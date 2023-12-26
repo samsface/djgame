@@ -9,6 +9,9 @@ var just_created_ := true
 var selected_ := false
 var dragging_ := false
 
+func _ready() -> void:
+	invalidate_()
+
 func _physics_process(delta: float) -> void:
 	var from_position = from.global_position
 	var to_position = get_global_mouse_position()

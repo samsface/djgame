@@ -26,13 +26,20 @@ func _enter_tree() -> void:
 	loadbang.outputs.push_front(C.new("value", "bang"))
 	db["loadbang"] = loadbang
 	
+	var multiply = N.new()
+	multiply.title = "*"
+	multiply.inputs.push_front(C.new("value", "float"))
+	multiply.inputs.push_front(C.new("by", "float"))
+	multiply.outputs.push_front(C.new("output", "float"))
+	db["*"] = multiply
+	
 	var multiply_signal = N.new()
 	multiply_signal.title = "*~"
 	multiply_signal.inputs.push_front(C.new("value", "signal"))
 	multiply_signal.inputs.push_front(C.new("by", "float"))
 	multiply_signal.outputs.push_front(C.new("output", "signal"))
 	db["*~"] = multiply_signal
-	
+
 	var bang = N.new()
 	bang.title = "bang"
 	bang.inputs.push_front(C.new("value", "any"))
@@ -110,3 +117,10 @@ func _enter_tree() -> void:
 	inlet.title = "inlet"
 	inlet.outputs.push_front(C.new("input", "any"))
 	db["inlet"] = inlet
+	
+	var spigot = N.new()
+	spigot.title = "spigot"
+	spigot.inputs.push_front(C.new("input", "signal"))
+	spigot.inputs.push_front(C.new("block", "float"))
+	spigot.outputs.push_front(C.new("output", "signal"))
+	db["spigot"] = spigot

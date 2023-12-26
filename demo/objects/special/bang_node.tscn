@@ -1,10 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnh3jbns1f8wp"]
+[gd_scene load_steps=3 format=3 uid="uid://bnh3jbns1f8wp"]
 
 [ext_resource type="Script" path="res://objects/special/bang_node.gd" id="1_fd3a4"]
+[ext_resource type="Theme" uid="uid://dp4iwwo6g8ipa" path="res://new_theme.tres" id="1_pruyd"]
 
 [node name="Bang" type="Button"]
 offset_right = 67.0625
 offset_bottom = 31.0
+theme = ExtResource("1_pruyd")
 text = "BANG"
 script = ExtResource("1_fd3a4")
 

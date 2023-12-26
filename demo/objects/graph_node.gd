@@ -22,9 +22,8 @@ var selected_ := false
 
 var connections_ := []
 var editing_text_ := false
-
+var original_text_ := ""
 var index := 0
-var u := 0
 
 func _ready() -> void:
 	mouse_entered.connect(_mouse_entered)
@@ -193,21 +192,29 @@ func _visibility_changed():
 func _line_edit_focus_entered() -> void:
 	begin_edit_text.emit()
 	editing_text_ = true
-	set_process_input(true)
+	original_text_ = %LineEdit.text
+	%LineEdit.mouse_filter = LineEdit.MOUSE_FILTER_STOP
 
 func _line_edit_text_submitted(new_text: String) -> void:
 	title_changed.emit(new_text)
+	original_text_ = new_text
 
 func _line_edit_focus_exited() -> void:
+	%LineEdit.text = original_text_
 	end_edit_text.emit()
 	editing_text_ = false
-	set_process_input(false)
+	%LineEdit.mouse_filter = LineEdit.MOUSE_FILTER_IGNORE
 
 func _input(event: InputEvent) -> void:
-	if editing_text_:
-		if event.is_action_pressed("ui_cancel"):
-			%LineEdit.release_focus()
-
-		elif event.is_action("click"):
-			if not Rect2(%LineEdit.global_position, %LineEdit.size).has_point(get_global_mouse_position()):
+	if selected_:
+		if editing_text_:
+			if event.is_action_pressed("ui_cancel"):
 				%LineEdit.release_focus()
+
+			elif event.is_action_pressed("click"):
+				if not Rect2(%LineEdit.global_position, %LineEdit.size).has_point(get_global_mouse_position()):
+					%LineEdit.release_focus()
+		elif event is InputEventMouseButton:
+			if event.double_click:
+				await get_tree().process_frame
+				%LineEdit.grab_focus()
