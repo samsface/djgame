@@ -1,0 +1,10 @@
+[submodule "godot-cpp"]
+	path = godot-cpp
+	url = https://github.com/godotengine/godot-cpp
+	branch = 4.1
+[submodule "src/lib/godot-cpp"]
+	path = src/lib/godot-cpp
+	url = git@github.com:godotengine/godot-cpp.git
+[submodule "src/lib/libpd"]
+	path = src/lib/libpd
+	url = git@github.com:libpd/libpd.git

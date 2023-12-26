@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://byxixsjbsubl1"]
+
+[ext_resource type="Script" path="res://objects/slot.gd" id="1_yp3o2"]
+
+[node name="Button" type="Button"]
+text = "A"
+script = ExtResource("1_yp3o2")

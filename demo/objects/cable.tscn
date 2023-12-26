@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4y74b04i6yim"]
+
+[ext_resource type="Script" path="res://objects/cable.gd" id="1_aue8h"]
+
+[node name="cable" type="Area2D"]
+monitoring = false
+script = ExtResource("1_aue8h")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(1, 1, 0, 1)
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)
+
+[connection signal="mouse_entered" from="." to="." method="_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_mouse_exited"]
+[connection signal="visibility_changed" from="." to="." method="_visibility_changed"]

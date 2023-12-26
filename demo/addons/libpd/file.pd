@@ -1,0 +1,10 @@
+#N canvas 948 475 784 572 10;
+#X text 14 32 this is a test abstraction ... does it load?;
+#X obj 222 264 dac~;
+#X obj 235 213 clip~ -0.1 0.1;
+#X obj 240 157 *~ 0.01;
+#X obj 230 88 osc~ 900;
+#X connect 2 0 1 0;
+#X connect 2 0 1 1;
+#X connect 3 0 2 0;
+#X connect 4 0 3 0;

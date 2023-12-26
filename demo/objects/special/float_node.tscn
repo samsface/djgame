@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpekb7kj7pmi3"]
+
+[ext_resource type="Script" path="res://objects/special/float_node.gd" id="1_h4guf"]
+
+[node name="LineEdit" type="LineEdit"]
+offset_right = 67.0625
+offset_bottom = 31.0
+text = "4,9"
+script = ExtResource("1_h4guf")
+
+[connection signal="text_changed" from="." to="." method="_on_text_changed"]

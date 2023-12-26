@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnh3jbns1f8wp"]
+
+[ext_resource type="Script" path="res://objects/special/bang_node.gd" id="1_fd3a4"]
+
+[node name="Bang" type="Button"]
+offset_right = 67.0625
+offset_bottom = 31.0
+text = "BANG"
+script = ExtResource("1_fd3a4")
+
+[connection signal="button_down" from="." to="." method="_button_down"]
