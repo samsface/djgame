@@ -1,50 +1,55 @@
-#N canvas 626 203 1354 1042 12;
+#N canvas 970 133 1354 1042 12;
 #X obj 238 45 loadbang;
-#X obj 206 154 metro;
+#X obj 205 154 metro;
 #X obj 60 156 loadbang;
 #X obj 205 115 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000 0 1;
-#X floatatom 242 109 5 0 0 0 - - - 0;
-#X obj 141 153 sel 0;
+#X floatatom 238 133 5 0 0 0 - - - 0;
+#X obj 141 156 sel 0;
 #X obj 140 251 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 206 252 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X obj 206 251 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X msg 238 79 375;
+#X msg 238 89 375;
 #X obj 211 318 int 0;
-#X obj 314 371 + 1;
-#X msg 141 278 0;
-#X msg 544 215 open 09_Hat_01_SP.wav \, 1;
-#X obj 544 249 readsf~;
+#X obj 314 380 + 1;
+#X msg 140 290 0;
+#X msg 544 221 open 09_Hat_01_SP.wav \, 1;
+#X obj 544 265 readsf~;
 #X obj 382 182 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 491 999 dac~;
+#X obj 504 993 dac~;
 #X obj 207 380 send clock;
-#X obj 866 371 receive clock;
-#X obj 793 244 readsf~;
-#X obj 793 181 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X obj 865 318 receive clock;
+#X obj 795 257 readsf~;
+#X obj 795 174 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X msg 793 210 open 09_Kick_01_SP.wav \, 1;
-#X obj 504 955 clip~ -0.1 0.1;
-#X obj 194 633 acid;
+#X msg 795 213 open 09_Kick_01_SP.wav \, 1;
+#X obj 504 949 clip~ -0.1 0.1;
+#X obj 195 630 acid;
 #X floatatom 195 587 5 0 0 0 - - - 0;
-#X obj 866 458 8seq;
-#X obj 792 50 8seq;
-#X obj 795 15 receive clock;
-#X obj 544 648 *~ 0.1;
-#X obj 355 41 8seq;
+#X obj 873 440 8seq;
+#X obj 795 50 8seq;
+#X obj 795 6 receive clock;
+#X obj 544 630 *~ 0.1;
+#X obj 358 50 8seq;
 #X obj 358 6 receive clock;
 #X obj 194 693 *~ 0.3;
-#X obj 392 284 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X obj 392 290 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X obj 364 207 delay 100 1 msec;
-#X floatatom 473 157 5 0 0 0 - - - 0;
-#X obj 836 650 delay 100 1 msec;
-#X obj 830 697 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X obj 382 221 delay 100 1 msec;
+#X floatatom 473 156 5 0 0 0 - - - 0;
+#X obj 855 693 delay 100 1 msec;
+#X obj 849 758 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
-#X floatatom 959 595 5 0 0 0 - - - 0;
-#X obj 875 601 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#X floatatom 978 630 5 0 0 0 - - - 0;
+#X obj 894 630 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
+#X obj 141 899 print;
+#X obj 141 943;
+#X obj 149 822 r pd-seq.pd;
+#X obj 727 758 dac~;
+#X obj 924 566 trace;
 #X connect 0 0 8 0;
 #X connect 1 0 7 0;
 #X connect 2 0 6 0;
@@ -71,7 +76,7 @@
 #X connect 22 0 30 0;
 #X connect 23 0 22 0;
 #X connect 24 0 23 0;
-#X connect 24 0 37 0;
+#X connect 24 0 42 0;
 #X connect 25 0 19 0;
 #X connect 26 0 25 0;
 #X connect 27 0 21 0;
@@ -86,4 +91,6 @@
 #X connect 35 0 23 0;
 #X connect 36 0 34 1;
 #X connect 37 0 34 0;
+#X connect 40 0 38 0;
+#X connect 42 0 37 0;
 #X coords 0 0 1 1 85 60 0;

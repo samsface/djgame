@@ -7,8 +7,9 @@ class_name PDNode
 		set_text_(value)
 		
 @export var selectable:bool = true
-@export var canvas:String
+@export var canvas:Node
 @export var in_subpatch:bool
+@export var index := 0
 
 signal connection_clicked
 signal title_changed
@@ -23,7 +24,6 @@ var selected_ := false
 var connections_ := []
 var editing_text_ := false
 var original_text_ := ""
-var index := 0
 
 func _ready() -> void:
 	mouse_entered.connect(_mouse_entered)
@@ -64,21 +64,19 @@ func connection_down_(connection:Button) -> void:
 	connection_clicked.emit(connection)
 
 func set_text_(value:String, is_update := false):
-	if value.contains("_"):
-		visible = false
-
-	if value.begins_with("bng"):
-		value = "bang"
-	if value.begins_with("tgl"):
-		value = "tgl"
-
-	%LineEdit.text = value
-	
-	%LineEdit.caret_column = %LineEdit.text.length()
-
-	index = PureData.create_obj(canvas, value, global_position)
-	if index < 0:
+	if not canvas:
 		return
+
+	var res = canvas.create_obj(value, global_position)
+	if not res:
+		return
+	
+	index = res[0]
+	value = res[1]
+	
+	%LineEdit.text = value
+
+	%LineEdit.caret_column = %LineEdit.text.length()
 
 	var args = value.split(' ')
 
@@ -90,6 +88,7 @@ func set_text_(value:String, is_update := false):
 		monitorable = false
 		if not node_model.visible_in_subpatch:
 			visible = false
+
 
 	update_connection_(node_model.inputs, %Inputs)
 	update_connection_(node_model.outputs, %Outputs)

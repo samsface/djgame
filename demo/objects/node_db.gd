@@ -7,6 +7,8 @@ class N:
 	var comment := ""
 	var visible_in_subpatch := false
 	var specialized:PackedScene
+	var instance := false
+	var default_args := PackedStringArray()
 
 class C:
 	var title := ""
@@ -44,7 +46,9 @@ func _enter_tree() -> void:
 	bang.title = "bang"
 	bang.inputs.push_front(C.new("value", "any"))
 	bang.outputs.push_front(C.new("value", "bang"))
+	bang.visible_in_subpatch = true
 	bang.specialized = preload("res://objects/special/bang_node.tscn")
+	bang.default_args = ['bng', "15", "250", "50", "0", 'empty', 'empty', 'empty', "17", "7", "0", "10", '#fcfcfc', '#000000', '#000000']
 	db["bng"] = bang
 	db["bang"] = bang
 	

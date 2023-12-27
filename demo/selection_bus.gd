@@ -18,6 +18,9 @@ func change_selection(node) -> void:
 	add_to_selection(node)
 	
 func remove_from_selection(node) -> void:
+	if not node:
+		return
+
 	selection_.erase(node)
 	node._unselect()
 
@@ -34,6 +37,10 @@ func is_selected(n) -> bool:
 func remove_from_hover(node) -> void:
 	if hovering == node:
 		hovering = null
+
+func remove_from_all(node) -> void:
+	remove_from_hover(node)
+	remove_from_selection(node)
 
 func is_empty() -> bool:
 	return selection_.is_empty()

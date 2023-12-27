@@ -3,7 +3,7 @@ extends Camera2D
 var panning_ := false
 var panning_start_position_ := Vector2.ZERO
 
-func _physics_process(delta: float) -> void:
+func _input(event: InputEvent):
 	if Input.is_action_pressed("pan"):
 		pan_()
 	elif Input.is_action_just_released("pan"):

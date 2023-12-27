@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bo4dowfn52ajp"]
+[gd_scene load_steps=2 format=3 uid="uid://dd3d4l46xd11a"]
 
-[ext_resource type="PackedScene" uid="uid://iboqwef7vr4g" path="res://objects/patch.tscn" id="1_elgq3"]
-[ext_resource type="Script" path="res://camera.gd" id="1_pdu1a"]
+[ext_resource type="Script" path="res://camera.gd" id="2_h78fy"]
 
 [node name="SubViewportContainer" type="SubViewportContainer"]
 offset_right = 1152.0
@@ -23,12 +22,5 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Patch" parent="SubViewport/MarginContainer" instance=ExtResource("1_elgq3")]
-unique_name_in_owner = true
-clip_contents = false
-layout_mode = 2
-patch_path = "res://addons/libpd/maker_test.pd"
-root = true
-
 [node name="Camera2D" type="Camera2D" parent="SubViewport/MarginContainer"]
-script = ExtResource("1_pdu1a")
+script = ExtResource("2_h78fy")

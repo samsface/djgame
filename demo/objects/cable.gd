@@ -4,6 +4,7 @@ class_name PDCable
 @export var from:Node
 @export var to:Node
 @export var selectable:bool = true
+@export var creating:bool = false
 
 var just_created_ := true
 var selected_ := false
@@ -12,11 +13,16 @@ var dragging_ := false
 func _ready() -> void:
 	invalidate_()
 
+func _input(event: InputEvent) -> void:
+	if creating:
+		if event.is_action_pressed("ui_cancel"):
+			queue_free()
+
 func _physics_process(delta: float) -> void:
 	var from_position = from.global_position
 	var to_position = get_global_mouse_position()
 	
-	if to:
+	if not creating:
 		to_position = to.global_position
 
 	$Polygon2D.polygon[0] = from_position
@@ -32,6 +38,7 @@ func _physics_process(delta: float) -> void:
 	#if mouse_entered_ and Input.is_action_just_pressed("click"):
 	#	SelectionBus.selection = [self]
 
+
 func invalidate():
 	pass
 
@@ -39,13 +46,13 @@ func call_disconnect():
 	if not from or not to:
 		return
 
-	PureData.send_disconnect(from.parent.canvas, from.parent.index, from.index, to.parent.index, to.index)
+	from.parent.canvas.send_disconnect(from.parent.index, from.index, to.parent.index, to.index)
 
 func call_connect():
 	if not from or not to:
 		return
-	
-	PureData.create_connection(from.parent.canvas, from.parent.index, from.index, to.parent.index, to.index)
+
+	from.parent.canvas.create_connection(from.parent.index, from.index, to.parent.index, to.index)
 
 	from.parent._connection(to)
 	to.parent._connection(from)
@@ -61,12 +68,11 @@ func invalidate_connections() -> void:
 	call_connect()
 
 func _enter_tree() -> void:
-	call_connect()
+	invalidate_connections()
+	pass
 
 func _exit_tree() -> void:
 	call_disconnect()
-	SelectionBus.remove_from_selection(self)
-	SelectionBus.remove_from_hover(self)
 
 func _mouse_entered() -> void:
 	SelectionBus.hovering = self

@@ -7,21 +7,22 @@ var sender_name_ := ""
 	set(value):
 		pass
 	get:
-		return get_parent().get_parent().get_parent().get_parent().get_parent()
+		return get_parent().get_parent().get_parent().get_parent()
 
 func _ready() -> void:
+	return
 	await get_tree().process_frame
 
 	if not receiver_name_:
 		receiver_name_ = "_" + str(randi())
-		var index = PureData.create_obj(parent.canvas, "r " + receiver_name_)
-		PureData.create_connection(parent.canvas, index, 0, index -1, 0)
+		var index = parent.canvas.create_obj("r " + receiver_name_)
+		parent.canvas.create_connection(index, 0, parent.index, 0)
 		PureData.bind(receiver_name_)
 
 	if not sender_name_:
 		sender_name_ = "_" + str(randi())
-		var index = PureData.create_obj(parent.canvas, "s " + sender_name_)
-		PureData.create_connection(parent.canvas, index - 2, 0, index, 0)
+		var index = parent.canvas.create_obj("s " + sender_name_)
+		parent.canvas.create_connection(parent.index, 0, index, 0)
 		PureData.bind(sender_name_)
 
 	PureData.float.connect(_float)

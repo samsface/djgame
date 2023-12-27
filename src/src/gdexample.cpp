@@ -80,7 +80,7 @@ GDExample::GDExample() {
 	}
 
 	//::libpd_set_instancedata(this, nullptr);
-
+	::libpd_set_verbose(1);
 	
 
 	::libpd_set_printhook(::libpd_print_concatenator);

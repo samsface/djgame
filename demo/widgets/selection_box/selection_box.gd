@@ -28,4 +28,4 @@ func _physics_process(delta: float):
 		size.y = get_global_mouse_position().y - global_position.y
 
 func _area_entered(area: Area2D) -> void:
-	print(area)
+	pass
