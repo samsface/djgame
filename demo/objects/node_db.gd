@@ -29,6 +29,25 @@ func _enter_tree() -> void:
 	loadbang.outputs.push_front(C.new("value", "bang"))
 	db["loadbang"] = loadbang
 	
+	var initbang = N.new()
+	initbang.title = "initbang"
+	initbang.outputs.push_front(C.new("value", "bang"))
+	db["initbang"] = initbang
+	
+	var div = N.new()
+	div.title = "/"
+	div.inputs.push_front(C.new("value", "float"))
+	div.inputs.push_front(C.new("by", "float"))
+	div.outputs.push_front(C.new("output", "float"))
+	db["/"] = div
+	
+	var div_signal = N.new()
+	div_signal.title = "/~"
+	div_signal.inputs.push_front(C.new("value", "float"))
+	div_signal.inputs.push_front(C.new("by", "float"))
+	div_signal.outputs.push_front(C.new("output", "float"))
+	db["/~"] = div_signal
+	
 	var multiply = N.new()
 	multiply.title = "*"
 	multiply.inputs.push_front(C.new("value", "float"))
@@ -43,12 +62,26 @@ func _enter_tree() -> void:
 	multiply_signal.outputs.push_front(C.new("output", "signal"))
 	db["*~"] = multiply_signal
 
-	var multiply_add = N.new()
-	multiply_add.title = "*~"
-	multiply_add.inputs.push_front(C.new("value", "signal"))
-	multiply_add.inputs.push_front(C.new("by", "float"))
-	multiply_add.outputs.push_front(C.new("output", "signal"))
-	db["+~"] = multiply_add
+	var add = N.new()
+	add.title = "+"
+	add.inputs.push_front(C.new("value", "signal"))
+	add.inputs.push_front(C.new("by", "float"))
+	add.outputs.push_front(C.new("output", "signal"))
+	db["+"] = add
+
+	var add_signal = N.new()
+	add_signal.title = "+~"
+	add_signal.inputs.push_front(C.new("value", "signal"))
+	add_signal.inputs.push_front(C.new("by", "float"))
+	add_signal.outputs.push_front(C.new("output", "signal"))
+	db["+~"] = add_signal
+	
+	var integer = N.new()
+	integer.title = "int"
+	integer.inputs.push_front(C.new("value", "bang"))
+	integer.inputs.push_front(C.new("set", "any"))
+	integer.outputs.push_front(C.new("output", "int"))
+	db["int"] = integer
 
 	var bang = N.new()
 	bang.title = "bng"
@@ -69,13 +102,55 @@ func _enter_tree() -> void:
 	toggle.default_args = ['obj', '{x}', '{y}', '{obj}', "8", "0", '{s}', '{r}', 'empty', "17", "7", "0", "10", '#fcfcfc', '#000000', '#000000', '0', '1']
 	db["toggle"] = toggle
 	db["tgl"] = toggle
+
+	var hsl = N.new()
+	hsl.title = "hsl"
+	hsl.inputs.push_front(C.new("value", "float"))
+	hsl.outputs.push_front(C.new("value", "float"))
+	hsl.visible_in_subpatch = true
+	hsl.specialized = preload("res://objects/special/hsl.tscn")
+	hsl.default_args = ['obj', '{x}', '{y}', '{obj}', '128', '15', '0', '127', '0', '0', '{s}', '{r}', 'empty', '-2', '-3', '0', '12', '-262144', '-1', '-1', '0', '1']
+	db["hslider"] = hsl
+	db["hsl"] = hsl
+
+	var msg = N.new()
+	msg.title = "msg"
+	msg.inputs.push_front(C.new("input", "bang"))
+	msg.outputs.push_front(C.new("output", "any"))
+	msg.default_args = ["msg", "{x}", "{y}", ""]
+	db["msg"] = msg
+	db["message"] = msg
 	
+	var mtof = N.new()
+	mtof.title = "mtof"
+	mtof.inputs.push_front(C.new("midi", "float"))
+	mtof.outputs.push_front(C.new("freq", "float"))
+	db["mtof"] = mtof
+
 	var metro = N.new()
 	metro.title = "metro"
 	metro.inputs.push_front(C.new("playing", "any"))
 	metro.inputs.push_front(C.new("time", "float"))
 	metro.outputs.push_front(C.new("value", "bang"))
 	db["metro"] = metro
+	
+	var vcf = N.new()
+	vcf.title = "vcf~"
+	vcf.inputs.push_front(C.new("input", "signal"))
+	vcf.inputs.push_front(C.new("freq", "float or signal"))
+	vcf.inputs.push_front(C.new("q", "float"))
+	vcf.outputs.push_front(C.new("real", "signal"))
+	vcf.outputs.push_front(C.new("imaginary", "signal"))
+	db["vcf~"] = vcf
+	
+	var line = N.new()
+	line.title = "line"
+	line.inputs.push_front(C.new("input", "signal"))
+	line.inputs.push_front(C.new("freq", "float or signal"))
+	line.inputs.push_front(C.new("q", "float"))
+	line.outputs.push_front(C.new("real", "signal"))
+	line.outputs.push_front(C.new("imaginary", "signal"))
+	db["line"] = line
 	
 	var osc = N.new()
 	osc.title = "osc~"
@@ -103,16 +178,30 @@ func _enter_tree() -> void:
 	floatatom.outputs.push_front(C.new("value", "float"))
 	floatatom.default_args = ["floatatom", "0", "100", "5", "0", "0", "0", "", "-", "-", "-"]
 	db["floatatom"] = floatatom
-	
-	var receiver = N.new()
-	receiver.title = "r"
-	receiver.outputs.push_front(C.new("value", "signal or float"))
-	db["r"] = receiver
+
+	var receive = N.new()
+	receive.title = "r"
+	receive.outputs.push_front(C.new("value", "signal or float"))
+	db["receive"] = receive
+	db["r"] = receive
+
+	var receive_signal = N.new()
+	receive_signal.title = "r~"
+	receive_signal.outputs.push_front(C.new("value", "signal or float"))
+	db["receive~"] = receive_signal
+	db["r~"] = receive_signal
 	
 	var send = N.new()
 	send.title = "s"
 	send.inputs.push_front(C.new("value", "signal or float"))
 	db["s"] = send
+	db["send"] = send
+	
+	var send_signal = N.new()
+	send_signal.title = "s~"
+	send_signal.inputs.push_front(C.new("value", "signal"))
+	db["s~"] = send_signal
+	db["send~"] = send_signal
 	
 	var clip = N.new()
 	clip.title = "clip~"
@@ -157,8 +246,8 @@ func _enter_tree() -> void:
 	sel.inputs.push_front(C.new("rhs", "any"))
 	sel.outputs.push_front(C.new("match", "bang"))
 	sel.outputs.push_front(C.new("else", "any"))
-	db["select"] = metro
-	db["sel"] = metro
+	db["select"] = sel
+	db["sel"] = sel
 	
 	var nbx = N.new()
 	nbx.title = "nbx"
@@ -167,14 +256,37 @@ func _enter_tree() -> void:
 	db["nbx"] = nbx
 
 
-	var msg = N.new()
-	msg.title = "msg"
-	msg.inputs.push_front(C.new("input", "bang"))
-	msg.outputs.push_front(C.new("output", "any"))
-	db["msg"] = msg
 	
 	var mod = N.new()
 	mod.title = "%"
 	mod.inputs.push_front(C.new("input", "float"))
+	mod.inputs.push_front(C.new("input", "float"))
 	mod.outputs.push_front(C.new("output", "float"))
 	db["%"] = mod
+	
+	var readsf_signal = N.new()
+	readsf_signal.title = "readsf~"
+	readsf_signal.inputs.push_front(C.new("path", "list"))
+	readsf_signal.outputs.push_front(C.new("out", "signal"))
+	readsf_signal.outputs.push_front(C.new("done", "bang"))
+	db["readsf~"] = readsf_signal
+	
+	var delay = N.new()
+	delay.title = "delay"
+	delay.inputs.push_front(C.new("start", "bang"))
+	delay.inputs.push_front(C.new("delay time", "float"))
+	delay.outputs.push_front(C.new("timeout", "bang"))
+	db["delay"] = delay
+
+func get_node_model(subpatch_name:String):
+	var node_model = NodeDb.db.get(subpatch_name)
+	if node_model:
+		return node_model
+		
+	var subpatch_path = "res://addons/libpd".path_join(subpatch_name + ".pd")
+	if FileAccess.file_exists(subpatch_path):
+		var subpatch = load("res://objects/patch.tscn").instantiate()
+		subpatch.open(subpatch_path)
+		return NodeDb.db.get(subpatch_name)
+		
+	return null

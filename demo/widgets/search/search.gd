@@ -10,6 +10,9 @@ func _ready() -> void:
 	fuzzy_search_.data = NodeDb.db.keys()
 
 func _text_changed(new_text: String) -> void:
+	if new_text.contains(' '):
+		return
+
 	top_search_result_ = null
 
 	for child in $VBoxContainer.get_children():
@@ -42,6 +45,12 @@ func _input(event: InputEvent) -> void:
 		end.emit("")
 		
 	elif Input.is_action_just_pressed("enter"):
+		if %Search.text.is_empty():
+			return
+
+		if not top_search_result_:
+			try_load_subpatch_()
+		
 		if top_search_result_:
 			queue_free()
 			found_()
@@ -55,4 +64,14 @@ func found_() -> void:
 	var a = %Search.text.split(' ')
 	a[0] = top_search_result_
 	
-	end.emit(PureData.found_(' '.join(a), position))
+	var command = PureData.found_(' '.join(a), position)
+	end.emit(command)
+
+func try_load_subpatch_():
+	var a = %Search.text.split(' ')
+	top_search_result_ = a[0]
+	
+	var nm = NodeDb.get_node_model(top_search_result_)
+	if nm:
+		top_search_result_ = nm.title
+	

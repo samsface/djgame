@@ -81,6 +81,9 @@ func pretty_text_(text:String):
 
 	if text.begins_with("tgl"):
 		return "toggle"
+		
+	if text.begins_with("hsl"):
+		return "hsl"
 
 	if text.begins_with("coords"):
 		return "coords"
@@ -91,7 +94,7 @@ func pretty_text_(text:String):
 	
 	return text
 
-func set_text_(value:String, is_update := false) -> String:
+func set_text_(value:String) -> String:
 	if not canvas:
 		return value
 
@@ -176,9 +179,9 @@ func _tree_exiting() -> void:
 	SelectionBus.remove_from_selection(self)
 	SelectionBus.remove_from_hover(self)
 
-func update(text):
-	text = PureData.found_(text, position)
-	set_text_(text, true)
+func update(command):
+	command = PureData.found_(command, position)
+	text = command
 
 func _select():
 	selected_ = true
@@ -279,12 +282,25 @@ func get_human_readable_for_obj_(args) -> String:
 	var res := ' '.join(args.slice(4))
 	if not res.is_empty():
 		res = " " + res
+		
+	res = res.replace(' ,', ',')
+
+	return res
+	
+func get_human_readable_for_widget_(args) -> String:
+	var res := ' '.join(args.slice(3))
+	if not res.is_empty():
+		res = " " + res
+
+	res = res.replace(' ,', ',')
 
 	return res
 
 func create_obj_(message:String, pos:Vector2 = Vector2.ZERO) -> Array:
 	message = message.replace('\n', ' ')
 	message = message.replace('  ', ' ')
+	
+	print(message)
 	
 	var arg_parser = PureData.IteratePackedStringArray.new(message)
 
@@ -296,7 +312,7 @@ func create_obj_(message:String, pos:Vector2 = Vector2.ZERO) -> Array:
 	if message_type == 'obj':
 		position.x = arg_parser.next_as_int()
 		position.y = arg_parser.next_as_int()
-		node_model = get_node_model_(arg_parser.next())
+		node_model = NodeDb.get_node_model(arg_parser.next())
 	elif message_type == 'floatatom':
 		position.x = arg_parser.next_as_int()
 		position.y = arg_parser.next_as_int()
@@ -305,10 +321,20 @@ func create_obj_(message:String, pos:Vector2 = Vector2.ZERO) -> Array:
 		position.x = arg_parser.next_as_int()
 		position.y = arg_parser.next_as_int()
 		node_model = NodeDb.db.get('msg')
+	elif message_type == 'hsl':
+		position.x = arg_parser.next_as_int()
+		position.y = arg_parser.next_as_int()
+		node_model = NodeDb.db.get('hsl')
+	elif message_type == 'coords':
+		node_model = NodeDb.db.get('coords')
+		# not an object so doesn't need this
+		canvas.object_count_ -= 1
 
 	if not node_model:
 		push_error("no model for %s" % message)
 		return []
+
+	resizeable = node_model.resizeable
 
 	#position *= 5.0
 	#position = position.rotated(- 90)
@@ -316,13 +342,17 @@ func create_obj_(message:String, pos:Vector2 = Vector2.ZERO) -> Array:
 	var human_readable_args := ""
 	if message_type == 'obj':
 		human_readable_args = get_human_readable_for_obj_(arg_parser.packed_string_)
-
+	else:
+		human_readable_args = get_human_readable_for_widget_(arg_parser.packed_string_)
+		
 	var args = arg_parser.packed_string_
 	args += node_model.default_args.slice(args.size())
 
 	if not node_model.default_args.is_empty():
 		var ns := "$1"
 		for i in args.size():
+			if i >= node_model.default_args.size():
+				break
 			if node_model.default_args[i] == '{r}':
 				args[i] = '/r/%s/%s' % [ns, canvas.object_count_]
 			elif node_model.default_args[i] == '{s}':
@@ -345,14 +375,3 @@ func create_obj_(message:String, pos:Vector2 = Vector2.ZERO) -> Array:
 
 	return [canvas.object_count_ - 1, ' '.join(args), node_model, human_readable_args]
 
-func get_node_model_(subpatch_name:String):
-	var node_model = NodeDb.db.get(subpatch_name)
-	if node_model:
-		return node_model
-		
-	var subpatch_path = "res://addons/libpd".path_join(subpatch_name + ".pd")
-	var subpatch = load("res://objects/patch.tscn").instantiate()
-	subpatch.open(subpatch_path)
-		#parse_sub_patch_file(subpatch_path, context)
-	
-	return NodeDb.db.get(subpatch_name)

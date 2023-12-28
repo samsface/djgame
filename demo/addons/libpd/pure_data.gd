@@ -31,6 +31,9 @@ class IteratePackedStringArray:
 	func _init(args:String = "") -> void:
 		if args.is_empty():
 			return
+		
+		args = args.replace(', ', ' , ')
+			
 		packed_string_ = args.split(' ')
 	
 	func next():
@@ -63,6 +66,9 @@ func found_(command:String, pos:Vector2) -> String:
 	var aaa = command.split(' ')
 	
 	var nm = NodeDb.db.get(aaa[0])
+	if not nm:
+		return ""
+
 	var tpl = ' '.join(nm.default_args)
 	if tpl.is_empty():
 		tpl = 'obj {x} {y} {obj}'

@@ -5,7 +5,7 @@ var patch_:PDPatch
 func _ready() -> void:
 	if not patch_:
 		var patch = preload("res://objects/patch.tscn").instantiate()
-		patch.open("res://addons/libpd/maker_test.pd")
+		patch.open("res://addons/libpd/test.pd")
 		add(patch)
 	
 	reset_camera_()

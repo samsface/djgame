@@ -18,6 +18,7 @@ private:
 	float outbuf_[44100 * 2];
 	float initialized_{};
 	void* opened_patch_{};
+	bool message_guard_{};
 
 protected:
 	static void _bind_methods();

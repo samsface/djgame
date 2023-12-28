@@ -36,6 +36,10 @@ func _input(event: InputEvent):
 	if mode >= Mode.connecting:
 		return
 		
+	if Input.is_action_just_pressed("expand"):
+		expand_()
+		return
+		
 	if Input.is_action_just_pressed("rotate"):
 		rotate_()
 		return
@@ -117,7 +121,7 @@ func get_connected_cables_(node:PDNode)-> Array:
 func open_patch_in_new_window_() -> void:
 	get_tree().root.get_viewport().gui_embed_subwindows = false
 	var viewer = load("res://widgets/viewer/viewer.tscn").instantiate()
-	viewer.add(PureData.files["pd-subpatch.pd"])
+	viewer.add(PureData.files["pd-square.pd"])
 	var window := Window.new()
 	window.size = get_viewport().size
 	window.add_child(viewer)
@@ -209,12 +213,16 @@ func drag_end_() -> void:
 	undo_.commit_action()
 
 ################################################################################
-# rotate
+# random node tricks
 ################################################################################
 
 func rotate_() -> void:
 	for node in get_children():
-		node.position = node.position.rotated(-90)
+		node.position = node.position.rotated(deg_to_rad(-90))
+
+func expand_() -> void:
+	for node in get_children():
+		node.position = node.position * 2.0
 
 ################################################################################
 # adding nodes
@@ -411,6 +419,13 @@ func get_obj_from_command(command:String) -> String:
 func parse_command(command:String, context:PDParseContext) -> void:
 	if command.is_empty():
 		return
+	
+	command = command.replace('\n', ' ')
+	command = command.replace('  ', ' ')
+	
+	if command[0] == ' ':
+		command = command.substr(1)
+
 
 	var args = command.split(' ')
 
@@ -427,7 +442,7 @@ func parse_command(command:String, context:PDParseContext) -> void:
 		push_error("message was null: '%s'" % command)
 		return
 
-	if message == 'obj' or message == 'floatatom' or message == 'msg':
+	if message == 'hsl' or message == 'obj' or message == 'floatatom' or message == 'msg' or message == 'coords':
 		#var pos := Vector2.ZERO
 		#pos.x = float(it.next())
 		#pos.y = float(it.next())
@@ -456,8 +471,8 @@ func parse_command(command:String, context:PDParseContext) -> void:
 		var inlet = int(it.next())
 		add_connection_(from, outlet, to, inlet)
 
-	elif message == 'coords':
-		execute_coords_command(' '.join(args.slice(1)))
+	#elif message == 'coords':
+	#	execute_coords_command(' '.join(args.slice(1)))
   
 func execute_coords_command(message) -> void:
 	var n = add_node__(message)
@@ -502,6 +517,7 @@ func open(path:String):
 	model.specialized = load("res://objects/special/subpatch.tscn").duplicate()
 	model.specialized.set_meta("path", tmp_path)
 	model.instance = true
+	model.visible_in_subpatch = true
 	
 	for i in get_all_objects_("inlet").size():
 		model.inputs.push_back(NodeDb.C.new("input", "any"))
@@ -542,6 +558,7 @@ func send_disconnect(from_object_idx, from_slot_idx, to_object_idx, to_object_sl
 	PureData.finish_message(canvas, "disconnect")
 
 func save() -> void:
-	PureData.start_message(1)
-	PureData.add_float(1)
+	print("saving %s" % canvas)
+	PureData.start_message(0)
+	#PureData.add_float(1)
 	PureData.finish_message(canvas, "menusave")

@@ -59,5 +59,4 @@ func _ready():
 	#PureData.add_float(x)
 	#PureData.add_float(y)
 	#PureData.finish_message(canvas, "coords")
-	
-	print("X")
+

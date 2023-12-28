@@ -122,6 +122,12 @@ bool GDExample::send_float(String receiver, float value)
 
 bool GDExample::start_message(int max_length)
 {
+	if(message_guard_) 
+	{
+		ERR_PRINT("STARTING TWO MESSAGES AT ONCE!!!");
+	}
+
+	message_guard_ = true;
 	return ::libpd_start_message(max_length) == 0;
 }
 
@@ -142,6 +148,13 @@ bool GDExample::finish_list(String receiver)
 
 bool GDExample::finish_message(String receiver, String message)
 {
+	if(!message_guard_) 
+	{
+		ERR_PRINT("NEVER STARTED MESSAGE");
+	}
+
+	message_guard_ = false;
+
 	return ::libpd_finish_message(receiver.utf8().get_data(), message.utf8().get_data()) == 0;
 }
 

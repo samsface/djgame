@@ -79,7 +79,7 @@ func invalidate_connections() -> void:
 
 func _enter_tree() -> void:
 	invalidate_connections()
-	pass
+	invalidate_()
 
 func _exit_tree() -> void:
 	call_disconnect()
