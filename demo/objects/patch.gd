@@ -447,20 +447,10 @@ func parse_command(command:String, context:PDParseContext) -> void:
 		add_connection_(from, outlet, to, inlet)
 
 	elif message == 'coords':
-		execute_coords_command(
-			message,
-			it.next_as_int(),
-			it.next_as_int(),
-			it.next_as_int(),
-			it.next_as_int(),
-			it.next_as_int(),
-			it.next_as_int(),
-			it.next_as_int(),
-			it.next_as_int(),
-			it.next_as_int())
+		execute_coords_command(' '.join(args.slice(1)))
   
-func execute_coords_command(message, x_from, x_to, y_from, y_to, width, height, graph_on_parent, x, y) -> void:
-	var n = add_node__(message, Vector2(x, y))
+func execute_coords_command(message) -> void:
+	var n = add_node__(message, Vector2.ZERO)
 	n.resizeable = true
 	add_child(n)
 

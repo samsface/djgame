@@ -6,6 +6,18 @@ class_name PDNode
 		text = set_text_(value)
 @export var index := 0
 @export var resizeable := false
+@export var visible_in_subpatch := false
+@export var clip_contents:bool :
+	set(value):
+		$ColorRect.clip_contents = value
+	get:
+		return $ColorRect.clip_contents
+		
+@export var custom_minimum_size:Vector2 :
+	set(value):
+		$ColorRect.custom_minimum_size = value
+	get:
+		return $ColorRect.custom_minimum_size
 
 var selectable:bool = true
 var canvas:Node
@@ -64,22 +76,24 @@ func pretty_text_(text:String):
 	if text.begins_with("bng"):
 		return "bang"
 	
+	if text.begins_with("coords"):
+		return "coords"
+
 	var r := RegEx.new()
 	r.compile("\\$1\\/.+")
 	text = r.sub(text, "")
 	
 	return text
 
-func set_text_(value:String, is_update := false):
+func set_text_(value:String, is_update := false) -> String:
 	if not canvas:
 		return value
 
 	var res = canvas.create_obj(value, global_position)
-	if not res:
-		return value
-	
-	index = res[0]
-	value = res[1]
+	if res:
+
+		index = res[0]
+		value = res[1]
 
 	%LineEdit.text = pretty_text_(value)
 	%LineEdit.caret_column = %LineEdit.text.length()
@@ -88,7 +102,9 @@ func set_text_(value:String, is_update := false):
 
 	var node_model = NodeDb.db.get(args[0])
 	if not node_model:
-		return
+		return ""
+		
+	visible_in_subpatch = node_model.visible_in_subpatch
 
 	if in_subpatch:
 		monitorable = false

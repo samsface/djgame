@@ -134,4 +134,5 @@ func _enter_tree() -> void:
 	coords.title = "coords"
 	coords.specialized = preload("res://objects/special/coords.tscn")
 	coords.resizeable = true
+	coords.visible_in_subpatch = true
 	db["coords"] = coords
