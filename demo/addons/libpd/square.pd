@@ -1,15 +1,17 @@
-#N canvas 2 138 1436 741 10;
+#N canvas 1161 524 1436 741 10;
 #X obj 175 169 phasor~;
 #X obj 111 169 phasor~;
 #X obj 168 186 *~ -1;
-#X obj 144 83 inlet;
+#X obj 149 44 inlet;
 #X obj 152 202 +~;
 #X msg 211 152 0.5;
 #X msg 144 152 0;
 #X obj 152 219 *~ 2;
-#X floatatom 144 100 5 0 0 0 - - -;
+#X floatatom 144 100 5 0 0 0 - - - 0;
 #X obj 152 236 outlet~;
 #X obj 206 97 loadbang;
+#X obj 378 184 bng 15 250 50 0 s r empty 17 7 0 10 #fcfcfc #000000
+#000000;
 #X connect 0 0 2 0;
 #X connect 1 0 4 0;
 #X connect 2 0 4 1;

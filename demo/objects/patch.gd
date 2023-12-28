@@ -35,6 +35,10 @@ func _input(event: InputEvent):
 	
 	if mode >= Mode.connecting:
 		return
+		
+	if Input.is_action_just_pressed("rotate"):
+		rotate_()
+		return
 
 	if Input.is_action_just_pressed("ui_down"):
 		open_patch_in_new_window_()
@@ -89,9 +93,10 @@ func _input(event: InputEvent):
 	if Input.is_action_just_pressed("search"):
 		print(get_parent().position)
 		var x = preload("res://widgets/search/search.tscn").instantiate()
+		x.position = get_global_mouse_position()
+		x.end.connect(search_end_)
 		add_child(x)
-		x.global_position = get_global_mouse_position()
-		x.end.connect(search_end_.bind(get_global_mouse_position()))
+
 		mode = Mode.searching
 		get_viewport().set_input_as_handled()
 
@@ -124,13 +129,13 @@ func open_patch_in_new_window_() -> void:
 # searching for stuff
 ################################################################################
 
-func search_end_(search_text:String, pos:Vector2) -> void:
+func search_end_(search_text:String) -> void:
 	mode = Mode.none
 
 	if not search_text:
 		return
 
-	add_node_(search_text, pos)
+	add_node_(search_text)
 
 ################################################################################
 # deleting stuff
@@ -205,11 +210,19 @@ func drag_end_() -> void:
 	undo_.commit_action()
 
 ################################################################################
+# rotate
+################################################################################
+
+func rotate_() -> void:
+	for node in get_children():
+		node.position = node.position.rotated(-90)
+
+################################################################################
 # adding nodes
 ################################################################################
 
-func add_node_(node_name:String, pos:Vector2):
-	var n = add_node__(node_name, pos)
+func add_node_(node_name:String):
+	var n = add_node__(node_name)
 
 	undo_.create_action("add_node")
 	undo_.add_do_method(add_child.bind(n))
@@ -217,11 +230,10 @@ func add_node_(node_name:String, pos:Vector2):
 	undo_.add_undo_method(remove_child.bind(n))
 	undo_.commit_action()
 
-func add_node__(node_name:String, pos:Vector2):
+func add_node__(node_name:String):
 	var node = preload("res://objects/graph_node.tscn").instantiate()
 	node.name = node_name
 	node.canvas = self
-	node.position = pos
 	node.text = node_name
 
 	node.connection_clicked.connect(connection_clicked_)
@@ -416,30 +428,30 @@ func parse_command(command:String, context:PDParseContext) -> void:
 		push_error("message was null: '%s'" % command)
 		return
 
-	if message == 'obj':
-		var pos := Vector2.ZERO
-		pos.x = float(it.next())
-		pos.y = float(it.next())
+	if message == 'obj' or message == 'floatatom' or message == 'msg':
+		#var pos := Vector2.ZERO
+		#pos.x = float(it.next())
+		#pos.y = float(it.next())
 
-		var obj = it.next()
-		if obj == null:
-			push_error("expected object")
-			return
+		#var obj = it.next()
+		#if obj == null:
+		#	push_error("expected object")
+		#	return
 
-		var node_model = NodeDb.db.get(obj)
-		if not node_model:
-			var subpatch_path = context.path.path_join(obj + ".pd")
-			if sub_patch_exists(subpatch_path):
-				var subpatch = load("res://objects/patch.tscn").instantiate()
-				subpatch.open(subpatch_path)
-				#parse_sub_patch_file(subpatch_path, context)
-			else:
-				push_error("Unknown obj '%s'." % obj)
-				return
+		#var node_model = NodeDb.db.get(obj)
+		#if not node_model:
+		#	var subpatch_path = context.path.path_join(obj + ".pd")
+		#	if sub_patch_exists(subpatch_path):
+		#		var subpatch = load("res://objects/patch.tscn").instantiate()
+		#		subpatch.open(subpatch_path)
+		#		#parse_sub_patch_file(subpatch_path, context)
+		#	else:
+		#		push_error("Unknown obj '%s'." % obj)
+		#		return
 
-		add_child(add_node__(it.join(), pos))
+		add_child(add_node__(it.join()))
 	elif message == 'floatatom':
-		pass
+		add_child(add_node__(command))
 	elif message == 'connect':
 		var from = int(it.next())
 		var outlet = int(it.next())
@@ -451,7 +463,7 @@ func parse_command(command:String, context:PDParseContext) -> void:
 		execute_coords_command(' '.join(args.slice(1)))
   
 func execute_coords_command(message) -> void:
-	var n = add_node__(message, Vector2.ZERO)
+	var n = add_node__(message)
 	n.resizeable = true
 	add_child(n)
 
@@ -515,65 +527,6 @@ func _connection(to) -> void:
 ################################################################################
 # talk to puredata
 ################################################################################
-
-func create_obj(message:String, pos:Vector2 = Vector2.ZERO) -> Array:
-	message = message.replace('\n', ' ')
-	message = message.replace('  ', ' ')
-	var args:PackedStringArray = message.split(' ')
-
-	var obj = NodeDb.db.get(args[0])
-	if not obj:
-		return []
-
-	args += obj.default_args.slice(args.size())
-
-	if obj.title == 'bang':
-		var ns := "$1"
-
-		args[0] = "bng"
-		var rid = str(object_count_)
-		args[5] = '/s/%s/%s' % [ns, rid]
-		args[6] = '/r/%s/%s' % [ns, rid]
-
-	elif obj.title == 'toggle':
-		var ns := "$1"
-
-		args[0] = "tgl"
-		var rid = str(object_count_)
-		args[3] = '/s/%s/%s' % [ns, rid]
-		args[4] = '/r/%s/%s' % [ns, rid]
-		
-	elif obj.instance:
-		args.push_back("$1/" + str(object_count_))
-
-	PureData.start_message(args.size() + 2)
-
-	PureData.add_float(pos.x)
-	PureData.add_float(pos.y)
-
-	for arg in args:
-		if arg == "msg":
-			continue
-		if arg == "floatatom":
-			continue
-		if PureData.regex.search(arg):
-			PureData.add_float(float(arg))
-		else:
-			PureData.add_symbol(arg)
-
-	if args[0] == "floatatom":
-		PureData.finish_message(canvas, "floatatom")
-	elif args[0] == "msg":
-		PureData.finish_message(canvas, "msg")
-	else:
-		PureData.finish_message(canvas, "obj")
-
-	if obj.instance:
-		pass
-		
-	object_count_ += 1
-
-	return [object_count_ - 1, ' '.join(args)]
 
 func create_connection(from_object_idx, from_slot_idx, to_object_idx, to_object_slot_idx):
 	PureData.start_message(4)

@@ -51,23 +51,22 @@ func _enter_tree() -> void:
 	db["+~"] = multiply_add
 
 	var bang = N.new()
-	bang.title = "bang"
+	bang.title = "bng"
 	bang.inputs.push_front(C.new("value", "any"))
 	bang.outputs.push_front(C.new("value", "bang"))
 	bang.visible_in_subpatch = true
 	bang.specialized = preload("res://objects/special/bang_node.tscn")
-	bang.default_args = ['bng', "15", "250", "50", "0", 'empty', 'empty', 'empty', "17", "7", "0", "10", '#fcfcfc', '#000000', '#000000']
-	db["bng"] = bang
+	bang.default_args = ['obj', '{x}', '{y}', '{obj}', "15", "250", "50", "0", '{s}', '{r}', 'empty', "17", "7", "0", "10", '#fcfcfc', '#000000', '#000000']
 	db["bang"] = bang
+	db["bng"] = bang
 	
 	var toggle = N.new()
-	toggle.title = "toggle"
+	toggle.title = "tgl"
 	toggle.inputs.push_front(C.new("value", "any"))
 	toggle.outputs.push_front(C.new("value", "any"))
 	toggle.visible_in_subpatch = true
 	toggle.specialized = preload("res://objects/special/toggle_node.tscn")
-	toggle.default_args = ['tgl', "8", "0", 'empty', 'empty', 'empty', "17", "7", "0", "10", '#fcfcfc', '#000000', '#000000', '0', '1']
-	db["toggle"] = toggle
+	toggle.default_args = ['obj', '{x}', '{y}', '{obj}', "8", "0", '{s}', '{r}', 'empty', "17", "7", "0", "10", '#fcfcfc', '#000000', '#000000', '0', '1']
 	db["tgl"] = toggle
 	
 	var metro = N.new()
@@ -89,7 +88,7 @@ func _enter_tree() -> void:
 	phasor.inputs.push_front(C.new("frequency", "float or signal"))
 	phasor.inputs.push_front(C.new("phase", "float"))
 	phasor.outputs.push_front(C.new("wave", "signal"))
-	db["phasor~"] = osc
+	db["phasor~"] = phasor
 
 	var dac = N.new()
 	dac.title = "dac~"
@@ -101,6 +100,7 @@ func _enter_tree() -> void:
 	floatatom.title = "floatatom"
 	floatatom.inputs.push_front(C.new("value", "float"))
 	floatatom.outputs.push_front(C.new("value", "float"))
+	floatatom.default_args = ["floatatom", "0", "100", "5", "0", "0", "0", "", "-", "-", "-"]
 	db["floatatom"] = floatatom
 	
 	var receiver = N.new()
@@ -125,6 +125,11 @@ func _enter_tree() -> void:
 	outlet.title = "outlet"
 	outlet.inputs.push_front(C.new("output", "any"))
 	db["outlet"] = outlet
+	
+	var outlet_signal = N.new()
+	outlet_signal.title = "outlet~"
+	outlet_signal.inputs.push_front(C.new("output", "signal"))
+	db["outlet~"] = outlet_signal
 	
 	var inlet = N.new()
 	inlet.title = "inlet"

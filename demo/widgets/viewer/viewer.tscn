@@ -32,4 +32,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Camera2D" type="Camera2D" parent="SubViewport/Root"]
+unique_name_in_owner = true
+position_smoothing_speed = 33.0
 script = ExtResource("1_pdu1a")

@@ -7,12 +7,9 @@ var top_search_result_
 
 func _ready() -> void:
 	%Search.grab_focus()
-
 	fuzzy_search_.data = NodeDb.db.keys()
 
 func _text_changed(new_text: String) -> void:
-	
-	
 	top_search_result_ = null
 
 	for child in $VBoxContainer.get_children():
@@ -47,12 +44,23 @@ func _input(event: InputEvent) -> void:
 	elif Input.is_action_just_pressed("enter"):
 		if top_search_result_:
 			queue_free()
-			var args = ' '.join(%Search.text.split(' ').slice(1))
-			if not args.is_empty():
-				args = " " + args
-			end.emit(top_search_result_ + args)
+			found_()
 
 	elif event.is_action("click"):
 		if not Rect2($VBoxContainer.global_position, $VBoxContainer.size).has_point(get_global_mouse_position()):
 			queue_free()
 			end.emit("")
+
+func found_() -> void:		
+	var nm = NodeDb.db.get(top_search_result_)
+	var tpl = ' '.join(nm.default_args)
+	if tpl.is_empty():
+		tpl = 'obj {x} {y} {obj}'
+	
+	var res = tpl.format({ x=int(position.x), y=int(position.y), obj=nm.title})
+	
+	var args = ' '.join(%Search.text.split(' ').slice(1))
+	if not args.is_empty():
+		res += " " + args
+
+	end.emit(res)

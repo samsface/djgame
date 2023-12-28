@@ -53,4 +53,8 @@ class IteratePackedStringArray:
 		return int(packed_string_[i-1])
 		
 	func join(join_string:String = " ") -> String:
+		if i >= packed_string_.size():
+			return ""
+
 		return join_string.join(packed_string_.slice(i-1))
+

@@ -75,10 +75,10 @@ func connection_down_(connection:PDSlot) -> void:
 func pretty_text_(text:String):
 	if text.begins_with("bng"):
 		return "bang"
-		
+
 	if text.begins_with("nbx"):
 		return "nbx"
-		
+
 	if text.begins_with("tgl"):
 		return "toggle"
 
@@ -95,21 +95,18 @@ func set_text_(value:String, is_update := false) -> String:
 	if not canvas:
 		return value
 
-	var res = canvas.create_obj(value, global_position)
-	if res:
-
-		index = res[0]
-		value = res[1]
-
-	%LineEdit.text = pretty_text_(value)
-	%LineEdit.caret_column = %LineEdit.text.length()
-
-	var args = value.split(' ')
-
-	var node_model = NodeDb.db.get(args[0])
-	if not node_model:
+	var res = create_obj_(value, global_position)
+	if not res:
 		return ""
 		
+	index = res[0]
+	value = res[1]
+	
+	var node_model = res[2]
+
+	%LineEdit.text = pretty_text_(node_model.title + res[3])
+	%LineEdit.caret_column = %LineEdit.text.length()
+
 	visible_in_subpatch = node_model.visible_in_subpatch
 
 	if in_subpatch:
@@ -236,9 +233,11 @@ func _line_edit_focus_exited() -> void:
 	end_edit_text.emit()
 	editing_text_ = false
 
+
 func _input(event: InputEvent) -> void:
 	if dragging_:
-		global_position = get_global_mouse_position() + drag_offset
+		position = get_global_mouse_position() + drag_offset
+		#position = position.snapped(Vector2.ONE * 16.0)
 		
 		for connection in connections_:
 			connection.invalidate()
@@ -268,8 +267,81 @@ func _input(event: InputEvent) -> void:
 					%LineEdit.grab_focus()
 					%LineEdit.caret_column = %LineEdit.text.length()
 
-
 func _size_control_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
 		resizing_ = true
 		begin_resize.emit()
+
+func get_human_readable_for_obj_(args) -> String:
+	var res := ' '.join(args.slice(4))
+	if not res.is_empty():
+		res = " " + res
+
+	return res
+
+func create_obj_(message:String, pos:Vector2 = Vector2.ZERO) -> Array:
+	message = message.replace('\n', ' ')
+	message = message.replace('  ', ' ')
+	
+	var arg_parser = PureData.IteratePackedStringArray.new(message)
+
+	var pretty_text := ""
+
+	var message_type = arg_parser.next()
+	var node_model
+	
+
+	if message_type == 'obj':
+		position.x = arg_parser.next_as_int()
+		position.y = arg_parser.next_as_int()
+		node_model = NodeDb.db.get(arg_parser.next())
+	elif message_type == 'floatatom':
+		position.x = arg_parser.next_as_int()
+		position.y = arg_parser.next_as_int()
+		node_model = NodeDb.db.get('floatatom')
+	elif message_type == 'msg':
+		position.x = arg_parser.next_as_int()
+		position.y = arg_parser.next_as_int()
+		node_model = NodeDb.db.get('msg')
+
+	if not node_model:
+		push_error("no model for %s" % message)
+		return []
+
+	#position *= 5.0
+	#position = position.rotated(- 90)
+	
+	var human_readable_args := ""
+	if message_type == 'obj':
+		human_readable_args = get_human_readable_for_obj_(arg_parser.packed_string_)
+
+	var args = arg_parser.packed_string_
+	args += node_model.default_args.slice(args.size())
+
+	if not node_model.default_args.is_empty():
+		var ns := "$1"
+		for i in args.size():
+			if node_model.default_args[i] == '{r}':
+				args[i] = '/r/%s/%s' % [ns, canvas.object_count_]
+			elif node_model.default_args[i] == '{s}':
+				args[i] = '/s/%s/%s' % [ns, canvas.object_count_]
+
+	#elif obj.instance:
+	#	args.push_back("$1/" + str(canvas.object_count_))
+
+	PureData.start_message(args.size())
+
+	for arg in args.slice(1):
+		if PureData.regex.search(arg):
+			PureData.add_float(float(arg))
+		else:
+			PureData.add_symbol(arg)
+
+	PureData.finish_message(canvas.canvas, args[0])
+
+	#if obj.instance:
+	#	pass
+		
+	canvas.object_count_ += 1
+
+	return [canvas.object_count_ - 1, ' '.join(args), node_model, human_readable_args]
