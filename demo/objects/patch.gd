@@ -1,11 +1,17 @@
 extends Control
 class_name PDPatch
 
-@export var patch_path:String :
-	set(value):
-		patch_path = value
-
 @export var root := false
+
+enum Mode {
+	none,
+	selecting,
+	dragging,
+	connecting,
+	searching,
+	editing,
+	resizing
+}
 
 var undo_ := UndoRedo.new()
 var canvas:String
@@ -13,36 +19,23 @@ var lines := []
 var drag_selection_box_
 var drag_threshold_ := 0.5
 var initial_click_position_ := Vector2.ZERO
-var dragging_ := false
-var selecting_ := false
-var editing_text_ := false
-var searching_ := false
-var connecting_:Node = null
 var object_count_ := 0
-var x := false
+var patch_path
+var inlets := []
+var outlets := []
 
+var mode := Mode.none
 
 func _ready() -> void:
-	if not x:
-		init()
-
-func init() -> void:
-	x = true
-	open_patch_(patch_path)
+	pass
 
 func _input(event: InputEvent):
 	if Input.is_action_just_pressed("save"):
 		save()
 	
-	if searching_:
+	if mode >= Mode.connecting:
 		return
 
-	if editing_text_:
-		return
-		
-	if connecting_:
-		return
-		
 	if Input.is_action_just_pressed("ui_down"):
 		open_patch_in_new_window_()
 	
@@ -69,7 +62,8 @@ func _input(event: InputEvent):
 				SelectionBus.change_selection(SelectionBus.hovering)
 
 		if not SelectionBus.hovering:
-			selecting_ = true
+			print("selecting")
+			mode = Mode.selecting
 			drag_selection_box_ = preload("res://widgets/selection_box/selection_box.tscn").instantiate()
 			add_child(drag_selection_box_)
 			drag_selection_box_.global_position = get_global_mouse_position()
@@ -77,9 +71,9 @@ func _input(event: InputEvent):
 		initial_click_position_ = get_global_mouse_position()
 			
 	elif Input.is_action_just_released("click"):
-		if selecting_:
-			selecting_ = false
-		elif dragging_:
+		if mode == Mode.selecting:
+			mode = Mode.none
+		elif mode == Mode.dragging:
 			drag_end_()
 		else:
 			if SelectionBus.selection_.size() > 1:
@@ -87,17 +81,18 @@ func _input(event: InputEvent):
 					SelectionBus.change_selection(SelectionBus.hovering)
 
 	elif Input.is_action_pressed("click"):
-		if selecting_:
+		if mode == Mode.selecting:
 			pass
 		else:
 			drag_live_action_()
 
 	if Input.is_action_just_pressed("search"):
+		print(get_parent().position)
 		var x = preload("res://widgets/search/search.tscn").instantiate()
 		add_child(x)
 		x.global_position = get_global_mouse_position()
-		x.end.connect(search_end_.bind(x.global_position))
-		searching_ = true
+		x.end.connect(search_end_.bind(get_global_mouse_position()))
+		mode = Mode.searching
 		get_viewport().set_input_as_handled()
 
 func get_connected_cables_(node:PDNode)-> Array:
@@ -117,20 +112,20 @@ func get_connected_cables_(node:PDNode)-> Array:
 
 func open_patch_in_new_window_() -> void:
 	get_tree().root.get_viewport().gui_embed_subwindows = false
+	var viewer = load("res://widgets/viewer/viewer.tscn").instantiate()
+	viewer.add(PureData.files["pd-subpatch.pd"])
 	var window := Window.new()
 	window.size = get_viewport().size
-	var p = load("res://viewer2.tscn").instantiate()
-	p.get_node("SubViewport/MarginContainer").add_child(PureData.files["pd-subpatch.pd"])
-	
+	window.add_child(viewer)
+	window.close_requested.connect(window.queue_free)
 	get_tree().root.add_child(window)
-	window.add_child(p)
 
 ################################################################################
 # searching for stuff
 ################################################################################
 
 func search_end_(search_text:String, pos:Vector2) -> void:
-	searching_ = false
+	mode = Mode.none
 
 	if not search_text:
 		return
@@ -173,7 +168,7 @@ func drag_begin_() -> void:
 	if SelectionBus.is_empty():
 		return
 	
-	dragging_ = true
+	mode = Mode.dragging
 	undo_.create_action("drag")
 	
 	var positions := []
@@ -183,11 +178,11 @@ func drag_begin_() -> void:
 	undo_.add_undo_method(drag_action_.bind(SelectionBus.selection_.duplicate(), positions))
 
 func drag_live_action_() -> void:
-	if not dragging_:
+	if mode != Mode.dragging:
 		if get_global_mouse_position().distance_to(initial_click_position_) > drag_threshold_:
 			drag_begin_()
 	
-	if dragging_:
+	if mode == Mode.dragging:
 		for node in SelectionBus.selection_:
 			node._drag(get_global_mouse_position())
 
@@ -196,7 +191,7 @@ func drag_action_(selection:Array, positions:Array) -> void:
 		selection[i].position = positions[i]
 
 func drag_end_() -> void:
-	dragging_ = false
+	mode == Mode.none
 	
 	for node in SelectionBus.selection_:
 		node._drag_end()
@@ -233,6 +228,8 @@ func add_node__(node_name:String, pos:Vector2):
 	node.title_changed.connect(title_changed_.bind(node))
 	node.begin_edit_text.connect(begin_edit_text_.bind(node))
 	node.end_edit_text.connect(end_edit_text_.bind(node))
+	node.begin_resize.connect(begin_resize_.bind(node))
+	node.end_resize.connect(end_resize_.bind(node))
 
 	return node
 
@@ -245,7 +242,7 @@ func find_node_by_object_id(id:int) -> Node:
 		if node is PDNode:
 			if node.index == id:
 				return node
-
+	
 	return null
 
 func add_connection_(from_object:int, outlet:int, to_object:int, inlet:int) -> void:
@@ -273,45 +270,66 @@ func add_connection_(from_object:int, outlet:int, to_object:int, inlet:int) -> v
 	cable.from = outlet_node
 	cable.to = inlet_node
 	add_child(cable)
+	#cable.global_position = Vector2.ZERO
 	cable.call_connect()
 
+var cable_
 func connection_clicked_(connection) -> void:
-	if connecting_:
-		var cable = preload("cable.tscn").instantiate()
-		cable.from = connecting_.from
-		cable.to = connection
+	if mode == Mode.selecting:
+		drag_selection_box_.queue_free()
+		drag_selection_box_ = null
 
-		undo_.create_action("connection")
-		undo_.add_do_reference(cable)
-		undo_.add_do_method(add_child.bind(cable))
-		undo_.add_undo_method(remove_child.bind(cable))
-		undo_.commit_action()
-		SelectionBus.remove_from_all(connecting_)
-		connecting_.queue_free()
-		remove_child(connecting_)
-
-		connecting_ = null
-		return
-
-	connecting_ = preload("cable.tscn").instantiate()
-	connecting_.creating = true
-	connecting_.from = connection
+	mode = Mode.connecting
 	
-	connecting_.tree_exited.connect(func(): SelectionBus.remove_from_all(connecting_); connecting_ = null)
+	cable_ = preload("cable.tscn").instantiate()
+	add_child(cable_)
+	cable_.creating = true
+	cable_.from = connection
+	#cable_.global_position = Vector2.ZERO
+	
+	cable_.tree_exited.connect(connection_canceled_)
+	cable_.connection.connect(connection_made_)
 
-	add_child(connecting_)
-	connecting_.global_position = Vector2.ZERO
-	SelectionBus.change_selection(connecting_)
+func connection_canceled_() -> void:
+	mode = Mode.none
+
+func connection_made_() -> void:
+	mode = Mode.none
+	
+	undo_.create_action("connection")
+	undo_.add_do_reference(cable_)
+	undo_.add_do_method(connection_do_.bind(cable_))
+	undo_.add_undo_method(remove_child.bind(cable_))
+	undo_.commit_action()
+	
+func connection_do_(cable:PDCable) -> void:
+	if not cable.get_parent():
+		add_child(cable)
+
+################################################################################
+# resizing nodes
+################################################################################
+
+func begin_resize_(node) -> void:
+	print("begin_resize_")
+	if mode == Mode.selecting:
+		drag_selection_box_.queue_free()
+		drag_selection_box_ = null
+
+	mode = Mode.resizing
+
+func end_resize_(node:PDNode) -> void:
+	mode = Mode.none
 
 ################################################################################
 # updating node type
 ################################################################################
 
 func begin_edit_text_(node) -> void:
-	editing_text_ = true
+	mode = Mode.editing
 
 func end_edit_text_(node) -> void:
-	editing_text_ = false
+	mode = Mode.none
 
 func title_changed_(next_text:String, node:PDNode) -> void:
 	undo_.create_action("update")
@@ -412,7 +430,9 @@ func parse_command(command:String, context:PDParseContext) -> void:
 		if not node_model:
 			var subpatch_path = context.path.path_join(obj + ".pd")
 			if sub_patch_exists(subpatch_path):
-				parse_sub_patch_file(subpatch_path, context)
+				var subpatch = load("res://objects/patch.tscn").instantiate()
+				subpatch.open(subpatch_path)
+				#parse_sub_patch_file(subpatch_path, context)
 			else:
 				push_error("Unknown obj '%s'." % obj)
 				return
@@ -428,6 +448,7 @@ func parse_command(command:String, context:PDParseContext) -> void:
 
 	elif message == 'coords':
 		execute_coords_command(
+			message,
 			it.next_as_int(),
 			it.next_as_int(),
 			it.next_as_int(),
@@ -437,76 +458,25 @@ func parse_command(command:String, context:PDParseContext) -> void:
 			it.next_as_int(),
 			it.next_as_int(),
 			it.next_as_int())
-
-func execute_coords_command(x_from, x_to, y_from, y_to, width, height, graph_on_parent, x, y) -> void:
-	return
-	if graph_on_parent == 0:
-		return
-	
-	custom_minimum_size = Vector2(width, height)
-	clip_contents = true
-	
-	for node in get_children():
-		node.position -= Vector2(x, y)
-
-	PureData.start_message(9)
-	PureData.add_float(x_from)
-	PureData.add_float(x_to)
-	PureData.add_float(y_from)
-	PureData.add_float(y_to)
-	PureData.add_float(width)
-	PureData.add_float(height)
-	PureData.add_float(graph_on_parent)
-	PureData.add_float(x)
-	PureData.add_float(y)
-	PureData.finish_message(canvas, "coords")
+  
+func execute_coords_command(message, x_from, x_to, y_from, y_to, width, height, graph_on_parent, x, y) -> void:
+	var n = add_node__(message, Vector2(x, y))
+	n.resizeable = true
+	add_child(n)
 
 func sub_patch_exists(path:String) -> bool:
 	return FileAccess.file_exists(path)
 
-func parse_sub_patch_file(path:String, context):
-	var model := NodeDb.N.new()
-	model.title = path.get_file().replace(".pd", "")
-
-	print("parse_sub_patch_file %s" % path)
-	var lines := FileAccess.get_file_as_string(path).split(';')
-	for line in lines:
-		var message = get_obj_from_command(line)
-		if not message:
-			continue
-
-		var node_model = NodeDb.db.get(message)
-		if not node_model:
-			continue
-
-		if node_model.title == "inlet":
-			var c = NodeDb.C.new("arg", "any")
-			model.inputs.push_back(c)
-		elif node_model.title == "outlet":
-			var c = NodeDb.C.new("arg", "any")
-			model.outputs.push_back(c)
+func get_all_objects_(filter:String) -> Array:
+	var res := []
+	for node in get_children():
+		if node is PDNode and node.text.begins_with(filter):
+			res.push_back(node)
 	
-	model.inputs.push_back(NodeDb.C.new("namespace", "string"))
-	
-	model.specialized = load("res://objects/special/subpatch.tscn")
-	model.specialized.set_meta("path", path)
-	model.instance = true
+	return res
 
-
-	NodeDb.db[model.title] = model
-
-	var p = load("res://objects/patch.tscn").instantiate()
-	p.patch_path = "res://addons/libpd/subpatch.pd"
-	p.init()
-	p.save()
-	
-	
-	PureData.start_message(1)
-	PureData.finish_message("pd-subpatch.pd", "menusave")
-
-	print("done parse_sub_patch_file")
-
-func open_patch_(path:String):
+func open(path:String):
+	patch_path = path
 	prints("open_patch", path)
 	var tmp_path = "res://junk/" + patch_path.get_file()
 	
@@ -521,15 +491,30 @@ func open_patch_(path:String):
 
 	canvas = "pd-" + tmp_path.get_file()
 	
+	var model := NodeDb.N.new()
 	var context := PDParseContext.new(path)
 	print("parsing %s" % path)
 	var lines := FileAccess.get_file_as_string(path).split(';')
 	for line in lines:
 		parse_command(line, context)
 
-	parse_command("#X obj 2000 2000 inlet", context)
+	model.title = path.get_file().replace(".pd", "")
+	model.specialized = load("res://objects/special/subpatch.tscn").duplicate()
+	model.specialized.set_meta("path", tmp_path)
+	model.instance = true
+	
+	for i in get_all_objects_("inlet").size():
+		model.inputs.push_back(NodeDb.C.new("input", "any"))
+		
+	for i in get_all_objects_("outlet").size():
+		model.outputs.push_back(NodeDb.C.new("input", "any"))
+
+	NodeDb.db[model.title] = model
 
 	PureData.files[canvas] = self
+
+	PureData.start_message(1)
+	PureData.finish_message(canvas, "menusave")
 
 	print("done parsing")
 
@@ -542,8 +527,9 @@ func _connection(to) -> void:
 
 func create_obj(message:String, pos:Vector2 = Vector2.ZERO) -> Array:
 	message = message.replace('\n', ' ')
-	var args = message.split(' ')
-	
+	message = message.replace('  ', ' ')
+	var args:PackedStringArray = message.split(' ')
+
 	var obj = NodeDb.db.get(args[0])
 	if not obj:
 		return []
@@ -551,19 +537,14 @@ func create_obj(message:String, pos:Vector2 = Vector2.ZERO) -> Array:
 	args += obj.default_args.slice(args.size())
 
 	if obj.title == 'bang':
-		var ns := "/$1"
-		if root:
-			ns = ""
+		var ns := "$1"
 
 		args[0] = "bng"
 		var rid = str(object_count_)
-		args[5] = '/s%s/%s' % [ns, rid]
-		args[6] = '/r%s/%s' % [ns, rid]
+		args[5] = '/s/%s/%s' % [ns, rid]
+		args[6] = '/r/%s/%s' % [ns, rid]
 	elif obj.instance:
-		args.push_back(str(object_count_))
-
-	#if args[0] == "bang":
-	#	args[0] = "bng"
+		args.push_back("$1/" + str(object_count_))
 
 	PureData.start_message(args.size() + 2)
 
@@ -604,17 +585,7 @@ func send_disconnect(from_object_idx, from_slot_idx, to_object_idx, to_object_sl
 	PureData.add_float(to_object_slot_idx)
 	PureData.finish_message(canvas, "disconnect")
 
-var hack_ := {}
-
 func save() -> void:
-
-
 	PureData.start_message(1)
 	PureData.add_float(1)
 	PureData.finish_message(canvas, "menusave")
-
-	
-	#PureData.start_message(1)
-	#PureData.finish_message("pd-subpatch.pd", "menusave")
-	
-	

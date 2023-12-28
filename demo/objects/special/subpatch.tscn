@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://wt5f1hxbpkqo"]
 
-[ext_resource type="Script" path="res://subpatch.gd" id="1_s6x0y"]
+[ext_resource type="Script" path="res://objects/subpatch.gd" id="1_2l17w"]
 
 [node name="subpatch" type="MarginContainer"]
 custom_minimum_size = Vector2(200, 200)
-script = ExtResource("1_s6x0y")
+script = ExtResource("1_2l17w")

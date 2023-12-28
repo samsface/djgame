@@ -7,6 +7,8 @@ func get_id_() -> String:
 	while p:
 		if p is PDNode:
 			id.push_front(p.index)
+		elif p is PDPatch:
+			id.push_front("$1")
 		p = p.get_parent()
 
 	return '/'.join(id)
@@ -18,9 +20,7 @@ func get_sender_id_() -> String:
 	return '/s/' + get_id_()
 
 func _ready() -> void:
-	print(get_sender_id_())
 	PureData.bind(get_sender_id_())
-	#PureData.bind(get_receiver_id_())
 	PureData.bang.connect(_bang)
 
 func _button_down() -> void:

@@ -32,7 +32,7 @@ bg_color = Color(0.823529, 0.423529, 0.807843, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 
-[node name="Area2D" type="Area2D"]
+[node name="s" type="Area2D"]
 collision_mask = 0
 monitoring = false
 script = ExtResource("1_q3tcj")
@@ -43,8 +43,9 @@ shape = SubResource("RectangleShape2D_jvwav")
 
 [node name="ColorRect" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(80, 64)
-offset_right = 213.0
+offset_right = 80.0
 offset_bottom = 64.0
+scale = Vector2(1.00298, 1.01027)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qhjff")
 
@@ -66,6 +67,7 @@ mouse_filter = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_08sck")
 text = "osc~"
 expand_to_text_length = true
+deselect_on_focus_loss_enabled = false
 flat = true
 caret_blink = true
 
@@ -97,8 +99,18 @@ size_flags_horizontal = 10
 [node name="Specialized" type="MarginContainer" parent="ColorRect/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Reize" type="ColorRect" parent="ColorRect"]
+visible = false
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+color = Color(1, 1, 1, 0.160784)
 
 [connection signal="item_rect_changed" from="ColorRect" to="ColorRect" method="_item_rect_changed"]
 [connection signal="focus_entered" from="ColorRect/VBoxContainer/LineEdit" to="." method="_line_edit_focus_entered"]
 [connection signal="focus_exited" from="ColorRect/VBoxContainer/LineEdit" to="." method="_line_edit_focus_exited"]
 [connection signal="text_submitted" from="ColorRect/VBoxContainer/LineEdit" to="." method="_line_edit_text_submitted"]
+[connection signal="gui_input" from="ColorRect/Reize" to="." method="_size_control_input"]

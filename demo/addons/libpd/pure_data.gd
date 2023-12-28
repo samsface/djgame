@@ -1,12 +1,14 @@
 extends GDExample
 
 var regex = RegEx.new()
+var sanitize = RegEx.new()
 
 var open_patches_ := {}
 
 var files := {}
 
 func _ready() -> void:
+
 	regex.compile("^[+-]?\\d+(\\.\\d+)?$")
 	
 	print(is_initialized())

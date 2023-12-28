@@ -8,7 +8,9 @@ func _ready() -> void:
 	for node in file.get_children():
 		if node is PDNode:
 			if node.text.begins_with('bng'):
-				add_child(node.duplicate())
-
+				var n = node.duplicate()
+				n.in_subpatch = true
+				add_child(n)
+			
 func _connection(to) -> void:
 	pass

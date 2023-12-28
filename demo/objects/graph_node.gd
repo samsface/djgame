@@ -3,21 +3,24 @@ class_name PDNode
 
 @export var text:String : 
 	set(value):
-		text = value
-		set_text_(value)
-		
-@export var selectable:bool = true
-@export var canvas:Node
-@export var in_subpatch:bool
+		text = set_text_(value)
 @export var index := 0
+@export var resizeable := false
+
+var selectable:bool = true
+var canvas:Node
+var in_subpatch:bool
 
 signal connection_clicked
 signal title_changed
 signal begin_edit_text
 signal end_edit_text
+signal begin_resize
+signal end_resize
 
 var mouse_over_ := false
 var dragging_ := false
+var resizing_ := false
 var drag_offset := Vector2.ZERO
 var selected_ := false
 
@@ -31,13 +34,7 @@ func _ready() -> void:
 	visibility_changed.connect(_visibility_changed)
 	tree_exiting.connect(_tree_exiting)
 	_item_rect_changed()
-
-func _physics_process(delta: float) -> void:
-	if dragging_:
-		global_position = get_global_mouse_position() + drag_offset
-		
-		for connection in connections_:
-			connection.invalidate()
+	$ColorRect/Reize.visible = resizeable
 
 func _mouse_entered() -> void:
 	if not monitorable:
@@ -50,7 +47,7 @@ func _mouse_entered() -> void:
 func _mouse_exited() -> void:
 	if not monitorable:
 		return
-	
+
 	mouse_over_ = false
 	if SelectionBus.hovering == self:
 		SelectionBus.hovering = null
@@ -60,22 +57,31 @@ func stop_dragging_() -> void:
 	if dragging_:
 		dragging_ = false
 
-func connection_down_(connection:Button) -> void:
+func connection_down_(connection:PDSlot) -> void:
 	connection_clicked.emit(connection)
+
+func pretty_text_(text:String):
+	if text.begins_with("bng"):
+		return "bang"
+	
+	var r := RegEx.new()
+	r.compile("\\$1\\/.+")
+	text = r.sub(text, "")
+	
+	return text
 
 func set_text_(value:String, is_update := false):
 	if not canvas:
-		return
+		return value
 
 	var res = canvas.create_obj(value, global_position)
 	if not res:
-		return
+		return value
 	
 	index = res[0]
 	value = res[1]
-	
-	%LineEdit.text = value
 
+	%LineEdit.text = pretty_text_(value)
 	%LineEdit.caret_column = %LineEdit.text.length()
 
 	var args = value.split(' ')
@@ -89,10 +95,11 @@ func set_text_(value:String, is_update := false):
 		if not node_model.visible_in_subpatch:
 			visible = false
 
-
 	update_connection_(node_model.inputs, %Inputs)
 	update_connection_(node_model.outputs, %Outputs)
 	update_specialized_(node_model)
+	
+	return value
 
 func update_connection_(connection_models:Array, node:Node) -> void:
 	var slot_index = 0
@@ -115,6 +122,9 @@ func update_connection_(connection_models:Array, node:Node) -> void:
 		node.remove_child(slot)
 
 func update_specialized_(node_model) -> void:
+	if node_model.title.begins_with("coords"):
+		pass
+	
 	for node in %Specialized.get_children():
 		node.queue_free()
 		node.get_parent().remove_child(node)
@@ -189,10 +199,10 @@ func _visibility_changed():
 		monitorable = false
 
 func _line_edit_focus_entered() -> void:
-	begin_edit_text.emit()
+	%LineEdit.mouse_filter = LineEdit.MOUSE_FILTER_STOP
 	editing_text_ = true
 	original_text_ = %LineEdit.text
-	%LineEdit.mouse_filter = LineEdit.MOUSE_FILTER_STOP
+	begin_edit_text.emit()
 
 func _line_edit_text_submitted(new_text: String) -> void:
 	title_changed.emit(new_text)
@@ -200,12 +210,27 @@ func _line_edit_text_submitted(new_text: String) -> void:
 
 func _line_edit_focus_exited() -> void:
 	%LineEdit.text = original_text_
+	%LineEdit.mouse_filter = LineEdit.MOUSE_FILTER_IGNORE
 	end_edit_text.emit()
 	editing_text_ = false
-	%LineEdit.mouse_filter = LineEdit.MOUSE_FILTER_IGNORE
 
 func _input(event: InputEvent) -> void:
-	if selected_:
+	if dragging_:
+		global_position = get_global_mouse_position() + drag_offset
+		
+		for connection in connections_:
+			connection.invalidate()
+
+	elif  resizing_:
+		if event.is_action_released("click"):
+			resizing_ = false
+			end_resize.emit()
+			resizing_ = false
+			_item_rect_changed()
+		else:
+			$ColorRect.custom_minimum_size = get_global_mouse_position() - global_position
+		
+	elif selected_:
 		if editing_text_:
 			if event.is_action_pressed("ui_cancel"):
 				%LineEdit.release_focus()
@@ -215,5 +240,14 @@ func _input(event: InputEvent) -> void:
 					%LineEdit.release_focus()
 		elif event is InputEventMouseButton:
 			if event.double_click:
-				await get_tree().process_frame
-				%LineEdit.grab_focus()
+				if Rect2(%LineEdit.global_position, %LineEdit.size).has_point(get_global_mouse_position()):
+					%LineEdit.release_focus()
+					await get_tree().process_frame
+					%LineEdit.grab_focus()
+					%LineEdit.caret_column = %LineEdit.text.length()
+
+
+func _size_control_input(event: InputEvent) -> void:
+	if event.is_action_pressed("click"):
+		resizing_ = true
+		begin_resize.emit()

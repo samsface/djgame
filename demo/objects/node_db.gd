@@ -9,6 +9,7 @@ class N:
 	var specialized:PackedScene
 	var instance := false
 	var default_args := PackedStringArray()
+	var resizeable := false
 
 class C:
 	var title := ""
@@ -128,3 +129,9 @@ func _enter_tree() -> void:
 	spigot.inputs.push_front(C.new("block", "float"))
 	spigot.outputs.push_front(C.new("output", "signal"))
 	db["spigot"] = spigot
+
+	var coords = N.new()
+	coords.title = "coords"
+	coords.specialized = preload("res://objects/special/coords.tscn")
+	coords.resizeable = true
+	db["coords"] = coords
