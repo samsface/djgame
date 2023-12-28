@@ -67,6 +67,7 @@ func _enter_tree() -> void:
 	toggle.visible_in_subpatch = true
 	toggle.specialized = preload("res://objects/special/toggle_node.tscn")
 	toggle.default_args = ['obj', '{x}', '{y}', '{obj}', "8", "0", '{s}', '{r}', 'empty', "17", "7", "0", "10", '#fcfcfc', '#000000', '#000000', '0', '1']
+	db["toggle"] = toggle
 	db["tgl"] = toggle
 	
 	var metro = N.new()

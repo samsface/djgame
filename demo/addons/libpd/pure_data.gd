@@ -58,3 +58,19 @@ class IteratePackedStringArray:
 
 		return join_string.join(packed_string_.slice(i-1))
 
+
+func found_(command:String, pos:Vector2) -> String:
+	var aaa = command.split(' ')
+	
+	var nm = NodeDb.db.get(aaa[0])
+	var tpl = ' '.join(nm.default_args)
+	if tpl.is_empty():
+		tpl = 'obj {x} {y} {obj}'
+	
+	var res = tpl.format({ x=int(pos.x), y=int(pos.y), obj=nm.title})
+	
+	var args = ' '.join(aaa.slice(1))
+	if not args.is_empty():
+		res += " " + args
+
+	return res

@@ -91,7 +91,6 @@ func _input(event: InputEvent):
 			drag_live_action_()
 
 	if Input.is_action_just_pressed("search"):
-		print(get_parent().position)
 		var x = preload("res://widgets/search/search.tscn").instantiate()
 		x.position = get_global_mouse_position()
 		x.end.connect(search_end_)
@@ -450,8 +449,6 @@ func parse_command(command:String, context:PDParseContext) -> void:
 		#		return
 
 		add_child(add_node__(it.join()))
-	elif message == 'floatatom':
-		add_child(add_node__(command))
 	elif message == 'connect':
 		var from = int(it.next())
 		var outlet = int(it.next())
@@ -473,7 +470,7 @@ func sub_patch_exists(path:String) -> bool:
 func get_all_objects_(filter:String) -> Array:
 	var res := []
 	for node in get_children():
-		if node is PDNode and node.text.begins_with(filter):
+		if node is PDNode and node.text.contains(filter):
 			res.push_back(node)
 	
 	return res

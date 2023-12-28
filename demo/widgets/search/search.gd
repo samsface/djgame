@@ -51,16 +51,8 @@ func _input(event: InputEvent) -> void:
 			queue_free()
 			end.emit("")
 
-func found_() -> void:		
-	var nm = NodeDb.db.get(top_search_result_)
-	var tpl = ' '.join(nm.default_args)
-	if tpl.is_empty():
-		tpl = 'obj {x} {y} {obj}'
+func found_() -> void:
+	var a = %Search.text.split(' ')
+	a[0] = top_search_result_
 	
-	var res = tpl.format({ x=int(position.x), y=int(position.y), obj=nm.title})
-	
-	var args = ' '.join(%Search.text.split(' ').slice(1))
-	if not args.is_empty():
-		res += " " + args
-
-	end.emit(res)
+	end.emit(PureData.found_(' '.join(a), position))

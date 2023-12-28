@@ -177,11 +177,14 @@ func _tree_exiting() -> void:
 	SelectionBus.remove_from_hover(self)
 
 func update(text):
+	text = PureData.found_(text, position)
 	set_text_(text, true)
 
 func _select():
 	selected_ = true
 	%Selected.visible = true
+	
+	print(text)
 
 func _unselect():
 	selected_ = false
@@ -289,12 +292,11 @@ func create_obj_(message:String, pos:Vector2 = Vector2.ZERO) -> Array:
 
 	var message_type = arg_parser.next()
 	var node_model
-	
 
 	if message_type == 'obj':
 		position.x = arg_parser.next_as_int()
 		position.y = arg_parser.next_as_int()
-		node_model = NodeDb.db.get(arg_parser.next())
+		node_model = get_node_model_(arg_parser.next())
 	elif message_type == 'floatatom':
 		position.x = arg_parser.next_as_int()
 		position.y = arg_parser.next_as_int()
@@ -326,8 +328,8 @@ func create_obj_(message:String, pos:Vector2 = Vector2.ZERO) -> Array:
 			elif node_model.default_args[i] == '{s}':
 				args[i] = '/s/%s/%s' % [ns, canvas.object_count_]
 
-	#elif obj.instance:
-	#	args.push_back("$1/" + str(canvas.object_count_))
+	if node_model.instance:
+		args.push_back("$1/" + str(canvas.object_count_))
 
 	PureData.start_message(args.size())
 
@@ -339,9 +341,18 @@ func create_obj_(message:String, pos:Vector2 = Vector2.ZERO) -> Array:
 
 	PureData.finish_message(canvas.canvas, args[0])
 
-	#if obj.instance:
-	#	pass
-		
 	canvas.object_count_ += 1
 
 	return [canvas.object_count_ - 1, ' '.join(args), node_model, human_readable_args]
+
+func get_node_model_(subpatch_name:String):
+	var node_model = NodeDb.db.get(subpatch_name)
+	if node_model:
+		return node_model
+		
+	var subpatch_path = "res://addons/libpd".path_join(subpatch_name + ".pd")
+	var subpatch = load("res://objects/patch.tscn").instantiate()
+	subpatch.open(subpatch_path)
+		#parse_sub_patch_file(subpatch_path, context)
+	
+	return NodeDb.db.get(subpatch_name)

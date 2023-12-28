@@ -200,8 +200,6 @@ func tidy_positions(str, positions):
 
 
 func score_fuzzy_path_(query:String, path:String):
-	print(query)
-	
 	var split_path = path.split("/")
 	var offset = 0
 	
