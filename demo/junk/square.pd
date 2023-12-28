@@ -1,0 +1,13 @@
+#N canvas 626 203 1354 1042 12;
+#X obj 175 169 phasor~;
+#X obj 111 169 phasor~;
+#X obj 168 186 *~ -1;
+#X obj 144 83 inlet;
+#X obj 152 202 +~;
+#X obj 152 219 *~ 2;
+#X obj 206 97 loadbang;
+#X connect 0 0 2 0;
+#X connect 1 0 4 0;
+#X connect 2 0 4 1;
+#X connect 5 0 0 1;
+#X connect 6 0 1 1;

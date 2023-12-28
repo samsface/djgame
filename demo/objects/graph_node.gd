@@ -75,7 +75,13 @@ func connection_down_(connection:PDSlot) -> void:
 func pretty_text_(text:String):
 	if text.begins_with("bng"):
 		return "bang"
-	
+		
+	if text.begins_with("nbx"):
+		return "nbx"
+		
+	if text.begins_with("tgl"):
+		return "toggle"
+
 	if text.begins_with("coords"):
 		return "coords"
 

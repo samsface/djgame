@@ -438,7 +438,8 @@ func parse_command(command:String, context:PDParseContext) -> void:
 				return
 
 		add_child(add_node__(it.join(), pos))
-
+	elif message == 'floatatom':
+		pass
 	elif message == 'connect':
 		var from = int(it.next())
 		var outlet = int(it.next())
@@ -533,6 +534,15 @@ func create_obj(message:String, pos:Vector2 = Vector2.ZERO) -> Array:
 		var rid = str(object_count_)
 		args[5] = '/s/%s/%s' % [ns, rid]
 		args[6] = '/r/%s/%s' % [ns, rid]
+
+	elif obj.title == 'toggle':
+		var ns := "$1"
+
+		args[0] = "tgl"
+		var rid = str(object_count_)
+		args[3] = '/s/%s/%s' % [ns, rid]
+		args[4] = '/r/%s/%s' % [ns, rid]
+		
 	elif obj.instance:
 		args.push_back("$1/" + str(object_count_))
 
@@ -542,6 +552,10 @@ func create_obj(message:String, pos:Vector2 = Vector2.ZERO) -> Array:
 	PureData.add_float(pos.y)
 
 	for arg in args:
+		if arg == "msg":
+			continue
+		if arg == "floatatom":
+			continue
 		if PureData.regex.search(arg):
 			PureData.add_float(float(arg))
 		else:
@@ -549,6 +563,8 @@ func create_obj(message:String, pos:Vector2 = Vector2.ZERO) -> Array:
 
 	if args[0] == "floatatom":
 		PureData.finish_message(canvas, "floatatom")
+	elif args[0] == "msg":
+		PureData.finish_message(canvas, "msg")
 	else:
 		PureData.finish_message(canvas, "obj")
 

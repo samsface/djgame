@@ -43,6 +43,13 @@ func _enter_tree() -> void:
 	multiply_signal.outputs.push_front(C.new("output", "signal"))
 	db["*~"] = multiply_signal
 
+	var multiply_add = N.new()
+	multiply_add.title = "*~"
+	multiply_add.inputs.push_front(C.new("value", "signal"))
+	multiply_add.inputs.push_front(C.new("by", "float"))
+	multiply_add.outputs.push_front(C.new("output", "signal"))
+	db["+~"] = multiply_add
+
 	var bang = N.new()
 	bang.title = "bang"
 	bang.inputs.push_front(C.new("value", "any"))
@@ -59,6 +66,7 @@ func _enter_tree() -> void:
 	toggle.outputs.push_front(C.new("value", "any"))
 	toggle.visible_in_subpatch = true
 	toggle.specialized = preload("res://objects/special/toggle_node.tscn")
+	toggle.default_args = ['tgl', "8", "0", 'empty', 'empty', 'empty', "17", "7", "0", "10", '#fcfcfc', '#000000', '#000000', '0', '1']
 	db["toggle"] = toggle
 	db["tgl"] = toggle
 	
@@ -136,3 +144,31 @@ func _enter_tree() -> void:
 	coords.resizeable = true
 	coords.visible_in_subpatch = true
 	db["coords"] = coords
+	
+	var sel = N.new()
+	sel.title = "sel"
+	sel.inputs.push_front(C.new("lhs", "any"))
+	sel.inputs.push_front(C.new("rhs", "any"))
+	sel.outputs.push_front(C.new("match", "bang"))
+	sel.outputs.push_front(C.new("else", "any"))
+	db["select"] = metro
+	db["sel"] = metro
+	
+	var nbx = N.new()
+	nbx.title = "nbx"
+	nbx.inputs.push_front(C.new("input", "float"))
+	nbx.outputs.push_front(C.new("output", "float"))
+	db["nbx"] = nbx
+
+
+	var msg = N.new()
+	msg.title = "msg"
+	msg.inputs.push_front(C.new("input", "bang"))
+	msg.outputs.push_front(C.new("output", "any"))
+	db["msg"] = msg
+	
+	var mod = N.new()
+	mod.title = "%"
+	mod.inputs.push_front(C.new("input", "float"))
+	mod.outputs.push_front(C.new("output", "float"))
+	db["%"] = mod

@@ -45,6 +45,8 @@ func _ready():
 			node.position -= Vector2(x, y)
 
 		host.clip_contents = true
+	else:
+		host.position += Vector2(x, y)
 
 	#PureData.start_message(9)visible_in_subpatch
 	#PureData.add_float(x_from)

@@ -1,46 +1,19 @@
-extends Button
-
-var receiver_name_ := ""
-var sender_name_ := ""
-
-@export var parent:Node :
-	set(value):
-		pass
-	get:
-		return get_parent().get_parent().get_parent().get_parent()
+extends PDSpecial
 
 func _ready() -> void:
-	return
-	await get_tree().process_frame
-
-	if not receiver_name_:
-		receiver_name_ = "_" + str(randi())
-		var index = parent.canvas.create_obj("r " + receiver_name_)
-		parent.canvas.create_connection(index, 0, parent.index, 0)
-		PureData.bind(receiver_name_)
-
-	if not sender_name_:
-		sender_name_ = "_" + str(randi())
-		var index = parent.canvas.create_obj("s " + sender_name_)
-		parent.canvas.create_connection(parent.index, 0, index, 0)
-		PureData.bind(sender_name_)
-
+	PureData.bind(get_sender_id_())
 	PureData.float.connect(_float)
 
 func _float(receiver:String, value:float) -> void:
-	if receiver == sender_name_:
+	if receiver == get_sender_id_():
 		var tween = create_tween()
 		tween.tween_property(self, "modulate", Color.RED, 0.1)
 		tween.tween_property(self, "modulate", Color.WHITE, 0.1)
 		
 		if value:
-			text = "ON"
+			set("text", "ON")
 		else:
-			text = "OFF"
+			set("text", "OFF")
 
 func _pressed() -> void:
-	PureData.send_bang(receiver_name_)
-	print(self, "sam")
-
-func _connection(to) -> void:
-	pass
+	PureData.send_bang(get_receiver_id_())
