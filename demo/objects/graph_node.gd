@@ -366,16 +366,6 @@ func create_obj_(message:String, ignore_position:bool) -> Array:
 	var args = arg_parser.packed_string_
 	args += node_model.default_args.slice(args.size())
 
-	if not node_model.default_args.is_empty():
-		var ns := "$1"
-		for i in args.size():
-			if i >= node_model.default_args.size():
-				break
-			if node_model.default_args[i] == '{r}':
-				args[i] = '/r/%s/%s' % [ns, canvas.object_count_]
-			elif node_model.default_args[i] == '{s}':
-				args[i] = '/s/%s/%s' % [ns, canvas.object_count_]
-
 	if node_model.instance:
 		args.push_back("$1/" + str(canvas.object_count_))
 

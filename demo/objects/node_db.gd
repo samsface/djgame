@@ -89,7 +89,7 @@ func _enter_tree() -> void:
 	bang.outputs.push_front(C.new("value", "bang"))
 	bang.visible_in_subpatch = true
 	bang.specialized = preload("res://objects/special/bang_node.tscn")
-	bang.default_args = ['obj', '{x}', '{y}', '{obj}', "15", "250", "50", "0", '{s}', '{r}', 'empty', "17", "7", "0", "10", '#fcfcfc', '#000000', '#000000']
+	bang.default_args = ['obj', '{x}', '{y}', '{obj}', "15", "250", "50", "0", 'empty', 'empty', 'empty', "17", "7", "0", "10", '#fcfcfc', '#000000', '#000000']
 	db["bang"] = bang
 	db["bng"] = bang
 	
