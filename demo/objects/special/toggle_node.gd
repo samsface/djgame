@@ -15,9 +15,3 @@ func _float(receiver:String, value:float) -> void:
 
 func _pressed() -> void:
 	PureData.send_bang(get_receiver_id_())
-
-func _pd_init() -> void:
-	if not parent.canvas.is_done:
-		await parent.canvas.done
-
-	add_ghost_rs_()

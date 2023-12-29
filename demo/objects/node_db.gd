@@ -10,6 +10,10 @@ class N:
 	var instance := false
 	var default_args := PackedStringArray()
 	var resizeable := false
+	var x_pos_in_command := 1
+	var y_pos_in_command := 2
+	var width_pos_in_command := 999999
+	var height_pos_in_command := 999999
 
 class C:
 	var title := ""
@@ -239,8 +243,12 @@ func _enter_tree() -> void:
 	coords.resizeable = true
 	coords.visible_in_subpatch = true
 	coords.default_args = ['coords', '0', '-1', '1', '1', '100', '100', '2', '{x}', '{y}']
+	coords.width_pos_in_command = 5
+	coords.height_pos_in_command = 6
+	coords.x_pos_in_command = 8
+	coords.y_pos_in_command = 9
 	db["coords"] = coords
-	
+
 	var sel = N.new()
 	sel.title = "sel"
 	sel.inputs.push_front(C.new("lhs", "any"))

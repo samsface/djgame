@@ -180,7 +180,7 @@ func delete_undo_(objects_to_delete:Array) -> void:
 func drag_begin_() -> void:
 	if SelectionBus.is_empty():
 		return
-	
+
 	mode = Mode.dragging
 	undo_.create_action("drag")
 	
@@ -373,7 +373,6 @@ func try_add_child_(cable) -> void:
 ################################################################################
 
 func begin_resize_(node) -> void:
-	print("begin_resize_")
 	if mode == Mode.selecting:
 		drag_selection_box_.queue_free()
 		drag_selection_box_ = null
@@ -381,8 +380,6 @@ func begin_resize_(node) -> void:
 	mode = Mode.resizing
 
 func end_resize_(node:PDNode) -> void:
-	node.invalidate_position()
-	
 	mode = Mode.none
 
 ################################################################################
@@ -462,15 +459,14 @@ func get_obj_from_command(command:String) -> String:
 	return a[4]
 
 func parse_command(command:String, context:PDParseContext) -> void:
-	if command.is_empty():
-		return
-	
 	command = command.replace('\n', ' ')
 	command = command.replace('  ', ' ')
-	
+
 	if command[0] == ' ':
 		command = command.substr(1)
 
+	if command.is_empty():
+		return
 
 	var args = command.split(' ')
 
@@ -512,33 +508,31 @@ func get_all_objects_(filter:String) -> Array:
 	
 	return res
 
-func open(path:String):
-	patch_path = path
+func open(path:String) -> bool:
 	prints("open_patch", path)
-	var tmp_path = "res://junk/" + patch_path.get_file()
 	
-	#if not FileAccess.file_exists(tmp_path):
-	var file := FileAccess.open(tmp_path, FileAccess.WRITE)
-	file.store_line("#N canvas 626 203 1354 1042 12;")
-	file.close()
+	patch_path = path
 
-	var p = ProjectSettings.globalize_path(tmp_path)
+	var p = ProjectSettings.globalize_path(patch_path)
 
 	if not patch_file_handle_.open(p):
 		push_error("couldn't open patch")
+		return false
 
-	canvas = "pd-" + tmp_path.get_file()
+	canvas = "pd-" + patch_path.get_file()
 	
-	var model := NodeDb.N.new()
 	var context := PDParseContext.new(path)
 	print("parsing %s" % path)
-	var lines := FileAccess.get_file_as_string(path).split(';')
+	PureData.supress_messages = true
+	var lines := FileAccess.get_file_as_string(patch_path).split(';')
 	for line in lines:
 		parse_command(line, context)
+	PureData.supress_messages = false
 
+	var model := NodeDb.N.new()
 	model.title = path.get_file().replace(".pd", "")
 	model.specialized = load("res://objects/special/subpatch.tscn").duplicate()
-	model.specialized.set_meta("path", tmp_path)
+	model.specialized.set_meta("path", patch_path)
 	model.instance = true
 	model.visible_in_subpatch = true
 	
@@ -554,11 +548,12 @@ func open(path:String):
 
 	is_done = true
 	done.emit()
-
-	PureData.start_message(1)
-	PureData.finish_message(canvas, "menusave")
+	
+	#PureData.send_message(canvas, ["menusave"])
 
 	print("done parsing")
+	
+	return true
 
 func _connection(to) -> void:
 	pass
@@ -568,31 +563,39 @@ func _connection(to) -> void:
 ################################################################################
 
 func create_connection(from_object_idx, from_slot_idx, to_object_idx, to_object_slot_idx):
-	PureData.start_message(4)
-	PureData.add_float(from_object_idx)
-	PureData.add_float(from_slot_idx)
-	PureData.add_float(to_object_idx)
-	PureData.add_float(to_object_slot_idx)
-	PureData.finish_message(canvas, "connect")
-
+	PureData.send_message(canvas, ["connect", from_object_idx, from_slot_idx, to_object_idx, to_object_slot_idx])
+	
 func send_disconnect(from_object_idx, from_slot_idx, to_object_idx, to_object_slot_idx):
-	PureData.start_message(4)
-	PureData.add_float(from_object_idx)
-	PureData.add_float(from_slot_idx)
-	PureData.add_float(to_object_idx)
-	PureData.add_float(to_object_slot_idx)
-	PureData.finish_message(canvas, "disconnect")
+	PureData.send_message(canvas, ["disconnect", from_object_idx, from_slot_idx, to_object_idx, to_object_slot_idx])
 
 func save() -> void:
-	#patch_file_handle_.close()
 	
+	#patch_file_handle_.close()
 	print("saving %s" % canvas)
-	#for node in get_children():
-	#	if node is PDNode:
-	#		clear_connections_(node)
-	#		node.invalidate_position()
-	#		add_connections_(node)
-		
+
+	var f := FileAccess.open("res://junk/saves.pd", FileAccess.WRITE)
+	if not f:
+		push_error("could not open file to save")
+
+	f.store_line("#N canvas 757 493 971 650 12;")
+
+	var coords
+
+	for node in get_children():
+		if node is PDNode:
+			if node.text.begins_with("coords"):
+				coords = node
+			else:
+				f.store_line("#X " + node.text + ";")
+
+	for node in get_children():
+		if node is PDCable:
+			f.store_line("#X " + node.text + ";")
+
+	if coords:
+		f.store_line("#X " + coords.text + ";")
+
+	f.close()
 	#	print(node.text)
 	
 
@@ -601,7 +604,6 @@ func save() -> void:
 	#var p = ProjectSettings.globalize_path(tmp_path)
 	
 	#patch_file_handle_.open(p)
-	
-	
-	PureData.start_message(0)
-	PureData.finish_message(canvas, "menusave")
+
+	#PureData.start_message(0)
+	#PureData.finish_message(canvas, "menusave")

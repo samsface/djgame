@@ -21,23 +21,6 @@ func get_subpatch():
 	
 	return null
 
-func get_text() -> String:
-	var host = find_host_()
-	
-	var args := PackedStringArray()
-	args.append("coords")
-	args.append("0")
-	args.append("-1")
-	args.append("1")
-	args.append("1")
-	args.append(str(host.custom_minimum_size.x))
-	args.append(str(host.custom_minimum_size.y))
-	args.append("1")
-	args.append(str(host.position.x))
-	args.append(str(host.position.y))
-	
-	return ' '.join(args)
-
 func _ready():
 	await get_tree().process_frame
 	
@@ -67,4 +50,5 @@ func _ready():
 	else:
 		host.position = Vector2(x, y)
 
-
+func _pd_init() -> void:
+	pass

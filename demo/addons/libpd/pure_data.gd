@@ -1,5 +1,7 @@
 extends GDExample
 
+var supress_messages := false
+
 var regex = RegEx.new()
 var sanitize = RegEx.new()
 
@@ -15,12 +17,7 @@ func _ready() -> void:
 	stream = AudioStreamGenerator.new()
 	stream.buffer_length = 0.1
 	playing = true
-	
-	#print(open_patch("maker_test.pd"))
-	
-	#start_message(0)
-	#finish_message("pd-maker_test.pd", "clear")
-	
+
 	set_process(true)
 
 
@@ -82,12 +79,15 @@ func found_(command:String, pos:Vector2) -> String:
 		res += " " + args
 
 	return res
-	
+
 func send_message(canvas, args) -> void:
+	if supress_messages:
+		return
+
 	PureData.start_message(args.size())
 
 	for i in range(1, args.size()):
-		if PureData.regex.search(args[i]):
+		if PureData.regex.search(str(args[i])):
 			PureData.add_float(float(args[i]))
 		else:
 			PureData.add_symbol(args[i])

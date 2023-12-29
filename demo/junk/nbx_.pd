@@ -1,11 +1,1 @@
 #N canvas 626 203 1354 1042 12;
-#X obj 249 209 nbx 5 8 -1e+37 1e+37 0 0 empty empty empty 0 -3 0 12 #fcfcfc #000000 #000000 0 256;
-#X obj 244 137 inlet;
-#X obj 242 269 outlet;
-#X obj 249 194 r /r/\$1/0;
-#X obj 249 224 s /s/\$1/0;
-#X connect 0 0 2 0;
-#X connect 0 0 4 0;
-#X connect 1 0 0 0;
-#X connect 3 0 0 0;
-#X coords 0 -1 1 1 300 300 1 100 100;

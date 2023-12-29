@@ -3,8 +3,9 @@ class_name PDNode
 
 @export var text:String : 
 	set(value):
-		if value != text:
-			text = set_text_(value)
+		set_text_(value)
+	get:
+		return ' '.join(args_)
 @export var index := 0
 @export var resizeable := false
 @export var visible_in_subpatch := false
@@ -24,6 +25,8 @@ var selectable:bool = true
 var canvas:Node
 var in_subpatch:bool
 
+var args_ := PackedStringArray()
+
 signal connection_clicked
 signal title_changed
 signal begin_edit_text
@@ -40,6 +43,7 @@ var selected_ := false
 var connections_ := []
 var editing_text_ := false
 var original_text_ := ""
+var node_model_
 
 func _ready() -> void:
 	mouse_entered.connect(_mouse_entered)
@@ -108,31 +112,29 @@ func pretty_text_(text:String):
 	
 	return text
 
-func set_text_(value:String, ignore_position:bool = false) -> String:
+func set_text_(value:String) -> String:
 	if not canvas:
 		return value
 
-	var res = create_obj_(value, ignore_position)
+	var res = create_obj_(value,)
 	if not res:
 		return ""
-		
-	value = res[1]
-	
-	var node_model = res[2]
 
-	%LineEdit.text = pretty_text_(node_model.title + res[3])
+	value = res[1]
+
+	%LineEdit.text = pretty_text_(node_model_.title + res[3])
 	%LineEdit.caret_column = %LineEdit.text.length()
 
-	visible_in_subpatch = node_model.visible_in_subpatch
+	visible_in_subpatch = node_model_.visible_in_subpatch
 
 	if in_subpatch:
 		monitorable = false
-		if not node_model.visible_in_subpatch:
+		if not node_model_.visible_in_subpatch:
 			visible = false
 
-	update_connection_(node_model.inputs, %Inputs, false)
-	update_connection_(node_model.outputs, %Outputs, true)
-	update_specialized_(node_model)
+	update_connection_(node_model_.inputs, %Inputs, false)
+	update_connection_(node_model_.outputs, %Outputs, true)
+	update_specialized_(node_model_)
 	
 	return value
 
@@ -215,6 +217,7 @@ func _drag(pos:Vector2) -> void:
 
 func _drag_end() -> void:
 	dragging_ = false
+	update_text_position_()
 
 func get_inlet(index:int) -> Node:
 	if %Inputs.get_child_count() <= index:
@@ -311,7 +314,7 @@ func get_human_readable_for_widget_(args) -> String:
 
 	return res
 
-func create_obj_(message:String, ignore_position:bool) -> Array:
+func create_obj_(message:String) -> Array:
 	message = message.replace('\n', ' ')
 	message = message.replace('  ', ' ')
 	
@@ -325,37 +328,25 @@ func create_obj_(message:String, ignore_position:bool) -> Array:
 	var node_model
 
 	if message_type == 'obj':
-		if ignore_position:
-			arg_parser.sneak(position.x)
 		position.x = arg_parser.next_as_int()
-		
-		if ignore_position:
-			arg_parser.sneak(position.y)
 		position.y = arg_parser.next_as_int()
-		
 		node_model = NodeDb.get_node_model(arg_parser.next())
-
 	elif message_type == 'coords':
 		node_model = NodeDb.db.get(message_type)
 		# not an object so doesn't need this
 		canvas.object_count_ -= 1
-
 	else:
-		if ignore_position:
-			arg_parser.sneak(position.x)
 		position.x = arg_parser.next_as_int()
-		
-		if ignore_position:
-			arg_parser.sneak(position.y)
 		position.y = arg_parser.next_as_int()
-
 		node_model = NodeDb.db.get(message_type)
 
 	if not node_model:
 		push_error("no model for %s" % message)
 		return []
+		
+	node_model_ = node_model
 
-	resizeable = node_model.resizeable
+	resizeable = node_model_.resizeable
 	
 	var human_readable_args := ""
 	if message_type == 'obj':
@@ -363,25 +354,33 @@ func create_obj_(message:String, ignore_position:bool) -> Array:
 	else:
 		human_readable_args = get_human_readable_for_widget_(arg_parser.packed_string_)
 		
-	var args = arg_parser.packed_string_
-	args += node_model.default_args.slice(args.size())
+	args_ = arg_parser.packed_string_
+	args_ += node_model_.default_args.slice(args_.size())
 
-	if node_model.instance:
-		args.push_back("$1/" + str(canvas.object_count_))
+	if node_model_.instance:
+		args_.push_back("$1/" + str(canvas.object_count_))
 
-	send_message_(args)
+	send_message_(args_)
 	index = canvas.object_count_
 	canvas.object_count_ += 1
 
-	return [canvas.object_count_ - 1, ' '.join(args), node_model, human_readable_args]
+	return [canvas.object_count_ - 1, ' '.join(args_), node_model_, human_readable_args]
 
 func send_message_(args) -> void:
 	PureData.send_message(canvas.canvas, args)
 
-func invalidate_position() -> void:
-	if %Specialized.get_child_count() > 0:
-		if %Specialized.get_child(0).has_method("get_text"):
-			text = %Specialized.get_child(0).get_text()
-			return
-	
-	text = set_text_(text, true)
+func update_text_position_() -> void:
+	if not node_model_:
+		return
+
+	if node_model_.x_pos_in_command < args_.size():
+		args_[node_model_.x_pos_in_command] = str(position.x)
+		
+	if node_model_.y_pos_in_command < args_.size():
+		args_[node_model_.y_pos_in_command] = str(position.y)
+
+	if node_model_.width_pos_in_command < args_.size():
+		args_[node_model_.width_pos_in_command] = str($ColorRect.size.x)
+
+	if node_model_.height_pos_in_command < args_.size():
+		args_[node_model_.height_pos_in_command] = str($ColorRect.size.y)
