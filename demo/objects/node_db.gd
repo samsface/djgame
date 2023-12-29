@@ -238,6 +238,7 @@ func _enter_tree() -> void:
 	coords.specialized = preload("res://objects/special/coords.tscn")
 	coords.resizeable = true
 	coords.visible_in_subpatch = true
+	coords.default_args = ['coords', '0', '-1', '1', '1', '100', '100', '2', '{x}', '{y}']
 	db["coords"] = coords
 	
 	var sel = N.new()
@@ -253,10 +254,11 @@ func _enter_tree() -> void:
 	nbx.title = "nbx"
 	nbx.inputs.push_front(C.new("input", "float"))
 	nbx.outputs.push_front(C.new("output", "float"))
+	nbx.default_args = ['obj', '{x}', '{y}', '{obj}', '2', '14', '-1e+37', '1e+37', '0', '0', 'empty', 'empty', 'empty', '0', '-8', '0', '10']
+	nbx.specialized = preload("res://objects/special/float_node.tscn")
+	nbx.visible_in_subpatch = true
 	db["nbx"] = nbx
 
-
-	
 	var mod = N.new()
 	mod.title = "%"
 	mod.inputs.push_front(C.new("input", "float"))

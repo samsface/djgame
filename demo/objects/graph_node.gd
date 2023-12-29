@@ -3,7 +3,8 @@ class_name PDNode
 
 @export var text:String : 
 	set(value):
-		text = set_text_(value)
+		if value != text:
+			text = set_text_(value)
 @export var index := 0
 @export var resizeable := false
 @export var visible_in_subpatch := false
@@ -47,6 +48,19 @@ func _ready() -> void:
 	tree_exiting.connect(_tree_exiting)
 	_item_rect_changed()
 	$ColorRect/Reize.visible = resizeable
+
+func get_best_slot(slot:PDSlot) -> PDSlot:
+	var test_slots
+	if slot.is_output:
+		test_slots = %Inputs.get_children()
+	else:
+		test_slots = %Outputs.get_children()
+	
+	for test_slot in test_slots:
+		if slot.allowed_connections_mask & test_slot.allowed_connections_mask != 0:
+			return test_slot
+
+	return null
 
 func _mouse_entered() -> void:
 	if not monitorable:
@@ -94,15 +108,14 @@ func pretty_text_(text:String):
 	
 	return text
 
-func set_text_(value:String) -> String:
+func set_text_(value:String, ignore_position:bool = false) -> String:
 	if not canvas:
 		return value
 
-	var res = create_obj_(value, global_position)
+	var res = create_obj_(value, ignore_position)
 	if not res:
 		return ""
 		
-	index = res[0]
 	value = res[1]
 	
 	var node_model = res[2]
@@ -117,13 +130,13 @@ func set_text_(value:String) -> String:
 		if not node_model.visible_in_subpatch:
 			visible = false
 
-	update_connection_(node_model.inputs, %Inputs)
-	update_connection_(node_model.outputs, %Outputs)
+	update_connection_(node_model.inputs, %Inputs, false)
+	update_connection_(node_model.outputs, %Outputs, true)
 	update_specialized_(node_model)
 	
 	return value
 
-func update_connection_(connection_models:Array, node:Node) -> void:
+func update_connection_(connection_models:Array, node:Node, is_output:bool) -> void:
 	var slot_index = 0
 	for connection_model in connection_models:
 		var slot
@@ -131,6 +144,7 @@ func update_connection_(connection_models:Array, node:Node) -> void:
 			slot = preload("slot.tscn").instantiate()
 			slot.parent = self
 			slot.index = slot_index
+			slot.is_output = is_output
 			slot.button_down.connect(connection_down_.bind(slot))
 			node.add_child(slot)
 		else:
@@ -156,6 +170,7 @@ func update_specialized_(node_model) -> void:
 		if node_model.specialized.has_meta("path"):
 			specialized.patch_path = node_model.specialized.get_meta("path")
 		%Specialized.add_child(specialized)
+		specialized._pd_init()
 
 func add_connection(cable):
 	cable.tree_exiting.connect(remove_connection.bind(cable))
@@ -296,7 +311,7 @@ func get_human_readable_for_widget_(args) -> String:
 
 	return res
 
-func create_obj_(message:String, pos:Vector2 = Vector2.ZERO) -> Array:
+func create_obj_(message:String, ignore_position:bool) -> Array:
 	message = message.replace('\n', ' ')
 	message = message.replace('  ', ' ')
 	
@@ -310,34 +325,37 @@ func create_obj_(message:String, pos:Vector2 = Vector2.ZERO) -> Array:
 	var node_model
 
 	if message_type == 'obj':
+		if ignore_position:
+			arg_parser.sneak(position.x)
 		position.x = arg_parser.next_as_int()
+		
+		if ignore_position:
+			arg_parser.sneak(position.y)
 		position.y = arg_parser.next_as_int()
+		
 		node_model = NodeDb.get_node_model(arg_parser.next())
-	elif message_type == 'floatatom':
-		position.x = arg_parser.next_as_int()
-		position.y = arg_parser.next_as_int()
-		node_model = NodeDb.db.get('floatatom')
-	elif message_type == 'msg':
-		position.x = arg_parser.next_as_int()
-		position.y = arg_parser.next_as_int()
-		node_model = NodeDb.db.get('msg')
-	elif message_type == 'hsl':
-		position.x = arg_parser.next_as_int()
-		position.y = arg_parser.next_as_int()
-		node_model = NodeDb.db.get('hsl')
+
 	elif message_type == 'coords':
-		node_model = NodeDb.db.get('coords')
+		node_model = NodeDb.db.get(message_type)
 		# not an object so doesn't need this
 		canvas.object_count_ -= 1
+
+	else:
+		if ignore_position:
+			arg_parser.sneak(position.x)
+		position.x = arg_parser.next_as_int()
+		
+		if ignore_position:
+			arg_parser.sneak(position.y)
+		position.y = arg_parser.next_as_int()
+
+		node_model = NodeDb.db.get(message_type)
 
 	if not node_model:
 		push_error("no model for %s" % message)
 		return []
 
 	resizeable = node_model.resizeable
-
-	#position *= 5.0
-	#position = position.rotated(- 90)
 	
 	var human_readable_args := ""
 	if message_type == 'obj':
@@ -361,17 +379,19 @@ func create_obj_(message:String, pos:Vector2 = Vector2.ZERO) -> Array:
 	if node_model.instance:
 		args.push_back("$1/" + str(canvas.object_count_))
 
-	PureData.start_message(args.size())
-
-	for arg in args.slice(1):
-		if PureData.regex.search(arg):
-			PureData.add_float(float(arg))
-		else:
-			PureData.add_symbol(arg)
-
-	PureData.finish_message(canvas.canvas, args[0])
-
+	send_message_(args)
+	index = canvas.object_count_
 	canvas.object_count_ += 1
 
 	return [canvas.object_count_ - 1, ' '.join(args), node_model, human_readable_args]
 
+func send_message_(args) -> void:
+	PureData.send_message(canvas.canvas, args)
+
+func invalidate_position() -> void:
+	if %Specialized.get_child_count() > 0:
+		if %Specialized.get_child(0).has_method("get_text"):
+			text = %Specialized.get_child(0).get_text()
+			return
+	
+	text = set_text_(text, true)

@@ -28,3 +28,21 @@ func get_sender_id_() -> String:
 
 func _connection(to:PDSlot):
 	pass
+
+func add_ghost_rs_() -> void:
+	if not parent.canvas:
+		return
+
+	parent.send_message_(["obj", str(parent.position.x), str(parent.position.y - 15), "r", '/r/%s/%s' % ["$1", parent.index]])
+	var r_id = parent.canvas.object_count_
+	parent.canvas.object_count_ += 1
+
+	parent.send_message_(["obj", str(parent.position.x), str(parent.position.y + 15), "s", '/s/%s/%s' % ["$1", parent.index]])
+	var s_id = parent.canvas.object_count_
+	parent.canvas.object_count_ += 1
+
+	parent.send_message_(["connect", str(r_id), "0", str(parent.index), "0"])
+	parent.send_message_(["connect", str(parent.index), "0", str(s_id), "0"])
+
+func _pd_init() -> void:
+	pass

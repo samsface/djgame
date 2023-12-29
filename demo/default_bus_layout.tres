@@ -10,6 +10,6 @@ resource_name = "Reverb"
 [resource]
 bus/0/volume_db = -1.31927
 bus/0/effect/0/effect = SubResource("AudioEffectLimiter_lfwnm")
-bus/0/effect/0/enabled = true
+bus/0/effect/0/enabled = false
 bus/0/effect/1/effect = SubResource("AudioEffectReverb_oif8r")
-bus/0/effect/1/enabled = true
+bus/0/effect/1/enabled = false

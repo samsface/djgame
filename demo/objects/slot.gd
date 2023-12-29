@@ -10,6 +10,8 @@ var parent :
 		return get_parent().get_parent().get_parent().get_parent().get_parent()
 
 @export var index := 0
+@export var is_output := false
+@export var allowed_connections_mask := 1
 @export var cable:Node : 
 	set(value):
 		cable = value

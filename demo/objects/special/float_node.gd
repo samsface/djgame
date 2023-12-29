@@ -1,18 +1,29 @@
-extends LineEdit
+extends PDSpecial
 
-var index := 0
-var receiver_name_ := ""
-
-@export var parent:Node :
-	set(value):
-		pass
-	get:
-		return get_parent().get_parent().get_parent().get_parent().get_parent()
+var setting_selfs_value_ := false
 
 func _ready() -> void:
-	receiver_name_ = "a" + str(randi())
-	index = PureData.create_obj(parent.canvas, "r " + receiver_name_)
-	PureData.create_connection(parent.canvas, index, 0, index -1, 0)
+	PureData.bind(get_sender_id_())
+	PureData.float.connect(_float)
 
-func _on_text_changed(new_text: String) -> void:
-	PureData.send_float(receiver_name_, float(new_text))
+func _float(receiver:String, new_value:float) -> void:
+	print(receiver)
+	if receiver == get_sender_id_():
+		if get("value") != new_value:
+			setting_selfs_value_ = true
+			set("value", new_value)
+			setting_selfs_value_ = false
+
+func _value_changed(value: float) -> void:
+	print(get_sender_id_())
+	if setting_selfs_value_:
+		return
+	
+	PureData.send_float(get_receiver_id_(), value)
+
+func _pd_init() -> void:
+	if not parent.canvas.is_done:
+		await parent.canvas.done
+
+	add_ghost_rs_()
+	

@@ -60,7 +60,9 @@ class IteratePackedStringArray:
 			return ""
 
 		return join_string.join(packed_string_.slice(i-1))
-
+	
+	func sneak(p) -> void:
+		packed_string_[i] = str(p)
 
 func found_(command:String, pos:Vector2) -> String:
 	var aaa = command.split(' ')
@@ -80,3 +82,14 @@ func found_(command:String, pos:Vector2) -> String:
 		res += " " + args
 
 	return res
+	
+func send_message(canvas, args) -> void:
+	PureData.start_message(args.size())
+
+	for i in range(1, args.size()):
+		if PureData.regex.search(args[i]):
+			PureData.add_float(float(args[i]))
+		else:
+			PureData.add_symbol(args[i])
+
+	PureData.finish_message(canvas, args[0])

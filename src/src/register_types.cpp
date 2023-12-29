@@ -14,6 +14,7 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
 	}
 
 	ClassDB::register_class<GDExample>();
+	ClassDB::register_class<PDPatchFile>();
 }
 
 void uninitialize_example_module(ModuleInitializationLevel p_level) {

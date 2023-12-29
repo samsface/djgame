@@ -2,40 +2,74 @@ extends Area2D
 class_name PDCable
 
 signal connection
+signal request_new_object
 
 @export var from:PDSlot
 @export var to:PDSlot
 @export var selectable:bool = true
 @export var creating:bool = false
 
+var text :
+	set(value):
+		pass
+	get:
+		return "connect %s %s %s %s" % [from.parent.index, from.index, to.parent.index, to.index]
+
+var creating_slot :
+	set(value):
+		pass
+	get: return from if from else to
+
 var just_created_ := true
 var hovering_slot_
+var requesting_new_object_ := false
 
 var selected_ := false
 var dragging_ := false
 
+
+
 func _input(event: InputEvent) -> void:
+	if requesting_new_object_:
+		return
+
 	if creating:
 		if event.is_action_pressed("ui_cancel"):
 			queue_free()
 		if event.is_action_released("click"):
 			if hovering_slot_:
-				to = hovering_slot_
-				creating = false
-				invalidate_connections()
-				connection.emit()
+				connect_(hovering_slot_)
 			else:
-				queue_free()
+				requesting_new_object_ = true
+				request_new_object.emit()
+
+func connect_(slot):
+	if to:
+		from = slot
+	else:
+		to = slot
+
+	creating = false
+	requesting_new_object_ = false
+	invalidate_connections()
+	connection.emit()
 
 func _physics_process(delta: float) -> void:
-	#global_position = Vector2.ZERO
-	
-	var from_position = from.global_position + Vector2(16, 16)
-	var to_position = get_global_mouse_position()
-	
-	if not creating:
-		to_position = to.global_position + Vector2(16, 16)
+	if requesting_new_object_:
+		return
 
+	var from_position
+	var to_position
+
+	if from:
+		from_position = from.global_position + Vector2(16, 16)
+	else:
+		from_position = get_global_mouse_position()
+
+	if to:
+		to_position = to.global_position + Vector2(16, 16)
+	else:
+		to_position = get_global_mouse_position()
 
 	$Line2D.set_point_position(0, from_position)
 	$Line2D.set_point_position(1, to_position)
@@ -125,8 +159,13 @@ func _visibility_changed():
 func _area_entered(area: Area2D) -> void:
 	if area.get_parent() == from:
 		return
+	
+	var hovering_slot = area.get_parent()
+	
+	if creating_slot.get_parent().get_parent() == hovering_slot.get_parent().get_parent():
+		return
 
-	hovering_slot_ = area.get_parent()
+	hovering_slot_ = hovering_slot
 	hovering_slot_._cable_entered()
 
 func _area_exited(area: Area2D) -> void:
@@ -135,3 +174,9 @@ func _area_exited(area: Area2D) -> void:
 
 	hovering_slot_._cable_exited()
 	hovering_slot_ = null
+
+func auto_connect(object) -> void:
+	pass
+
+func _pre_save() -> void:
+	pass

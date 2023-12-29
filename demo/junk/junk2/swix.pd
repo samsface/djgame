@@ -10,9 +10,6 @@
 #X obj 80 65 inlet;
 #X obj 104 161 nbx 2 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
 #fcfcfc #000000 #000000 0 256;
-#X floatatom 360 147 5 0 0 0 - - - 0;
-#X obj 206 203 nbx 5 14 -1e+37 1e+37 0 0 {empty} {empty} {empty} 0
--8 0 10 #fcfcfc #000000 #000000 0 256;
 #X connect 0 0 1 0;
 #X connect 2 0 3 0;
 #X connect 3 0 5 0;

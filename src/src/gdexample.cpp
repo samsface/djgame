@@ -49,11 +49,26 @@ static void _print(const char *s)
 	std::cout << s << std::endl;
 }
 
+void PDPatchFile::_bind_methods() 
+{
+	ClassDB::bind_method(D_METHOD("open"), &PDPatchFile::open);
+	ClassDB::bind_method(D_METHOD("close"), &PDPatchFile::close);
+}
+
+bool PDPatchFile::open(String path)
+{
+	handle_ = ::libpd_openfile(path.get_file().utf8().get_data(), path.get_base_dir().utf8().get_data());
+	return handle_ != nullptr;
+}
+
+void PDPatchFile::close()
+{
+	::libpd_closefile(handle_);
+}
 
 void GDExample::_bind_methods() 
 {
 	ClassDB::bind_method(D_METHOD("is_initialized"), &GDExample::is_initialized);
-	ClassDB::bind_method(D_METHOD("open_patch"), &GDExample::open_patch);
 	ClassDB::bind_method(D_METHOD("start_message"), &GDExample::start_message);
 	ClassDB::bind_method(D_METHOD("send_bang"), &GDExample::send_bang);
 	ClassDB::bind_method(D_METHOD("send_float"), &GDExample::send_float);
@@ -101,13 +116,6 @@ GDExample::~GDExample()
 bool GDExample::is_initialized() const
 {
 	return initialized_;
-}
-
-bool GDExample::open_patch(String string)
-{
-	opened_patch_ = ::libpd_openfile(string.get_file().utf8().get_data(), string.get_base_dir().utf8().get_data());
-
-	return opened_patch_ != nullptr;
 }
 
 bool GDExample::send_bang(String receiver)

@@ -15,3 +15,7 @@ func _ready() -> void:
 
 func _connection(to) -> void:
 	pass
+
+func _pd_init() -> void:
+
+	pass

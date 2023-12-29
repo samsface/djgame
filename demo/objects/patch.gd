@@ -1,6 +1,8 @@
 extends Control
 class_name PDPatch
 
+signal done
+
 @export var root := false
 
 enum Mode {
@@ -23,8 +25,11 @@ var object_count_ := 0
 var patch_path
 var inlets := []
 var outlets := []
+var is_done := false
 
 var mode := Mode.none
+var patch_file_handle_ := PDPatchFile.new()
+
 
 func _ready() -> void:
 	pass
@@ -121,7 +126,7 @@ func get_connected_cables_(node:PDNode)-> Array:
 func open_patch_in_new_window_() -> void:
 	get_tree().root.get_viewport().gui_embed_subwindows = false
 	var viewer = load("res://widgets/viewer/viewer.tscn").instantiate()
-	viewer.add(PureData.files["pd-square.pd"])
+	viewer.add(PureData.files["pd-clock.pd"])
 	var window := Window.new()
 	window.size = get_viewport().size
 	window.add_child(viewer)
@@ -293,7 +298,7 @@ func add_connection_(from_object:int, outlet:int, to_object:int, inlet:int) -> v
 	cable.call_connect()
 
 var cable_
-func connection_clicked_(connection) -> void:
+func connection_clicked_(connection:PDSlot) -> void:
 	if mode == Mode.selecting:
 		drag_selection_box_.queue_free()
 		drag_selection_box_ = null
@@ -303,25 +308,63 @@ func connection_clicked_(connection) -> void:
 	cable_ = preload("cable.tscn").instantiate()
 	add_child(cable_)
 	cable_.creating = true
-	cable_.from = connection
-	#cable_.global_position = Vector2.ZERO
+	
+	if connection.is_output:
+		cable_.from = connection
+	else:
+		cable_.to = connection
 	
 	cable_.tree_exited.connect(connection_canceled_)
 	cable_.connection.connect(connection_made_)
+	cable_.request_new_object.connect(connection_requests_new_object_)
+	
+	undo_.create_action("connection")
+	undo_.add_do_reference(cable_)
+	undo_.add_do_method(try_add_child_.bind(cable_))
+	undo_.add_undo_method(remove_child.bind(cable_))
+
+func connection_requests_new_object_() -> void:
+	var x = preload("res://widgets/search/search.tscn").instantiate()
+	x.position = get_global_mouse_position()
+	x.end.connect(connection_requests_new_object_search_end_)
+	add_child(x)
+
+	mode = Mode.searching
+	
+func connection_requests_new_object_search_end_(text) -> void:
+	if not text:
+		cable_.queue_free()
+		cable_ = null
+		return
+
+	var n = add_node__(text)
+
+	var best_slot = n.get_best_slot(cable_.creating_slot)
+	if not best_slot:
+		cable_.queue_free()
+		cable_ = null
+		n.queue_free()
+		return
+
+	add_child(n)
+
+	undo_.add_do_reference(n)
+	undo_.add_do_method(try_add_child_.bind(n))
+	undo_.add_undo_method(remove_child.bind(n))
+	
+	cable_.connect_(best_slot)
 
 func connection_canceled_() -> void:
 	mode = Mode.none
+	
+	undo_.commit_action(false)
 
 func connection_made_() -> void:
 	mode = Mode.none
 	
-	undo_.create_action("connection")
-	undo_.add_do_reference(cable_)
-	undo_.add_do_method(connection_do_.bind(cable_))
-	undo_.add_undo_method(remove_child.bind(cable_))
 	undo_.commit_action()
 	
-func connection_do_(cable:PDCable) -> void:
+func try_add_child_(cable) -> void:
 	if not cable.get_parent():
 		add_child(cable)
 
@@ -338,6 +381,8 @@ func begin_resize_(node) -> void:
 	mode = Mode.resizing
 
 func end_resize_(node:PDNode) -> void:
+	node.invalidate_position()
+	
 	mode = Mode.none
 
 ################################################################################
@@ -443,26 +488,6 @@ func parse_command(command:String, context:PDParseContext) -> void:
 		return
 
 	if message == 'hsl' or message == 'obj' or message == 'floatatom' or message == 'msg' or message == 'coords':
-		#var pos := Vector2.ZERO
-		#pos.x = float(it.next())
-		#pos.y = float(it.next())
-
-		#var obj = it.next()
-		#if obj == null:
-		#	push_error("expected object")
-		#	return
-
-		#var node_model = NodeDb.db.get(obj)
-		#if not node_model:
-		#	var subpatch_path = context.path.path_join(obj + ".pd")
-		#	if sub_patch_exists(subpatch_path):
-		#		var subpatch = load("res://objects/patch.tscn").instantiate()
-		#		subpatch.open(subpatch_path)
-		#		#parse_sub_patch_file(subpatch_path, context)
-		#	else:
-		#		push_error("Unknown obj '%s'." % obj)
-		#		return
-
 		add_child(add_node__(it.join()))
 	elif message == 'connect':
 		var from = int(it.next())
@@ -471,9 +496,6 @@ func parse_command(command:String, context:PDParseContext) -> void:
 		var inlet = int(it.next())
 		add_connection_(from, outlet, to, inlet)
 
-	#elif message == 'coords':
-	#	execute_coords_command(' '.join(args.slice(1)))
-  
 func execute_coords_command(message) -> void:
 	var n = add_node__(message)
 	n.resizeable = true
@@ -501,7 +523,8 @@ func open(path:String):
 	file.close()
 
 	var p = ProjectSettings.globalize_path(tmp_path)
-	if not PureData.open_patch(p):
+
+	if not patch_file_handle_.open(p):
 		push_error("couldn't open patch")
 
 	canvas = "pd-" + tmp_path.get_file()
@@ -528,6 +551,9 @@ func open(path:String):
 	NodeDb.db[model.title] = model
 
 	PureData.files[canvas] = self
+
+	is_done = true
+	done.emit()
 
 	PureData.start_message(1)
 	PureData.finish_message(canvas, "menusave")
@@ -558,7 +584,24 @@ func send_disconnect(from_object_idx, from_slot_idx, to_object_idx, to_object_sl
 	PureData.finish_message(canvas, "disconnect")
 
 func save() -> void:
+	#patch_file_handle_.close()
+	
 	print("saving %s" % canvas)
+	#for node in get_children():
+	#	if node is PDNode:
+	#		clear_connections_(node)
+	#		node.invalidate_position()
+	#		add_connections_(node)
+		
+	#	print(node.text)
+	
+
+	
+	#var tmp_path = "res://junk/" + patch_path.get_file()
+	#var p = ProjectSettings.globalize_path(tmp_path)
+	
+	#patch_file_handle_.open(p)
+	
+	
 	PureData.start_message(0)
-	#PureData.add_float(1)
 	PureData.finish_message(canvas, "menusave")

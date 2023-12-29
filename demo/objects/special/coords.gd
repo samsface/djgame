@@ -21,7 +21,26 @@ func get_subpatch():
 	
 	return null
 
+func get_text() -> String:
+	var host = find_host_()
+	
+	var args := PackedStringArray()
+	args.append("coords")
+	args.append("0")
+	args.append("-1")
+	args.append("1")
+	args.append("1")
+	args.append(str(host.custom_minimum_size.x))
+	args.append(str(host.custom_minimum_size.y))
+	args.append("1")
+	args.append(str(host.position.x))
+	args.append(str(host.position.y))
+	
+	return ' '.join(args)
+
 func _ready():
+	await get_tree().process_frame
+	
 	parent.z_index -=1
 	
 	var it = PureData.IteratePackedStringArray.new(parent.text)
@@ -46,17 +65,6 @@ func _ready():
 
 		host.clip_contents = true
 	else:
-		host.position += Vector2(x, y)
+		host.position = Vector2(x, y)
 
-	#PureData.start_message(9)visible_in_subpatch
-	#PureData.add_float(x_from)
-	#PureData.add_float(x_to)
-	#PureData.add_float(y_from)get_parent
-	#PureData.add_float(y_to)
-	#PureData.add_float(width)ColorRect/VBoxContainer/S
-	#PureData.add_float(height)
-	#PureData.add_float(graph_on_parent)body
-	#PureData.add_float(x)
-	#PureData.add_float(y)
-	#PureData.finish_message(canvas, "coords")
 

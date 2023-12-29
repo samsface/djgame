@@ -9,6 +9,23 @@
 
 namespace godot {
 
+class PDPatchFile  : public RefCounted {
+	GDCLASS(PDPatchFile, RefCounted)
+
+	void* handle_{};
+
+protected:
+	static void _bind_methods();
+
+public:
+	PDPatchFile() = default;
+	~PDPatchFile() = default;
+
+	bool open(String path);
+	void close();
+
+};
+
 class GDExample : public AudioStreamPlayer {
 	GDCLASS(GDExample, AudioStreamPlayer)
 
@@ -17,7 +34,6 @@ private:
 	float inbuf_[1];
 	float outbuf_[44100 * 2];
 	float initialized_{};
-	void* opened_patch_{};
 	bool message_guard_{};
 
 protected:
@@ -30,7 +46,6 @@ public:
 	void _process(double delta) override;
 
 	bool is_initialized() const;
-	bool open_patch(String patch_path);
 	bool send_bang(String receiver);
 	bool send_float(String receiver, float value);
 	bool start_message(int max_length);
