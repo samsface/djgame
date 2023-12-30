@@ -25,6 +25,8 @@ var mode_
 func _ready() -> void:
 	cursor_ = preload("res://widgets/cursor/cursor.tscn").instantiate()
 	add_child(cursor_)
+	
+	get_viewport().get_window().title = patch_path.get_file()
 
 func enter_mode_(mode) -> void:
 	if mode_:
@@ -64,8 +66,8 @@ func _input(event: InputEvent):
 	elif PlayMode.test(event, SelectionBus.selection_):
 		enter_mode_(PlayMode.new())
 
-	elif DragMode.test(event, SelectionBus.selection_):
-		enter_mode_(DragMode.new(SelectionBus.selection_))
+	elif MoveMode.test(event, SelectionBus.selection_):
+		enter_mode_(MoveMode.new(SelectionBus.selection_))
 
 	elif SelectMode.test(event, SelectionBus.selection_):
 		enter_mode_(SelectMode.new(SelectionBus.selection_))
@@ -262,6 +264,8 @@ func parse_command(command:String, context:PDParseContext) -> void:
 		var to = int(it.next())
 		var inlet = int(it.next())
 		add_connection_(from, outlet, to, inlet)
+	elif message == 'canvas':
+		return
 	else:
 		add_child(add_node__(it.join()))
 

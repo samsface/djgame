@@ -33,7 +33,7 @@ signal begin_resize
 signal end_resize
 
 var mouse_over_ := false
-var dragging_ := false
+var moving_ := false
 var resizing_ := false
 var drag_offset := Vector2.ZERO
 var selected_ := false
@@ -84,10 +84,6 @@ func _mouse_exited() -> void:
 	if SelectionBus.hovering == self:
 		SelectionBus.hovering = null
 	modulate = Color.WHITE
-
-func stop_dragging_() -> void:
-	if dragging_:
-		dragging_ = false
 
 func pretty_text_(text:String):
 	if text.begins_with("bng"):
@@ -219,9 +215,9 @@ func _unselect():
 	selected_ = false
 	%Selected.visible = false
 
-func _drag(pos:Vector2) -> void:
-	if not dragging_:
-		dragging_ = true
+func _move(pos:Vector2) -> void:
+	if not moving_:
+		moving_ = true
 		drag_offset = global_position - get_global_mouse_position()
 		
 	position = get_global_mouse_position() + drag_offset
@@ -229,8 +225,8 @@ func _drag(pos:Vector2) -> void:
 	for connection in connections_:
 		connection.invalidate()
 
-func _drag_end() -> void:
-	dragging_ = false
+func _move_end() -> void:
+	moving_ = false
 	update_text_position_()
 
 func get_inlet(index:int) -> Node:
@@ -387,12 +383,18 @@ func update_text_position_() -> void:
 		args_[node_model_.height_pos_in_command] = str($ColorRect.size.y)
 
 func _play_mode_begin() -> void:
+	%Inputs.visible = false
+	%Outputs.visible = false
+	
 	monitorable = false
 	if %Specialized.get_child_count() > 0:
 		%Block.visible = false
 	set_process_input(false)
 
 func _play_mode_end() -> void:
+	%Inputs.visible = true
+	%Outputs.visible = true
+
 	monitorable = true
 	if %Specialized.get_child_count() > 0:
 		%Block.visible = true

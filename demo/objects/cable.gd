@@ -115,10 +115,10 @@ func _select():
 func _unselect():
 	invalidate_()
 
-func _drag(pos:Vector2):
+func _move(pos:Vector2):
 	pass
 
-func _drag_end():
+func _move_end():
 	pass
 
 func invalidate_():
