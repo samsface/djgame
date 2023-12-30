@@ -2,9 +2,21 @@ shader_type canvas_item;
 
 uniform bool up = false;
 uniform vec3 color : source_color;
+uniform float l : hint_range(0.0, 1.0);
+
 
 void vertex() {
-	VERTEX.y += up ? 2.0 : -2.0;
+
+	
+	//VERTEX.xy -= vec2(0.5, 0.5);
+	VERTEX.xy *= 1.0 + l * 0.5;
+	VERTEX.xy -= vec2(5.0, 5.0) * l;
+//	VERTEX.xy += vec2(0.5, 0.5);
+
+
+	float offset = 2.0 + 3.0 * l;
+	//VERTEX.y += up ? offset : -offset;
+	
 }
 
 void fragment() {
@@ -15,7 +27,7 @@ void fragment() {
 		uv.y = 1.0 - uv.y;
 	}
 	
-	uv.y += 0.5;
+	uv.y += 0.5 - (l * 0.5);
 	
 	float a = 1.0 - distance(uv, vec2(0.5, 0.5));
 	float b = 0.9 - distance(uv, vec2(0.5, 0.5));

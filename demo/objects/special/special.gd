@@ -8,7 +8,10 @@ var parent :
 	set(value):
 		pass
 	get:
-		return get_parent().get_parent().get_parent().get_parent()
+		return get_parent().get_parent().get_parent()
+
+func _ready() -> void:
+	pass
 
 func get_id_() -> String:
 	var id := []
@@ -96,3 +99,6 @@ func _float(receiver:String, new_value:float) -> void:
 		setting_selfs_value_ = true
 		set("value", new_value)
 		setting_selfs_value_ = false
+
+func set_play_mode(value:bool) -> void:
+	pass

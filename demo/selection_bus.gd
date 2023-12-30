@@ -1,5 +1,8 @@
 extends Node
 
+signal play_mode_begin
+signal play_mode_end
+
 var selection_ := []
 var hovering
 
@@ -44,3 +47,41 @@ func remove_from_all(node) -> void:
 
 func is_empty() -> bool:
 	return selection_.is_empty()
+
+
+func find_closet_node(nodes:Array, pos:Vector2) -> Node:
+	var closest_node
+	var closest_distance = 999999
+	for node in nodes:
+
+		# for controls measure from the center
+		var offset = Vector2.ZERO
+		if node is Control:
+			offset += node.size * 0.5
+
+		var d = (node.global_position + offset).distance_to(pos)
+		if d < closest_distance:
+			closest_node = node
+			closest_distance = d
+
+	return closest_node
+
+func find_closet_node_with_skip(nodes:Array, pos:Vector2, skip:Callable) -> Node:
+	var closest_node
+	var closest_distance = 999999
+	for node in nodes:
+
+		# for controls measure from the center
+		var offset = Vector2.ZERO
+		if node is Control:
+			offset += node.size * 0.5
+
+		if skip.call(node):
+			continue
+
+		var d = (node.global_position + offset).distance_to(pos)
+		if d < closest_distance:
+			closest_node = node
+			closest_distance = d
+
+	return closest_node

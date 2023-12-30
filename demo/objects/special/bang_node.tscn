@@ -7,7 +7,7 @@
 offset_right = 67.0625
 offset_bottom = 31.0
 theme = ExtResource("1_pruyd")
-text = "BANG"
+text = "!"
 script = ExtResource("1_fd3a4")
 
 [connection signal="button_down" from="." to="." method="_button_down"]

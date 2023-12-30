@@ -27,9 +27,7 @@ var in_subpatch:bool
 
 var args_ := PackedStringArray()
 
-signal connection_clicked
 signal title_changed
-signal begin_edit_text
 signal end_edit_text
 signal begin_resize
 signal end_resize
@@ -46,7 +44,6 @@ var editing_text_ := false
 var original_text_ := ""
 var node_model_
 
-
 func _ready() -> void:
 	mouse_entered.connect(_mouse_entered)
 	mouse_exited.connect(_mouse_exited)
@@ -54,6 +51,9 @@ func _ready() -> void:
 	tree_exiting.connect(_tree_exiting)
 	_item_rect_changed()
 	$ColorRect/Reize.visible = resizeable
+
+	if not visible:
+		_visibility_changed()
 
 func get_best_slot(slot:PDSlot) -> PDSlot:
 	var test_slots
@@ -89,9 +89,6 @@ func stop_dragging_() -> void:
 	if dragging_:
 		dragging_ = false
 
-func connection_down_(connection:PDSlot) -> void:
-	connection_clicked.emit(connection)
-
 func pretty_text_(text:String):
 	if text.begins_with("bng"):
 		return "bang"
@@ -100,7 +97,7 @@ func pretty_text_(text:String):
 		return "nbx"
 
 	if text.begins_with("tgl"):
-		return "toggle"
+		return "tgl"
 		
 	if text.begins_with("hsl"):
 		return "hsl"
@@ -125,6 +122,7 @@ func set_text_(value:String) -> String:
 	value = res[1]
 
 	%LineEdit.text = pretty_text_(node_model_.title + res[3])
+	print(%LineEdit.text)
 	%LineEdit.caret_column = %LineEdit.text.length()
 
 	visible_in_subpatch = node_model_.visible_in_subpatch
@@ -149,7 +147,7 @@ func update_connection_(connection_models:Array, node:Node, is_output:bool) -> v
 			slot.parent = self
 			slot.index = slot_index
 			slot.is_output = is_output
-			slot.button_down.connect(connection_down_.bind(slot))
+			#slot.button_down.connect(connection_down_.bind(slot))
 			node.add_child(slot)
 		else:
 			slot = node.get_child_count(slot_index)
@@ -170,11 +168,17 @@ func update_specialized_(node_model) -> void:
 		node.get_parent().remove_child(node)
 
 	if node_model.specialized:
+		%Specialized.visible = true
+		%LineEdit.visible = false
+		
 		var specialized = node_model.specialized.instantiate()
 		if node_model.specialized.has_meta("path"):
 			specialized.patch_path = node_model.specialized.get_meta("path")
 		%Specialized.add_child(specialized)
 		specialized._pd_init()
+	else:
+		%Specialized.visible = false
+		%LineEdit.visible = true
 
 func add_connection(cable):
 	cable.tree_exiting.connect(remove_connection.bind(cable))
@@ -216,6 +220,11 @@ func _drag(pos:Vector2) -> void:
 	if not dragging_:
 		dragging_ = true
 		drag_offset = global_position - get_global_mouse_position()
+		
+	position = get_global_mouse_position() + drag_offset
+
+	for connection in connections_:
+		connection.invalidate()
 
 func _drag_end() -> void:
 	dragging_ = false
@@ -244,30 +253,26 @@ func _visibility_changed():
 		monitorable = false
 
 func _line_edit_focus_entered() -> void:
-	%LineEdit.mouse_filter = LineEdit.MOUSE_FILTER_STOP
+	%Block.visible = false
 	editing_text_ = true
 	original_text_ = %LineEdit.text
-	begin_edit_text.emit()
 
 func _line_edit_text_submitted(new_text: String) -> void:
-	title_changed.emit(new_text)
 	original_text_ = new_text
+	title_changed.emit(new_text)
 
 func _line_edit_focus_exited() -> void:
 	%LineEdit.text = original_text_
-	%LineEdit.mouse_filter = LineEdit.MOUSE_FILTER_IGNORE
+	%Block.visible = true
 	end_edit_text.emit()
 	editing_text_ = false
+	
+	if %Specialized.get_child_count() > 0:
+		%Specialized.visible = true
+		%LineEdit.visible = false
 
 func _input(event: InputEvent) -> void:
-	if dragging_:
-		position = get_global_mouse_position() + drag_offset
-		#position = position.snapped(Vector2.ONE * 16.0)
-		
-		for connection in connections_:
-			connection.invalidate()
-
-	elif  resizing_:
+	if resizing_:
 		if event.is_action_released("click"):
 			resizing_ = false
 			update_text_position_()
@@ -275,22 +280,14 @@ func _input(event: InputEvent) -> void:
 			_item_rect_changed()
 		else:
 			$ColorRect.custom_minimum_size = get_global_mouse_position() - global_position
-		
-	elif selected_:
-		if editing_text_:
-			if event.is_action_pressed("ui_cancel"):
-				%LineEdit.release_focus()
 
-			elif event.is_action_pressed("click"):
-				if not Rect2(%LineEdit.global_position, %LineEdit.size).has_point(get_global_mouse_position()):
-					%LineEdit.release_focus()
-		elif event is InputEventMouseButton:
-			if event.double_click:
-				if Rect2(%LineEdit.global_position, %LineEdit.size).has_point(get_global_mouse_position()):
-					%LineEdit.release_focus()
-					await get_tree().process_frame
-					%LineEdit.grab_focus()
-					%LineEdit.caret_column = %LineEdit.text.length()
+func _begin_edit() -> void:
+	await get_tree().process_frame
+	%Block.visible = false
+	%Specialized.visible = false
+	%LineEdit.visible = true
+	%LineEdit.select_all()
+	%LineEdit.grab_focus()
 
 func _size_control_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
@@ -344,7 +341,7 @@ func create_obj_(message:String) -> Array:
 	if not node_model:
 		push_error("no model for %s" % message)
 		return []
-		
+
 	node_model_ = node_model
 
 	resizeable = node_model_.resizeable
@@ -385,3 +382,16 @@ func update_text_position_() -> void:
 
 	if node_model_.height_pos_in_command < args_.size():
 		args_[node_model_.height_pos_in_command] = str($ColorRect.size.y)
+
+func _play_mode_begin() -> void:
+	monitorable = false
+	%Block.visible = false
+	set_process_input(false)
+
+func _play_mode_end() -> void:
+	monitorable = true
+	%Block.visible = true
+	set_process_input(true)
+
+func get_slots() -> Array:
+	return %Inputs.get_children() + %Outputs.get_children()

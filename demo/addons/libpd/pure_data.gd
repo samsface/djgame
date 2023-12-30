@@ -43,7 +43,7 @@ class IteratePackedStringArray:
 		
 	func next_as_int():
 		if i >= packed_string_.size():
-			return null
+			return 0
 		
 		i += 1
 		

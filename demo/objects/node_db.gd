@@ -181,6 +181,7 @@ func _enter_tree() -> void:
 	floatatom.inputs.push_front(C.new("value", "float"))
 	floatatom.outputs.push_front(C.new("value", "float"))
 	floatatom.default_args = ["floatatom", "0", "100", "5", "0", "0", "0", "", "-", "-", "-"]
+	floatatom.specialized = preload("res://objects/special/float_node.tscn")
 	db["floatatom"] = floatatom
 
 	var receive = N.new()

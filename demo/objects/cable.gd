@@ -1,13 +1,13 @@
 extends Area2D
 class_name PDCable
 
-signal connection
-signal request_new_object
-
 @export var from:PDSlot
 @export var to:PDSlot
 @export var selectable:bool = true
 @export var creating:bool = false
+
+var fallback_from_position := Vector2.ZERO
+var fallback_to_position := Vector2.ZERO
 
 var text :
 	set(value):
@@ -21,27 +21,9 @@ var creating_slot :
 	get: return from if from else to
 
 var just_created_ := true
-var hovering_slot_
-var requesting_new_object_ := false
 
 var selected_ := false
 var dragging_ := false
-
-
-
-func _input(event: InputEvent) -> void:
-	if requesting_new_object_:
-		return
-
-	if creating:
-		if event.is_action_pressed("ui_cancel"):
-			queue_free()
-		if event.is_action_released("click"):
-			if hovering_slot_:
-				connect_(hovering_slot_)
-			else:
-				requesting_new_object_ = true
-				request_new_object.emit()
 
 func connect_(slot):
 	if to:
@@ -50,26 +32,21 @@ func connect_(slot):
 		to = slot
 
 	creating = false
-	requesting_new_object_ = false
 	invalidate_connections()
-	connection.emit()
 
 func _physics_process(delta: float) -> void:
-	if requesting_new_object_:
-		return
-
-	var from_position
-	var to_position
+	var from_position := Vector2.ZERO
+	var to_position := Vector2.ZERO
 
 	if from:
 		from_position = from.global_position + Vector2(10, 18)
 	else:
-		from_position = get_global_mouse_position()
+		from_position = fallback_from_position
 
 	if to:
 		to_position = to.global_position + Vector2(10, 2)
 	else:
-		to_position = get_global_mouse_position()
+		to_position = fallback_to_position
 
 	$Line2D.set_point_position(0, from_position)
 	$Line2D.set_point_position(1, to_position)
@@ -157,26 +134,19 @@ func _visibility_changed():
 		monitorable = false
 
 func _area_entered(area: Area2D) -> void:
-	if area.get_parent() == from:
-		return
-	
-	var hovering_slot = area.get_parent()
-	
-	if creating_slot.get_parent().get_parent() == hovering_slot.get_parent().get_parent():
-		return
-
-	hovering_slot_ = hovering_slot
-	hovering_slot_._cable_entered()
+	pass
 
 func _area_exited(area: Area2D) -> void:
-	if hovering_slot_ != area:
-		return
-
-	hovering_slot_._cable_exited()
-	hovering_slot_ = null
+	pass
 
 func auto_connect(object) -> void:
 	pass
 
 func _pre_save() -> void:
+	pass
+
+func _play_mode_begin() -> void:
+	pass
+
+func _play_mode_end() -> void:
 	pass

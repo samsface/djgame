@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://byxixsjbsubl1"]
+[gd_scene load_steps=4 format=3 uid="uid://byxixsjbsubl1"]
 
 [ext_resource type="Script" path="res://objects/slot.gd" id="1_yp3o2"]
 [ext_resource type="Shader" path="res://objects/slot.gdshader" id="2_88w2a"]
@@ -6,10 +6,9 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ym7ib"]
 resource_local_to_scene = true
 shader = ExtResource("2_88w2a")
-shader_parameter/up = false
+shader_parameter/up = true
 shader_parameter/color = Color(1, 0.282353, 0.701961, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q0k1a"]
+shader_parameter/l = 0.0
 
 [node name="Button" type="MarginContainer"]
 custom_minimum_size = Vector2(20, 20)
@@ -24,16 +23,4 @@ layout_mode = 2
 mouse_filter = 2
 color = Color(0.505882, 0.584314, 1, 1)
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 0
-monitoring = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(10, 10)
-shape = SubResource("RectangleShape2D_q0k1a")
-
 [connection signal="visibility_changed" from="." to="." method="_visibility_changed"]
-[connection signal="input_event" from="Area2D" to="." method="_input_event"]
-[connection signal="mouse_entered" from="Area2D" to="." method="_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_mouse_exited"]

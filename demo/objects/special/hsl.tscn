@@ -4,8 +4,11 @@
 [ext_resource type="Script" path="res://objects/special/hsl.gd" id="2_s0k4p"]
 
 [node name="Hsl" type="HSlider"]
+custom_minimum_size = Vector2(128, 0)
 offset_right = 67.0625
 offset_bottom = 31.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("1_ylyy1")
 script = ExtResource("2_s0k4p")
 
