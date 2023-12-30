@@ -62,12 +62,12 @@ func _physics_process(delta: float) -> void:
 	var to_position
 
 	if from:
-		from_position = from.global_position + Vector2(16, 16)
+		from_position = from.global_position + Vector2(10, 18)
 	else:
 		from_position = get_global_mouse_position()
 
 	if to:
-		to_position = to.global_position + Vector2(16, 16)
+		to_position = to.global_position + Vector2(10, 2)
 	else:
 		to_position = get_global_mouse_position()
 

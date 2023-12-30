@@ -41,9 +41,11 @@ var drag_offset := Vector2.ZERO
 var selected_ := false
 
 var connections_ := []
+var ghost_rs := []
 var editing_text_ := false
 var original_text_ := ""
 var node_model_
+
 
 func _ready() -> void:
 	mouse_entered.connect(_mouse_entered)
@@ -257,7 +259,6 @@ func _line_edit_focus_exited() -> void:
 	end_edit_text.emit()
 	editing_text_ = false
 
-
 func _input(event: InputEvent) -> void:
 	if dragging_:
 		position = get_global_mouse_position() + drag_offset
@@ -269,8 +270,8 @@ func _input(event: InputEvent) -> void:
 	elif  resizing_:
 		if event.is_action_released("click"):
 			resizing_ = false
+			update_text_position_()
 			end_resize.emit()
-			resizing_ = false
 			_item_rect_changed()
 		else:
 			$ColorRect.custom_minimum_size = get_global_mouse_position() - global_position

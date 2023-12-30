@@ -36,23 +36,13 @@ func add_ghost_rs_() -> void:
 	if not parent.canvas:
 		return
 
-	var r = '$1_%s' % parent.index
-	var ghost_rs_already := false
-	for p in parent.canvas.get_children():
-		if p.name.ends_with(r):
-			p.visible = false
-			ghost_rs_already = true
-	
-	if ghost_rs_already:
-		return
-	
 	var receiver_args = ["obj", str(parent.position.x), str(parent.position.y - 30), "r", '/r/%s/%s' % ["$1", parent.index]]
 	var receiver_node = preload("res://objects/graph_node.tscn").instantiate()
-	receiver_node.name = r
 	receiver_node.canvas = parent.canvas
 	receiver_node.text = ' '.join(receiver_args)
 	receiver_node.visible = false
 	parent.canvas.add_child(receiver_node)
+	parent.ghost_rs.push_back(receiver_node)
 
 	var sender_args = ["obj", str(parent.position.x), str(parent.position.y + 30), "s", '/s/%s/%s' % ["$1", parent.index]]
 	var sender_node = preload("res://objects/graph_node.tscn").instantiate()
@@ -60,6 +50,7 @@ func add_ghost_rs_() -> void:
 	sender_node.text = ' '.join(sender_args)
 	sender_node.visible = false
 	parent.canvas.add_child(sender_node)
+	parent.ghost_rs.push_back(sender_node)
 
 	var receiver_cable = preload("res://objects/cable.tscn").instantiate()
 	receiver_cable.from = receiver_node.get_outlet(0)
@@ -70,9 +61,9 @@ func add_ghost_rs_() -> void:
 	sender_cable.from = parent.get_outlet(0)
 	sender_cable.to = sender_node.get_inlet(0)
 	parent.canvas.add_child(sender_cable)
+	
 
-	#parent.send_message_(["connect", str(receiver_ghost_node.index), "0", str(parent.index), "0"])
-	#parent.send_message_(["connect", str(parent.index), "0", str(sender_ghost_node.index), "0"])
+
 
 func _pd_init() -> void:
 	if not parent.canvas.is_done:

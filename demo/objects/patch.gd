@@ -152,10 +152,13 @@ func search_end_(search_text:String) -> void:
 func delete_() -> void:
 	var objects_to_delete = SelectionBus.selection_.duplicate()
 	var cables_to_delete := []
+	var ghost_objects := []
 	for object in objects_to_delete:
 		if object is PDNode:
 			cables_to_delete += get_connected_cables_(object)
+			ghost_objects += object.ghost_rs
 
+	objects_to_delete += ghost_objects
 	objects_to_delete += cables_to_delete
 
 	undo_.create_action("delete")
@@ -573,7 +576,7 @@ func save() -> void:
 	#patch_file_handle_.close()
 	print("saving %s" % canvas)
 
-	var f := FileAccess.open("res://junk/saves.pd", FileAccess.WRITE)
+	var f := FileAccess.open(patch_path, FileAccess.WRITE)
 	if not f:
 		push_error("could not open file to save")
 
@@ -581,24 +584,30 @@ func save() -> void:
 
 	var coords
 
+	var rejigged_indexs := {}
+
 	for node in get_children():
 		if node is PDNode:
+			if not node.visible:
+				continue
 			if node.text.begins_with("coords"):
 				coords = node
 			else:
 				f.store_line("#X " + node.text + ";")
+				rejigged_indexs[node] = rejigged_indexs.size()
 
 	for node in get_children():
+		if not node.visible:
+			continue
 		if node is PDCable:
-			f.store_line("#X " + node.text + ";")
+			var from = rejigged_indexs[node.from.parent]
+			var to = rejigged_indexs[node.to.parent]
+			f.store_line("#X connect %s %s %s %s;" % [from, node.from.index, to, node.to.index])
 
 	if coords:
 		f.store_line("#X " + coords.text + ";")
 
 	f.close()
-	#	print(node.text)
-	
-
 	
 	#var tmp_path = "res://junk/" + patch_path.get_file()
 	#var p = ProjectSettings.globalize_path(tmp_path)

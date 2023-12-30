@@ -26,8 +26,9 @@ size_flags_vertical = 3
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="VBoxContainer/SubViewportContainer"]
+disable_3d = true
 handle_input_locally = false
-msaa_2d = 1
+msaa_2d = 3
 screen_space_aa = 1
 canvas_item_default_texture_repeat = 1
 physics_object_picking = true

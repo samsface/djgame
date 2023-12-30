@@ -5,5 +5,6 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_me3p1"]
 
 [resource]
+Button/font_sizes/font_size = 16
 Button/styles/focus = SubResource("StyleBoxEmpty_im2cn")
 LineEdit/styles/focus = SubResource("StyleBoxEmpty_me3p1")

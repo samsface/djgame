@@ -7,7 +7,7 @@ var parent :
 	set(value):
 		pass
 	get:
-		return get_parent().get_parent().get_parent().get_parent().get_parent()
+		return get_parent().get_parent().get_parent().get_parent()
 
 @export var index := 0
 @export var is_output := false
@@ -22,6 +22,8 @@ func set_cable_(value:Node) -> void:
 
 func _ready() -> void:
 	modulate = Color.PURPLE
+
+	$PanelContainer.material.set_shader_parameter("up", is_output)
 
 func _input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event.is_action_pressed("click"):
@@ -38,3 +40,6 @@ func _mouse_entered() -> void:
 
 func _mouse_exited() -> void:
 	modulate = Color.PURPLE
+
+func _visibility_changed() -> void:
+	$Area2D.monitorable = visible

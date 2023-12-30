@@ -13,17 +13,20 @@ func _ready() -> void:
 		add(patch)
 	
 	reset_camera_()
-	
-	
+
 	%File.add_item("open", FileMenuIds.open)
 	%File.id_pressed.connect(_file_item_pressed)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("file_open"):
+		file_open_()
 
 func _file_item_pressed(id:int) -> void:
 	match id:
 		FileMenuIds.open:
-			open_()
+			file_open_()
 
-func open_() -> void:
+func file_open_() -> void:
 	get_tree().root.get_viewport().gui_embed_subwindows = false
 	
 	var file_dialog = FileDialog.new()
@@ -32,11 +35,11 @@ func open_() -> void:
 	file_dialog.visible = true
 	file_dialog.size = Vector2(500, 600)
 	file_dialog.initial_position = FileDialog.WINDOW_INITIAL_POSITION_CENTER_SCREEN_WITH_MOUSE_FOCUS
-	file_dialog.file_selected.connect(open_file_selected_)
+	file_dialog.file_selected.connect(file_open_selected_)
 	file_dialog.canceled.connect(file_dialog.queue_free)
 	add_child(file_dialog)
 
-func open_file_selected_(path:String) -> void:
+func file_open_selected_(path:String) -> void:
 	var patch = preload("res://objects/patch.tscn").instantiate()
 	if not patch.open(path):
 		push_error("error opening patch")
