@@ -1,4 +1,4 @@
-extends Node2D
+extends Mode
 class_name ConnectMode
 
 var slot_
@@ -16,6 +16,9 @@ var cursor_ :
 		pass
 	get: return get_parent().cursor_
 
+func _init(slot) -> void:
+	slot_ = slot
+
 func skip_(slot:PDSlot) -> bool:
 	if slot.is_output == slot_.is_output:
 		return true
@@ -30,7 +33,7 @@ func get_best_hovering_slot_() -> PDSlot:
 		var slots = []
 		for node in cursor_.get_overlapping_areas():
 			slots += node.get_slots()
-		
+
 		return SelectionBus.find_closet_node_with_skip(
 			slots, 
 			get_global_mouse_position(),
@@ -43,19 +46,19 @@ func _input(event: InputEvent):
 		_cancel()
 		return
 
-	if event is InputEventMouseMotion:
-		var slot = get_best_hovering_slot_()
-		if slot != candidate_slot_:
-			if candidate_slot_:
-				candidate_slot_._mouse_exited()
-				candidate_slot_ = null
-			
-			candidate_slot_ = slot
-			
-			if candidate_slot_:
-				slot._mouse_entered()
+	if not adding_new_object_:
+		if event is InputEventMouseMotion:
+			var slot = get_best_hovering_slot_()
+			if slot != candidate_slot_:
+				if candidate_slot_:
+					candidate_slot_._mouse_exited()
+					candidate_slot_ = null
 				
-		if not adding_new_object_:
+				candidate_slot_ = slot
+				
+				if candidate_slot_:
+					slot._mouse_entered()
+
 			if not cable_.from:
 				cable_.fallback_from_position = get_global_mouse_position()
 			if not cable_.to:
@@ -94,7 +97,7 @@ func connection_request_() -> void:
 
 func connection_requests_new_object_search_end_(text) -> void:
 	if not text:
-		cable_.queue_free()
+		_cancel()
 		return
 
 	var n = get_parent().add_node__(text)

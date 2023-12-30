@@ -202,9 +202,12 @@ func _tree_exiting() -> void:
 	SelectionBus.remove_from_selection(self)
 	SelectionBus.remove_from_hover(self)
 
-func update(command):
+func interprit(command):
 	command = PureData.found_(command, position)
 	text = command
+
+func set_text(t):
+	text = t
 
 func _select():
 	selected_ = true
@@ -385,12 +388,14 @@ func update_text_position_() -> void:
 
 func _play_mode_begin() -> void:
 	monitorable = false
-	%Block.visible = false
+	if %Specialized.get_child_count() > 0:
+		%Block.visible = false
 	set_process_input(false)
 
 func _play_mode_end() -> void:
 	monitorable = true
-	%Block.visible = true
+	if %Specialized.get_child_count() > 0:
+		%Block.visible = true
 	set_process_input(true)
 
 func get_slots() -> Array:

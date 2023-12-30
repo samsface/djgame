@@ -5,17 +5,6 @@ signal done
 
 @export var root := false
 
-enum Mode {
-	none,
-	selecting,
-	dragging,
-	connecting,
-	searching,
-	editing,
-	resizing,
-	play
-}
-
 var undo_ := UndoRedo.new()
 var canvas:String
 var lines := []
@@ -28,107 +17,89 @@ var inlets := []
 var outlets := []
 var is_done := false
 
-var mode := Mode.none
 var patch_file_handle_ := PDPatchFile.new()
 var cursor_:Area2D
 
-var hovering_slot_
-
 var mode_
 
-func remove_hovering_slot_() -> void:
-	if hovering_slot_:
-		if hovering_slot_.is_inside_tree():
-			hovering_slot_._mouse_exited()
-		hovering_slot_ = null
-
 func _ready() -> void:
-	cursor_ = preload("res://widgets/cursor.tscn").instantiate()
+	cursor_ = preload("res://widgets/cursor/cursor.tscn").instantiate()
 	add_child(cursor_)
 
-func update_hovering_slot_() -> void:
-	if mode != Mode.selecting and cursor_.has_overlapping_areas():
-		var slots = []
-		for node in cursor_.get_overlapping_areas():
-			slots += node.get_slots()
-		
-		var closet_slot = SelectionBus.find_closet_node(slots, get_global_mouse_position())
-		
-		if closet_slot != hovering_slot_:
-			remove_hovering_slot_()
-			hovering_slot_ = closet_slot
-			if closet_slot:
-				closet_slot._mouse_entered()
-	else:
-		remove_hovering_slot_()
+func enter_mode_(mode) -> void:
+	if mode_:
+		mode_._cancel()
+		remove_child(mode_)
+
+	mode_ = mode
+	
+	if mode_:
+		mode_.tree_exited.connect(exit_mode_)
+		add_child(mode_)
+
+func exit_mode_() -> void:
+	mode_ = null
+
+class InputEventDrag extends InputEventMouseMotion:
+	pass
 
 func _input(event: InputEvent):
-	print(mode)
-	
-	cursor_.position = get_global_mouse_position()
+	if event is InputEventMouseMotion:
+		cursor_.position = get_global_mouse_position()
 
-	if Input.is_action_just_pressed("save"):
+	if not mode_:
+		enter_mode_(HoverMode.new())
+		
+	if mode_.block():
+		return
+
+	if SelectionBus.hovering_slot:
+		if event.is_action_pressed("right_click"):
+			enter_mode_(ConnectMode.new(SelectionBus.hovering_slot))
+			return
+
+	if event.is_action_pressed("save"):
 		save()
 
-	if mode == Mode.play:
-		play_mode_input_()
-		return
-		
-	if mode == Mode.dragging:
-		drag_mode_input_()
-		return
+	elif PlayMode.test(event, SelectionBus.selection_):
+		enter_mode_(PlayMode.new())
 
-	if mode >= Mode.dragging:
-		return
-		
-	update_hovering_slot_()
+	elif DragMode.test(event, SelectionBus.selection_):
+		enter_mode_(DragMode.new(SelectionBus.selection_))
 
-	if hovering_slot_:
-		if event.is_action_pressed("right_click"):
-			mode = Mode.connecting
-			mode_ = ConnectMode.new()
-			mode_.slot_ = hovering_slot_
-			mode_.tree_exited.connect(func(): mode = Mode.none)
-			add_child(mode_)
-
-	if Input.is_action_just_pressed("toggle_play_mode"):
-		play_begin_()
-		return
+	elif SelectMode.test(event, SelectionBus.selection_):
+		enter_mode_(SelectMode.new(SelectionBus.selection_))
 		
-	if Input.is_action_just_pressed("expand"):
-		expand_()
-		return
+	elif SearchMode.test(event, SelectionBus.selection_):
+		enter_mode_(SearchMode.new())
 		
-	if Input.is_action_just_pressed("rotate"):
-		rotate_()
-		return
+	elif EditMode.test(event, SelectionBus.selection_):
+		enter_mode_(EditMode.new(SelectionBus.selection_))
 
-	if Input.is_action_just_pressed("ui_down"):
+	elif event.is_action_pressed("ui_down"):
 		open_patch_in_new_window_()
 	
-	if Input.is_action_just_pressed("ui_cancel"):
+	elif event.is_action_pressed("ui_cancel"):
 		SelectionBus.clear_selection()
 		
-	if Input.is_action_just_pressed("select_all"):
+	elif event.is_action_pressed("select_all"):
 		SelectionBus.clear_selection()
 		for node in get_children():
 			if "selectable" in node:
 				SelectionBus.add_to_selection(node)
 	
-	if Input.is_action_just_pressed("delete"):
+	elif event.is_action_pressed("delete"):
 		delete_()
-	if Input.is_action_just_pressed("redo"):
+
+	elif event.is_action_pressed("redo"):
 		undo_.redo()
 
-	elif Input.is_action_just_pressed("undo"):
+	elif event.is_action_pressed("undo"):
 		undo_.undo()
 
-	if Input.is_action_just_pressed("click"):
-		if SelectionBus.hovering:
-			if event.double_click:
-				begin_edit_text_(SelectionBus.hovering)
-				return
-		
+	elif event.is_action_pressed("click"):
+		initial_click_position_ = get_global_mouse_position()
+
 		if not SelectionBus.hovering:
 			SelectionBus.clear_selection()
 		
@@ -136,33 +107,17 @@ func _input(event: InputEvent):
 			if SelectionBus.hovering:
 				SelectionBus.change_selection(SelectionBus.hovering)
 
-		if SelectionBus.selection_.size() > 0:
-			drag_mode_input_()
-		else:
-			mode = Mode.selecting
-			remove_hovering_slot_()
-			drag_selection_box_ = preload("res://widgets/selection_box/selection_box.tscn").instantiate()
-			add_child(drag_selection_box_)
-			drag_selection_box_.global_position = get_global_mouse_position()
+	elif event is InputEventMouseMotion and initial_click_position_ != Vector2.ZERO:
+		if get_global_mouse_position().distance_to(initial_click_position_) > drag_threshold_:
+			initial_click_position_ = Vector2.ZERO
+			_input(InputEventDrag.new())
 
-			initial_click_position_ = get_global_mouse_position()
-			
-	elif Input.is_action_just_released("click"):
-		if mode == Mode.selecting:
-			mode = Mode.none
-		else:
-			if SelectionBus.selection_.size() > 1:
-				if SelectionBus.hovering:
-					SelectionBus.change_selection(SelectionBus.hovering)
+	elif event.is_action_released("click"):
+		initial_click_position_ = Vector2.ZERO
 
-	if Input.is_action_just_pressed("search"):
-		var x = preload("res://widgets/search/search.tscn").instantiate()
-		x.position = get_global_mouse_position()
-		x.end.connect(search_end_)
-		add_child(x)
-
-		mode = Mode.searching
-		get_viewport().set_input_as_handled()
+		if SelectionBus.selection_.size() > 1:
+			if SelectionBus.hovering:
+				SelectionBus.change_selection(SelectionBus.hovering)
 
 func get_connected_cables_(node:PDNode)-> Array:
 	var res := []
@@ -174,34 +129,6 @@ func get_connected_cables_(node:PDNode)-> Array:
 				res.push_back(object)
 
 	return res
-
-################################################################################
-# play mode
-################################################################################
-
-func play_begin_() -> void:
-	mode = Mode.play
-	
-	var window = get_viewport().get_window()
-	if window:
-		window.title = patch_path.get_file() + " - play"
-	
-	for node in get_children():
-		node._play_mode_begin()
-
-func play_mode_input_() -> void:
-	if Input.is_action_just_pressed("toggle_play_mode"):
-		play_end_()
-
-func play_end_() -> void:
-	mode = Mode.none
-
-	var window = get_viewport().get_window()
-	if window:
-		window.title = patch_path.get_file() + " - edit"
-
-	for node in get_children():
-		node._play_mode_end()
 
 ################################################################################
 # open patch in new window
@@ -216,18 +143,6 @@ func open_patch_in_new_window_() -> void:
 	window.add_child(viewer)
 	window.close_requested.connect(window.queue_free)
 	get_tree().root.add_child(window)
-
-################################################################################
-# searching for stuff
-################################################################################
-
-func search_end_(search_text:String) -> void:
-	mode = Mode.none
-
-	if not search_text:
-		return
-
-	add_node_(search_text)
 
 ################################################################################
 # deleting stuff
@@ -261,67 +176,6 @@ func delete_undo_(objects_to_delete:Array) -> void:
 		add_child(object)
 
 ################################################################################
-# dragging
-################################################################################
-
-func drag_begin_() -> void:
-	if SelectionBus.is_empty():
-		return
-		
-	remove_hovering_slot_()
-
-	mode = Mode.dragging
-	undo_.create_action("drag")
-	
-	var positions := []
-	for node in SelectionBus.selection_:
-		positions.push_back(node.position)
-
-	undo_.add_undo_method(drag_action_.bind(SelectionBus.selection_.duplicate(), positions))
-
-func drag_mode_input_() -> void:
-	if mode != Mode.dragging:
-		if get_global_mouse_position().distance_to(initial_click_position_) > drag_threshold_:
-			drag_begin_()
-	
-	if mode == Mode.dragging:
-		for node in SelectionBus.selection_:
-			node._drag(get_global_mouse_position())
-			
-		if Input.is_action_just_released("click"):
-			drag_end_()
-
-func drag_action_(selection:Array, positions:Array) -> void:
-	for i in selection.size():
-		selection[i].position = positions[i]
-
-func drag_end_() -> void:
-	mode = Mode.none
-	
-	for node in SelectionBus.selection_:
-		node._drag_end()
-	
-	var positions := []
-	for node in SelectionBus.selection_:
-		positions.push_back(node.position)
-
-	undo_.add_do_method(drag_action_.bind(SelectionBus.selection_.duplicate(), positions))
-	
-	undo_.commit_action()
-
-################################################################################
-# random node tricks
-################################################################################
-
-func rotate_() -> void:
-	for node in get_children():
-		node.position = node.position.rotated(deg_to_rad(-90))
-
-func expand_() -> void:
-	for node in get_children():
-		node.position = node.position * 2.0
-
-################################################################################
 # adding nodes
 ################################################################################
 
@@ -340,57 +194,26 @@ func add_node__(node_name:String):
 	node.canvas = self
 	node.text = node_name
 
-	node.title_changed.connect(title_changed_.bind(node))
-	node.end_edit_text.connect(end_edit_text_.bind(node))
 	node.begin_resize.connect(begin_resize_.bind(node))
 	node.end_resize.connect(end_resize_.bind(node))
 
 	return node
 
 ################################################################################
-# adding connections
-################################################################################
-
-
-
-################################################################################
 # resizing nodes
 ################################################################################
 
 func begin_resize_(node) -> void:
-	if mode == Mode.selecting:
-		drag_selection_box_.queue_free()
-		drag_selection_box_ = null
+	#if mode == Mode.selecting:
+	#	drag_selection_box_.queue_free()
+	#	drag_selection_box_ = null
 
-	mode = Mode.resizing
+	#mode = Mode.resizing
+	pass
 
 func end_resize_(node:PDNode) -> void:
-	mode = Mode.none
-
-################################################################################
-# updating node type
-################################################################################
-
-func begin_edit_text_(node) -> void:
-	mode = Mode.editing
-	remove_hovering_slot_()
-	node._begin_edit()
-
-func end_edit_text_(node) -> void:
-	mode = Mode.none
-
-func title_changed_(next_text:String, node:PDNode) -> void:
-	undo_.create_action("update")
-	
-	undo_.add_do_method(clear_connections_.bind(node))
-	undo_.add_do_method(node.update.bind(next_text))
-	undo_.add_do_method(add_connections_.bind(node))
-
-	undo_.add_undo_method(clear_connections_.bind(node))
-	undo_.add_undo_method(node.update.bind(node.text))
-	undo_.add_undo_method(add_connections_.bind(node))
-
-	undo_.commit_action()
+	#mode = Mode.none
+	pass
 
 func clear_connections_(node:PDNode) -> void:
 	for cable in get_connected_cables_(node):
@@ -402,48 +225,11 @@ func add_connections_(node:PDNode) -> void:
 
 ################################################################################
 
-class IteratePackedStringArray:
-	var packed_string_:PackedStringArray
-	var i = 0
-	
-	func next():
-		if i >= packed_string_.size():
-			return null
-		
-		i += 1
-		
-		return packed_string_[i-1]
-		
-	func next_as_int():
-		if i >= packed_string_.size():
-			return null
-		
-		i += 1
-		
-		if packed_string_[i-1] == null:
-			return 0
-
-		return int(packed_string_[i-1])
-		
-	func join(join_string:String = " ") -> String:
-		return join_string.join(packed_string_.slice(i-1))
-
-
 class PDParseContext:
 	var path:String
 	
 	func _init(file) -> void:
 		path = file.substr(0, file.length() - file.get_file().length())
-
-func get_obj_from_command(command:String) -> String:
-	var a = command.split(' ')
-	if a.size() < 5:
-		return ""
-	
-	if a[1] != 'obj':
-		return ""
-
-	return a[4]
 
 func parse_command(command:String, context:PDParseContext) -> void:
 	command = command.replace('\n', ' ')
@@ -457,7 +243,7 @@ func parse_command(command:String, context:PDParseContext) -> void:
 
 	var args = command.split(' ')
 
-	var it = IteratePackedStringArray.new()
+	var it = PureData.IteratePackedStringArray.new()
 	it.packed_string_ = args
 	
 	var canvas = it.next()
@@ -470,15 +256,14 @@ func parse_command(command:String, context:PDParseContext) -> void:
 		push_error("message was null: '%s'" % command)
 		return
 
-	if message == 'hsl' or message == 'obj' or message == 'floatatom' or message == 'msg' or message == 'coords':
-		add_child(add_node__(it.join()))
-	elif message == 'connect':
+	if message == 'connect':
 		var from = int(it.next())
 		var outlet = int(it.next())
 		var to = int(it.next())
 		var inlet = int(it.next())
 		add_connection_(from, outlet, to, inlet)
-
+	else:
+		add_child(add_node__(it.join()))
 
 func find_node_by_object_id(id:int) -> Node:
 	for node in get_children():
@@ -487,7 +272,6 @@ func find_node_by_object_id(id:int) -> Node:
 				return node
 	
 	return null
-
 
 func add_connection_(from_object:int, outlet:int, to_object:int, inlet:int) -> void:
 	var from_node = find_node_by_object_id(from_object)
@@ -516,14 +300,6 @@ func add_connection_(from_object:int, outlet:int, to_object:int, inlet:int) -> v
 	add_child(cable)
 	#cable.global_position = Vector2.ZERO
 	cable.call_connect()
-
-func execute_coords_command(message) -> void:
-	var n = add_node__(message)
-	n.resizeable = true
-	add_child(n)
-
-func sub_patch_exists(path:String) -> bool:
-	return FileAccess.file_exists(path)
 
 func get_all_objects_(filter:String) -> Array:
 	var res := []
@@ -630,16 +406,7 @@ func save() -> void:
 		f.store_line("#X " + coords.text + ";")
 
 	f.close()
-	
-	#var tmp_path = "res://junk/" + patch_path.get_file()
-	#var p = ProjectSettings.globalize_path(tmp_path)
-	
-	#patch_file_handle_.open(p)
 
-	#PureData.start_message(0)
-	#PureData.finish_message(canvas, "menusave")
-	
-	
 func try_add_child_(cable) -> void:
 	if not cable.get_parent():
 		add_child(cable)

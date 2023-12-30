@@ -5,6 +5,7 @@ signal play_mode_end
 
 var selection_ := []
 var hovering
+var hovering_slot
 
 func add_to_selection(node) -> void:
 	selection_.push_back(node)
