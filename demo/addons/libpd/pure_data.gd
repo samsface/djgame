@@ -84,6 +84,8 @@ func send_message(canvas, args) -> void:
 	if supress_messages:
 		return
 
+	prints('sam', args)
+
 	PureData.start_message(args.size())
 
 	for i in range(1, args.size()):

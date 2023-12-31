@@ -9,7 +9,7 @@ enum FileMenuIds {
 func _ready() -> void:
 	if not patch_:
 		var patch = preload("res://objects/patch.tscn").instantiate()
-		patch.open("res://junk/save.pdx")
+		patch.open("res://junk/saves.pd")
 		add(patch)
 	
 	reset_camera_()

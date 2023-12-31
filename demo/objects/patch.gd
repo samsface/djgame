@@ -19,6 +19,7 @@ var is_loading := false
 
 var patch_file_handle_ := PDPatchFile.new()
 var cursor_:Area2D
+var supress_messages := false
 
 var mode_
 
@@ -46,6 +47,12 @@ class InputEventDrag extends InputEventMouseMotion:
 	pass
 
 func _input(event: InputEvent):
+	if event.is_action_pressed("save"):
+		save()
+		
+	if event.is_action_pressed("super_save"):
+		super_save_()
+	
 	if event is InputEventMouseMotion:
 		cursor_.position = get_global_mouse_position()
 
@@ -60,10 +67,7 @@ func _input(event: InputEvent):
 			enter_mode_(ConnectMode.new(SelectionBus.hovering_slot))
 			return
 
-	if event.is_action_pressed("save"):
-		save()
-
-	elif PlayMode.test(event, SelectionBus.selection_):
+	if PlayMode.test(event, SelectionBus.selection_):
 		enter_mode_(PlayMode.new())
 
 	elif MoveMode.test(event, SelectionBus.selection_):
@@ -219,8 +223,6 @@ func serialize_(selection:Array) -> String:
 	if coords:
 		str += "#X " + coords.text + ";\n"
 
-	print(str)
-
 	return str
 
 func paste_() -> void:
@@ -284,15 +286,10 @@ func add_node__(node_name:String):
 ################################################################################
 
 func begin_resize_(node) -> void:
-	#if mode == Mode.selecting:
-	#	drag_selection_box_.queue_free()
-	#	drag_selection_box_ = null
-
-	#mode = Mode.resizing
-	pass
+	if not mode_ or not mode_.block():
+		pass
 
 func end_resize_(node:PDNode) -> void:
-	#mode = Mode.none
 	pass
 
 func clear_connections_(node:PDNode) -> void:
@@ -341,9 +338,7 @@ func parse_command(command:String, object_idx_offset:int = 0) -> Node:
 		var outlet = int(it.next())
 		var to = int(it.next()) + object_idx_offset
 		var inlet = int(it.next())
-		
-		prints(from, outlet, to, inlet)
-		
+
 		return add_connection_(from, outlet, to, inlet)
 	elif message == 'canvas':
 		return null
@@ -412,11 +407,11 @@ func open(path:String) -> bool:
 	canvas = "pd-" + patch_path.get_file()
 	
 	print("parsing %s" % path)
-	PureData.supress_messages = true
+	supress_messages = true
 	var lines := FileAccess.get_file_as_string(patch_path).split(';')
 	for line in lines:
 		parse_command(line)
-	PureData.supress_messages = false
+	supress_messages = false
 
 	var model := NodeDb.N.new()
 	model.title = path.get_file().replace(".pd", "")
@@ -452,10 +447,14 @@ func _connection(to) -> void:
 ################################################################################
 
 func create_connection(from_object_idx, from_slot_idx, to_object_idx, to_object_slot_idx):
-	PureData.send_message(canvas, ["connect", from_object_idx, from_slot_idx, to_object_idx, to_object_slot_idx])
+	send_message(["connect", from_object_idx, from_slot_idx, to_object_idx, to_object_slot_idx])
 	
 func send_disconnect(from_object_idx, from_slot_idx, to_object_idx, to_object_slot_idx):
-	PureData.send_message(canvas, ["disconnect", from_object_idx, from_slot_idx, to_object_idx, to_object_slot_idx])
+	send_message(["disconnect", from_object_idx, from_slot_idx, to_object_idx, to_object_slot_idx])
+
+func send_message(args):
+	if not supress_messages:
+		PureData.send_message(canvas, args)
 
 func save() -> void:
 	
@@ -474,3 +473,5 @@ func try_add_child_(cable) -> void:
 	if not cable.get_parent():
 		add_child(cable)
 
+func super_save_() -> void:
+	PureData.send_message(canvas, ["menusave"])

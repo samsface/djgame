@@ -12,6 +12,7 @@ func _ready() -> void:
 				var n = node.duplicate()
 				n.in_subpatch = true
 				add_child(n)
+				n._play_mode_begin()
 
 func _connection(to) -> void:
 	pass

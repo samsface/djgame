@@ -294,7 +294,7 @@ func get_node_model(subpatch_name:String):
 	if node_model:
 		return node_model
 		
-	var subpatch_path = "res://addons/libpd".path_join(subpatch_name + ".pd")
+	var subpatch_path = "res://junk/".path_join(subpatch_name + ".pd")
 	if FileAccess.file_exists(subpatch_path):
 		var subpatch = load("res://objects/patch.tscn").instantiate()
 		subpatch.open(subpatch_path)

@@ -14,4 +14,6 @@ func _float(receiver:String, value:float) -> void:
 			set("text", "OFF")
 
 func _pressed() -> void:
-	PureData.send_bang(get_receiver_id_())
+	var id = get_receiver_id_()
+	print(id)
+	PureData.send_bang(id)

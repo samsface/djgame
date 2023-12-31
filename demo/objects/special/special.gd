@@ -58,15 +58,14 @@ func add_ghost_rs_() -> void:
 	var receiver_cable = preload("res://objects/cable.tscn").instantiate()
 	receiver_cable.from = receiver_node.get_outlet(0)
 	receiver_cable.to = parent.get_inlet(0)
+	#receiver_cable.call_connect()
 	parent.canvas.add_child(receiver_cable)
 
 	var sender_cable = preload("res://objects/cable.tscn").instantiate()
 	sender_cable.from = parent.get_outlet(0)
 	sender_cable.to = sender_node.get_inlet(0)
+	#sender_cable.call_connect()
 	parent.canvas.add_child(sender_cable)
-	
-
-
 
 func _pd_init() -> void:
 	if not parent.canvas.is_loading:

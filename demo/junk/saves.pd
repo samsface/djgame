@@ -1,8 +1,6 @@
 #N canvas 757 493 971 650 12;
-#X msg -415 90 sam;
-#X obj -172 168 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000;
-#X obj 38 162 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000;
-#X obj -398 266 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000;
-#X connect 0 0 1 0;
+#X obj -261 -20 xxx $1/0;
+#X obj -242 -172 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000;
+#X obj 8 -101 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000;
+#X connect 1 0 0 0;
 #X connect 1 0 2 0;
-#X connect 3 0 1 0;

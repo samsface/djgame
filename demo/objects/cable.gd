@@ -25,6 +25,9 @@ var just_created_ := true
 var selected_ := false
 var dragging_ := false
 
+func  _ready() -> void:
+	name = "cable"
+
 func connect_(slot):
 	if to:
 		from = slot

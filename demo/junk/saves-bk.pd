@@ -1,0 +1,8 @@
+#N canvas 757 493 971 650 12;
+#X obj -294 -95 xxx $1/0;
+#X obj -310 -224 metro;
+#X obj -173 -321 hsl 128 15 0 127 0 0 {s} {r} empty -2 -3 0 12 -262144 -1 -1 0 1;
+#X obj -309 -315 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000;
+#X connect 1 0 0 0;
+#X connect 2 0 1 1;
+#X connect 3 0 1 0;

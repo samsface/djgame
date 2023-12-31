@@ -25,7 +25,7 @@ var selectable:bool = true
 var canvas:Node
 var in_subpatch:bool
 
-var args_ := PackedStringArray()
+@export var args_ := PackedStringArray()
 
 signal title_changed
 signal end_edit_text
@@ -299,6 +299,12 @@ func get_human_readable_for_widget_(args) -> String:
 
 	return res
 
+func has_namespace_arg_already_(args) -> bool:
+	for arg in args:
+		if arg.begins_with("$1"):
+			return true
+	return false
+
 func create_obj_(message:String) -> Array:
 	message = message.replace('\n', ' ')
 	message = message.replace('  ', ' ')
@@ -340,7 +346,7 @@ func create_obj_(message:String) -> Array:
 	args_ = arg_parser.packed_string_
 	args_ += node_model_.default_args.slice(args_.size())
 
-	if node_model_.instance:
+	if node_model_.instance and not has_namespace_arg_already_(args_):
 		args_.push_back("$1/" + str(canvas.object_count_))
 
 	send_message_(args_)
@@ -350,7 +356,7 @@ func create_obj_(message:String) -> Array:
 	return [canvas.object_count_ - 1, ' '.join(args_), node_model_, human_readable_args]
 
 func send_message_(args) -> void:
-	PureData.send_message(canvas.canvas, args)
+	canvas.send_message(args)
 
 func update_text_position_() -> void:
 	if not node_model_:

@@ -11,7 +11,7 @@ var selection_:Array
 static func test(input:InputEvent, selection:Array) -> bool:
 	if input is PDPatch.InputEventDrag and not selection.is_empty():
 		return true
-	
+
 	return false
 
 func _init(selection:Array) -> void:
