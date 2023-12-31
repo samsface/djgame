@@ -94,6 +94,7 @@ func _enter_tree() -> void:
 
 func _exit_tree() -> void:
 	call_disconnect()
+	SelectionBus.remove_from_all(self)
 
 func _mouse_entered() -> void:
 	if creating:
@@ -115,7 +116,7 @@ func _select():
 func _unselect():
 	invalidate_()
 
-func _move(pos:Vector2):
+func _move():
 	pass
 
 func _move_end():

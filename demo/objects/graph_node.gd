@@ -48,7 +48,6 @@ func _ready() -> void:
 	mouse_entered.connect(_mouse_entered)
 	mouse_exited.connect(_mouse_exited)
 	visibility_changed.connect(_visibility_changed)
-	tree_exiting.connect(_tree_exiting)
 	_item_rect_changed()
 	$ColorRect/Reize.visible = resizeable
 
@@ -118,7 +117,6 @@ func set_text_(value:String) -> String:
 	value = res[1]
 
 	%LineEdit.text = pretty_text_(node_model_.title + res[3])
-	print(%LineEdit.text)
 	%LineEdit.caret_column = %LineEdit.text.length()
 
 	visible_in_subpatch = node_model_.visible_in_subpatch
@@ -188,13 +186,6 @@ func _item_rect_changed() -> void:
 	$CollisionShape2D.position = $ColorRect.size * 0.5
 
 func _exit_tree() -> void:
-	pass
-
-func _tree_exiting() -> void:
-	for connection in connections_:
-		connection.queue_free()
-		connection.get_parent().remove_child(connection)
-
 	SelectionBus.remove_from_selection(self)
 	SelectionBus.remove_from_hover(self)
 
@@ -209,21 +200,18 @@ func _select():
 	selected_ = true
 	%Selected.visible = true
 	
-	print(text)
+	prints(index, text)
 
 func _unselect():
 	selected_ = false
 	%Selected.visible = false
 
-func _move(pos:Vector2) -> void:
+func _move() -> void:
 	if not moving_:
 		moving_ = true
 		drag_offset = global_position - get_global_mouse_position()
 		
 	position = get_global_mouse_position() + drag_offset
-
-	for connection in connections_:
-		connection.invalidate()
 
 func _move_end() -> void:
 	moving_ = false
@@ -314,9 +302,7 @@ func get_human_readable_for_widget_(args) -> String:
 func create_obj_(message:String) -> Array:
 	message = message.replace('\n', ' ')
 	message = message.replace('  ', ' ')
-	
-	print(message)
-	
+
 	var arg_parser = PureData.IteratePackedStringArray.new(message)
 
 	var pretty_text := ""

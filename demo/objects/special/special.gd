@@ -69,8 +69,8 @@ func add_ghost_rs_() -> void:
 
 
 func _pd_init() -> void:
-	if not parent.canvas.is_done:
-		await parent.canvas.done
+	if not parent.canvas.is_loading:
+		await parent.canvas.loading_done
 	elif not parent.is_inside_tree():
 		await parent.ready
 

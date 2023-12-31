@@ -8,6 +8,9 @@ var hovering
 var hovering_slot
 
 func add_to_selection(node) -> void:
+	if not node:
+		return
+
 	selection_.push_back(node)
 	node._select()
 
@@ -49,7 +52,6 @@ func remove_from_all(node) -> void:
 func is_empty() -> bool:
 	return selection_.is_empty()
 
-
 func find_closet_node(nodes:Array, pos:Vector2) -> Node:
 	var closest_node
 	var closest_distance = 999999
@@ -86,3 +88,17 @@ func find_closet_node_with_skip(nodes:Array, pos:Vector2, skip:Callable) -> Node
 			closest_distance = d
 
 	return closest_node
+
+func get_center_point() -> Vector2:
+	var cp := Vector2.ZERO
+	
+	if selection_.is_empty():
+		return cp
+
+	for obj in selection_:
+		if obj is PDNode:
+			cp += obj.position
+	
+	cp /= selection_.size()
+	
+	return cp

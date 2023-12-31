@@ -1,7 +1,7 @@
 extends Control
 class_name PDPatch
 
-signal done
+signal loading_done
 
 @export var root := false
 
@@ -15,7 +15,7 @@ var object_count_ := 0
 var patch_path
 var inlets := []
 var outlets := []
-var is_done := false
+var is_loading := false
 
 var patch_file_handle_ := PDPatchFile.new()
 var cursor_:Area2D
@@ -92,6 +92,12 @@ func _input(event: InputEvent):
 	
 	elif event.is_action_pressed("delete"):
 		delete_()
+
+	elif event.is_action_pressed("copy"):
+		copy_()
+
+	elif event.is_action_pressed("paste"):
+		paste_()
 
 	elif event.is_action_pressed("redo"):
 		undo_.redo()
@@ -178,6 +184,78 @@ func delete_undo_(objects_to_delete:Array) -> void:
 		add_child(object)
 
 ################################################################################
+# copy paste
+################################################################################
+
+func copy_() -> void:
+	DisplayServer.clipboard_set(serialize_(SelectionBus.selection_))
+
+func serialize_(selection:Array) -> String:
+	var coords
+	var rejigged_indexs := {}
+
+	var str := "#N canvas 757 493 971 650 12;\n"
+
+	for node in selection:
+		if node is PDNode:
+			if not node.visible:
+				continue
+			if node.text.begins_with("coords"):
+				coords = node
+			else:
+				str += "#X " + node.text + ";\n"
+				rejigged_indexs[node] = rejigged_indexs.size()
+
+	for node in selection:
+		if not node.visible:
+			continue
+		if node is PDCable:
+			var from = rejigged_indexs.get(node.from.parent)
+			var to = rejigged_indexs.get(node.to.parent)
+			# protect against selecting the cable but the node
+			if from != null and to != null:
+				str += "#X connect %s %s %s %s;\n" % [from, node.from.index, to, node.to.index]
+
+	if coords:
+		str += "#X " + coords.text + ";\n"
+
+	print(str)
+
+	return str
+
+func paste_() -> void:
+	undo_.create_action("paste")
+	
+	var clipboard = DisplayServer.clipboard_get()
+
+	is_loading = false
+
+	var lines = clipboard.split(';')
+	var object_count = object_count_
+	
+	SelectionBus.clear_selection()
+
+	for line in lines:
+		SelectionBus.add_to_selection(parse_command(line, object_count))
+
+	var center_point := SelectionBus.get_center_point()
+	var move = get_global_mouse_position() - center_point
+	
+	for obj in SelectionBus.selection_:
+		if obj is PDNode:
+			obj.position += move
+			obj._move_end()
+
+		undo_.add_do_reference(obj)
+		undo_.add_do_method(try_add_child_.bind(obj))
+		undo_.add_undo_method(remove_child.bind(obj))
+
+	undo_.commit_action()
+
+	is_loading = true
+	loading_done.emit()
+
+################################################################################
 # adding nodes
 ################################################################################
 
@@ -233,7 +311,7 @@ class PDParseContext:
 	func _init(file) -> void:
 		path = file.substr(0, file.length() - file.get_file().length())
 
-func parse_command(command:String, context:PDParseContext) -> void:
+func parse_command(command:String, object_idx_offset:int = 0) -> Node:
 	command = command.replace('\n', ' ')
 	command = command.replace('  ', ' ')
 
@@ -241,7 +319,7 @@ func parse_command(command:String, context:PDParseContext) -> void:
 		command = command.substr(1)
 
 	if command.is_empty():
-		return
+		return null
 
 	var args = command.split(' ')
 
@@ -251,23 +329,28 @@ func parse_command(command:String, context:PDParseContext) -> void:
 	var canvas = it.next()
 	if canvas == null:
 		push_error("canvas was null")
-		return
+		return null
 
 	var message = it.next()
 	if message == null:
 		push_error("message was null: '%s'" % command)
-		return
+		return null
 
 	if message == 'connect':
-		var from = int(it.next())
+		var from = int(it.next()) + object_idx_offset
 		var outlet = int(it.next())
-		var to = int(it.next())
+		var to = int(it.next()) + object_idx_offset
 		var inlet = int(it.next())
-		add_connection_(from, outlet, to, inlet)
+		
+		prints(from, outlet, to, inlet)
+		
+		return add_connection_(from, outlet, to, inlet)
 	elif message == 'canvas':
-		return
+		return null
 	else:
-		add_child(add_node__(it.join()))
+		var res = add_node__(it.join())
+		add_child(res)
+		return res
 
 func find_node_by_object_id(id:int) -> Node:
 	for node in get_children():
@@ -277,7 +360,7 @@ func find_node_by_object_id(id:int) -> Node:
 	
 	return null
 
-func add_connection_(from_object:int, outlet:int, to_object:int, inlet:int) -> void:
+func add_connection_(from_object:int, outlet:int, to_object:int, inlet:int) -> PDCable:
 	var from_node = find_node_by_object_id(from_object)
 	if not from_node:
 		push_error("from object does not exit")
@@ -304,6 +387,8 @@ func add_connection_(from_object:int, outlet:int, to_object:int, inlet:int) -> v
 	add_child(cable)
 	#cable.global_position = Vector2.ZERO
 	cable.call_connect()
+	
+	return cable
 
 func get_all_objects_(filter:String) -> Array:
 	var res := []
@@ -326,12 +411,11 @@ func open(path:String) -> bool:
 
 	canvas = "pd-" + patch_path.get_file()
 	
-	var context := PDParseContext.new(path)
 	print("parsing %s" % path)
 	PureData.supress_messages = true
 	var lines := FileAccess.get_file_as_string(patch_path).split(';')
 	for line in lines:
-		parse_command(line, context)
+		parse_command(line)
 	PureData.supress_messages = false
 
 	var model := NodeDb.N.new()
@@ -351,8 +435,8 @@ func open(path:String) -> bool:
 
 	PureData.files[canvas] = self
 
-	is_done = true
-	done.emit()
+	is_loading = true
+	loading_done.emit()
 	
 	#PureData.send_message(canvas, ["menusave"])
 
@@ -382,32 +466,7 @@ func save() -> void:
 	if not f:
 		push_error("could not open file to save")
 
-	f.store_line("#N canvas 757 493 971 650 12;")
-
-	var coords
-
-	var rejigged_indexs := {}
-
-	for node in get_children():
-		if node is PDNode:
-			if not node.visible:
-				continue
-			if node.text.begins_with("coords"):
-				coords = node
-			else:
-				f.store_line("#X " + node.text + ";")
-				rejigged_indexs[node] = rejigged_indexs.size()
-
-	for node in get_children():
-		if not node.visible:
-			continue
-		if node is PDCable:
-			var from = rejigged_indexs[node.from.parent]
-			var to = rejigged_indexs[node.to.parent]
-			f.store_line("#X connect %s %s %s %s;" % [from, node.from.index, to, node.to.index])
-
-	if coords:
-		f.store_line("#X " + coords.text + ";")
+	f.store_string(serialize_(get_children()))
 
 	f.close()
 

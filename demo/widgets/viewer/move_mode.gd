@@ -31,7 +31,7 @@ func _ready() -> void:
 func _input(event:InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		for node in selection_:
-			node._move(get_global_mouse_position())
+			node._move()
 			
 	if event.is_action_released("click"):
 		queue_free()
