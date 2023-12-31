@@ -21,7 +21,7 @@ func get_id_() -> String:
 		if p is PDNode:
 			id.push_front(p.index)
 		elif p is PDPatch:
-			id.push_front("$1")
+			id.push_front("sam")
 		p = p.get_parent()
 
 	return '/'.join(id)
@@ -39,7 +39,7 @@ func add_ghost_rs_() -> void:
 	if not parent.canvas:
 		return
 
-	var receiver_args = ["obj", str(parent.position.x), str(parent.position.y - 30), "r", '/r/%s/%s' % ["$1", parent.index]]
+	var receiver_args = ["obj", str(parent.position.x), str(parent.position.y - 30), "r", '/r/%s/%s' % ["sam", parent.index]]
 	var receiver_node = preload("res://objects/graph_node.tscn").instantiate()
 	receiver_node.canvas = parent.canvas
 	receiver_node.text = ' '.join(receiver_args)
@@ -47,7 +47,7 @@ func add_ghost_rs_() -> void:
 	parent.canvas.add_child(receiver_node)
 	parent.ghost_rs.push_back(receiver_node)
 
-	var sender_args = ["obj", str(parent.position.x), str(parent.position.y + 30), "s", '/s/%s/%s' % ["$1", parent.index]]
+	var sender_args = ["obj", str(parent.position.x), str(parent.position.y + 30), "s", '/s/%s/%s' % ["sam", parent.index]]
 	var sender_node = preload("res://objects/graph_node.tscn").instantiate()
 	sender_node.canvas = parent.canvas
 	sender_node.text = ' '.join(sender_args)
@@ -58,13 +58,13 @@ func add_ghost_rs_() -> void:
 	var receiver_cable = preload("res://objects/cable.tscn").instantiate()
 	receiver_cable.from = receiver_node.get_outlet(0)
 	receiver_cable.to = parent.get_inlet(0)
-	#receiver_cable.call_connect()
+	receiver_cable.call_connect()
 	parent.canvas.add_child(receiver_cable)
 
 	var sender_cable = preload("res://objects/cable.tscn").instantiate()
 	sender_cable.from = parent.get_outlet(0)
 	sender_cable.to = sender_node.get_inlet(0)
-	#sender_cable.call_connect()
+	sender_cable.call_connect()
 	parent.canvas.add_child(sender_cable)
 
 func _pd_init() -> void:

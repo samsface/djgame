@@ -299,11 +299,12 @@ func get_human_readable_for_widget_(args) -> String:
 
 	return res
 
-func has_namespace_arg_already_(args) -> bool:
-	for arg in args:
-		if arg.begins_with("$1"):
-			return true
-	return false
+func remove_namespace_(args:PackedStringArray):
+	for i in args.size():
+		if args[i].contains("sam"):
+			args.remove_at(i)
+			return args
+	return args
 
 func create_obj_(message:String) -> Array:
 	message = message.replace('\n', ' ')
@@ -346,8 +347,10 @@ func create_obj_(message:String) -> Array:
 	args_ = arg_parser.packed_string_
 	args_ += node_model_.default_args.slice(args_.size())
 
-	if node_model_.instance and not has_namespace_arg_already_(args_):
-		args_.push_back("$1/" + str(canvas.object_count_))
+	if node_model_.instance:
+		args_ = remove_namespace_(args_)
+		args_.push_back("sam/" + str(canvas.object_count_))
+		print("samsssssssssssss")
 
 	send_message_(args_)
 	index = canvas.object_count_

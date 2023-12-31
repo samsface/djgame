@@ -1,7 +1,5 @@
 extends GDExample
 
-var supress_messages := false
-
 var regex = RegEx.new()
 var sanitize = RegEx.new()
 
@@ -81,10 +79,7 @@ func found_(command:String, pos:Vector2) -> String:
 	return res
 
 func send_message(canvas, args) -> void:
-	if supress_messages:
-		return
-
-	prints('sam', args)
+	#prints('sam', args)
 
 	PureData.start_message(args.size())
 

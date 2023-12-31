@@ -433,7 +433,8 @@ func open(path:String) -> bool:
 	is_loading = true
 	loading_done.emit()
 	
-	#PureData.send_message(canvas, ["menusave"])
+	if is_inside_tree():
+		PureData.send_message(canvas, ["menusave"])
 
 	print("done parsing")
 	
@@ -475,3 +476,4 @@ func try_add_child_(cable) -> void:
 
 func super_save_() -> void:
 	PureData.send_message(canvas, ["menusave"])
+	PureData.send_message("pd-xxx.pd", ["menusave"])
