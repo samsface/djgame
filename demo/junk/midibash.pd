@@ -1,0 +1,63 @@
+#N canvas 414 256 1461 990 12;
+#X obj 568 565 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#fcfcfc #000000 #000000 0 256;
+#X obj 535 681 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#fcfcfc #000000 #000000 0 256;
+#X obj 535 648 snap2scale;
+#X obj 568 532 +;
+#X obj 568 493 clip 0 12;
+#X obj 753 536 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#fcfcfc #000000 #000000 0 256;
+#X obj 753 493 clip 0 1;
+#X obj 535 747 outlet;
+#X obj 753 593 outlet;
+#X obj 104 107 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#fcfcfc #000000 #000000 0 256;
+#X obj 165 107 nbx 5 14 0 2 0 0 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0 256;
+#N canvas 0 0 1343 909 (subpatch) 0;
+#X array \$0-sss 16 float 3;
+#A 0 4.54288 8.14294 8.74295 8.31437 3.25711 3.59998 3.77146 7.45714
+7.88573 7.88573 8.05716 8.05716 2.05702 2.05702 2.05702 2.31417;
+#X coords 0 12 16 0 208 140 2 0 0;
+#X restore 100 140 graph;
+#X obj 226 107 nbx 5 14 1 4 0 0 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0 256;
+#X obj 569 428 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#fcfcfc #000000 #000000 0 256;
+#X obj 569 356 simpleseq \$0-sss;
+#X obj 753 428 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#fcfcfc #000000 #000000 0 256;
+#X obj 753 356 simpleseq \$0-xxx;
+#N canvas 0 0 1343 909 (subpatch) 0;
+#X array \$0-xxx 16 float 3;
+#A 0 1.27662 0.936193 0.765982 0.510664 0.510664 0.510664 0.510664
+0.510664 0.510664 0.510664 0.510664 0.510664 0.510664 0.510664 0.510664
+0.340452;
+#X coords 0 12 16 0 208 141 1 0 0;
+#X restore 100 293 graph;
+#X obj 100 280 hradio 13 1 0 16 empty empty empty 0 -8 0 10 #ffffff
+#000000 #000000 0;
+#X obj 681 79 inlet;
+#X obj 101 124 cnv 15 100 12 empty empty empty 20 12 0 14 #ffffff #404040
+0;
+#X connect 0 0 2 1;
+#X connect 1 0 7 0;
+#X connect 2 0 1 0;
+#X connect 3 0 0 0;
+#X connect 4 0 3 0;
+#X connect 5 0 8 0;
+#X connect 6 0 5 0;
+#X connect 9 0 3 1;
+#X connect 9 0 2 0;
+#X connect 10 0 2 2;
+#X connect 12 0 14 1;
+#X connect 12 0 16 1;
+#X connect 13 0 4 0;
+#X connect 14 0 13 0;
+#X connect 15 0 6 0;
+#X connect 16 0 15 0;
+#X connect 19 0 14 0;
+#X connect 19 0 16 0;
+#X connect 19 0 18 0;
+#X coords 0 -1 1 1 208 334 2 100 100;

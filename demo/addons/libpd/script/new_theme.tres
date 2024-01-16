@@ -1,0 +1,35 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://dp4iwwo6g8ipa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_im2cn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ikrws"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yaequ"]
+bg_color = Color(0.470588, 0.470588, 0.470588, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kd1sv"]
+bg_color = Color(0.203922, 0.203922, 0.203922, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_me3p1"]
+
+[resource]
+Button/font_sizes/font_size = 16
+Button/styles/focus = SubResource("StyleBoxEmpty_im2cn")
+Button/styles/hover = SubResource("StyleBoxFlat_ikrws")
+Button/styles/normal = SubResource("StyleBoxFlat_yaequ")
+Button/styles/pressed = SubResource("StyleBoxFlat_kd1sv")
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_me3p1")
+LineEdit/styles/normal = null

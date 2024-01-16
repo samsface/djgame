@@ -69,7 +69,7 @@ func found_(command:String, pos:Vector2) -> String:
 	var tpl = ' '.join(nm.default_args)
 	if tpl.is_empty():
 		tpl = 'obj {x} {y} {obj}'
-	
+
 	var res = tpl.format({ x=int(pos.x), y=int(pos.y), obj=nm.title})
 	
 	var args = ' '.join(aaa.slice(1))
@@ -79,8 +79,6 @@ func found_(command:String, pos:Vector2) -> String:
 	return res
 
 func send_message(canvas, args) -> void:
-	#prints('sam', args)
-
 	PureData.start_message(args.size())
 
 	for i in range(1, args.size()):

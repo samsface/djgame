@@ -1,0 +1,114 @@
+#N canvas 555 343 1481 990 12;
+#X obj 139 333 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#fcfcfc #000000 #000000 0 256;
+#X obj 139 158 inlet;
+#X obj 178 479 outlet;
+#X obj 139 394 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#fcfcfc #000000 #000000 0 256;
+#N canvas 0 50 450 250 (subpatch) 0;
+#X array \$0-0 16 float 3;
+#A 0 3.85726 5.57151 5.91436 6.25721 6.85719 7.45718 7.6286 1.80013
+1.71442 3.85723 5.14292 6.94288 8.4857 10.1142 2.0573 2.0573;
+#X coords 0 1 16 -1 200 140 1;
+#X restore 1155 123 graph;
+#N canvas 0 0 450 250 (subpatch) 0;
+#X array \$0-1 16 float 3;
+#A 0 3.85726 5.57151 5.91436 6.25721 6.85719 7.45718 7.6286 2.40015
+2.0573 2.0573 2.0573 2.0573 2.0573 2.0573 2.0573 2.0573;
+#X coords 0 1 16 -1 200 140 1 0 0;
+#X restore 1155 291 graph;
+#N canvas 0 0 450 250 (subpatch) 0;
+#X array \$0-2 16 float 3;
+#A 0 3.85726 5.57151 5.91436 6.25721 6.85719 7.45718 7.6286 2.40015
+2.0573 2.0573 2.0573 2.0573 2.0573 2.0573 2.0573 2.0573;
+#X coords 0 1 16 -1 200 140 1 0 0;
+#X restore 1156 453 graph;
+#N canvas 0 0 450 250 (subpatch) 0;
+#X array \$0-3 16 float 3;
+#A 0 3.85726 5.57151 5.91436 6.25721 6.85719 7.45718 7.6286 2.40015
+2.0573 2.0573 2.0573 2.0573 2.0573 2.0573 2.0573 2.0573;
+#X coords 0 1 16 -1 200 140 1 0 0;
+#X restore 1155 612 graph;
+#X obj 530 351 int;
+#X obj 597 394 + 1;
+#X obj 530 241 % 16;
+#X obj 530 294 sel 0;
+#X msg 589 307 0;
+#X obj 589 253 loadbang;
+#X obj 588 874 array get;
+#X msg 648 785 symbol \$2-\$1;
+#X obj 588 838 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X msg 474 532 symbol \$2-\$1;
+#X obj 414 680 array set;
+#X obj 414 582 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 530 397 - 1;
+#X obj 474 486 pack f \$0;
+#X obj 648 752 pack f \$0;
+#X obj 825 78 inlet;
+#X obj 530 432 %;
+#X obj 648 474 %;
+#X msg 914 751 symbol \$2-\$1;
+#X obj 854 811 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 914 700 pack f \$0;
+#X obj 914 588 int;
+#X obj 982 625 + 1;
+#X msg 1029 449 1;
+#X obj 854 863 array get \$0-0;
+#X obj 854 917 array set;
+#X obj 914 528 until;
+#X obj 914 489 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#fcfcfc #000000 #000000 0 256;
+#X obj 969 89 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 139 302 array get \$1;
+#X obj 414 623 array get \$1;
+#X obj 588 934 array set \$1;
+#X obj 139 431 sel -1;
+#X connect 0 0 3 0;
+#X connect 1 0 10 0;
+#X connect 1 0 37 0;
+#X connect 3 0 40 0;
+#X connect 8 0 9 0;
+#X connect 8 0 25 0;
+#X connect 8 0 20 0;
+#X connect 9 0 8 1;
+#X connect 10 0 11 0;
+#X connect 11 0 8 0;
+#X connect 12 0 8 1;
+#X connect 13 0 12 0;
+#X connect 14 0 39 0;
+#X connect 15 0 14 2;
+#X connect 16 0 14 0;
+#X connect 17 0 18 2;
+#X connect 17 0 19 0;
+#X connect 19 0 38 0;
+#X connect 20 0 24 0;
+#X connect 21 0 17 0;
+#X connect 22 0 15 0;
+#X connect 23 0 24 1;
+#X connect 23 0 25 1;
+#X connect 23 0 31 0;
+#X connect 23 0 35 0;
+#X connect 24 0 21 0;
+#X connect 25 0 22 0;
+#X connect 26 0 27 0;
+#X connect 26 0 33 2;
+#X connect 27 0 32 0;
+#X connect 28 0 26 0;
+#X connect 29 0 30 0;
+#X connect 29 0 28 0;
+#X connect 30 0 29 1;
+#X connect 31 0 29 1;
+#X connect 32 0 33 0;
+#X connect 34 0 29 0;
+#X connect 35 0 34 0;
+#X connect 36 0 35 0;
+#X connect 36 0 31 0;
+#X connect 37 0 0 0;
+#X connect 38 0 18 0;
+#X connect 38 0 16 0;
+#X connect 40 1 2 0;
+#X coords 0 990 1 989 200 30 0;

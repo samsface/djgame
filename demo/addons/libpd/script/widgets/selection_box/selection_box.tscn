@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkexiiywjf76m"]
+
+[ext_resource type="Script" path="res://addons/libpd/script/widgets/selection_box/selection_box.gd" id="1_l8lxb"]
+
+[node name="selection_box" type="Area2D"]
+collision_layer = 0
+collision_mask = 3
+monitorable = false
+script = ExtResource("1_l8lxb")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.380392, 1, 1, 0.196078)
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)
+
+[connection signal="area_entered" from="." to="." method="_area_entered"]

@@ -1,2 +1,2 @@
-#N canvas 626 203 1354 1042 12;
-#X msg 0 0 sam;
+#N canvas 757 493 971 650 12;
+#X obj 112 203 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000;

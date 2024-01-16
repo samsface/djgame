@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdty2mu6u1ely"]
+
+[ext_resource type="Theme" uid="uid://dp4iwwo6g8ipa" path="res://addons/libpd/script/new_theme.tres" id="1_nci8u"]
+[ext_resource type="Script" path="res://addons/libpd/script/objects/special/toggle_node.gd" id="1_t2aff"]
+
+[node name="LineEdit" type="Button"]
+offset_right = 67.0625
+offset_bottom = 31.0
+theme = ExtResource("1_nci8u")
+text = "OFF"
+script = ExtResource("1_t2aff")

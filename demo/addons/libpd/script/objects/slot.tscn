@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://byxixsjbsubl1"]
+
+[ext_resource type="Script" path="res://addons/libpd/script/objects/slot.gd" id="1_yp3o2"]
+[ext_resource type="Shader" path="res://addons/libpd/script/objects/slot.gdshader" id="2_88w2a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ym7ib"]
+resource_local_to_scene = true
+shader = ExtResource("2_88w2a")
+shader_parameter/up = true
+shader_parameter/color = Color(1, 0.282353, 0.701961, 1)
+shader_parameter/l = 0.0
+
+[node name="Button" type="MarginContainer"]
+custom_minimum_size = Vector2(20, 20)
+offset_right = 16.0
+offset_bottom = 16.0
+mouse_filter = 2
+script = ExtResource("1_yp3o2")
+
+[node name="PanelContainer" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ym7ib")
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.505882, 0.584314, 1, 1)
+
+[connection signal="visibility_changed" from="." to="." method="_visibility_changed"]

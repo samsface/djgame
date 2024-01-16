@@ -1,0 +1,8 @@
+#N canvas 757 493 971 650 12;
+#X obj -265 -50 sam/0;
+#X msg -273 -201 kick.wav;
+#X obj -266 262 dac~;
+#X msg -43 -162 1;
+#X connect 1 0 0 0;
+#X connect 0 0 2 0;
+#X connect 3 0 0 1;

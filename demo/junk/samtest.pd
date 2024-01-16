@@ -1,0 +1,23 @@
+#N canvas 1017 695 971 650 12;
+#X obj -266 262 dac~;
+#X obj -248 -55 sampler NAMESPACE/7;
+#X obj -249 -104 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj -103 -78 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 #fcfcfc #000000 #000000 0 256;
+#X obj -25 270 dac~;
+#X obj -7 -47 sampler NAMESPACE/7;
+#X obj -8 -96 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 152 -70 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#fcfcfc #000000 #000000 0 256;
+#X msg 60 -105 set list hat.wav;
+#X msg -181 -113 set list kick.wav;
+#X connect 1 0 0 0;
+#X connect 2 0 1 0;
+#X connect 3 0 1 2;
+#X connect 5 0 4 0;
+#X connect 6 0 5 0;
+#X connect 7 0 5 2;
+#X connect 8 0 5 1;
+#X connect 9 0 1 1;

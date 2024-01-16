@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkqkbgorqvjmi"]
+
+[ext_resource type="Script" path="res://addons/libpd/script/widgets/cursor/cursor.gd" id="1_2teig"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yrbcx"]
+radius = 32.0
+
+[node name="Cursor" type="Area2D"]
+collision_layer = 0
+monitorable = false
+script = ExtResource("1_2teig")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_yrbcx")
