@@ -18,7 +18,6 @@ func _ready() -> void:
 
 	set_process(true)
 
-
 class IteratePackedStringArray:
 	var packed_string_:PackedStringArray
 	var i = 0
@@ -88,3 +87,6 @@ func send_message(canvas, args) -> void:
 			PureData.add_symbol(args[i])
 
 	PureData.finish_message(canvas, args[0])
+
+func write_at_array_index(array:String, index:int, value:float) -> void:
+	PureData.write_array(array, index, PackedFloat32Array([value]), 1)

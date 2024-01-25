@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://b34ex32xpvd1s"]
+
+[ext_resource type="PackedScene" uid="uid://cq1tq75l6it7v" path="res://models/toydrum/base.glb" id="1_geond"]
+[ext_resource type="Script" path="res://models/lital/little2.gd" id="2_g4yco"]
+[ext_resource type="Material" uid="uid://cytpp1dehbt86" path="res://models/toydrum/toydrum.tres" id="3_eln34"]
+[ext_resource type="Resource" uid="uid://cqmulviu26gd3" path="res://models/toydrum/mappings.tres" id="3_t4x0b"]
+[ext_resource type="Script" path="res://models/toydrum/Node.gd" id="5_dvo51"]
+
+[node name="base" instance=ExtResource("1_geond")]
+script = ExtResource("2_g4yco")
+patch = "toykit"
+map = ExtResource("3_t4x0b")
+
+[node name="Base" parent="." index="1"]
+surface_material_override/0 = ExtResource("3_eln34")
+
+[node name="Node" type="Node" parent="." index="2"]
+script = ExtResource("5_dvo51")
+
+[node name="0" parent="." index="3"]
+range = 2
+
+[node name="9" parent="." index="12"]
+range = 2
+
+[node name="10" parent="." index="13"]
+range = 2
+
+[node name="11" parent="." index="14"]
+range = 2
+
+[node name="12" parent="." index="15"]
+range = 2
+
+[node name="13" parent="." index="16"]
+range = 2
+
+[node name="14" parent="." index="17"]
+range = 2
+
+[node name="15" parent="." index="18"]
+range = 2
+
+[node name="16" parent="." index="19"]
+range = 2
+
+[node name="17" parent="." index="20"]
+range = 2
+
+[node name="18" parent="." index="21"]
+range = 2
+
+[node name="19" parent="." index="22"]
+range = 2
+
+[node name="20" parent="." index="23"]
+range = 2
+
+[node name="21" parent="." index="24"]
+range = 2
+
+[node name="22" parent="." index="25"]
+range = 2
+
+[node name="23" parent="." index="26"]
+range = 2

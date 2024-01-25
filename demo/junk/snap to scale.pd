@@ -1,10 +1,10 @@
-#N canvas 73 26 2486 1344 12;
+#N canvas 257 202 1651 990 12;
 #X obj 239 92 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000;
 #X obj 561 1192 compressor;
 #X obj 400 22 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 #fcfcfc
 #000000 #000000 0 1;
-#X obj 290 366 midibash;
+#X obj 284 381 midibash;
 #X obj 239 168 metro 200;
 #X obj 290 927 hsl 128 15 0 10000 0 0 empty empty empty -2 -8 0 10
 #fcfcfc #000000 #000000 0 1;

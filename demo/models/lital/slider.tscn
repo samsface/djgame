@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvxsm2x52fp42"]
+
+[ext_resource type="Script" path="res://models/lital/slider2.gd" id="1_cglxd"]
+[ext_resource type="PackedScene" uid="uid://7chbqpmrrhk7" path="res://models/lital/slider_3.tscn" id="2_5ku2x"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_t4snb"]
+radius = 0.01
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_cglxd")
+
+[node name="Nob" type="Area3D" parent="."]
+input_capture_on_drag = true
+
+[node name="slider2" parent="Nob" instance=ExtResource("2_5ku2x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00509066, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Nob"]
+shape = SubResource("SphereShape3D_t4snb")
+
+[connection signal="mouse_entered" from="Nob" to="." method="_mouse_entered"]
+[connection signal="mouse_exited" from="Nob" to="." method="_mouse_exited"]

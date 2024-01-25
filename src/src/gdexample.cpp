@@ -76,6 +76,10 @@ void GDExample::_bind_methods()
 	ClassDB::bind_method(D_METHOD("add_symbol"), &GDExample::add_symbol);
 	ClassDB::bind_method(D_METHOD("finish_list"), &GDExample::finish_list);
 	ClassDB::bind_method(D_METHOD("finish_message"), &GDExample::finish_message);
+	ClassDB::bind_method(D_METHOD("get_array_size"), &GDExample::get_array_size);
+	ClassDB::bind_method(D_METHOD("set_array_size"), &GDExample::set_array_size);
+	ClassDB::bind_method(D_METHOD("write_array"), &GDExample::write_array);
+	ClassDB::bind_method(D_METHOD("read_array"), &GDExample::read_array);
 	ClassDB::bind_method(D_METHOD("start_gui"), &GDExample::start_gui);
 	ClassDB::bind_method(D_METHOD("bind"), &GDExample::bind);
 	ADD_SIGNAL(MethodInfo("bang", PropertyInfo(Variant::STRING, "receiver")));
@@ -176,6 +180,31 @@ void GDExample::bind(String string)
 	::libpd_bind(string.utf8());
 }
 
+int GDExample::get_array_size(String string)
+{
+	return ::libpd_arraysize(string.utf8());
+}
+
+int GDExample::set_array_size(String string, int size)
+{
+	return ::libpd_resize_array(string.utf8(), size);
+}
+
+int GDExample::write_array(String array_name, int offset, PackedRealArray src, int n)
+{
+	return ::libpd_write_array(array_name.utf8(), offset, src.ptr(), n);
+}
+
+PackedRealArray GDExample::read_array(String array_name, int offset, int n)
+{
+	PackedRealArray dest;
+	dest.resize(n);
+	::libpd_read_array(dest.ptrw(), array_name.utf8(), offset, n);
+
+	return dest;
+}
+
+
 void GDExample::_process(double delta) 
 {
 	if(is_playing()) 
@@ -194,7 +223,10 @@ void GDExample::_process(double delta)
 
 			for(int i = 0; i < nframes; i++)
 			{
-				p->push_frame(Vector2(outbuf_[i*2], outbuf_[(i*2)+1]) * 0.1f);
+				auto v = Vector2(outbuf_[i*2], outbuf_[(i*2)+1]) * 0.1f;
+				v = v.clamp(Vector2(-1, -1), Vector2(1, 1));
+
+				p->push_frame(v);
 			}
 		}
 	}

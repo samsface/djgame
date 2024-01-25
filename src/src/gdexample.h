@@ -55,8 +55,11 @@ public:
 	bool finish_message(String receiver, String message);
 	void bind(String receiver);
 	bool start_gui(String pure_data_bin_dir_path);
+	int get_array_size(String array_name);
+	int set_array_size(String array_name, int size);
+	int write_array(String array_name, int offset, PackedRealArray src, int n);
+	PackedRealArray read_array(String array_name, int offset, int n);
 };
-
-}
+};
 
 #endif

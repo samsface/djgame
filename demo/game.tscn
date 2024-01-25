@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfo1bxbj7knm0"]
+
+[ext_resource type="Script" path="res://game.gd" id="1_507jt"]
+[ext_resource type="PackedScene" uid="uid://bgkx88llub2vg" path="res://models/lital/little2.tscn" id="1_akhe1"]
+[ext_resource type="PackedScene" uid="uid://b34ex32xpvd1s" path="res://models/toydrum/toydrum.tscn" id="3_db0a3"]
+[ext_resource type="PackedScene" uid="uid://myu11bovhya6" path="res://models/daft_box/daft_box.tscn" id="4_gcnau"]
+
+[sub_resource type="Environment" id="Environment_8y6op"]
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_bounce_feedback = 1.99
+glow_enabled = true
+fog_enabled = true
+volumetric_fog_enabled = true
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_507jt")
+
+[node name="hat" parent="." instance=ExtResource("1_akhe1")]
+transform = Transform3D(0.981714, 0, 0.190364, 0, 1, 0, -0.190364, 0, 0.981714, -0.100571, 0.0192293, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.773398, 0.633921, 0, -0.633921, 0.773398, 0, 0.161308, 0.159738)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8y6op")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.128796, -0.863107, 0.488322, 0, 0.492424, 0.870356, -0.991671, -0.112098, 0.063422, 0, 0.26248, 0.363653)
+shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_split_1 = 0.0
+directional_shadow_split_2 = 0.015
+directional_shadow_split_3 = 1.0
+directional_shadow_blend_splits = true
+directional_shadow_fade_start = 0.0
+directional_shadow_max_distance = 0.5
+directional_shadow_pancake_size = 0.1
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.499829, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0340311, 0.145733, -0.103002)
+light_color = Color(1, 0, 1, 1)
+omni_range = 0.188
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.230654, 0.0535484, -0.0864199)
+light_color = Color(0.360784, 0.792157, 1, 1)
+omni_range = 0.188
+
+[node name="toykit" parent="." instance=ExtResource("3_db0a3")]
+transform = Transform3D(1.45442, 0, -0.564135, 0, 1.56, 0, 0.564135, 0, 1.45442, 0.14403, 0.0426679, -0.00459415)
+
+[node name="base" parent="." instance=ExtResource("4_gcnau")]
+transform = Transform3D(0.943876, 0, 0.3303, 0, 1, 0, -0.3303, 0, 0.943876, -0.129269, 0.000445679, -0.10626)

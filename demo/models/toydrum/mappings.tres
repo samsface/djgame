@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="DeviceData" load_steps=10 format=3 uid="uid://cqmulviu26gd3"]
+
+[ext_resource type="Script" path="res://models/shared/nob_mapping_hradio.gd" id="1_7kknr"]
+[ext_resource type="Script" path="res://models/shared/nob_mapping_array.gd" id="1_24r56"]
+[ext_resource type="Script" path="res://models/shared/nob_mapping_expr.gd" id="2_gmc4h"]
+[ext_resource type="Script" path="res://models/shared/NobMappingArray.gd" id="2_ymg7s"]
+
+[sub_resource type="Resource" id="Resource_ca0ll"]
+script = ExtResource("1_24r56")
+array_name = "toykit-array1"
+node = Array[NodePath]([NodePath("0"), NodePath("9"), NodePath("10"), NodePath("11"), NodePath("12"), NodePath("13"), NodePath("14"), NodePath("15"), NodePath("16"), NodePath("17"), NodePath("18"), NodePath("19"), NodePath("20"), NodePath("21"), NodePath("22"), NodePath("23")])
+
+[sub_resource type="Resource" id="Resource_4l3wh"]
+script = ExtResource("2_gmc4h")
+node = NodePath("1")
+expr = "set_array_name(0, \"toykit-array2\")"
+
+[sub_resource type="Resource" id="Resource_8bj34"]
+script = ExtResource("2_gmc4h")
+node = NodePath("2")
+expr = "set_array_name(0, \"toykit-array3\")"
+
+[sub_resource type="Resource" id="Resource_av6lp"]
+script = ExtResource("2_gmc4h")
+node = NodePath("3")
+expr = "set_array_name(0, \"toykit-array1\")"
+
+[sub_resource type="Resource" id="Resource_scfs4"]
+script = ExtResource("1_7kknr")
+send_symbol = "s-toykit-step"
+receive_symbol = ""
+node = Array[NodePath]([NodePath("1"), NodePath("9"), NodePath("10"), NodePath("11"), NodePath("12"), NodePath("13"), NodePath("14"), NodePath("15"), NodePath("16"), NodePath("17"), NodePath("18"), NodePath("19"), NodePath("20"), NodePath("21"), NodePath("22"), NodePath("23")])
+
+[resource]
+script = ExtResource("2_ymg7s")
+arrays = Array[ExtResource("1_24r56")]([SubResource("Resource_ca0ll")])
+radios = Array[ExtResource("1_7kknr")]([SubResource("Resource_scfs4")])
+exprs = Array[ExtResource("2_gmc4h")]([SubResource("Resource_4l3wh"), SubResource("Resource_8bj34"), SubResource("Resource_av6lp")])

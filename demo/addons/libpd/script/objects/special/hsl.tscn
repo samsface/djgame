@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bcjcner06h4j5"]
 
-[ext_resource type="Theme" uid="uid://dp4iwwo6g8ipa" path="res://addons/libpd/script/new_theme.tres" id="1_ylyy1"]
-[ext_resource type="Script" path="res://addons/libpd/script/objects/special/hsl.gd" id="2_s0k4p"]
+[ext_resource type="Theme" uid="uid://dp4iwwo6g8ipa" path="res://addons/libpd/script/new_theme.tres" id="1_wt06a"]
+[ext_resource type="Script" path="res://addons/libpd/script/objects/special/hsl.gd" id="2_8l35l"]
 
 [node name="Hsl" type="HSlider"]
 custom_minimum_size = Vector2(128, 0)
@@ -9,7 +9,7 @@ offset_right = 67.0625
 offset_bottom = 31.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("1_ylyy1")
-script = ExtResource("2_s0k4p")
+theme = ExtResource("1_wt06a")
+script = ExtResource("2_8l35l")
 
 [connection signal="value_changed" from="." to="." method="_value_changed"]

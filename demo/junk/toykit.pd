@@ -1,0 +1,85 @@
+#N canvas 227 608 2144 1037 12;
+#X obj 1292 665 sampler;
+#X obj 1525 649 sampler;
+#X obj 408 318 hsl 128 15 0 127 0 0 s-\$1-swing empty Swing -2 -8 0
+10 #fcfcfc #000000 #000000 0 1;
+#X msg 1548 615 kick.wav;
+#X msg 1315 631 hat.wav;
+#X obj 1771 644 sampler;
+#X msg 1794 609 snare.wav;
+#X obj 1486 208 swing;
+#X obj 1583 254 nbx 5 14 1 4 0 0 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0 256;
+#X obj 1325 406 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 #fcfcfc #000000 #000000 0 256;
+#X obj 1518 288 %;
+#N canvas 0 0 450 250 (subpatch) 0;
+#X array \$1-array1 16 float 3;
+#A 0 -0.225012 -0.250012 -0.250012 -0.250012 -0.250012 -0.250012 -0.250012
+-0.225012 -0.225012 -0.208345 -0.208345 -0.191678 -0.179178 -0.166678
+-0.150011 -0.150011;
+#X coords 0 1 16 0 208 120 1 0 0;
+#X restore 400 358 graph;
+#X obj 1260 483 simpleseq \$1-array1;
+#X obj 1260 548 clip 0 1;
+#X obj 1260 606 sel 0;
+#N canvas 0 50 450 250 (subpatch) 0;
+#X array \$1-array2 16 float 3;
+#A 0 -0.408342 -0.408342 -0.416676 -0.416676 -0.416676 -0.416676 -0.416676
+-0.416676 -0.416676 -0.416676 -0.416676 -0.416676 -0.416676 -0.425009
+-0.425009 -0.425009;
+#X coords 0 1 16 0 200 120 1 0 0;
+#X restore 608 358 graph;
+#X obj 1493 481 simpleseq \$1-array2;
+#X obj 1493 538 clip 0 1;
+#X obj 1493 595 sel 0;
+#N canvas 0 50 450 250 (subpatch) 0;
+#X array \$1-array3 16 float 3;
+#A 0 -0.400007 -0.400007 -0.400007 -0.400007 -0.400007 -0.400007 -0.400007
+-0.400007 -0.400007 -0.400007 -0.400007 -0.400007 -0.400007 -0.400007
+-0.400007 -0.441674;
+#X coords 0 1 16 0 200 120 1 0 0;
+#X restore 808 358 graph;
+#X obj 1739 533 clip 0 1;
+#X obj 1739 588 sel 0;
+#X obj 1739 479 simpleseq \$1-array3;
+#X obj 1315 590 loadbang;
+#X obj 1548 578 loadbang;
+#X obj 1794 572 loadbang;
+#X obj 1518 870 outlet~;
+#X obj 1486 125 inlet;
+#X obj 400 478 hradio 13 1 0 16 s-\$1-step empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 379 643 print;
+#X connect 0 0 26 0;
+#X connect 1 0 26 0;
+#X connect 2 0 7 1;
+#X connect 3 0 1 1;
+#X connect 4 0 0 1;
+#X connect 5 0 26 0;
+#X connect 6 0 5 1;
+#X connect 7 0 12 0;
+#X connect 7 0 16 0;
+#X connect 7 0 22 0;
+#X connect 7 0 28 0;
+#X connect 7 1 10 0;
+#X connect 8 0 10 1;
+#X connect 8 0 12 1;
+#X connect 8 0 16 1;
+#X connect 8 0 22 1;
+#X connect 10 0 9 0;
+#X connect 12 0 13 0;
+#X connect 13 0 14 0;
+#X connect 14 1 0 0;
+#X connect 16 0 17 0;
+#X connect 17 0 18 0;
+#X connect 18 1 1 0;
+#X connect 20 0 21 0;
+#X connect 21 1 5 0;
+#X connect 22 0 20 0;
+#X connect 23 0 4 0;
+#X connect 24 0 3 0;
+#X connect 25 0 6 0;
+#X connect 27 0 7 0;
+#X connect 28 0 29 0;
+#X coords 0 -1 1 1 608 191 2 400 300;

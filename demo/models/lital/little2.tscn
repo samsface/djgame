@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgkx88llub2vg"]
+
+[ext_resource type="PackedScene" uid="uid://ce22ckp86h4db" path="res://models/lital/ting.tscn" id="1_opyy8"]
+[ext_resource type="Script" path="res://models/lital/little2.gd" id="1_rx3ie"]
+[ext_resource type="PackedScene" uid="uid://bvxsm2x52fp42" path="res://models/lital/slider.tscn" id="2_bjhig"]
+
+[node name="Lital" type="Node3D"]
+script = ExtResource("1_rx3ie")
+patch = "lital"
+
+[node name="Wrap" type="Node3D" parent="."]
+
+[node name="Model" parent="Wrap" instance=ExtResource("1_opyy8")]
+
+[node name="cut" parent="Wrap" instance=ExtResource("2_bjhig")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0488974, 0.00885034, 0.0100451)
+
+[node name="res" parent="Wrap" instance=ExtResource("2_bjhig")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0306751, 0.00909758, 0.00972927)
+
+[node name="a" parent="Wrap" instance=ExtResource("2_bjhig")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00811367, 0.00909758, 0.00972927)
+
+[node name="d" parent="Wrap" instance=ExtResource("2_bjhig")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0102495, 0.00909758, 0.00972927)
+
+[node name="s" parent="Wrap" instance=ExtResource("2_bjhig")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0283095, 0.00909758, 0.00972927)
+max_value = 1.0
+
+[node name="r" parent="Wrap" instance=ExtResource("2_bjhig")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0469891, 0.00909758, 0.00972927)
+max_value = 5000.0

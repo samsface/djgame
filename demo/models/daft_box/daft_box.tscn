@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://myu11bovhya6"]
+
+[ext_resource type="PackedScene" uid="uid://btqh2ja1cv012" path="res://models/daft_box/base.glb" id="1_pbi7b"]
+
+[node name="base" instance=ExtResource("1_pbi7b")]
+
+[node name="DaftBoxWidgetPositions" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)

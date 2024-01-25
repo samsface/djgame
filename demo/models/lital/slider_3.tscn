@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://7chbqpmrrhk7"]
+
+[ext_resource type="PackedScene" uid="uid://c6cj4ylwmj0e8" path="res://models/lital/slider.glb" id="1_lkhmy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6mn64"]
+albedo_color = Color(1, 0.745098, 0, 1)
+
+[node name="slider2" instance=ExtResource("1_lkhmy")]
+
+[node name="slider" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_6mn64")

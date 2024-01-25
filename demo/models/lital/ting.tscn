@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://ce22ckp86h4db"]
+
+[ext_resource type="PackedScene" uid="uid://bmbh8x6xdqdv3" path="res://models/lital/ting.glb" id="1_58qkh"]
+[ext_resource type="Texture2D" uid="uid://b8ruc67rnxkpn" path="res://models/lital/littlemap.png" id="2_lmj52"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="3_srdh6"]
+[ext_resource type="Texture2D" uid="uid://cyqijqesyfuqx" path="res://models/lital/ting_drawing.png" id="4_i23tq"]
+
+[sub_resource type="Shader" id="Shader_ysapm"]
+code = "shader_type spatial;
+
+uniform sampler2D tex : source_color;
+uniform sampler2D map : source_color;
+uniform sampler2D smudges : source_color;
+uniform vec3 color : source_color;
+
+void fragment() 
+{
+	float b = texture(tex, UV2).g;
+	b = round(b);
+	
+	vec3 alb = color;
+	alb = mix(vec3(b), alb, b);
+
+
+
+	vec2 uv = UV;
+
+	vec3 vec = texture(map, uv).rgb;
+	
+	float r = texture(smudges, UV * 1.0).r;
+	r *= vec.g + 0.5;
+	r = clamp(r, 0.0, 1.0);
+
+	alb = mix(alb, 1.0 - vec3(r), r );
+
+	alb *= pow(vec.r, 5.0);
+
+	ALBEDO.rgb = alb;
+	METALLIC = 0.5;
+	ROUGHNESS = 0.6;
+	SPECULAR = 0.5;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3lyqo"]
+render_priority = 0
+shader = SubResource("Shader_ysapm")
+shader_parameter/color = Color(0.959184, 0.671226, 0, 1)
+shader_parameter/tex = ExtResource("4_i23tq")
+shader_parameter/map = ExtResource("2_lmj52")
+shader_parameter/smudges = ExtResource("3_srdh6")
+
+[node name="ting" instance=ExtResource("1_58qkh")]
+
+[node name="slider" parent="." index="0"]
+visible = false
+
+[node name="path8006_001" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00110433, -0.00578051, 0.00415913)
+surface_material_override/0 = SubResource("ShaderMaterial_3lyqo")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://iboqwef7vr4g"]
 
-[ext_resource type="Script" path="res://addons/libpd/script/objects/patch.gd" id="1_luunn"]
+[ext_resource type="Script" path="res://addons/libpd/script/objects/patch.gd" id="1_kv02m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3baf2"]
 
@@ -15,4 +15,4 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_luunn")
+script = ExtResource("1_kv02m")

@@ -34,7 +34,7 @@ canvas_item_default_texture_repeat = 1
 physics_object_picking = true
 physics_object_picking_sort = true
 gui_snap_controls_to_pixels = false
-size = Vector2i(1152, 613)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="Root" type="MarginContainer" parent="VBoxContainer/SubViewportContainer/SubViewport"]
