@@ -13,7 +13,7 @@ func _ready() -> void:
 	await get_tree().process_frame
 	
 	if map:
-		for m in map.radios + map.exprs + map.arrays:
+		for m in map.radios + map.exprs + map.arrays + map.sliders + map.bangs:
 			m.hook(self)
 			#n.impulse.connect(_impulse)
 	

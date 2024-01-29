@@ -1,22 +1,30 @@
-[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://vns8yf4lufeq"]
+[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://vns8yf4lufeq"]
+
+[sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_gby66"]
+resource_name = "Amplify"
+volume_db = -13.94
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_oif8r"]
+resource_name = "Reverb"
+room_size = 0.39
+damping = 0.78
+spread = 0.51
+wet = 0.2
+
+[sub_resource type="AudioEffectChorus" id="AudioEffectChorus_r80rm"]
+resource_name = "Chorus"
 
 [sub_resource type="AudioEffectLimiter" id="AudioEffectLimiter_lfwnm"]
 resource_name = "Limiter"
 ceiling_db = -6.6
 
-[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_oif8r"]
-resource_name = "Reverb"
-room_size = 0.29
-wet = 0.19
-
-[sub_resource type="AudioEffectChorus" id="AudioEffectChorus_r80rm"]
-resource_name = "Chorus"
-
 [resource]
-bus/0/volume_db = -4.25003
-bus/0/effect/0/effect = SubResource("AudioEffectLimiter_lfwnm")
+bus/0/volume_db = 0.662756
+bus/0/effect/0/effect = SubResource("AudioEffectAmplify_gby66")
 bus/0/effect/0/enabled = true
 bus/0/effect/1/effect = SubResource("AudioEffectReverb_oif8r")
 bus/0/effect/1/enabled = true
 bus/0/effect/2/effect = SubResource("AudioEffectChorus_r80rm")
 bus/0/effect/2/enabled = true
+bus/0/effect/3/effect = SubResource("AudioEffectLimiter_lfwnm")
+bus/0/effect/3/enabled = true

@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://c1wmsmwadtxvn"]
+
+[ext_resource type="Shader" path="res://models/shared/basic.gdshader" id="1_3rsoq"]
+[ext_resource type="Texture2D" uid="uid://c6tmq0bxjyh2p" path="res://models/daft_box/map.png" id="2_3ycfu"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="3_p88vn"]
+[ext_resource type="Texture2D" uid="uid://cln2mtv44s6pb" path="res://models/daft_box/texture.png" id="4_cmdxx"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_3rsoq")
+shader_parameter/color = Color(0.901961, 0.584314, 0, 1)
+shader_parameter/debug_uv1 = false
+shader_parameter/debug_uv2 = false
+shader_parameter/edge_color = Color(0.537255, 0.529412, 0.164706, 0.47451)
+shader_parameter/tex = ExtResource("4_cmdxx")
+shader_parameter/map = ExtResource("2_3ycfu")
+shader_parameter/smudges = ExtResource("3_p88vn")

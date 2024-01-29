@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var looking_at_ := $hat
+@onready var looking_at_ := $toykit
 
 var patch_file_handle_ := PDPatchFile.new()
 var tween_:Tween

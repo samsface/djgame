@@ -4,6 +4,10 @@ uniform sampler2D tex : source_color, repeat_disable;
 uniform sampler2D map : source_color;
 uniform sampler2D smudges : source_color;
 uniform vec3 color : source_color;
+uniform bool debug_uv1 = false;
+uniform bool debug_uv2 = false;
+
+uniform vec4 edge_color : source_color;
 
 void fragment() 
 {
@@ -22,8 +26,14 @@ void fragment()
 	
 	//alb -= min(0.2, pow(vec.g, 1.0));
 	
-	alb = mix(alb, vec3(1.0), round(pow(vec.g, 0.5)));
-	
+	if(edge_color.a >= 1.0)
+	{
+		alb = mix(alb, edge_color.rgb, round(pow(vec.g, 0.5)));
+	}
+	else 
+	{
+		alb = mix(alb, alb * edge_color.a, round(pow(vec.g, 0.5)));
+	}
 	
 	alb = mix(alb, vec3(r), r);
 	
@@ -32,5 +42,19 @@ void fragment()
 	METALLIC = 0.5;
 	ROUGHNESS = 0.6;
 	SPECULAR = 0.5;
+	
+	if(debug_uv1) 
+	{
+		ALBEDO.r = UV.x;
+		ALBEDO.g = UV.y;
+		ALBEDO.b = 0.0;
+	}
+	
+	if(debug_uv2) 
+	{
+		ALBEDO.r = UV2.x;
+		ALBEDO.g = UV2.y;
+		ALBEDO.b = 0.0;
+	}
 
 }

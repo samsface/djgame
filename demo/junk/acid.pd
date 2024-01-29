@@ -1,4 +1,4 @@
-#N canvas 493 512 874 697 12;
+#N canvas 493 512 1094 697 12;
 #X obj 53 159 inlet;
 #X obj 53 197 mtof;
 #X floatatom 54 421 5 0 0 0 - - - 0;
@@ -26,8 +26,8 @@
 #X obj 543 329 loadbang;
 #X obj 200 550 s Filter_Freq;
 #X obj 367 290 r Filter_Freq;
-#X obj 145 123 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 #fcfcfc
-#000000 #000000 0 1;
+#X obj 145 123 hsl 128 15 0 127 0 0 s-acid-res r-acid-res empty -2
+-8 0 10 #fcfcfc #000000 #000000 0 1;
 #X obj 139 155 / 127;
 #X msg 263 295 0 250;
 #X obj 201 441 *;
@@ -38,6 +38,8 @@
 #X obj 758 340 delay 133;
 #X msg 541 370 24;
 #X msg 379 374 4;
+#X obj 146 104 hsl 128 15 0 5000 0 0 s-acid-res r-acid-res empty -2
+-8 0 10 #fcfcfc #000000 #000000 0 1;
 #X connect 0 0 1 0;
 #X connect 1 0 2 0;
 #X connect 1 0 13 0;
@@ -75,4 +77,5 @@
 #X connect 33 0 32 0;
 #X connect 34 0 20 2;
 #X connect 35 0 16 2;
+#X connect 36 0 33 1;
 #X coords 0 -1 1 1 200 60 1 100 100;

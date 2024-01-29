@@ -1,4 +1,4 @@
-#N canvas 669 625 1864 705 12;
+#N canvas 73 26 2486 1344 12;
 #X obj -895 -432 soundfiler;
 #X obj -895 -312 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
 10 #fcfcfc #000000 #000000 0 256;
@@ -36,6 +36,7 @@
 #X obj -895 -595 pack s f;
 #X obj -803 -695 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
+#X obj -942 766 *~;
 #X connect 0 0 1 0;
 #X connect 1 0 4 0;
 #X connect 1 0 12 1;
@@ -59,13 +60,15 @@
 #X connect 16 0 15 0;
 #X connect 18 0 30 0;
 #X connect 19 0 20 0;
+#X connect 19 0 32 1;
 #X connect 20 0 1 0;
 #X connect 22 0 30 1;
 #X connect 23 0 31 0;
 #X connect 24 0 0 0;
 #X connect 25 0 27 0;
 #X connect 26 0 25 0;
-#X connect 28 0 17 0;
+#X connect 28 0 32 0;
 #X connect 30 0 24 0;
 #X connect 30 0 29 0;
 #X connect 31 0 22 0;
+#X connect 32 0 17 0;

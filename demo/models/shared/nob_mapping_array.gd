@@ -24,7 +24,6 @@ func hook(p:Node) -> void:
 		node.value_changed.connect(_value_changed.bind(i))
 
 func refresh() -> void:
-	print(array_name)
 	var data:PackedFloat32Array = PureData.read_array(array_name, 0, PureData.get_array_size(array_name))
 	if not data:
 		return

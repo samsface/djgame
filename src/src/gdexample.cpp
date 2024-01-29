@@ -223,7 +223,7 @@ void GDExample::_process(double delta)
 
 			for(int i = 0; i < nframes; i++)
 			{
-				auto v = Vector2(outbuf_[i*2], outbuf_[(i*2)+1]) * 0.1f;
+				auto v = Vector2(outbuf_[i*2], outbuf_[(i*2)+1]);
 				v = v.clamp(Vector2(-1, -1), Vector2(1, 1));
 
 				p->push_frame(v);
