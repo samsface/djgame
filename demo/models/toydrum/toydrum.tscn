@@ -12,6 +12,3 @@ map = ExtResource("3_t4x0b")
 
 [node name="Base" parent="." index="1"]
 surface_material_override/0 = ExtResource("3_eln34")
-
-[node name="9" parent="." index="11"]
-range = 2
