@@ -1,6 +1,8 @@
 extends Resource 
 class_name NobMappingSlider
 
+signal value_changed
+
 @export var node:NodePath
 @export var receiver_symbol:String
 @export var send_symbol:String
@@ -23,3 +25,4 @@ func hook(p:Node) -> void:
 
 func _value_changed(v:float) -> void:
 	PureData.send_float(receiver_symbol, v)
+	value_changed.emit(v)

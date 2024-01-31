@@ -14,7 +14,8 @@ albedo_color = Color(0, 0, 0, 1)
 script = ExtResource("1_cglxd")
 
 [node name="Nob" type="Area3D" parent="."]
-input_capture_on_drag = true
+collision_layer = 9
+input_ray_pickable = false
 
 [node name="slider2" parent="Nob" instance=ExtResource("2_5ku2x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00509066, 0)
@@ -26,6 +27,3 @@ shape = SubResource("SphereShape3D_t4snb")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00603976, 0)
 size = Vector3(0.01, 0.01, 0.05)
 material = SubResource("StandardMaterial3D_3v7bt")
-
-[connection signal="mouse_entered" from="Nob" to="." method="_mouse_entered"]
-[connection signal="mouse_exited" from="Nob" to="." method="_mouse_exited"]

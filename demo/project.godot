@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 NodeDb="*res://addons/libpd/script/objects/node_db.gd"
 SelectionBus="*res://addons/libpd/script/selection_bus.gd"
 PureData="*res://addons/libpd/pure_data.gd"
+Camera="*res://auto_loads/view/camera.tscn"
 
 [display]
 
@@ -27,6 +28,7 @@ window/size/viewport_width=1680
 window/size/viewport_height=1050
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
+window/vsync/vsync_mode=0
 
 [input]
 
@@ -154,6 +156,15 @@ look={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"echo":false,"script":null)
 ]
 }
+noise={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":78,"key_label":0,"unicode":110,"echo":false,"script":null)
+]
+}
+
+[layer_names]
+
+3d_physics/layer_4="cursor"
 
 [rendering]
 

@@ -26,17 +26,17 @@ send_symbol = "r-toykit-preset1"
 [sub_resource type="Resource" id="Resource_4l3wh"]
 script = ExtResource("2_gmc4h")
 node = NodePath("1")
-expr = "set_array_name(0, \"toykit-array2\")"
+expr = "set_array_name(0, \"toykit-array1\")"
 
 [sub_resource type="Resource" id="Resource_8bj34"]
 script = ExtResource("2_gmc4h")
 node = NodePath("2")
-expr = "set_array_name(0, \"toykit-array3\")"
+expr = "set_array_name(0, \"toykit-array2\")"
 
 [sub_resource type="Resource" id="Resource_av6lp"]
 script = ExtResource("2_gmc4h")
 node = NodePath("4")
-expr = "set_array_name(0, \"toykit-array1\")"
+expr = "set_array_name(0, \"toykit-array3\")"
 
 [sub_resource type="Resource" id="Resource_scfs4"]
 script = ExtResource("1_7kknr")

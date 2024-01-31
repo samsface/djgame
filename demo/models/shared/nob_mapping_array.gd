@@ -1,6 +1,8 @@
 extends Resource
 class_name NobMappingArray
 
+signal value_changed
+
 @export var array_name:String :
 	set(v):
 		if array_name != v:
@@ -40,3 +42,4 @@ func refresh() -> void:
 
 func _value_changed(v:float, idx:int) -> void:
 	PureData.write_at_array_index(array_name, idx, v * 5.0)
+	value_changed.emit(v)

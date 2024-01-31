@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfo1bxbj7knm0"]
+[gd_scene load_steps=6 format=3 uid="uid://bfo1bxbj7knm0"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_507jt"]
 [ext_resource type="PackedScene" uid="uid://b34ex32xpvd1s" path="res://models/toydrum/toydrum.tscn" id="3_db0a3"]
@@ -15,11 +15,11 @@ glow_enabled = true
 fog_enabled = true
 volumetric_fog_enabled = true
 
-[node name="Game" type="Node3D"]
-script = ExtResource("1_507jt")
+[sub_resource type="BoxShape3D" id="BoxShape3D_fhy07"]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.773398, 0.633921, 0, -0.633921, 0.773398, 0, 0.161308, 0.159738)
+[node name="Game" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000950955, 0.000868201, -0.000772789)
+script = ExtResource("1_507jt")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8y6op")
@@ -48,6 +48,7 @@ omni_range = 0.188
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.230654, 0.0535484, -0.0864199)
 light_color = Color(0.360784, 0.792157, 1, 1)
 omni_range = 0.188
+omni_shadow_mode = 0
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0617377, 0.160684, 0.0738555)
@@ -60,3 +61,12 @@ transform = Transform3D(1.45442, 0, -0.564135, 0, 1.56, 0, 0.564135, 0, 1.45442,
 
 [node name="base" parent="." instance=ExtResource("4_gcnau")]
 transform = Transform3D(0.96492, 0, -0.262543, 0, 1, 0, 0.262543, 0, 0.96492, 0.0635047, 0.000445686, 0.0536318)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.486114, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00161257, 0)
+shape = SubResource("BoxShape3D_fhy07")

@@ -11,21 +11,26 @@ var dragging_ := false
 var dragging_start_ := Vector2.ZERO
 var mouse_over_ := false
 
+func _ready() -> void:
+	set_process_input(false)
+
 func _input(event: InputEvent) -> void:
 	if dragging_:
 		if event.is_action_released("click"):
 			dragging_ = false
-		
+			Camera.cursor.pop(self)
+			set_process_input(false)
+
 	if mouse_over_:
 		if event.is_action_pressed("click"):
 			dragging_ = true
-			dragging_start_ = get_viewport().get_mouse_position()
+			Camera.cursor.push(self, Cursor.Action.grab)
+			dragging_start_ = get_window().get_mouse_position()
 
 func _physics_process(delta: float) -> void:
 	if dragging_:
-		var mp = get_viewport().get_mouse_position()
-		var y = mp.y - dragging_start_.y
-		dragging_start_ = mp
+		var y = Camera.cursor.get_node("CanvasLayer/Sprite2D").x.y
+		Camera.cursor.get_node("CanvasLayer/Sprite2D").x = Vector2.ZERO
 		
 		var p = $Nob.position
 		p.z += 0.00015 * y
@@ -42,8 +47,17 @@ func _physics_process(delta: float) -> void:
 		if abs(y) > 40.0 and is_equal_approx(abs(p.z), freedom):
 			impulse.emit($Nob.position, y)
 
+		Camera.cursor.try_set_position(self, $Nob.global_position + Vector3.UP * 0.002)
+		Camera.smooth_look_at(self.get_parent())
+
 func _mouse_entered() -> void:
 	mouse_over_ = true
+	set_process_input(true)
+	
+	$Nob/slider2/slider.set_instance_shader_parameter("outline_color", Color.WHITE)
 	
 func _mouse_exited() -> void:
 	mouse_over_ = false
+	if not dragging_:
+		set_process_input(false)
+		$Nob/slider2/slider.set_instance_shader_parameter("outline_color", Color.TRANSPARENT)

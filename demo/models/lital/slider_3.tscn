@@ -1,8 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://7chbqpmrrhk7"]
+[gd_scene load_steps=5 format=3 uid="uid://7chbqpmrrhk7"]
 
 [ext_resource type="PackedScene" uid="uid://c6cj4ylwmj0e8" path="res://models/lital/slider.glb" id="1_lkhmy"]
+[ext_resource type="Shader" path="res://models/lital/outline.gdshader" id="2_df2s1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hc8ic"]
+render_priority = 0
+shader = ExtResource("2_df2s1")
+shader_parameter/outline_width = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6mn64"]
+next_pass = SubResource("ShaderMaterial_hc8ic")
 albedo_color = Color(1, 0.745098, 0, 1)
 
 [node name="slider2" instance=ExtResource("1_lkhmy")]

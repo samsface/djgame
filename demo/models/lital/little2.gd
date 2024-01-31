@@ -15,12 +15,11 @@ func _ready() -> void:
 	if map:
 		for m in map.radios + map.exprs + map.arrays + map.sliders + map.bangs:
 			m.hook(self)
+			m.value_changed.connect(_value_changed)
 			#n.impulse.connect(_impulse)
 	
-func _value_changed(value, m:NobMapping) -> void:
-	m = m.duplicate()
-	m.name = m.name.format({ select=select })
-	value_changed.emit(m, value)
+func _value_changed(value) -> void:
+	value_changed.emit(value)
 
 func _expr(value, m:NobMapping) -> void:
 	if value:

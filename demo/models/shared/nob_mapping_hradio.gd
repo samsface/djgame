@@ -1,6 +1,7 @@
 extends Resource
 class_name NobMappingHradio
 
+signal value_changed
 signal send
 
 @export var send_symbol:String

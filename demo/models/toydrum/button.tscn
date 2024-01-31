@@ -9,13 +9,14 @@ size = Vector3(0.01, 0.01, 0.01)
 [node name="Button" type="Node3D"]
 script = ExtResource("1_hygni")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Nob" type="Area3D" parent="."]
+collision_layer = 9
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Nob"]
 shape = SubResource("BoxShape3D_fygew")
 
-[node name="Button" parent="Area3D" instance=ExtResource("2_nny25")]
+[node name="Button" parent="Nob" instance=ExtResource("2_nny25")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
-[connection signal="mouse_entered" from="Area3D" to="." method="_mouse_entered"]
-[connection signal="mouse_exited" from="Area3D" to="." method="_mouse_exited"]
+[connection signal="mouse_entered" from="Nob" to="." method="_mouse_entered"]
+[connection signal="mouse_exited" from="Nob" to="." method="_mouse_exited"]

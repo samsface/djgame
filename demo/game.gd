@@ -6,7 +6,9 @@ var patch_file_handle_ := PDPatchFile.new()
 var tween_:Tween
 
 func _ready() -> void:
-	look_at_($toykit)
+	Engine.max_fps = 144
+
+	Camera.smooth_look_at($toykit)
 	
 	var p = ProjectSettings.globalize_path("res://junk/xxx.pd")
 
@@ -15,50 +17,26 @@ func _ready() -> void:
 		
 	for node in get_children():
 		if node is Device:
-			node.value_changed.connect(value_changed_)
+			node.value_changed.connect(value_changed_.bind(node))
 
-func value_changed_(nob:NobMapping, value) -> void:
-	PureData.write_at_array_index(nob.name, nob.index, value)
+	PureData.bind("s-clock")
+	PureData.bind("s-rumble")
+	PureData.bang.connect(_bang)
 
-func send_message_(args):
-	PureData.send_message("pd-xxx", args)
+var i_ = 0
 
-func send_float_(receiver:String, value:float, ns:String):
-	print("r-%s-%s" % [ns, receiver])
-	PureData.send_float("r-%s-%s" % [ns, receiver], value)
+func _bang(r):
+	if r == "s-clock":
+		i_ += 1
+		#if i_ % 2 == 0:
+		#	Camera.smooth_look_at(looking_at_, true)
+		return
+	elif r == "s-rumble":
+		Camera.shake(0.7, 0.001)
 
-func send_array_(receiver:String, value:float, ns:String):
-	print("r-%s-%s" % [ns, receiver])
-	PureData.write_at_array_index("toykit-array1", 0, 1)
-
-func look_at_(node) -> void:
-	if tween_:
-		tween_.kill()
-		
-	looking_at_ = node
-	
-	var r = $Camera3D.rotation
-	var p = $Camera3D.position
-	
-	var x = looking_at_.position.x + randf_range(-1, 1) * 0.05
-	
-	$Camera3D.position.x = x
-	$Camera3D.look_at(looking_at_.position)
-	var t = $Camera3D.rotation
-	$Camera3D.position = p
-	$Camera3D.rotation = r
-
-	tween_ = create_tween()
-	tween_.set_trans(Tween.TRANS_SINE)
-	tween_.set_ease(Tween.EASE_OUT)
-	tween_.set_parallel()
-	tween_.tween_property($Camera3D, "position:x", x, 0.6)
-	tween_.tween_property($Camera3D, "rotation", t, 0.6)
-	tween_.tween_property($Camera3D, "fov", randf_range(50, 75), 0.6)
+func value_changed_(value, node:Device) -> void:
+	pass
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("look"):
-		if looking_at_ == $toykit:
-			look_at_($hat)
-		else:
-			look_at_($toykit)
+	if Input.is_action_just_pressed("noise"):
+		PureData.send_bang("r-noise")

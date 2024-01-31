@@ -1,6 +1,8 @@
 extends Resource
 class_name NobMappingBang
 
+signal value_changed
+
 @export var node:NodePath
 @export var receiver_symbol:String
 @export var send_symbol:String

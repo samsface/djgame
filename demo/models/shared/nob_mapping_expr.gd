@@ -1,6 +1,8 @@
 extends Resource
 class_name NobMappingExpr
 
+signal value_changed
+
 @export var node:NodePath
 @export var expr:String
 
