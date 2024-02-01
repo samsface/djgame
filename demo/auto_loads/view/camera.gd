@@ -32,9 +32,9 @@ func _physics_process(delta: float) -> void:
 	if not cursor.is_owner(self):
 		return
 	
-	$Cursor/CanvasLayer/Sprite2D.update()
+	cursor.update()
 
-	var pos = $Cursor/CanvasLayer/Sprite2D.position
+	var pos = cursor.position2D
 	
 	var from = camera_.project_ray_origin(pos)
 	var to = from + camera_.project_ray_normal(pos) * 100

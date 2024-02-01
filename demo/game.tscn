@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bfo1bxbj7knm0"]
+[gd_scene load_steps=9 format=3 uid="uid://bfo1bxbj7knm0"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_507jt"]
 [ext_resource type="Texture2D" uid="uid://cdvjs1do44ycq" path="res://models/shared/photos_2017_9_7_fst_stained-wooden-texture-table.jpg" id="2_0hwtm"]
 [ext_resource type="PackedScene" uid="uid://b34ex32xpvd1s" path="res://models/toydrum/toydrum.tscn" id="3_db0a3"]
 [ext_resource type="PackedScene" uid="uid://myu11bovhya6" path="res://models/daft_box/daft_box.tscn" id="4_gcnau"]
+[ext_resource type="Script" path="res://track.gd" id="5_0wgbd"]
 
 [sub_resource type="Environment" id="Environment_8y6op"]
 ssr_enabled = true
@@ -70,7 +71,7 @@ omni_range = 0.188
 [node name="toykit" parent="." instance=ExtResource("3_db0a3")]
 transform = Transform3D(1.45442, 0, -0.564133, 0, 1.56, 0, 0.564133, 0, 1.45442, 0.14403, 0.0444821, -0.00459415)
 
-[node name="base" parent="." instance=ExtResource("4_gcnau")]
+[node name="acid" parent="." instance=ExtResource("4_gcnau")]
 transform = Transform3D(0.96492, 0, -0.262543, 0, 1, 0, 0.262543, 0, 0.96492, 0.0635047, 0.000445686, 0.0536318)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
@@ -81,3 +82,6 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00161257, 0)
 shape = SubResource("BoxShape3D_fhy07")
+
+[node name="Node3D" type="Node3D" parent="."]
+script = ExtResource("5_0wgbd")

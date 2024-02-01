@@ -4,7 +4,7 @@ class_name NobSlider
 signal value_changed(float)
 signal impulse(Vector3, float)
 
-@export var freedom:float = 0.02
+@export var value:float
 @export var max_value:float = 127
 
 var dragging_ := false
@@ -29,23 +29,18 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	if dragging_:
-		var y = Camera.cursor.get_node("CanvasLayer/Sprite2D").x.y
-		Camera.cursor.get_node("CanvasLayer/Sprite2D").x = Vector2.ZERO
-		
-		var p = $Nob.position
-		p.z += 0.00015 * y
+		$Path3D/PathFollow3D.progress_ratio -= Camera.cursor.relative.y * 0.005
+		Camera.cursor.relative = Vector2.ZERO
 
-		p.z = clamp(p.z, -freedom, freedom)
-
-		$Nob.position = p
-		
-		var v = 1.0 - ((p.z / freedom) * 0.5 + 0.5)
+		var v = $Path3D/PathFollow3D.progress_ratio
 		v *= max_value
+
+		value = v
 
 		value_changed.emit(v)
 
-		if abs(y) > 40.0 and is_equal_approx(abs(p.z), freedom):
-			impulse.emit($Nob.position, y)
+		#if abs(y) > 40.0 and is_equal_approx(abs(p.z), freedom):
+		#	impulse.emit($Nob.position, y)
 
 		Camera.cursor.try_set_position(self, $Nob.global_position + Vector3.UP * 0.002)
 		Camera.smooth_look_at(self.get_parent())

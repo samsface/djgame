@@ -10,11 +10,22 @@ enum Action {
 	grab
 }
 
+var relative:Vector2 :
+	set(v):
+		relative = v
+	get:
+		return relative
+
+var position2D:Vector2
+
 var owner_stack_ := []
 var next_position_ := Vector3.ZERO
 
+@onready var cursor_ = $DebugCursorCanvasLayer/DebugCursor
+
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	position2D = get_window().get_visible_rect().size / 2
 
 func is_owner(node:Node) -> bool:
 	return owner_stack_.size() > 0 and owner_stack_.back()[0] == node
@@ -31,7 +42,7 @@ func pop(node:Node) -> void:
 	if owner_stack_.size() > 0:
 		frame = owner_stack_.back()[1]
 
-	$CanvasLayer/Sprite2D.position = get_node("../CameraArm/Camera3D").unproject_position(position)
+	Camera.cursor.position2D = get_node("../CameraArm/Camera3D").unproject_position(position)
 	next_position_ = position
 
 	popped.emit()
@@ -44,3 +55,14 @@ func try_set_position(node:Node, pos:Vector3) -> void:
 
 func _process(delta: float) -> void:
 	position = next_position_
+
+var x := Vector2.ZERO
+
+func _unhandled_input(event:InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		relative = event.relative
+
+func update() -> void:
+	position2D += relative * 1.5
+	cursor_.position = position2D
+	relative = Vector2.ZERO

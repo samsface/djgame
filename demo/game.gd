@@ -39,4 +39,5 @@ func value_changed_(value, node:Device) -> void:
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("noise"):
-		PureData.send_bang("r-noise")
+		print("r-" + name + "-noise")
+		PureData.send_bang("r-" + name + "-noise")

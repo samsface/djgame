@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvxsm2x52fp42"]
+[gd_scene load_steps=6 format=3 uid="uid://bvxsm2x52fp42"]
 
 [ext_resource type="Script" path="res://models/lital/slider2.gd" id="1_cglxd"]
 [ext_resource type="PackedScene" uid="uid://7chbqpmrrhk7" path="res://models/lital/slider_3.tscn" id="2_5ku2x"]
@@ -10,20 +10,41 @@ radius = 0.01
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
 
+[sub_resource type="Curve3D" id="Curve3D_pxbqc"]
+bake_interval = 0.01
+_data = {
+"points": PackedVector3Array(0, 0, -0.02, 0, 0, 0.02, 0, 0, 0.02, 0, 0, -0.02, 0, 0, 0.02, 0, 0, -0.02),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_cglxd")
 
 [node name="Nob" type="Area3D" parent="."]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 2.32831e-10)
 collision_layer = 9
 input_ray_pickable = false
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Nob"]
+transform = Transform3D(0.999996, -0.00274016, 0, 0.00274016, 0.999996, 0, 0, 0, 0.999999, 0, 0, 0)
+shape = SubResource("SphereShape3D_t4snb")
+
 [node name="slider2" parent="Nob" instance=ExtResource("2_5ku2x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00509066, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Nob"]
-shape = SubResource("SphereShape3D_t4snb")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00603976, 0)
 size = Vector3(0.01, 0.01, 0.05)
 material = SubResource("StandardMaterial3D_3v7bt")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_pxbqc")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 2.32831e-10)
+progress = 0.02
+loop = false
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
+remote_path = NodePath("../../../Nob")
