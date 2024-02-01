@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dq1tbhw4jpqju"]
+[gd_scene load_steps=5 format=3 uid="uid://dq1tbhw4jpqju"]
 
 [ext_resource type="PackedScene" uid="uid://dj76h8ndtg7k3" path="res://models/toydrum/button2.glb" id="1_77mno"]
 [ext_resource type="Script" path="res://models/toydrum/buttonm.gd" id="2_wtdvo"]
+[ext_resource type="Material" uid="uid://dq63e5mx8jbve" path="res://models/shared/outline.tres" id="3_0mk2q"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4rd6y"]
+next_pass = ExtResource("3_0mk2q")
+albedo_color = Color(1, 0.121569, 0.0823529, 1)
 
 [node name="button2" instance=ExtResource("1_77mno")]
 script = ExtResource("2_wtdvo")
+
+[node name="Button2" parent="." index="0"]
+instance_shader_parameters/outline_color = Color(1, 1, 1, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_4rd6y")

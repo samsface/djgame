@@ -7,7 +7,7 @@ instance uniform float light : hint_range(0.0, 1.0);
 void fragment() {
 	vec3 albedo = color;
 	
-	vec3 t = texture(button_top, UV2).rgb;
+	vec3 t = texture(button_top, UV).rgb;
 	t = round(t);
 	
 	vec3 lt = vec3(0);

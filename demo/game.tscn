@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfo1bxbj7knm0"]
+[gd_scene load_steps=8 format=3 uid="uid://bfo1bxbj7knm0"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_507jt"]
+[ext_resource type="Texture2D" uid="uid://cdvjs1do44ycq" path="res://models/shared/photos_2017_9_7_fst_stained-wooden-texture-table.jpg" id="2_0hwtm"]
 [ext_resource type="PackedScene" uid="uid://b34ex32xpvd1s" path="res://models/toydrum/toydrum.tscn" id="3_db0a3"]
 [ext_resource type="PackedScene" uid="uid://myu11bovhya6" path="res://models/daft_box/daft_box.tscn" id="4_gcnau"]
 
@@ -14,6 +15,15 @@ sdfgi_bounce_feedback = 1.99
 glow_enabled = true
 fog_enabled = true
 volumetric_fog_enabled = true
+adjustment_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ij4h"]
+albedo_color = Color(0.47451, 0.47451, 0.47451, 1)
+albedo_texture = ExtResource("2_0hwtm")
+subsurf_scatter_enabled = true
+subsurf_scatter_strength = 0.3
+uv1_scale = Vector3(2, 2, 2)
+uv1_offset = Vector3(0.5, 0.5, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fhy07"]
 
@@ -38,6 +48,7 @@ directional_shadow_pancake_size = 0.1
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.499829, 0)
+material = SubResource("StandardMaterial3D_3ij4h")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0340311, 0.145733, -0.103002)
@@ -57,7 +68,7 @@ light_size = 0.003
 omni_range = 0.188
 
 [node name="toykit" parent="." instance=ExtResource("3_db0a3")]
-transform = Transform3D(1.45442, 0, -0.564135, 0, 1.56, 0, 0.564135, 0, 1.45442, 0.14403, 0.0444821, -0.00459415)
+transform = Transform3D(1.45442, 0, -0.564133, 0, 1.56, 0, 0.564133, 0, 1.45442, 0.14403, 0.0444821, -0.00459415)
 
 [node name="base" parent="." instance=ExtResource("4_gcnau")]
 transform = Transform3D(0.96492, 0, -0.262543, 0, 1, 0, 0.262543, 0, 0.96492, 0.0635047, 0.000445686, 0.0536318)

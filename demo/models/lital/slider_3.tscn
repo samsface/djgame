@@ -1,18 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://7chbqpmrrhk7"]
+[gd_scene load_steps=6 format=3 uid="uid://7chbqpmrrhk7"]
 
 [ext_resource type="PackedScene" uid="uid://c6cj4ylwmj0e8" path="res://models/lital/slider.glb" id="1_lkhmy"]
-[ext_resource type="Shader" path="res://models/lital/outline.gdshader" id="2_df2s1"]
+[ext_resource type="Shader" path="res://models/toydrum/buttonm.gdshader" id="2_imgo6"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hc8ic"]
+[sub_resource type="Gradient" id="Gradient_hyruf"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3seyl"]
+gradient = SubResource("Gradient_hyruf")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_laalh"]
 render_priority = 0
-shader = ExtResource("2_df2s1")
-shader_parameter/outline_width = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6mn64"]
-next_pass = SubResource("ShaderMaterial_hc8ic")
-albedo_color = Color(1, 0.745098, 0, 1)
+shader = ExtResource("2_imgo6")
+shader_parameter/color = Color(1, 0.901961, 0.282353, 1)
+shader_parameter/button_top = SubResource("GradientTexture1D_3seyl")
 
 [node name="slider2" instance=ExtResource("1_lkhmy")]
 
 [node name="slider" parent="." index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_6mn64")
+surface_material_override/0 = SubResource("ShaderMaterial_laalh")

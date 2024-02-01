@@ -66,11 +66,13 @@ func released() -> void:
 func _mouse_entered() -> void:
 	mouse_over_ = true
 	set_process_input(true)
-	
+	$Nob/Button.outline = Color(1.0, 1.0, 1.0, 1.0)
+
 func _mouse_exited() -> void:
 	mouse_over_ = false
 	if not down_:
 		set_process_input(false)
+		$Nob/Button.outline = Color.TRANSPARENT
 
 func light_color_() -> float:
 	return value_ + pulse_

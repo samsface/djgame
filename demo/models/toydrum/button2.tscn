@@ -11,6 +11,7 @@ script = ExtResource("1_3a06k")
 range = 3
 
 [node name="Nob" type="Area3D" parent="."]
+collision_layer = 9
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Nob"]
 shape = SubResource("BoxShape3D_fygew")
