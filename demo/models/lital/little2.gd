@@ -15,16 +15,8 @@ func _ready() -> void:
 	if map:
 		for m in map.radios + map.exprs + map.arrays + map.sliders + map.bangs:
 			m.hook(self)
-			m.value_changed.connect(_value_changed)
 			#n.impulse.connect(_impulse)
-	
-func _value_changed(value) -> void:
-	value_changed.emit(value)
 
-func _expr(value, m:NobMapping) -> void:
-	if value:
-		select = m.name
-	
 func _impulse(from:Vector3, force:float) -> void:
 	if tween_:
 		tween_.kill()

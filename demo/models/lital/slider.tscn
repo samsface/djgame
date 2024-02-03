@@ -48,3 +48,10 @@ loop = false
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
 remote_path = NodePath("../../../Nob")
+update_rotation = false
+update_scale = false
+
+[node name="PathFollow3D2" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 2.32831e-10)
+progress = 0.02
+loop = false

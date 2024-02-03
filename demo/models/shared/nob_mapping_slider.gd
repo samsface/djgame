@@ -18,8 +18,7 @@ func hook(p:Node) -> void:
 		pass
 			
 	node.value_changed.connect(_value_changed)
-	node.max_value = max_value
 
 func _value_changed(v:float) -> void:
-	PureData.send_float("r-%s-%s" % [p_.name, symbol], v)
+	PureData.send_float("r-%s-%s" % [p_.name, symbol], v * max_value)
 	value_changed.emit(v)

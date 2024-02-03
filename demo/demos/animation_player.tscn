@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8ty72ak3iapv"]
+
+[ext_resource type="AnimationLibrary" uid="uid://bcgekpeq1vljp" path="res://junk/test.tres" id="1_tbauu"]
+
+[node name="AnimationPlayer" type="AnimationPlayer"]
+libraries = {
+"": ExtResource("1_tbauu")
+}

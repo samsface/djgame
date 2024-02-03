@@ -21,6 +21,7 @@ script = ExtResource("3_2n3f3")
 [node name="DebugCursorCanvasLayer" type="CanvasLayer" parent="Cursor"]
 
 [node name="DebugCursor" type="Sprite2D" parent="Cursor/DebugCursorCanvasLayer"]
+visible = false
 texture = ExtResource("4_575od")
 
 [node name="CameraArm" type="Node3D" parent="."]

@@ -61,6 +61,12 @@ var x := Vector2.ZERO
 func _unhandled_input(event:InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		relative = event.relative
+	
+	if event.is_action_pressed("ui_cancel"):
+		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func update() -> void:
 	position2D += relative * 1.5
