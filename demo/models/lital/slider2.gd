@@ -5,9 +5,20 @@ signal value_changed(float)
 signal impulse(Vector3, float)
 
 @export var value:float : 
-	set(v):
-		value = v
-		if not Recorder.recording_:
+	set(new_value):
+		if new_value == value:
+			return
+			
+		if reset_to_intended_value_tween_:
+			reset_to_intended_value_tween_.kill()
+
+		var old_value = value
+		
+		value = new_value
+		
+		value_changed.emit(value, old_value)
+		
+		if not Camera.recording:
 			invalidate_()
 
 var dragging_ := false
@@ -15,9 +26,11 @@ var dragging_start_ := Vector2.ZERO
 var mouse_over_ := false
 
 @onready var path_follow_ = $Path3D/PathFollow3D
+@onready var shadow_path_follow_ = $Path3D/PathFollow3D2
 
 func _ready() -> void:
 	set_process_input(false)
+	value = randf()
 
 func _input(event: InputEvent) -> void:
 	if dragging_:
@@ -35,14 +48,16 @@ func _input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	if dragging_:
 		var diff = Camera.cursor.relative.y * 0.005
+		if diff == 0.0:
+			return
+
 		Camera.cursor.relative = Vector2.ZERO
 		
-		value -= diff
-		value = clamp(value, 0, 1)
-		
-		invalidate_()
+		var new_value = value - diff
 
-		Recorder.capture(self)
+		value = clamp(new_value, 0, 1.0)
+		
+		Camera.recorder.capture(self)
 
 func _mouse_entered() -> void:
 	mouse_over_ = true
@@ -65,7 +80,12 @@ func invalidate_() -> void:
 
 	path_follow_.progress_ratio = value
 
-	value_changed.emit(value)
-
 	Camera.cursor.try_set_position(self, $Nob.global_position + Vector3.UP * 0.002)
 	Camera.smooth_look_at(self.get_parent())
+
+func get_guide_position_for_value(value:float) -> Vector3:
+	shadow_path_follow_.progress_ratio = value
+	return shadow_path_follow_.global_position
+
+func get_nob_position() -> Vector3:
+	return $Nob.global_position

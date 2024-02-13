@@ -28,6 +28,7 @@ texture = ExtResource("4_575od")
 
 [node name="Camera3D" type="Camera3D" parent="CameraArm"]
 current = true
+fov = 66.0
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, 0)

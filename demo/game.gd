@@ -1,12 +1,20 @@
 extends Node3D
 
 @onready var looking_at_ := $toykit
+@onready var guides_ := $Guides
+@onready var recorder_ := $Recorder
 
 var patch_file_handle_ := PDPatchFile.new()
 var tween_:Tween
+var score_ := 0 :
+	set(value):
+		score_ = value
+		$Recorder/CanvasLayer/Label2.text = str(score_)
 
 func _ready() -> void:
 	Engine.max_fps = 144
+
+	Camera.set_head_position($acid.get_view_position())
 
 	Camera.smooth_look_at($toykit)
 	
@@ -14,14 +22,15 @@ func _ready() -> void:
 
 	if not patch_file_handle_.open(p):
 		push_error("couldn't open patch")
-		
-	for node in get_children():
-		if node is Device:
-			node.value_changed.connect(value_changed_.bind(node))
 
 	PureData.bind("s-clock")
+	PureData.bind("s-clock-4")
 	PureData.bind("s-rumble")
 	PureData.bang.connect(_bang)
+	
+	for child in get_children():
+		if child is Device:
+			child.value_changed.connect(_device_nob_value_changed)
 
 var i_ = 0
 
@@ -34,10 +43,74 @@ func _bang(r):
 	elif r == "s-rumble":
 		Camera.shake(0.7, 0.001)
 
-func value_changed_(value, node:Device) -> void:
-	pass
-
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("noise"):
-		print("r-" + name + "-noise")
-		PureData.send_bang("r-" + name + "-noise")
+		Camera.smooth_look_at($Dancer)
+
+func follow(nob_path:NodePath, begin_time:float, end_time:float, from_value:float, to_value:float):
+	var nob := get_node_or_null(nob_path)
+	if not nob:
+		return
+
+	var pos = nob.get_guide_position_for_value(from_value)
+	var d = preload("res://models/guide/follow.tscn").instantiate()
+	d.position = pos
+	d.watch(nob, from_value, to_value, (end_time - begin_time) / $Recorder/AnimationPlayer.speed_scale)
+	d.hit.connect(func(accuracy): score_ += 50; good_(nob.get_nob_position() + Vector3(0.0, 0.01, 0.0)))
+	d.miss.connect(func(accuracy): bad_(nob.get_nob_position() + Vector3(0.0, 0.01, 0.0), accuracy))
+
+	guides_.add_child(d)
+
+func test(nob_path:NodePath, key_time:float, value:float):
+	var nob := get_node_or_null(nob_path)
+	if not nob:
+		return
+
+	var pos = nob.get_guide_position_for_value(value)
+	var d = preload("res://models/guide/sphere.tscn").instantiate()
+	d.position = pos
+	d.watch(nob, value)
+	d.hit.connect(func(off:float): score_ += 100; good_(pos + Vector3(0.0, 0.01, 0.0)))
+	d.miss.connect(func(off:float): bad_(pos + Vector3(0.0, 0.01, 0.0), off))
+	nob.intended_value = value
+
+	guides_.add_child(d)
+	
+func good_(pos:Vector3) -> void:
+	var x = preload("res://models/guide/hit.tscn").instantiate()
+	x.position = pos
+	add_child(x)
+	x.good()
+	
+	$Nice.pitch_scale = randf_range(0.7, 1.5)
+	$Nice.play() 
+
+var last_bad_
+
+func bad_(pos:Vector3, accuracy:float) -> void:
+	if last_bad_:
+		last_bad_.queue_free()
+
+	last_bad_ = preload("res://models/guide/hit.tscn").instantiate()
+	last_bad_.position = pos
+	last_bad_.accuracy = accuracy
+	add_child(last_bad_)
+	last_bad_.bad()
+
+func guide_exists_(nob:Nob) -> bool:
+	for node in guides_.get_children():
+		if node.get_nob() == nob:
+			return true
+
+	return false
+
+func _device_nob_value_changed(nob:Nob, new_value:float, old_value:float) -> void:
+	if not recorder_.playing_:
+		return
+
+	if guide_exists_(nob):
+		return
+
+	if abs(nob.intended_value - new_value) > 0.1:
+		nob.reset_to_intended_value()
+		bad_(nob.get_nob_position() + Vector3.UP * 0.01, -1)

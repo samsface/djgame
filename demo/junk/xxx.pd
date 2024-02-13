@@ -30,6 +30,12 @@
 #000000 #000000;
 #X obj 208 25 bng 15 250 50 0 s-STOP r-STOP stop 17 7 0 10 #fcfcfc
 #000000 #000000;
+#X obj 802 443 bng 15 250 50 0 s-clock-beat r-clock-beat empty 17 7
+0 10 #fcfcfc #000000 #000000;
+#X obj 566 535 bng 15 250 50 0 s-clock-4 r-clock-4 empty 17 7 0 10
+#fcfcfc #000000 #000000;
+#X obj 577 460 sel 0;
+#X obj 577 430 % 4;
 #X connect 2 0 1 0;
 #X connect 2 0 7 0;
 #X connect 2 1 1 1;
@@ -49,6 +55,7 @@
 #X connect 9 0 8 0;
 #X connect 10 0 11 0;
 #X connect 10 0 20 0;
+#X connect 10 0 27 0;
 #X connect 11 0 13 0;
 #X connect 13 1 12 0;
 #X connect 14 0 15 0;
@@ -60,3 +67,5 @@
 #X connect 21 0 6 0;
 #X connect 22 0 6 0;
 #X connect 23 0 21 0;
+#X connect 26 0 25 0;
+#X connect 27 0 26 0;

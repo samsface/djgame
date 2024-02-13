@@ -1,11 +1,32 @@
-[gd_scene load_steps=8 format=3 uid="uid://bfo1bxbj7knm0"]
+[gd_scene load_steps=15 format=3 uid="uid://bfo1bxbj7knm0"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_507jt"]
 [ext_resource type="Texture2D" uid="uid://cdvjs1do44ycq" path="res://models/shared/photos_2017_9_7_fst_stained-wooden-texture-table.jpg" id="2_0hwtm"]
 [ext_resource type="PackedScene" uid="uid://b34ex32xpvd1s" path="res://models/toydrum/toydrum.tscn" id="3_db0a3"]
 [ext_resource type="PackedScene" uid="uid://myu11bovhya6" path="res://models/daft_box/daft_box.tscn" id="4_gcnau"]
+[ext_resource type="PackedScene" uid="uid://bnb4n0pt0sbo6" path="res://dancers/dancer.tscn" id="5_jsubw"]
+[ext_resource type="AudioStream" uid="uid://dalhkqu5ld48w" path="res://models/guide/nice.wav" id="6_i23vf"]
+[ext_resource type="Script" path="res://track.gd" id="6_tw36s"]
+[ext_resource type="Animation" uid="uid://cy4itbq2etbq0" path="res://junk/test2.tres" id="7_wtwf7"]
+
+[sub_resource type="Animation" id="Animation_7u863"]
+resource_name = "reset"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ll70c"]
+_data = {
+"reset": SubResource("Animation_7u863"),
+"test": ExtResource("7_wtwf7")
+}
+
+[sub_resource type="Gradient" id="Gradient_655s4"]
+offsets = PackedFloat32Array(0.0394537, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 0.72114, 0.984908, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sgggg"]
+gradient = SubResource("Gradient_655s4")
 
 [sub_resource type="Environment" id="Environment_8y6op"]
+background_mode = 2
 ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
@@ -15,7 +36,7 @@ sdfgi_bounce_feedback = 1.99
 glow_enabled = true
 fog_enabled = true
 volumetric_fog_enabled = true
-adjustment_enabled = true
+adjustment_color_correction = SubResource("GradientTexture1D_sgggg")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ij4h"]
 albedo_color = Color(0.47451, 0.47451, 0.47451, 1)
@@ -25,17 +46,82 @@ subsurf_scatter_strength = 0.3
 uv1_scale = Vector3(2, 2, 2)
 uv1_offset = Vector3(0.5, 0.5, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_fhy07"]
-
 [node name="Game" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000950955, 0.000868201, -0.000772789)
 script = ExtResource("1_507jt")
+
+[node name="Nice" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00650228, 0.104412, -0.389397)
+stream = ExtResource("6_i23vf")
+volume_db = -80.0
+
+[node name="Recorder" type="Node" parent="."]
+script = ExtResource("6_tw36s")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Recorder"]
+
+[node name="Label" type="Label" parent="Recorder/CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+metadata/_edit_use_anchors_ = true
+
+[node name="HSlider" type="HSlider" parent="Recorder/CanvasLayer"]
+offset_left = 9.0
+offset_top = 52.0
+offset_right = 1674.0
+offset_bottom = 68.0
+max_value = 240.0
+step = 0.0
+value = 1.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Recorder/CanvasLayer/HSlider"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = -25.0
+offset_right = 43.0
+offset_bottom = -2.0
+text = "0"
+metadata/_edit_use_anchors_ = true
+
+[node name="ProgressBar" type="ProgressBar" parent="Recorder/CanvasLayer/HSlider"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+max_value = 240.0
+step = 0.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="Recorder/CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 1545.0
+offset_top = 947.0
+offset_right = 1656.0
+offset_bottom = 1035.0
+theme_override_font_sizes/font_size = 64
+text = "123"
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Recorder"]
+active = false
+root_node = NodePath("../..")
+libraries = {
+"test": SubResource("AnimationLibrary_ll70c")
+}
+speed_scale = 1.923
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8y6op")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.128796, -0.863107, 0.488322, 0, 0.492424, 0.870356, -0.991671, -0.112098, 0.063422, 0, 0.26248, 0.363653)
+transform = Transform3D(0.128796, -0.863107, 0.488322, 0, 0.492424, 0.870356, -0.991671, -0.112098, 0.0634222, 0, 0.26248, 0.363653)
+light_energy = 0.044
 shadow_enabled = true
 directional_shadow_mode = 0
 directional_shadow_split_1 = 0.0
@@ -47,13 +133,40 @@ directional_shadow_max_distance = 0.5
 directional_shadow_pancake_size = 0.1
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.499829, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.499829, 0.377878)
+use_collision = true
+collision_layer = 8
+collision_mask = 0
+material = SubResource("StandardMaterial3D_3ij4h")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(35.785, 0, 0, 0, 35.785, 0, 0, 0, 35.785, 0, -18.449, -12.0004)
+material = SubResource("StandardMaterial3D_3ij4h")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(35.785, 0, 0, 0, 35.785, 0, 0, 0, 35.785, 0, -7.99355, -26.1777)
+material = SubResource("StandardMaterial3D_3ij4h")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(35.785, 0, 0, 0, 35.785, 0, 0, 0, 35.785, 26.3108, -7.66908, -12.4576)
 material = SubResource("StandardMaterial3D_3ij4h")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0340311, 0.145733, -0.103002)
 light_color = Color(1, 0, 1, 1)
 omni_range = 0.188
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0340311, 1.2553, -1.90846)
+light_color = Color(1, 0, 1, 1)
+shadow_enabled = true
+omni_range = 1.47
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.73602, 1.09459, -1.90846)
+light_color = Color(0.819608, 0.568627, 0, 1)
+shadow_enabled = true
+omni_range = 1.47
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.230654, 0.0535484, -0.0864199)
@@ -73,11 +186,25 @@ transform = Transform3D(1.45442, 0, -0.564133, 0, 1.56, 0, 0.564133, 0, 1.45442,
 [node name="acid" parent="." instance=ExtResource("4_gcnau")]
 transform = Transform3D(0.96492, 0, -0.262543, 0, 1, 0, 0.262543, 0, 0.96492, 0.0635047, 0.000445686, 0.0536318)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.486114, 0)
-collision_layer = 8
-collision_mask = 0
+[node name="Dancer" parent="." instance=ExtResource("5_jsubw")]
+transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.999808, 0.208545, -0.591279, -1.56871)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00161257, 0)
-shape = SubResource("BoxShape3D_fhy07")
+[node name="Dancer2" parent="." instance=ExtResource("5_jsubw")]
+transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.999808, -1.72006, -0.591279, -2.16028)
+
+[node name="Dancer3" parent="." instance=ExtResource("5_jsubw")]
+transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.999808, 1.88294, -0.591279, -3.21977)
+
+[node name="Dancer4" parent="." instance=ExtResource("5_jsubw")]
+transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.999808, 1.15755, -0.591279, -2.32565)
+
+[node name="Dancer5" parent="." instance=ExtResource("5_jsubw")]
+transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.999808, -0.90388, -0.591279, -3.38836)
+
+[node name="Dancer6" parent="." instance=ExtResource("5_jsubw")]
+transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.999808, -0.636143, -0.591279, -2.47841)
+
+[node name="Guides" type="Node3D" parent="."]
+
+[node name="Player" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0135274, 0.151198, 0.109009)

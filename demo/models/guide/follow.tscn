@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhr4siavx51c0"]
+
+[ext_resource type="Script" path="res://models/guide/follow.gd" id="1_3oh8p"]
+
+[node name="Follow" type="Node3D"]
+script = ExtResource("1_3oh8p")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(0.01, 0.01, 0.01)

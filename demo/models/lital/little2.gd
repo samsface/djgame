@@ -29,3 +29,10 @@ func _impulse(from:Vector3, force:float) -> void:
 	tween_.tween_property($Wrap, "rotation:x", 0.005 * sign(force), 0.01)
 	tween_.set_parallel(false)
 	tween_.tween_property($Wrap, "rotation:x", 0.0, 0.02)
+
+func get_view_position(from_position := Vector3.ZERO) -> Vector3:
+	for view in $Views.get_children():
+		if from_position.distance_to(view.global_position):
+			return view.global_position
+
+	return from_position

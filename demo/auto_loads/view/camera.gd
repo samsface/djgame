@@ -10,10 +10,13 @@ var looking_at_:Node3D
 var looking_at_tween_:Tween
 var hovering_
 
-func _ready() -> void:
-	camera_arm_.position.y = 0.15
-	camera_arm_.position.z = 0.1
+var recording := false
+var recorder
 
+func looking_at() -> void:
+	pass
+
+func _ready() -> void:
 	cursor.push(self, Cursor.Action.point)
 
 func rv(scale:float = 1.0) -> Vector3:
@@ -27,6 +30,14 @@ func shake(duration:float = 0.5, scale:float = 0.001) -> void:
 	shake_tween_.set_speed_scale(0.2)
 	for i in int(duration / 0.1):
 		shake_tween_.tween_property(camera_, "position", position + rv(scale / (i+1)), 0.01)
+
+func _process(delta: float) -> void:
+	if looking_at_:
+		var r = camera_arm_.rotation
+		camera_arm_.look_at(looking_at_.global_position)
+		var rr = camera_arm_.rotation
+		camera_arm_.rotation = r
+		camera_arm_.rotation = lerp(r, rr, delta * 6.0)
 
 func _physics_process(delta: float) -> void:
 	if not cursor.is_owner(self):
@@ -58,29 +69,17 @@ func _physics_process(delta: float) -> void:
 			hovering_ = ray_cast_.get_collider().get_parent()
 			hovering_._mouse_entered()
 
-func smooth_look_at(node, force = false) -> void:
-	if not force:
-		if looking_at_ == node:
-			return
-	
-	if looking_at_tween_:
-		looking_at_tween_.kill()
-		
-	looking_at_ = node
-	
-	var r = camera_arm_.rotation
-	var p = camera_arm_.position
-	
-	camera_arm_.look_at(looking_at_.global_position)
-	var t = camera_arm_.rotation
-	camera_arm_.position = p
-	camera_arm_.rotation = r
+func set_head_position(pos:Vector3) -> void:
+	var tween := create_tween()
+	tween.tween_property(camera_arm_, ^"position", pos, 0.5)
 
-	looking_at_tween_ = create_tween()
-	looking_at_tween_.set_speed_scale(1.2)
-	looking_at_tween_.set_trans(Tween.TRANS_CUBIC)
-	looking_at_tween_.set_ease(Tween.EASE_OUT)
-	looking_at_tween_.set_parallel()
-	#looking_at_tween_.tween_property(camera_arm_, "position:x", x, 0.6)
-	looking_at_tween_.tween_property(camera_arm_, "rotation", t, 0.6)
-	#tween_.tween_property($CameraArm, "fov", randf_range(50, 75), 0.6)
+
+func get_head_position() -> Vector3:
+	return camera_arm_.position
+
+func smooth_look_at(node, force = false) -> void:
+	looking_at_ = node
+
+func shift():
+	var tween = create_tween()
+	pass

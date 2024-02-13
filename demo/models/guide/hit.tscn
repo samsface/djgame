@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://lnop4o6ali3c"]
+
+[ext_resource type="FontFile" uid="uid://bu5kmaeux4fmv" path="res://ui/fonts/KMKDSPKW.ttf" id="1_q4f27"]
+[ext_resource type="Script" path="res://models/guide/hit.gd" id="2_hf7l0"]
+[ext_resource type="AudioStream" uid="uid://dalhkqu5ld48w" path="res://models/guide/nice.wav" id="3_h05od"]
+
+[node name="Hit" type="Label3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0140477, -0.00180785)
+visible = false
+cast_shadow = 1
+pixel_size = 0.0002
+billboard = 1
+text = "GOOD!"
+font = ExtResource("1_q4f27")
+outline_size = 16
+script = ExtResource("2_hf7l0")
+
+[node name="Nice" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_h05od")
+volume_db = 12.0

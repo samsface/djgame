@@ -1,0 +1,26 @@
+[gd_scene load_steps=7 format=3 uid="uid://b3jnpx2odxvr"]
+
+[ext_resource type="PackedScene" uid="uid://s0wjly1qmey5" path="res://models/guide/sphere.glb" id="1_inlc3"]
+[ext_resource type="Shader" path="res://models/guide/sphere.gdshader" id="2_5ixre"]
+[ext_resource type="Script" path="res://models/guide/sphere.gd" id="2_52rml"]
+[ext_resource type="Shader" path="res://models/guide/sphere_outline.gdshader" id="3_wtrec"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nib8p"]
+render_priority = 0
+shader = ExtResource("3_wtrec")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pqqrx"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_nib8p")
+shader = ExtResource("2_5ixre")
+
+[node name="sphere" instance=ExtResource("1_inlc3")]
+script = ExtResource("2_52rml")
+
+[node name="Icosphere" parent="." index="0"]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0)
+instance_shader_parameters/bang = 0.0
+instance_shader_parameters/danger = 0.0
+instance_shader_parameters/ttl = 0.0
+instance_shader_parameters/ttl2 = 0.0
+surface_material_override/0 = SubResource("ShaderMaterial_pqqrx")
