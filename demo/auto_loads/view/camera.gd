@@ -73,7 +73,6 @@ func set_head_position(pos:Vector3) -> void:
 	var tween := create_tween()
 	tween.tween_property(camera_arm_, ^"position", pos, 0.5)
 
-
 func get_head_position() -> Vector3:
 	return camera_arm_.position
 

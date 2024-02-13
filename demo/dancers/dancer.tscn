@@ -13,15 +13,17 @@ shader_parameter/squash_top = 0.94
 shader_parameter/curve = ExtResource("10_xg3q7")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_58emb"]
+resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_gx8e3")
 shader = ExtResource("8_j6yxr")
 shader_parameter/squash_bottom = 0.1
-shader_parameter/squash_top = 0.94
+shader_parameter/squash_top = 0.861
 shader_parameter/eye_gap = 0.306
 shader_parameter/eye_size = 0.644
 shader_parameter/eye_width = 0.042
 shader_parameter/eye_white_size = 0.815
+shader_parameter/albedo = Color(1, 0, 0, 1)
 shader_parameter/curve = ExtResource("10_xg3q7")
 
 [node name="Sprite3D" type="Node3D"]

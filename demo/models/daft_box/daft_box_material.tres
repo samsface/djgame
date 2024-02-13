@@ -8,7 +8,7 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_3rsoq")
-shader_parameter/color = Color(0.901961, 0.584314, 0, 1)
+shader_parameter/color = Color(1, 0.372549, 0.788235, 1)
 shader_parameter/debug_uv1 = false
 shader_parameter/debug_uv2 = false
 shader_parameter/edge_color = Color(0.537255, 0.529412, 0.164706, 0.47451)

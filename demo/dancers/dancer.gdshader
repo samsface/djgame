@@ -7,6 +7,7 @@ uniform float eye_gap : hint_range(0.0, 1.0);
 uniform float eye_size : hint_range(0.0, 1.0);
 uniform float eye_width : hint_range(0.0, 1.0);
 uniform float eye_white_size : hint_range(0.0, 1.0);
+uniform vec3 albedo : source_color;
 
 // Define the draw_oval "function"
 float draw_oval(vec2 frag_coord, vec2 center, vec2 radii) {
@@ -66,7 +67,7 @@ void fragment()
 	METALLIC = 0.1;
 	ROUGHNESS = 0.5;
 
-	ALBEDO.rgb = vec3(1.0, 0.2, 1.0);
+	ALBEDO.rgb = albedo;
 	ALBEDO.rgb = mix(vec3(0.0), ALBEDO.rgb, left_eye);
 	ALBEDO.rgb = mix(vec3(1.0), ALBEDO.rgb, left_eye_whites);
 	ALBEDO.rgb = mix(vec3(0.0), ALBEDO.rgb, right_eye);

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bfo1bxbj7knm0"]
+[gd_scene load_steps=19 format=3 uid="uid://bfo1bxbj7knm0"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_507jt"]
 [ext_resource type="Texture2D" uid="uid://cdvjs1do44ycq" path="res://models/shared/photos_2017_9_7_fst_stained-wooden-texture-table.jpg" id="2_0hwtm"]
@@ -20,7 +20,6 @@ _data = {
 
 [sub_resource type="Gradient" id="Gradient_655s4"]
 offsets = PackedFloat32Array(0.0394537, 1)
-colors = PackedColorArray(0, 0, 0, 1, 1, 0.72114, 0.984908, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_sgggg"]
 gradient = SubResource("Gradient_655s4")
@@ -36,6 +35,7 @@ sdfgi_bounce_feedback = 1.99
 glow_enabled = true
 fog_enabled = true
 volumetric_fog_enabled = true
+adjustment_saturation = 2.14
 adjustment_color_correction = SubResource("GradientTexture1D_sgggg")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ij4h"]
@@ -45,6 +45,50 @@ subsurf_scatter_enabled = true
 subsurf_scatter_strength = 0.3
 uv1_scale = Vector3(2, 2, 2)
 uv1_offset = Vector3(0.5, 0.5, 1)
+
+[sub_resource type="Shader" id="Shader_40l5y"]
+code = "
+// NOTE: Shader automatically converted from Godot Engine 4.2.1.stable's FogMaterial.
+
+shader_type fog;
+
+uniform float density : hint_range(0, 1, 0.0001) = 1.0;
+uniform vec4 albedo : source_color = vec4(1.0);
+uniform vec4 emission : source_color = vec4(0, 0, 0, 1);
+uniform float height_falloff = 0.0;
+uniform float edge_fade = 0.1;
+uniform sampler3D density_texture: hint_default_white;
+
+
+void fog() {
+	vec3 uv = UVW;
+
+	
+    DENSITY = density * clamp(exp2(-height_falloff * (WORLD_POSITION.y - OBJECT_POSITION.y)), 0.0, 1.0);
+    DENSITY *= texture(density_texture, uv).r;
+    DENSITY *= pow(clamp(-2.0 * SDF / min(min(SIZE.x, SIZE.y), SIZE.z), 0.0, 1.0), edge_fade);
+    ALBEDO = albedo.rgb;
+    EMISSION = emission.rgb;
+}
+"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qaufs"]
+frequency = 0.1764
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_jwtjn"]
+width = 256
+height = 256
+depth = 256
+noise = SubResource("FastNoiseLite_qaufs")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dhelg"]
+shader = SubResource("Shader_40l5y")
+shader_parameter/density = 1.0447
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/emission = Color(0, 0.765175, 0.78628, 1)
+shader_parameter/height_falloff = 0.0
+shader_parameter/edge_fade = 0.1
+shader_parameter/density_texture = SubResource("NoiseTexture3D_jwtjn")
 
 [node name="Game" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000950955, 0.000868201, -0.000772789)
@@ -66,6 +110,7 @@ offset_bottom = 23.0
 metadata/_edit_use_anchors_ = true
 
 [node name="HSlider" type="HSlider" parent="Recorder/CanvasLayer"]
+visible = false
 offset_left = 9.0
 offset_top = 52.0
 offset_right = 1674.0
@@ -122,7 +167,7 @@ environment = SubResource("Environment_8y6op")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.128796, -0.863107, 0.488322, 0, 0.492424, 0.870356, -0.991671, -0.112098, 0.0634222, 0, 0.26248, 0.363653)
 light_energy = 0.044
-shadow_enabled = true
+light_angular_distance = 3.13
 directional_shadow_mode = 0
 directional_shadow_split_1 = 0.0
 directional_shadow_split_2 = 0.015
@@ -189,22 +234,33 @@ transform = Transform3D(0.96492, 0, -0.262543, 0, 1, 0, 0.262543, 0, 0.96492, 0.
 [node name="Dancer" parent="." instance=ExtResource("5_jsubw")]
 transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.999808, 0.208545, -0.591279, -1.56871)
 
+[node name="Dancer10" parent="." instance=ExtResource("5_jsubw")]
+transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.999808, 1.29434, -0.591279, -2.55304)
+
+[node name="Dancer12" parent="." instance=ExtResource("5_jsubw")]
+transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.999808, 2.78022, -0.591279, -3.12403)
+
+[node name="Dancer14" parent="." instance=ExtResource("5_jsubw")]
+transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.999808, 2.72624, -0.591279, -4.79792)
+
 [node name="Dancer2" parent="." instance=ExtResource("5_jsubw")]
 transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.999808, -1.72006, -0.591279, -2.16028)
 
 [node name="Dancer3" parent="." instance=ExtResource("5_jsubw")]
-transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.999808, 1.88294, -0.591279, -3.21977)
-
-[node name="Dancer4" parent="." instance=ExtResource("5_jsubw")]
-transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.999808, 1.15755, -0.591279, -2.32565)
+transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.999808, 0.0791962, -0.591279, -2.95691)
 
 [node name="Dancer5" parent="." instance=ExtResource("5_jsubw")]
 transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.999808, -0.90388, -0.591279, -3.38836)
 
-[node name="Dancer6" parent="." instance=ExtResource("5_jsubw")]
-transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.999808, -0.636143, -0.591279, -2.47841)
+[node name="Dancer9" parent="." instance=ExtResource("5_jsubw")]
+transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.999808, -0.200826, -0.591279, -4.37227)
 
 [node name="Guides" type="Node3D" parent="."]
 
 [node name="Player" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0135274, 0.151198, 0.109009)
+
+[node name="FogVolume" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0882363, -0.583118, -3.65045)
+size = Vector3(5, 5, 5)
+material = SubResource("ShaderMaterial_dhelg")

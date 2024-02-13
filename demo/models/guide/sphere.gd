@@ -12,29 +12,20 @@ var miss_ := false
 var last_off_ := 0.0
 
 func _ready() -> void:
+	var color = HyperRandom.fruity_color()
+	
+	$Icosphere/OmniLight3D.light_color = color
+	$Icosphere.set_instance_shader_parameter("albedo", color);
+	
 	$Icosphere.position.y = 0.04
 	var tween := create_tween()
+	tween.set_parallel()
+	tween.tween_property($Icosphere, ^"rotation:y", 5, 1.0)
 	tween.tween_property($Icosphere, ^"position:y", -0.005, 1.0)
+	tween.tween_property($Icosphere/OmniLight3D, ^"light_energy", 1.0, 1.0)
 	#tween.tween_property($Icosphere, ^"instance_shader_parameters/bang", 1.0, 0.5)
 	#tween.tween_property($Icosphere, ^"instance_shader_parameters/danger", 1.0, 0.2)
 	tween.finished.connect(_miss)
-	$Icosphere.set_instance_shader_parameter("albedo", generate_fruity_color());
-
-func generate_fruity_color():
-	# Generate random values for red, green, and blue components
-	var red = randf()
-	var green = randf()
-	var blue = randf()
-
-	# Boost the brightness of the color
-	var brightness_factor = 0.1  # Adjust this value to control brightness
-	red = clamp(red + brightness_factor, 0.0, 1.0)
-	green = clamp(green + brightness_factor, 0.0, 1.0)
-	blue = clamp(blue + brightness_factor, 0.0, 1.0)
-
-	# Create and return the Color
-	var fruity_color = Color(red, green, blue)
-	return fruity_color
 
 func _miss() -> void:
 	if hit_:
@@ -55,9 +46,11 @@ func _hit() -> void:
 
 	nob_.value_changed.disconnect(_nob_value_changed)
 	var tween = create_tween()
+	tween.set_parallel()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_EXPO)
 	tween.tween_property($Icosphere, ^"instance_shader_parameters/ttl", 1.0, 0.35)
+	tween.tween_property($Icosphere/OmniLight3D, ^"light_energy", 0.0, 0.35)
 	$Icosphere.set_instance_shader_parameter("ttl2", 1.0);
 	
 	wait_for_accuracy_()
@@ -106,9 +99,8 @@ func wait_for_accuracy_() -> void:
 	wait_then_free_()
 	
 func wait_then_free_() -> void:
-	create_tween().tween_interval(0.2).finished.connect(queue_free)
+	create_tween().tween_interval(0.3).finished.connect(queue_free)
 
-	
 func get_nob() -> Nob:
 	return nob_
 	
