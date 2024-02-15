@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnvodaqvhpkdb"]
+
+[ext_resource type="PackedScene" uid="uid://22gc32j3ucsv" path="res://phone/contacts.tscn" id="1_sit53"]
+
+[node name="PhoneGui" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="App" parent="." instance=ExtResource("1_sit53")]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 32

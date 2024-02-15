@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bq8fsxd126r2p"]
+
+[ext_resource type="PackedScene" uid="uid://22gc32j3ucsv" path="res://phone/contacts.tscn" id="2_oiope"]
+
+[node name="PhoneTest" type="Node2D"]
+
+[node name="MarginContainer" parent="." instance=ExtResource("2_oiope")]

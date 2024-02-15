@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://bfo1bxbj7knm0"]
+[gd_scene load_steps=20 format=3 uid="uid://bfo1bxbj7knm0"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_507jt"]
 [ext_resource type="Texture2D" uid="uid://cdvjs1do44ycq" path="res://models/shared/photos_2017_9_7_fst_stained-wooden-texture-table.jpg" id="2_0hwtm"]
+[ext_resource type="PackedScene" uid="uid://bl7d8jwotcuws" path="res://phone.tscn" id="2_3faxa"]
 [ext_resource type="PackedScene" uid="uid://b34ex32xpvd1s" path="res://models/toydrum/toydrum.tscn" id="3_db0a3"]
 [ext_resource type="PackedScene" uid="uid://myu11bovhya6" path="res://models/daft_box/daft_box.tscn" id="4_gcnau"]
 [ext_resource type="PackedScene" uid="uid://bnb4n0pt0sbo6" path="res://dancers/dancer.tscn" id="5_jsubw"]
@@ -93,6 +94,9 @@ shader_parameter/density_texture = SubResource("NoiseTexture3D_jwtjn")
 [node name="Game" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000950955, 0.000868201, -0.000772789)
 script = ExtResource("1_507jt")
+
+[node name="phone" parent="." instance=ExtResource("2_3faxa")]
+transform = Transform3D(0.0787763, 0, -0.0139386, 0, 0.08, 0, 0.0139386, 0, 0.0787763, 0.0302815, 0.0018706, 0.13907)
 
 [node name="Nice" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00650228, 0.104412, -0.389397)

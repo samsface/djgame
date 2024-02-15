@@ -22,6 +22,7 @@ SelectionBus="*res://addons/libpd/script/selection_bus.gd"
 PureData="*res://addons/libpd/pure_data.gd"
 Camera="*res://auto_loads/view/camera.tscn"
 VerletPhysicsServer="*res://addons/verlet_physics/verlet_physics_server.gd"
+GameTime="*res://phone/clock.gd"
 
 [display]
 
@@ -34,6 +35,10 @@ window/vsync/vsync_mode=0
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/verlet_physics/plugin.cfg")
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
 
 [input]
 

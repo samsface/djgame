@@ -65,7 +65,7 @@ func _physics_process(delta: float) -> void:
 		var point = ray_cast_.get_collision_point()
 		cursor.try_set_position(self, point + Vector3.UP * 0.002)
 
-		if ray_cast_.get_collider().get_parent() is Nob:
+		if ray_cast_.get_collider().get_parent().has_method("_mouse_entered"):
 			hovering_ = ray_cast_.get_collider().get_parent()
 			hovering_._mouse_entered()
 

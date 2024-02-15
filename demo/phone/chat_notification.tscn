@@ -1,0 +1,95 @@
+[gd_scene load_steps=6 format=3 uid="uid://f4atf7m6lavj"]
+
+[ext_resource type="Shader" path="res://phone/chat_notification.gdshader" id="1_hawdo"]
+[ext_resource type="Script" path="res://phone/chat_notification.gd" id="2_gfddj"]
+[ext_resource type="Texture2D" uid="uid://bay42xckqhybc" path="res://icon.svg" id="3_vvylg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_datqb"]
+shader = ExtResource("1_hawdo")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rkes5"]
+bg_color = Color(0.109804, 0.109804, 0.109804, 1)
+corner_radius_top_left = 11
+corner_radius_top_right = 11
+corner_radius_bottom_right = 11
+corner_radius_bottom_left = 11
+
+[node name="PanelContainer" type="PanelContainer"]
+material = SubResource("ShaderMaterial_datqb")
+offset_left = 155.0
+offset_right = 545.0
+offset_bottom = 71.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_rkes5")
+script = ExtResource("2_gfddj")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="Image" type="TextureRect" parent="HBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("3_vvylg")
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ContactName" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Giadi"
+vertical_alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_right = 12
+
+[node name="TimeStamp" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+text = "Just now"
+vertical_alignment = 2
+
+[node name="HBoxContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+clip_contents = true
+layout_mode = 2
+theme_override_constants/margin_right = 24
+
+[node name="Message" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/HBoxContainer2/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+text = "I made pizza! I made Pizza!"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[connection signal="gui_input" from="." to="." method="_gui_input"]
+[connection signal="timeout" from="Timer" to="." method="_timeout"]

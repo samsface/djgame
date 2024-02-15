@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://4s0i5u4b6lfr"]
+
+[ext_resource type="PackedScene" uid="uid://bl7d8jwotcuws" path="res://phone.tscn" id="2_37awu"]
+[ext_resource type="Script" path="res://phone/phone_test.gd" id="2_u6ny8"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="s" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.278639, 0.960396, 0, -0.960396, 0.278639, 0, 1.00749, 0.261644)
+current = true
+
+[node name="phone" parent="." instance=ExtResource("2_37awu")]
+transform = Transform3D(0.990034, 0.139192, -0.0214287, -0.140832, 0.978506, -0.150641, 0, 0.152158, 0.988356, 0, 0, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("2_u6ny8")
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_left = 1403.0
+offset_top = 50.0
+offset_right = 1528.0
+offset_bottom = 81.0
+text = "NEW CONTACT"
+
+[node name="Button2" type="Button" parent="CanvasLayer"]
+offset_left = 1403.0
+offset_top = 99.0
+offset_right = 1528.0
+offset_bottom = 130.0
+text = "NEW MESSAGE"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0531903, 0.998584, 0, -0.998584, 0.0531903, 0, 0.477031, 0.930294)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.331858, 0.373501, 0)
+light_color = Color(0.858824, 0.627451, 0, 1)
+
+[connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer" method="_new_contact_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button2" to="CanvasLayer" method="_new_message_pressed"]
