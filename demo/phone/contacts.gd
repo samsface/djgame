@@ -5,6 +5,7 @@ extends MarginContainer
 	set(value):
 		chats = value
 		chats.new_chat.connect(_new_chat)
+@export var notification_service_node_path:NodePath
 
 var chat_
 
@@ -36,7 +37,7 @@ func _new_chat(phone_chat:PhoneChat) -> void:
 		contact_list_item.message = ""
 
 	phone_chat.changed.connect(_chat_changed.bind(phone_chat, contact_list_item))
-	phone_chat.new_message.connect(func(message): contacts_.move_child(contact_list_item, 0))
+	phone_chat.new_message.connect(_new_message.bind(phone_chat, contact_list_item))
 
 	contacts_.add_child(contact_list_item)
 	contacts_.move_child(contact_list_item, 0)
@@ -48,3 +49,10 @@ func _chat_changed(chat:PhoneChat, contact_list_item:Node) -> void:
 	contact_list_item.message = chat.messages.back().message
 	contact_list_item.time_stamp = chat.messages.back().sent_time
 	contact_list_item.unread_count = chat.unread_count
+
+func _new_message(message:PhoneChatMessage, chat:PhoneChat, contact_list_item:Node) -> void:
+	contacts_.move_child(contact_list_item, 0)
+	
+	var notification_service = get_node_or_null(notification_service_node_path)
+	if notification_service:
+		notification_service.show_notification(chat.messages.back(), chat)

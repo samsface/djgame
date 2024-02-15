@@ -7,6 +7,7 @@
 custom_minimum_size = Vector2(0, 68)
 offset_right = 386.0
 offset_bottom = 68.0
+flat = true
 script = ExtResource("1_aj4iv")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -24,6 +25,7 @@ layout_mode = 2
 
 [node name="Timer" type="Timer" parent="HBoxContainer"]
 one_shot = true
+autostart = true
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -95,4 +97,4 @@ custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
 color = Color(1, 1, 1, 0.0862745)
 
-[connection signal="timeout" from="HBoxContainer/Timer" to="HBoxContainer" method="_timeout"]
+[connection signal="timeout" from="HBoxContainer/Timer" to="." method="_timeout"]

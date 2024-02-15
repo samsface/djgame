@@ -96,7 +96,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000950955, 0.000868201, -0.
 script = ExtResource("1_507jt")
 
 [node name="phone" parent="." instance=ExtResource("2_3faxa")]
-transform = Transform3D(0.0787763, 0, -0.0139386, 0, 0.08, 0, 0.0139386, 0, 0.0787763, 0.0302815, 0.0018706, 0.13907)
+transform = Transform3D(0.0788486, -0.00353008, -0.0130548, 0.000528859, 0.0779723, -0.0178898, 0.0135133, 0.017546, 0.0768734, 0.0735189, 0.00980824, 0.129406)
 
 [node name="Nice" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00650228, 0.104412, -0.389397)
@@ -186,6 +186,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.499829, 0.377878)
 use_collision = true
 collision_layer = 8
 collision_mask = 0
+material = SubResource("StandardMaterial3D_3ij4h")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.499829, 0.377878)
+visible = false
+use_collision = true
+collision_layer = 8
+collision_mask = 0
+size = Vector3(100, 1, 100)
 material = SubResource("StandardMaterial3D_3ij4h")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]

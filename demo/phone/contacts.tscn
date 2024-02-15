@@ -3,14 +3,15 @@
 [ext_resource type="Script" path="res://phone/contacts.gd" id="1_ig03a"]
 [ext_resource type="Script" path="res://phone/debug_mouse.gd" id="2_nyw6p"]
 
-[node name="MarginContainer" type="MarginContainer"]
+[node name="Contacts" type="MarginContainer"]
 clip_contents = true
-custom_minimum_size = Vector2(389, 628)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_ig03a")
 
 [node name="ColorRect" type="ColorRect" parent="."]

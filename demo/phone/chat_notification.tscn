@@ -1,21 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://f4atf7m6lavj"]
+[gd_scene load_steps=4 format=3 uid="uid://f4atf7m6lavj"]
 
-[ext_resource type="Shader" path="res://phone/chat_notification.gdshader" id="1_hawdo"]
 [ext_resource type="Script" path="res://phone/chat_notification.gd" id="2_gfddj"]
 [ext_resource type="Texture2D" uid="uid://bay42xckqhybc" path="res://icon.svg" id="3_vvylg"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_datqb"]
-shader = ExtResource("1_hawdo")
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rkes5"]
-bg_color = Color(0.109804, 0.109804, 0.109804, 1)
+bg_color = Color(0, 0.854902, 0.337255, 1)
 corner_radius_top_left = 11
 corner_radius_top_right = 11
 corner_radius_bottom_right = 11
 corner_radius_bottom_left = 11
 
 [node name="PanelContainer" type="PanelContainer"]
-material = SubResource("ShaderMaterial_datqb")
 offset_left = 155.0
 offset_right = 545.0
 offset_bottom = 71.0

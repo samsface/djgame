@@ -33,6 +33,8 @@ func _ready():
 	
 	#input_.grab_focus()
 	get_node("%Send").pressed.connect(_send_pressed)
+	
+	%ScrollContainer.custom_minimum_size.y = 200
 
 func add_message_(message:PhoneChatMessage, animate := false, show_replies := false):
 	var x = preload("res://phone/bubble.tscn").instantiate()

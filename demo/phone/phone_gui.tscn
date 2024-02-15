@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnvodaqvhpkdb"]
+[gd_scene load_steps=3 format=3 uid="uid://bnvodaqvhpkdb"]
 
-[ext_resource type="PackedScene" uid="uid://22gc32j3ucsv" path="res://phone/contacts.tscn" id="1_sit53"]
+[ext_resource type="Script" path="res://phone/phone_gui.gd" id="1_6eoth"]
+[ext_resource type="Texture2D" uid="uid://dsorwbefbljaq" path="res://phone/IMG_5753.jpg" id="2_wasnv"]
 
 [node name="PhoneGui" type="MarginContainer"]
 anchors_preset = 15
@@ -10,15 +11,30 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+script = ExtResource("1_6eoth")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 2
-color = Color(0, 0, 0, 1)
+color = Color(0.00392157, 0.00392157, 0.00392157, 1)
 
-[node name="App" parent="." instance=ExtResource("1_sit53")]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 48
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="StatusBar" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_wasnv")
+expand_mode = 5
+
+[node name="App" parent="MarginContainer/VBoxContainer" instance_placeholder="res://phone/contacts.tscn"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 3
