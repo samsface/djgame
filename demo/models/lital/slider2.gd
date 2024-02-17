@@ -82,6 +82,7 @@ func invalidate_() -> void:
 
 	Camera.cursor.try_set_position(self, $Nob.global_position + Vector3.UP * 0.002)
 	Camera.smooth_look_at(self.get_parent())
+	Camera.set_head_position(get_parent().get_view_position())
 
 func get_guide_position_for_value(value:float) -> Vector3:
 	shadow_path_follow_.progress_ratio = value

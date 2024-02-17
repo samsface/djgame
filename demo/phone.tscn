@@ -74,6 +74,7 @@ mouse_filter = 2
 script = ExtResource("5_pqb1u")
 
 [node name="Debug" type="CanvasLayer" parent="." index="4"]
+visible = false
 script = ExtResource("6_vrhos")
 
 [node name="Button" type="Button" parent="Debug" index="0"]
@@ -96,6 +97,9 @@ offset_top = 144.0
 offset_right = 1525.0
 offset_bottom = 175.0
 text = "VIBRATE"
+
+[node name="Head" type="Marker3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.911029, 0.392024)
 
 [connection signal="input_event" from="StaticBody3D" to="." method="_input_event"]
 [connection signal="pressed" from="Debug/Button" to="Debug" method="_new_contact_pressed"]

@@ -1,10 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvxsm2x52fp42"]
+[gd_scene load_steps=9 format=3 uid="uid://bvxsm2x52fp42"]
 
 [ext_resource type="Script" path="res://models/lital/slider2.gd" id="1_cglxd"]
 [ext_resource type="PackedScene" uid="uid://7chbqpmrrhk7" path="res://models/lital/slider_3.tscn" id="2_5ku2x"]
+[ext_resource type="PackedScene" uid="uid://dwp3tnmuhyvep" path="res://models/shared/nobs/fader.tscn" id="2_ord32"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_t4snb"]
 radius = 0.01
+
+[sub_resource type="Gradient" id="Gradient_avto0"]
+offsets = PackedFloat32Array(0.20155, 0.445736)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_033kv"]
+gradient = SubResource("Gradient_avto0")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3v7bt"]
 shading_mode = 0
@@ -30,8 +40,18 @@ input_ray_pickable = false
 transform = Transform3D(0.999996, -0.00274016, 0, 0.00274016, 0.999996, 0, 0, 0, 0.999999, 0, 0, 0)
 shape = SubResource("SphereShape3D_t4snb")
 
+[node name="fader" parent="Nob" instance=ExtResource("2_ord32")]
+transform = Transform3D(0.015, 0, 0, 0, 0.015, 0, 0, 0, 0.015, 0, 0.00272084, -2.32831e-10)
+
 [node name="slider2" parent="Nob" instance=ExtResource("2_5ku2x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00509066, 0)
+visible = false
+
+[node name="Decal" type="Decal" parent="Nob"]
+transform = Transform3D(1, 0, 0, 0, 1, -2.39176e-05, 0, 2.39176e-05, 1, 0.000333264, -0.00127602, -0.000200025)
+visible = false
+size = Vector3(0.05, 0.01, 0.05)
+texture_albedo = SubResource("GradientTexture2D_033kv")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00603976, 0)

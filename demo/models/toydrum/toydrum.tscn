@@ -12,3 +12,8 @@ map = ExtResource("3_t4x0b")
 
 [node name="Base" parent="." index="1"]
 surface_material_override/0 = ExtResource("3_eln34")
+
+[node name="Views" type="Node3D" parent="." index="29"]
+
+[node name="Marker3D" type="Marker3D" parent="Views" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0890531, 0.0749367)

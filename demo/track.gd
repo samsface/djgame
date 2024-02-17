@@ -37,8 +37,8 @@ func get_animation_() -> Animation:
 
 func _bang(r):
 	if r == "s-clock-beat":
-		if beat_ % 32 == 0:
-			Camera.set_head_position(get_node("../acid").get_view_position(Camera.get_head_position()))
+		#if beat_ % 32 == 0:
+			#Camera.set_head_position(get_node("../acid").get_view_position(Camera.get_head_position()))
 		
 		beat_ += 1
 		#if beat_ > max_time_:

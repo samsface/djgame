@@ -21,6 +21,9 @@ func _input(event) -> void:
 		e.position.y *= $SubViewport.size.y
 		e.global_position = event.position
 		$SubViewport.push_input(e, false)
+		
+		Camera.smooth_look_at(self)
+		Camera.set_head_position($Head.global_position)
 
 func _input_event(camera: Node, event: InputEvent, position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
