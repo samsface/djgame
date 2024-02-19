@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cj382hkvrdxdi"]
 
-[ext_resource type="Script" path="res://track.gd" id="1_k3pmq"]
+[ext_resource type="Script" path="res://game/track.gd" id="1_k3pmq"]
 [ext_resource type="Animation" uid="uid://cy4itbq2etbq0" path="res://junk/test2.tres" id="2_msxe5"]
 [ext_resource type="AudioStream" uid="uid://dalhkqu5ld48w" path="res://models/guide/nice.wav" id="3_qn837"]
 

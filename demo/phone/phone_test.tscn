@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://4s0i5u4b6lfr"]
 
 [ext_resource type="Script" path="res://phone/s.gd" id="1_dxpna"]
-[ext_resource type="PackedScene" uid="uid://bl7d8jwotcuws" path="res://phone.tscn" id="2_37awu"]
+[ext_resource type="PackedScene" uid="uid://bl7d8jwotcuws" path="res://phone/phone.tscn" id="2_37awu"]
 
 [node name="Node3D" type="Node3D"]
 

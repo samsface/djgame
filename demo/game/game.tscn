@@ -1,16 +1,16 @@
 [gd_scene load_steps=26 format=3 uid="uid://bfo1bxbj7knm0"]
 
-[ext_resource type="Script" path="res://game.gd" id="1_507jt"]
-[ext_resource type="Texture2D" uid="uid://cdvjs1do44ycq" path="res://models/shared/photos_2017_9_7_fst_stained-wooden-texture-table.jpg" id="2_0hwtm"]
-[ext_resource type="PackedScene" uid="uid://bl7d8jwotcuws" path="res://phone.tscn" id="2_3faxa"]
-[ext_resource type="PackedScene" uid="uid://b34ex32xpvd1s" path="res://models/toydrum/toydrum.tscn" id="3_db0a3"]
-[ext_resource type="PackedScene" uid="uid://myu11bovhya6" path="res://models/daft_box/daft_box.tscn" id="4_gcnau"]
-[ext_resource type="AudioStream" uid="uid://dalhkqu5ld48w" path="res://models/guide/nice.wav" id="6_i23vf"]
-[ext_resource type="Script" path="res://track.gd" id="6_tw36s"]
-[ext_resource type="Script" path="res://Node.gd" id="9_mttb8"]
-[ext_resource type="Script" path="res://TextService.gd" id="10_1a162"]
-[ext_resource type="Script" path="res://crowd_service.gd" id="10_bemke"]
-[ext_resource type="AudioStream" uid="uid://b0l0fdwmx47o7" path="res://models/lital/woo.wav" id="10_n1vba"]
+[ext_resource type="Script" path="res://game/game.gd" id="1_5uhe0"]
+[ext_resource type="PackedScene" uid="uid://bl7d8jwotcuws" path="res://phone/phone.tscn" id="2_4rjj7"]
+[ext_resource type="AudioStream" uid="uid://dalhkqu5ld48w" path="res://models/guide/nice.wav" id="3_rphps"]
+[ext_resource type="Script" path="res://game/track.gd" id="4_mbgf6"]
+[ext_resource type="Texture2D" uid="uid://cdvjs1do44ycq" path="res://models/shared/photos_2017_9_7_fst_stained-wooden-texture-table.jpg" id="5_mue40"]
+[ext_resource type="PackedScene" uid="uid://b34ex32xpvd1s" path="res://models/toydrum/toydrum.tscn" id="6_mvalr"]
+[ext_resource type="PackedScene" uid="uid://myu11bovhya6" path="res://models/daft_box/daft_box.tscn" id="7_jscvx"]
+[ext_resource type="Script" path="res://game/Node.gd" id="8_iskqc"]
+[ext_resource type="Script" path="res://game/TextService.gd" id="9_7s010"]
+[ext_resource type="Script" path="res://game/crowd_service.gd" id="10_aypd4"]
+[ext_resource type="AudioStream" uid="uid://b0l0fdwmx47o7" path="res://models/lital/woo.wav" id="11_1d16v"]
 
 [sub_resource type="Animation" id="Animation_7u863"]
 resource_name = "reset"
@@ -91,7 +91,7 @@ adjustment_color_correction = SubResource("GradientTexture1D_sgggg")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ij4h"]
 albedo_color = Color(0.235294, 0.235294, 0.235294, 1)
-albedo_texture = ExtResource("2_0hwtm")
+albedo_texture = ExtResource("5_mue40")
 metallic = 0.84
 metallic_specular = 0.28
 roughness = 0.42
@@ -154,18 +154,18 @@ shader_parameter/density_texture = SubResource("NoiseTexture3D_jwtjn")
 
 [node name="Game" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000950955, 0.000868201, -0.000772789)
-script = ExtResource("1_507jt")
+script = ExtResource("1_5uhe0")
 
-[node name="phone" parent="." instance=ExtResource("2_3faxa")]
+[node name="phone" parent="." instance=ExtResource("2_4rjj7")]
 transform = Transform3D(0.0788486, -0.00353008, -0.0130548, 0.000528859, 0.0779723, -0.0178898, 0.0135133, 0.017546, 0.0768734, 0.0735189, 0.00980824, 0.129406)
 
 [node name="Nice" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00650228, 0.104412, -0.389397)
-stream = ExtResource("6_i23vf")
+stream = ExtResource("3_rphps")
 volume_db = -80.0
 
 [node name="Recorder" type="Node" parent="."]
-script = ExtResource("6_tw36s")
+script = ExtResource("4_mbgf6")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Recorder"]
 
@@ -300,10 +300,10 @@ light_color = Color(0.823529, 0.705882, 0.694118, 1)
 light_size = 0.003
 omni_range = 0.188
 
-[node name="toykit" parent="." instance=ExtResource("3_db0a3")]
+[node name="toykit" parent="." instance=ExtResource("6_mvalr")]
 transform = Transform3D(1.45442, 0, -0.564133, 0, 1.56, 0, 0.564133, 0, 1.45442, 0.14403, 0.0444821, -0.00459415)
 
-[node name="acid" parent="." instance=ExtResource("4_gcnau")]
+[node name="acid" parent="." instance=ExtResource("7_jscvx")]
 transform = Transform3D(0.96492, 0, -0.262543, 0, 1, 0, 0.262543, 0, 0.96492, 0.0635047, 0.000445686, 0.0536318)
 
 [node name="Guides" type="Node3D" parent="."]
@@ -317,15 +317,15 @@ size = Vector3(5, 5, 5)
 material = SubResource("ShaderMaterial_dhelg")
 
 [node name="Meta" type="Node" parent="."]
-script = ExtResource("9_mttb8")
+script = ExtResource("8_iskqc")
 
 [node name="TextService" type="Node3D" parent="."]
-script = ExtResource("10_1a162")
+script = ExtResource("9_7s010")
 
 [node name="CrowdService" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.16311)
-script = ExtResource("10_bemke")
+script = ExtResource("10_aypd4")
 
 [node name="Woo" type="AudioStreamPlayer3D" parent="CrowdService"]
-stream = ExtResource("10_n1vba")
+stream = ExtResource("11_1d16v")
 pitch_scale = 1.3
