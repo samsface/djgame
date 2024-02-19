@@ -59,7 +59,7 @@ func follow(nob_path:NodePath, begin_time:float, end_time:float, from_value:floa
 	var phrase_over = "phrase_over" in meta
 
 	var pos = nob.get_guide_position_for_value(from_value)
-	var d = preload("res://models/guide/follow.tscn").instantiate()
+	var d = preload("res://models/guide/slide/slide.tscn").instantiate()
 	d.text_service = $TextService
 	d.position = pos
 	d.watch(nob, from_value, to_value, (end_time - begin_time) / $Recorder/AnimationPlayer.speed_scale)
@@ -76,7 +76,7 @@ func test(nob_path:NodePath, key_time:float, value:float, meta:Array):
 	var phrase_over = "phrase_over" in meta
 
 	var pos = nob.get_guide_position_for_value(value)
-	var d = preload("res://models/guide/bhit.tscn").instantiate()
+	var d = preload("res://models/guide/bang/bang.tscn").instantiate()
 	d.text_service = $TextService
 	d.crowd_service = $CrowdService
 	d.position = pos
@@ -90,7 +90,7 @@ func test(nob_path:NodePath, key_time:float, value:float, meta:Array):
 func good_(pos:Vector3, phrase_over:bool = false) -> void:
 	combo_ += 1
 	
-	var x = preload("res://models/guide/hit.tscn").instantiate()
+	var x = preload("res://game/text_service/text.tscn").instantiate()
 	x.position = pos
 
 	if phrase_over and combo_perfect_:
@@ -117,7 +117,7 @@ func bad_(pos:Vector3, accuracy:float, phrase_over:bool = false) -> void:
 	if last_bad_:
 		last_bad_.queue_free()
 
-	last_bad_ = preload("res://models/guide/hit.tscn").instantiate()
+	last_bad_ = preload("res://game/text_service/text.tscn").instantiate()
 	last_bad_.position = pos
 	last_bad_.accuracy = accuracy
 	add_child(last_bad_)

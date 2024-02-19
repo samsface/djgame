@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhr4siavx51c0"]
+
+[ext_resource type="Script" path="res://models/guide/slide/slide.gd" id="1_tfp0g"]
+[ext_resource type="PackedScene" uid="uid://cw6wg4868tix8" path="res://models/guide/shared/arrow/arrow.tscn" id="2_cu1yk"]
+
+[node name="Follow" type="Node3D"]
+script = ExtResource("1_tfp0g")
+
+[node name="arrow" parent="." instance=ExtResource("2_cu1yk")]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0, 0)

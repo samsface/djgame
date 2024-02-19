@@ -1,14 +1,13 @@
-[gd_scene load_steps=26 format=3 uid="uid://bfo1bxbj7knm0"]
+[gd_scene load_steps=25 format=3 uid="uid://bfo1bxbj7knm0"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_5uhe0"]
 [ext_resource type="PackedScene" uid="uid://bl7d8jwotcuws" path="res://phone/phone.tscn" id="2_4rjj7"]
-[ext_resource type="AudioStream" uid="uid://dalhkqu5ld48w" path="res://models/guide/nice.wav" id="3_rphps"]
 [ext_resource type="Script" path="res://game/track.gd" id="4_mbgf6"]
 [ext_resource type="Texture2D" uid="uid://cdvjs1do44ycq" path="res://models/shared/photos_2017_9_7_fst_stained-wooden-texture-table.jpg" id="5_mue40"]
 [ext_resource type="PackedScene" uid="uid://b34ex32xpvd1s" path="res://models/toydrum/toydrum.tscn" id="6_mvalr"]
 [ext_resource type="PackedScene" uid="uid://myu11bovhya6" path="res://models/daft_box/daft_box.tscn" id="7_jscvx"]
 [ext_resource type="Script" path="res://game/Node.gd" id="8_iskqc"]
-[ext_resource type="Script" path="res://game/TextService.gd" id="9_7s010"]
+[ext_resource type="Script" path="res://game/text_service/text_service.gd" id="9_7s010"]
 [ext_resource type="Script" path="res://game/crowd_service.gd" id="10_aypd4"]
 [ext_resource type="AudioStream" uid="uid://b0l0fdwmx47o7" path="res://models/lital/woo.wav" id="11_1d16v"]
 
@@ -158,11 +157,6 @@ script = ExtResource("1_5uhe0")
 
 [node name="phone" parent="." instance=ExtResource("2_4rjj7")]
 transform = Transform3D(0.0788486, -0.00353008, -0.0130548, 0.000528859, 0.0779723, -0.0178898, 0.0135133, 0.017546, 0.0768734, 0.0735189, 0.00980824, 0.129406)
-
-[node name="Nice" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00650228, 0.104412, -0.389397)
-stream = ExtResource("3_rphps")
-volume_db = -80.0
 
 [node name="Recorder" type="Node" parent="."]
 script = ExtResource("4_mbgf6")
