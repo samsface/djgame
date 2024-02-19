@@ -26,7 +26,7 @@ instance_shader_parameters/ttl2 = 0.0
 surface_material_override/0 = SubResource("ShaderMaterial_pqqrx")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Icosphere" index="0"]
-transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 0, -0.765422, 0)
+transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 0, 0, 0)
 light_energy = 0.0
 omni_range = 0.05
 omni_attenuation = 0.732043

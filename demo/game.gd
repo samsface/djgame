@@ -11,6 +11,10 @@ var score_ := 0 :
 		score_ = value
 		$Recorder/CanvasLayer/Label2.text = str(score_)
 
+var combo_ := 0
+var combo_perfect_ := true
+var last_bad_
+
 func _ready() -> void:
 	Engine.max_fps = 144
 
@@ -47,47 +51,69 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("noise"):
 		Camera.smooth_look_at($Dancer)
 
-func follow(nob_path:NodePath, begin_time:float, end_time:float, from_value:float, to_value:float):
+func follow(nob_path:NodePath, begin_time:float, end_time:float, from_value:float, to_value:float, meta:Array = []):
 	var nob := get_node_or_null(nob_path)
 	if not nob:
 		return
+		
+	var phrase_over = "phrase_over" in meta
 
 	var pos = nob.get_guide_position_for_value(from_value)
 	var d = preload("res://models/guide/follow.tscn").instantiate()
+	d.text_service = $TextService
 	d.position = pos
 	d.watch(nob, from_value, to_value, (end_time - begin_time) / $Recorder/AnimationPlayer.speed_scale)
-	d.hit.connect(func(accuracy): score_ += 50; good_(nob.get_nob_position() + Vector3(0.0, 0.01, 0.0)))
+	d.hit.connect(func(accuracy, finished): score_ += 50; good_(nob.get_nob_position() + Vector3(0.0, 0.01, 0.0), phrase_over and finished))
 	d.miss.connect(func(accuracy): bad_(nob.get_nob_position() + Vector3(0.0, 0.01, 0.0), accuracy))
 
 	guides_.add_child(d)
 
-func test(nob_path:NodePath, key_time:float, value:float):
+func test(nob_path:NodePath, key_time:float, value:float, meta:Array):
 	var nob := get_node_or_null(nob_path)
 	if not nob:
 		return
+		
+	var phrase_over = "phrase_over" in meta
 
 	var pos = nob.get_guide_position_for_value(value)
-	var d = preload("res://models/guide/sphere.tscn").instantiate()
+	var d = preload("res://models/guide/bhit.tscn").instantiate()
+	d.text_service = $TextService
+	d.crowd_service = $CrowdService
 	d.position = pos
 	d.watch(nob, value)
-	d.hit.connect(func(off:float): score_ += 100; good_(pos + Vector3(0.0, 0.01, 0.0)))
+	d.hit.connect(func(off:float): score_ += 100; good_(pos + Vector3(0.0, 0.01, 0.0), phrase_over))
 	d.miss.connect(func(off:float): bad_(pos + Vector3(0.0, 0.01, 0.0), off))
 	nob.intended_value = value
 
 	guides_.add_child(d)
+
+func good_(pos:Vector3, phrase_over:bool = false) -> void:
+	combo_ += 1
 	
-func good_(pos:Vector3) -> void:
 	var x = preload("res://models/guide/hit.tscn").instantiate()
 	x.position = pos
+
+	if phrase_over and combo_perfect_:
+		x.text =  "x " + str(combo_) + "  COMBO! PERFECT!"
+		x.hang_time = 1.0
+	elif phrase_over:
+		x.text =  "x " + str(combo_) + "  COMBO!"
+		x.hang_time = 1.0
+	else:
+		x.text = "x " + str(combo_)
+
 	add_child(x)
 	x.good()
 	
 	$Nice.pitch_scale = randf_range(0.7, 1.5)
 	$Nice.play() 
 
-var last_bad_
+	if phrase_over:
+		combo_ = 0
+		combo_perfect_ = true
 
-func bad_(pos:Vector3, accuracy:float) -> void:
+func bad_(pos:Vector3, accuracy:float, phrase_over:bool = false) -> void:
+	return
 	if last_bad_:
 		last_bad_.queue_free()
 
@@ -95,7 +121,10 @@ func bad_(pos:Vector3, accuracy:float) -> void:
 	last_bad_.position = pos
 	last_bad_.accuracy = accuracy
 	add_child(last_bad_)
-	last_bad_.bad()
+	#last_bad_.bad()
+	
+	combo_ = 0
+	combo_perfect_ = false
 
 func guide_exists_(nob:Nob) -> bool:
 	for node in guides_.get_children():

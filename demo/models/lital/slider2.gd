@@ -55,9 +55,11 @@ func _physics_process(delta: float) -> void:
 		
 		var new_value = value - diff
 
-		value = clamp(new_value, 0, 1.0)
+		value = clamp(new_value, 0.05, 0.5)
 		
 		Camera.recorder.capture(self)
+		
+		Camera.cursor.try_set_position(self, $Nob.global_position + Vector3.UP * 0.002)
 
 func _mouse_entered() -> void:
 	mouse_over_ = true

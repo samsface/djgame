@@ -1,38 +1,43 @@
-extends Label3D
+extends MeshInstance3D
 class_name FlashText
 
 var tween_:Tween
 var accuracy := 0.0
 
-func good() -> Tween:
-	visible = true
-	modulate = Color.GREEN
-	text = ["SICK!", "GUD!", "NICE!", "YEAH!"].pick_random()
-	tween_ = create_tween()
-	tween_.set_parallel()
-	#text_tween.tween_property($Hit, ^"position:y", $Hit.position.y + 0.05, 1.5).set_delay(0.2)
-	tween_.tween_property(self, ^"transparency", 1.0, 0.1).set_delay(0.25)
+var hang_time_ := 0.0
+var hang_time:float :
+	set(value):
+		set_hang_time(value)
+var text :
+	set(value):
+		text = value
+		mesh.text = text
 
-	return tween_
+var random_rotation_ := Vector3.ZERO
 
-func bad() -> Tween:
-	visible = true
-	modulate = Color.RED
+func _ready() -> void:
+	random_rotation_ = (Vector3(randf(), randf(), randf()) * 2.0) - Vector3.ONE
+	random_rotation_ *= 0.1
 
-	if accuracy <= -1:
-		text = "OPS!"
-	elif accuracy > 0.0:
-		text = "TOO HIGH!"
-	else:
-		text = "TOO LOW!"
+func _physics_process(delta: float) -> void:
+	look_at(Camera.get_head_position(), Vector3.DOWN)
+	scale = Vector3(1, -1, -1)
+	rotation += random_rotation_
 
-	tween_ = create_tween()
+func danger() -> void:
+	mesh.material.albedo_color = Color("ff002c")
+	pass
 
-	tween_.set_parallel(false)
-	for i in 4:
-		tween_.tween_property(self, ^"visible", false, 0.0).set_delay(0.1)
-		tween_.tween_property(self, ^"visible", true, 0.0).set_delay(0.1)
+func ok() -> void:
+	mesh.material.albedo_color = Color("00ef6f")
+	pass
 
-	tween_.tween_property(self, ^"visible", false, 0.0).set_delay(0.0)
+func set_hang_time(time:float) -> void:
+	if hang_time == time:
+		return
 
-	return tween_
+	hang_time_ = time
+
+	var tween = create_tween()
+	tween.tween_property(self, ^"transparency", 1.0, 0.1).set_delay(hang_time_)
+	tween.finished.connect(queue_free)

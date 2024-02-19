@@ -1,4 +1,5 @@
 shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
 
 uniform vec3 albedo : source_color;
 uniform vec3 albedo2 : source_color;

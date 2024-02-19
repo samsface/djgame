@@ -11,21 +11,39 @@ var hit_ := false
 var miss_ := false
 var last_off_ := 0.0
 
+@onready var timer_ := $Timer
+@onready var arrow_ := $Arrow
+
+var text_service
+var crowd_service
+
+var sound_tween_:Tween
+var sound_played_ := false
+
 func _ready() -> void:
-	var color = HyperRandom.fruity_color()
+	last_off_ = get_off_()
 	
-	$Icosphere/OmniLight3D.light_color = color
-	$Icosphere.set_instance_shader_parameter("albedo", color);
-	
-	$Icosphere.position.y = 0.04
+	arrow_.position.y = 0.04
+
 	var tween := create_tween()
 	tween.set_parallel()
-	tween.tween_property($Icosphere, ^"rotation:y", 5, 1.0)
-	tween.tween_property($Icosphere, ^"position:y", -0.005, 1.0)
-	tween.tween_property($Icosphere/OmniLight3D, ^"light_energy", 1.0, 1.0)
-	#tween.tween_property($Icosphere, ^"instance_shader_parameters/bang", 1.0, 0.5)
-	#tween.tween_property($Icosphere, ^"instance_shader_parameters/danger", 1.0, 0.2)
+	tween.tween_property(arrow_, "rotation:y", 5, 1.0)
+	tween.tween_property(arrow_, "position:y", -0.005, 1.0)
+	
+	sound_tween_ = create_tween()
+	sound_tween_.tween_interval(0.5)
+
 	tween.finished.connect(_miss)
+
+func _sound():
+	if sound_played_:
+		return
+		
+	sound_tween_.kill()
+
+	sound_played_ = true
+	
+	crowd_service.cheer()
 
 func _miss() -> void:
 	if hit_:
@@ -33,27 +51,26 @@ func _miss() -> void:
 		
 	miss_ = true
 	
-	$Icosphere.visible = false
+	arrow_.visible = false
 
-	miss.emit(get_off_())
-	wait_then_free_()
+	judge_accuracy_()
 
 func _hit() -> void:
 	if miss_:
 		return
 
+	var combo:float = min(get_parent().get_parent().combo_, 10.0)
+	combo = combo / 10.0
+	
+	arrow_.explode(combo)
+
 	hit_ = true
 
-	nob_.value_changed.disconnect(_nob_value_changed)
-	var tween = create_tween()
-	tween.set_parallel()
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Tween.TRANS_EXPO)
-	tween.tween_property($Icosphere, ^"instance_shader_parameters/ttl", 1.0, 0.35)
-	tween.tween_property($Icosphere/OmniLight3D, ^"light_energy", 0.0, 0.35)
-	$Icosphere.set_instance_shader_parameter("ttl2", 1.0);
-	
-	wait_for_accuracy_()
+	var create := create_tween()
+	create.tween_interval(0.05)
+	await create.finished
+
+	judge_accuracy_()
 
 func watch(nob:Nob, for_value:float) -> void:
 	if not nob:
@@ -61,16 +78,21 @@ func watch(nob:Nob, for_value:float) -> void:
 		
 	for_value_ = for_value
 	nob_ = nob
-	nob_.value_changed.connect(_nob_value_changed)
 
-	await nob.get_tree().process_frame
+func _physics_process(delta: float) -> void:
+	if hit_ or miss_:
+		return
 
-	last_off_ = get_off_()
+	if not timer_.is_stopped():
+		return
+		
+	for node in get_parent().get_children():
+		if node == self:
+			break
+		
+		if not node.hit_ and not node.miss_:
+			return
 
-	if abs(last_off_) < proximity_:
-		_hit()
-
-func _nob_value_changed(value:float, old_value:float) -> void:
 	var off = get_off_()
 	
 	# we moved way passed the target
@@ -82,24 +104,22 @@ func _nob_value_changed(value:float, old_value:float) -> void:
 	else:
 		last_off_ = off
 
-func wait_for_accuracy_() -> void:
-	var create := create_tween()
-	create.tween_interval(0.05)
-	await create.finished
-	
+func judge_accuracy_() -> void:
 	var off := get_off_()
 
 	if off > proximity_:
-		miss.emit(off)
+		text_service.make_too_high_text(global_position + Vector3.UP * 0.03)
 	elif off < -proximity_:
-		miss.emit(off)
+		text_service.make_too_low_text(global_position + Vector3.UP * 0.03)
 	else:
-		hit.emit(off)
-	
+		if sound_tween_.is_running():
+			_sound()
+		text_service.make_pts_text(100, global_position + Vector3.UP * 0.03)
+
 	wait_then_free_()
-	
+
 func wait_then_free_() -> void:
-	create_tween().tween_interval(0.3).finished.connect(queue_free)
+	create_tween().tween_interval(0.5).finished.connect(queue_free)
 
 func get_nob() -> Nob:
 	return nob_

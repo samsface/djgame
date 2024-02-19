@@ -74,7 +74,7 @@ func set_head_position(pos:Vector3) -> void:
 	tween.tween_property(camera_arm_, ^"position", pos, 0.5)
 
 func get_head_position() -> Vector3:
-	return camera_arm_.position
+	return camera_arm_.global_position
 
 func smooth_look_at(node, force = false) -> void:
 	looking_at_ = node

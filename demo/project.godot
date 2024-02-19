@@ -30,11 +30,10 @@ window/size/viewport_width=1680
 window/size/viewport_height=1050
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
-window/vsync/vsync_mode=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/verlet_physics/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_sfxr/plugin.cfg", "res://addons/verlet_physics/plugin.cfg")
 
 [gui]
 
@@ -189,5 +188,8 @@ play={
 [rendering]
 
 textures/canvas_textures/default_texture_repeat=1
+anti_aliasing/screen_space_roughness_limiter/enabled=false
+anti_aliasing/quality/msaa_2d=1
+anti_aliasing/quality/msaa_3d=1
 viewport/hdr_2d=true
 anti_aliasing/quality/screen_space_aa=1

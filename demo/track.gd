@@ -218,28 +218,52 @@ func _sider_value_changed(value:int, seek := true) -> void:
 		animation_player_.seek(value, true)
 		animation_player_.active = false
 
+func get_meta_track_idx() -> int:
+	var animation:Animation = get_animation_()
+	
+	var root = animation_player_.get_node(animation_player_.root_node)
+	
+	for track_idx in animation.get_track_count(): 
+		var node_path := animation.track_get_path(track_idx)
+		if root.get_node(node_path) == root.get_node("Meta"):
+			return track_idx 
+
+	return -1
+
+func get_meta_at_key_time(key_time:int) -> Array:
+	var meta_track_idx = get_meta_track_idx()
+	
+	var animation:Animation = get_animation_()
+	for key_idx in animation.track_get_key_count(meta_track_idx):
+		var kt = animation.track_get_key_time(meta_track_idx, key_idx)
+		if is_equal_approx(key_time, kt):
+			var args = animation.method_track_get_params(meta_track_idx, key_idx)
+			if args.size() > 0:
+				return args[0]
+
+	return []
+
 func assure_functions_track_idx_() -> int:
 	var animation:Animation = get_animation_()
 	
-	for track_idx in animation.get_track_count():
-		var node_path := animation.track_get_path(track_idx)
-		if node_path == get_path():
-			animation.remove_track(track_idx)
-			break
-
-	var track_idx = animation.add_track(Animation.TYPE_METHOD)
-	animation.track_set_path(track_idx, get_parent().get_path())
+	var root = animation_player_.get_node(animation_player_.root_node)
 	
-	return track_idx
+	for track_idx in animation.get_track_count(): 
+		var node_path := animation.track_get_path(track_idx)
+		if root.get_node_or_null(node_path) == root:
+			return track_idx 
+
+	return -1
 
 func idk_():
 	var functions_track_idx := assure_functions_track_idx_()
-	
+
 	var animation:Animation = get_animation_()
 
 	for track_idx in animation.get_track_count():
 		var node_path := animation.track_get_path(track_idx)
-		if node_path == get_parent().get_path():
+
+		if track_idx == functions_track_idx:
 			continue
 
 		var last_key_value = 0
@@ -250,9 +274,11 @@ func idk_():
 			var key_value = animation.bezier_track_get_key_value(track_idx, key_idx)
 			if key_value != last_key_value:
 				if (key_time - last_key_time) > 4.0:
-					animation.track_insert_key(functions_track_idx, max(last_key_time, 0.0), { "method" : "follow" , "args" : [node_path, last_key_time, key_time, last_key_value, key_value] })
+					var meta = get_meta_at_key_time(key_time)
+					animation.track_insert_key(functions_track_idx, max(last_key_time, 0.0), { "method" : "follow" , "args" : [node_path, last_key_time, key_time, last_key_value, key_value, meta] })
 				else:
-					animation.track_insert_key(functions_track_idx, max(key_time - 0.5, 0.0), { "method" : "test" , "args" : [node_path, key_time, key_value] })
+					var meta = get_meta_at_key_time(key_time)
+					animation.track_insert_key(functions_track_idx, max(key_time - 0.5, 0.0), { "method" : "test" , "args" : [node_path, key_time, key_value, meta] })
 
 			last_key_time = key_time
 			last_key_value = key_value

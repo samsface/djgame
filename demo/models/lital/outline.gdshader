@@ -2,7 +2,7 @@ shader_type spatial;
 render_mode cull_front, depth_draw_always, unshaded;
 
 instance uniform vec4 outline_color : source_color;
-const float outline_width = 2.0;
+const float outline_width = 5.0;
 uniform sampler2D DEPTH_TEXTURE : hint_depth_texture;
 
 void vertex() 
@@ -19,11 +19,6 @@ void vertex()
 
 void fragment() 
 {
-	ALBEDO = outline_color.rgb;
-	if (outline_color.a < 1.0) 
-	{
-		ALPHA = outline_color.a;
-	}
-	
-	
+	ALBEDO = vec3(0.0);
+
 }

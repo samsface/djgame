@@ -9,15 +9,49 @@ var duration_ := 0.0
 var expected_value_ := 0.0
 
 var first_hit_ := false
+var fall_tween_:Tween
+var text_
+
+var hit_ := false
+var miss_ := false
+
+var score_ := 0
+
+@onready var arrow_ = $arrow
+
+var score_tween_:Tween
+
+var text_service
 
 func _ready() -> void:
-	var tween = create_tween()
-	tween.set_parallel()
-	tween.tween_property($CSGBox3D, "global_position", nob_.get_guide_position_for_value(to_value_), duration_)
-	tween.tween_property(self, "expected_value_", to_value_, duration_)
-	tween.finished.connect(queue_free)
+	var fall_duration := 0.5
 	
-	PureData.bang.connect(_bang)
+	arrow_.orient(
+		nob_.get_guide_position_for_value(to_value_),
+		nob_.get_guide_position_for_value(expected_value_)
+	)
+
+	fall_tween_ = create_tween()
+	fall_tween_.set_parallel()
+	arrow_.position.y = 0.04
+	#fall_tween_.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+	fall_tween_.tween_property(arrow_, "position:y", 0.0, fall_duration)
+	
+	await fall_tween_.finished
+
+	var tween := create_tween()
+	tween.set_parallel()
+	tween.tween_property(arrow_, "global_position", nob_.get_guide_position_for_value(to_value_), duration_ - fall_duration)
+	tween.tween_property(self, "expected_value_", to_value_, duration_ - fall_duration)
+	
+	tween.finished.connect(_done)
+
+	score_tween_ = create_tween()
+	score_tween_.tween_property(self, "score_", 300, duration_ - fall_duration)
+
+	text_ = text_service.make_text()
+
+	test_()
 
 func watch(nob:Nob, from_value:float, to_value:float, duration:float) -> void:
 	if not nob:
@@ -28,17 +62,47 @@ func watch(nob:Nob, from_value:float, to_value:float, duration:float) -> void:
 	to_value_ = to_value
 	duration_ = duration
 
-func _physics_process(delta: float) -> void:
-	pass
+var first_ := true
 
-func _bang(r):
-	if r == "s-clock-4":
-		var off = nob_.value - expected_value_
-		if abs(off) < 0.1:
-			hit.emit(off)
-		else:
-			miss.emit(off)
+func test_(finished := false) -> void:
+	if finished:
+		text_.text = str(score_) + " PTS"
+		text_.ok()
+		return
+
+	var off = nob_.value - expected_value_
+	if abs(off) <= 0.2:
+		score_tween_.play()
+		text_.text = ("%d" % score_) + " PTS"
+		text_.ok()
+
+	elif off > 0.2:
+		score_tween_.pause()
+		text_.text = "TOO HIGH!"
+		text_.danger()
+	elif off < 0.2:
+		score_tween_.pause()
+		text_.text = "TOO LOW!"
+		text_.danger()
+
+	text_.global_position = get_nob().get_nob_position() + Vector3.UP * 0.03
+
+func _physics_process(delta: float) -> void:
+	if hit_:
+		return
+
+	if fall_tween_.is_running():
+		return
+
+	test_()
 
 func get_nob() -> Nob:
 	return nob_
 
+func _done() -> void:
+	text_.queue_free()
+	
+	hit_ = true
+	test_(true)
+	await arrow_.explode().finished
+	queue_free()
