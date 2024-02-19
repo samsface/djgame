@@ -17,10 +17,7 @@ surface_material_override/0 = ExtResource("2_cpd7i")
 collision_layer = 8
 collision_mask = 0
 
-[node name="0" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 2.39176e-05, 0, -2.39176e-05, 1, -0.047813, 0.0128812, 0.00564336)
-
-[node name="Views" type="Node3D" parent="." index="8"]
+[node name="Views" type="Node3D" parent="." index="2"]
 
 [node name="View" type="Marker3D" parent="Views" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0667845, 0.132594, 0.0857208)

@@ -33,7 +33,7 @@ layout_mode = 2
 texture = ExtResource("2_wasnv")
 expand_mode = 5
 
-[node name="App" parent="MarginContainer/VBoxContainer" instance_placeholder="res://phone/contacts.tscn"]
+[node name="App" parent="MarginContainer/VBoxContainer" instance_placeholder="res://models/phone/contacts.tscn"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 1
