@@ -1,12 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://bfo1bxbj7knm0"]
+[gd_scene load_steps=24 format=3 uid="uid://bfo1bxbj7knm0"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_5uhe0"]
-[ext_resource type="PackedScene" uid="uid://bl7d8jwotcuws" path="res://phone/phone.tscn" id="2_4rjj7"]
+[ext_resource type="PackedScene" uid="uid://bl7d8jwotcuws" path="res://models/phone/phone.tscn" id="2_4rjj7"]
 [ext_resource type="Script" path="res://game/track.gd" id="4_mbgf6"]
 [ext_resource type="Texture2D" uid="uid://cdvjs1do44ycq" path="res://models/shared/photos_2017_9_7_fst_stained-wooden-texture-table.jpg" id="5_mue40"]
 [ext_resource type="PackedScene" uid="uid://b34ex32xpvd1s" path="res://models/toydrum/toydrum.tscn" id="6_mvalr"]
 [ext_resource type="PackedScene" uid="uid://myu11bovhya6" path="res://models/daft_box/daft_box.tscn" id="7_jscvx"]
-[ext_resource type="Script" path="res://game/Node.gd" id="8_iskqc"]
 [ext_resource type="Script" path="res://game/text_service/text_service.gd" id="9_7s010"]
 [ext_resource type="Script" path="res://game/crowd_service.gd" id="10_aypd4"]
 [ext_resource type="AudioStream" uid="uid://b0l0fdwmx47o7" path="res://models/lital/woo.wav" id="11_1d16v"]
@@ -39,26 +38,6 @@ tracks/1/keys = {
 "times": PackedFloat32Array(),
 "transitions": PackedFloat32Array(),
 "values": []
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Meta")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(17, 28, 44),
-"transitions": PackedFloat32Array(1, 1, 1),
-"values": [{
-"args": [["phrase_over"]],
-"method": &"meta"
-}, {
-"args": [["phrase_over"]],
-"method": &"meta"
-}, {
-"args": [["phrase_over"]],
-"method": &"meta"
-}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ll70c"]
@@ -309,9 +288,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0135274, 0.151198, 0.10900
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0882363, -0.583118, -3.65045)
 size = Vector3(5, 5, 5)
 material = SubResource("ShaderMaterial_dhelg")
-
-[node name="Meta" type="Node" parent="."]
-script = ExtResource("8_iskqc")
 
 [node name="TextService" type="Node3D" parent="."]
 script = ExtResource("9_7s010")

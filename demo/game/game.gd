@@ -59,7 +59,7 @@ func follow(nob_path:NodePath, begin_time:float, end_time:float, from_value:floa
 	var phrase_over = "phrase_over" in meta
 
 	var pos = nob.get_guide_position_for_value(from_value)
-	var d = preload("res://models/guide/slide/slide.tscn").instantiate()
+	var d = preload("res://game/guide/slide/slide.tscn").instantiate()
 	d.text_service = $TextService
 	d.position = pos
 	d.watch(nob, from_value, to_value, (end_time - begin_time) / $Recorder/AnimationPlayer.speed_scale)
@@ -76,7 +76,7 @@ func test(nob_path:NodePath, key_time:float, value:float, meta:Array):
 	var phrase_over = "phrase_over" in meta
 
 	var pos = nob.get_guide_position_for_value(value)
-	var d = preload("res://models/guide/bang/bang.tscn").instantiate()
+	var d = preload("res://game/guide/bang/bang.tscn").instantiate()
 	d.text_service = $TextService
 	d.crowd_service = $CrowdService
 	d.position = pos
@@ -143,3 +143,6 @@ func _device_nob_value_changed(nob:Nob, new_value:float, old_value:float) -> voi
 	if abs(nob.intended_value - new_value) > 0.1:
 		nob.reset_to_intended_value()
 		bad_(nob.get_nob_position() + Vector3.UP * 0.01, -1)
+
+func meta(array:Array = []) -> void:
+	pass
