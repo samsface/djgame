@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b34ex32xpvd1s" path="res://models/toydrum/toydrum.tscn" id="6_mvalr"]
 [ext_resource type="PackedScene" uid="uid://myu11bovhya6" path="res://models/daft_box/daft_box.tscn" id="7_jscvx"]
 [ext_resource type="Script" path="res://game/text_service/text_service.gd" id="9_7s010"]
-[ext_resource type="Script" path="res://game/crowd_service.gd" id="10_aypd4"]
+[ext_resource type="Script" path="res://game/crowd_service/crowd_service.gd" id="10_aypd4"]
 [ext_resource type="AudioStream" uid="uid://b0l0fdwmx47o7" path="res://models/lital/woo.wav" id="11_1d16v"]
 
 [sub_resource type="Animation" id="Animation_7u863"]
@@ -280,9 +280,6 @@ transform = Transform3D(1.45442, 0, -0.564133, 0, 1.56, 0, 0.564133, 0, 1.45442,
 transform = Transform3D(0.96492, 0, -0.262543, 0, 1, 0, 0.262543, 0, 0.96492, 0.0635047, 0.000445686, 0.0536318)
 
 [node name="Guides" type="Node3D" parent="."]
-
-[node name="Player" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0135274, 0.151198, 0.109009)
 
 [node name="FogVolume" type="FogVolume" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0882363, -0.583118, -3.65045)
