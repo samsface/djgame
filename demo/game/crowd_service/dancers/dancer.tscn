@@ -18,7 +18,7 @@ render_priority = 0
 next_pass = SubResource("ShaderMaterial_gx8e3")
 shader = ExtResource("8_j6yxr")
 shader_parameter/squash_bottom = 0.1
-shader_parameter/squash_top = 0.861
+shader_parameter/squash_top = 0.948
 shader_parameter/eye_gap = 0.306
 shader_parameter/eye_size = 0.644
 shader_parameter/eye_width = 0.042
@@ -31,6 +31,6 @@ script = ExtResource("2_7ekfj")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
 use_collision = true
-radial_segments = 64
-rings = 32
+radial_segments = 16
+rings = 16
 material = SubResource("ShaderMaterial_58emb")

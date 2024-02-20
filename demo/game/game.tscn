@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bfo1bxbj7knm0"]
+[gd_scene load_steps=25 format=3 uid="uid://bfo1bxbj7knm0"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_5uhe0"]
 [ext_resource type="PackedScene" uid="uid://bl7d8jwotcuws" path="res://models/phone/phone.tscn" id="2_4rjj7"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cdvjs1do44ycq" path="res://models/shared/photos_2017_9_7_fst_stained-wooden-texture-table.jpg" id="5_mue40"]
 [ext_resource type="PackedScene" uid="uid://b34ex32xpvd1s" path="res://models/toydrum/toydrum.tscn" id="6_mvalr"]
 [ext_resource type="PackedScene" uid="uid://myu11bovhya6" path="res://models/daft_box/daft_box.tscn" id="7_jscvx"]
+[ext_resource type="PackedScene" uid="uid://bnb4n0pt0sbo6" path="res://game/crowd_service/dancers/dancer.tscn" id="9_5vnt4"]
 [ext_resource type="Script" path="res://game/text_service/text_service.gd" id="9_7s010"]
 [ext_resource type="Script" path="res://game/crowd_service/crowd_service.gd" id="10_aypd4"]
 [ext_resource type="AudioStream" uid="uid://b0l0fdwmx47o7" path="res://models/lital/woo.wav" id="11_1d16v"]
@@ -258,13 +259,13 @@ light_color = Color(0, 0.737255, 0.47451, 1)
 omni_range = 0.188
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0340311, 1.2553, -1.90846)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0340311, 0.341738, -1.06024)
 light_color = Color(1, 0, 1, 1)
 shadow_enabled = true
 omni_range = 1.47
 
 [node name="OmniLight3D5" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.73602, 1.09459, -1.90846)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.73602, 0.181028, -1.06024)
 light_color = Color(0.819608, 0.568627, 0, 1)
 shadow_enabled = true
 omni_range = 1.47
@@ -290,7 +291,7 @@ transform = Transform3D(0.96492, 0, -0.262543, 0, 1, 0, 0.262543, 0, 0.96492, 0.
 [node name="Guides" type="Node3D" parent="."]
 
 [node name="FogVolume" type="FogVolume" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0882363, -0.583118, -3.65045)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0882363, -0.583118, -2.80223)
 size = Vector3(5, 5, 5)
 material = SubResource("ShaderMaterial_dhelg")
 
@@ -300,6 +301,9 @@ script = ExtResource("9_7s010")
 [node name="CrowdService" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.16311)
 script = ExtResource("10_aypd4")
+
+[node name="Sprite3D" parent="CrowdService" instance=ExtResource("9_5vnt4")]
+transform = Transform3D(-0.983935, 0, 0.178527, 0, 1, 0, -0.178527, 0, -0.983935, 0.603735, -0.588911, 6.08496)
 
 [node name="Woo" type="AudioStreamPlayer3D" parent="CrowdService"]
 stream = ExtResource("11_1d16v")

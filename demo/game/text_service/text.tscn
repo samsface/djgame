@@ -4,7 +4,10 @@
 [ext_resource type="Script" path="res://game/text_service/text.gd" id="2_vd7c5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wj57c"]
-albedo_color = Color(1, 0, 0.172549, 1)
+albedo_color = Color(1, 0, 0.173, 1)
+metallic_specular = 0.0
+emission = Color(0, 0.937255, 0.435294, 1)
+emission_energy_multiplier = 3.0
 
 [sub_resource type="TextMesh" id="TextMesh_4td3p"]
 resource_local_to_scene = true

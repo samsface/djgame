@@ -1,7 +1,7 @@
 [gd_resource type="CurveTexture" load_steps=2 format=3 uid="uid://du61gn7qk83fg"]
 
 [sub_resource type="Curve" id="Curve_dnusj"]
-_data = [Vector2(0.0291121, 0), 0.0, 0.0, 0, 0, Vector2(0.0873362, 0.669376), 0.0600409, 0.0600409, 0, 0, Vector2(0.896652, 0.608023), 0.0, 0.0, 0, 0, Vector2(1, 0.181961), -5.67668, 0.0, 0, 0]
+_data = [Vector2(0.0291121, 0), 0.0, 0.0, 0, 0, Vector2(0.132353, 0.708411), 0.0600409, 0.0600409, 0, 0, Vector2(0.896652, 0.608023), 0.0, 0.0, 0, 0, Vector2(1, 0.181961), -5.67668, 0.0, 0, 0]
 point_count = 4
 
 [resource]

@@ -9,7 +9,7 @@
 render_priority = 0
 shader = ExtResource("1_y4rs0")
 shader_parameter/smudge_scale = 2.0
-shader_parameter/color = Color(0, 0.596078, 0.490196, 1)
+shader_parameter/color = Color(0.890196, 0.819608, 0.827451, 1)
 shader_parameter/debug_uv1 = false
 shader_parameter/debug_uv2 = false
 shader_parameter/edge_color = Color(1, 1, 1, 1)
