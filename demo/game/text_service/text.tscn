@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://lnop4o6ali3c"]
 
-[ext_resource type="FontFile" uid="uid://bu5kmaeux4fmv" path="res://ui/fonts/KMKDSPKW.ttf" id="1_n2y4n"]
+[ext_resource type="FontFile" uid="uid://ca4jgypv8bjcn" path="res://ui/fonts/RetroGaming.ttf" id="1_ga71c"]
 [ext_resource type="Script" path="res://game/text_service/text.gd" id="2_vd7c5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wj57c"]
@@ -9,8 +9,11 @@ albedo_color = Color(1, 0, 0.172549, 1)
 [sub_resource type="TextMesh" id="TextMesh_4td3p"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_wj57c")
-text = "TOO LOW"
-font = ExtResource("1_n2y4n")
+text = "ABCDEFGH
+IJKLMNOPQ
+RSTUVWXYZ
+0123456789"
+font = ExtResource("1_ga71c")
 pixel_size = 0.0005
 curve_step = 10.0
 depth = 0.004

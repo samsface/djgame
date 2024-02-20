@@ -11,6 +11,7 @@ patch = "toykit"
 map = ExtResource("3_t4x0b")
 
 [node name="Base" parent="." index="1"]
+instance_shader_parameters/emission_scale = 0.0
 surface_material_override/0 = ExtResource("3_eln34")
 
 [node name="Views" type="Node3D" parent="." index="29"]

@@ -1,13 +1,14 @@
 shader_type spatial;
 
 uniform sampler2D button_top : source_color;
+uniform sampler2D aoe_map : source_color;
 uniform vec3 color : source_color;
 instance uniform float light : hint_range(0.0, 1.0);
 
 void fragment() {
 	vec3 albedo = color;
 	
-	vec3 t = texture(button_top, UV).rgb;
+	vec3 t = texture(button_top, UV2).rgb;
 	t = round(t);
 	
 	vec3 lt = vec3(0);

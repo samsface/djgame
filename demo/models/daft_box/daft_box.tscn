@@ -11,6 +11,7 @@ script = ExtResource("2_gy2of")
 map = ExtResource("3_ycwiq")
 
 [node name="DaftBoxBase" parent="." index="0"]
+instance_shader_parameters/emission_scale = 0.0
 surface_material_override/0 = ExtResource("2_cpd7i")
 
 [node name="StaticBody3D" parent="DaftBoxBase" index="0"]
@@ -24,3 +25,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0667845, 0.132594, 0.08572
 
 [node name="View2" type="Marker3D" parent="Views" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0528385, 0.137999, 0.0780013)
+
+[node name="3" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.39176e-05, 0, -2.39176e-05, 1, 0.0114548, 0.0131827, 0.00564336)

@@ -34,7 +34,7 @@ func _ready() -> void:
 	fall_tween_ = create_tween()
 	fall_tween_.set_parallel()
 	arrow_.position.y = 0.04
-	#fall_tween_.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+	fall_tween_.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
 	fall_tween_.tween_property(arrow_, "position:y", 0.0, fall_duration)
 	
 	await fall_tween_.finished

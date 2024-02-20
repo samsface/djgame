@@ -27,8 +27,9 @@ func _ready() -> void:
 
 	var tween := create_tween()
 	tween.set_parallel()
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
 	tween.tween_property(arrow_, "rotation:y", 5, 1.0)
-	tween.tween_property(arrow_, "position:y", -0.005, 1.0)
+	tween.tween_property(arrow_, "position:y", -0.002, 1.0)
 	
 	sound_tween_ = create_tween()
 	sound_tween_.tween_interval(0.5)

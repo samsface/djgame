@@ -56,15 +56,23 @@ gradient = SubResource("Gradient_655s4")
 background_mode = 2
 ssr_enabled = true
 ssao_enabled = true
+ssao_radius = 0.01
 ssao_intensity = 16.0
+ssao_detail = 5.0
+ssao_light_affect = 1.0
+ssao_ao_channel_affect = 0.7
 ssil_enabled = true
+ssil_radius = 0.3
+ssil_intensity = 8.92
+ssil_sharpness = 1.0
+ssil_normal_rejection = 0.55
 sdfgi_enabled = true
 sdfgi_use_occlusion = true
 sdfgi_bounce_feedback = 1.99
 glow_enabled = true
 fog_enabled = true
 volumetric_fog_enabled = true
-adjustment_saturation = 2.14
+adjustment_saturation = 0.01
 adjustment_color_correction = SubResource("GradientTexture1D_sgggg")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ij4h"]
@@ -209,11 +217,11 @@ light_angular_distance = 3.13
 shadow_enabled = true
 directional_shadow_mode = 0
 directional_shadow_split_1 = 0.0
-directional_shadow_split_2 = 0.015
+directional_shadow_split_2 = 0.117
 directional_shadow_split_3 = 1.0
 directional_shadow_blend_splits = true
 directional_shadow_fade_start = 0.0
-directional_shadow_max_distance = 0.5
+directional_shadow_max_distance = 0.9
 directional_shadow_pancake_size = 0.1
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]

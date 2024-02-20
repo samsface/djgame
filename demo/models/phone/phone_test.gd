@@ -19,12 +19,12 @@ func _ready() -> void:
 
 func _new_contact_pressed() -> void:
 	var message := PhoneChatMessage.new()
-	message.message = "hello"
+	message.message = "Hey"
 	message.sent_time = GameTime.now
 	
 	var chat := PhoneChat.new()
 	chat.contact_image = preload("res://models/phone/giadi_small.png")
-	chat.contact_name = "sam"
+	chat.contact_name = "Girlfriend"
 	chat.messages.push_back(message)
 	
 	chats.chats[chat.contact_name] = chat
@@ -33,7 +33,7 @@ func _new_contact_pressed() -> void:
 
 func _new_message_pressed() -> void:
 	var message := PhoneChatMessage.new()
-	message.message = "ssss" + str(randf())
+	message.message = "I knew it. You've been out DJing again :("
 	message.sent_time =  GameTime.now
 	
 	chats.chats.values()[0].messages.push_back(message)

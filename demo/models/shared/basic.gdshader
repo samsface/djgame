@@ -3,10 +3,14 @@ render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlic
 
 uniform sampler2D tex : source_color, repeat_disable;
 uniform sampler2D map : source_color;
+instance uniform float emission_scale : hint_range(0.0, 1.0) = 0.0;
+uniform sampler2D emission_map : source_color;
+uniform float smudge_scale : hint_range(0.0, 10.0);
 uniform sampler2D smudges : source_color;
 uniform vec3 color : source_color;
 uniform bool debug_uv1 = false;
 uniform bool debug_uv2 = false;
+instance uniform float rand : hint_range(0.0, 1.0);
 
 uniform vec4 edge_color : source_color;
 
@@ -22,7 +26,7 @@ void fragment()
 
 	vec3 vec = texture(map, uv).rgb;
 	
-	float r = texture(smudges, UV * 2.0).r;
+	float r = texture(smudges, UV * smudge_scale + rand).r;
 	
 	
 	//alb -= min(0.2, pow(vec.g, 1.0));
@@ -37,13 +41,25 @@ void fragment()
 	}
 	
 	alb = mix(alb, vec3(r), r);
-	
+
 	
 	ALBEDO.rgb = alb;
 	METALLIC = 0.5;
 	ROUGHNESS = 0.6;
 	SPECULAR = 0.5;
+
+	// emission
+	vec3 t = texture(emission_map, UV2).rgb;
+	t = round(t);
 	
+	vec3 lt = vec3(0);
+		
+	
+	
+	EMISSION = t * 255.0 * pow(emission_scale, 8.0);
+	ALBEDO = mix(ALBEDO, EMISSION, length(EMISSION));
+	//
+
 	if(debug_uv1) 
 	{
 		ALBEDO.r = UV.x;
