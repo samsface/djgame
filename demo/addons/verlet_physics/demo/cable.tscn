@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://d077l81j3ytmv"]
+
+[ext_resource type="Script" path="res://addons/verlet_physics/demo/cable.gd" id="1_a8j5w"]
+[ext_resource type="PackedScene" uid="uid://bc1nf0oh7e2pm" path="res://addons/verlet_physics/primitives/mesh_instance_3d.tscn" id="2_3ssl1"]
+
+[node name="Demo" type="Node3D"]
+script = ExtResource("1_a8j5w")
+
+[node name="Noodle" parent="." instance=ExtResource("2_3ssl1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.33926, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.59226, -1.11687)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.38586, 0, 0)
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.744405, -0.000664275, 0.667728, -0.6257, -0.349871, 0.697202, 0.233156, -0.936798, -0.260861, 0, 0.867813, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.49545)

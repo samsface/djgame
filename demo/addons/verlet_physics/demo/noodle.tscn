@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkjmfectetxms"]
+
+[ext_resource type="PackedScene" uid="uid://dqhs8ejdq47ey" path="res://addons/verlet_physics/primitives/noodle.glb" id="1_en7ce"]
+[ext_resource type="Script" path="res://addons/verlet_physics/primitives/VerletNoodle.gd" id="2_mvnu4"]
+
+[node name="noodle" instance=ExtResource("1_en7ce")]
+script = ExtResource("2_mvnu4")
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/rotation = Quaternion(4.6194e-10, -0.000783205, -7.23588e-13, 1)
+bones/0/scale = Vector3(1, 1, 1)
+bones/1/rotation = Quaternion(-1.23167e-09, -0.0337149, 4.34809e-11, 0.999431)
+bones/2/rotation = Quaternion(1.91966e-09, 0.145758, 1.48629e-10, 0.98932)

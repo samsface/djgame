@@ -19,7 +19,7 @@ func _ready() -> void:
 	
 	if not Engine.is_editor_hint():
 		if rest_distance_ == 0.0:
-			rest_distance_ = atom_a_.position.distance_to(atom_b_.position)
+			rest_distance_ = atom_a_.position.distance_to(atom_b_.position) * 0.1
 
 func tick(delta:float) -> void:
 	if atom_b_.dynamic == 0.0 and atom_a_.dynamic == 0.0:

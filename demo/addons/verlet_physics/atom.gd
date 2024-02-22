@@ -28,8 +28,8 @@ func tick(delta:float) -> void:
 	position += (position - last_position)
 	last_position = tmp
 	
-	if max_move_radius_ > 0.0:
-		position = position.clamp(max_move_radius_position_ - Vector3.ONE * max_move_radius_, max_move_radius_position_ + Vector3.ONE * max_move_radius_)
+	#if max_move_radius_ > 0.0:
+	#	position = position.clamp(max_move_radius_position_ - Vector3.ONE * max_move_radius_, max_move_radius_position_ + Vector3.ONE * max_move_radius_)
 
 func stop() -> void:
 	last_position = position

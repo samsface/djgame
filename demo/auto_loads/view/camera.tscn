@@ -1,32 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://lprkgl2wh3cd"]
+[gd_scene load_steps=4 format=3 uid="uid://lprkgl2wh3cd"]
 
 [ext_resource type="Script" path="res://auto_loads/view/camera.gd" id="1_lssk8"]
 [ext_resource type="Texture2D" uid="uid://cwhxcbe4nkdvd" path="res://auto_loads/view/cursor.png" id="2_1qugs"]
 [ext_resource type="Script" path="res://auto_loads/view/cursor.gd" id="3_2n3f3"]
-[ext_resource type="Texture2D" uid="uid://cojd77v4s2bv" path="res://auto_loads/view/debug.png" id="4_575od"]
 
 [node name="Camera" type="Node3D"]
 script = ExtResource("1_lssk8")
 
-[node name="Cursor" type="Sprite3D" parent="."]
+[node name="Cursor" type="Node3D" parent="."]
 transform = Transform3D(0.025, 0, 0, 0, 0.025, 0, 0, 0, 0.025, 0, 0, 0)
-offset = Vector2(16, -16)
-billboard = 1
-double_sided = false
-no_depth_test = true
-alpha_antialiasing_mode = 2
-texture_filter = 1
+script = ExtResource("3_2n3f3")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Cursor"]
+
+[node name="Cursor2D" type="Sprite2D" parent="Cursor/CanvasLayer"]
 texture = ExtResource("2_1qugs")
 hframes = 2
 vframes = 2
-script = ExtResource("3_2n3f3")
-
-[node name="DebugCursorCanvasLayer" type="CanvasLayer" parent="Cursor"]
-visible = false
-
-[node name="DebugCursor" type="Sprite2D" parent="Cursor/DebugCursorCanvasLayer"]
-visible = false
-texture = ExtResource("4_575od")
 
 [node name="CameraArm" type="Node3D" parent="."]
 

@@ -101,6 +101,7 @@ func get_nob() -> Nob:
 
 func _done() -> void:
 	text_.queue_free()
+	$arrow/Particles.emitting = false
 	
 	hit_ = true
 	test_(true)

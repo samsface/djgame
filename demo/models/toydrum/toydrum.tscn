@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://b34ex32xpvd1s"]
+[gd_scene load_steps=6 format=3 uid="uid://b34ex32xpvd1s"]
 
 [ext_resource type="PackedScene" uid="uid://cq1tq75l6it7v" path="res://models/toydrum/base.glb" id="1_geond"]
 [ext_resource type="Script" path="res://models/lital/little2.gd" id="2_g4yco"]
 [ext_resource type="Material" uid="uid://cytpp1dehbt86" path="res://models/toydrum/toydrum.tres" id="3_eln34"]
 [ext_resource type="Resource" uid="uid://cqmulviu26gd3" path="res://models/toydrum/mappings.tres" id="3_t4x0b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_psw3l"]
+size = Vector3(0.2, 0.025, 0.04)
 
 [node name="base" instance=ExtResource("1_geond")]
 script = ExtResource("2_g4yco")
@@ -13,6 +16,14 @@ map = ExtResource("3_t4x0b")
 [node name="Base" parent="." index="1"]
 instance_shader_parameters/emission_scale = 0.0
 surface_material_override/0 = ExtResource("3_eln34")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Base" index="0"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.936556, -0.350518, 0, 0.350518, 0.936556, 0, -0.0209118, -0.00620326)
+shape = SubResource("BoxShape3D_psw3l")
 
 [node name="Views" type="Node3D" parent="." index="29"]
 

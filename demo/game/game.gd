@@ -16,6 +16,10 @@ var combo_perfect_ := true
 var last_bad_
 
 func _ready() -> void:
+	VerletPhysicsServer.height_map = $HeightMapGenerator.data
+	VerletPhysicsServer.height_map_origin = $HeightMapGenerator.global_position
+	VerletPhysicsServer.height_map_width = $HeightMapGenerator.size
+
 	Engine.max_fps = 144
 
 	Camera.set_head_position($acid.get_view_position())

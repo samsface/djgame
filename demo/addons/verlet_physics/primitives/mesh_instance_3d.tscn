@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bc1nf0oh7e2pm"]
+
+[ext_resource type="Shader" path="res://addons/verlet_physics/primitives/noodle.gdshader" id="1_cfnlo"]
+[ext_resource type="Script" path="res://addons/verlet_physics/primitives/VerletNoodle.gd" id="2_r4636"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6kohx"]
+render_priority = 0
+shader = ExtResource("1_cfnlo")
+shader_parameter/bones = null
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2yyxa"]
+material = SubResource("ShaderMaterial_6kohx")
+top_radius = 0.003
+bottom_radius = 0.003
+height = 1.0
+radial_segments = 8
+rings = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+mesh = SubResource("CylinderMesh_2yyxa")
+script = ExtResource("2_r4636")
+bone_count = 32

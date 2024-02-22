@@ -1,10 +1,46 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhr4siavx51c0"]
+[gd_scene load_steps=8 format=3 uid="uid://dhr4siavx51c0"]
 
 [ext_resource type="Script" path="res://game/guide/slide/slide.gd" id="1_tfp0g"]
 [ext_resource type="PackedScene" uid="uid://cw6wg4868tix8" path="res://game/guide/shared/arrow/arrow.tscn" id="2_cu1yk"]
+
+[sub_resource type="Curve" id="Curve_ci4k6"]
+_data = [Vector2(0, 0.335671), 0.0, 0.0, 0, 0, Vector2(0.489583, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_x0qac"]
+curve = SubResource("Curve_ci4k6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dp1w3"]
+emission_shape_scale = Vector3(0.011, 1, 1)
+emission_shape = 1
+emission_sphere_radius = 0.5
+gravity = Vector3(0, 0.5, 0)
+scale_min = 0.1
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_x0qac")
+turbulence_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2kmp0"]
+albedo_color = Color(0, 0.901961, 0.34902, 1)
+emission_enabled = true
+emission = Color(0, 0.901961, 0.34902, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_4td0m"]
+material = SubResource("StandardMaterial3D_2kmp0")
+radius = 0.001
+height = 0.002
+radial_segments = 4
+rings = 1
 
 [node name="Follow" type="Node3D"]
 script = ExtResource("1_tfp0g")
 
 [node name="arrow" parent="." instance=ExtResource("2_cu1yk")]
 transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0, 0)
+
+[node name="Particles" type="GPUParticles3D" parent="arrow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.357625, 0)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_dp1w3")
+draw_pass_1 = SubResource("SphereMesh_4td0m")

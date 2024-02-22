@@ -120,6 +120,7 @@ func judge_accuracy_() -> void:
 	wait_then_free_()
 
 func wait_then_free_() -> void:
+	$Arrow/Particles.emitting = false
 	create_tween().tween_interval(0.5).finished.connect(queue_free)
 
 func get_nob() -> Nob:
