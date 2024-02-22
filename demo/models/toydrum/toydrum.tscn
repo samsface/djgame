@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://cqmulviu26gd3" path="res://models/toydrum/mappings.tres" id="3_t4x0b"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_psw3l"]
-size = Vector3(0.2, 0.025, 0.04)
+size = Vector3(0.2, 0.025, 0.045)
 
 [node name="base" instance=ExtResource("1_geond")]
 script = ExtResource("2_g4yco")
@@ -22,7 +22,7 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Base/StaticBody3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.936556, -0.350518, 0, 0.350518, 0.936556, 0, -0.0209118, -0.00620326)
+transform = Transform3D(1, 0, 0, 0, 0.946461, -0.322817, 0, 0.322817, 0.946461, 0, -0.0209118, -0.00758976)
 shape = SubResource("BoxShape3D_psw3l")
 
 [node name="Views" type="Node3D" parent="." index="29"]

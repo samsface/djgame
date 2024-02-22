@@ -16,9 +16,7 @@ func smooth_array(input_array: PackedFloat32Array) -> Array:
 
 	for y in range(size):
 		for x in range(size):
-			var total = 0
 			var max = 0
-			var count = 0
 
 			# Iterate over the neighboring cells
 			for dy in [-1, 0, 1]:
@@ -29,14 +27,13 @@ func smooth_array(input_array: PackedFloat32Array) -> Array:
 					if nx >= 0 and nx < size and ny >= 0 and ny < size:
 						if input_array[ny * size + nx] > max:
 							max = input_array[ny * size + nx]
-						
-						total += input_array[ny * size + nx]
-						count += 1
 
-			if smoothed_array[y * size + x] < max:
-				smoothed_array[y * size + x] = max * 0.95
+			var current_cell_value = input_array[y * size + x]
+
+			if current_cell_value < max:
+				smoothed_array[y * size + x] = max * 0.99
 			else:
-				smoothed_array[y * size + x] = input_array[y * size + x]
+				smoothed_array[y * size + x] = current_cell_value
 
 	return smoothed_array
 
@@ -58,7 +55,7 @@ func scan_() -> void:
 			ray_cast_.position.x = x * resolution
 			ray_cast_.position.z = y * resolution
 
-	for i in 4:
+	for i in 10:
 		data = smooth_array(data)
 	
 	var image := Image.create(size, size, false, Image.FORMAT_R8)

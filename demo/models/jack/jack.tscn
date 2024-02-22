@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7ox5uinmne8"]
+
+[ext_resource type="PackedScene" uid="uid://biduxhtm5u764" path="res://models/jack/jack.glb" id="1_addxn"]
+[ext_resource type="Shader" path="res://models/shared/basic.gdshader" id="2_ioitd"]
+[ext_resource type="Texture2D" uid="uid://b06scjii2i88j" path="res://models/jack/aoe_map.png" id="3_of0if"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="4_nx2i8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xjqno"]
+render_priority = 0
+shader = ExtResource("2_ioitd")
+shader_parameter/smudge_scale = 0.205
+shader_parameter/color = Color(0.945098, 0.792157, 0.27451, 1)
+shader_parameter/debug_uv1 = false
+shader_parameter/debug_uv2 = false
+shader_parameter/ambient_occlusion = 4.0
+shader_parameter/metalic = 3.0
+shader_parameter/edge_color = Color(1, 1, 1, 0.705882)
+shader_parameter/map = ExtResource("3_of0if")
+shader_parameter/smudges = ExtResource("4_nx2i8")
+
+[node name="jack" instance=ExtResource("1_addxn")]
+
+[node name="Jack" parent="." index="0"]
+instance_shader_parameters/emission_scale = 0.0
+surface_material_override/0 = SubResource("ShaderMaterial_xjqno")

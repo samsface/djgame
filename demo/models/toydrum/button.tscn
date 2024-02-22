@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cld6mbchnrp3"]
+[gd_scene load_steps=5 format=3 uid="uid://cld6mbchnrp3"]
 
 [ext_resource type="Script" path="res://models/toydrum/button.gd" id="1_hygni"]
 [ext_resource type="PackedScene" uid="uid://dhounssqfe2jw" path="res://models/toydrum/buttonm.tscn" id="2_nny25"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fygew"]
 size = Vector3(0.01, 0.01, 0.01)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yo581"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
 
 [node name="Button" type="Node3D"]
 script = ExtResource("1_hygni")
@@ -17,6 +21,11 @@ transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Nob"]
 shape = SubResource("BoxShape3D_fygew")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00126357, 0)
+material_override = SubResource("StandardMaterial3D_yo581")
+size = Vector3(0.01, 0.0025, 0.01)
 
 [connection signal="mouse_entered" from="Nob" to="." method="_mouse_entered"]
 [connection signal="mouse_exited" from="Nob" to="." method="_mouse_exited"]

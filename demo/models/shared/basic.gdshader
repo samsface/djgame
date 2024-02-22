@@ -10,7 +10,10 @@ uniform sampler2D smudges : source_color;
 uniform vec3 color : source_color;
 uniform bool debug_uv1 = false;
 uniform bool debug_uv2 = false;
+uniform float ambient_occlusion : hint_range(0.0, 10.0, 0.0) = 1.0;
 instance uniform float rand : hint_range(0.0, 1.0);
+
+uniform float metalic : hint_range(0.0, 10.0, 0.0) = 0.5;
 
 uniform vec4 edge_color : source_color;
 
@@ -27,10 +30,7 @@ void fragment()
 	vec3 vec = texture(map, uv).rgb;
 	
 	float r = texture(smudges, UV * smudge_scale + rand).r;
-	
-	
-	//alb -= min(0.2, pow(vec.g, 1.0));
-	
+
 	if(edge_color.a >= 1.0)
 	{
 		alb = mix(alb, edge_color.rgb, round(pow(vec.g, 0.5)));
@@ -42,9 +42,13 @@ void fragment()
 	
 	alb = mix(alb, vec3(r), r);
 
+
+	// ambient oc
+	alb.rgb *= pow(vec.r, ambient_occlusion);
+	//
 	
 	ALBEDO.rgb = alb;
-	METALLIC = 0.5;
+	METALLIC = metalic;
 	ROUGHNESS = 0.6;
 	SPECULAR = 0.5;
 
@@ -53,9 +57,7 @@ void fragment()
 	t = round(t);
 	
 	vec3 lt = vec3(0);
-		
-	
-	
+
 	EMISSION = t * 255.0 * pow(emission_scale, 8.0);
 	ALBEDO = mix(ALBEDO, EMISSION, length(EMISSION));
 	//
