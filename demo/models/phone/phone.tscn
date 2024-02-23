@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://models/phone/phone_test.gd" id="6_vrhos"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vffgr"]
-size = Vector3(0.5, 0, 1)
+size = Vector3(0.5, 0.02, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_gv248"]
 viewport_path = NodePath("SubViewport")
@@ -32,6 +32,7 @@ script = ExtResource("2_hu3e3")
 transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0)
 collision_layer = 8
 collision_mask = 0
+input_ray_pickable = false
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]

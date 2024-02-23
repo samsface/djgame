@@ -9,7 +9,10 @@ extends Marker3D
 @export var red := 0.0
 @export var blood := 0.0
 @export var lock := 0.0
+@export var friction_scale := 0.0
 
+
+var friction := 0.0
 var max_move_radius_ := 0.0
 var max_move_radius_position_ := Vector3.ZERO
 var debug = false
@@ -17,7 +20,7 @@ var debug = false
 func _ready() -> void:
 	if debug:
 		var x = CSGSphere3D.new()
-		x.radius = 0.025
+		x.radius = 0.0025
 		add_child(x)
 
 func tick(delta:float) -> void:

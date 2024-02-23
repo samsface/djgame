@@ -3,6 +3,7 @@ extends Node3D
 
 @export var size := 256
 @export var resolution:float = 0.001 
+@export var smooth_iterations:int = 0
 @export var data := PackedFloat32Array()
 @export var texture:ImageTexture
 @export var reset:bool :
@@ -55,7 +56,7 @@ func scan_() -> void:
 			ray_cast_.position.x = x * resolution
 			ray_cast_.position.z = y * resolution
 
-	for i in 10:
+	for i in smooth_iterations:
 		data = smooth_array(data)
 	
 	var image := Image.create(size, size, false, Image.FORMAT_R8)

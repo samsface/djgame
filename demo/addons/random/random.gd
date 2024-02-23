@@ -16,3 +16,11 @@ static func fruity_color() -> Color:
 	# Create and return the Color
 	var fruity_color = Color(red, green, blue)
 	return fruity_color
+
+static func random_vector3() -> Vector3:
+	# Generate random values for red, green, and blue components
+	var red = randf() - 0.5
+	var green = randf() - 0.5
+	var blue = randf() - 0.5
+
+	return Vector3(red, green, blue)

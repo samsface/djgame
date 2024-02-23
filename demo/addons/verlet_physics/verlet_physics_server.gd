@@ -1,7 +1,7 @@
 extends Node3D
 
-@export var global_gravity := -0.5
-@export var air_resistnace := 24.0
+@export var global_gravity := -0.098
+@export var air_resistnace := 2.0
 
 var height_map:PackedFloat32Array
 var height_map_origin:Vector3
@@ -32,24 +32,23 @@ func _physics_process(delta) -> void:
 		if height_map:
 			for atom in body.atoms_:
 				var ap:Vector3 = atom.global_position - height_map_origin
-				ap *= height_map_width
-				
-				if ap.x >= height_map_width or ap.z >= height_map_width:
-					continue
-					
-				if ap.x < 0.0 or ap.z < 0.0:
-					continue
+				ap *= float(height_map_width)
 
 				var iv = ap.floor()
 			
 				var idx:int = iv.z * height_map_width + iv.x
-			
+
+				if idx < 0 or idx >= height_map.size():
+					continue
+
 				var f = height_map[idx]
 
 				if atom.global_position.y < f:
-					atom.global_position.y = lerp(atom.global_position.y , f, delta * 44.0)
-					atom.last_position.y = atom.position.y
+					var v = atom.get_velocity()
 
-		for i in range(10):
+					atom.last_position.y = f - v.y 
+					atom.global_position.y = f
+	
+		for i in range(4):
 			for bond in body.bonds_:
 				bond.tick(delta)

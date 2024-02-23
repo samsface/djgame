@@ -19,7 +19,7 @@ func _ready() -> void:
 	
 	if not Engine.is_editor_hint():
 		if rest_distance_ == 0.0:
-			rest_distance_ = atom_a_.position.distance_to(atom_b_.position) * 0.1
+			rest_distance_ = atom_a_.position.distance_to(atom_b_.position)
 
 func tick(delta:float) -> void:
 	if atom_b_.dynamic == 0.0 and atom_a_.dynamic == 0.0:
@@ -31,10 +31,16 @@ func tick(delta:float) -> void:
 	
 	var direction = atom_b_.position.direction_to(atom_a_.position)
 	
-	var ratio := 0.5
-	if atom_a_.dynamic == 0.0:
+	
+	
+	var total_mass := atom_a_.mass + atom_b_.mass
+	var a_diff = atom_a_.mass / total_mass
+	var b_diff = atom_b_.mass / total_mass
+	
+	var ratio = 0.5
+	if atom_a_.friction > 0.0 and atom_a_.friction_scale > 0.0:
 		ratio = 0.0
-	elif atom_b_.dynamic == 0.0:
+	elif atom_b_.friction > 0.0 and atom_b_.friction_scale > 0.0:
 		ratio = 1.0
 
 	atom_a_.position += direction * diff * 0.5 * ratio

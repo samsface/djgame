@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://0kfwlme4ujx2"
+path="res://.godot/imported/pixar_mom.obj-5c8a6faea342b8991acc50b7c70fbc8b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/pixar_mom.obj-5c8a6faea342b8991acc50b7c70fbc8b.mesh"]
+
+source_file="res://models/lital/pixar_mom.obj"
+dest_files=["res://.godot/imported/pixar_mom.obj-5c8a6faea342b8991acc50b7c70fbc8b.mesh", "res://.godot/imported/pixar_mom.obj-5c8a6faea342b8991acc50b7c70fbc8b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
