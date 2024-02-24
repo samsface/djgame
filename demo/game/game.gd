@@ -16,6 +16,8 @@ var combo_perfect_ := true
 var last_bad_
 
 func _ready() -> void:
+	$WorldEnvironment.camera_attributes.dof_blur_far_enabled = true
+	
 	VerletPhysicsServer.height_map = $HeightMapGenerator.data
 	VerletPhysicsServer.height_map_origin = $HeightMapGenerator.global_position
 	VerletPhysicsServer.height_map_width = $HeightMapGenerator.size
@@ -53,7 +55,7 @@ func _bang(r):
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("noise"):
-		Camera.smooth_look_at($Dancer/Node3D)
+		Camera.smooth_look_at($CrowdService)
 
 func follow(nob_path:NodePath, begin_time:float, end_time:float, from_value:float, to_value:float, meta:Array = []):
 	var nob := get_node_or_null(nob_path)

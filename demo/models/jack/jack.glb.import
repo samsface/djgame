@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/jack.glb-01c449963da8d1d02f6fb3e9ee8d09e9.scn
 
 [params]
 
-nodes/root_type="RigidBody3D"
+nodes/root_type="Node3D"
 nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
@@ -28,7 +28,7 @@ animation/import=true
 animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
-import_script/path="res://models/hack_import.gd"
+import_script/path=""
 _subresources={
 "nodes": {
 "PATH:Jack": {

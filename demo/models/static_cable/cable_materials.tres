@@ -1,0 +1,32 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://briuikniopxan"]
+
+[ext_resource type="Shader" uid="uid://ce2plrxsubdvu" path="res://models/static_cable/cable_shader.tres" id="1_j4vcd"]
+
+[sub_resource type="Gradient" id="Gradient_auygc"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.115789)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_46ivc"]
+noise_type = 0
+frequency = 0.1245
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3tds1"]
+seamless = true
+color_ramp = SubResource("Gradient_auygc")
+noise = SubResource("FastNoiseLite_46ivc")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_j4vcd")
+shader_parameter/albedo = Color(0, 0, 0, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.61
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.45
+shader_parameter/metallic = 0.0
+shader_parameter/normal_scale = 0.0500008
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/texture_normal = SubResource("NoiseTexture2D_3tds1")

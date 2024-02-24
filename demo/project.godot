@@ -185,10 +185,6 @@ play={
 
 3d_physics/layer_4="cursor"
 
-[physics]
-
-3d/physics_engine="JoltPhysics3D"
-
 [rendering]
 
 textures/canvas_textures/default_texture_repeat=1
