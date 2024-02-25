@@ -13,6 +13,9 @@ var hovering_
 var recording := false
 var recorder
 
+func logi(str:String) -> void:
+	pass
+
 func looking_at() -> void:
 	pass
 
@@ -59,15 +62,26 @@ func _physics_process(delta: float) -> void:
 	ray_cast_.force_raycast_update()
 
 	if ray_cast_.is_colliding():
-		if hovering_:
+		$Debug.position = ray_cast_.get_collision_point()
+		
+		var next_hovering = ray_cast_.get_collider().get_parent()
+		
+		if hovering_ and next_hovering != hovering_:
+			logi("MOUSE EXIT")
 			hovering_._mouse_exited()
 		
 		var point = ray_cast_.get_collision_point()
 		cursor.try_set_position(self, point + Vector3.UP * 0.002)
-
-		if ray_cast_.get_collider().get_parent().has_method("_mouse_entered"):
-			hovering_ = ray_cast_.get_collider().get_parent()
+		
+		if hovering_ == next_hovering:
+			pass
+		elif next_hovering.has_method("_mouse_entered"):
+			logi("MOUSE ENTER")
+			hovering_ = next_hovering
 			hovering_._mouse_entered()
+		else:
+			logi("MOUSE ENTER NOTING")
+			hovering_ = null
 
 func set_head_position(pos:Vector3) -> void:
 	var tween := create_tween()

@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cld6mbchnrp3"]
+[gd_scene load_steps=6 format=3 uid="uid://cld6mbchnrp3"]
 
 [ext_resource type="Script" path="res://models/toydrum/button.gd" id="1_hygni"]
+[ext_resource type="Script" path="res://models/shared/nob_model.gd" id="2_4hhqy"]
 [ext_resource type="PackedScene" uid="uid://dhounssqfe2jw" path="res://models/toydrum/buttonm.tscn" id="2_nny25"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fygew"]
@@ -16,7 +17,10 @@ script = ExtResource("1_hygni")
 [node name="Nob" type="Area3D" parent="."]
 collision_layer = 9
 
-[node name="Button" parent="Nob" instance=ExtResource("2_nny25")]
+[node name="Model" type="Node3D" parent="Nob"]
+script = ExtResource("2_4hhqy")
+
+[node name="Button" parent="Nob/Model" instance=ExtResource("2_nny25")]
 transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Nob"]

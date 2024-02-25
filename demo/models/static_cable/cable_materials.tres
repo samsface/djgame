@@ -4,11 +4,11 @@
 
 [sub_resource type="Gradient" id="Gradient_auygc"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.115789)
+offsets = PackedFloat32Array(0, 0.512676)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_46ivc"]
 noise_type = 0
-frequency = 0.1245
+frequency = 0.2221
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3tds1"]
 seamless = true

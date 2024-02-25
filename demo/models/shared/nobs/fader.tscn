@@ -1,20 +1,26 @@
 [gd_scene load_steps=6 format=3 uid="uid://dwp3tnmuhyvep"]
 
 [ext_resource type="PackedScene" uid="uid://d1j3o2mbfpav3" path="res://models/shared/nobs/fader.glb" id="1_jm8os"]
-[ext_resource type="Shader" path="res://models/shared/nobs/fader.gdshader" id="2_f0c55"]
+[ext_resource type="Shader" path="res://models/shared/basic.gdshader" id="2_urh7x"]
 [ext_resource type="Texture2D" uid="uid://30joc7s5lht6" path="res://models/shared/nobs/ao_map.png" id="3_s3mb1"]
 [ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="4_okjcm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tq8lx"]
 render_priority = 0
-shader = ExtResource("2_f0c55")
-shader_parameter/albedo = Color(1, 0.372549, 0.788235, 1)
-shader_parameter/albedo2 = Color(0, 0, 0, 1)
-shader_parameter/ao_map = ExtResource("3_s3mb1")
-shader_parameter/scratches = ExtResource("4_okjcm")
+shader = ExtResource("2_urh7x")
+shader_parameter/smudge_scale = 0.2
+shader_parameter/color = Color(1, 0.372549, 0.788235, 1)
+shader_parameter/debug_uv1 = false
+shader_parameter/debug_uv2 = false
+shader_parameter/ambient_occlusion = 1.36752
+shader_parameter/metalic = 0.5
+shader_parameter/edge_color = Color(0, 0, 0, 0.631373)
+shader_parameter/map = ExtResource("3_s3mb1")
+shader_parameter/smudges = ExtResource("4_okjcm")
 
 [node name="fader" instance=ExtResource("1_jm8os")]
 
 [node name="Plane_001" parent="." index="0"]
 transform = Transform3D(0.7, 0, 0, 0, 1, 0, 0, 0, 0.7, 0, 0, 0)
+instance_shader_parameters/highlight = 0.0
 surface_material_override/0 = SubResource("ShaderMaterial_tq8lx")

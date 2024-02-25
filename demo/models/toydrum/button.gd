@@ -10,7 +10,7 @@ var value :
 	set(v):
 		value = v
 		value_ = clamp(v, 0.0, 1.0)
-		$Nob/Button.light = light_color_()
+		$Nob/Model/Button.light = light_color_()
 
 var down_ := false
 var mouse_over_ := false
@@ -19,7 +19,7 @@ var value_ := 0.0
 var pulse_ := 0.0 :
 	set(v):
 		pulse_ = v
-		$Nob/Button.light = light_color_()
+		$Nob/Model/Button.light = light_color_()
 
 func _ready() -> void:
 	set_process_input(false)
@@ -44,7 +44,7 @@ func pressed() -> void:
 	value_ += 1
 	value_ = int(value_) % range
 
-	$Nob/Button.light = light_color_()
+	$Nob/Model/Button.light = light_color_()
 	
 	value_changed.emit(float(value_) / float(range))
 	
@@ -67,13 +67,14 @@ func released() -> void:
 func _mouse_entered() -> void:
 	mouse_over_ = true
 	set_process_input(true)
-	$Nob/Button.outline = Color(1.0, 1.0, 1.0, 1.0)
-
+	
+	$Nob/Model.hover_begin()
+	
 func _mouse_exited() -> void:
 	mouse_over_ = false
 	if not down_:
 		set_process_input(false)
-		$Nob/Button.outline = Color.TRANSPARENT
+		$Nob/Model.hover_end()
 
 func light_color_() -> float:
 	return value_ + pulse_
@@ -82,5 +83,3 @@ func radio():
 	var tween = create_tween()
 	tween.tween_property(self, "pulse_", 0.5, 0.0)
 	tween.tween_property(self, "pulse_", 0.0, 1.0).set_delay(0.1)
-
-

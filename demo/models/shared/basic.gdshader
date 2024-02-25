@@ -11,7 +11,10 @@ uniform vec3 color : source_color;
 uniform bool debug_uv1 = false;
 uniform bool debug_uv2 = false;
 uniform float ambient_occlusion : hint_range(0.0, 10.0, 0.0) = 1.0;
+uniform sampler2D DEPTH_TEXTURE : source_color, hint_depth_texture;
+
 instance uniform float rand : hint_range(0.0, 1.0);
+instance uniform float highlight = 0.0;
 
 uniform float metalic : hint_range(0.0, 10.0, 0.0) = 0.5;
 
@@ -75,5 +78,4 @@ void fragment()
 		ALBEDO.g = UV2.y;
 		ALBEDO.b = 0.0;
 	}
-
 }
