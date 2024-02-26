@@ -1,41 +1,33 @@
 extends Guide
 
-signal hit
-signal miss
-
 const proximity_ := 0.1
 
 var nob_
 var for_value_ := 0.0
-var hit_ := false
-var miss_ := false
 var last_off_ := 0.0
+var sound_tween_:Tween
+var sound_played_ := false
 
 @onready var timer_ := $Timer
 @onready var arrow_ := $Arrow
-
-var text_service
-var points_service
-var crowd_service
-
-var sound_tween_:Tween
-var sound_played_ := false
 
 func _ready() -> void:
 	last_off_ = get_off_()
 	
 	arrow_.position.y = 0.04
 
-	var tween := create_tween()
-	tween.set_parallel()
-	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
-	tween.tween_property(arrow_, "rotation:y", 5, 1.0)
-	tween.tween_property(arrow_, "position:y", -0.002, 1.0)
+	fall_tween_ = create_tween()
+	fall_tween_.set_parallel()
+	fall_tween_.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+	fall_tween_.tween_property(arrow_, "rotation:y", 5, 1.0)
+	fall_tween_.tween_property(arrow_, "position:y", -0.002, 1.0)
 	
 	sound_tween_ = create_tween()
 	sound_tween_.tween_interval(0.5)
 
-	tween.finished.connect(_miss)
+	fall_tween_.finished.connect(_miss)
+	
+	points_ = points_service.make_points()
 
 func _sound():
 	if sound_played_:
@@ -44,8 +36,6 @@ func _sound():
 	sound_tween_.kill()
 
 	sound_played_ = true
-	
-	crowd_service.cheer()
 
 func _miss() -> void:
 	if hit_:
@@ -61,7 +51,7 @@ func _hit() -> void:
 	if miss_:
 		return
 
-	var combo:float = min(get_parent().get_parent().combo_, 10.0)
+	var combo:float = min(points_service.combo, 10.0)
 	combo = combo / 10.0
 	
 	arrow_.explode(combo)
@@ -87,7 +77,7 @@ func _physics_process(delta: float) -> void:
 
 	if not timer_.is_stopped():
 		return
-		
+
 	for node in get_parent().get_children():
 		if node == self:
 			break
@@ -109,23 +99,19 @@ func _physics_process(delta: float) -> void:
 func judge_accuracy_() -> void:
 	var off := get_off_()
 
-	if off > proximity_:
-		text_service.make_too_high_text(global_position + Vector3.UP * 0.03)
-		points_service.miss()
-	elif off < -proximity_:
-		text_service.make_too_low_text(global_position + Vector3.UP * 0.03)
-		points_service.miss()
-	else:
-		points_service.points += 100
-			
+	if abs(off) < proximity_:
+		points_.hit(100)
+		points_.commit()
 		if sound_tween_.is_running():
 			_sound()
-		text_service.make_pts_text(100, global_position + Vector3.UP * 0.03)
+	else:
+		points_.miss(off)
+
+	points_.global_position = global_position  
 
 	wait_then_free_()
 
-func wait_then_free_() -> void:
-
+func wait_then_free_() -> void:	
 	$Arrow/Particles.emitting = false
 	create_tween().tween_interval(0.5).finished.connect(queue_free)
 
@@ -134,3 +120,6 @@ func get_nob() -> Nob:
 	
 func get_off_() -> float:
 	return nob_.value - for_value_
+
+func _exit_tree() -> void:
+	points_.queue_free()

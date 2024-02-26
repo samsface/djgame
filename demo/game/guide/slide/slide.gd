@@ -1,30 +1,15 @@
 extends Guide
 
-signal hit
-signal miss
-
 var nob_
 var to_value_ := 0.0
 var duration_ := 0.0
 var expected_value_ := 0.0
-
-var first_hit_ := false
-var fall_tween_:Tween
-var text_
-
-var hit_ := false
-var miss_ := false
-
 var score_ := 0
-
-@onready var arrow_ = $arrow
-
 var score_tween_:Tween
 var rumble_tween_:Tween
 var rumble_scale_ := 1.2
 
-var text_service
-var points_service
+@onready var arrow_ = $arrow
 
 func _ready() -> void:
 	var fall_duration := 0.5
@@ -52,10 +37,8 @@ func _ready() -> void:
 	score_tween_ = create_tween()
 	score_tween_.tween_property(self, "score_", 300, duration_ - fall_duration)
 
-	text_ = text_service.make_text()
+	points_ = points_service.make_points()
 
-	test_()
-	
 	Camera.rumble.connect(_rumble)
 
 func _rumble() -> void:
@@ -76,32 +59,17 @@ func watch(nob:Nob, from_value:float, to_value:float, duration:float) -> void:
 	to_value_ = to_value
 	duration_ = duration
 
-var first_ := true
-
-func test_(finished := false) -> void:
-	if finished:
-		text_.text = str(score_) + " PTS"
-		text_.ok()
-		return
-
+func test_() -> void:
 	var off = nob_.value - expected_value_
+
 	if abs(off) <= 0.2:
 		score_tween_.play()
-		text_.text = ("%d" % score_) + " PTS"
-		text_.ok()
-
-	elif off > 0.2:
+		points_.hit(score_)
+	else:
 		score_tween_.pause()
-		text_.text = "TOO HIGH!"
-		text_.danger()
-		points_service.miss()
-	elif off < 0.2:
-		score_tween_.pause()
-		text_.text = "TOO LOW!"
-		text_.danger()
-		points_service.miss()
+		points_.miss(off)
 
-	text_.global_position = get_nob().get_nob_position() + Vector3.UP * 0.03
+	points_.global_position = get_nob().get_nob_position()
 
 func _physics_process(delta: float) -> void:
 	if hit_:
@@ -116,12 +84,17 @@ func get_nob() -> Nob:
 	return nob_
 
 func _done() -> void:
-	points_service.points += score_
-
-	text_.queue_free()
 	$arrow/Particles.emitting = false
-	
+
 	hit_ = true
-	test_(true)
-	await arrow_.explode().finished
+
+	var explode_size:float = min(points_service.combo, 10.0)
+	explode_size = explode_size / 10.0
+	
+	points_.commit()
+
+	await arrow_.explode(explode_size).finished
 	queue_free()
+
+func _exit_tree() -> void:
+	points_.queue_free()

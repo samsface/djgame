@@ -73,12 +73,9 @@ func follow(nob_path:NodePath, begin_time:float, end_time:float, from_value:floa
 
 	var pos = nob.get_guide_position_for_value(from_value)
 	var d = preload("res://game/guide/slide/slide.tscn").instantiate()
-	d.text_service = $TextService
 	d.points_service = $PointsService
 	d.position = pos
 	d.watch(nob, from_value, to_value, (end_time - begin_time) / $Recorder/AnimationPlayer.speed_scale)
-	d.hit.connect(func(accuracy, finished): score_ += 50; good_(nob.get_nob_position() + Vector3(0.0, 0.01, 0.0), phrase_over and finished))
-	d.miss.connect(func(accuracy): bad_(nob.get_nob_position() + Vector3(0.0, 0.01, 0.0), accuracy))
 
 	guides_.add_child(d)
 
@@ -91,13 +88,9 @@ func test(nob_path:NodePath, key_time:float, value:float, meta:Array):
 
 	var pos = nob.get_guide_position_for_value(value)
 	var d = preload("res://game/guide/bang/bang.tscn").instantiate()
-	d.text_service = $TextService
 	d.points_service = $PointsService 
-	d.crowd_service = $CrowdService
 	d.position = pos
 	d.watch(nob, value)
-	d.hit.connect(func(off:float): score_ += 100; good_(pos + Vector3(0.0, 0.01, 0.0), phrase_over))
-	d.miss.connect(func(off:float): bad_(pos + Vector3(0.0, 0.01, 0.0), off))
 	nob.intended_value = value
 
 	guides_.add_child(d)
