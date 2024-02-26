@@ -16,6 +16,8 @@ var combo_perfect_ := true
 var last_bad_
 
 func _ready() -> void:
+	%Label2.points_service_ = $PointsService
+	
 	$WorldEnvironment.camera_attributes.dof_blur_far_enabled = true
 	
 	VerletPhysicsServer.height_map = $HeightMapGenerator.data
@@ -24,9 +26,9 @@ func _ready() -> void:
 
 	Engine.max_fps = 144
 
-	Camera.set_head_position($acid.get_view_position())
+	#Camera.set_head_position($acid.get_view_position())
 
-	Camera.smooth_look_at($toykit)
+	#Camera.smooth_look_at($toykit)
 	
 	var p = ProjectSettings.globalize_path("res://junk/xxx.pd")
 
@@ -52,10 +54,15 @@ func _bang(r):
 		return
 	elif r == "s-rumble":
 		Camera.shake(0.7, 0.001)
+		Camera.rumble.emit()
+
+var last_ting_
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("noise"):
-		Camera.smooth_look_at($CrowdService)
+		Camera.push_look_at($CrowdService, 0, 0)
+	elif Input.is_action_just_released("noise"):
+		Camera.pop_look_at($CrowdService)
 
 func follow(nob_path:NodePath, begin_time:float, end_time:float, from_value:float, to_value:float, meta:Array = []):
 	var nob := get_node_or_null(nob_path)
@@ -67,6 +74,7 @@ func follow(nob_path:NodePath, begin_time:float, end_time:float, from_value:floa
 	var pos = nob.get_guide_position_for_value(from_value)
 	var d = preload("res://game/guide/slide/slide.tscn").instantiate()
 	d.text_service = $TextService
+	d.points_service = $PointsService
 	d.position = pos
 	d.watch(nob, from_value, to_value, (end_time - begin_time) / $Recorder/AnimationPlayer.speed_scale)
 	d.hit.connect(func(accuracy, finished): score_ += 50; good_(nob.get_nob_position() + Vector3(0.0, 0.01, 0.0), phrase_over and finished))
@@ -84,6 +92,7 @@ func test(nob_path:NodePath, key_time:float, value:float, meta:Array):
 	var pos = nob.get_guide_position_for_value(value)
 	var d = preload("res://game/guide/bang/bang.tscn").instantiate()
 	d.text_service = $TextService
+	d.points_service = $PointsService 
 	d.crowd_service = $CrowdService
 	d.position = pos
 	d.watch(nob, value)

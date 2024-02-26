@@ -36,14 +36,15 @@ func _input(event: InputEvent) -> void:
 	if dragging_:
 		if event.is_action_released("click"):
 			dragging_ = false
+			$Nob/Model._grab_end()
 			Camera.cursor.pop(self)
 
 	if mouse_over_:
 		if event.is_action_pressed("click"):
 			dragging_ = true
+			$Nob/Model._grab_begin()
 			Camera.cursor.push(self, Cursor.Action.grab)
 			dragging_start_ = get_window().get_mouse_position()
-
 
 func _physics_process(delta: float) -> void:
 	if dragging_:
@@ -84,8 +85,10 @@ func invalidate_() -> void:
 	path_follow_.progress_ratio = value
 
 	Camera.cursor.try_set_position(self, $Nob.global_position + Vector3.UP * 0.002)
-	Camera.smooth_look_at(self.get_parent())
-	Camera.set_head_position(get_parent().get_view_position())
+	
+	
+	
+	Camera.look_at_node(self.get_parent())
 
 func get_guide_position_for_value(value:float) -> Vector3:
 	shadow_path_follow_.progress_ratio = value

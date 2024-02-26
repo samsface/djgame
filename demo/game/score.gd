@@ -1,30 +1,27 @@
 extends Label
 
+var points_service_
+
+var tween_:Tween
+var value_ := 0
 
 func _ready() -> void:
-	float_()
-
-func float_() -> void:
 	pivot_offset = size * 0.5
-	
-	var p = position
-	
-	var tween := create_tween()
-	tween.set_speed_scale(0.5)
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_parallel()
-	tween.tween_property(self, "position", p + Vector2.UP * 10.0, 1.0)
-	tween.tween_property(self, "scale", Vector2.ONE * 1.1, 1.0)
-	tween.tween_property(self, "rotation", 0.1, 1.0)
-	
-	await tween.finished
+	get_parent().pivot_offset = get_parent().size * 0.5
 
-	tween = create_tween()
-	tween.set_speed_scale(0.5)
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_parallel()
-	tween.tween_property(self, "position", p, 1.0)
-	tween.tween_property(self, "scale", Vector2.ONE, 1.0)
-	tween.tween_property(self, "rotation", -0.1, 1.0)
-	
-	tween.finished.connect(float_)
+	await get_tree().process_frame
+
+	points_service_.points_changed.connect(_points_changed)
+
+func _points_changed(value) -> void:
+	if tween_:
+		tween_.kill()
+
+	tween_ = create_tween()
+	tween_.set_parallel()
+	tween_.tween_method(func(v): value_ = v; text = str(value_) + " pts", value_, value, value * 0.005)
+
+	tween_.tween_property(get_parent(), "scale", Vector2.ONE * 1.2, 0.05)
+	tween_.tween_property(get_parent(), "scale", Vector2.ONE, 0.1).set_delay(0.05)
+
+

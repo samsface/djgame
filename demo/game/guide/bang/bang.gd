@@ -15,6 +15,7 @@ var last_off_ := 0.0
 @onready var arrow_ := $Arrow
 
 var text_service
+var points_service
 var crowd_service
 
 var sound_tween_:Tween
@@ -120,6 +121,7 @@ func judge_accuracy_() -> void:
 	wait_then_free_()
 
 func wait_then_free_() -> void:
+	points_service.points += 100
 	$Arrow/Particles.emitting = false
 	create_tween().tween_interval(0.5).finished.connect(queue_free)
 

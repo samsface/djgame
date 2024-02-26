@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://bfo1bxbj7knm0"]
+[gd_scene load_steps=49 format=3 uid="uid://bfo1bxbj7knm0"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_5uhe0"]
 [ext_resource type="PackedScene" uid="uid://bl7d8jwotcuws" path="res://models/phone/phone.tscn" id="2_4rjj7"]
@@ -6,6 +6,7 @@
 [ext_resource type="CameraAttributesPractical" uid="uid://ev1eo0cru0we" path="res://game/cameraatr.tres" id="4_1tamb"]
 [ext_resource type="Texture2D" uid="uid://48p1jkwhm4wh" path="res://samm0363_texture_of_a_bar_table_with_stains_and_wear_tile_5a36bd34-3c9c-4c2b-a62c-8adabec8fccf.png" id="4_g7021"]
 [ext_resource type="Script" path="res://game/track.gd" id="4_mbgf6"]
+[ext_resource type="Script" path="res://game/score.gd" id="5_2fact"]
 [ext_resource type="PackedScene" uid="uid://b34ex32xpvd1s" path="res://models/toydrum/toydrum.tscn" id="6_mvalr"]
 [ext_resource type="PackedScene" uid="uid://bc1nf0oh7e2pm" path="res://addons/verlet_physics/primitives/mesh_instance_3d.tscn" id="7_cc7jl"]
 [ext_resource type="PackedScene" uid="uid://myu11bovhya6" path="res://models/daft_box/daft_box.tscn" id="7_jscvx"]
@@ -21,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://c0rex7vmgy31h" path="res://wall.png" id="17_j3kk8"]
 [ext_resource type="PackedScene" uid="uid://dcbsuq0eekvuf" path="res://models/jack/jack.tscn" id="18_r0g3h"]
 [ext_resource type="PackedScene" uid="uid://dn18w300jjfpl" path="res://models/static_cable/cable_poly.tscn" id="20_p7nhh"]
+[ext_resource type="Script" path="res://game/PointsService.gd" id="22_7tagj"]
 
 [sub_resource type="Animation" id="Animation_7u863"]
 resource_name = "reset"
@@ -304,6 +306,7 @@ theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("3_ch5nx")
 theme_override_font_sizes/font_size = 64
 text = "123 pts"
+script = ExtResource("5_2fact")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8y6op")
@@ -587,3 +590,6 @@ diameter = 0.0021
 [node name="Path3D2" type="Path3D" parent="Poly2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00100997, -0.000725999, -0.00313415)
 curve = SubResource("Curve3D_5q1n3")
+
+[node name="PointsService" type="Node3D" parent="."]
+script = ExtResource("22_7tagj")

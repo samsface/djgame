@@ -20,8 +20,11 @@ var score_ := 0
 @onready var arrow_ = $arrow
 
 var score_tween_:Tween
+var rumble_tween_:Tween
+var rumble_scale_ := 1.2
 
 var text_service
+var points_service
 
 func _ready() -> void:
 	var fall_duration := 0.5
@@ -52,6 +55,17 @@ func _ready() -> void:
 	text_ = text_service.make_text()
 
 	test_()
+	
+	Camera.rumble.connect(_rumble)
+
+func _rumble() -> void:
+	if rumble_tween_:
+		rumble_tween_.kill()
+
+	rumble_tween_ = create_tween()
+	rumble_tween_.set_ease(Tween.EASE_OUT)
+	rumble_tween_.tween_property(self, "scale", Vector3.ONE * rumble_scale_, 0.05)
+	rumble_tween_.tween_property(self, "scale", Vector3.ONE, 0.1)
 
 func watch(nob:Nob, from_value:float, to_value:float, duration:float) -> void:
 	if not nob:
@@ -100,6 +114,8 @@ func get_nob() -> Nob:
 	return nob_
 
 func _done() -> void:
+	points_service.points += score_
+
 	text_.queue_free()
 	$arrow/Particles.emitting = false
 	

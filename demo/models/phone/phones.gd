@@ -21,9 +21,9 @@ func _input(event) -> void:
 		e.position.y *= $SubViewport.size.y
 		e.global_position = event.position
 		$SubViewport.push_input(e, false)
-		
-		Camera.smooth_look_at(self)
-		Camera.set_head_position($Head.global_position)
+
+		Camera.look_at_node(self)
+		#Camera.set_head_position($Head.global_position)
 
 func _input_event(camera: Node, event: InputEvent, position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
@@ -44,3 +44,6 @@ func vibrate() -> void:
 		j *= 0.025
 		var d = 1.0 if i % 2 == 0 else -1.0
 		tween.tween_property($Phone, "position:x", j * d, 0.02)
+
+func get_view_position(from_position := Vector3.ZERO) -> Vector3:
+	return $Head.global_position
