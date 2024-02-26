@@ -1,8 +1,47 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvxsm2x52fp42"]
+[gd_scene load_steps=14 format=3 uid="uid://bvxsm2x52fp42"]
 
 [ext_resource type="Script" path="res://models/lital/slider2.gd" id="1_cglxd"]
 [ext_resource type="PackedScene" uid="uid://dwp3tnmuhyvep" path="res://models/shared/nobs/fader.tscn" id="2_ord32"]
+[ext_resource type="Script" path="res://models/lital/Sparks.gd" id="2_rj4c3"]
 [ext_resource type="Script" path="res://models/shared/nob_model.gd" id="2_uhddo"]
+
+[sub_resource type="Curve" id="Curve_fs3fk"]
+_data = [Vector2(0, 0.637363), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rqxh3"]
+curve = SubResource("Curve_fs3fk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_agffy"]
+particle_flag_align_y = true
+angle_min = -720.0
+angle_max = 138.0
+direction = Vector3(0, 0.1, 1)
+spread = 40.0
+initial_velocity_min = 0.05
+initial_velocity_max = 0.2
+gravity = Vector3(0, -0.98, 0)
+scale_min = 0.5
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_rqxh3")
+
+[sub_resource type="Curve" id="Curve_utejc"]
+_data = [Vector2(0, 0.472527), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nyvk5"]
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 1, 0, 1)
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_33snq"]
+material = SubResource("StandardMaterial3D_nyvk5")
+size = 0.001
+sections = 4
+section_length = 0.001
+section_segments = 1
+curve = SubResource("Curve_utejc")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_t4snb"]
 radius = 0.01
@@ -26,6 +65,18 @@ script = ExtResource("1_cglxd")
 transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 4.65661e-10)
 collision_layer = 9
 input_ray_pickable = false
+
+[node name="Sparks" type="GPUParticles3D" parent="Nob"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0.00393656, 0)
+emitting = false
+amount = 50
+explosiveness = 0.15
+randomness = 0.25
+trail_enabled = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_agffy")
+draw_pass_1 = SubResource("RibbonTrailMesh_33snq")
+script = ExtResource("2_rj4c3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Nob"]
 transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999998, 0, 0.00283833, 0)

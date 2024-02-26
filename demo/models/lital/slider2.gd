@@ -62,6 +62,9 @@ func _physics_process(delta: float) -> void:
 		
 		Camera.cursor.try_set_position(self, $Nob.global_position)
 
+		if abs(diff) > 0.1:
+			$Nob/Sparks.spark()
+
 func _mouse_entered() -> void:
 	mouse_over_ = true
 	set_process_input(true)

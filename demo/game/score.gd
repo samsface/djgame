@@ -19,9 +19,8 @@ func _points_changed(value) -> void:
 
 	tween_ = create_tween()
 	tween_.set_parallel()
-	tween_.tween_method(func(v): value_ = v; text = str(value_) + " pts", value_, value, value * 0.005)
+	tween_.tween_method(func(v): value_ = v; text = str(value_) + " pts", value_, value, 2.0)
 
 	tween_.tween_property(get_parent(), "scale", Vector2.ONE * 1.2, 0.05)
 	tween_.tween_property(get_parent(), "scale", Vector2.ONE, 0.1).set_delay(0.05)
-
 

@@ -94,10 +94,12 @@ func test_(finished := false) -> void:
 		score_tween_.pause()
 		text_.text = "TOO HIGH!"
 		text_.danger()
+		points_service.miss()
 	elif off < 0.2:
 		score_tween_.pause()
 		text_.text = "TOO LOW!"
 		text_.danger()
+		points_service.miss()
 
 	text_.global_position = get_nob().get_nob_position() + Vector3.UP * 0.03
 

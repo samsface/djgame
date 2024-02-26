@@ -111,9 +111,13 @@ func judge_accuracy_() -> void:
 
 	if off > proximity_:
 		text_service.make_too_high_text(global_position + Vector3.UP * 0.03)
+		points_service.miss()
 	elif off < -proximity_:
 		text_service.make_too_low_text(global_position + Vector3.UP * 0.03)
+		points_service.miss()
 	else:
+		points_service.points += 100
+			
 		if sound_tween_.is_running():
 			_sound()
 		text_service.make_pts_text(100, global_position + Vector3.UP * 0.03)
@@ -121,7 +125,7 @@ func judge_accuracy_() -> void:
 	wait_then_free_()
 
 func wait_then_free_() -> void:
-	points_service.points += 100
+
 	$Arrow/Particles.emitting = false
 	create_tween().tween_interval(0.5).finished.connect(queue_free)
 
