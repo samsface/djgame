@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dn18w300jjfpl"]
 
-[ext_resource type="Script" path="res://game/Poly.gd" id="1_oambq"]
+[ext_resource type="Script" path="res://models/static_cable/Poly.gd" id="1_oambq"]
 [ext_resource type="Material" uid="uid://briuikniopxan" path="res://models/static_cable/cable_materials.tres" id="1_unvhc"]
 
 [node name="Poly" type="CSGPolygon3D"]

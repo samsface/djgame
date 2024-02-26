@@ -6,18 +6,8 @@ extends Node3D
 
 var patch_file_handle_ := PDPatchFile.new()
 var tween_:Tween
-var score_ := 0 :
-	set(value):
-		score_ = value
-		$Recorder/CanvasLayer/Label2.text = str(score_)
-
-var combo_ := 0
-var combo_perfect_ := true
-var last_bad_
 
 func _ready() -> void:
-	%Label2.points_service_ = $PointsService
-	
 	$WorldEnvironment.camera_attributes.dof_blur_far_enabled = true
 	
 	VerletPhysicsServer.height_map = $HeightMapGenerator.data
@@ -95,45 +85,6 @@ func test(nob_path:NodePath, key_time:float, value:float, meta:Array):
 
 	guides_.add_child(d)
 
-func good_(pos:Vector3, phrase_over:bool = false) -> void:
-	combo_ += 1
-	
-	var x = preload("res://game/text_service/text.tscn").instantiate()
-	x.position = pos
-
-	if phrase_over and combo_perfect_:
-		x.text =  "x " + str(combo_) + "  COMBO! PERFECT!"
-		x.hang_time = 1.0
-	elif phrase_over:
-		x.text =  "x " + str(combo_) + "  COMBO!"
-		x.hang_time = 1.0
-	else:
-		x.text = "x " + str(combo_)
-
-	add_child(x)
-	x.good()
-	
-	$Nice.pitch_scale = randf_range(0.7, 1.5)
-	$Nice.play() 
-
-	if phrase_over:
-		combo_ = 0
-		combo_perfect_ = true
-
-func bad_(pos:Vector3, accuracy:float, phrase_over:bool = false) -> void:
-	return
-	if last_bad_:
-		last_bad_.queue_free()
-
-	last_bad_ = preload("res://game/text_service/text.tscn").instantiate()
-	last_bad_.position = pos
-	last_bad_.accuracy = accuracy
-	add_child(last_bad_)
-	#last_bad_.bad()
-	
-	combo_ = 0
-	combo_perfect_ = false
-
 func guide_exists_(nob:Nob) -> bool:
 	for node in guides_.get_children():
 		if node.get_nob() == nob:
@@ -150,7 +101,7 @@ func _device_nob_value_changed(nob:Nob, new_value:float, old_value:float) -> voi
 
 	if abs(nob.intended_value - new_value) > 0.1:
 		nob.reset_to_intended_value()
-		bad_(nob.get_nob_position() + Vector3.UP * 0.01, -1)
+		#bad_(nob.get_nob_position() + Vector3.UP * 0.01, -1)
 
 func meta(array:Array = []) -> void:
 	pass

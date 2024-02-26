@@ -8,6 +8,7 @@ var damage_tween_:Tween
 	set(value):
 		points = value
 		points_changed.emit(points)
+		%Score.set_points(points)
 
 var combo := 0
 
@@ -23,6 +24,6 @@ func miss() -> void:
 	damage_tween_.tween_property($CanvasLayer/ColorRect.material, "shader_parameter/damage", 0.0, 0.2)
 
 func make_points():
-	var points = preload("res://game/points.tscn").instantiate()
+	var points = preload("res://game/points_service/points.tscn").instantiate()
 	add_child(points)
 	return points
