@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://d1i36ul15hsb8"]
+
+[ext_resource type="Script" path="res://game/guide/rapid_bang/rapid_bang.gd" id="1_bgscu"]
+[ext_resource type="PackedScene" uid="uid://cw6wg4868tix8" path="res://game/guide/shared/arrow/arrow.tscn" id="2_nq4fq"]
+
+[sub_resource type="Curve" id="Curve_h621f"]
+_data = [Vector2(0, 0.335671), 0.0, 0.0, 0, 0, Vector2(0.489583, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hrauc"]
+curve = SubResource("Curve_h621f")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fdilt"]
+emission_shape_scale = Vector3(0.011, 1, 1)
+emission_shape = 1
+emission_sphere_radius = 0.5
+gravity = Vector3(0, 0.5, 0)
+scale_min = 0.1
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_hrauc")
+turbulence_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7nvc"]
+albedo_color = Color(0, 0.901961, 0.34902, 1)
+emission_enabled = true
+emission = Color(0, 0.901961, 0.34902, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_34g5m"]
+material = SubResource("StandardMaterial3D_r7nvc")
+radius = 0.001
+height = 0.002
+radial_segments = 4
+rings = 1
+
+[node name="Hit" type="Node3D"]
+script = ExtResource("1_bgscu")
+
+[node name="Arrow" parent="." instance=ExtResource("2_nq4fq")]
+transform = Transform3D(0.02, 0, 0, 0, 0.000349048, 0.019997, 0, -0.019997, 0.000349048, 0, 0, 0)
+
+[node name="Particles" type="GPUParticles3D" parent="Arrow"]
+transform = Transform3D(1, 0, 0, 0, 1, -3.72529e-09, 0, 3.72529e-09, 1, 0, 0.0309078, 0.00570286)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_fdilt")
+draw_pass_1 = SubResource("SphereMesh_34g5m")

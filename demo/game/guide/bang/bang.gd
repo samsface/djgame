@@ -5,8 +5,6 @@ const proximity_ := 0.1
 var nob_
 var for_value_ := 0.0
 var last_off_ := 0.0
-var sound_tween_:Tween
-var sound_played_ := false
 
 @onready var timer_ := $Timer
 @onready var arrow_ := $Arrow
@@ -21,21 +19,9 @@ func _ready() -> void:
 	fall_tween_.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
 	fall_tween_.tween_property(arrow_, "rotation:y", 5, 1.0)
 	fall_tween_.tween_property(arrow_, "position:y", -0.002, 1.0)
-	
-	sound_tween_ = create_tween()
-	sound_tween_.tween_interval(0.5)
-
 	fall_tween_.finished.connect(_miss)
 	
 	points_ = points_service.make_points()
-
-func _sound():
-	if sound_played_:
-		return
-		
-	sound_tween_.kill()
-
-	sound_played_ = true
 
 func _miss() -> void:
 	if hit_:
@@ -102,8 +88,6 @@ func judge_accuracy_() -> void:
 	if abs(off) < proximity_:
 		points_.hit(100)
 		points_.commit()
-		if sound_tween_.is_running():
-			_sound()
 	else:
 		points_.miss(off)
 
@@ -111,7 +95,7 @@ func judge_accuracy_() -> void:
 
 	wait_then_free_()
 
-func wait_then_free_() -> void:	
+func wait_then_free_() -> void:
 	$Arrow/Particles.emitting = false
 	create_tween().tween_interval(0.5).finished.connect(queue_free)
 

@@ -3,11 +3,20 @@ extends Node3D
 @onready var looking_at_ := $toykit
 @onready var guides_ := $Guides
 @onready var recorder_ := $Recorder
+@onready var beat_player_  := %BeatPlayer
 
 var patch_file_handle_ := PDPatchFile.new()
 var tween_:Tween
 
+
 func _ready() -> void:
+	beat_player_.bang.connect(_beat_player_bang)
+	
+	$Recorder.play.connect(func():
+		create_tween().tween_property($CrowdService/Chatter, "volume_db", linear_to_db(0.25), 5.0)
+		$CrowdService/Clap.play()
+		)
+	
 	$WorldEnvironment.camera_attributes.dof_blur_far_enabled = true
 	
 	VerletPhysicsServer.height_map = $HeightMapGenerator.data
@@ -33,6 +42,12 @@ func _ready() -> void:
 	for child in get_children():
 		if child is Device:
 			child.value_changed.connect(_device_nob_value_changed)
+
+func _beat_player_bang(node_path:NodePath, value) -> void:
+	if not get_node_or_null(node_path):
+		return
+	
+	test(node_path, 0.0, value, [])
 
 var i_ = 0
 
@@ -93,8 +108,7 @@ func guide_exists_(nob:Nob) -> bool:
 	return false
 
 func _device_nob_value_changed(nob:Nob, new_value:float, old_value:float) -> void:
-	if not recorder_.playing_:
-		return
+	beat_player_.add_track(nob.get_path())
 
 	if guide_exists_(nob):
 		return

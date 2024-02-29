@@ -20,7 +20,7 @@ func _ready() -> void:
 	await get_tree().process_frame
 	
 	animation_player_ = $AnimationPlayer
-	animation_player_.play("test/test")
+	animation_player_.play("test/scene2")
 
 	max_time_ = get_last_data_time()
 
@@ -32,7 +32,7 @@ func _ready() -> void:
 	#dump_()
 
 func get_animation_() -> Animation:
-	var al:Animation = animation_player_.libraries["test"].get_animation("test")
+	var al:Animation = animation_player_.libraries["test"].get_animation("scene2")
 	return al
 
 func _bang(r):

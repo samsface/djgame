@@ -46,6 +46,6 @@ process_material = SubResource("ParticleProcessMaterial_fdilt")
 draw_pass_1 = SubResource("SphereMesh_34g5m")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.2
 one_shot = true
 autostart = true
