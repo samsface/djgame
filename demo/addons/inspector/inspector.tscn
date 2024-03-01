@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://0xf0dcjgbmqj"]
 
-[ext_resource type="Script" path="res://addons/Inspector/inspector.gd" id="1_vifvy"]
-[ext_resource type="Script" path="res://addons/Inspector/test_node.gd" id="2_yejx8"]
+[ext_resource type="Script" path="res://addons/inspector/inspector.gd" id="1_vifvy"]
+[ext_resource type="Script" path="res://addons/inspector/test_node.gd" id="2_yejx8"]
 
 [node name="Inspector" type="MarginContainer" node_paths=PackedStringArray("node")]
 anchors_preset = 15

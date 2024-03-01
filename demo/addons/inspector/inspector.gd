@@ -1,5 +1,7 @@
 extends MarginContainer
 
+var undo = UndoRedo.new()
+
 @export var node:Node :
 	set(value):
 		if node != value:
@@ -21,13 +23,14 @@ func invalidate_() -> void:
 		return
 	
 	var properties := node.get_property_list()
-	
+
 	for property in properties:
 		if property.usage & PROPERTY_USAGE_EDITOR == 0:
 			continue
 		
-		if property.name not in include_list:
-			continue
+		if not include_list.is_empty():
+			if property.name not in include_list:
+				continue
 
 		var control
 
@@ -39,7 +42,10 @@ func invalidate_() -> void:
 					control = add_int_control_(property)
 			TYPE_FLOAT:
 				control = add_float_control_(property)
-				
+		
+		if not control:
+			continue
+		
 		control.get_node("Label").text = property.name
 		control.value = node.get(property.name)
 		properties_to_poll_[property.name] = [node.get(property.name), control]
@@ -52,7 +58,7 @@ func _physics_process(delta):
 	poll_node_properties_()
 
 func add_enum_control_(property:Dictionary) -> Control:
-	var control = preload("res://tools/enum_control.tscn").instantiate()
+	var control = preload("enum_control.tscn").instantiate()
 	control.get_node("Label").text = property.name
 	
 	for e in property.hint_string.split(","):
@@ -65,23 +71,34 @@ func add_enum_control_(property:Dictionary) -> Control:
 	return control
 
 func add_float_control_(property:Dictionary) -> Control:
-	var control = preload("res://tools/int_control.tscn").instantiate()
+	var control = preload("int_control.tscn").instantiate()
 	control.get_node("Value").step = 0.01
 	return control
 
 func add_int_control_(property:Dictionary) -> Control:
-	var control = preload("res://tools/int_control.tscn").instantiate()
+	var control = preload("int_control.tscn").instantiate()
 	return control
 
-func _control_value_changed(value, property_name:String) -> void:
+func _control_value_changed(new_value, property_name:String) -> void:
 	if not node:
 		return
 	
-	if properties_to_poll_[property_name][0] == value:
+	if properties_to_poll_[property_name][0] == new_value:
 		return
 
-	properties_to_poll_[property_name][0] = value
-	node.set(property_name, value)
+	undo.create_action("update " + property_name)
+
+	var old_value = properties_to_poll_[property_name][0]
+
+	undo.add_do_method(func():
+		properties_to_poll_[property_name][0] = new_value
+		node.set(property_name, new_value)
+	)
+	undo.add_undo_method(func():
+		node.set(property_name, old_value)
+	)
+
+	undo.commit_action()
 
 func poll_node_properties_() -> void:
 	if not node:

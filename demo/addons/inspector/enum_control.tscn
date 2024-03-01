@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://dvn4sipuc24b5"]
 
-[ext_resource type="Script" path="res://tools/enum_control.gd" id="1_6dcfq"]
+[ext_resource type="Script" path="res://addons/inspector/enum_control.gd" id="1_x18p5"]
 
 [node name="HBoxContainer" type="HBoxContainer"]
-script = ExtResource("1_6dcfq")
+script = ExtResource("1_x18p5")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2

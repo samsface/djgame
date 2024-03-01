@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://djt43y0g843nn"]
+
+[ext_resource type="Script" path="res://addons/table_control/node_path_tracks.gd" id="1_nucj0"]
+
+[node name="MarginContainer" type="VBoxContainer"]
+theme_override_constants/separation = 0
+script = ExtResource("1_nucj0")
+
+[node name="Spacer" type="ReferenceRect" parent="."]
+custom_minimum_size = Vector2(32, 64)
+layout_mode = 2
+
+[node name="TrackNames" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="AddTrackButton" type="Button" parent="."]
+visible = false
+layout_mode = 2
+text = "ADD TRACK"
+
+[connection signal="pressed" from="AddTrackButton" to="." method="_add_track_pressed"]

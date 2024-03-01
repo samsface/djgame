@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://uug6aakn4y02"]
+
+[ext_resource type="PackedScene" uid="uid://cwilpnax30ixm" path="res://addons/table_control/table_control.tscn" id="1_4m14e"]
+[ext_resource type="Script" path="res://addons/table_control/table_control_test.gd" id="1_gwyq4"]
+[ext_resource type="PackedScene" uid="uid://0xf0dcjgbmqj" path="res://addons/inspector/inspector.tscn" id="3_0hwqh"]
+
+[node name="TableControlTest" type="Node2D"]
+script = ExtResource("1_gwyq4")
+
+[node name="Table" parent="." instance=ExtResource("1_4m14e")]
+offset_left = 315.0
+offset_top = 162.0
+offset_right = 1375.0
+offset_bottom = 783.0
+
+[node name="Inspector" parent="." instance=ExtResource("3_0hwqh")]
+custom_minimum_size = Vector2(200, 500)
+offset_left = 1411.0
+offset_top = 193.0
+offset_right = 1611.0
+offset_bottom = 693.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0

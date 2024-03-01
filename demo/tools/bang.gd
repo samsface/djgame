@@ -1,8 +1,4 @@
-extends Control
-
-signal right_click
-signal time_changed
-signal length_changed
+extends GridItem
 
 enum Type {
 	bang,
@@ -17,14 +13,15 @@ enum Type {
 		
 @export var time:int : 
 	set(value):
-		time = value
-		time_changed.emit()
+		position.x = value * 32
+	get:
+		return int(position.x / 32)
 
 @export var length:int = 1 : 
 	set(value):
-		length = clamp(1, value, 100)
-		length_changed.emit()
-		invalidate_value_()
+		size.x = value * 32
+	get:
+		return int(size.x / 32)
 
 @export var from_value:float : 
 	set(v):
@@ -38,18 +35,7 @@ enum Type {
 
 func _ready():
 	invalidate_value_()
-
-func _gui_input(event):
-	if event is InputEventMouseButton:
-		if event.pressed:
-			if event.button_index == MOUSE_BUTTON_RIGHT:
-				right_click.emit()
-
-func show_resize_handle() -> void:
-	pass
-
-func hide_resize_handle() -> void:
-	pass
+	item_rect_changed.connect(invalidate_value_)
 
 func invalidate_type_() -> void:
 	match type:
@@ -61,7 +47,6 @@ func invalidate_type_() -> void:
 func invalidate_value_() -> void:
 	var polygon := PackedVector2Array()
 	polygon.resize(4)
-	
 	
 	var from = 1.0 - from_value
 	var to = 1.0 - value
