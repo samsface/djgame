@@ -19,8 +19,9 @@ func _ready() -> void:
 	fall_tween_.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
 	fall_tween_.tween_property(arrow_, "rotation:y", 5, 1.0)
 	fall_tween_.tween_property(arrow_, "position:y", -0.002, 1.0)
+	fall_tween_.chain().tween_interval(5.0)
 	fall_tween_.finished.connect(_miss)
-	
+
 	points_ = points_service.make_points()
 
 func _miss() -> void:

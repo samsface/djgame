@@ -1,1 +1,40 @@
-[{"name":"/root/Game/acid/2","notes":[{"from_value":0,"length":1,"time":0,"type":0,"value":0},{"from_value":0.5,"length":1,"time":8,"type":0,"value":0.5},{"from_value":0,"length":1,"time":16,"type":0,"value":0},{"from_value":0.5,"length":1,"time":24,"type":0,"value":0.5}]}]
+{
+"time_range": Vector2i(0, 48),
+"tracks": [{
+"name": "/root/Game/toykit/0",
+"notes": [{
+"from_value": "0.0",
+"length": "48",
+"time": "0",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/toykit/13",
+"notes": [{
+"from_value": "0.0",
+"length": "48",
+"time": "0",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/toykit/17",
+"notes": [{
+"from_value": "0.0",
+"length": "48",
+"time": "0",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/toykit/21",
+"notes": [{
+"from_value": "0.0",
+"length": "48",
+"time": "0",
+"type": "0",
+"value": "1.0"
+}]
+}]
+}

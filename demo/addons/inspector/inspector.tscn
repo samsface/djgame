@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://addons/inspector/inspector.gd" id="1_vifvy"]
 [ext_resource type="Script" path="res://addons/inspector/test_node.gd" id="2_yejx8"]
 
-[node name="Inspector" type="MarginContainer" node_paths=PackedStringArray("node")]
+[node name="Inspector" type="PanelContainer" node_paths=PackedStringArray("node")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

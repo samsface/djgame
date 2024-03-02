@@ -1,8 +1,7 @@
-extends HBoxContainer
+extends MarginContainer
 
 @export var value:NodePath : 
 	set(v):
-		value = v
-		$Value.text = str(value)
+		$H/Value.text = str(v)
 	get:
-		return value
+		return $H/Value.text

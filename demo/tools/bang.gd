@@ -1,9 +1,11 @@
-extends GridItem
+extends Button
 
 enum Type {
 	bang,
 	slide
 }
+
+var grid_size := 32
 
 @export var type:Type : 
 	set(value):
@@ -13,15 +15,15 @@ enum Type {
 		
 @export var time:int : 
 	set(value):
-		position.x = value * 32
+		position.x = value * grid_size
 	get:
-		return int(position.x / 32)
+		return int(position.x / grid_size)
 
 @export var length:int = 1 : 
 	set(value):
-		size.x = value * 32
+		size.x = value * grid_size
 	get:
-		return int(size.x / 32)
+		return int(size.x / grid_size)
 
 @export var from_value:float : 
 	set(v):
@@ -34,6 +36,8 @@ enum Type {
 		invalidate_value_()
 
 func _ready():
+	self_modulate = Color.DARK_SLATE_GRAY
+	$Polygon2D.self_modulate = Color.LIGHT_GREEN
 	invalidate_value_()
 	item_rect_changed.connect(invalidate_value_)
 
@@ -53,9 +57,21 @@ func invalidate_value_() -> void:
 	
 	if type == Type.bang:
 		from = to
+		
+	var border_width := 1
+
+	var style_box:StyleBoxFlat = get_theme_stylebox("normal", "button")
+	if style_box:
+		border_width = style_box.border_width_bottom
+	
+	border_width = 2;
 	
 	polygon[0] = Vector2(0, from * size.y)
 	polygon[1] = Vector2(size.x, to * size.y)
-	polygon[2] = Vector2(size.x, size.y)
+	polygon[2] = Vector2(size.x, size.y )
 	polygon[3] = Vector2(0, size.y)
+	
+	$Polygon2D.scale = Vector2(1.0 - ((border_width * border_width)  / size.x), 1.0 - ((border_width * border_width) / size.y))
+	$Polygon2D.position = Vector2.ONE + Vector2.ONE * border_width * 0.5
+	
 	$Polygon2D.polygon = polygon

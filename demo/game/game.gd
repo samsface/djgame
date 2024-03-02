@@ -43,11 +43,14 @@ func _ready() -> void:
 		if child is Device:
 			child.value_changed.connect(_device_nob_value_changed)
 
-func _beat_player_bang(node_path:NodePath, value) -> void:
-	if not get_node_or_null(node_path):
+func _beat_player_bang(args:Dictionary) -> void:
+	if not get_node_or_null(args.node_path):
 		return
 	
-	test(node_path, 0.0, value, [])
+	if args.type == 0:
+		test(args.node_path, 0.0, args.value, [])
+	else:
+		follow(args.node_path, args.length / 16.0, args.from_value, args.value, [])
 
 var i_ = 0
 
@@ -69,7 +72,7 @@ func _input(event: InputEvent) -> void:
 	elif Input.is_action_just_released("noise"):
 		Camera.pop_look_at($CrowdService)
 
-func follow(nob_path:NodePath, begin_time:float, end_time:float, from_value:float, to_value:float, meta:Array = []):
+func follow(nob_path:NodePath, length:float, from_value:float, to_value:float, meta:Array = []):
 	var nob := get_node_or_null(nob_path)
 	if not nob:
 		return
@@ -80,7 +83,7 @@ func follow(nob_path:NodePath, begin_time:float, end_time:float, from_value:floa
 	var d = preload("res://game/guide/slide/slide.tscn").instantiate()
 	d.points_service = $PointsService
 	d.position = pos
-	d.watch(nob, from_value, to_value, (end_time - begin_time) / $Recorder/AnimationPlayer.speed_scale)
+	d.watch(nob, from_value, to_value, length)
 
 	guides_.add_child(d)
 
@@ -113,8 +116,8 @@ func _device_nob_value_changed(nob:Nob, new_value:float, old_value:float) -> voi
 	if guide_exists_(nob):
 		return
 
-	if abs(nob.intended_value - new_value) > 0.1:
-		nob.reset_to_intended_value()
+	#if abs(nob.intended_value - new_value) > 0.1:
+	#	nob.reset_to_intended_value()
 		#bad_(nob.get_nob_position() + Vector3.UP * 0.01, -1)
 
 func meta(array:Array = []) -> void:

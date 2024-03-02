@@ -1,0 +1,59 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://dbvpa0vlu34gu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xaiim"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_co6he"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xo0p"]
+bg_color = Color(0.941176, 0.941176, 0.941176, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ya280"]
+bg_color = Color(0.85098, 0.85098, 0.85098, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y8fkl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8bilb"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5rdg"]
+bg_color = Color(0.564706, 0.564706, 0.564706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j1vbi"]
+
+[resource]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/styles/focus = SubResource("StyleBoxEmpty_xaiim")
+Button/styles/hover = SubResource("StyleBoxFlat_co6he")
+Button/styles/normal = SubResource("StyleBoxFlat_0xo0p")
+Button/styles/pressed = SubResource("StyleBoxFlat_ya280")
+Label/colors/font_color = Color(0, 0, 0, 1)
+LineEdit/colors/caret_color = Color(0, 0, 0, 1)
+LineEdit/colors/font_color = Color(0, 0, 0, 1)
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_y8fkl")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_8bilb")
+Panel/styles/panel = SubResource("StyleBoxFlat_u5rdg")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_j1vbi")

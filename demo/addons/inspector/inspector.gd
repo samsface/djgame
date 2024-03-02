@@ -1,4 +1,4 @@
-extends MarginContainer
+extends Control
 
 var undo = UndoRedo.new()
 

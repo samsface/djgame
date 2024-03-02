@@ -1,21 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://dfr7o1tvoy1ur"]
+[gd_scene load_steps=3 format=3 uid="uid://dfr7o1tvoy1ur"]
 
 [ext_resource type="Script" path="res://addons/table_control/track_name.gd" id="1_po4w0"]
+[ext_resource type="Theme" uid="uid://dbvpa0vlu34gu" path="res://ui/beat_player.tres" id="1_vx7j3"]
 
-[node name="HBoxContainer" type="HBoxContainer"]
-offset_right = 292.0
-offset_bottom = 40.0
+[node name="HBoxContainer" type="MarginContainer"]
+custom_minimum_size = Vector2(0, 32)
+offset_right = 290.0
+offset_bottom = 33.2485
+theme = ExtResource("1_vx7j3")
 script = ExtResource("1_po4w0")
 
-[node name="Value" type="LineEdit" parent="."]
-custom_minimum_size = Vector2(32, 32)
+[node name="H" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Value" type="LineEdit" parent="H"]
 layout_mode = 2
 size_flags_horizontal = 3
-editable = false
+text = "1234123"
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="Delete" type="Button" parent="."]
-custom_minimum_size = Vector2(32, 32)
+[node name="Delete" type="Button" parent="H"]
+self_modulate = Color(0.929412, 0.807843, 0, 1)
 layout_mode = 2
-text = "X"
+text = " DEL "

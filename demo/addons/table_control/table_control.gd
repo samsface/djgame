@@ -1,4 +1,4 @@
-extends MarginContainer
+extends Control
 
 signal bang
 signal selection_changed
@@ -11,8 +11,18 @@ enum Tool {
 	resize_east
 }
 
-var time_range_ := Vector2i(0, 16)
-var grid_size := 32
+var supress_hack_ := false
+var time_range := Vector2i(0, 16) :
+	set(v):
+		time_range = v
+		if not supress_hack_:
+			%TimeRange.position.x = time_range.x * grid_size
+			%TimeRange.size.x = (time_range.x + time_range.y) * grid_size
+
+var grid_size := 32 :
+	set(value):
+		grid_size = value
+		invalidate_grid_size_()
 var selection_ := []
 
 var border_ = 8
@@ -33,24 +43,17 @@ var queue_ := []
 
 func _ready() -> void:
 	connect_row_item_(%TimeRange)
+	invalidate_headings_()
 
 func connect_row_item_(row_item:Button) -> void:
 	row_item.button_down.connect(_table_item_button_down.bind(row_item))
 	row_item.button_up.connect(_table_item_button_up.bind(row_item)) 
-	
-	if row_item == %TimeRange:
-		return
-
-	row_item.gui_input.connect(func(event):
-		if event is InputEventMouseButton:
-			if event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT:
-				remove_item(row_item)
-	)
+	row_item.gui_input.connect(_item_gui_input.bind(row_item))
 
 func connect_row_(row) -> void:
 	row.gui_input.connect(func(event): 
 		if event.is_action_pressed("click"): 
-			row_pressed.emit(row)
+			row_pressed.emit(row.get_index() - 2, row.get_local_mouse_position())
 	)
 	
 func quantinize_to_grid(value:float) -> int:
@@ -135,7 +138,7 @@ func play_(delta) -> void:
 		return
 
 	var t := int(floor(time_))
-	t = t % (time_range_.y - time_range_.x) + time_range_.x
+	t = t % (time_range.y - time_range.x) + time_range.x
 
 	cursor.position.x = t * 32
 	
@@ -153,7 +156,9 @@ func translation_begin_() -> void:
 
 func translation_end_() -> void:
 	if selection_[0] == %TimeRange:
-		time_range_ = Vector2i(%TimeRange.position.x, %TimeRange.position.x + %TimeRange.size.x) / grid_size
+		supress_hack_ = true
+		time_range = Vector2i(%TimeRange.position.x, %TimeRange.position.x + %TimeRange.size.x) / grid_size
+		supress_hack_ = false
 		undo.commit_action(false)
 		return
 	
@@ -199,12 +204,17 @@ func where_(control:Control) -> Vector2i:
 
 	return where
 
-func add_item(node:Button, row:Control) -> void:
-	if node == null or row == null:
+func add_item(node:Button, row_idx:int) -> void:
+	if node == null:
 		return
-		
+	
+	if %Rows.get_child_count() <= row_idx + 2:
+		return
+
+	var row = %Rows.get_child(row_idx + 2)
+
 	node.custom_minimum_size = Vector2i(grid_size, grid_size)
-	node.size *= 0
+	node.size.y *= 0
 	node.position.x = quantinize_to_grid(node.position.x)
 	connect_row_item_(node)
 
@@ -226,6 +236,13 @@ func remove_item(node:Control) -> void:
 
 	undo.commit_action()
 
+func invalidate_grid_size_() -> void:
+	$ScrollContainer/MarginContainer/Grid.grid_size = grid_size
+	
+	for row in %Rows.get_children():
+		for item in row.get_children():
+			item.grid_size = grid_size
+
 func invalidate_queue_() -> void:
 	queue_.clear()
 
@@ -238,6 +255,20 @@ func invalidate_queue_() -> void:
 			dict[int(item.position.x / grid_size)] = item
 		
 		queue_.push_back(dict)
+
+func get_queue() -> Array:
+	invalidate_queue_()
+
+	var res := []
+	
+	for q in queue_:
+		var items := []
+		for item in q.values():
+			items.push_back(item)
+		
+		res.push_back(items)
+
+	return res
 
 func add_row() -> void:
 	var row := Control.new()
@@ -254,3 +285,52 @@ func remove_row(idx:int) -> void:
 	undo.add_undo_method(%Rows.add_child.bind(row))
 	undo.add_undo_method(%Rows.move_child.bind(row, idx + 2))
 	undo.add_undo_reference(row)
+
+func _item_gui_input(event:InputEvent, item:Control):
+	if item != %TimeRange:
+		if event is InputEventMouseButton:
+			if event.pressed:
+				if event.button_index == MOUSE_BUTTON_RIGHT:
+					remove_item(item)
+					return
+
+	var where := Vector2.ZERO
+	
+	var p := item.get_local_mouse_position()
+	
+	if p.x < border_:
+		where.x = -1
+	
+	if p.x > item.size.x - border_:
+		where.x = 1
+	
+	if p.y < border_:
+		where.y = -1
+	
+	if p.y > item.size.y - border_:
+		where.y = 1
+
+	update_cursor_(item, where)
+
+func update_cursor_(item:Control, where) -> void:
+	await get_tree().process_frame
+
+	if abs(where.x) > 0:
+		item.mouse_default_cursor_shape = Control.CURSOR_HSIZE
+	elif abs(where.y) > 0: 
+		item.mouse_default_cursor_shape = Control.CURSOR_VSIZE
+	else:
+		item.mouse_default_cursor_shape = 0
+
+func invalidate_headings_() -> void:
+	for child in %Headings.get_children():
+		%Headings.remove_child(child)
+	
+	for i in 128:
+		if i % 4 == 0:
+			var label := Label.new()
+			label.custom_minimum_size.y = grid_size
+			label.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
+			label.text = " " + str(int(floor(i / 16))) + "." + str(i % 16)
+			label.position.x = i * grid_size
+			%Headings.add_child(label)

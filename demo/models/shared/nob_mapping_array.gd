@@ -43,3 +43,4 @@ func refresh() -> void:
 func _value_changed(v:float, idx:int) -> void:
 	PureData.write_at_array_index(array_name, idx, v * 5.0)
 	value_changed.emit(v)
+	p_.value_changed.emit(p_.get_node(node[idx]), v, v)

@@ -11,6 +11,8 @@ var value :
 		value = v
 		value_ = clamp(v, 0.0, 1.0)
 		$Nob/Model/Button.light = light_color_()
+	get:
+		return value_
 
 var down_ := false
 var mouse_over_ := false

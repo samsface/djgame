@@ -12,6 +12,8 @@ func _ready():
 	%PianoRoll.bang.connect(_piano_roll_bang)
 	%PianoRoll.selection_changed.connect(_piano_roll_selection_changed)
 	
+	reload()
+	
 func _input(event:InputEvent) -> void:
 	if event.is_action_pressed("redo"):
 		undo_.redo()
@@ -19,12 +21,18 @@ func _input(event:InputEvent) -> void:
 		undo_.undo()
 
 func _piano_roll_bang(item:Control, idx:int) -> void:
-	bang.emit(%TrackNames.get_track_node_path(idx), item.value)
+	bang.emit({
+		type = item.type,
+		from_value = item.from_value,
+		value = item.value,
+		length = item.length,
+		node_path = %TrackNames.get_track_node_path(idx)
+	})
 
-func _piano_roll_pressed(row:Control) -> void:
+func _piano_roll_pressed(row_idx:int, pos:Vector2i) -> void:
 	var note = preload("res://tools/bang.tscn").instantiate()
-	note.position.x = row.get_local_mouse_position().x
-	%PianoRoll.add_item(note, row)
+	note.position.x = pos.x
+	%PianoRoll.add_item(note, row_idx)
 
 func _piano_roll_selection_changed(selection:Array) -> void:
 	if not selection:
@@ -41,37 +49,43 @@ func add_track(node_path) -> void:
 	%TrackNames.add_track(node_path)
 
 func save() -> void:
-	var res := []
+	var state := {
+		time_range = %PianoRoll.time_range,
+		tracks = []
+	}
+	
+	var track_names = %TrackNames.get_all_track_names()
+	var piano_roll = %PianoRoll.get_queue()
 
-	for track in %Tracks.get_children():
-		res.push_back(track.serialize())
+	for i in range(piano_roll.size()):
+		var track := {
+			name = track_names[i],
+			notes = []
+		}
+
+		for note in piano_roll[i]:
+			track.notes.push_back(Dictializer.to_dict(note, ["type", "time", "type", "length", "from_value", "value"]))
+			
+		state.tracks.push_back(track)
 
 	var file := FileAccess.open("res://junk/beat.json", FileAccess.WRITE)
-	file.store_string(JSON.stringify(res))
+	file.store_string(var_to_str(state))
 
 func reload() -> void:
 	var file := FileAccess.open("res://junk/beat.json", FileAccess.READ)
 	if not file:
 		return
 
-	var text := file.get_as_text()
-	var res = JSON.parse_string(text)
+	var dict:Dictionary = str_to_var(file.get_as_text())
+	%PianoRoll.time_range = dict.time_range
 	
-	for track in res:
-		#var track_node = add_track(track.name)
-		var track_node = null
+	for i in dict.tracks.size():
+		add_track(dict.tracks[i].name)
 		
-		for note in track.notes:
-			var key = preload("res://tools/bang.tscn").instantiate()
-			#connect_key_signals_(key)
-			key.time = note.time
-			key.type = note.get("type", 0)
-			key.from_value = note.from_value
-			key.value = note.value
-			key.length = note.length
-			track_node.add_child(key)
-		
-		track_node.invalidate_queue()
+		for note in dict.tracks[i].notes:
+			var n := preload("bang.tscn").instantiate()
+			Dictializer.from_dict(note, n)
+			%PianoRoll.add_item(n, i)
 
 func _save_pressed():
 	save()

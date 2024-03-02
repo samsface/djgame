@@ -2,22 +2,26 @@
 
 [ext_resource type="Script" path="res://addons/table_control/node_path_tracks.gd" id="1_nucj0"]
 
-[node name="MarginContainer" type="VBoxContainer"]
-theme_override_constants/separation = 0
+[node name="Panel" type="PanelContainer"]
+offset_right = 300.0
+offset_bottom = 575.0
 script = ExtResource("1_nucj0")
 
-[node name="Spacer" type="ReferenceRect" parent="."]
+[node name="MarginContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Spacer" type="ReferenceRect" parent="MarginContainer"]
 custom_minimum_size = Vector2(32, 64)
 layout_mode = 2
 
-[node name="TrackNames" type="VBoxContainer" parent="."]
+[node name="TrackNames" type="VBoxContainer" parent="MarginContainer"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="AddTrackButton" type="Button" parent="."]
-visible = false
+[node name="AddTrackButton" type="Button" parent="MarginContainer"]
 layout_mode = 2
 text = "ADD TRACK"
 
-[connection signal="pressed" from="AddTrackButton" to="." method="_add_track_pressed"]
+[connection signal="pressed" from="MarginContainer/AddTrackButton" to="." method="_add_track_pressed"]
