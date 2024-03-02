@@ -46,11 +46,7 @@ func _bang(r):
 		_sider_value_changed(beat_, false)
 
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("record"):
-		record_()
-	elif Input.is_action_just_pressed("play"):
-		play_()
+
 
 func play_() -> void:
 	if playing_:

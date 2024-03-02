@@ -1,10 +1,10 @@
 {
-"time_range": Vector2i(0, 48),
+"time_range": Vector2i(0, 336),
 "tracks": [{
 "name": "/root/Game/toykit/0",
 "notes": [{
 "from_value": "0.0",
-"length": "48",
+"length": "16",
 "time": "0",
 "type": "0",
 "value": "1.0"
@@ -13,8 +13,14 @@
 "name": "/root/Game/toykit/13",
 "notes": [{
 "from_value": "0.0",
-"length": "48",
+"length": "16",
 "time": "0",
+"type": "0",
+"value": "1.0"
+}, {
+"from_value": "0.0",
+"length": "4",
+"time": "32",
 "type": "0",
 "value": "1.0"
 }]
@@ -22,7 +28,7 @@
 "name": "/root/Game/toykit/17",
 "notes": [{
 "from_value": "0.0",
-"length": "48",
+"length": "16",
 "time": "0",
 "type": "0",
 "value": "1.0"
@@ -31,8 +37,92 @@
 "name": "/root/Game/toykit/21",
 "notes": [{
 "from_value": "0.0",
-"length": "48",
+"length": "16",
 "time": "0",
+"type": "0",
+"value": "1.0"
+}, {
+"from_value": "0.0",
+"length": "4",
+"time": "40",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/toykit/2",
+"notes": [{
+"from_value": "0.0",
+"length": "16",
+"time": "16",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/toykit/10",
+"notes": []
+}, {
+"name": "/root/Game/toykit/24",
+"notes": []
+}, {
+"name": "/root/Game/acid/2",
+"notes": [{
+"from_value": "0.0",
+"length": "76",
+"time": "64",
+"type": "1",
+"value": "0.5"
+}, {
+"from_value": "0.0",
+"length": "4",
+"time": "140",
+"type": "0",
+"value": "0.0"
+}]
+}, {
+"name": "/root/Game/toykit/1",
+"notes": []
+}, {
+"name": "/root/Game/toykit/4",
+"notes": [{
+"from_value": "0.0",
+"length": "16",
+"time": "144",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/toykit/11",
+"notes": [{
+"from_value": "0.0",
+"length": "32",
+"time": "160",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/toykit/15",
+"notes": [{
+"from_value": "0.0",
+"length": "32",
+"time": "160",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/toykit/19",
+"notes": [{
+"from_value": "0.0",
+"length": "32",
+"time": "160",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/toykit/23",
+"notes": [{
+"from_value": "0.0",
+"length": "32",
+"time": "160",
 "type": "0",
 "value": "1.0"
 }]

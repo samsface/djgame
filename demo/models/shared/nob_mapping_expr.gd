@@ -33,3 +33,5 @@ func set_array_name(idx:int, value:String) -> void:
 		return
 
 	p_.map.arrays[idx].array_name = value
+
+	p_.value_changed.emit(p_.get_node(node), 0, 0)

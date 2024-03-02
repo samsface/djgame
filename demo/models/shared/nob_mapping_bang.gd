@@ -20,3 +20,4 @@ func hook(p):
 
 func _value_changed(r) -> void:
 	PureData.send_bang(receiver_symbol)
+	p_.value_changed.emit(p_.get_node(node), 1, 1)

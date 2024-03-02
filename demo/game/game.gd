@@ -48,9 +48,9 @@ func _beat_player_bang(args:Dictionary) -> void:
 		return
 	
 	if args.type == 0:
-		test(args.node_path, 0.0, args.value, [])
+		test(args.node_path, args.value, args.length)
 	else:
-		follow(args.node_path, args.length / 16.0, args.from_value, args.value, [])
+		follow(args.node_path, args.length, args.from_value, args.value, [])
 
 var i_ = 0
 
@@ -71,6 +71,17 @@ func _input(event: InputEvent) -> void:
 		Camera.push_look_at($CrowdService, 0, 0)
 	elif Input.is_action_just_released("noise"):
 		Camera.pop_look_at($CrowdService)
+	elif Input.is_action_just_pressed("play"):
+		play_()
+
+func play_() -> void:
+	if %BeatPlayer.playing:
+		%BeatPlayer.stop()
+		PureData.send_bang("r-STOP")
+	else:
+		%BeatPlayer.play()
+		PureData.send_bang("r-RESET")
+		PureData.send_bang("r-PLAY")
 
 func follow(nob_path:NodePath, length:float, from_value:float, to_value:float, meta:Array = []):
 	var nob := get_node_or_null(nob_path)
@@ -87,17 +98,16 @@ func follow(nob_path:NodePath, length:float, from_value:float, to_value:float, m
 
 	guides_.add_child(d)
 
-func test(nob_path:NodePath, key_time:float, value:float, meta:Array):
+func test(nob_path:NodePath, value:float, length:float):
 	var nob := get_node_or_null(nob_path)
 	if not nob:
 		return
-		
-	var phrase_over = "phrase_over" in meta
 
 	var pos = nob.get_guide_position_for_value(value)
 	var d = preload("res://game/guide/bang/bang.tscn").instantiate()
 	d.points_service = $PointsService 
 	d.position = pos
+	d.length = length
 	d.watch(nob, value)
 	nob.intended_value = value
 

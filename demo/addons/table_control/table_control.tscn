@@ -11,15 +11,17 @@ theme = ExtResource("1_qor3e")
 script = ExtResource("1_ieshf")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
-custom_minimum_size = Vector2(5000, 0)
+custom_minimum_size = Vector2(8000, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Grid" type="MarginContainer" parent="ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("2_w1t41")
 
@@ -53,3 +55,24 @@ custom_minimum_size = Vector2(4, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 color = Color(1, 0, 1, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="MenuButton" type="OptionButton" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+item_count = 3
+selected = 2
+popup/item_0/text = "1/16"
+popup/item_0/id = 0
+popup/item_1/text = "1/4"
+popup/item_1/id = 1
+popup/item_2/text = "1"
+popup/item_2/id = 2
+
+[connection signal="item_selected" from="MarginContainer/MenuButton" to="." method="_quant_selected"]

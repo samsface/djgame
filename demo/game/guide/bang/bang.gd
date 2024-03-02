@@ -5,6 +5,7 @@ const proximity_ := 0.1
 var nob_
 var for_value_ := 0.0
 var last_off_ := 0.0
+var length := 0.0
 
 @onready var timer_ := $Timer
 @onready var arrow_ := $Arrow
@@ -19,7 +20,7 @@ func _ready() -> void:
 	fall_tween_.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
 	fall_tween_.tween_property(arrow_, "rotation:y", 5, 1.0)
 	fall_tween_.tween_property(arrow_, "position:y", -0.002, 1.0)
-	fall_tween_.chain().tween_interval(5.0)
+	fall_tween_.chain().tween_interval(length - 1.0)
 	fall_tween_.finished.connect(_miss)
 
 	points_ = points_service.make_points()
@@ -54,7 +55,7 @@ func _hit() -> void:
 func watch(nob:Nob, for_value:float) -> void:
 	if not nob:
 		return
-		
+
 	for_value_ = for_value
 	nob_ = nob
 
@@ -73,6 +74,7 @@ func _physics_process(delta: float) -> void:
 			return
 
 	var off = get_off_()
+	prints("off", off)
 	
 	# we moved way passed the target
 	if sign(off) != sign(last_off_):

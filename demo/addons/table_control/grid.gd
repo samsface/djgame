@@ -1,6 +1,9 @@
 extends Control
 
-var grid_size = 32
+var grid_size = 32 :
+	set(v):
+		grid_size = v
+		queue_redraw()
 
 func _draw():
 	#for y in range(1, size.y / grid_size):

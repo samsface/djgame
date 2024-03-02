@@ -12,7 +12,7 @@
 #X obj 1518 288 %;
 #N canvas 73 26 2486 1344 (subpatch) 0;
 #X array \$1-array1 16 float 3;
-#A 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
 #X coords 0 1 16 0 208 120 1 0 0;
 #X restore 400 358 graph;
 #X obj 1260 483 simpleseq \$1-array1;
@@ -20,7 +20,7 @@
 #X obj 1260 606 sel 0;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array \$1-array2 16 float 3;
-#A 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 1;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
 #X coords 0 1 16 0 200 120 1 0 0;
 #X restore 608 358 graph;
 #X obj 1493 481 simpleseq \$1-array2;
@@ -28,7 +28,7 @@
 #X obj 1493 595 sel 0;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array \$1-array3 16 float 3;
-#A 0 0 0 1 0 0 0 1 0 0 1 1 0 0 0 1 0;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
 #X coords 0 1 16 0 200 120 1 0 0;
 #X restore 808 358 graph;
 #X obj 1739 533 clip 0 1;
@@ -47,7 +47,7 @@
 #X obj 609 319 bng 15 250 50 0 s-\$1-preset1 r-\$1-preset1 HOUSE 17
 7 0 10 #fcfcfc #000000 #000000;
 #X obj 454 174 array set \$1-array1;
-#X msg 711 25 23;
+#X msg 712 10 23;
 #X msg 708 50 0 0 1 0 0 0 1 0 0 1 1 0 0 0 1 0;
 #X msg 705 78 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 1;
 #X obj 550 320 bng 15 250 50 0 s-\$1-preset0 r-\$1-preset0 GA\\\ GA
@@ -69,6 +69,10 @@
 #X obj 1348 730 outlet;
 #X obj 1581 726 outlet;
 #X obj 1828 723 outlet;
+#X obj 676 320 bng 15 250 50 0 s-\$1-preset0 r-\$1-preset0 Clear 17
+7 0 10 #fcfcfc #000000 #000000;
+#X msg 456 -55 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X msg 310 7 0;
 #X connect 0 0 41 0;
 #X connect 0 0 42 0;
 #X connect 1 0 38 0;
@@ -122,4 +126,10 @@
 #X connect 46 0 0 1;
 #X connect 47 0 1 1;
 #X connect 48 0 3 1;
+#X connect 52 0 53 0;
+#X connect 52 0 54 0;
+#X connect 53 0 28 0;
+#X connect 53 0 27 0;
+#X connect 53 0 30 0;
+#X connect 54 0 2 0;
 #X coords 0 -1 1 1 608 196 2 400 300;

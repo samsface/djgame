@@ -1,4 +1,5 @@
 extends Control
+class_name PianoRollControl
 
 signal bang
 signal selection_changed
@@ -8,9 +9,12 @@ enum Tool {
 	none,
 	move,
 	resize_west,
-	resize_east
+	resize_east,
+	zooming
 }
 
+var playing := false
+var tempo = 1000.0/130.0
 var supress_hack_ := false
 var time_range := Vector2i(0, 16) :
 	set(v):
@@ -19,10 +23,15 @@ var time_range := Vector2i(0, 16) :
 			%TimeRange.position.x = time_range.x * grid_size
 			%TimeRange.size.x = (time_range.x + time_range.y) * grid_size
 
-var grid_size := 32 :
+
+var grid_size := 4 :
 	set(value):
+		var old_grid_size = grid_size
 		grid_size = value
-		invalidate_grid_size_()
+		invalidate_grid_size_(old_grid_size)
+var grid_size_old_ := grid_size
+var zoom_grab_time_ := 0
+var quantinize_snap := 16
 var selection_ := []
 
 var border_ = 8
@@ -42,8 +51,20 @@ var queue_ := []
 @onready var grid_ := $ScrollContainer/MarginContainer/Grid
 
 func _ready() -> void:
+	%Grid.grid_size = grid_size
 	connect_row_item_(%TimeRange)
+	create_headings_()
 	invalidate_headings_()
+	%Headings.gui_input.connect(_headings_gui_input)
+
+func _headings_gui_input(event:InputEvent) -> void:
+	if event.is_action_pressed("click"):
+		tool_ = Tool.zooming
+		zoom_grab_time_ = %Headings.get_local_mouse_position().x / grid_size
+		grid_size_old_ = grid_size
+	elif event.is_action_released("click"):
+		tool_ = Tool.none
+		grid_size_old_ = grid_size
 
 func connect_row_item_(row_item:Button) -> void:
 	row_item.button_down.connect(_table_item_button_down.bind(row_item))
@@ -101,6 +122,9 @@ func _input(event:InputEvent) -> void:
 		elif event.is_action_pressed("undo"):
 			undo.undo()
 
+func quantinize(value:float, q:int) -> float:
+	return (floor((value / grid_size) / q) * q) * grid_size
+
 func _physics_process(delta:float) -> void:
 	if should_auto_scroll_():
 		var mpx = scroll_container_.get_local_mouse_position().x
@@ -118,29 +142,35 @@ func _physics_process(delta:float) -> void:
 	if tool_ == Tool.move:
 		for item in selection_:
 			item.position.x = row_position * grid_size - quantinize_to_grid(grab_offet_)
+			item.position.x = quantinize(item.position.x, quantinize_snap)
 	elif tool_ == Tool.resize_east:
 		for item in selection_:
-			row_position += 1
-			item.size.x = row_position * grid_size - item.position.x
+			item.size.x = quantinize((row_position + quantinize_snap) * grid_size, quantinize_snap) - item.position.x
 	elif tool_ == Tool.resize_west:
 		for item in selection_:
 			var c = item.position.x
-			item.position.x = row_position * grid_size
+			item.position.x = quantinize(row_position * grid_size, quantinize_snap)
 			item.size.x += c - item.position.x
+	elif tool_ == Tool.zooming:
+		var zoom = %Headings.get_local_mouse_position().y
+		grid_size = clamp(grid_size_old_ + zoom * 0.1, 3, 32)
 
 	play_(delta)
 
 func play_(delta) -> void:
-	var time = time_
-	time_ += delta * 16.0
+	if not playing:
+		return
 	
-	if floor(time_) <= floor(time):
+	var time = time_
+	time_ += delta * tempo
+
+	if (floor(time_) <= floor(time)) and time != 0.0:
 		return
 
 	var t := int(floor(time_))
 	t = t % (time_range.y - time_range.x) + time_range.x
 
-	cursor.position.x = t * 32
+	cursor.position.x = t * grid_size
 	
 	invalidate_queue_()
 	
@@ -204,18 +234,21 @@ func where_(control:Control) -> Vector2i:
 
 	return where
 
-func add_item(node:Button, row_idx:int) -> void:
+func add_item(node:Button, row_idx:int, quantinize := true) -> void:
 	if node == null:
 		return
-	
+
 	if %Rows.get_child_count() <= row_idx + 2:
 		return
 
 	var row = %Rows.get_child(row_idx + 2)
 
-	node.custom_minimum_size = Vector2i(grid_size, grid_size)
+	node.grid_size = grid_size
+	node.custom_minimum_size = Vector2i(grid_size, 32)
 	node.size.y *= 0
-	node.position.x = quantinize_to_grid(node.position.x)
+	if quantinize:
+		node.position.x = quantinize(node.position.x, quantinize_snap)
+		node.size.x = quantinize_snap * grid_size
 	connect_row_item_(node)
 
 	undo.create_action("add")
@@ -236,12 +269,23 @@ func remove_item(node:Control) -> void:
 
 	undo.commit_action()
 
-func invalidate_grid_size_() -> void:
+func invalidate_grid_size_(old_grid_size) -> void:
 	$ScrollContainer/MarginContainer/Grid.grid_size = grid_size
-	
+
 	for row in %Rows.get_children():
-		for item in row.get_children():
-			item.grid_size = grid_size
+		if row.get_index() > 0:
+			for item in row.get_children():
+				if row.get_index() > 1:
+					item.grid_size = grid_size
+				
+				var t = item.position.x / old_grid_size
+				var l = item.size.x / old_grid_size
+				item.position.x = t * grid_size 
+				item.size.x = l * grid_size
+
+	%ScrollContainer.scroll_horizontal = zoom_grab_time_ * grid_size - %ScrollContainer.size.x * 0.5
+
+	invalidate_headings_()
 
 func invalidate_queue_() -> void:
 	queue_.clear()
@@ -322,15 +366,41 @@ func update_cursor_(item:Control, where) -> void:
 	else:
 		item.mouse_default_cursor_shape = 0
 
+func create_headings_() -> void:
+	for i in 256:
+		var label := Label.new()
+		label.custom_minimum_size.y = 32
+		label.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		label.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
+		label.position.x = i * grid_size
+		%Headings.add_child(label)
+
 func invalidate_headings_() -> void:
-	for child in %Headings.get_children():
-		%Headings.remove_child(child)
-	
-	for i in 128:
-		if i % 4 == 0:
-			var label := Label.new()
-			label.custom_minimum_size.y = grid_size
+	var m = 4
+	if grid_size <= 8:
+		m = 16
+
+	for i in 256:
+		var label:Label = %Headings.get_child(i)
+		if i % m == 0:
+			label.visible = true
+			label.custom_minimum_size.y = 32
+			label.size_flags_vertical = Control.SIZE_EXPAND_FILL
 			label.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
-			label.text = " " + str(int(floor(i / 16))) + "." + str(i % 16)
+			label.text = " " + str(int(floor(i / 16)))
+			
+			if m < 16:
+				label.text += "." + str(i % 16)
+
 			label.position.x = i * grid_size
-			%Headings.add_child(label)
+		else:
+			label.visible = false
+
+func _quant_selected(index):
+	match index:
+		0:
+			quantinize_snap = 1
+		1:
+			quantinize_snap = 4
+		2:
+			quantinize_snap = 16

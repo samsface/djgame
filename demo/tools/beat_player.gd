@@ -4,6 +4,8 @@ signal bang
 
 var undo_ = UndoRedo.new()
 
+var playing := false
+
 func _ready():
 	%TrackNames.undo = undo_
 	%Inspector.undo = undo_
@@ -25,7 +27,7 @@ func _piano_roll_bang(item:Control, idx:int) -> void:
 		type = item.type,
 		from_value = item.from_value,
 		value = item.value,
-		length = item.length,
+		length = item.length / %PianoRoll.tempo,
 		node_path = %TrackNames.get_track_node_path(idx)
 	})
 
@@ -42,8 +44,13 @@ func _piano_roll_selection_changed(selection:Array) -> void:
 	%Inspector.node = selection[0]
 
 func play():
-	pass
-	#playing_ = true
+	playing = true
+	%PianoRoll.playing = true
+
+func stop():
+	%PianoRoll.time_ = 0.0
+	playing = false
+	%PianoRoll.playing = false
 
 func add_track(node_path) -> void:
 	%TrackNames.add_track(node_path)
@@ -84,8 +91,9 @@ func reload() -> void:
 		
 		for note in dict.tracks[i].notes:
 			var n := preload("bang.tscn").instantiate()
+			n.grid_size = %PianoRoll.grid_size
 			Dictializer.from_dict(note, n)
-			%PianoRoll.add_item(n, i)
+			%PianoRoll.add_item(n, i, false)
 
 func _save_pressed():
 	save()
