@@ -1,14 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwilpnax30ixm"]
+[gd_scene load_steps=5 format=3 uid="uid://cwilpnax30ixm"]
 
 [ext_resource type="Script" path="res://addons/table_control/table_control.gd" id="1_ieshf"]
 [ext_resource type="Theme" uid="uid://dbvpa0vlu34gu" path="res://ui/beat_player.tres" id="1_qor3e"]
 [ext_resource type="Script" path="res://addons/table_control/grid.gd" id="2_w1t41"]
+[ext_resource type="Script" path="res://addons/table_control/selection_box.gd" id="3_5uoug"]
 
 [node name="MarginContainer" type="PanelContainer"]
 offset_right = 1060.0
 offset_bottom = 621.0
 theme = ExtResource("1_qor3e")
 script = ExtResource("1_ieshf")
+
+[node name="Node2D" type="Node2D" parent="."]
+visible = false
+script = ExtResource("3_5uoug")
+
+[node name="Selection" type="Polygon2D" parent="Node2D"]
+color = Color(0.521569, 1, 1, 0.333333)
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 unique_name_in_owner = true

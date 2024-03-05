@@ -43,14 +43,16 @@ func _ready() -> void:
 		if child is Device:
 			child.value_changed.connect(_device_nob_value_changed)
 
-func _beat_player_bang(args:Dictionary) -> void:
-	if not get_node_or_null(args.node_path):
-		return
+func _beat_player_bang(method:StringName, args:Array) -> void:
+	if has_method(method):
+		callv(method, args)
 	
-	if args.type == 0:
-		test(args.node_path, args.value, args.length)
-	else:
-		follow(args.node_path, args.length, args.from_value, args.value, [])
+	#if args.type == 0:
+	#	test(args.node_path, args.value, args.length)
+	#elif args.type == 1:
+	#	follow(args.node_path, args.length, args.from_value, args.value, [])
+	#elif args.type == 2:
+	#	wait()
 
 var i_ = 0
 
@@ -83,12 +85,10 @@ func play_() -> void:
 		PureData.send_bang("r-RESET")
 		PureData.send_bang("r-PLAY")
 
-func follow(nob_path:NodePath, length:float, from_value:float, to_value:float, meta:Array = []):
+func slide(nob_path:NodePath, length:float, from_value:float, to_value:float):
 	var nob := get_node_or_null(nob_path)
 	if not nob:
 		return
-		
-	var phrase_over = "phrase_over" in meta
 
 	var pos = nob.get_guide_position_for_value(from_value)
 	var d = preload("res://game/guide/slide/slide.tscn").instantiate()
@@ -98,7 +98,7 @@ func follow(nob_path:NodePath, length:float, from_value:float, to_value:float, m
 
 	guides_.add_child(d)
 
-func test(nob_path:NodePath, value:float, length:float):
+func bang(nob_path:NodePath, length:float, value:float):
 	var nob := get_node_or_null(nob_path)
 	if not nob:
 		return
@@ -112,6 +112,9 @@ func test(nob_path:NodePath, value:float, length:float):
 	nob.intended_value = value
 
 	guides_.add_child(d)
+
+func wait(node_path:NodePath) -> void:
+	pass
 
 func guide_exists_(nob:Nob) -> bool:
 	for node in guides_.get_children():

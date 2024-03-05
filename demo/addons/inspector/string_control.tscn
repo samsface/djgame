@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://chpf6xemxw7i1"]
+
+[ext_resource type="Script" path="res://addons/inspector/string_control.gd" id="1_4lisc"]
+
+[node name="HBoxContainer4" type="HBoxContainer"]
+script = ExtResource("1_4lisc")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Time"
+
+[node name="Value" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[connection signal="text_changed" from="Value" to="." method="_value_changed"]

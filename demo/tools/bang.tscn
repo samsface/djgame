@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cd11m6esh25g7" path="res://tools/bang.png" id="1_boywt"]
 [ext_resource type="Script" path="res://tools/bang.gd" id="2_rihem"]
 
-[node name="Button" type="Button"]
+[node name="Bang" type="Button"]
 clip_children = 2
 clip_contents = true
 offset_right = 32.0

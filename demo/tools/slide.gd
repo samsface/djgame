@@ -1,5 +1,10 @@
 extends Button
 
+@export var from_value:float : 
+	set(v):
+		from_value = v
+		invalidate_value_()
+
 @export var value:float : 
 	set(v):
 		value = v
@@ -15,10 +20,8 @@ func invalidate_value_() -> void:
 	var polygon := PackedVector2Array()
 	polygon.resize(4)
 	
-	var from = 1.0 - value
+	var from = 1.0 - from_value
 	var to = 1.0 - value
-
-	from = to
 		
 	var border_width := 1
 

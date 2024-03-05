@@ -5,6 +5,8 @@ signal bang
 signal selection_changed
 signal row_pressed
 
+@export var streams:Array[AudioStream]
+	
 enum Tool {
 	none,
 	move,
@@ -99,6 +101,7 @@ func _table_item_button_down(item):
 	selection_changed.emit([item])
 
 func _table_item_button_up(item):
+	print(tool_)
 	if tool_ == Tool.move:
 		translation_end_()
 	elif tool_ == Tool.resize_east:
@@ -108,7 +111,7 @@ func _table_item_button_up(item):
 
 	tool_ = Tool.none
 	selection_.clear()
-	selection_changed.emit()
+	#selection_changed.emit([])
 
 func should_auto_scroll_() -> bool:
 	return (
@@ -243,7 +246,6 @@ func add_item(node:Button, row_idx:int, quantinize := true) -> void:
 
 	var row = %Rows.get_child(row_idx + 2)
 
-	node.grid_size = grid_size
 	node.custom_minimum_size = Vector2i(grid_size, 32)
 	node.size.y *= 0
 	if quantinize:
@@ -261,7 +263,7 @@ func add_item(node:Button, row_idx:int, quantinize := true) -> void:
 func remove_item(node:Control) -> void:
 	if node == null or node.get_parent() == null:
 		return
-		
+	
 	undo.create_action("remove")
 	undo.add_do_method(node.get_parent().remove_child.bind(node))
 	undo.add_undo_method(node.get_parent().add_child.bind(node))
@@ -275,8 +277,8 @@ func invalidate_grid_size_(old_grid_size) -> void:
 	for row in %Rows.get_children():
 		if row.get_index() > 0:
 			for item in row.get_children():
-				if row.get_index() > 1:
-					item.grid_size = grid_size
+				#if row.get_index() > 1:
+					#item.grid_size = grid_size
 				
 				var t = item.position.x / old_grid_size
 				var l = item.size.x / old_grid_size
