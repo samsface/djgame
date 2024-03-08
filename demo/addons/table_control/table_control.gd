@@ -4,6 +4,8 @@ class_name PianoRollControl
 signal bang
 signal selection_changed
 signal row_pressed
+signal row_mouse_entered
+signal row_mouse_exited
 
 @export var streams:Array[AudioStream]
 	
@@ -75,10 +77,13 @@ func connect_row_item_(row_item:Button) -> void:
 
 func connect_row_(row) -> void:
 	row.gui_input.connect(func(event): 
+		var row_index = row.get_index() - 2
 		if event.is_action_pressed("click"): 
-			row_pressed.emit(row.get_index() - 2, row.get_local_mouse_position())
+			row_pressed.emit(row_index, row.get_local_mouse_position())
 	)
-	
+	row.mouse_entered.connect(func(): var row_index = row.get_index() - 2; row_mouse_entered.emit(row_index))
+	row.mouse_exited.connect(func(): var row_index = row.get_index() - 2; row_mouse_exited.emit(row_index))
+
 func quantinize_to_grid(value:float) -> int:
 	return clamp(floor(value / grid_size) * grid_size, 0 , 2048)
 
@@ -174,7 +179,7 @@ func play_(delta) -> void:
 	t = t % (time_range.y - time_range.x) + time_range.x
 
 	cursor.position.x = t * grid_size
-	
+
 	invalidate_queue_()
 	
 	for i in queue_.size():
@@ -406,3 +411,17 @@ func _quant_selected(index):
 			quantinize_snap = 4
 		2:
 			quantinize_snap = 16
+
+func move_row_up(row_idx:int) -> void:
+	var row = %Rows.get_child(row_idx + 2)
+	if row.get_index() == 2:
+		return
+
+	row.get_parent().move_child(row, row.get_index() - 1)
+
+func move_row_down(row_idx:int) -> void:
+	var row = %Rows.get_child(row_idx + 2)
+	if row.get_index() == row.get_parent().get_child_count() - 1:
+		return
+
+	row.get_parent().move_child(row, row.get_index() + 1)

@@ -19,7 +19,7 @@ resource_name = "Limiter"
 ceiling_db = -6.6
 
 [resource]
-bus/0/volume_db = -0.328256
+bus/0/volume_db = 1.25825
 bus/0/effect/0/effect = SubResource("AudioEffectAmplify_gby66")
 bus/0/effect/0/enabled = true
 bus/0/effect/1/effect = SubResource("AudioEffectReverb_oif8r")
@@ -28,3 +28,9 @@ bus/0/effect/2/effect = SubResource("AudioEffectChorus_r80rm")
 bus/0/effect/2/enabled = true
 bus/0/effect/3/effect = SubResource("AudioEffectLimiter_lfwnm")
 bus/0/effect/3/enabled = true
+bus/1/name = &"KeyPresses"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = -7.63485
+bus/1/send = &"Master"

@@ -1,0 +1,60 @@
+{
+"clips": {
+183112528: {
+"time_range": Vector2i(0, 64),
+"tracks": [{
+"name": "/root/Game",
+"notes": [{
+"length": "16",
+"method": "&\"play__\"",
+"time": "0",
+"type": "2"
+}]
+}, {
+"name": "/root/Game/toykit/seq-1",
+"notes": [{
+"length": "16",
+"time": "0",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/toykit/seq-5",
+"notes": [{
+"length": "16",
+"time": "32",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/toykit/seq-9",
+"notes": [{
+"length": "16",
+"time": "32",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/toykit/seq-13",
+"notes": [{
+"length": "16",
+"time": "16",
+"type": "0",
+"value": "1.0"
+}]
+}]
+},
+1806420329: {
+"time_range": Vector2i(0, 16),
+"tracks": [{
+"name": "",
+"notes": [{
+"length": "16",
+"time": "0",
+"type": "0",
+"value": "0.0"
+}]
+}]
+}
+}
+}

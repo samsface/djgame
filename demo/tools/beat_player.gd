@@ -6,6 +6,10 @@ var undo_ = UndoRedo.new()
 
 var playing := false
 
+var hover_tween_ : Tween
+
+@onready var piano_roll_ = %PianoRoll
+
 func _ready():
 	undo_.clear_history()
 	%TrackNames.undo = undo_
@@ -14,8 +18,25 @@ func _ready():
 	%PianoRoll.row_pressed.connect(_piano_roll_pressed)
 	%PianoRoll.bang.connect(_piano_roll_bang)
 	%PianoRoll.selection_changed.connect(_piano_roll_selection_changed)
-	
-	reload()
+	%PianoRoll.row_mouse_entered.connect(func(row_index:int):
+		print(row_index)
+		if hover_tween_:
+			hover_tween_.kill()
+		hover_tween_ = create_tween()
+		var n = get_node_or_null(%TrackNames.get_track_node_path(row_index))
+		if n:
+			hover_tween_.set_loops(-1)
+			hover_tween_.tween_property(n, "visible", false, 0.1)
+			hover_tween_.tween_property(n, "visible", true, 0.3)
+	)
+	%PianoRoll.row_mouse_exited.connect(func(row_index:int):
+		print(row_index)
+		if hover_tween_:
+			hover_tween_.kill()
+		var n = get_node_or_null(%TrackNames.get_track_node_path(row_index))
+		if n:
+			n.visible = true
+	)
 
 func _input(event:InputEvent) -> void:
 	if event.is_action_pressed("redo"):
@@ -40,6 +61,8 @@ func _piano_roll_bang(item:Control, idx:int) -> void:
 	]
 	
 	for property_name in %Inspector.include_list:
+		if property_name == "method":
+			continue
 		if property_name in item:
 			args.push_back(item.get(property_name))
 
@@ -65,11 +88,12 @@ func stop():
 	%PianoRoll.time_ = 0.0
 	playing = false
 	%PianoRoll.playing = false
+	%PianoRoll.cursor.position.x = 0
 
 func add_track(node_path) -> void:
 	%TrackNames.add_track(node_path)
 
-func save() -> void:
+func get_state() -> Dictionary:
 	var state := {
 		time_range = %PianoRoll.time_range,
 		tracks = []
@@ -89,15 +113,9 @@ func save() -> void:
 
 		state.tracks.push_back(track)
 
-	var file := FileAccess.open("res://junk/beat.json", FileAccess.WRITE)
-	file.store_string(var_to_str(state))
+	return state
 
-func reload() -> void:
-	var file := FileAccess.open("res://junk/beat.json", FileAccess.READ)
-	if not file:
-		return
-
-	var dict:Dictionary = str_to_var(file.get_as_text())
+func reload(dict:Dictionary) -> void:
 	%PianoRoll.time_range = dict.time_range
 	
 	for i in dict.tracks.size():
@@ -117,9 +135,6 @@ func reload() -> void:
 			Dictializer.from_dict(note, $Virtual)
 			Dictializer.from_dict(note, n)
 			%PianoRoll.add_item(n, i, false)
-
-func _save_pressed():
-	save()
 
 func _play_pressed():
 	%PianoRoll.play()
@@ -157,3 +172,6 @@ func change_type_(node, new_type:int) -> void:
 
 
 	#node.queue_free()
+
+func _next_pressed():
+	reload({time_range = Vector2i(0, 16), tracks = [] })

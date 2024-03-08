@@ -17,7 +17,7 @@ func hook(p) -> void:
 	var n = p_.get_node_or_null(node)
 	if not n:
 		return
-	
+
 	n.value_changed.connect(_value_changed)
 
 func _value_changed(v) -> void:

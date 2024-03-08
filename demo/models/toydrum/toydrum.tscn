@@ -13,6 +13,9 @@ script = ExtResource("2_g4yco")
 patch = "toykit"
 map = ExtResource("3_t4x0b")
 
+[node name="Widgets" parent="." index="0"]
+visible = false
+
 [node name="Base" parent="." index="1"]
 instance_shader_parameters/emission_scale = 0.0
 surface_material_override/0 = ExtResource("3_eln34")
@@ -25,7 +28,7 @@ collision_mask = 0
 transform = Transform3D(1, 0, 0, 0, 0.946461, -0.322817, 0, 0.322817, 0.946461, 0, -0.0209118, -0.00758976)
 shape = SubResource("BoxShape3D_psw3l")
 
-[node name="Views" type="Node3D" parent="." index="29"]
+[node name="Views" type="Node3D" parent="." index="2"]
 
 [node name="Marker3D" type="Marker3D" parent="Views" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0890531, 0.0749367)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0808042, 0.0617226)

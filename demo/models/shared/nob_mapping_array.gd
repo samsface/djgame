@@ -22,10 +22,23 @@ func hook(p:Node) -> void:
 		var node = p_.get_node_or_null(node[i])
 		if not node:
 			continue
-			
+
 		node.value_changed.connect(_value_changed.bind(i))
 
+	PureData.bind("r-RESET")
+	PureData.bang.connect(reset_)
+
+func reset_(s:String) -> void:
+	if s == "r-RESET":
+		# freeze without this wait
+		await p_.get_tree().process_frame
+		refresh()
+
 func refresh() -> void:
+	var array_size = PureData.get_array_size(array_name)
+	if array_size <= 0:
+		return
+
 	var data:PackedFloat32Array = PureData.read_array(array_name, 0, PureData.get_array_size(array_name))
 	if not data:
 		return
@@ -38,9 +51,10 @@ func refresh() -> void:
 		if not p:
 			continue
 		
+		p.intended_value = data[i]
 		p.value = data[i]
 
 func _value_changed(v:float, idx:int) -> void:
-	PureData.write_at_array_index(array_name, idx, v * 5.0)
+	PureData.write_at_array_index(array_name, idx, v)
 	value_changed.emit(v)
 	p_.value_changed.emit(p_.get_node(node[idx]), v, v)

@@ -3,11 +3,10 @@ extends Node3D
 @onready var looking_at_ := $toykit
 @onready var guides_ := $Guides
 @onready var recorder_ := $Recorder
-@onready var beat_player_  := %BeatPlayer
+@onready var beat_player_  := %BeatPlayerHost
 
 var patch_file_handle_ := PDPatchFile.new()
 var tween_:Tween
-
 
 func _ready() -> void:
 	beat_player_.bang.connect(_beat_player_bang)
@@ -46,13 +45,6 @@ func _ready() -> void:
 func _beat_player_bang(method:StringName, args:Array) -> void:
 	if has_method(method):
 		callv(method, args)
-	
-	#if args.type == 0:
-	#	test(args.node_path, args.value, args.length)
-	#elif args.type == 1:
-	#	follow(args.node_path, args.length, args.from_value, args.value, [])
-	#elif args.type == 2:
-	#	wait()
 
 var i_ = 0
 
@@ -76,14 +68,20 @@ func _input(event: InputEvent) -> void:
 	elif Input.is_action_just_pressed("play"):
 		play_()
 
+func play__(node_path, length) -> void:
+	PureData.send_bang("r-PLAY")
+
 func play_() -> void:
-	if %BeatPlayer.playing:
-		%BeatPlayer.stop()
+	if beat_player_.playing:
+		beat_player_.stop()
 		PureData.send_bang("r-STOP")
-	else:
-		%BeatPlayer.play()
 		PureData.send_bang("r-RESET")
-		PureData.send_bang("r-PLAY")
+
+		for node in guides_.get_children():
+			node.queue_free()
+
+	else:
+		beat_player_.play()
 
 func slide(nob_path:NodePath, length:float, from_value:float, to_value:float):
 	var nob := get_node_or_null(nob_path)
@@ -102,6 +100,9 @@ func bang(nob_path:NodePath, length:float, value:float):
 	var nob := get_node_or_null(nob_path)
 	if not nob:
 		return
+
+	Camera.cursor.try_set_position(nob, global_position + Vector3.UP * 0.002)
+	Camera.look_at_node(nob.get_parent())
 
 	var pos = nob.get_guide_position_for_value(value)
 	var d = preload("res://game/guide/bang/bang.tscn").instantiate()
@@ -124,14 +125,14 @@ func guide_exists_(nob:Nob) -> bool:
 	return false
 
 func _device_nob_value_changed(nob:Nob, new_value:float, old_value:float) -> void:
-	beat_player_.add_track(nob.get_path())
+	print(nob.get_path())
 
 	if guide_exists_(nob):
 		return
 
-	#if abs(nob.intended_value - new_value) > 0.1:
-	#	nob.reset_to_intended_value()
-		#bad_(nob.get_nob_position() + Vector3.UP * 0.01, -1)
+	if abs(nob.intended_value - new_value) > 0.1:
+		nob.reset_to_intended_value()
+		$PointsService.no_touch(nob)
 
 func meta(array:Array = []) -> void:
 	pass

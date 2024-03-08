@@ -1,4 +1,4 @@
-#N canvas 73 26 2486 1344 12;
+#N canvas 278 359 1864 990 12;
 #X obj 1292 665 sampler;
 #X obj 1525 649 sampler;
 #X obj 408 318 hsl 128 15 0 127 0 0 s-\$1-swing empty Swing -2 -8 0
@@ -72,7 +72,9 @@
 #X obj 676 320 bng 15 250 50 0 s-\$1-preset0 r-\$1-preset0 Clear 17
 7 0 10 #fcfcfc #000000 #000000;
 #X msg 456 -55 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
-#X msg 310 7 0;
+#X msg 310 7 23;
+#X obj 676 256 bng 15 250 50 0 s-RESET r-RESET RESET 17 7 0 10 #fcfcfc
+#000000 #000000;
 #X connect 0 0 41 0;
 #X connect 0 0 42 0;
 #X connect 1 0 38 0;
@@ -132,4 +134,5 @@
 #X connect 53 0 27 0;
 #X connect 53 0 30 0;
 #X connect 54 0 2 0;
+#X connect 55 0 52 0;
 #X coords 0 -1 1 1 608 196 2 400 300;

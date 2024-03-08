@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://0xf0dcjgbmqj"]
+[gd_scene load_steps=2 format=3 uid="uid://0xf0dcjgbmqj"]
 
 [ext_resource type="Script" path="res://addons/inspector/inspector.gd" id="1_vifvy"]
-[ext_resource type="Script" path="res://addons/inspector/test_node.gd" id="2_yejx8"]
 
 [node name="Inspector" type="PanelContainer" node_paths=PackedStringArray("node")]
 anchors_preset = 15
@@ -10,10 +9,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vifvy")
-node = NodePath("Node")
-
-[node name="Node" type="Node" parent="."]
-script = ExtResource("2_yejx8")
+node = NodePath("")
 
 [node name="Controls" type="VBoxContainer" parent="."]
 unique_name_in_owner = true

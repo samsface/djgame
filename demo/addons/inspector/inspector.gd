@@ -154,7 +154,7 @@ func to_dict(node_to_dict:Node) -> Dictionary:
 	var current_node = node
 
 	var res := {}
-	
+
 	node = node_to_dict
 	
 	for property_name in properties_to_poll_:

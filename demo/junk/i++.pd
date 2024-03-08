@@ -1,7 +1,7 @@
 #N canvas 673 480 887 460 12;
 #X obj 326 170 int;
 #X obj 446 182 + 1;
-#X obj 531 30 bng 15 250 50 0 s-RESET r-RESET empty 17 7 0 10 #fcfcfc
+#X obj 531 30 bng 15 250 50 0 s-RESET r-RESET RESET 17 7 0 10 #fcfcfc
 #000000 #000000;
 #X msg 531 51 0;
 #X obj 326 288 outlet;

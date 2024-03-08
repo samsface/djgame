@@ -91,15 +91,13 @@ class Triangle:
 
 		return res
 
-func iterate(root, node):
+func iterate(root, node, node_names):
 	var bank := {
 		255: load("res://models/toydrum/button.tscn"),
 		250: load("res://models/toydrum/button2.tscn"),
 		243: load("res://models/lital/slider.tscn")
 	}
 
-	var c = 0
-	
 	if node != null:
 		if node.name.contains("Widget"):
 			if node is MeshInstance3D:
@@ -107,8 +105,6 @@ func iterate(root, node):
 
 				for tri in triangles:
 					var widget = bank.get(int(tri.uv1.x * 255))
-					prints("Widget ", widget)
-					
 					if not widget:
 						continue
 
@@ -116,19 +112,23 @@ func iterate(root, node):
 					ii.position = tri.get_center_point()
 					ii.rotate_x(-tri.normal.z)
 					
-					# use the the position gives kinda stable names
-					ii.name = str(c)
-					
+					if not node_names.is_empty():
+						ii.name = node_names.pop_front()
+
 					root.add_child(ii)
 					ii.owner = root
-					
-					c += 1
-
-				#node.mesh = null
 
 		for child in node.get_children():
-			iterate(root, child)
+			iterate(root, child, node_names)
 
-func _post_import(scene):
-	iterate(scene, scene)
+func _post_import(scene:Node) -> Object:
+	var path := get_source_file().get_base_dir().path_join("node_names.txt")
+	var node_names
+	if FileAccess.file_exists(path):
+		print("Found node name file")
+		var file := FileAccess.open(path, FileAccess.READ) 
+		if file:
+			node_names = Array(file.get_as_text(true).split("\n"))
+
+	iterate(scene, scene, node_names)
 	return scene

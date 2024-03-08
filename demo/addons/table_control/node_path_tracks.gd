@@ -16,6 +16,8 @@ func add_track(node_path:NodePath = "") -> void:
 	
 	var track_name := preload("track_name.tscn").instantiate()
 	track_name.get_node("H/Delete").pressed.connect(_erase_track.bind(track_name))
+	track_name.get_node("H/MoveUp").pressed.connect(_move_track_up.bind(track_name))
+	track_name.get_node("H/MoveDown").pressed.connect(_move_track_down.bind(track_name))
 
 	piano_roll.add_row()
 
@@ -48,6 +50,34 @@ func _erase_track(track_name:Control) -> void:
 	undo.add_undo_reference(track_name)
 
 	piano_roll.remove_row(track_name.get_index())
+
+	undo.commit_action()
+
+func _move_track_up(track_name:Control) -> void:
+	if track_name.get_index() == 0:
+		return
+	
+	undo.create_action("move track up")
+	
+	undo.add_do_method(track_name.get_parent().move_child.bind(track_name, track_name.get_index() - 1))
+	undo.add_do_method(piano_roll.move_row_up.bind(track_name.get_index()))
+	
+	undo.add_undo_method(track_name.get_parent().move_child.bind(track_name, track_name.get_index()))
+	undo.add_undo_method(piano_roll.move_row_down.bind(track_name.get_index() - 1))
+
+	undo.commit_action()
+	
+func _move_track_down(track_name:Control) -> void:
+	if track_name.get_index() == track_name.get_parent().get_child_count() - 1:
+		return
+	
+	undo.create_action("move track down")
+	
+	undo.add_do_method(track_name.get_parent().move_child.bind(track_name, track_name.get_index() + 1))
+	undo.add_do_method(piano_roll.move_row_down.bind(track_name.get_index()))
+	
+	undo.add_undo_method(track_name.get_parent().move_child.bind(track_name, track_name.get_index()))
+	undo.add_undo_method(piano_roll.move_row_up.bind(track_name.get_index() + 1))
 
 	undo.commit_action()
 

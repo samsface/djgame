@@ -1,9 +1,15 @@
 extends Node
 class_name InpsectorVirtualProperties
 
-@export var node:Control
+@export var node:Control : 
+	set(v):
+		node = v
 
-var grid_size = 4
+var grid_size : 
+	set(v):
+		pass
+	get:
+		return get_parent().piano_roll_.grid_size
 
 enum Type {
 	bang,

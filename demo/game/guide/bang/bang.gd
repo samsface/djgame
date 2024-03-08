@@ -13,31 +13,41 @@ var length := 0.0
 func _ready() -> void:
 	last_off_ = get_off_()
 	
-	arrow_.position.y = 0.04
+	arrow_.position.y = 0.1
+
+	var fall_time := 2.0
 
 	fall_tween_ = create_tween()
 	fall_tween_.set_parallel()
-	fall_tween_.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
-	fall_tween_.tween_property(arrow_, "rotation:y", 5, 1.0)
-	fall_tween_.tween_property(arrow_, "position:y", -0.002, 1.0)
-	fall_tween_.chain().tween_interval(length - 1.0)
+	#fall_tween_.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
+	fall_tween_.tween_property(nob_, "scale:y", 3.0, 0.1).set_trans(Tween.TRANS_SPRING).set_ease(Tween.EASE_OUT)
+	fall_tween_.tween_property(arrow_, "rotation:y", 5, fall_time)
+	fall_tween_.tween_property(arrow_, "position:y", -0.002, fall_time)
+	fall_tween_.chain().tween_interval(length - fall_time)
 	fall_tween_.finished.connect(_miss)
 
 	points_ = points_service.make_points()
+	
 
 func _miss() -> void:
 	if hit_:
 		return
+		
+	nob_.scale.y = 1.0
 		
 	miss_ = true
 	
 	arrow_.visible = false
 
 	judge_accuracy_()
+	
+	nob_.value = for_value_
 
 func _hit() -> void:
 	if miss_:
 		return
+
+	nob_.scale.y = 1.0
 
 	var combo:float = min(points_service.combo, 10.0)
 	combo = combo / 10.0
@@ -74,7 +84,6 @@ func _physics_process(delta: float) -> void:
 			return
 
 	var off = get_off_()
-	prints("off", off)
 	
 	# we moved way passed the target
 	if sign(off) != sign(last_off_):
@@ -110,3 +119,5 @@ func get_off_() -> float:
 
 func _exit_tree() -> void:
 	points_.queue_free()
+	# just for when we reset during testing
+	nob_.scale.y = 1.0

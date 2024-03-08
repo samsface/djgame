@@ -36,6 +36,10 @@ func miss(off:float) -> void:
 
 	text_.danger()
 
+func no_touch() -> void:
+	text_.text = "DON'T TOUCH!"
+	get_parent().miss()
+
 func commit():
 	var tween := create_tween()
 	tween.set_trans(Tween.TRANS_QUAD)

@@ -25,7 +25,7 @@ var next_position_ := Vector3.ZERO
 @onready var camera_ = get_node("../CameraArm/Camera3D")
 
 func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	position2D = get_window().get_visible_rect().size / 2
 
 func is_owner(node:Node) -> bool:

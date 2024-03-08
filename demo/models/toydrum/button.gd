@@ -4,13 +4,14 @@ class_name NobButton
 signal value_changed(float)
 signal impulse(Vector3, float)
 
-@export var range:int = 2
-
 var value : 
 	set(v):
-		value = v
+		if v == value_:
+			return
+
 		value_ = clamp(v, 0.0, 1.0)
 		$Nob/Model/Button.light = light_color_()
+		value_changed.emit(value_)
 	get:
 		return value_
 
@@ -43,12 +44,13 @@ func pressed() -> void:
 	var tween = create_tween()
 	tween.tween_property($Nob, "position:y", -0.001, 0.01)
 
-	value_ += 1
-	value_ = int(value_) % range
+	value_ = 1.0 - value
 
 	$Nob/Model/Button.light = light_color_()
+	if has_node("Sound"):
+		$Sound.play()
 	
-	value_changed.emit(float(value_) / float(range))
+	value_changed.emit(value_)
 	
 	Camera.cursor.push(self, Cursor.Action.grab)
 	Camera.cursor.try_set_position(self, global_position + Vector3.UP * 0.002)

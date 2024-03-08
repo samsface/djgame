@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://lb3oq22iphka"]
+
+[ext_resource type="Theme" uid="uid://dbvpa0vlu34gu" path="res://ui/beat_player.tres" id="1_rs0lp"]
+[ext_resource type="Script" path="res://tools/beat_player_host.gd" id="2_gk3x2"]
+
+[node name="BeatPlayerHost" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_rs0lp")
+script = ExtResource("2_gk3x2")
+
+[node name="Menu" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Save" type="Button" parent="Menu"]
+layout_mode = 2
+text = "Save"
+
+[node name="Play" type="Button" parent="Menu"]
+layout_mode = 2
+text = "Play"
+
+[node name="Stop" type="Button" parent="Menu"]
+layout_mode = 2
+text = "Stop"
+
+[node name="New" type="Button" parent="Menu"]
+layout_mode = 2
+text = "New +"
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 2
+
+[connection signal="pressed" from="Menu/Save" to="." method="_save_pressed"]
+[connection signal="pressed" from="Menu/Play" to="." method="_play_pressed"]
+[connection signal="pressed" from="Menu/Stop" to="." method="_stop_pressed"]
+[connection signal="pressed" from="Menu/New" to="." method="_new_pressed"]

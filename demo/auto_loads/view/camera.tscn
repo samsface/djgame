@@ -8,7 +8,6 @@
 script = ExtResource("1_lssk8")
 
 [node name="Cursor" type="Node3D" parent="."]
-transform = Transform3D(0.025, 0, 0, 0, 0.025, 0, 0, 0, 0.025, 0, 0, 0)
 script = ExtResource("3_2n3f3")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Cursor"]

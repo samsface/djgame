@@ -24,8 +24,8 @@ func explode(scale := 1.0) -> Tween:
 	tween.tween_property(light, "light_energy", 8.0, 0.1)
 	tween.tween_property(light, "light_energy", 0.0, 0.2).set_delay(0.1)
 
-	$SfxrStreamPlayer3D.pitch_scale = randf_range(1.5, 2.0)
-	$SfxrStreamPlayer3D.play()
+	$AudioStreamPlayer3D.pitch_scale = randf_range(1.5, 2.0)
+	$AudioStreamPlayer3D.play()
 
 	return tween
 

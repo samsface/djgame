@@ -1,4 +1,4 @@
-#N canvas 302 197 1864 990 12;
+#N canvas 303 170 1864 990 12;
 #X obj 473 1114 dac~;
 #X obj 364 643 lital hat;
 #X obj 285 268 midibash;
