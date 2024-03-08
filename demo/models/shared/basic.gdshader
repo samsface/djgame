@@ -61,7 +61,7 @@ void fragment()
 	
 	vec3 lt = vec3(0);
 
-	EMISSION = t * 255.0 * pow(emission_scale, 8.0);
+	EMISSION = t * 1000.0 * pow(emission_scale, 8.0);
 	ALBEDO = mix(ALBEDO, EMISSION, length(EMISSION));
 	//
 

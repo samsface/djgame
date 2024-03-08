@@ -6,10 +6,10 @@ volume_db = -13.94
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_oif8r"]
 resource_name = "Reverb"
-room_size = 0.31
+room_size = 0.06
 damping = 0.78
-spread = 0.51
-wet = 0.23
+spread = 0.13
+wet = 0.12
 
 [sub_resource type="AudioEffectChorus" id="AudioEffectChorus_r80rm"]
 resource_name = "Chorus"

@@ -44,7 +44,7 @@ func pressed() -> void:
 	var tween = create_tween()
 	tween.tween_property($Nob, "position:y", -0.001, 0.01)
 
-	value_ = 1.0 - value
+	value_ = intended_value# 1.0 - value
 
 	$Nob/Model/Button.light = light_color_()
 	if has_node("Sound"):
@@ -86,4 +86,8 @@ func light_color_() -> float:
 func radio():
 	var tween = create_tween()
 	tween.tween_property(self, "pulse_", 0.5, 0.0)
-	tween.tween_property(self, "pulse_", 0.0, 1.0).set_delay(0.1)
+	tween.tween_property(self, "pulse_", 0.0, 0.0).set_delay(0.1)
+	
+	if value > 0.0:
+		tween.tween_property(self, "scale", Vector3.ONE * 1.2, 0.0)
+		tween.tween_property(self, "scale", Vector3.ONE, 0.1).set_delay(0.1)

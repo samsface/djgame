@@ -8,4 +8,3 @@
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_df2n6")
 shader = ExtResource("1_n0e2a")
-shader_parameter/albedo = Color(0, 0.901961, 0.34902, 1)

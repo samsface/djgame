@@ -51,6 +51,8 @@ func invalidate_() -> void:
 				control = add_float_control_(property)
 			TYPE_STRING_NAME:
 				control = add_string_control_(property)
+			TYPE_BOOL:
+				control = add_bool_control_(property)
 		
 		if not control:
 			continue
@@ -88,6 +90,10 @@ func add_int_control_(property:Dictionary) -> Control:
 
 func add_string_control_(property:Dictionary) -> Control:
 	var control = preload("string_control.tscn").instantiate()
+	return control
+
+func add_bool_control_(property:Dictionary) -> Control:
+	var control = preload("bool_control.tscn").instantiate()
 	return control
 
 func _control_value_changed(new_value, property_name:String) -> void:

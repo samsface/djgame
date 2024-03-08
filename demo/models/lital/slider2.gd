@@ -56,7 +56,7 @@ func _physics_process(delta: float) -> void:
 		
 		var new_value = value - diff
 
-		value = clamp(new_value, 0.05, 0.5)
+		value = clamp(new_value, 0.05, 1.0)
 		
 		Camera.recorder.capture(self)
 		

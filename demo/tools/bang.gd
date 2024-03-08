@@ -5,13 +5,23 @@ extends Button
 		value = v
 		invalidate_value_()
 
+@export var auto:bool : 
+	set(v):
+		auto = v
+		invalidate_value_()
+
 func _ready():
-	self_modulate = Color.DARK_SLATE_GRAY
-	$Polygon2D.self_modulate = Color.LIGHT_GREEN
 	invalidate_value_()
 	item_rect_changed.connect(invalidate_value_)
 
 func invalidate_value_() -> void:
+	self_modulate = Color.DARK_SLATE_GRAY
+	
+	if auto:
+		$Polygon2D.self_modulate = Color.PURPLE
+	else:
+		$Polygon2D.self_modulate = Color.LIGHT_GREEN
+
 	var polygon := PackedVector2Array()
 	polygon.resize(4)
 	

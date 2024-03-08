@@ -88,6 +88,9 @@ func slide(nob_path:NodePath, length:float, from_value:float, to_value:float):
 	if not nob:
 		return
 
+	Camera.cursor.try_set_position(nob, global_position + Vector3.UP * 0.002)
+	Camera.look_at_node(nob.get_parent())
+
 	var pos = nob.get_guide_position_for_value(from_value)
 	var d = preload("res://game/guide/slide/slide.tscn").instantiate()
 	d.points_service = $PointsService
@@ -96,7 +99,7 @@ func slide(nob_path:NodePath, length:float, from_value:float, to_value:float):
 
 	guides_.add_child(d)
 
-func bang(nob_path:NodePath, length:float, value:float):
+func bang(nob_path:NodePath, length:float, value:float, auto:bool):
 	var nob := get_node_or_null(nob_path)
 	if not nob:
 		return
@@ -106,6 +109,7 @@ func bang(nob_path:NodePath, length:float, value:float):
 
 	var pos = nob.get_guide_position_for_value(value)
 	var d = preload("res://game/guide/bang/bang.tscn").instantiate()
+	d.auto = auto
 	d.points_service = $PointsService 
 	d.position = pos
 	d.length = length

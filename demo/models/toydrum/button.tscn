@@ -53,5 +53,8 @@ size = Vector3(0.01, 0.0025, 0.01)
 stream = SubResource("AudioStreamRandomizer_qnwah")
 bus = &"KeyPresses"
 
+[node name="Top" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00499544, 0)
+
 [connection signal="mouse_entered" from="Nob" to="." method="_mouse_entered"]
 [connection signal="mouse_exited" from="Nob" to="." method="_mouse_exited"]

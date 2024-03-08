@@ -1,12 +1,22 @@
 extends Node3D
 class_name Arrow
 
+@export var albedo : Color :
+	set(v):
+		albedo = v
+		if light:
+			light.light_color = albedo
+			mesh.set_instance_shader_parameter("albedo", albedo)
+		
+
 @onready var mesh = $Cube
 @onready var light = $OmniLight3D
 
 var intro_light_tween_:Tween
 
 func _ready() -> void:
+	albedo = albedo
+
 	intro_light_tween_ = create_tween()
 	intro_light_tween_.tween_property(light, "light_energy", 1, 0.3)
 

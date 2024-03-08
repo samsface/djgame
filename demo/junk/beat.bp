@@ -1,7 +1,7 @@
 {
 "clips": {
 183112528: {
-"time_range": Vector2i(0, 64),
+"time_range": Vector2i(0, 384),
 "tracks": [{
 "name": "/root/Game",
 "notes": [{
@@ -13,6 +13,7 @@
 }, {
 "name": "/root/Game/toykit/seq-1",
 "notes": [{
+"auto": "false",
 "length": "16",
 "time": "0",
 "type": "0",
@@ -21,40 +22,119 @@
 }, {
 "name": "/root/Game/toykit/seq-5",
 "notes": [{
+"auto": "false",
 "length": "16",
-"time": "32",
+"time": "20",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "false",
+"length": "16",
+"time": "84",
 "type": "0",
 "value": "1.0"
 }]
 }, {
 "name": "/root/Game/toykit/seq-9",
 "notes": [{
+"auto": "false",
 "length": "16",
-"time": "32",
+"time": "40",
 "type": "0",
 "value": "1.0"
 }]
 }, {
 "name": "/root/Game/toykit/seq-13",
 "notes": [{
+"auto": "false",
 "length": "16",
-"time": "16",
+"time": "60",
 "type": "0",
+"value": "1.0"
+}, {
+"auto": "false",
+"length": "16",
+"time": "92",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/toykit/seq-3",
+"notes": [{
+"auto": "false",
+"length": "16",
+"time": "114",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/toykit/seq-7",
+"notes": [{
+"auto": "false",
+"length": "16",
+"time": "134",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/toykit/seq-11",
+"notes": [{
+"auto": "false",
+"length": "16",
+"time": "154",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/toykit/seq-15",
+"notes": [{
+"auto": "false",
+"length": "16",
+"time": "174",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/toykit/seq-16",
+"notes": [{
+"auto": "false",
+"length": "16",
+"time": "174",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/toykit/select-clap",
+"notes": [{
+"auto": "true",
+"length": "16",
+"time": "64",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/toykit/select-closed",
+"notes": [{
+"auto": "true",
+"length": "16",
+"time": "96",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/acid/2",
+"notes": [{
+"from_value": "0.0",
+"length": "64",
+"time": "192",
+"type": "1",
 "value": "1.0"
 }]
 }]
 },
 1806420329: {
 "time_range": Vector2i(0, 16),
-"tracks": [{
-"name": "",
-"notes": [{
-"length": "16",
-"time": "0",
-"type": "0",
-"value": "0.0"
-}]
-}]
+"tracks": []
 }
 }
 }
