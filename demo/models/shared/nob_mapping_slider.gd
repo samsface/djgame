@@ -19,5 +19,7 @@ func hook(p:Node) -> void:
 	nob_.value_changed.connect(_value_changed)
 
 func _value_changed(new_value:float, old_value:float) -> void:
-	PureData.send_float("r-%s-%s" % [p_.name, symbol], new_value * max_value)
+	print("v", new_value * (max_value - min_value) + min_value)
+	
+	PureData.send_float("r-%s-%s" % [p_.name, symbol], new_value * (max_value - min_value) + min_value)
 	p_.value_changed.emit(nob_, new_value, old_value)

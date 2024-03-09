@@ -134,6 +134,8 @@ func _device_nob_value_changed(nob:Nob, new_value:float, old_value:float) -> voi
 	if guide_exists_(nob):
 		return
 
+	return
+
 	if abs(nob.intended_value - new_value) > 0.1:
 		nob.reset_to_intended_value()
 		$PointsService.no_touch(nob)
