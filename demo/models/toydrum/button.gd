@@ -24,6 +24,11 @@ var pulse_ := 0.0 :
 		pulse_ = v
 		$Nob/Model/Button.light = light_color_()
 
+var electric:Color = Color.TRANSPARENT :
+	set(v):
+		electric = v
+		$Nob/Model/Button.electric = v
+
 func _ready() -> void:
 	set_process_input(false)
 

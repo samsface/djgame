@@ -19,12 +19,18 @@ func _ready() -> void:
 		nob_.get_guide_position_for_value(expected_value_)
 	)
 
+	var g = Color("#00e659")
+	g.a = 0.9
+
 	fall_tween_ = create_tween()
 	fall_tween_.set_parallel()
+	
+	fall_tween_.tween_property(nob_, "electric", g, 0.2)
+	
 	arrow_.position.y = 0.04
 	fall_tween_.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
 	fall_tween_.tween_property(arrow_, "position:y", 0.0, fall_duration)
-	
+
 	await fall_tween_.finished
 
 	var tween := create_tween()
@@ -40,6 +46,8 @@ func _ready() -> void:
 	points_ = points_service.make_points()
 
 	Camera.rumble.connect(_rumble)
+	
+	
 
 func _rumble() -> void:
 	if rumble_tween_:
@@ -97,4 +105,5 @@ func _done() -> void:
 	queue_free()
 
 func _exit_tree() -> void:
+	nob_.electric = Color.TRANSPARENT
 	points_.queue_free()

@@ -12,6 +12,18 @@ var auto := false
 @onready var arrow_ := $Arrow
 @onready var arrow__ := $Arrow/Arrow_
 
+func color_() -> Color:
+	if auto:
+		return Color.PURPLE
+	else:
+		return Color("#00e659")
+
+func emission_color_() -> Color:
+	if auto:
+		return Color.BLUE
+	else:
+		return Color.GREEN
+
 func _ready() -> void:
 	last_off_ = get_off_()
 	
@@ -21,23 +33,26 @@ func _ready() -> void:
 
 	fall_tween_ = create_tween()
 	fall_tween_.set_parallel()
-	#fall_tween_.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
+	
+	arrow__.albedo = color_()
+
+	var g = emission_color_()
+	g.a = 0.8
+	fall_tween_.tween_property(nob_, "electric", g, 0.2)
+
 	fall_tween_.tween_property(nob_, "scale:y", 1.0, 0.1).set_trans(Tween.TRANS_SPRING).set_ease(Tween.EASE_OUT)
 	fall_tween_.tween_property(arrow_, "rotation:y", 5, fall_time)
 	fall_tween_.tween_property(arrow_, "position:y", nob_.get_node("Top").position.y, fall_time)
 	fall_tween_.finished.connect(_miss)
 
 	points_ = points_service.make_points()
-	
-	if auto:
-		arrow__.albedo = Color.PURPLE
 
 func _miss() -> void:
 	if hit_:
 		return
 		
-	nob_.scale.y = 1.0
-		
+	nob_.electric = Color.TRANSPARENT
+
 	miss_ = true
 	
 	arrow_.visible = false
@@ -50,7 +65,7 @@ func _hit() -> void:
 	if miss_:
 		return
 
-	nob_.scale.y = 1.0
+	nob_.electric = Color.TRANSPARENT
 
 	var combo:float = min(points_service.combo, 10.0)
 	combo = combo / 10.0
@@ -58,10 +73,6 @@ func _hit() -> void:
 	arrow__.explode(combo)
 
 	hit_ = true
-
-	var create := create_tween()
-	create.tween_interval(0.05)
-	await create.finished
 
 	judge_accuracy_()
 
@@ -112,8 +123,13 @@ func judge_accuracy_() -> void:
 	wait_then_free_()
 
 func wait_then_free_() -> void:
+	var end_tween := create_tween()
+	end_tween.set_parallel()
+	end_tween.tween_property(nob_, "electric", emission_color_(), 0.1)
+	end_tween.tween_property(nob_, "electric", Color.TRANSPARENT, 0.1).set_delay(0.1)
+
 	$Arrow/Arrow_/Particles.emitting = false
-	create_tween().tween_interval(0.5).finished.connect(queue_free)
+	end_tween.tween_interval(0.8).finished.connect(queue_free)
 
 func get_nob() -> Nob:
 	return nob_
@@ -125,3 +141,4 @@ func _exit_tree() -> void:
 	points_.queue_free()
 	# just for when we reset during testing
 	nob_.scale.y = 1.0
+	nob_.electric = Color.TRANSPARENT

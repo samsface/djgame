@@ -21,6 +21,11 @@ signal impulse(Vector3, float)
 		if not Camera.recording:
 			invalidate_()
 
+var electric:Color = Color.TRANSPARENT :
+	set(v):
+		electric = v
+		$Nob/Model/fader.electric = v
+
 var dragging_ := false
 var dragging_start_ := Vector2.ZERO
 var mouse_over_ := false

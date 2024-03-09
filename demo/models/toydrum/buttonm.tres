@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://br10irxvn4cuh"]
 
-[ext_resource type="Material" uid="uid://dq63e5mx8jbve" path="res://models/shared/outline.tres" id="1_uhaad"]
+[ext_resource type="Material" uid="uid://c3pp76cx8xann" path="res://models/shared/electric.tres" id="1_heqnb"]
 [ext_resource type="Shader" path="res://models/shared/basic.gdshader" id="2_ao7rm"]
 [ext_resource type="Texture2D" uid="uid://cbec1fsqepa08" path="res://models/toydrum/button_ao_map.png" id="3_caejd"]
 [ext_resource type="Texture2D" uid="uid://bh5ei77qd6l38" path="res://models/toydrum/button.png" id="4_45it1"]
@@ -9,7 +9,7 @@
 
 [resource]
 render_priority = 0
-next_pass = ExtResource("1_uhaad")
+next_pass = ExtResource("1_heqnb")
 shader = ExtResource("2_ao7rm")
 shader_parameter/smudge_scale = 0.142
 shader_parameter/color = Color(0.890196, 0.819608, 0.827451, 1)
