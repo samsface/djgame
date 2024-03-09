@@ -1,7 +1,5 @@
 extends Control
 
-signal bang
-
 var undo_ = UndoRedo.new()
 
 var playing := false
@@ -47,26 +45,37 @@ func _input(event:InputEvent) -> void:
 func _piano_roll_bang(item:Control, idx:int) -> void:
 	$Virtual2.node = item
 
+	var args := []
+
 	var method:StringName
 	if $Virtual2.type == 0:
 		method = &"bang"
+		args.push_back($Virtual2.length / %PianoRoll.tempo)
 	elif $Virtual2.type == 1:
 		method = &"slide" 
+		args.push_back($Virtual2.length / %PianoRoll.tempo)
 	else:
-		method = item.get("method")
-	
-	var args := [
-		%TrackNames.get_track_node_path(idx),
-		$Virtual2.length / %PianoRoll.tempo
-	]
-	
+		var method_args_generic = item.get("method").split(" ")
+		method = method_args_generic[0]
+		for i in range(1, method_args_generic.size()):
+			args.push_back(int(method_args_generic[i]))
+
+	var node_path = %TrackNames.get_track_node_path(idx)
+
 	for property_name in %Inspector.include_list:
 		if property_name == "method":
 			continue
 		if property_name in item:
 			args.push_back(item.get(property_name))
 
-	bang.emit(method, args)
+	var node = get_node(node_path)
+	if not node:
+		return
+	
+	if not node.has_method(method):
+		return
+	
+	node.callv(method, args)
 
 func _piano_roll_pressed(row_idx:int, pos:Vector2i) -> void:
 	var note = preload("bang.tscn").instantiate()

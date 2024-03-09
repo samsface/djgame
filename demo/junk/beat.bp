@@ -9,6 +9,44 @@
 "method": "&\"play__\"",
 "time": "0",
 "type": "2"
+}, {
+"length": "16",
+"method": "&\"clap\"",
+"time": "16",
+"type": "2"
+}, {
+"length": "16",
+"method": "&\"clap\"",
+"time": "76",
+"type": "2"
+}, {
+"length": "16",
+"method": "&\"clap\"",
+"time": "144",
+"type": "2"
+}, {
+"length": "16",
+"method": "&\"clap\"",
+"time": "176",
+"type": "2"
+}]
+}, {
+"name": "/root/Game/toykit",
+"notes": [{
+"length": "16",
+"method": "&\"look 0\"",
+"time": "0",
+"type": "2"
+}, {
+"length": "16",
+"method": "&\"look 1\"",
+"time": "80",
+"type": "2"
+}, {
+"length": "8",
+"method": "&\"look 2\"",
+"time": "170",
+"type": "2"
 }]
 }, {
 "name": "/root/Game/toykit/seq-1",
@@ -122,49 +160,43 @@
 "value": "1.0"
 }]
 }, {
+"name": "/root/Game/acid",
+"notes": [{
+"length": "16",
+"method": "&\"look\"",
+"time": "192",
+"type": "2"
+}, {
+"length": "16",
+"method": "&\"look 1\"",
+"time": "256",
+"type": "2"
+}, {
+"length": "16",
+"method": "&\"look 2\"",
+"time": "320",
+"type": "2"
+}]
+}, {
 "name": "/root/Game/acid/2",
 "notes": [{
-"from_value": "0.0",
-"length": "64",
-"time": "192",
-"type": "1",
-"value": "1.0"
-}, {
 "auto": "true",
 "length": "4",
 "time": "0",
 "type": "0",
 "value": "0.05"
 }, {
+"from_value": "0.0",
+"length": "64",
+"time": "192",
+"type": "1",
+"value": "1.0"
+}, {
 "from_value": "1.0",
 "length": "64",
 "time": "256",
 "type": "1",
 "value": "0.0"
-}, {
-"from_value": "0.0",
-"length": "64",
-"time": "384",
-"type": "1",
-"value": "1.0"
-}, {
-"auto": "false",
-"length": "8",
-"time": "448",
-"type": "0",
-"value": "0.0"
-}, {
-"auto": "false",
-"length": "8",
-"time": "456",
-"type": "0",
-"value": "1.0"
-}, {
-"auto": "false",
-"length": "8",
-"time": "464",
-"type": "0",
-"value": "0.5"
 }]
 }, {
 "name": "/root/Game/acid/3",
@@ -179,7 +211,7 @@
 "length": "64",
 "time": "320",
 "type": "1",
-"value": "0.01"
+"value": "0.0"
 }]
 }]
 },

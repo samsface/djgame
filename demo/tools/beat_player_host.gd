@@ -32,7 +32,6 @@ func _ready():
 	for clip_id in state_.clips:
 		var bp := preload("beat_player.tscn").instantiate()
 		$TabContainer.add_child(bp)
-		bp.bang.connect(func(method, args): bang.emit(method, args))
 		bp.set_meta("id", clip_id)
 		bp.reload(state_.clips[clip_id])
 

@@ -32,3 +32,9 @@ shape = SubResource("BoxShape3D_psw3l")
 
 [node name="Marker3D" type="Marker3D" parent="Views" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0808042, 0.0617226)
+
+[node name="Marker3D2" type="Marker3D" parent="Views" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00924496, 0.0709294, 0.0617226)
+
+[node name="Marker3D3" type="Marker3D" parent="Views" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0128037, 0.0709294, 0.0617226)

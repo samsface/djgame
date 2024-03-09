@@ -8,6 +8,7 @@ signal value_changed
 
 var tween_:Tween
 var select := "1"
+var current_view_position_:Node3D
 
 func _ready() -> void:
 	await get_tree().process_frame
@@ -15,11 +16,13 @@ func _ready() -> void:
 	if map:
 		for m in map.radios + map.exprs + map.arrays + map.sliders + map.bangs:
 			m.hook(self)
-			#n.impulse.connect(_impulse)
 
 func get_view_position(from_position := Vector3.ZERO) -> Vector3:
-	for view in $Views.get_children():
-		if from_position.distance_to(view.global_position):
-			return view.global_position
+	if not current_view_position_:
+		return Vector3.ZERO
 
-	return from_position
+	return current_view_position_.global_position
+
+func look(view_position_idx:int = 0) -> void:
+	current_view_position_ = $Views.get_child(view_position_idx)
+	Camera.look_at_node(self)

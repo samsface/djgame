@@ -13,6 +13,7 @@ var hovering_
 
 var recording := false
 var recorder
+var guide_service:GuideService
 
 var stack_ := []
 var head_pos_:Vector3

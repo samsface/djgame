@@ -5,8 +5,8 @@ var delta_sum_ := 0.0
 func _ready() -> void:
 	pass
 
-func cheer() -> void:
-	pass
+func clap() -> void:
+	$Clap.play()
 
 func _physics_process(delta: float) -> void:
 	delta_sum_ += delta

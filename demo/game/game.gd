@@ -9,13 +9,8 @@ var patch_file_handle_ := PDPatchFile.new()
 var tween_:Tween
 
 func _ready() -> void:
-	beat_player_.bang.connect(_beat_player_bang)
-	
-	$Recorder.play.connect(func():
-		create_tween().tween_property($CrowdService/Chatter, "volume_db", linear_to_db(0.25), 5.0)
-		$CrowdService/Clap.play()
-		)
-	
+	Camera.guide_service = $Guides
+
 	$WorldEnvironment.camera_attributes.dof_blur_far_enabled = true
 	
 	VerletPhysicsServer.height_map = $HeightMapGenerator.data
@@ -24,10 +19,6 @@ func _ready() -> void:
 
 	Engine.max_fps = 144
 
-	#Camera.set_head_position($acid.get_view_position())
-
-	#Camera.smooth_look_at($toykit)
-	
 	var p = ProjectSettings.globalize_path("res://junk/xxx.pd")
 
 	if not patch_file_handle_.open(p):
@@ -41,10 +32,6 @@ func _ready() -> void:
 	for child in get_children():
 		if child is Device:
 			child.value_changed.connect(_device_nob_value_changed)
-
-func _beat_player_bang(method:StringName, args:Array) -> void:
-	if has_method(method):
-		callv(method, args)
 
 var i_ = 0
 
@@ -68,7 +55,7 @@ func _input(event: InputEvent) -> void:
 	elif Input.is_action_just_pressed("play"):
 		play_()
 
-func play__(node_path, length) -> void:
+func play__() -> void:
 	PureData.send_bang("r-PLAY")
 
 func play_() -> void:
@@ -83,40 +70,7 @@ func play_() -> void:
 	else:
 		beat_player_.play()
 
-func slide(nob_path:NodePath, length:float, from_value:float, to_value:float):
-	var nob := get_node_or_null(nob_path)
-	if not nob:
-		return
 
-	Camera.cursor.try_set_position(nob, global_position + Vector3.UP * 0.002)
-	Camera.look_at_node(nob.get_parent())
-
-	var pos = nob.get_guide_position_for_value(from_value)
-	var d = preload("res://game/guide/slide/slide.tscn").instantiate()
-	d.points_service = $PointsService
-	d.position = pos
-	d.watch(nob, from_value, to_value, length)
-
-	guides_.add_child(d)
-
-func bang(nob_path:NodePath, length:float, value:float, auto:bool):
-	var nob := get_node_or_null(nob_path)
-	if not nob:
-		return
-
-	Camera.cursor.try_set_position(nob, global_position + Vector3.UP * 0.002)
-	Camera.look_at_node(nob.get_parent())
-
-	var pos = nob.get_guide_position_for_value(value)
-	var d = preload("res://game/guide/bang/bang.tscn").instantiate()
-	d.auto = auto
-	d.points_service = $PointsService 
-	d.position = pos
-	d.length = length
-	d.watch(nob, value)
-	nob.intended_value = value
-
-	guides_.add_child(d)
 
 func wait(node_path:NodePath) -> void:
 	pass
@@ -142,3 +96,6 @@ func _device_nob_value_changed(nob:Nob, new_value:float, old_value:float) -> voi
 
 func meta(array:Array = []) -> void:
 	pass
+
+func clap() -> void:
+	$CrowdService.clap()

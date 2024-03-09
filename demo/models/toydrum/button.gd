@@ -59,8 +59,7 @@ func pressed() -> void:
 	
 	Camera.cursor.push(self, Cursor.Action.grab)
 	Camera.cursor.try_set_position(self, global_position + Vector3.UP * 0.002)
-	Camera.look_at_node(self.get_parent())
-	#Camera.set_head_position(self.get_parent().get_view_position())
+	#Camera.look_at_node(self.get_parent())
 
 func released() -> void:
 	if not down_:
