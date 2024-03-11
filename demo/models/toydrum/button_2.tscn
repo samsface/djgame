@@ -7,12 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://cd1vuyb8210hn" path="res://models/toydrum/button2_ao_map.png" id="6_mtigs"]
 [ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="7_12w07"]
 
-[sub_resource type="Gradient" id="Gradient_h4wjr"]
+[sub_resource type="Gradient" id="Gradient_bnxpm"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_ygpid"]
-gradient = SubResource("Gradient_h4wjr")
-width = 1
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nm0bt"]
+gradient = SubResource("Gradient_bnxpm")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dyr0b"]
 render_priority = 0
@@ -26,7 +25,7 @@ shader_parameter/ambient_occlusion = 1.0
 shader_parameter/metalic = 0.5
 shader_parameter/edge_color = Color(0.921569, 0, 0.466667, 0.792157)
 shader_parameter/map = ExtResource("6_mtigs")
-shader_parameter/emission_map = SubResource("GradientTexture1D_ygpid")
+shader_parameter/emission_map = SubResource("GradientTexture1D_nm0bt")
 shader_parameter/smudges = ExtResource("7_12w07")
 
 [node name="button2" instance=ExtResource("1_77mno")]
@@ -34,4 +33,5 @@ script = ExtResource("2_wtdvo")
 
 [node name="Button2" parent="." index="0"]
 instance_shader_parameters/electric_albedo = Color(0, 1, 0, 0)
+instance_shader_parameters/emission_scale = 0.0
 surface_material_override/0 = SubResource("ShaderMaterial_dyr0b")

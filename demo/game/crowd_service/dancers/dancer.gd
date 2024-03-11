@@ -3,7 +3,6 @@ extends Node3D
 @onready var body_ = $CSGSphere3D
 
 func _ready() -> void:
-	Camera.recorder.play.connect(dance_1)
 	$CSGSphere3D.material.set_shader_parameter("albedo", HyperRandom.fruity_color())
 	
 

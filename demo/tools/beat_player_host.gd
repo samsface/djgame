@@ -1,8 +1,8 @@
 extends VBoxContainer
 
-signal bang
+@export var save_path:String
 
-var state_
+var state_ = { clips = {} }
 var beat_player_
 var current_clip_
 
@@ -16,8 +16,11 @@ func stop():
 	playing = false
 	$TabContainer.get_current_tab_control().stop()
 
+func get_save_file_path_() -> String:
+	return save_path
+
 func _ready():
-	var file := FileAccess.open("res://junk/beat.bp", FileAccess.READ)
+	var file := FileAccess.open(get_save_file_path_(), FileAccess.READ)
 	if not file:
 		return
 
@@ -43,12 +46,11 @@ func _new_pressed():
 	state_.clips[new_clip_id] = { time_range = Vector2i(0, 16), tracks = [] }
 	var bp := preload("beat_player.tscn").instantiate()
 	$TabContainer.add_child(bp)
-	bp.bang.connect(func(method, args): bang.emit(method, args))
 	bp.set_meta("id", new_clip_id)
 	bp.reload(state_.clips[new_clip_id])
 
 func _save_pressed():
-	var file := FileAccess.open("res://junk/beat.bp", FileAccess.WRITE)
+	var file := FileAccess.open(get_save_file_path_(), FileAccess.WRITE)
 	
 	for clip in $TabContainer.get_children():
 		state_.clips[clip.get_meta("id")] = clip.get_state()

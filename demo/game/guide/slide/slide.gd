@@ -93,6 +93,7 @@ func get_nob() -> Nob:
 
 func _done() -> void:
 	$arrow/Particles.emitting = false
+	nob_.electric = Color.TRANSPARENT
 
 	hit_ = true
 
@@ -105,5 +106,5 @@ func _done() -> void:
 	queue_free()
 
 func _exit_tree() -> void:
-	nob_.electric = Color.TRANSPARENT
+	#nob_.electric = Color.TRANSPARENT
 	points_.queue_free()

@@ -58,7 +58,7 @@
 #X msg 139 199 0;
 #X msg 193 215 1;
 #X obj 334 827 redux;
-#X obj 603 721 hsl 128 15 64 3 0 0 s-acid-redux r-acid-redux empty
+#X obj 609 697 hsl 128 15 32 4 0 0 s-acid-redux r-acid-redux empty
 -2 -8 0 10 #fcfcfc #000000 #000000 0 1;
 #X connect 1 0 6 0;
 #X connect 1 0 30 0;

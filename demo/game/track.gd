@@ -18,9 +18,7 @@ func _ready() -> void:
 	PureData.bang.connect(_bang)
 	
 	await get_tree().process_frame
-	
-	animation_player_ = $AnimationPlayer
-	animation_player_.play("test/scene2")
+
 
 	max_time_ = get_last_data_time()
 

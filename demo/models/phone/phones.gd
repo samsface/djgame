@@ -1,4 +1,4 @@
-extends Node3D
+extends Device
 
 var mouse_entered_ := false
 
@@ -44,6 +44,3 @@ func vibrate() -> void:
 		j *= 0.025
 		var d = 1.0 if i % 2 == 0 else -1.0
 		tween.tween_property($Phone, "position:x", j * d, 0.02)
-
-func get_view_position(from_position := Vector3.ZERO) -> Vector3:
-	return $Head.global_position

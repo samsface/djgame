@@ -103,6 +103,9 @@ func _table_item_button_down(item):
 	elif w.x < 0:
 		resize_west_begin_()
 		
+	time_ = item.position.x / grid_size
+	cursor.position.x = item.position.x
+		
 	selection_changed.emit([item])
 
 func _table_item_button_up(item):

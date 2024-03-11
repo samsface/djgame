@@ -10,4 +10,5 @@ script = ExtResource("2_sw36p")
 [node name="Fader" parent="." index="0"]
 instance_shader_parameters/electric_albedo = Color(0, 0, 0, 0)
 instance_shader_parameters/emission_scale = 0.0
+instance_shader_parameters/rand = 0.0
 surface_material_override/0 = ExtResource("3_hcw2f")

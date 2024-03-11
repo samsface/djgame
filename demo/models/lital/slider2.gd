@@ -33,6 +33,11 @@ var mouse_over_ := false
 @onready var path_follow_ = $Path3D/PathFollow3D
 @onready var shadow_path_follow_ = $Path3D/PathFollow3D2
 
+
+@onready var path_follow = $Path/PathFollow
+@onready var remote_transform = $Path/PathFollow/RemoteTransform
+
+
 func _ready() -> void:
 	set_process_input(false)
 	value = randf()
@@ -62,9 +67,7 @@ func _physics_process(delta: float) -> void:
 		var new_value = value - diff
 
 		value = clamp(new_value, 0.00, 1.0)
-		
-		Camera.recorder.capture(self)
-		
+
 		Camera.cursor.try_set_position(self, $Nob.global_position)
 
 		if abs(diff) > 0.1:

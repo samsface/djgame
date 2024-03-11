@@ -1,0 +1,178 @@
+[gd_scene load_steps=18 format=3 uid="uid://c6tysa1ynd8ph"]
+
+[ext_resource type="Script" path="res://game/game.gd" id="1_oven2"]
+[ext_resource type="CameraAttributesPractical" uid="uid://ev1eo0cru0we" path="res://game/cameraatr.tres" id="2_gl63k"]
+[ext_resource type="Script" path="res://game/points_service/PointsService.gd" id="3_x5nm2"]
+[ext_resource type="Shader" path="res://game/points_service/damage.gdshader" id="4_m0pjb"]
+[ext_resource type="FontFile" uid="uid://ca4jgypv8bjcn" path="res://ui/fonts/RetroGaming.ttf" id="5_tlrlm"]
+[ext_resource type="Script" path="res://game/points_service/score.gd" id="6_3q4nq"]
+[ext_resource type="PackedScene" uid="uid://bl7d8jwotcuws" path="res://models/phone/phone.tscn" id="7_3n0u3"]
+[ext_resource type="Script" path="res://game/animation.gd" id="9_vwu5x"]
+[ext_resource type="PackedScene" uid="uid://lb3oq22iphka" path="res://tools/beat_player_host.tscn" id="10_rvaid"]
+[ext_resource type="Texture2D" uid="uid://48p1jkwhm4wh" path="res://models/club/samm0363_texture_of_a_bar_table_with_stains_and_wear_tile_5a36bd34-3c9c-4c2b-a62c-8adabec8fccf.png" id="11_5tiql"]
+[ext_resource type="Script" path="res://game/GuidesService.gd" id="14_afyj4"]
+[ext_resource type="Script" path="res://game/crowd_service/crowd_service.gd" id="15_h2jxo"]
+
+[sub_resource type="Gradient" id="Gradient_655s4"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sgggg"]
+gradient = SubResource("Gradient_655s4")
+
+[sub_resource type="Environment" id="Environment_8y6op"]
+background_mode = 2
+ssr_enabled = true
+ssao_enabled = true
+ssao_radius = 0.01
+ssao_intensity = 16.0
+ssao_detail = 5.0
+ssao_horizon = 0.0
+ssao_light_affect = 1.0
+ssao_ao_channel_affect = 0.7
+ssil_enabled = true
+ssil_radius = 0.3
+ssil_intensity = 8.92
+ssil_sharpness = 1.0
+ssil_normal_rejection = 0.55
+sdfgi_use_occlusion = true
+sdfgi_bounce_feedback = 1.99
+glow_enabled = true
+fog_enabled = true
+volumetric_fog_enabled = true
+adjustment_enabled = true
+adjustment_color_correction = SubResource("GradientTexture1D_sgggg")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2qps5"]
+shader = ExtResource("4_m0pjb")
+shader_parameter/damage = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_inoyg"]
+albedo_color = Color(0.235294, 0.235294, 0.235294, 1)
+albedo_texture = ExtResource("11_5tiql")
+metallic = 0.84
+metallic_specular = 0.28
+roughness = 0.42
+normal_scale = 0.05
+normal_texture = ExtResource("11_5tiql")
+rim_tint = 1.0
+clearcoat_roughness = 0.0
+anisotropy = -1.0
+ao_light_affect = 1.0
+heightmap_scale = 1.0
+subsurf_scatter_strength = 0.3
+uv1_scale = Vector3(2, 2, 2)
+uv1_offset = Vector3(-0.1305, 0, 0)
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_oven2")
+metadata/_edit_lock_ = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8y6op")
+camera_attributes = ExtResource("2_gl63k")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.128796, -0.863107, 0.488322, 0, 0.492424, 0.870356, -0.991671, -0.112098, 0.0634222, 0, 0.26248, 0.363653)
+light_energy = 0.1
+light_angular_distance = 3.13
+shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_split_1 = 0.0
+directional_shadow_split_2 = 0.117
+directional_shadow_split_3 = 1.0
+directional_shadow_blend_splits = true
+directional_shadow_fade_start = 0.0
+directional_shadow_max_distance = 0.9
+directional_shadow_pancake_size = 0.1
+
+[node name="PointsService" type="Node3D" parent="."]
+script = ExtResource("3_x5nm2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="PointsService"]
+layer = 3
+
+[node name="ColorRect" type="ColorRect" parent="PointsService/CanvasLayer"]
+material = SubResource("ShaderMaterial_2qps5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PointsService/CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -231.0
+offset_top = -81.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Score" type="Label" parent="PointsService/CanvasLayer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("5_tlrlm")
+theme_override_font_sizes/font_size = 64
+text = "123 pts"
+script = ExtResource("6_3q4nq")
+
+[node name="phone" parent="." instance=ExtResource("7_3n0u3")]
+transform = Transform3D(0.985608, -0.0441258, -0.163185, 0.00661074, 0.974654, -0.223622, 0.168916, 0.219325, 0.960918, 0.0735189, 0.00980824, 0.129406)
+
+[node name="Guides" type="Node3D" parent="."]
+script = ExtResource("14_afyj4")
+
+[node name="CrowdService" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.16311)
+script = ExtResource("15_h2jxo")
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0617377, 0.160684, 0.0738555)
+light_color = Color(0.823529, 0.705882, 0.694118, 1)
+light_size = 0.003
+omni_range = 0.188
+
+[node name="Recorder" type="Node" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Recorder"]
+layer = 3
+script = ExtResource("9_vwu5x")
+
+[node name="VSplitContainer" type="VSplitContainer" parent="Recorder/CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/autohide = 0
+split_offset = 50000
+
+[node name="ColorRect" type="ColorRect" parent="Recorder/CanvasLayer/VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="BeatPlayerHost" parent="Recorder/CanvasLayer/VSplitContainer" instance=ExtResource("10_rvaid")]
+unique_name_in_owner = true
+layout_mode = 2
+save_path = "res://junk/sam.bp"
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.499829, 0.377878)
+visible = false
+use_collision = true
+collision_layer = 8
+collision_mask = 0
+size = Vector3(100, 1, 100)
+material = SubResource("StandardMaterial3D_inoyg")

@@ -29,6 +29,9 @@ var electric:Color = Color.TRANSPARENT :
 		electric = v
 		$Nob/Model/Button.electric = v
 
+@onready var path_follow = $Path/PathFollow
+@onready var remote_transform = $Path/PathFollow/RemoteTransform
+
 func _ready() -> void:
 	set_process_input(false)
 

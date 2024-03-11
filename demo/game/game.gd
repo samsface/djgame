@@ -13,9 +13,9 @@ func _ready() -> void:
 
 	$WorldEnvironment.camera_attributes.dof_blur_far_enabled = true
 	
-	VerletPhysicsServer.height_map = $HeightMapGenerator.data
-	VerletPhysicsServer.height_map_origin = $HeightMapGenerator.global_position
-	VerletPhysicsServer.height_map_width = $HeightMapGenerator.size
+	#VerletPhysicsServer.height_map = $HeightMapGenerator.data
+	#VerletPhysicsServer.height_map_origin = $HeightMapGenerator.global_position
+	#VerletPhysicsServer.height_map_width = $HeightMapGenerator.size
 
 	Engine.max_fps = 144
 

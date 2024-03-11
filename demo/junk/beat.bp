@@ -47,13 +47,27 @@
 "method": "&\"look 2\"",
 "time": "170",
 "type": "2"
+}, {
+"length": "16",
+"method": "&\"look\"",
+"time": "384",
+"type": "2"
+}]
+}, {
+"name": "/root/Game/toykit/preset-rock",
+"notes": [{
+"auto": "false",
+"length": "16",
+"time": "384",
+"type": "0",
+"value": "1.0"
 }]
 }, {
 "name": "/root/Game/toykit/seq-1",
 "notes": [{
 "auto": "false",
-"length": "15",
-"time": "1",
+"length": "16",
+"time": "0",
 "type": "0",
 "value": "1.0"
 }]
@@ -104,6 +118,12 @@
 "time": "114",
 "type": "0",
 "value": "1.0"
+}, {
+"auto": "true",
+"length": "4",
+"time": "380",
+"type": "0",
+"value": "0.0"
 }]
 }, {
 "name": "/root/Game/toykit/seq-7",
@@ -113,6 +133,12 @@
 "time": "134",
 "type": "0",
 "value": "1.0"
+}, {
+"auto": "true",
+"length": "4",
+"time": "380",
+"type": "0",
+"value": "0.0"
 }]
 }, {
 "name": "/root/Game/toykit/seq-11",
@@ -122,6 +148,12 @@
 "time": "154",
 "type": "0",
 "value": "1.0"
+}, {
+"auto": "true",
+"length": "4",
+"time": "380",
+"type": "0",
+"value": "0.0"
 }]
 }, {
 "name": "/root/Game/toykit/seq-15",
@@ -131,6 +163,12 @@
 "time": "174",
 "type": "0",
 "value": "1.0"
+}, {
+"auto": "true",
+"length": "4",
+"time": "380",
+"type": "0",
+"value": "0.0"
 }]
 }, {
 "name": "/root/Game/toykit/seq-16",
@@ -140,6 +178,12 @@
 "time": "174",
 "type": "0",
 "value": "1.0"
+}, {
+"auto": "true",
+"length": "4",
+"time": "380",
+"type": "0",
+"value": "0.0"
 }]
 }, {
 "name": "/root/Game/toykit/select-clap",
@@ -176,6 +220,11 @@
 "method": "&\"look 2\"",
 "time": "320",
 "type": "2"
+}, {
+"length": "16",
+"method": "&\"look 1\"",
+"time": "400",
+"type": "2"
 }]
 }, {
 "name": "/root/Game/acid/2",
@@ -197,6 +246,12 @@
 "time": "256",
 "type": "1",
 "value": "0.0"
+}, {
+"from_value": "0.0",
+"length": "64",
+"time": "400",
+"type": "1",
+"value": "1.0"
 }]
 }, {
 "name": "/root/Game/acid/3",
@@ -217,7 +272,24 @@
 },
 1806420329: {
 "time_range": Vector2i(0, 16),
-"tracks": []
+"tracks": [{
+"name": "/root/Game/phone",
+"notes": [{
+"length": "16",
+"method": "&\"look\"",
+"time": "0",
+"type": "2"
+}]
+}, {
+"name": "/root/Game/phone/0",
+"notes": [{
+"auto": "false",
+"length": "16",
+"time": "0",
+"type": "0",
+"value": "1.0"
+}]
+}]
 }
 }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bvxsm2x52fp42"]
+[gd_scene load_steps=15 format=3 uid="uid://bvxsm2x52fp42"]
 
 [ext_resource type="Script" path="res://models/lital/slider2.gd" id="1_cglxd"]
 [ext_resource type="PackedScene" uid="uid://dwp3tnmuhyvep" path="res://models/shared/nobs/fader.tscn" id="2_ord32"]
@@ -54,6 +54,14 @@ albedo_color = Color(0, 0, 0, 1)
 bake_interval = 0.01
 _data = {
 "points": PackedVector3Array(0, 0, -0.02, 0, 0, 0.02, 0, 0, 0.02, 0, 0, -0.02, 0, 0, 0.02, 0, 0, -0.02),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_y63d2"]
+bake_interval = 0.01
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -117,3 +125,16 @@ tilt_enabled = false
 
 [node name="Top" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00569686, 0)
+
+[node name="Path" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+curve = SubResource("Curve3D_y63d2")
+
+[node name="PathFollow" type="PathFollow3D" parent="Path"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.1, 0)
+use_model_front = true
+loop = false
+
+[node name="RemoteTransform" type="RemoteTransform3D" parent="Path/PathFollow"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+update_scale = false
