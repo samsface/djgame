@@ -134,6 +134,7 @@ func wait_then_free_() -> void:
 	end_tween.tween_property(nob_, "electric", ec, 0.1)
 	end_tween.tween_property(nob_, "electric", eca, 0.1).set_delay(0.1)
 
+	nob_.remote_transform.remote_path = NodePath()
 	$Arrow___/Arrow_/Particles.emitting = false
 	end_tween.tween_interval(0.8).finished.connect(queue_free)
 
