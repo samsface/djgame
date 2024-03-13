@@ -43,7 +43,7 @@ func no_touch() -> void:
 func commit():
 	var tween := create_tween()
 	tween.set_trans(Tween.TRANS_QUAD)
-	tween.tween_property(self, "scale", Vector3.ONE * 1.5, 0.1)
-	tween.tween_property(self, "scale", Vector3.ONE, 0.1)
+	tween.tween_property(self, "scale", scale * 1.5, 0.1)
+	tween.tween_property(self, "scale", scale, 0.1)
 	get_parent().combo += 1
 	get_parent().points += points_ * get_parent().combo

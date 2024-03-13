@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://c23pskns2q5d1"]
+
+[ext_resource type="Script" path="res://models/phone/nob.gd" id="1_qaq8g"]
+
+[sub_resource type="Curve3D" id="Curve3D_y3bud"]
+bake_interval = 0.01
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[node name="0" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0211966, -9.78545e-05, -0.0237682)
+script = ExtResource("1_qaq8g")
+scale_guide = 0.35
+
+[node name="Path" type="Path3D" parent="."]
+curve = SubResource("Curve3D_y3bud")
+
+[node name="PathFollow" type="PathFollow3D" parent="Path"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.1, 0, 0)
+loop = false
+
+[node name="RemoteTransform" type="RemoteTransform3D" parent="Path/PathFollow"]
+update_scale = false

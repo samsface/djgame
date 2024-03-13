@@ -29,8 +29,8 @@ left_aligned = true
 
 [node name="bubble" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_right = 272.0
-offset_bottom = 359.0
+offset_right = 223.0
+offset_bottom = 48.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_xn84k")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="bubble"]
@@ -40,6 +40,7 @@ theme_override_constants/separation = 0
 
 [node name="Image" type="TextureRect" parent="bubble/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_horizontal = 4

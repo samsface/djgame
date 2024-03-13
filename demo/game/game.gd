@@ -17,7 +17,6 @@ func _ready() -> void:
 	#VerletPhysicsServer.height_map_origin = $HeightMapGenerator.global_position
 	#VerletPhysicsServer.height_map_width = $HeightMapGenerator.size
 
-	Engine.max_fps = 144
 
 	var p = ProjectSettings.globalize_path("res://junk/xxx.pd")
 

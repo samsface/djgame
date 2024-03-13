@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://ytf0hlccw1ia"]
+[gd_scene load_steps=6 format=3 uid="uid://ytf0hlccw1ia"]
 
 [ext_resource type="Script" path="res://models/phone/chat.gd" id="1_7l83e"]
+[ext_resource type="Script" path="res://models/phone/phone_chat.gd" id="2_ph844"]
 [ext_resource type="Theme" uid="uid://dpxg4eclat4vv" path="res://models/phone/default_theme.tres" id="3_c7dsc"]
 [ext_resource type="Texture2D" uid="uid://bay42xckqhybc" path="res://icon.svg" id="4_v2jhf"]
+
+[sub_resource type="Resource" id="Resource_34r06"]
+script = ExtResource("2_ph844")
+contact_name = ""
+messages = Array[Resource("res://models/phone/PhoneChatMessage.gd")]([])
+unread_count = 0
+status = "online"
 
 [node name="Chat" type="MarginContainer"]
 custom_minimum_size = Vector2(389, 0)
@@ -13,6 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_7l83e")
+chat = SubResource("Resource_34r06")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 2
@@ -102,70 +111,22 @@ size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 10
 
-[node name="ColorRect2" type="ColorRect" parent="MarginContainer2"]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
-
-[node name="Replies" type="GridContainer" parent="MarginContainer2"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-mouse_filter = 2
-columns = 3
-
-[node name="s" type="Button" parent="MarginContainer2/Replies"]
-custom_minimum_size = Vector2(127, 46)
-layout_mode = 2
-theme = ExtResource("3_c7dsc")
-flat = true
-
-[node name="ColorRect" type="ColorRect" parent="MarginContainer2/Replies/s"]
-custom_minimum_size = Vector2(1, 0)
-layout_mode = 0
-offset_left = 125.0
-offset_top = 10.0
-offset_right = 126.0
-offset_bottom = 40.0
-color = Color(1, 1, 1, 0.254902)
-
-[node name="Button2" type="Button" parent="MarginContainer2/Replies"]
-custom_minimum_size = Vector2(127, 46)
-layout_mode = 2
-theme = ExtResource("3_c7dsc")
-flat = true
-
-[node name="ColorRect2" type="ColorRect" parent="MarginContainer2/Replies/Button2"]
-custom_minimum_size = Vector2(1, 0)
-layout_mode = 0
-offset_left = 140.0
-offset_top = 10.0
-offset_right = 141.0
-offset_bottom = 40.0
-color = Color(1, 1, 1, 0.254902)
-
-[node name="Button3" type="Button" parent="MarginContainer2/Replies"]
-custom_minimum_size = Vector2(127, 46)
-layout_mode = 2
-theme = ExtResource("3_c7dsc")
-flat = true
-
-[node name="TextEdit" type="LineEdit" parent="MarginContainer2"]
+[node name="Replies" type="HBoxContainer" parent="MarginContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 8
-max_length = 30
 
-[node name="Send" type="Button" parent="MarginContainer2"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(48, 0)
+[node name="Panel" type="Button" parent="MarginContainer2/Replies"]
 layout_mode = 2
-size_flags_horizontal = 8
-text = "Send"
+size_flags_horizontal = 3
+text = "REPLY"
+
+[node name="Panel2" type="Button" parent="MarginContainer2/Replies"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "REPLY"
 
 [connection signal="pressed" from="VBoxContainer/ColorRect/Button" to="." method="_back_pressed"]
-[connection signal="text_submitted" from="MarginContainer2/TextEdit" to="." method="_text_submitted"]

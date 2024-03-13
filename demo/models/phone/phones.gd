@@ -8,33 +8,50 @@ func _mouse_entered() -> void:
 func _mouse_exited() -> void:
 	mouse_entered_ = false
 
+func click(pos:Vector3) -> void:
+	pos = $StaticBody3D.to_local(pos)
+	
+	var e := InputEventMouseButton.new()
+	e.button_index = MOUSE_BUTTON_LEFT
+	e.pressed = true
+	e.button_mask = 1
+	e.position.x = pos.x
+	e.position.y = pos.z
+	e.global_position = e.position
+	e.device = 444
+
+	Input.parse_input_event(e)
+
+	var e2 := e.duplicate()
+	e2.pressed = false
+	e2.button_mask = 0
+
+	Input.parse_input_event(e2)
+
 func _input(event) -> void:
-	if not mouse_entered_:
+	var automated = event.device == 444
+	
+	if not automated and not mouse_entered_:
 		return
 
 	if event.is_action("click"):
-		var p = $StaticBody3D.to_local(Camera.cursor.position) + Vector3(0.25, 0.0, 0.5)
+		var p
+		if automated:
+			p = event.position
+		else:
+			p = $StaticBody3D.to_local(Camera.cursor.position)
+			p = Vector2(p.x, p.z)
+
+		p += Vector2(0.25, 0.5)
 
 		var e = event.duplicate()
-		e.position = Vector2(p.x, p.z)
+		e.position = p
 		e.position.x *= $SubViewport.size.x * 2.0
 		e.position.y *= $SubViewport.size.y
 		e.global_position = event.position
+
 		$SubViewport.push_input(e, false)
 
-		Camera.look_at_node(self)
-		#Camera.set_head_position($Head.global_position)
-
-func _input_event(camera: Node, event: InputEvent, position: Vector3, normal: Vector3, shape_idx: int) -> void:
-	if event is InputEventMouseButton:
-		var p = $StaticBody3D.to_local(position) + Vector3(0.25, 0.0, 0.5)
-
-		event.position = Vector2(p.x, p.z)
-		event.position.x *= $SubViewport.size.x * 2.0
-		event.position.y *= $SubViewport.size.y
-
-		$SubViewport.push_input(event, false)
-		
 func vibrate() -> void:
 	var its := 20
 	
@@ -44,3 +61,6 @@ func vibrate() -> void:
 		j *= 0.025
 		var d = 1.0 if i % 2 == 0 else -1.0
 		tween.tween_property($Phone, "position:x", j * d, 0.02)
+
+func dialog(length:float, who:String, value:String) -> void:
+	pass

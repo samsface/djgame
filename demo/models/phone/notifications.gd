@@ -3,7 +3,7 @@ extends Control
 var last_notification_
 
 func show_notification(message:PhoneChatMessage, chat:PhoneChat) -> void:
-	get_parent().get_parent().get_parent().vibrate()
+	#get_parent().get_parent().get_parent().vibrate()
 	
 	var chat_notification := preload("res://models/phone/chat_notification.tscn").instantiate()
 	chat_notification.message = message.message

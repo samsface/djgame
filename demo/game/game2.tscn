@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c6tysa1ynd8ph"]
+[gd_scene load_steps=19 format=3 uid="uid://c6tysa1ynd8ph"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_oven2"]
 [ext_resource type="CameraAttributesPractical" uid="uid://ev1eo0cru0we" path="res://game/cameraatr.tres" id="2_gl63k"]
@@ -46,6 +46,23 @@ shader = ExtResource("4_m0pjb")
 shader_parameter/damage = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_inoyg"]
+albedo_color = Color(0.235294, 0.235294, 0.235294, 1)
+albedo_texture = ExtResource("11_5tiql")
+metallic = 0.84
+metallic_specular = 0.28
+roughness = 0.42
+normal_scale = 0.05
+normal_texture = ExtResource("11_5tiql")
+rim_tint = 1.0
+clearcoat_roughness = 0.0
+anisotropy = -1.0
+ao_light_affect = 1.0
+heightmap_scale = 1.0
+subsurf_scatter_strength = 0.3
+uv1_scale = Vector3(2, 2, 2)
+uv1_offset = Vector3(-0.1305, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4bawq"]
 albedo_color = Color(0.235294, 0.235294, 0.235294, 1)
 albedo_texture = ExtResource("11_5tiql")
 metallic = 0.84
@@ -137,7 +154,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.16311)
 script = ExtResource("15_h2jxo")
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0617377, 0.160684, 0.0738555)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0617377, 0.101768, 0.151411)
 light_color = Color(0.823529, 0.705882, 0.694118, 1)
 light_size = 0.003
 omni_range = 0.188
@@ -176,3 +193,9 @@ collision_layer = 8
 collision_mask = 0
 size = Vector3(100, 1, 100)
 material = SubResource("StandardMaterial3D_inoyg")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.501325, 0)
+collision_layer = 8
+collision_mask = 8
+material = SubResource("StandardMaterial3D_4bawq")

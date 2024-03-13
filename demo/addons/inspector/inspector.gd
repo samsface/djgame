@@ -49,6 +49,8 @@ func invalidate_() -> void:
 					control = add_int_control_(property)
 			TYPE_FLOAT:
 				control = add_float_control_(property)
+			TYPE_STRING:
+				control = add_string_control_(property)
 			TYPE_STRING_NAME:
 				control = add_string_control_(property)
 			TYPE_BOOL:

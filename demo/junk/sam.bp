@@ -1,29 +1,42 @@
 {
 "clips": {
 703323318: {
-"time_range": Vector2i(0, 32),
+"time_range": Vector2i(0, 128),
 "tracks": [{
 "name": "/root/Game/phone",
 "notes": [{
-"length": "16",
-"method": "&\"look\"",
+"length": "32",
 "time": "0",
-"type": "2"
+"type": "3",
+"value": "\"Hey what's up?\"",
+"who": "\"Giada\""
 }]
 }, {
 "name": "/root/Game/phone/0",
 "notes": [{
 "auto": "false",
-"length": "16",
+"length": "32",
 "time": "0",
 "type": "0",
 "value": "1.0"
+}]
 }, {
+"name": "/root/Game/phone/ReplyA",
+"notes": [{
 "auto": "false",
-"length": "16",
-"time": "16",
+"length": "64",
+"time": "32",
 "type": "0",
-"value": "0.0"
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/phone/ReplyB",
+"notes": [{
+"auto": "false",
+"length": "64",
+"time": "32",
+"type": "0",
+"value": "1.0"
 }]
 }]
 }

@@ -11,7 +11,7 @@ var playing
 func play():
 	playing = true
 	$TabContainer.get_current_tab_control().play()
-	
+
 func stop():
 	playing = false
 	$TabContainer.get_current_tab_control().stop()
@@ -59,3 +59,8 @@ func _save_pressed():
 
 func _stop_pressed():
 	stop()
+
+func jump(scene) -> void:
+	stop()
+	$TabContainer.current_tab = scene
+	play()

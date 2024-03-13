@@ -10,8 +10,6 @@ extends MarginContainer
 var chat_
 
 func _contact_pressed(chat:PhoneChat) -> void:
-	print(get_global_mouse_position())
-	
 	if chat_:
 		chat_.queue_free()
 		chat_.get_parent().remove_child(chat_)

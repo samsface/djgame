@@ -1,5 +1,7 @@
 extends Control
 
+signal finished
+
 var undo_ = UndoRedo.new()
 
 var playing := false
@@ -17,6 +19,7 @@ func _ready():
 	%PianoRoll.bang.connect(_piano_roll_bang)
 	%PianoRoll.selection_changed.connect(_piano_roll_selection_changed)
 	%PianoRoll.row_mouse_entered.connect(func(row_index:int):
+		return
 		print(row_index)
 		if hover_tween_:
 			hover_tween_.kill()
@@ -28,12 +31,16 @@ func _ready():
 			hover_tween_.tween_property(n, "visible", true, 0.3)
 	)
 	%PianoRoll.row_mouse_exited.connect(func(row_index:int):
+		return
 		print(row_index)
 		if hover_tween_:
 			hover_tween_.kill()
 		var n = get_node_or_null(%TrackNames.get_track_node_path(row_index))
 		if n:
 			n.visible = true
+	)
+	%PianoRoll.finished.connect(func():
+		finished.emit()
 	)
 
 func _input(event:InputEvent) -> void:
@@ -53,6 +60,9 @@ func _piano_roll_bang(item:Control, idx:int) -> void:
 		args.push_back($Virtual2.length / %PianoRoll.tempo)
 	elif $Virtual2.type == 1:
 		method = &"slide" 
+		args.push_back($Virtual2.length / %PianoRoll.tempo)
+	elif $Virtual2.type == 3:
+		method = &"dialog" 
 		args.push_back($Virtual2.length / %PianoRoll.tempo)
 	else:
 		var method_args_generic = item.get("method").split(" ")
@@ -138,6 +148,8 @@ func reload(dict:Dictionary) -> void:
 				n = preload("slide.tscn").instantiate()
 			elif int(note.type) == 2:
 				n = preload("method.tscn").instantiate()
+			elif int(note.type) == 3:
+				n = preload("dialog.tscn").instantiate()
 
 			$Virtual.node = n
 			var grid_size = %PianoRoll.grid_size
@@ -169,6 +181,8 @@ func change_type_(node, new_type:int) -> void:
 		n = preload("res://tools/slide.tscn").instantiate()
 	elif int(new_type) == 2:
 		n = preload("res://tools/method.tscn").instantiate()
+	elif int(new_type) == 3:
+		n = preload("res://tools/dialog.tscn").instantiate()
 	
 	%PianoRoll.add_item(n, row_idx)
 

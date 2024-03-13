@@ -14,7 +14,8 @@ var grid_size :
 enum Type {
 	bang,
 	slide,
-	method
+	method,
+	dialog
 }
 
 @export var type:Type : 

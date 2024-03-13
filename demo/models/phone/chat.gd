@@ -32,7 +32,7 @@ func _ready():
 	await get_tree().create_timer(0.1).timeout
 	
 	#input_.grab_focus()
-	get_node("%Send").pressed.connect(_send_pressed)
+	#get_node("%Send").pressed.connect(_send_pressed)
 	
 	%ScrollContainer.custom_minimum_size.y = 200
 
@@ -54,14 +54,11 @@ func add_message_(message:PhoneChatMessage, animate := false, show_replies := fa
 	if clear_replies_on_reply_:
 		pass
 	
-	if show_replies and false:
+	if show_replies:
 		await x.finished
-		
-		var i = 0
-		for reply in message.replies:
-			replies_.get_child(i).disabled = false
-			replies_.get_child(i).text = "(%d) %s" % [i+1, reply]
-			i += 1
+
+		for i in message.replies.size():
+			replies_.get_child(i).text = message.replies[i]
 
 func scroll_to_bottom_() -> void:
 	#await get_tree().process_frame
@@ -74,7 +71,6 @@ func _new_message(message:PhoneChatMessage) -> void:
 	scroll_to_bottom_()
 
 func _input(event) -> void:
-	
 	pass
 	#if Input.is_action_just_pressed("back"):
 	#	_back_pressed()
@@ -85,7 +81,7 @@ func _reply_pressed(reply_button) -> void:
 
 	var new_message := PhoneChatMessage.new()
 	new_message.contact_name = "me"
-	new_message.message = reply_button.text.substr(4)
+	new_message.message = reply_button.text
 	new_message.sent_time = GameTime.now
 
 	if clear_replies_on_reply_:

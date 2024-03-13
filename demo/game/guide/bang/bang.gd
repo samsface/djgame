@@ -29,6 +29,7 @@ func _ready() -> void:
 	last_off_ = get_off_()
 
 	nob_.remote_transform.remote_path = get_path()
+	nob_.remote_transform.rotation
 	nob_.path_follow.progress_ratio = 0.0
 
 	var fall_time = length - (1.0 / 60)
@@ -47,6 +48,7 @@ func _ready() -> void:
 	fall_tween_.finished.connect(_miss)
 
 	points_ = points_service.make_points()
+	points_.scale = Vector3.ONE * nob_.scale_guide
 
 func _miss() -> void:
 	if hit_:
@@ -119,7 +121,7 @@ func judge_accuracy_() -> void:
 		else:
 			points_.miss(off)
 
-		points_.global_position = global_position  
+		points_.global_position = global_position
 
 	wait_then_free_()
 

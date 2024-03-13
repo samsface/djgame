@@ -1,7 +1,7 @@
 {
 "clips": {
 183112528: {
-"time_range": Vector2i(0, 544),
+"time_range": Vector2i(0, 400),
 "tracks": [{
 "name": "/root/Game",
 "notes": [{
@@ -47,21 +47,10 @@
 "method": "&\"look 2\"",
 "time": "170",
 "type": "2"
-}, {
-"length": "16",
-"method": "&\"look\"",
-"time": "384",
-"type": "2"
 }]
 }, {
 "name": "/root/Game/toykit/preset-rock",
-"notes": [{
-"auto": "false",
-"length": "16",
-"time": "384",
-"type": "0",
-"value": "1.0"
-}]
+"notes": []
 }, {
 "name": "/root/Game/toykit/seq-1",
 "notes": [{
@@ -220,11 +209,6 @@
 "method": "&\"look 2\"",
 "time": "320",
 "type": "2"
-}, {
-"length": "16",
-"method": "&\"look 1\"",
-"time": "400",
-"type": "2"
 }]
 }, {
 "name": "/root/Game/acid/2",
@@ -246,12 +230,6 @@
 "time": "256",
 "type": "1",
 "value": "0.0"
-}, {
-"from_value": "0.0",
-"length": "64",
-"time": "400",
-"type": "1",
-"value": "1.0"
 }]
 }, {
 "name": "/root/Game/acid/3",
@@ -268,24 +246,56 @@
 "type": "1",
 "value": "0.0"
 }]
+}, {
+"name": "/root/Game/Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
+"notes": [{
+"length": "16",
+"method": "&\"jump 1\"",
+"time": "384",
+"type": "2"
+}]
 }]
 },
 1806420329: {
-"time_range": Vector2i(0, 16),
+"time_range": Vector2i(0, 208),
 "tracks": [{
 "name": "/root/Game/phone",
 "notes": [{
-"length": "16",
+"length": "32",
 "method": "&\"look\"",
 "time": "0",
 "type": "2"
+}, {
+"length": "32",
+"time": "96",
+"type": "3",
+"value": "\"Hmmm\"",
+"who": "\"Giada\""
 }]
 }, {
 "name": "/root/Game/phone/0",
 "notes": [{
 "auto": "false",
-"length": "16",
+"length": "32",
 "time": "0",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/phone/ReplyA",
+"notes": [{
+"auto": "false",
+"length": "64",
+"time": "32",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/phone/ReplyB",
+"notes": [{
+"auto": "false",
+"length": "64",
+"time": "32",
 "type": "0",
 "value": "1.0"
 }]

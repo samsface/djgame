@@ -2,6 +2,7 @@ extends Control
 class_name PianoRollControl
 
 signal bang
+signal finished
 signal selection_changed
 signal row_pressed
 signal row_mouse_entered
@@ -179,12 +180,16 @@ func play_(delta) -> void:
 		return
 
 	var t := int(floor(time_))
+	
+	if t >= time_range.y:
+		finished.emit()
+
 	t = t % (time_range.y - time_range.x) + time_range.x
 
 	cursor.position.x = t * grid_size
 
 	invalidate_queue_()
-	
+
 	for i in queue_.size():
 		var item = queue_[i].get(t)
 		if item:

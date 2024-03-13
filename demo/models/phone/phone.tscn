@@ -9,10 +9,10 @@
 [ext_resource type="Script" path="res://models/phone/notifications.gd" id="5_pqb1u"]
 [ext_resource type="Texture2D" uid="uid://m76np0thy42y" path="res://models/phone/marc.png" id="5_s4yx2"]
 [ext_resource type="Script" path="res://models/phone/phone_test.gd" id="6_vrhos"]
-[ext_resource type="Script" path="res://models/phone/nob.gd" id="10_kb7as"]
+[ext_resource type="PackedScene" uid="uid://c23pskns2q5d1" path="res://models/phone/nob.tscn" id="10_agbu1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vffgr"]
-size = Vector3(0.5, 0.02, 1)
+size = Vector3(0.05, 0.0025, 0.008)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_gv248"]
 viewport_path = NodePath("SubViewport")
@@ -26,13 +26,8 @@ shader_parameter/scuff = ExtResource("4_v74j0")
 shader_parameter/ao = ExtResource("4_mdlhq")
 shader_parameter/marc = ExtResource("5_s4yx2")
 
-[sub_resource type="Curve3D" id="Curve3D_y3bud"]
-bake_interval = 0.01
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-"tilts": PackedFloat32Array(0, 0)
-}
-point_count = 2
+[sub_resource type="BoxShape3D" id="BoxShape3D_r4ofo"]
+size = Vector3(0.02, 0.0025, 0.02)
 
 [node name="phone" instance=ExtResource("1_qnpo2")]
 script = ExtResource("2_hu3e3")
@@ -43,9 +38,11 @@ collision_layer = 8
 collision_mask = 0
 input_ray_pickable = false
 monitoring = false
+monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
 shape = SubResource("BoxShape3D_vffgr")
+disabled = true
 
 [node name="Phone" parent="." index="1"]
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0, 0, 0)
@@ -67,6 +64,7 @@ device_width = Vector2(385, 700)
 layer = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2" index="0"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -110,30 +108,50 @@ text = "VIBRATE"
 [node name="Views" type="Node3D" parent="." index="5"]
 
 [node name="Marker3D" type="Marker3D" parent="Views" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00764202, 0.113948, 0.000383288)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00131534, 0.0789503, 0.00488686)
 
-[node name="0" type="Node3D" parent="." index="6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0211966, -9.78545e-05, -0.0218321)
-script = ExtResource("10_kb7as")
-scale_guide = 0.35
+[node name="0" parent="." index="6" instance=ExtResource("10_agbu1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0185696, -9.78545e-05, -0.0262739)
 
-[node name="Path" type="Path3D" parent="0" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-curve = SubResource("Curve3D_y3bud")
+[node name="StaticBody3D" type="Area3D" parent="0" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.019272, 0, 0)
+collision_layer = 8
+collision_mask = 0
+input_ray_pickable = false
+monitoring = false
+monitorable = false
 
-[node name="PathFollow" type="PathFollow3D" parent="0/Path" index="0"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.1, 0, 0)
-use_model_front = true
-loop = false
+[node name="CollisionShape3D" type="CollisionShape3D" parent="0/StaticBody3D" index="0"]
+shape = SubResource("BoxShape3D_vffgr")
 
-[node name="RemoteTransform" type="RemoteTransform3D" parent="0/Path/PathFollow" index="0"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-update_scale = false
+[node name="ReplyA" parent="." index="7" instance=ExtResource("10_agbu1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0187413, -9.78545e-05, 0.0287075)
 
-[node name="Top" type="Marker3D" parent="0" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+[node name="StaticBody3D" type="Area3D" parent="ReplyA" index="1"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.00862861, 0, 0)
+collision_layer = 8
+collision_mask = 0
+input_ray_pickable = false
+monitoring = false
+monitorable = false
 
-[connection signal="input_event" from="StaticBody3D" to="." method="_input_event"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ReplyA/StaticBody3D" index="0"]
+shape = SubResource("BoxShape3D_r4ofo")
+
+[node name="ReplyB" parent="." index="8" instance=ExtResource("10_agbu1")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.0190193, -9.78545e-05, 0.0287075)
+
+[node name="StaticBody3D" type="Area3D" parent="ReplyB" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00872133, 0, -1.11759e-08)
+collision_layer = 8
+collision_mask = 0
+input_ray_pickable = false
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ReplyB/StaticBody3D" index="0"]
+shape = SubResource("BoxShape3D_r4ofo")
+
 [connection signal="pressed" from="Debug/Button" to="Debug" method="_new_contact_pressed"]
 [connection signal="pressed" from="Debug/Button2" to="Debug" method="_new_message_pressed"]
 [connection signal="pressed" from="Debug/Button3" to="Debug" method="_vibrate_pressed"]
