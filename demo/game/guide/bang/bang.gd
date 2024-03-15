@@ -1,5 +1,7 @@
 extends Guide
 
+signal hit
+
 const proximity_ := 0.1
 
 var nob_
@@ -28,6 +30,7 @@ func _ready() -> void:
 
 	last_off_ = get_off_()
 
+	nob_.update_path_follow_position_for_value(for_value_)
 	nob_.remote_transform.remote_path = get_path()
 	nob_.remote_transform.rotation
 	nob_.path_follow.progress_ratio = 0.0
@@ -76,6 +79,8 @@ func _hit() -> void:
 	arrow__.explode(combo)
 
 	hit_ = true
+	
+	hit.emit()
 
 	judge_accuracy_()
 
@@ -97,8 +102,8 @@ func _physics_process(delta: float) -> void:
 		if node == self:
 			break
 		
-		if not node.hit_ and not node.miss_:
-			return
+		#if not node.hit_ and not node.miss_:
+		#	return
 
 	var off = get_off_()
 	

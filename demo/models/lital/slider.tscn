@@ -127,14 +127,11 @@ tilt_enabled = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00569686, 0)
 
 [node name="Path" type="Path3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 curve = SubResource("Curve3D_y63d2")
 
 [node name="PathFollow" type="PathFollow3D" parent="Path"]
-transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.1, 0)
-use_model_front = true
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0, 0.1, 0)
 loop = false
 
 [node name="RemoteTransform" type="RemoteTransform3D" parent="Path/PathFollow"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 update_scale = false

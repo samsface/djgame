@@ -10,6 +10,9 @@ extends Button
 		value = v
 		invalidate_value_()
 
+@export var replay_a:String
+@export var replay_b:String
+
 func _ready():
 	invalidate_value_()
 	item_rect_changed.connect(invalidate_value_)

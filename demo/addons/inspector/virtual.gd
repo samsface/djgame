@@ -15,7 +15,8 @@ enum Type {
 	bang,
 	slide,
 	method,
-	dialog
+	dialog,
+	tween
 }
 
 @export var type:Type : 

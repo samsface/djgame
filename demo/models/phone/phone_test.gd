@@ -28,7 +28,7 @@ func _new_contact_pressed() -> void:
 	
 	var chat := PhoneChat.new()
 	chat.contact_image = preload("res://models/phone/giadi_small.png")
-	chat.contact_name = "Girlfriend"
+	chat.contact_name = "Giada"
 	chat.messages.push_back(message)
 	
 	chats.chats[chat.contact_name] = chat
@@ -50,15 +50,25 @@ func _vibrate_pressed() -> void:
 func setup_gf_chat_() -> void:
 	var message := PhoneChatMessage.new()
 	message.contact_name = "Giada"
-	message.message = "Hey you doing anything tonight?"
+	message.message = "Hey"
 	message.sent_time = GameTime.now
-	message.replies = ["Wanna come?", "Not you're thing I bet."]
 
 	var chat := PhoneChat.new()
 	chat.contact_image = preload("res://models/phone/giadi_small.png")
-	chat.contact_name = "Girlfriend"
+	chat.contact_name = "Giada"
 	chat.messages.push_back(message)
 	
 	chats.chats[chat.contact_name] = chat
 	
 	chats.new_chat.emit(chat)
+
+func dialog(length:float, who:String, value:String, replay_a:String, reply_b:String) -> void:
+	var message := PhoneChatMessage.new()
+	message.contact_name = who
+	message.message = value
+	message.sent_time = GameTime.now
+	message.replies = [replay_a, reply_b]
+
+	var chat = chats.chats[who]
+	chat.messages.push_back(message)
+	chat.new_message.emit(message)

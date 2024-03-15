@@ -7,6 +7,7 @@ extends Node3D
 
 var patch_file_handle_ := PDPatchFile.new()
 var tween_:Tween
+var rumble := 1.0
 
 func _ready() -> void:
 	Camera.guide_service = $Guides
@@ -41,7 +42,7 @@ func _bang(r):
 		#	Camera.smooth_look_at(looking_at_, true)
 		return
 	elif r == "s-rumble":
-		Camera.shake(0.7, 0.001)
+		Camera.shake(0.7, 0.001 * rumble)
 		Camera.rumble.emit()
 
 var last_ting_
@@ -53,6 +54,8 @@ func _input(event: InputEvent) -> void:
 		Camera.pop_look_at($CrowdService)
 	elif Input.is_action_just_pressed("play"):
 		play_()
+	elif Input.is_action_just_pressed("reset"):
+		get_tree().reload_current_scene()
 
 func play__() -> void:
 	PureData.send_bang("r-PLAY")

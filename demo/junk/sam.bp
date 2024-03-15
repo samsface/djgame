@@ -1,20 +1,39 @@
 {
 "clips": {
 703323318: {
-"time_range": Vector2i(0, 128),
+"time_range": Vector2i(0, 144),
 "tracks": [{
-"name": "/root/Game/phone",
+"name": "/root/Game/phone/ChatApp",
 "notes": [{
 "length": "32",
+"replay_a": "\"I'm playing\"",
+"replay_b": "\"Nothing\"",
 "time": "0",
 "type": "3",
 "value": "\"Hey what's up?\"",
+"who": "\"Giada\""
+}, {
+"length": "16",
+"replay_a": "\"\"",
+"replay_b": "\"\"",
+"time": "64",
+"type": "3",
+"value": "\"Hmm\"",
+"who": "\"Giada\""
+}, {
+"length": "16",
+"replay_a": "\"\"",
+"replay_b": "\"\"",
+"time": "80",
+"type": "3",
+"value": "\"Sure you're not playing?\"",
 "who": "\"Giada\""
 }]
 }, {
 "name": "/root/Game/phone/0",
 "notes": [{
 "auto": "false",
+"dilema_group": "0",
 "length": "32",
 "time": "0",
 "type": "0",
@@ -24,7 +43,8 @@
 "name": "/root/Game/phone/ReplyA",
 "notes": [{
 "auto": "false",
-"length": "64",
+"dilema_group": "1",
+"length": "32",
 "time": "32",
 "type": "0",
 "value": "1.0"
@@ -33,7 +53,8 @@
 "name": "/root/Game/phone/ReplyB",
 "notes": [{
 "auto": "false",
-"length": "64",
+"dilema_group": "1",
+"length": "32",
 "time": "32",
 "type": "0",
 "value": "1.0"

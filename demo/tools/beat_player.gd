@@ -52,25 +52,33 @@ func _input(event:InputEvent) -> void:
 func _piano_roll_bang(item:Control, idx:int) -> void:
 	$Virtual2.node = item
 
+	var node_path = %TrackNames.get_track_node_path(idx)
+	var node = get_node(node_path)
+	if not node:
+		return
+	
+	var length = $Virtual2.length / %PianoRoll.tempo
+
 	var args := []
 
 	var method:StringName
 	if $Virtual2.type == 0:
 		method = &"bang"
-		args.push_back($Virtual2.length / %PianoRoll.tempo)
+		args.push_back(length)
 	elif $Virtual2.type == 1:
 		method = &"slide" 
-		args.push_back($Virtual2.length / %PianoRoll.tempo)
+		args.push_back(length)
 	elif $Virtual2.type == 3:
 		method = &"dialog" 
-		args.push_back($Virtual2.length / %PianoRoll.tempo)
-	else:
+		args.push_back(length)
+	elif $Virtual2.type == 2:
 		var method_args_generic = item.get("method").split(" ")
 		method = method_args_generic[0]
 		for i in range(1, method_args_generic.size()):
 			args.push_back(int(method_args_generic[i]))
-
-	var node_path = %TrackNames.get_track_node_path(idx)
+	elif $Virtual2.type == 4:
+		item.op(node, length)
+		return 
 
 	for property_name in %Inspector.include_list:
 		if property_name == "method":
@@ -78,10 +86,6 @@ func _piano_roll_bang(item:Control, idx:int) -> void:
 		if property_name in item:
 			args.push_back(item.get(property_name))
 
-	var node = get_node(node_path)
-	if not node:
-		return
-	
 	if not node.has_method(method):
 		return
 	
@@ -150,7 +154,9 @@ func reload(dict:Dictionary) -> void:
 				n = preload("method.tscn").instantiate()
 			elif int(note.type) == 3:
 				n = preload("dialog.tscn").instantiate()
-
+			elif int(note.type) == 4:
+				n = preload("tween.tscn").instantiate()
+				
 			$Virtual.node = n
 			var grid_size = %PianoRoll.grid_size
 			Dictializer.from_dict(note, $Virtual)
@@ -183,6 +189,8 @@ func change_type_(node, new_type:int) -> void:
 		n = preload("res://tools/method.tscn").instantiate()
 	elif int(new_type) == 3:
 		n = preload("res://tools/dialog.tscn").instantiate()
+	elif int(new_type) == 4:
+		n = preload("res://tools/tween.tscn").instantiate()
 	
 	%PianoRoll.add_item(n, row_idx)
 

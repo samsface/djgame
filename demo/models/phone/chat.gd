@@ -86,7 +86,7 @@ func _reply_pressed(reply_button) -> void:
 
 	if clear_replies_on_reply_:
 		for reply in replies_.get_children():
-			reply.disabled = true
+			#reply.disabled = true
 			reply.text = ""
 
 	chat.messages.push_back(new_message)

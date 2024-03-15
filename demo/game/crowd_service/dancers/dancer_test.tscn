@@ -7,6 +7,7 @@
 albedo_color = Color(0, 0, 0, 1)
 
 [node name="dancer_test" instance=ExtResource("1_ad273")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 script = ExtResource("2_71x3x")
 
 [node name="Skeleton3D" parent="Armature" index="0"]

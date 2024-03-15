@@ -2,9 +2,11 @@ extends Nob
 
 var value := 0.0 :
 	set(v):
+		if v == value:
+			return
+
 		value = 1.0
 		bang_()
-		await get_tree().process_frame
 		await get_tree().process_frame
 		value = 0.0
 

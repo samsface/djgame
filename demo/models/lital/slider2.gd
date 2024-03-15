@@ -103,5 +103,8 @@ func get_guide_position_for_value(value:float) -> Vector3:
 	shadow_path_follow_.progress_ratio = value
 	return shadow_path_follow_.global_position
 
+func update_path_follow_position_for_value(for_value:float) -> void:
+	$Path.global_position = get_guide_position_for_value(for_value)
+
 func get_nob_position() -> Vector3:
 	return $Nob.global_position

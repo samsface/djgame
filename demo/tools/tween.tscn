@@ -1,15 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://74pwn2qyav8l"]
+[gd_scene load_steps=3 format=3 uid="uid://ogx3qotg0a0o"]
 
-[ext_resource type="Theme" uid="uid://dbvpa0vlu34gu" path="res://ui/beat_player.tres" id="1_641as"]
-[ext_resource type="Script" path="res://tools/bang.gd" id="2_rihem"]
+[ext_resource type="Theme" uid="uid://dbvpa0vlu34gu" path="res://ui/beat_player.tres" id="1_27w2i"]
+[ext_resource type="Script" path="res://tools/tween.gd" id="2_smc25"]
 
 [node name="Bang" type="Button"]
 clip_children = 2
 clip_contents = true
 offset_right = 32.0
 offset_bottom = 32.0
-theme = ExtResource("1_641as")
-script = ExtResource("2_rihem")
+theme = ExtResource("1_27w2i")
+script = ExtResource("2_smc25")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 color = Color(0.556863, 0.823529, 0.490196, 1)

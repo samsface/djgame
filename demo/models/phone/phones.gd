@@ -61,6 +61,3 @@ func vibrate() -> void:
 		j *= 0.025
 		var d = 1.0 if i % 2 == 0 else -1.0
 		tween.tween_property($Phone, "position:x", j * d, 0.02)
-
-func dialog(length:float, who:String, value:String) -> void:
-	pass

@@ -10,6 +10,11 @@ extends Button
 		auto = v
 		invalidate_value_()
 
+@export var dilema_group:int : 
+	set(v):
+		dilema_group = v
+		invalidate_value_()
+
 func _ready():
 	invalidate_value_()
 	item_rect_changed.connect(invalidate_value_)
@@ -17,10 +22,19 @@ func _ready():
 func invalidate_value_() -> void:
 	self_modulate = Color.DARK_SLATE_GRAY
 	
+	$Label.text = " "
+	
+	var label_text := []
+
+	if dilema_group:
+		label_text.push_back("?")
+	
 	if auto:
-		$Polygon2D.self_modulate = Color.PURPLE
-	else:
-		$Polygon2D.self_modulate = Color.LIGHT_GREEN
+		label_text.push_back("Auto")
+		
+	label_text.push_back("Bang")
+
+	$Label.text += ":".join(label_text)
 
 	var polygon := PackedVector2Array()
 	polygon.resize(4)

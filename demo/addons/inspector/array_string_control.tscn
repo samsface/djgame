@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://e138gi4ialyj"]
+
+[ext_resource type="Script" path="res://addons/inspector/int_control.gd" id="1_k0ocd"]
+
+[node name="HBoxContainer4" type="HBoxContainer"]
+script = ExtResource("1_k0ocd")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Time"

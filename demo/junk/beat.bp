@@ -55,6 +55,7 @@
 "name": "/root/Game/toykit/seq-1",
 "notes": [{
 "auto": "false",
+"dilema_group": "0",
 "length": "16",
 "time": "0",
 "type": "0",
@@ -64,12 +65,14 @@
 "name": "/root/Game/toykit/seq-5",
 "notes": [{
 "auto": "false",
+"dilema_group": "0",
 "length": "16",
 "time": "20",
 "type": "0",
 "value": "1.0"
 }, {
 "auto": "false",
+"dilema_group": "0",
 "length": "16",
 "time": "84",
 "type": "0",
@@ -79,6 +82,7 @@
 "name": "/root/Game/toykit/seq-9",
 "notes": [{
 "auto": "false",
+"dilema_group": "0",
 "length": "16",
 "time": "40",
 "type": "0",
@@ -88,12 +92,14 @@
 "name": "/root/Game/toykit/seq-13",
 "notes": [{
 "auto": "false",
+"dilema_group": "0",
 "length": "16",
 "time": "60",
 "type": "0",
 "value": "1.0"
 }, {
 "auto": "false",
+"dilema_group": "0",
 "length": "16",
 "time": "92",
 "type": "0",
@@ -103,12 +109,14 @@
 "name": "/root/Game/toykit/seq-3",
 "notes": [{
 "auto": "false",
+"dilema_group": "0",
 "length": "16",
 "time": "114",
 "type": "0",
 "value": "1.0"
 }, {
 "auto": "true",
+"dilema_group": "0",
 "length": "4",
 "time": "380",
 "type": "0",
@@ -118,12 +126,14 @@
 "name": "/root/Game/toykit/seq-7",
 "notes": [{
 "auto": "false",
+"dilema_group": "0",
 "length": "16",
 "time": "134",
 "type": "0",
 "value": "1.0"
 }, {
 "auto": "true",
+"dilema_group": "0",
 "length": "4",
 "time": "380",
 "type": "0",
@@ -133,12 +143,14 @@
 "name": "/root/Game/toykit/seq-11",
 "notes": [{
 "auto": "false",
+"dilema_group": "0",
 "length": "16",
 "time": "154",
 "type": "0",
 "value": "1.0"
 }, {
 "auto": "true",
+"dilema_group": "0",
 "length": "4",
 "time": "380",
 "type": "0",
@@ -148,12 +160,14 @@
 "name": "/root/Game/toykit/seq-15",
 "notes": [{
 "auto": "false",
+"dilema_group": "0",
 "length": "16",
 "time": "174",
 "type": "0",
 "value": "1.0"
 }, {
 "auto": "true",
+"dilema_group": "0",
 "length": "4",
 "time": "380",
 "type": "0",
@@ -163,12 +177,14 @@
 "name": "/root/Game/toykit/seq-16",
 "notes": [{
 "auto": "false",
+"dilema_group": "0",
 "length": "16",
 "time": "174",
 "type": "0",
 "value": "1.0"
 }, {
 "auto": "true",
+"dilema_group": "0",
 "length": "4",
 "time": "380",
 "type": "0",
@@ -178,6 +194,7 @@
 "name": "/root/Game/toykit/select-clap",
 "notes": [{
 "auto": "true",
+"dilema_group": "0",
 "length": "16",
 "time": "64",
 "type": "0",
@@ -187,6 +204,7 @@
 "name": "/root/Game/toykit/select-closed",
 "notes": [{
 "auto": "true",
+"dilema_group": "0",
 "length": "16",
 "time": "96",
 "type": "0",
@@ -214,6 +232,7 @@
 "name": "/root/Game/acid/2",
 "notes": [{
 "auto": "true",
+"dilema_group": "0",
 "length": "4",
 "time": "0",
 "type": "0",
@@ -235,6 +254,7 @@
 "name": "/root/Game/acid/3",
 "notes": [{
 "auto": "true",
+"dilema_group": "0",
 "length": "4",
 "time": "0",
 "type": "0",
@@ -265,17 +285,39 @@
 "method": "&\"look\"",
 "time": "0",
 "type": "2"
+}]
 }, {
+"name": "/root/Game/phone/ChatApp",
+"notes": [{
 "length": "32",
+"replay_a": "\"Idk?\"",
+"replay_b": "\"Who are you? \"",
+"time": "32",
+"type": "3",
+"value": "\"Guess where I am? \"",
+"who": "\"Giada\""
+}, {
+"length": "16",
+"replay_a": "\"\"",
+"replay_b": "\"\"",
 "time": "96",
 "type": "3",
-"value": "\"Hmmm\"",
+"value": "\"HERE! I came!\"",
+"who": "\"Giada\""
+}, {
+"length": "16",
+"replay_a": "\"I'm the DJ\"",
+"replay_b": "\"lol sure\"",
+"time": "112",
+"type": "3",
+"value": "\"Can you be louder though :)\"",
 "who": "\"Giada\""
 }]
 }, {
 "name": "/root/Game/phone/0",
 "notes": [{
 "auto": "false",
+"dilema_group": "0",
 "length": "32",
 "time": "0",
 "type": "0",
@@ -285,8 +327,16 @@
 "name": "/root/Game/phone/ReplyA",
 "notes": [{
 "auto": "false",
-"length": "64",
+"dilema_group": "1",
+"length": "48",
 "time": "32",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "false",
+"dilema_group": "2",
+"length": "48",
+"time": "112",
 "type": "0",
 "value": "1.0"
 }]
@@ -294,11 +344,156 @@
 "name": "/root/Game/phone/ReplyB",
 "notes": [{
 "auto": "false",
-"length": "64",
+"dilema_group": "1",
+"length": "48",
 "time": "32",
 "type": "0",
 "value": "1.0"
+}, {
+"auto": "false",
+"dilema_group": "2",
+"length": "48",
+"time": "112",
+"type": "0",
+"value": "1.0"
 }]
+}, {
+"name": "/root/Game/Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
+"notes": [{
+"length": "16",
+"method": "&\"jump 2\"",
+"time": "160",
+"type": "2"
+}]
+}]
+},
+3559986301: {
+"time_range": Vector2i(0, 160),
+"tracks": [{
+"name": "/root/Game",
+"notes": [{
+"length": "16",
+"method": "&\"play__\"",
+"time": "0",
+"type": "2"
+}, {
+"length": "44",
+"property": "\"rumble\"",
+"time": "32",
+"to_value": "10.0",
+"type": "4"
+}, {
+"length": "4",
+"property": "\"rumble\"",
+"time": "92",
+"to_value": "10.0",
+"type": "4"
+}, {
+"length": "4",
+"property": "\"rumble\"",
+"time": "76",
+"to_value": "1.0",
+"type": "4"
+}]
+}, {
+"name": "/root/Game/toykit",
+"notes": [{
+"length": "16",
+"method": "&\"look\"",
+"time": "0",
+"type": "2"
+}]
+}, {
+"name": "/root/Game/toykit/preset-rock",
+"notes": [{
+"auto": "false",
+"dilema_group": "0",
+"length": "16",
+"time": "0",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/toykit/preset-house",
+"notes": [{
+"auto": "true",
+"dilema_group": "0",
+"length": "8",
+"time": "72",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/acid",
+"notes": [{
+"length": "16",
+"method": "&\"look 2\"",
+"time": "16",
+"type": "2"
+}, {
+"length": "16",
+"method": "&\"look\"",
+"time": "72",
+"type": "2"
+}, {
+"length": "16",
+"method": "&\"look 1\"",
+"time": "96",
+"type": "2"
+}]
+}, {
+"name": "/root/Game/acid/2",
+"notes": [{
+"from_value": "0.0",
+"length": "48",
+"time": "16",
+"type": "1",
+"value": "0.8"
+}, {
+"auto": "false",
+"dilema_group": "0",
+"length": "16",
+"time": "64",
+"type": "0",
+"value": "0.0"
+}, {
+"auto": "false",
+"dilema_group": "0",
+"length": "16",
+"time": "80",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"name": "/root/Game/phone/ChatApp",
+"notes": [{
+"length": "16",
+"replay_a": "\"\"",
+"replay_b": "\"\"",
+"time": "32",
+"type": "3",
+"value": "\"LOUDER!\"",
+"who": "\"Giada\""
+}, {
+"length": "16",
+"replay_a": "\"\"",
+"replay_b": "\"\"",
+"time": "48",
+"type": "3",
+"value": "\"MORE  LOUDER!\"",
+"who": "\"Giada\""
+}, {
+"length": "16",
+"replay_a": "\"\"",
+"replay_b": "\"\"",
+"time": "64",
+"type": "3",
+"value": "\"YES!!!!\"",
+"who": "\"Giada\""
+}]
+}, {
+"name": "/root/Game/Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
+"notes": []
 }]
 }
 }
