@@ -1,6 +1,8 @@
 class_name PhoneChatMessage
 extends Resource
 
+signal reply
+
 @export var contact_name:String
 @export var message:String
 @export var image:Texture

@@ -19,3 +19,4 @@ func _ready():
 
 func invalidate_value_() -> void:
 	text = who + ": \"" + value + "\""
+	tooltip_text = text

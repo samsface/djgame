@@ -12,6 +12,7 @@ var hover_tween_ : Tween
 
 func _ready():
 	undo_.clear_history()
+	%TrackNames.track_focused.connect(_track_focused)
 	%TrackNames.undo = undo_
 	%Inspector.undo = undo_
 	%PianoRoll.undo = undo_
@@ -42,6 +43,10 @@ func _ready():
 	%PianoRoll.finished.connect(func():
 		finished.emit()
 	)
+
+func _track_focused(track) -> void:
+	%Inspector.virtual_properties = null
+	%Inspector.node = track
 
 func _input(event:InputEvent) -> void:
 	if event.is_action_pressed("redo"):
@@ -101,6 +106,7 @@ func _piano_roll_selection_changed(selection:Array) -> void:
 		%Inspector.node = null
 		return
 
+	%Inspector.virtual_properties = $Virtual
 	%Inspector.node = selection[0]
 
 func play():
@@ -117,6 +123,8 @@ func add_track(node_path) -> void:
 	%TrackNames.add_track(node_path)
 
 func get_state() -> Dictionary:
+	%Inspector.virtual_properties = $Virtual
+	
 	var state := {
 		time_range = %PianoRoll.time_range,
 		tracks = []

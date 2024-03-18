@@ -53,6 +53,8 @@ func invalidate_() -> void:
 				control = add_string_control_(property)
 			TYPE_STRING_NAME:
 				control = add_string_control_(property)
+			TYPE_NODE_PATH:
+				control = add_string_control_(property)
 			TYPE_BOOL:
 				control = add_bool_control_(property)
 		

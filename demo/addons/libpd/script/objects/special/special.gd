@@ -23,8 +23,8 @@ func get_id_() -> String:
 	while p:
 		if p is PDNode:
 			id.push_front(p.index)
-		elif p is PDPatch:
-			id.push_front("NAMESPACE")
+		#elif p is PDPatch:
+		#	id.push_front("NAMESPACE")
 		p = p.get_parent()
 
 	return '/'.join(id)

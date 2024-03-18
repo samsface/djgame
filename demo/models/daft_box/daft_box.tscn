@@ -28,9 +28,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0135922, 0.0931738, 0.0421
 
 [node name="View3" type="Marker3D" parent="Views" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0144488, 0.0665829, 0.106457)
-
-[node name="1" parent="." index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 2.39176e-05, 0, -2.39176e-05, 1, -0.029468, 0.0131827, 0.00564336)
-
-[node name="3" parent="." index="6"]
-transform = Transform3D(1, 0, 0, 0, 1, 2.39176e-05, 0, -2.39176e-05, 1, 0.0114548, 0.0131827, 0.00564336)

@@ -13,6 +13,7 @@ var hovering_
 
 var recording := false
 var recorder
+var level:Level
 var guide_service:GuideService
 
 var stack_ := []
@@ -80,6 +81,8 @@ func _physics_process(delta: float) -> void:
 		
 		var point = ray_cast_.get_collision_point()
 		cursor.try_set_position(self, point + Vector3.UP * 0.002)
+		
+		#print(next_hovering)
 		
 		if hovering_ == next_hovering:
 			pass

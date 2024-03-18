@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://lb3oq22iphka"]
+[gd_scene load_steps=4 format=3 uid="uid://lb3oq22iphka"]
 
 [ext_resource type="Theme" uid="uid://dbvpa0vlu34gu" path="res://ui/beat_player.tres" id="1_rs0lp"]
 [ext_resource type="Script" path="res://tools/beat_player_host.gd" id="2_gk3x2"]
+[ext_resource type="PackedScene" uid="uid://bnh7e3jq63xtj" path="res://addons/graph/viewer.tscn" id="3_3i5jy"]
 
 [node name="BeatPlayerHost" type="VBoxContainer"]
 anchors_preset = 15
@@ -9,8 +10,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("1_rs0lp")
 script = ExtResource("2_gk3x2")
+
+[node name="SubViewportContainer" parent="." instance=ExtResource("3_3i5jy")]
+layout_mode = 2
 
 [node name="Menu" type="HBoxContainer" parent="."]
 layout_mode = 2

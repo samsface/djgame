@@ -13,6 +13,7 @@ func add_to_selection(node) -> void:
 
 	selection_.push_back(node)
 	node._select()
+	node.get_parent().node_selected.emit(node)
 
 func add_all(nodes:Array) -> void:
 	for n in nodes:

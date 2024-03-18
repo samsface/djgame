@@ -104,7 +104,9 @@ func iterate(root, node, node_names):
 				var triangles = Triangle.array_mesh_to_triangles(node.mesh)
 
 				for tri in triangles:
-					var widget = bank.get(int(tri.uv1.x * 255))
+					var widget_id = int(tri.uv1.x * 255)
+					var widget = bank.get(widget_id)
+					prints("Found widget", widget_id, widget)
 					if not widget:
 						continue
 

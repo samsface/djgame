@@ -79,6 +79,8 @@ func _reply_pressed(reply_button) -> void:
 	if reply_button.disabled:
 		return
 
+	chat.messages.back().reply.emit(reply_button.get_index())
+
 	var new_message := PhoneChatMessage.new()
 	new_message.contact_name = "me"
 	new_message.message = reply_button.text

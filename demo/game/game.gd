@@ -1,4 +1,5 @@
 extends Node3D
+class_name Level
 
 @onready var looking_at_ := $toykit
 @onready var guides_ := $Guides
@@ -10,6 +11,7 @@ var tween_:Tween
 var rumble := 1.0
 
 func _ready() -> void:
+	Camera.level = self
 	Camera.guide_service = $Guides
 
 	$WorldEnvironment.camera_attributes.dof_blur_far_enabled = true
@@ -56,6 +58,9 @@ func _input(event: InputEvent) -> void:
 		play_()
 	elif Input.is_action_just_pressed("reset"):
 		get_tree().reload_current_scene()
+
+func play():
+	play_()
 
 func play__() -> void:
 	PureData.send_bang("r-PLAY")

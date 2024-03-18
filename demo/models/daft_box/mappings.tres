@@ -5,17 +5,17 @@
 
 [sub_resource type="Resource" id="Resource_rkmgh"]
 script = ExtResource("2_07fgk")
-node = NodePath("2")
+node = NodePath("a")
 symbol = "res"
 max_value = 127.0
-min_value = 1.0
+min_value = 2.0
 
 [sub_resource type="Resource" id="Resource_f6ar4"]
 script = ExtResource("2_07fgk")
-node = NodePath("3")
+node = NodePath("d")
 symbol = "redux"
 max_value = 64.0
-min_value = 3.0
+min_value = 4.0
 
 [sub_resource type="Resource" id="Resource_4q3d2"]
 script = ExtResource("2_07fgk")

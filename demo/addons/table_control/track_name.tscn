@@ -20,6 +20,14 @@ text = "1234123"
 caret_blink = true
 caret_blink_interval = 0.5
 
+[node name="Condition" type="LineEdit" parent="H"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1234123"
+editable = false
+caret_blink = true
+caret_blink_interval = 0.5
+
 [node name="MoveUp" type="Button" parent="H"]
 self_modulate = Color(0.929412, 0.807843, 0, 1)
 custom_minimum_size = Vector2(32, 0)

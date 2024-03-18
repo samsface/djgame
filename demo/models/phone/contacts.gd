@@ -33,7 +33,7 @@ func _new_chat(phone_chat:PhoneChat) -> void:
 		contact_list_item.time_stamp = phone_chat.messages.back().sent_time
 	else:
 		contact_list_item.message = ""
-
+ 
 	phone_chat.changed.connect(_chat_changed.bind(phone_chat, contact_list_item))
 	phone_chat.new_message.connect(_new_message.bind(phone_chat, contact_list_item))
 
@@ -49,6 +49,13 @@ func _chat_changed(chat:PhoneChat, contact_list_item:Node) -> void:
 	contact_list_item.unread_count = chat.unread_count
 
 func _new_message(message:PhoneChatMessage, chat:PhoneChat, contact_list_item:Node) -> void:
+	if message.contact_name == "me":
+		return
+	
+	if chat_:
+		if message.contact_name == chat_.chat.contact_name:
+			return
+	
 	contacts_.move_child(contact_list_item, 0)
 	
 	var notification_service = get_node_or_null(notification_service_node_path)

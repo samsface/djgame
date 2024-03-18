@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnh7e3jq63xtj"]
+
+[ext_resource type="Script" path="res://addons/graph/viewer.gd" id="1_vjtj2"]
+[ext_resource type="Script" path="res://addons/libpd/script/widgets/viewer/camera.gd" id="2_0teno"]
+
+[node name="SubViewportContainer" type="SubViewportContainer"]
+offset_right = 1680.0
+offset_bottom = 1050.0
+size_flags_vertical = 3
+stretch = true
+script = ExtResource("1_vjtj2")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+handle_input_locally = false
+msaa_2d = 3
+screen_space_aa = 1
+canvas_item_default_texture_repeat = 1
+physics_object_picking = true
+physics_object_picking_sort = true
+gui_snap_controls_to_pixels = false
+size = Vector2i(1680, 1050)
+render_target_update_mode = 4
+
+[node name="Root" type="MarginContainer" parent="SubViewport"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Camera2D" type="Camera2D" parent="SubViewport/Root"]
+unique_name_in_owner = true
+position_smoothing_speed = 33.0
+script = ExtResource("2_0teno")

@@ -15,3 +15,11 @@ signal status_changed
 	set(value):
 		status = value
 		status_changed.emit()
+
+func from_simple(history:Array):
+	for i in history.size():
+		var message := PhoneChatMessage.new()
+		message.contact_name = history[i].split(":")[0]
+		message.message = history[i].split(":")[1]
+		message.sent_time = GameTime.now
+		messages.push_back(message)

@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dd30uioypnl7e"]
+
+[ext_resource type="Script" path="res://addons/graph/search/search_result.gd" id="1_u8eae"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ohpyq"]
+bg_color = Color(0.329412, 0.329412, 0.329412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5mdu"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Theme" id="Theme_4ro4i"]
+Button/styles/hover = SubResource("StyleBoxFlat_ohpyq")
+Button/styles/normal = SubResource("StyleBoxFlat_u5mdu")
+
+[node name="SearchResult" type="Button"]
+offset_right = 289.0
+offset_bottom = 23.0
+theme = SubResource("Theme_4ro4i")
+theme_override_colors/font_color = Color(0, 0, 0, 0)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 0)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 0)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 0)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 0)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 0)
+script = ExtResource("1_u8eae")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+offset_right = 289.0
+offset_bottom = 23.0
+mouse_filter = 2
+bbcode_enabled = true

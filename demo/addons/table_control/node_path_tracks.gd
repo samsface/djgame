@@ -1,5 +1,7 @@
 extends Control
 
+signal track_focused
+
 var undo := UndoRedo.new()
 @export var piano_roll:Control
 
@@ -8,13 +10,14 @@ var data_ := {}
 @onready var track_names_ = $MarginContainer/TrackNames
 
 func add_track(node_path:NodePath = "") -> void:
-	for track_name in track_names_.get_children():
-		if track_name.get_node("H/Value").text == str(node_path):
-			return
+	#for track_name in track_names_.get_children():
+	#	if track_name.get_node("H/Value").text == str(node_path):
+	#		return
 
 	undo.create_action("add track")
 	
 	var track_name := preload("track_name.tscn").instantiate()
+	track_name.get_node("H/Value").focus_entered.connect(_focus_entered.bind(track_name))
 	track_name.get_node("H/Delete").pressed.connect(_erase_track.bind(track_name))
 	track_name.get_node("H/MoveUp").pressed.connect(_move_track_up.bind(track_name))
 	track_name.get_node("H/MoveDown").pressed.connect(_move_track_down.bind(track_name))
@@ -41,6 +44,9 @@ func get_all_track_names() -> Array:
 
 func _track_value_changed(new_text, track) -> void:
 	track.node_path = NodePath(new_text)
+
+func _focus_entered(track) -> void:
+	track_focused.emit(track)
 
 func _erase_track(track_name:Control) -> void:
 	undo.create_action("erase track")

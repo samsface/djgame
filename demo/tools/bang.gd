@@ -13,7 +13,10 @@ extends Button
 @export var dilema_group:int : 
 	set(v):
 		dilema_group = v
-		invalidate_value_()
+
+@export var silent:bool : 
+	set(v):
+		silent = v
 
 func _ready():
 	invalidate_value_()

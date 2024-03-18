@@ -11,7 +11,7 @@ func show_notification(message:PhoneChatMessage, chat:PhoneChat) -> void:
 	chat_notification.contact_image = chat.contact_image
 	chat_notification.time_stamp = message.sent_time
 	chat_notification.pressed.connect(_chat_notification_pressed.bind(chat))
-	
+
 	add_child(chat_notification)
 
 	chat_notification.position.y = (get_child_count() - 1) * chat_notification.size.y - chat_notification.size.y
@@ -19,9 +19,9 @@ func show_notification(message:PhoneChatMessage, chat:PhoneChat) -> void:
 	var tween = chat_notification.create_tween()
 	tween.set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(chat_notification, "position:y",  (get_child_count() - 1) * (chat_notification.size.y + 8), 0.45)
-	
+
 	last_notification_ = chat
-	
+
 	await get_tree().create_timer(3.0).timeout
 	chat_notification.queue_free()
 

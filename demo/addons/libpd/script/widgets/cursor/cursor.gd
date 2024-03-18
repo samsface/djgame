@@ -15,3 +15,12 @@ func _play_mode_begin() -> void:
 	
 func _play_mode_end() -> void:
 	pass
+
+
+func _area_entered(area):
+	if area.has_method("_mouse_entered"):
+		area._mouse_entered(area)
+
+func _area_exited(area):
+	if area.has_method("_mouse_exited"):
+		area._mouse_exited(area)

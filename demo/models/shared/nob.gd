@@ -26,8 +26,8 @@ func reset_() -> void:
 func slide(length, from_value, to_value) -> void:
 	Camera.guide_service.slide(self, length, from_value, to_value)
 	
-func bang(length, value, auto, dilema_group) -> void:
-	Camera.guide_service.bang(self, length, value, auto, dilema_group)
+func bang(length, value, auto, dilema_group, silent) -> void:
+	Camera.guide_service.bang(self, length, value, auto, dilema_group, silent)
 
 func update_path_follow_position_for_value(for_value:float) -> void:
 	pass

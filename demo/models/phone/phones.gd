@@ -30,25 +30,32 @@ func click(pos:Vector3) -> void:
 
 func _input(event) -> void:
 	var automated = event.device == 444
-	
+
 	if not automated and not mouse_entered_:
 		return
 
 	if event.is_action("click"):
+			
+		#Camera.camera_.fov = 50
+
+		
 		var p
 		if automated:
 			p = event.position
 		else:
 			p = $StaticBody3D.to_local(Camera.cursor.position)
 			p = Vector2(p.x, p.z)
+			var shape_size = $StaticBody3D/CollisionShape3D.shape.size
+			shape_size = Vector2(shape_size.x, shape_size.z)
+			p += shape_size * 0.5
+			p /= shape_size
 
-		p += Vector2(0.25, 0.5)
 
 		var e = event.duplicate()
 		e.position = p
-		e.position.x *= $SubViewport.size.x * 2.0
+		e.position.x *= $SubViewport.size.x
 		e.position.y *= $SubViewport.size.y
-		e.global_position = event.position
+		e.global_position = e.position
 
 		$SubViewport.push_input(e, false)
 
