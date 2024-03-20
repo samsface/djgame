@@ -4,12 +4,14 @@ class_name InpsectorVirtualProperties
 @export var node:Control : 
 	set(v):
 		node = v
+		
+@export var parent:Control
 
 var grid_size : 
 	set(v):
 		pass
 	get:
-		return get_parent().piano_roll_.grid_size
+		return parent.piano_roll_.grid_size
 
 enum Type {
 	bang,
@@ -21,7 +23,7 @@ enum Type {
 
 @export var type:Type : 
 	set(value):
-		get_parent().change_type_(node, value)
+		parent.change_type_(node, value)
 	get:
 		return node.get_meta("__type__", Type.bang)
 

@@ -1,13 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfr7o1tvoy1ur"]
+[gd_scene load_steps=2 format=3 uid="uid://dfr7o1tvoy1ur"]
 
 [ext_resource type="Script" path="res://addons/table_control/track_name.gd" id="1_po4w0"]
-[ext_resource type="Theme" uid="uid://dbvpa0vlu34gu" path="res://ui/beat_player.tres" id="1_vx7j3"]
 
 [node name="HBoxContainer" type="MarginContainer"]
 custom_minimum_size = Vector2(0, 32)
 offset_right = 290.0
 offset_bottom = 33.2485
-theme = ExtResource("1_vx7j3")
 script = ExtResource("1_po4w0")
 
 [node name="H" type="HBoxContainer" parent="."]
@@ -30,19 +28,16 @@ caret_blink = true
 caret_blink_interval = 0.5
 
 [node name="MoveUp" type="Button" parent="H"]
-self_modulate = Color(0.929412, 0.807843, 0, 1)
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 text = "UP"
 
 [node name="MoveDown" type="Button" parent="H"]
-self_modulate = Color(0.929412, 0.807843, 0, 1)
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 text = "DN"
 
 [node name="Delete" type="Button" parent="H"]
-self_modulate = Color(0.929412, 0.807843, 0, 1)
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 text = "X"

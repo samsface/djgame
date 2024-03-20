@@ -9,6 +9,11 @@ signal row_mouse_entered
 signal row_mouse_exited
 
 @export var streams:Array[AudioStream]
+@export var scroll_horizontal:float :
+	set(v):
+		scroll_container_.scroll_horizontal = v * scroll_container_.get_child(0).size.x
+	get:
+		return scroll_container_.scroll_horizontal
 
 enum Tool {
 	none,
@@ -154,7 +159,7 @@ func _physics_process(delta:float) -> void:
 	if tool_ == Tool.move:
 		for item in selection_:
 			item.position.x = row_position * grid_size - quantinize_to_grid(grab_offet_)
-			item.position.x = quantinize(item.position.x, quantinize_snap)
+			#item.position.x = quantinize(item.position.x, quantinize_snap)
 	elif tool_ == Tool.resize_east:
 		for item in selection_:
 			item.size.x = quantinize((row_position + quantinize_snap) * grid_size, quantinize_snap) - item.position.x
@@ -411,7 +416,7 @@ func invalidate_headings_() -> void:
 		else:
 			label.visible = false
 
-func _quant_selected(index):
+func set_quantinize_snap(index):
 	match index:
 		0:
 			quantinize_snap = 1

@@ -52,9 +52,7 @@ func invalidate_value_() -> void:
 	var style_box:StyleBoxFlat = get_theme_stylebox("normal", "button")
 	if style_box:
 		border_width = style_box.border_width_bottom
-	
-	border_width = 2;
-	
+
 	polygon[0] = Vector2(0, from * size.y)
 	polygon[1] = Vector2(size.x, to * size.y)
 	polygon[2] = Vector2(size.x, size.y )

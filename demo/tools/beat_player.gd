@@ -64,7 +64,7 @@ func _input(event:InputEvent) -> void:
 		undo_.undo()
 
 func _piano_roll_bang(item:Control, idx:int) -> void:
-	$Virtual2.node = item
+	%Virtual2.node = item
 
 	var node_path = %TrackNames.get_track_node_path(idx)
 	var node = get_node(node_path)
@@ -78,7 +78,7 @@ func _piano_roll_bang(item:Control, idx:int) -> void:
 		if not e.execute([], db):
 			return
 
-	var length = $Virtual2.length / %PianoRoll.tempo
+	var length = %Virtual2.length / %PianoRoll.tempo
 
 	item.op(db, node, length)
 
@@ -92,13 +92,13 @@ func _piano_roll_selection_changed(selection:Array) -> void:
 		inspector.node = null
 		return
 
-	inspector.virtual_properties = $Virtual
+	inspector.virtual_properties = %Virtual
 	inspector.node = selection[0]
 	
 	if Input.is_action_pressed("ctrl"):
 		for node in selection:
 			_piano_roll_bang(node, node.get_parent().get_index() - 2)
-	
+
 func play():
 	playing = true
 	%PianoRoll.playing = true
@@ -113,7 +113,7 @@ func add_track(node_path) -> void:
 	%TrackNames.add_track(node_path)
 
 func get_state() -> Dictionary:
-	inspector.virtual_properties = $Virtual
+	inspector.virtual_properties = %Virtual
 	
 	var state := {
 		time_range = %PianoRoll.time_range,
@@ -158,9 +158,9 @@ func reload(dict:Dictionary) -> void:
 			elif int(note.type) == 4:
 				n = preload("tween.tscn").instantiate()
 				
-			$Virtual.node = n
+			%Virtual.node = n
 			var grid_size = %PianoRoll.grid_size
-			Dictializer.from_dict(note, $Virtual)
+			Dictializer.from_dict(note, %Virtual)
 			Dictializer.from_dict(note, n)
 			%PianoRoll.add_item(n, i, false)
 
@@ -202,8 +202,17 @@ func change_type_(node, new_type:int) -> void:
 
 	n.set_meta("__type__", new_type)
 
-
-	#node.queue_free()
-
 func _next_pressed():
 	reload({time_range = Vector2i(0, 16), tracks = [] })
+
+func _split_container_dragged(offset):
+	%GhostHSplitContainer.split_offset = offset
+
+func _scroll_horizontal(value):
+	%PianoRoll.scroll_horizontal = value
+
+func _scroll_vertical(value):
+	$ScrollContainer.scroll_vertical = value * $ScrollContainer.get_child(0).size.y
+
+func _quant_selected(index):
+	%PianoRoll.set_quantinize_snap(index)
