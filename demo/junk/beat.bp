@@ -1,8 +1,9 @@
 {
 "clips": {
-183112528: {
+"a_intro": {
 "time_range": Vector2i(0, 400),
 "tracks": [{
+"condition_ex": "",
 "name": "/root/Game",
 "notes": [{
 "length": "16",
@@ -31,10 +32,11 @@
 "type": "2"
 }]
 }, {
+"condition_ex": "",
 "name": "/root/Game/toykit",
 "notes": [{
 "length": "16",
-"method": "&\"look 0\"",
+"method": "&\"look\"",
 "time": "0",
 "type": "2"
 }, {
@@ -49,9 +51,11 @@
 "type": "2"
 }]
 }, {
+"condition_ex": "",
 "name": "/root/Game/toykit/preset-rock",
 "notes": []
 }, {
+"condition_ex": "",
 "name": "/root/Game/toykit/seq-1",
 "notes": [{
 "auto": "false",
@@ -63,6 +67,7 @@
 "value": "1.0"
 }]
 }, {
+"condition_ex": "",
 "name": "/root/Game/toykit/seq-5",
 "notes": [{
 "auto": "false",
@@ -82,6 +87,7 @@
 "value": "1.0"
 }]
 }, {
+"condition_ex": "",
 "name": "/root/Game/toykit/seq-9",
 "notes": [{
 "auto": "false",
@@ -93,6 +99,7 @@
 "value": "1.0"
 }]
 }, {
+"condition_ex": "",
 "name": "/root/Game/toykit/seq-13",
 "notes": [{
 "auto": "false",
@@ -112,6 +119,7 @@
 "value": "1.0"
 }]
 }, {
+"condition_ex": "",
 "name": "/root/Game/toykit/seq-3",
 "notes": [{
 "auto": "false",
@@ -131,6 +139,7 @@
 "value": "0.0"
 }]
 }, {
+"condition_ex": "",
 "name": "/root/Game/toykit/seq-7",
 "notes": [{
 "auto": "false",
@@ -150,6 +159,7 @@
 "value": "0.0"
 }]
 }, {
+"condition_ex": "",
 "name": "/root/Game/toykit/seq-11",
 "notes": [{
 "auto": "false",
@@ -169,6 +179,7 @@
 "value": "0.0"
 }]
 }, {
+"condition_ex": "",
 "name": "/root/Game/toykit/seq-15",
 "notes": [{
 "auto": "false",
@@ -188,6 +199,7 @@
 "value": "0.0"
 }]
 }, {
+"condition_ex": "",
 "name": "/root/Game/toykit/seq-16",
 "notes": [{
 "auto": "false",
@@ -207,6 +219,7 @@
 "value": "0.0"
 }]
 }, {
+"condition_ex": "",
 "name": "/root/Game/toykit/select-clap",
 "notes": [{
 "auto": "true",
@@ -218,6 +231,7 @@
 "value": "1.0"
 }]
 }, {
+"condition_ex": "",
 "name": "/root/Game/toykit/select-closed",
 "notes": [{
 "auto": "true",
@@ -229,6 +243,7 @@
 "value": "1.0"
 }]
 }, {
+"condition_ex": "",
 "name": "/root/Game/acid",
 "notes": [{
 "length": "16",
@@ -247,7 +262,8 @@
 "type": "2"
 }]
 }, {
-"name": "/root/Game/acid/2",
+"condition_ex": "",
+"name": "/root/Game/acid/a",
 "notes": [{
 "auto": "true",
 "dilema_group": "0",
@@ -270,7 +286,8 @@
 "value": "0.0"
 }]
 }, {
-"name": "/root/Game/acid/3",
+"condition_ex": "",
+"name": "/root/Game/acid/d",
 "notes": [{
 "auto": "true",
 "dilema_group": "0",
@@ -287,114 +304,20 @@
 "value": "0.0"
 }]
 }, {
+"condition_ex": "",
 "name": "/root/Game/Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
 "notes": [{
 "length": "16",
-"method": "&\"jump 1\"",
+"method": "&\"jump text\"",
 "time": "384",
 "type": "2"
 }]
 }]
 },
-1806420329: {
-"time_range": Vector2i(0, 208),
-"tracks": [{
-"name": "/root/Game/phone",
-"notes": [{
-"length": "32",
-"method": "&\"look\"",
-"time": "0",
-"type": "2"
-}]
-}, {
-"name": "/root/Game/phone/ChatApp",
-"notes": [{
-"length": "32",
-"replay_a": "\"Idk?\"",
-"replay_b": "\"Who are you? \"",
-"time": "32",
-"type": "3",
-"value": "\"Guess where I am? \"",
-"who": "\"Giada\""
-}, {
-"length": "16",
-"replay_a": "\"\"",
-"replay_b": "\"\"",
-"time": "96",
-"type": "3",
-"value": "\"HERE! I came!\"",
-"who": "\"Giada\""
-}, {
-"length": "16",
-"replay_a": "\"I'm the DJ\"",
-"replay_b": "\"lol sure\"",
-"time": "112",
-"type": "3",
-"value": "\"Can you be louder though :)\"",
-"who": "\"Giada\""
-}]
-}, {
-"name": "/root/Game/phone/0",
-"notes": [{
-"auto": "false",
-"dilema_group": "0",
-"length": "32",
-"silent": "false",
-"time": "0",
-"type": "0",
-"value": "1.0"
-}]
-}, {
-"name": "/root/Game/phone/ReplyA",
-"notes": [{
-"auto": "false",
-"dilema_group": "1",
-"length": "48",
-"silent": "false",
-"time": "32",
-"type": "0",
-"value": "1.0"
-}, {
-"auto": "false",
-"dilema_group": "2",
-"length": "48",
-"silent": "false",
-"time": "112",
-"type": "0",
-"value": "1.0"
-}]
-}, {
-"name": "/root/Game/phone/ReplyB",
-"notes": [{
-"auto": "false",
-"dilema_group": "1",
-"length": "48",
-"silent": "false",
-"time": "32",
-"type": "0",
-"value": "1.0"
-}, {
-"auto": "false",
-"dilema_group": "2",
-"length": "48",
-"silent": "false",
-"time": "112",
-"type": "0",
-"value": "1.0"
-}]
-}, {
-"name": "/root/Game/Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
-"notes": [{
-"length": "16",
-"method": "&\"jump 2\"",
-"time": "160",
-"type": "2"
-}]
-}]
-},
-3559986301: {
+"impress": {
 "time_range": Vector2i(0, 160),
 "tracks": [{
+"condition_ex": "",
 "name": "/root/Game",
 "notes": [{
 "length": "16",
@@ -421,6 +344,7 @@
 "type": "4"
 }]
 }, {
+"condition_ex": "",
 "name": "/root/Game/toykit",
 "notes": [{
 "length": "16",
@@ -429,6 +353,7 @@
 "type": "2"
 }]
 }, {
+"condition_ex": "",
 "name": "/root/Game/toykit/preset-rock",
 "notes": [{
 "auto": "false",
@@ -440,6 +365,7 @@
 "value": "1.0"
 }]
 }, {
+"condition_ex": "",
 "name": "/root/Game/toykit/preset-house",
 "notes": [{
 "auto": "true",
@@ -451,16 +377,17 @@
 "value": "1.0"
 }]
 }, {
+"condition_ex": "",
 "name": "/root/Game/acid",
 "notes": [{
 "length": "16",
-"method": "&\"look 2\"",
+"method": "&\"look 1\"",
 "time": "16",
 "type": "2"
 }, {
 "length": "16",
-"method": "&\"look\"",
-"time": "72",
+"method": "&\"look \"",
+"time": "80",
 "type": "2"
 }, {
 "length": "16",
@@ -469,7 +396,8 @@
 "type": "2"
 }]
 }, {
-"name": "/root/Game/acid/2",
+"condition_ex": "",
+"name": "/root/Game/acid/a",
 "notes": [{
 "from_value": "0.0",
 "length": "48",
@@ -494,8 +422,10 @@
 "value": "1.0"
 }]
 }, {
+"condition_ex": "not missing ",
 "name": "/root/Game/phone/ChatApp",
 "notes": [{
+"db_name": "\"\"",
 "length": "16",
 "replay_a": "\"\"",
 "replay_b": "\"\"",
@@ -504,6 +434,7 @@
 "value": "\"LOUDER!\"",
 "who": "\"Giada\""
 }, {
+"db_name": "\"\"",
 "length": "16",
 "replay_a": "\"\"",
 "replay_b": "\"\"",
@@ -512,6 +443,7 @@
 "value": "\"MORE  LOUDER!\"",
 "who": "\"Giada\""
 }, {
+"db_name": "\"\"",
 "length": "16",
 "replay_a": "\"\"",
 "replay_b": "\"\"",
@@ -521,8 +453,189 @@
 "who": "\"Giada\""
 }]
 }, {
+"condition_ex": "missing",
+"name": "/root/Game/phone/ChatApp",
+"notes": [{
+"db_name": "\"\"",
+"length": "16",
+"replay_a": "\"\"",
+"replay_b": "\"\"",
+"time": "32",
+"type": "3",
+"value": "\"ehhh\"",
+"who": "\"Giada\""
+}, {
+"db_name": "\"\"",
+"length": "16",
+"replay_a": "\"\"",
+"replay_b": "\"\"",
+"time": "48",
+"type": "3",
+"value": "\"hmm\"",
+"who": "\"Giada\""
+}]
+}, {
+"condition_ex": "",
 "name": "/root/Game/Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
 "notes": []
+}]
+},
+"text": {
+"time_range": Vector2i(0, 208),
+"tracks": [{
+"condition_ex": "",
+"name": "/root/Game/phone",
+"notes": [{
+"length": "32",
+"method": "&\"look\"",
+"time": "0",
+"type": "2"
+}]
+}, {
+"condition_ex": "",
+"name": "/root/Game/phone/ChatApp",
+"notes": [{
+"db_name": "\"guess_where_i_am\"",
+"length": "32",
+"replay_a": "\"Who are you?\"",
+"replay_b": "\"Idk?\"",
+"time": "32",
+"type": "3",
+"value": "\"Guess where I am? \"",
+"who": "\"Giada\""
+}, {
+"db_name": "\"i_am_the_dj\"",
+"length": "16",
+"replay_a": "\"I'm the DJ\"",
+"replay_b": "\"lol sure\"",
+"time": "112",
+"type": "3",
+"value": "\"Can you be louder though :)\"",
+"who": "\"Giada\""
+}, {
+"db_name": "\"\"",
+"length": "32",
+"replay_a": "\"\"",
+"replay_b": "\"\"",
+"time": "0",
+"type": "3",
+"value": "\"Hi\"",
+"who": "\"Giada\""
+}]
+}, {
+"condition_ex": "guess_where_i_am",
+"name": "/root/Game/phone/ChatApp",
+"notes": [{
+"db_name": "\"\"",
+"length": "16",
+"replay_a": "\"\"",
+"replay_b": "\"\"",
+"time": "80",
+"type": "3",
+"value": "\"HERE!\"",
+"who": "\"Giada\""
+}, {
+"db_name": "\"\"",
+"length": "16",
+"replay_a": "\"\"",
+"replay_b": "\"\"",
+"time": "96",
+"type": "3",
+"value": "\"I CAME!\"",
+"who": "\"Giada\""
+}]
+}, {
+"condition_ex": "not guess_where_i_am",
+"name": "/root/Game/phone/ChatApp",
+"notes": [{
+"db_name": "\"\"",
+"length": "8",
+"replay_a": "\"\"",
+"replay_b": "\"\"",
+"time": "80",
+"type": "3",
+"value": "\"Oh no! I ignored you : )\"",
+"who": "\"Giada\""
+}, {
+"db_name": "\"\"",
+"length": "12",
+"replay_a": "\"\"",
+"replay_b": "\"\"",
+"time": "88",
+"type": "3",
+"value": "\"Was busy sorry\"",
+"who": "\"Giada\""
+}, {
+"db_name": "\"\"",
+"length": "12",
+"replay_a": "\"\"",
+"replay_b": "\"\"",
+"time": "100",
+"type": "3",
+"value": "\"But now I'm here!\"",
+"who": "\"Giada\""
+}]
+}, {
+"condition_ex": "",
+"name": "/root/Game/phone/0",
+"notes": [{
+"auto": "false",
+"dilema_group": "0",
+"length": "32",
+"silent": "false",
+"time": "0",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"condition_ex": "",
+"name": "/root/Game/phone/ReplyA",
+"notes": [{
+"auto": "false",
+"dilema_group": "1",
+"length": "48",
+"silent": "false",
+"time": "32",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "false",
+"dilema_group": "2",
+"length": "48",
+"silent": "false",
+"time": "112",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"condition_ex": "",
+"name": "/root/Game/phone/ReplyB",
+"notes": [{
+"auto": "false",
+"dilema_group": "1",
+"length": "48",
+"silent": "false",
+"time": "32",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "false",
+"dilema_group": "2",
+"length": "48",
+"silent": "false",
+"time": "112",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"condition_ex": "",
+"name": "/root/Game/Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
+"notes": [{
+"length": "16",
+"method": "&\"jump impress\"",
+"time": "160",
+"type": "2"
+}]
 }]
 }
 }

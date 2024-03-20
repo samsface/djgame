@@ -50,6 +50,7 @@ func _bang(r):
 var last_ting_
 
 func _input(event: InputEvent) -> void:
+	return
 	if Input.is_action_just_pressed("noise"):
 		Camera.push_look_at($CrowdService, 0, 0)
 	elif Input.is_action_just_released("noise"):

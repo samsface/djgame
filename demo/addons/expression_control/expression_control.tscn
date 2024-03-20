@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7lfbeipihvkj"]
+
+[ext_resource type="Script" path="res://addons/expression_control/expression_control.gd" id="1_lq70l"]
+
+[sub_resource type="CodeHighlighter" id="CodeHighlighter_p5noi"]
+number_color = Color(0.65098, 0.462745, 0.862745, 1)
+symbol_color = Color(1, 0.643137, 0.133333, 1)
+function_color = Color(0.721569, 0.721569, 0.721569, 1)
+
+[node name="VBoxContainer" type="VBoxContainer"]
+offset_right = 440.0
+offset_bottom = 146.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_lq70l")
+
+[node name="CodeEdit" type="CodeEdit" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+scroll_fit_content_height = true
+syntax_highlighter = SubResource("CodeHighlighter_p5noi")
+highlight_all_occurrences = true
+highlight_current_line = true
+code_completion_enabled = true
+
+[node name="Error" type="TextEdit" parent="."]
+visible = false
+layout_mode = 2
+editable = false
+scroll_fit_content_height = true
+
+[node name="Node" type="Node" parent="."]
+
+[connection signal="text_changed" from="CodeEdit" to="." method="_text_changed"]

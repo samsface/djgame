@@ -32,7 +32,7 @@ func _ready() -> void:
 
 	nob_.update_path_follow_position_for_value(for_value_)
 	nob_.remote_transform.remote_path = get_path()
-	nob_.remote_transform.rotation
+	nob_.remote_transform.rotation.z = 0
 	nob_.path_follow.progress_ratio = 0.0
 
 	var fall_time = length - (1.0 / 60)

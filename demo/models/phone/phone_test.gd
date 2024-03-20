@@ -107,12 +107,16 @@ func setup_mm_chat_() -> void:
 func _reply(reply_idx:int):
 	Camera.level.play()
 
-func dialog(length:float, who:String, value:String, replay_a:String, reply_b:String) -> void:
+func dialog(db:Object, length:float, who:String, value:String, db_name:String, replay_a:String, reply_b:String) -> void:
 	var message := PhoneChatMessage.new()
 	message.contact_name = who
 	message.message = value
 	message.sent_time = GameTime.now
 	message.replies = [replay_a, reply_b]
+	
+	message.reply.connect(func(reply_idx:int):
+		db.set(db_name, reply_idx)
+		)
 
 	var chat = chats.chats[who]
 	chat.messages.push_back(message)

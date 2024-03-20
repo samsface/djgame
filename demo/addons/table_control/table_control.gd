@@ -9,7 +9,7 @@ signal row_mouse_entered
 signal row_mouse_exited
 
 @export var streams:Array[AudioStream]
-	
+
 enum Tool {
 	none,
 	move,

@@ -3,18 +3,27 @@ extends Control
 signal finished
 
 var undo_ = UndoRedo.new()
+var inspector
 
 var playing := false
 
 var hover_tween_ : Tween
 
+var db
+
 @onready var piano_roll_ = %PianoRoll
+
+@export var title:String :
+	set(value):
+		name = value
+	get:
+		return name
 
 func _ready():
 	undo_.clear_history()
 	%TrackNames.track_focused.connect(_track_focused)
 	%TrackNames.undo = undo_
-	%Inspector.undo = undo_
+	inspector.undo = undo_
 	%PianoRoll.undo = undo_
 	%PianoRoll.row_pressed.connect(_piano_roll_pressed)
 	%PianoRoll.bang.connect(_piano_roll_bang)
@@ -45,8 +54,8 @@ func _ready():
 	)
 
 func _track_focused(track) -> void:
-	%Inspector.virtual_properties = null
-	%Inspector.node = track
+	inspector.virtual_properties = null
+	inspector.node = track
 
 func _input(event:InputEvent) -> void:
 	if event.is_action_pressed("redo"):
@@ -61,40 +70,17 @@ func _piano_roll_bang(item:Control, idx:int) -> void:
 	var node = get_node(node_path)
 	if not node:
 		return
-	
+		
+	var c:String = %TrackNames.get_condition(idx)
+	if not c.is_empty():
+		var e = Expression.new()
+		e.parse(c)
+		if not e.execute([], db):
+			return
+
 	var length = $Virtual2.length / %PianoRoll.tempo
 
-	var args := []
-
-	var method:StringName
-	if $Virtual2.type == 0:
-		method = &"bang"
-		args.push_back(length)
-	elif $Virtual2.type == 1:
-		method = &"slide" 
-		args.push_back(length)
-	elif $Virtual2.type == 3:
-		method = &"dialog" 
-		args.push_back(length)
-	elif $Virtual2.type == 2:
-		var method_args_generic = item.get("method").split(" ")
-		method = method_args_generic[0]
-		for i in range(1, method_args_generic.size()):
-			args.push_back(int(method_args_generic[i]))
-	elif $Virtual2.type == 4:
-		item.op(node, length)
-		return 
-
-	for property_name in %Inspector.include_list:
-		if property_name == "method":
-			continue
-		if property_name in item:
-			args.push_back(item.get(property_name))
-
-	if not node.has_method(method):
-		return
-	
-	node.callv(method, args)
+	item.op(db, node, length)
 
 func _piano_roll_pressed(row_idx:int, pos:Vector2i) -> void:
 	var note = preload("bang.tscn").instantiate()
@@ -103,11 +89,11 @@ func _piano_roll_pressed(row_idx:int, pos:Vector2i) -> void:
 
 func _piano_roll_selection_changed(selection:Array) -> void:
 	if not selection:
-		%Inspector.node = null
+		inspector.node = null
 		return
 
-	%Inspector.virtual_properties = $Virtual
-	%Inspector.node = selection[0]
+	inspector.virtual_properties = $Virtual
+	inspector.node = selection[0]
 
 func play():
 	playing = true
@@ -123,24 +109,25 @@ func add_track(node_path) -> void:
 	%TrackNames.add_track(node_path)
 
 func get_state() -> Dictionary:
-	%Inspector.virtual_properties = $Virtual
+	inspector.virtual_properties = $Virtual
 	
 	var state := {
 		time_range = %PianoRoll.time_range,
 		tracks = []
 	}
-	
+
 	var track_names = %TrackNames.get_all_track_names()
 	var piano_roll = %PianoRoll.get_queue()
 
 	for i in range(piano_roll.size()):
 		var track := {
-			name = track_names[i],
+			name = track_names[i][0],
+			condition_ex = track_names[i][1],
 			notes = []
 		}
 
 		for note in piano_roll[i]:
-			track.notes.push_back(%Inspector.to_dict(note))
+			track.notes.push_back(inspector.to_dict(note))
 
 		state.tracks.push_back(track)
 
@@ -151,6 +138,8 @@ func reload(dict:Dictionary) -> void:
 	
 	for i in dict.tracks.size():
 		add_track(dict.tracks[i].name)
+		%TrackNames.set_track_condition(i, dict.tracks[i].get("condition_ex", ""))
+		
 		
 		for note in dict.tracks[i].notes:
 			var n:Control
@@ -202,8 +191,8 @@ func change_type_(node, new_type:int) -> void:
 	
 	%PianoRoll.add_item(n, row_idx)
 
-	%Inspector.node = n
-	%Inspector.copy_all_possible_property_values(node, n)
+	inspector.node = n
+	inspector.copy_all_possible_property_values(node, n)
 	n.size = node.size
 	n.position = node.position
 

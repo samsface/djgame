@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5yhj5m3qblia"]
+[gd_scene load_steps=8 format=3 uid="uid://c5yhj5m3qblia"]
 
 [ext_resource type="Theme" uid="uid://dbvpa0vlu34gu" path="res://ui/beat_player.tres" id="1_4sc8w"]
 [ext_resource type="Script" path="res://tools/beat_player.gd" id="1_cu0vf"]
 [ext_resource type="PackedScene" uid="uid://cwilpnax30ixm" path="res://addons/table_control/table_control.tscn" id="2_aoyoc"]
 [ext_resource type="PackedScene" uid="uid://djt43y0g843nn" path="res://addons/table_control/node_path_tracks.tscn" id="2_pot1g"]
-[ext_resource type="PackedScene" uid="uid://0xf0dcjgbmqj" path="res://addons/inspector/inspector.tscn" id="5_5v16j"]
 [ext_resource type="Script" path="res://addons/inspector/virtual.gd" id="6_hnn6r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l60d4"]
@@ -32,6 +31,7 @@ script = ExtResource("6_hnn6r")
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+visible = false
 layout_mode = 2
 
 [node name="Save" type="Button" parent="PanelContainer/HBoxContainer"]
@@ -62,14 +62,5 @@ piano_roll = NodePath("../PianoRoll")
 [node name="PianoRoll" parent="MarginContainer/HSplitContainer2/HSplitContainer" instance=ExtResource("2_aoyoc")]
 unique_name_in_owner = true
 layout_mode = 2
-
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/HSplitContainer2"]
-layout_mode = 2
-
-[node name="Inspector" parent="MarginContainer/HSplitContainer2/MarginContainer2" node_paths=PackedStringArray("virtual_properties") instance=ExtResource("5_5v16j")]
-unique_name_in_owner = true
-layout_mode = 2
-include_list = Array[String](["type", "time", "length", "who", "from_value", "value", "method", "auto", "replay_a", "replay_b", "dilema_group", "to_value", "property", "silent", "condition"])
-virtual_properties = NodePath("../../../../Virtual")
 
 [connection signal="dragged" from="MarginContainer/HSplitContainer2" to="." method="_inspector_split_dragged"]

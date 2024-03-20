@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends Control
 
 signal value_changed
 
@@ -9,3 +9,6 @@ signal value_changed
 
 func _value_changed(value):
 	value_changed.emit(value)
+
+func _value_changed_alt():
+	value_changed.emit($Value.text)

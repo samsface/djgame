@@ -64,3 +64,6 @@ func invalidate_value_() -> void:
 	$Polygon2D.position = Vector2.ONE + Vector2.ONE * border_width * 0.5
 	
 	$Polygon2D.polygon = polygon
+
+func op(db, node, length) -> void:
+	node.bang(length, value, auto, dilema_group, silent)

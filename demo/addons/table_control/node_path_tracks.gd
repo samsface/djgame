@@ -9,7 +9,7 @@ var data_ := {}
 
 @onready var track_names_ = $MarginContainer/TrackNames
 
-func add_track(node_path:NodePath = "") -> void:
+func add_track(node_path:NodePath = "") -> Node:
 	#for track_name in track_names_.get_children():
 	#	if track_name.get_node("H/Value").text == str(node_path):
 	#		return
@@ -32,13 +32,15 @@ func add_track(node_path:NodePath = "") -> void:
 
 	undo.commit_action()
 	
+	return track_name
+	
 func get_track_node_path(idx:int) -> NodePath:
 	return track_names_.get_child(idx).value
 
 func get_all_track_names() -> Array:
 	var res := []
 	for child in track_names_.get_children():
-		res.push_back(str(child.value))
+		res.push_back([str(child.value), str(child.condition_ex)])
 
 	return res
 
@@ -87,5 +89,11 @@ func _move_track_down(track_name:Control) -> void:
 
 	undo.commit_action()
 
+func set_track_condition(track_idx:int, condition_ex:String) -> void:
+	track_names_.get_child(track_idx).condition_ex = condition_ex
+
 func _add_track_pressed():
 	add_track()
+
+func get_condition(track_idx:int) -> String:
+	return track_names_.get_child(track_idx).condition_ex

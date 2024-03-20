@@ -38,7 +38,6 @@ func _input(event) -> void:
 			
 		#Camera.camera_.fov = 50
 
-		
 		var p
 		if automated:
 			p = event.position

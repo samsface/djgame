@@ -18,5 +18,5 @@ func invalidate_value_() -> void:
 	
 	$Label.text = "%s->%s" % [property, to_value]
 
-func op(node:Node, length:float) -> void:
+func op(db, node:Node, length:float) -> void:
 	create_tween().tween_property(node, property, to_value, length)

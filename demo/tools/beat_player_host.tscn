@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://lb3oq22iphka"]
+[gd_scene load_steps=5 format=3 uid="uid://lb3oq22iphka"]
 
 [ext_resource type="Theme" uid="uid://dbvpa0vlu34gu" path="res://ui/beat_player.tres" id="1_rs0lp"]
 [ext_resource type="Script" path="res://tools/beat_player_host.gd" id="2_gk3x2"]
-[ext_resource type="PackedScene" uid="uid://bnh7e3jq63xtj" path="res://addons/graph/viewer.tscn" id="3_3i5jy"]
+[ext_resource type="Script" path="res://tools/db.gd" id="3_6y6es"]
+[ext_resource type="PackedScene" uid="uid://0xf0dcjgbmqj" path="res://addons/inspector/inspector.tscn" id="3_em7m1"]
 
 [node name="BeatPlayerHost" type="VBoxContainer"]
 anchors_preset = 15
@@ -14,8 +15,8 @@ mouse_filter = 2
 theme = ExtResource("1_rs0lp")
 script = ExtResource("2_gk3x2")
 
-[node name="SubViewportContainer" parent="." instance=ExtResource("3_3i5jy")]
-layout_mode = 2
+[node name="DB" type="Node" parent="."]
+script = ExtResource("3_6y6es")
 
 [node name="Menu" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -36,10 +37,22 @@ text = "Stop"
 layout_mode = 2
 text = "New +"
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 2
+split_offset = 1300
+
+[node name="TabContainer" type="TabContainer" parent="HSplitContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+drag_to_rearrange_enabled = true
+
+[node name="Inspector" parent="HSplitContainer" instance=ExtResource("3_em7m1")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [connection signal="pressed" from="Menu/Save" to="." method="_save_pressed"]
 [connection signal="pressed" from="Menu/Play" to="." method="_play_pressed"]
 [connection signal="pressed" from="Menu/Stop" to="." method="_stop_pressed"]
 [connection signal="pressed" from="Menu/New" to="." method="_new_pressed"]
+[connection signal="tab_clicked" from="HSplitContainer/TabContainer" to="." method="_tab_clicked"]

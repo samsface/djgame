@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://drlpyebu011rd"]
+
+[ext_resource type="Script" path="res://addons/inspector/string_control.gd" id="1_kdott"]
+
+[node name="HBoxContainer4" type="VBoxContainer"]
+offset_right = 309.0
+offset_bottom = 23.0
+script = ExtResource("1_kdott")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Time"
+
+[node name="Value" type="TextEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+scroll_fit_content_height = true
+
+[connection signal="text_changed" from="Value" to="." method="_value_changed_alt"]

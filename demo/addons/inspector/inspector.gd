@@ -8,8 +8,8 @@ var undo = UndoRedo.new()
 			node = value
 			invalidate_()
 		
-@export var include_list:Array[String] 
 @export var virtual_properties:Node
+@export var custom_rules:Array[Callable]
 
 var properties_to_poll_ := {}
 
@@ -33,30 +33,36 @@ func invalidate_() -> void:
 		properties = virtual_properties.get_property_list() + properties
 
 	for property in properties:
-		if property.usage & PROPERTY_USAGE_EDITOR == 0:
-			continue
-
-		if not (property.name in include_list):
+		if property.usage & PROPERTY_USAGE_SCRIPT_VARIABLE == 0:
 			continue
 
 		var control
+		
+		for rule in custom_rules:
+			control = rule.call(property)
+			if control:
+				break
 
-		match property.type:
-			TYPE_INT:
-				if property.hint & PROPERTY_HINT_ENUM:
-					control = add_enum_control_(property)
-				else:
-					control = add_int_control_(property)
-			TYPE_FLOAT:
-				control = add_float_control_(property)
-			TYPE_STRING:
-				control = add_string_control_(property)
-			TYPE_STRING_NAME:
-				control = add_string_control_(property)
-			TYPE_NODE_PATH:
-				control = add_string_control_(property)
-			TYPE_BOOL:
-				control = add_bool_control_(property)
+		if not control:
+			match property.type:
+				TYPE_INT:
+					if property.hint & PROPERTY_HINT_ENUM:
+						control = add_enum_control_(property)
+					else:
+						control = add_int_control_(property)
+				TYPE_FLOAT:
+					control = add_float_control_(property)
+				TYPE_STRING:
+					if property.hint & PROPERTY_HINT_MULTILINE_TEXT:
+						control = add_multiline_string_control_(property)
+					else:
+						control = add_string_control_(property)
+				TYPE_STRING_NAME:
+					control = add_string_control_(property)
+				TYPE_NODE_PATH:
+					control = add_string_control_(property)
+				TYPE_BOOL:
+					control = add_bool_control_(property)
 		
 		if not control:
 			continue
@@ -92,6 +98,10 @@ func add_int_control_(property:Dictionary) -> Control:
 	var control = preload("int_control.tscn").instantiate()
 	return control
 
+func add_multiline_string_control_(property:Dictionary) -> Control:
+	var control = preload("res://addons/inspector/multiline_string_control.tscn").instantiate()
+	return control
+
 func add_string_control_(property:Dictionary) -> Control:
 	var control = preload("string_control.tscn").instantiate()
 	return control
@@ -103,7 +113,10 @@ func add_bool_control_(property:Dictionary) -> Control:
 func _control_value_changed(new_value, property_name:String) -> void:
 	if not node:
 		return
-	
+
+	if properties_to_poll_[property_name][0] is NodePath:
+		new_value = NodePath(new_value)
+
 	if properties_to_poll_[property_name][0] == new_value:
 		return
 
@@ -151,10 +164,7 @@ func poll_node_properties_() -> void:
 
 func copy_all_possible_property_values(from:Node, to:Node) -> void:
 	for property in to.get_property_list():
-		if property.usage & PROPERTY_USAGE_EDITOR == 0:
-			continue
-			
-		if not (property.name in include_list):
+		if property.usage & PROPERTY_USAGE_SCRIPT_VARIABLE == 0:
 			continue
 
 		if property.name in from:

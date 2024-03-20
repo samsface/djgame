@@ -17,6 +17,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = "1234123"
+editable = false
 caret_blink = true
 caret_blink_interval = 0.5
 
