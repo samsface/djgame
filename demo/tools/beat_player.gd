@@ -94,7 +94,11 @@ func _piano_roll_selection_changed(selection:Array) -> void:
 
 	inspector.virtual_properties = $Virtual
 	inspector.node = selection[0]
-
+	
+	if Input.is_action_pressed("ctrl"):
+		for node in selection:
+			_piano_roll_bang(node, node.get_parent().get_index() - 2)
+	
 func play():
 	playing = true
 	%PianoRoll.playing = true

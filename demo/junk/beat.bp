@@ -268,7 +268,7 @@
 "auto": "true",
 "dilema_group": "0",
 "length": "4",
-"silent": "false",
+"silent": "true",
 "time": "0",
 "type": "0",
 "value": "0.05"
@@ -292,7 +292,7 @@
 "auto": "true",
 "dilema_group": "0",
 "length": "4",
-"silent": "false",
+"silent": "true",
 "time": "0",
 "type": "0",
 "value": "1.0"
@@ -303,19 +303,10 @@
 "type": "1",
 "value": "0.0"
 }]
-}, {
-"condition_ex": "",
-"name": "/root/Game/Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
-"notes": [{
-"length": "16",
-"method": "&\"jump text\"",
-"time": "384",
-"type": "2"
-}]
 }]
 },
 "impress": {
-"time_range": Vector2i(0, 160),
+"time_range": Vector2i(0, 208),
 "tracks": [{
 "condition_ex": "",
 "name": "/root/Game",
@@ -371,7 +362,7 @@
 "auto": "true",
 "dilema_group": "0",
 "length": "8",
-"silent": "false",
+"silent": "true",
 "time": "72",
 "type": "0",
 "value": "1.0"
@@ -381,18 +372,28 @@
 "name": "/root/Game/acid",
 "notes": [{
 "length": "16",
-"method": "&\"look 1\"",
+"method": "&\"look 2\"",
 "time": "16",
 "type": "2"
 }, {
 "length": "16",
 "method": "&\"look \"",
-"time": "80",
+"time": "64",
 "type": "2"
 }, {
 "length": "16",
 "method": "&\"look 1\"",
 "time": "96",
+"type": "2"
+}, {
+"length": "16",
+"method": "&\"look\"",
+"time": "144",
+"type": "2"
+}, {
+"length": "16",
+"method": "&\"look 1\"",
+"time": "160",
 "type": "2"
 }]
 }, {
@@ -420,6 +421,22 @@
 "time": "80",
 "type": "0",
 "value": "1.0"
+}, {
+"auto": "false",
+"dilema_group": "0",
+"length": "16",
+"silent": "false",
+"time": "144",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "false",
+"dilema_group": "0",
+"length": "16",
+"silent": "false",
+"time": "128",
+"type": "0",
+"value": "0.0"
 }]
 }, {
 "condition_ex": "not missing ",
@@ -626,15 +643,6 @@
 "time": "112",
 "type": "0",
 "value": "1.0"
-}]
-}, {
-"condition_ex": "",
-"name": "/root/Game/Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
-"notes": [{
-"length": "16",
-"method": "&\"jump impress\"",
-"time": "160",
-"type": "2"
 }]
 }]
 }
