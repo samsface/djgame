@@ -73,9 +73,13 @@ func _unhandled_input(event:InputEvent) -> void:
 	
 	if event.is_action_pressed("ui_cancel"):
 		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			reset()
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+func reset() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	position2D = get_viewport().size * 0.5
 
 func update() -> void:
 	position2D += relative * 1.5

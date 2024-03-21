@@ -97,7 +97,14 @@ func _piano_roll_selection_changed(selection:Array) -> void:
 	
 	if Input.is_action_pressed("ctrl"):
 		for node in selection:
-			_piano_roll_bang(node, node.get_parent().get_index() - 2)
+			_piano_roll_bang(node, node.get_parent().get_index())
+
+func _gui_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			$ScrollContainer.scroll_vertical -= 20.0
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			$ScrollContainer.scroll_vertical += 20.0
 
 func play():
 	playing = true
@@ -177,7 +184,7 @@ func change_type_(node, new_type:int) -> void:
 		node.set_meta("__type__", new_type)
 		return
 		
-	var row_idx = node.get_parent().get_index() - 2
+	var row_idx = node.get_parent().get_index()
 		
 	%PianoRoll.remove_item(node)
 	
@@ -209,7 +216,7 @@ func _split_container_dragged(offset):
 	%GhostHSplitContainer.split_offset = offset
 
 func _scroll_horizontal(value):
-	%PianoRoll.scroll_horizontal = value
+	%PianoRoll.scroll_horizontal_ratio = value
 
 func _scroll_vertical(value):
 	$ScrollContainer.scroll_vertical = value * $ScrollContainer.get_child(0).size.y

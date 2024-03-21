@@ -18,3 +18,7 @@ func invalidate_() -> void:
 		$H/Condition.text = condition_ex
 		
 	$H/Value.text = str(value).get_file()
+
+func set_indent(level:int) -> void:
+	$H/Value.visible = level == 0
+	$H/Indent.custom_minimum_size.x = level * 16

@@ -17,4 +17,4 @@ func _draw():
 		elif x % 4 == 0:
 			color.a = 0.25
 
-		draw_line(Vector2(x * grid_size, 20), Vector2(x * grid_size, size.y), color, 2.0)
+		draw_line(Vector2(x * grid_size, 0), Vector2(x * grid_size, size.y), color, 2.0)

@@ -12,6 +12,7 @@ theme = ExtResource("1_27w2i")
 script = ExtResource("2_smc25")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
 color = Color(0.556863, 0.823529, 0.490196, 1)
 antialiased = true
 polygon = PackedVector2Array(1, 1, 31, 1, 31, 31, 1, 31)

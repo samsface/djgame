@@ -97,3 +97,13 @@ func _add_track_pressed():
 
 func get_condition(track_idx:int) -> String:
 	return track_names_.get_child(track_idx).condition_ex
+
+func pretty_tracks_() -> void:
+	for i in track_names_.get_child_count() - 1:
+		if track_names_.get_child(i).value == track_names_.get_child(i + 1).value:
+			track_names_.get_child(i + 1).set_indent(1)
+		else:
+			track_names_.get_child(i + 1).set_indent(0)
+
+func _order_changed():
+	pretty_tracks_()

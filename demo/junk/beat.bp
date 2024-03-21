@@ -68,58 +68,6 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/seq-5",
-"notes": [{
-"auto": "false",
-"dilema_group": "0",
-"length": "16",
-"silent": "false",
-"time": "20",
-"type": "0",
-"value": "1.0"
-}, {
-"auto": "false",
-"dilema_group": "0",
-"length": "16",
-"silent": "false",
-"time": "84",
-"type": "0",
-"value": "1.0"
-}]
-}, {
-"condition_ex": "",
-"name": "/root/Game/toykit/seq-9",
-"notes": [{
-"auto": "false",
-"dilema_group": "0",
-"length": "16",
-"silent": "false",
-"time": "40",
-"type": "0",
-"value": "1.0"
-}]
-}, {
-"condition_ex": "",
-"name": "/root/Game/toykit/seq-13",
-"notes": [{
-"auto": "false",
-"dilema_group": "0",
-"length": "16",
-"silent": "false",
-"time": "60",
-"type": "0",
-"value": "1.0"
-}, {
-"auto": "false",
-"dilema_group": "0",
-"length": "16",
-"silent": "false",
-"time": "92",
-"type": "0",
-"value": "1.0"
-}]
-}, {
-"condition_ex": "",
 "name": "/root/Game/toykit/seq-3",
 "notes": [{
 "auto": "false",
@@ -137,6 +85,26 @@
 "time": "380",
 "type": "0",
 "value": "0.0"
+}]
+}, {
+"condition_ex": "",
+"name": "/root/Game/toykit/seq-5",
+"notes": [{
+"auto": "false",
+"dilema_group": "0",
+"length": "16",
+"silent": "false",
+"time": "20",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "false",
+"dilema_group": "0",
+"length": "16",
+"silent": "false",
+"time": "84",
+"type": "0",
+"value": "1.0"
 }]
 }, {
 "condition_ex": "",
@@ -160,6 +128,18 @@
 }]
 }, {
 "condition_ex": "",
+"name": "/root/Game/toykit/seq-9",
+"notes": [{
+"auto": "false",
+"dilema_group": "0",
+"length": "16",
+"silent": "false",
+"time": "40",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"condition_ex": "",
 "name": "/root/Game/toykit/seq-11",
 "notes": [{
 "auto": "false",
@@ -177,6 +157,26 @@
 "time": "380",
 "type": "0",
 "value": "0.0"
+}]
+}, {
+"condition_ex": "",
+"name": "/root/Game/toykit/seq-13",
+"notes": [{
+"auto": "false",
+"dilema_group": "0",
+"length": "16",
+"silent": "false",
+"time": "60",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "false",
+"dilema_group": "0",
+"length": "16",
+"silent": "false",
+"time": "92",
+"type": "0",
+"value": "1.0"
 }]
 }, {
 "condition_ex": "",
@@ -303,6 +303,15 @@
 "type": "1",
 "value": "0.0"
 }]
+}, {
+"condition_ex": "",
+"name": "/root/Game/Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
+"notes": [{
+"length": "16",
+"method": "&\"jump text\"",
+"time": "384",
+"type": "2"
+}]
 }]
 },
 "impress": {
@@ -311,11 +320,6 @@
 "condition_ex": "",
 "name": "/root/Game",
 "notes": [{
-"length": "16",
-"method": "&\"play__\"",
-"time": "0",
-"type": "2"
-}, {
 "length": "44",
 "property": "\"rumble\"",
 "time": "32",
@@ -387,13 +391,13 @@
 "type": "2"
 }, {
 "length": "16",
-"method": "&\"look\"",
-"time": "144",
+"method": "&\"look 1\"",
+"time": "152",
 "type": "2"
 }, {
 "length": "16",
-"method": "&\"look 1\"",
-"time": "160",
+"method": "&\"look 0\"",
+"time": "128",
 "type": "2"
 }]
 }, {
@@ -439,7 +443,7 @@
 "value": "0.0"
 }]
 }, {
-"condition_ex": "not missing ",
+"condition_ex": "not missing",
 "name": "/root/Game/phone/ChatApp",
 "notes": [{
 "db_name": "\"\"",
@@ -643,6 +647,15 @@
 "time": "112",
 "type": "0",
 "value": "1.0"
+}]
+}, {
+"condition_ex": "",
+"name": "/root/Game/Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
+"notes": [{
+"length": "16",
+"method": "&\"jump impress\"",
+"time": "160",
+"type": "2"
 }]
 }]
 }

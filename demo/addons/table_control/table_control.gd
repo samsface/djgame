@@ -9,9 +9,18 @@ signal row_mouse_entered
 signal row_mouse_exited
 
 @export var streams:Array[AudioStream]
-@export var scroll_horizontal:float :
+
+@export var scroll_horizontal_ratio:float :
 	set(v):
 		scroll_container_.scroll_horizontal = v * scroll_container_.get_child(0).size.x
+		header_scroll_container_.scroll_horizontal = v * scroll_container_.get_child(0).size.x
+	get:
+		return scroll_container_.scroll_horizontal * scroll_container_.get_child(0).size.x
+
+@export var scroll_horizontal:float :
+	set(v):
+		scroll_container_.scroll_horizontal = v 
+		header_scroll_container_.scroll_horizontal = v
 	get:
 		return scroll_container_.scroll_horizontal
 
@@ -56,12 +65,13 @@ var index_ := {}
 var time_ := 0.0
 var queue_ := []
 
-@onready var cursor := $ScrollContainer/MarginContainer/Cursor
-@onready var scroll_container_ := $ScrollContainer
-@onready var grid_ := $ScrollContainer/MarginContainer/Grid
+@onready var cursor := %Cursor
+@onready var scroll_container_ := %ScrollContainer
+@onready var header_scroll_container_ := %ScrollContainer2
+@onready var grid_ := %Grid
 
 func _ready() -> void:
-	%Grid.grid_size = grid_size
+	grid_.grid_size = grid_size
 	connect_row_item_(%TimeRange)
 	create_headings_()
 	invalidate_headings_()
@@ -83,28 +93,33 @@ func connect_row_item_(row_item:Button) -> void:
 
 func connect_row_(row) -> void:
 	row.gui_input.connect(func(event): 
-		var row_index = row.get_index() - 2
+		var row_index = row.get_index()
 		if event.is_action_pressed("click"): 
 			row_pressed.emit(row_index, row.get_local_mouse_position())
 	)
-	row.mouse_entered.connect(func(): var row_index = row.get_index() - 2; row_mouse_entered.emit(row_index))
-	row.mouse_exited.connect(func(): var row_index = row.get_index() - 2; row_mouse_exited.emit(row_index))
+	row.mouse_entered.connect(func(): var row_index = row.get_index(); row_mouse_entered.emit(row_index))
+	row.mouse_exited.connect(func(): var row_index = row.get_index(); row_mouse_exited.emit(row_index))
 
 func quantinize_to_grid(value:float) -> int:
 	return clamp(floor(value / grid_size) * grid_size, 0 , 2048)
 
 func get_local_mouse_table_position() -> int:
-	return clamp(floor($ScrollContainer/MarginContainer/Rows.get_local_mouse_position().x / grid_size), 0 , 2048)
+	return clamp(floor($VBoxContainer/ScrollContainer/MarginContainer.get_local_mouse_position().x / grid_size), 0 , 2048)
+
+
+var grab_position_ := Vector2.ZERO
 
 func _table_item_button_down(item):
+	grab_position_ = get_global_mouse_position()
+	
 	selection_.clear()
 	selection_.push_back(item)
 	
 	var w := where_(item)
 
-	if w.x == 0:
-		move_begin_()
-	elif w.x > 0:
+	#if w.x == 0:
+		#move_begin_()
+	if w.x > 0:
 		resize_east_begin_()
 	elif w.x < 0:
 		resize_west_begin_()
@@ -148,18 +163,22 @@ func _physics_process(delta:float) -> void:
 		var d = mpx - scroll_container_.size.x
 
 		if d > 0:
-			scroll_container_.scroll_horizontal += d * delta * 10.0
+			scroll_horizontal += d * delta * 10.0
 			_input(InputEventMouseMotion.new())
 		elif mpx < 0:
-			scroll_container_.scroll_horizontal += mpx * delta * 10.0
+			scroll_horizontal += mpx * delta * 10.0
 			_input(InputEventMouseMotion.new())
 
 	var row_position = get_local_mouse_table_position()
 
-	if tool_ == Tool.move:
+
+	if not selection_.is_empty() and tool_ == Tool.none:
+		if abs(get_global_mouse_position().x - grab_position_.x) > 0.1:
+			move_begin_()
+	elif tool_ == Tool.move:
 		for item in selection_:
 			item.position.x = row_position * grid_size - quantinize_to_grid(grab_offet_)
-			#item.position.x = quantinize(item.position.x, quantinize_snap)
+			item.position.x = quantinize(item.position.x, quantinize_snap)
 	elif tool_ == Tool.resize_east:
 		for item in selection_:
 			item.size.x = quantinize((row_position + quantinize_snap) * grid_size, quantinize_snap) - item.position.x
@@ -259,12 +278,12 @@ func add_item(node:Button, row_idx:int, quantinize := true) -> void:
 	if node == null:
 		return
 
-	if %Rows.get_child_count() <= row_idx + 2:
+	if %Rows.get_child_count() <= row_idx:
 		return
 
-	var row = %Rows.get_child(row_idx + 2)
+	var row = %Rows.get_child(row_idx)
 
-	node.custom_minimum_size = Vector2i(grid_size, 32)
+	node.custom_minimum_size = Vector2i(grid_size, 36)
 	node.size.y *= 0
 	if quantinize:
 		node.position.x = quantinize(node.position.x, quantinize_snap)
@@ -290,20 +309,16 @@ func remove_item(node:Control) -> void:
 	undo.commit_action()
 
 func invalidate_grid_size_(old_grid_size) -> void:
-	$ScrollContainer/MarginContainer/Grid.grid_size = grid_size
+	grid_.grid_size = grid_size
 
-	for row in %Rows.get_children():
-		if row.get_index() > 0:
-			for item in row.get_children():
-				#if row.get_index() > 1:
-					#item.grid_size = grid_size
-				
-				var t = item.position.x / old_grid_size
-				var l = item.size.x / old_grid_size
-				item.position.x = t * grid_size 
-				item.size.x = l * grid_size
+	for row in %Rows.get_children() + [%TimeRange.get_parent()]:
+		for item in row.get_children():
+			var t = item.position.x / old_grid_size
+			var l = item.size.x / old_grid_size
+			item.position.x = t * grid_size 
+			item.size.x = l * grid_size
 
-	%ScrollContainer.scroll_horizontal = zoom_grab_time_ * grid_size - %ScrollContainer.size.x * 0.5
+	scroll_horizontal = zoom_grab_time_ * grid_size - %ScrollContainer.size.x * 0.5
 
 	invalidate_headings_()
 
@@ -311,9 +326,6 @@ func invalidate_queue_() -> void:
 	queue_.clear()
 
 	for row in %Rows.get_children():
-		if row.get_index() <= 1:
-			continue
-
 		var dict := {}
 		for item in row.get_children():
 			dict[int(item.position.x / grid_size)] = item
@@ -336,18 +348,18 @@ func get_queue() -> Array:
 
 func add_row() -> void:
 	var row := Control.new()
-	row.custom_minimum_size.y = 32
+	row.custom_minimum_size.y = 36
 	connect_row_(row)
 	undo.add_do_method(%Rows.add_child.bind(row))
 	undo.add_do_reference(row)
 	undo.add_undo_method(%Rows.remove_child.bind(row))
 	
 func remove_row(idx:int) -> void:
-	var row = %Rows.get_child(idx + 2)
+	var row = %Rows.get_child(idx)
 
 	undo.add_do_method(%Rows.remove_child.bind(row))
 	undo.add_undo_method(%Rows.add_child.bind(row))
-	undo.add_undo_method(%Rows.move_child.bind(row, idx + 2))
+	undo.add_undo_method(%Rows.move_child.bind(row, idx))
 	undo.add_undo_reference(row)
 
 func _item_gui_input(event:InputEvent, item:Control):
@@ -426,14 +438,14 @@ func set_quantinize_snap(index):
 			quantinize_snap = 16
 
 func move_row_up(row_idx:int) -> void:
-	var row = %Rows.get_child(row_idx + 2)
+	var row = %Rows.get_child(row_idx)
 	if row.get_index() == 2:
 		return
 
 	row.get_parent().move_child(row, row.get_index() - 1)
 
 func move_row_down(row_idx:int) -> void:
-	var row = %Rows.get_child(row_idx + 2)
+	var row = %Rows.get_child(row_idx)
 	if row.get_index() == row.get_parent().get_child_count() - 1:
 		return
 

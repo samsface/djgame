@@ -5,7 +5,7 @@ extends Button
 		who = v
 		invalidate_value_()
 
-@export var value:String : 
+@export_multiline var value:String : 
 	set(v):
 		value = v
 		invalidate_value_()

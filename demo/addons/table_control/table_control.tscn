@@ -18,47 +18,66 @@ script = ExtResource("3_5uoug")
 [node name="Selection" type="Polygon2D" parent="Node2D"]
 color = Color(0.521569, 1, 1, 0.333333)
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
-unique_name_in_owner = true
-layout_mode = 2
-horizontal_scroll_mode = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
-custom_minimum_size = Vector2(8000, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Grid" type="MarginContainer" parent="ScrollContainer/MarginContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-script = ExtResource("2_w1t41")
-
-[node name="Rows" type="VBoxContainer" parent="ScrollContainer/MarginContainer"]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Headings" type="Control" parent="ScrollContainer/MarginContainer/Rows"]
+[node name="ScrollContainer2" type="ScrollContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer2"]
+custom_minimum_size = Vector2(8000, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Headings" type="Control" parent="VBoxContainer/ScrollContainer2/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(500, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Range2" type="Control" parent="ScrollContainer/MarginContainer/Rows"]
+[node name="Range2" type="Control" parent="VBoxContainer/ScrollContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(500, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TimeRange" type="Button" parent="ScrollContainer/MarginContainer/Rows/Range2"]
+[node name="TimeRange" type="Button" parent="VBoxContainer/ScrollContainer2/VBoxContainer/Range2"]
 unique_name_in_owner = true
 self_modulate = Color(1, 0.533333, 1, 1)
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 0
 offset_right = 103.0
 offset_bottom = 18.0
+theme = ExtResource("1_qor3e")
 
-[node name="Cursor" type="ColorRect" parent="ScrollContainer/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(8000, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Grid" type="MarginContainer" parent="VBoxContainer/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("2_w1t41")
+
+[node name="Rows" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Cursor" type="ColorRect" parent="VBoxContainer/ScrollContainer/MarginContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(4, 0)
 layout_mode = 2

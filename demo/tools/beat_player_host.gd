@@ -70,6 +70,8 @@ func _graph_node_selected(node) -> void:
 				break
 
 func _play_pressed() -> void:
+	visible = false
+	Camera.cursor.reset()
 	play()
 
 func _new_pressed():
@@ -106,3 +108,7 @@ func jump(scene) -> void:
 func _tab_clicked(tab):
 	%Inspector.virtual_properties = null
 	%Inspector.node = %TabContainer.get_current_tab_control()
+
+
+func _debug_pressed():
+	play()

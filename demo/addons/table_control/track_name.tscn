@@ -11,6 +11,9 @@ script = ExtResource("1_po4w0")
 [node name="H" type="HBoxContainer" parent="."]
 layout_mode = 2
 
+[node name="Indent" type="MarginContainer" parent="H"]
+layout_mode = 2
+
 [node name="Value" type="LineEdit" parent="H"]
 layout_mode = 2
 size_flags_horizontal = 3
