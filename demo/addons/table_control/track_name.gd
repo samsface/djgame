@@ -1,4 +1,4 @@
-extends MarginContainer
+extends Control
 
 @export var value:NodePath : 
 	set(v):
@@ -15,10 +15,10 @@ func invalidate_() -> void:
 		$H/Condition.visible = false
 	else:
 		$H/Condition.visible = true
-		$H/Condition.text = condition_ex
+		$H/Condition.text = condition_ex.replace("\n", " ")
 		
 	$H/Value.text = str(value).get_file()
 
 func set_indent(level:int) -> void:
 	$H/Value.visible = level == 0
-	$H/Indent.custom_minimum_size.x = level * 16
+	$H/Indent.visible = level > 0

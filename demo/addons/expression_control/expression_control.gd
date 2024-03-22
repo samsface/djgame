@@ -37,7 +37,7 @@ func add_code_completion_options_() -> void:
 	code_edit_.add_code_completion_option(CodeEdit.KIND_CONSTANT, "not", "not", symbol_color_, preload("op_icon.png"))
 	code_edit_.add_code_completion_option(CodeEdit.KIND_CONSTANT, "true", "true", symbol_color_, preload("op_icon.png"))
 	code_edit_.add_code_completion_option(CodeEdit.KIND_CONSTANT, "false", "false", symbol_color_, preload("op_icon.png"))
-	
+
 	if base_instance == null:
 		return
 
@@ -72,6 +72,3 @@ func show_error_(error_string:String) -> void:
 
 func hide_error_() -> void:
 	error_text_.visible = false
-
-func _request_code_completion():
-	pass

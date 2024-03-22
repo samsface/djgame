@@ -20,7 +20,7 @@ func _ready():
 	item_rect_changed.connect(invalidate_value_)
 
 func invalidate_value_() -> void:
-	text = value
+	text = value.replace("\n", " ")
 	tooltip_text = text
 
 func op(db:Object, node:Node, length:float) -> void:

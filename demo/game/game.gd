@@ -11,6 +11,8 @@ var tween_:Tween
 var rumble := 1.0
 
 func _ready() -> void:
+	print_rich("[url]this is clickable[/url]")
+	
 	Camera.level = self
 	Camera.guide_service = $Guides
 

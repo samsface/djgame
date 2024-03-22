@@ -67,8 +67,8 @@ func invalidate_() -> void:
 		if not control:
 			continue
 
-		control.get_node("Label").text = property.name
-		control.value = get_node_value_(property.name)
+		control.set_label(property.name)
+		control.set_value(get_node_value_(property.name))
 		properties_to_poll_[property.name] = [get_node_value_(property.name), control]
 		control.value_changed.connect(_control_value_changed.bind(property.name))
 		%Controls.add_child(control)
@@ -78,20 +78,20 @@ func _physics_process(delta):
 
 func add_enum_control_(property:Dictionary) -> Control:
 	var control = preload("enum_control.tscn").instantiate()
-	control.get_node("Label").text = property.name
+	control.set_label(property.name)
 	
 	for e in property.hint_string.split(","):
 		var name_value = e.split(":")
 		if name_value.size() == 1:
-			control.get_node("Value").add_item(name_value[0])
+			control.get_node("%Value").add_item(name_value[0])
 		else:
-			control.get_node("Value").add_item(name_value[0], int(name_value[1]))
+			control.get_node("%Value").add_item(name_value[0], int(name_value[1]))
 
 	return control
 
 func add_float_control_(property:Dictionary) -> Control:
 	var control = preload("int_control.tscn").instantiate()
-	control.get_node("Value").step = 0.01
+	control.get_node("%Value").step = 0.01
 	return control
 
 func add_int_control_(property:Dictionary) -> Control:
@@ -160,7 +160,7 @@ func poll_node_properties_() -> void:
 		
 		if node_value != properties_to_poll_[property_name][0]:
 			properties_to_poll_[property_name][0] = node_value
-			properties_to_poll_[property_name][1].value = node_value
+			properties_to_poll_[property_name][1].set_value(node_value)
 
 func copy_all_possible_property_values(from:Node, to:Node) -> void:
 	for property in to.get_property_list():

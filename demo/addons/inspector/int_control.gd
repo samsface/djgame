@@ -1,11 +1,7 @@
-extends HBoxContainer
+extends InspectorControl
 
-signal value_changed
-
-@export var value:float :
-	set(v):
-		value = v
-		$Value.value = v
+func set_value(value) -> void:
+	%Value.value = value
 
 func _value_changed(value):
 	value_changed.emit(value)

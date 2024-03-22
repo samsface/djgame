@@ -17,7 +17,7 @@ func add_track(node_path:NodePath = "") -> Node:
 	undo.create_action("add track")
 	
 	var track_name := preload("track_name.tscn").instantiate()
-	track_name.get_node("H/Value").focus_entered.connect(_focus_entered.bind(track_name))
+	track_name.pressed.connect(_focus_entered.bind(track_name))
 	track_name.get_node("H/Delete").pressed.connect(_erase_track.bind(track_name))
 	track_name.get_node("H/MoveUp").pressed.connect(_move_track_up.bind(track_name))
 	track_name.get_node("H/MoveDown").pressed.connect(_move_track_down.bind(track_name))

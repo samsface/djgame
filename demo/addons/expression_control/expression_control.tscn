@@ -9,7 +9,7 @@ function_color = Color(0.721569, 0.721569, 0.721569, 1)
 
 [node name="VBoxContainer" type="VBoxContainer"]
 offset_right = 440.0
-offset_bottom = 146.0
+offset_bottom = 34.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_lq70l")
@@ -20,7 +20,6 @@ size_flags_vertical = 3
 scroll_fit_content_height = true
 syntax_highlighter = SubResource("CodeHighlighter_p5noi")
 highlight_all_occurrences = true
-highlight_current_line = true
 code_completion_enabled = true
 
 [node name="Error" type="TextEdit" parent="."]
