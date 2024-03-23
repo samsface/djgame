@@ -22,6 +22,10 @@ func _ready() -> void:
 		if child is Device:
 			child.value_changed.connect(_device_nob_value_changed)
 
+func _input(event) -> void:
+	if event.is_action("reset"):
+		get_tree().reload_current_scene()
+
 func _rumble() -> void:
 	Camera.shake(0.7, 0.001 * rumble)
 	Camera.rumble.emit()
@@ -30,7 +34,7 @@ func _clock(value:float) -> void:
 	beat_player_.seek(value)
 
 func _device_nob_value_changed(nob:Nob, new_value:float, old_value:float) -> void:
-	print(nob.get_path())
+	#print(nob.get_path())
 
 	if guides_.nob_has_guide(nob):
 		return

@@ -155,6 +155,9 @@ func quantinize(value:float, q:int) -> float:
 	return (floor((value / grid_size) / q) * q) * grid_size
 
 func _physics_process(delta:float) -> void:
+	if not is_visible_in_tree():
+		return
+	
 	if should_auto_scroll_():
 		var mpx = scroll_container_.get_local_mouse_position().x
 		var d = mpx - scroll_container_.size.x

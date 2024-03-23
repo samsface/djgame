@@ -13,7 +13,7 @@ func _ready() -> void:
 	
 	print(is_initialized())
 	stream = AudioStreamGenerator.new()
-	stream.buffer_length = 0.024
+	stream.buffer_length = 0.034
 	playing = true
 
 	set_process(true)

@@ -45,3 +45,6 @@ func emit_bang(signal_name:StringName) -> void:
 
 func emit_float(signal_name:StringName, v:float) -> void:
 	PureData.send_float("r-" + signal_name, v)
+
+func _exit_tree() -> void:
+	patch_file_handle_.close()
