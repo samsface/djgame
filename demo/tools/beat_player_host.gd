@@ -1,5 +1,7 @@
 extends Control
 
+signal play
+
 @export var save_path:String
 
 var state_ = { clips = {} }
@@ -10,13 +12,8 @@ var playing
 
 #var node_db := GraphControlNodeDatabase.new()
 
-func play():
-	playing = true
-	%TabContainer.get_current_tab_control().play()
-
-func stop():
-	playing = false
-	%TabContainer.get_current_tab_control().stop()
+func seek(time:float) -> void:
+	%TabContainer.get_current_tab_control().seek(time)
 
 func get_save_file_path_() -> String:
 	return save_path
@@ -71,8 +68,10 @@ func _graph_node_selected(node) -> void:
 
 func _play_pressed() -> void:
 	visible = false
-	Camera.cursor.reset()
-	play()
+	play.emit()
+
+func _debug_pressed():
+	play.emit()
 
 func _new_pressed():
 	var new_clip_id = randi()
@@ -94,21 +93,12 @@ func _save_pressed():
 	var file := FileAccess.open(get_save_file_path_(), FileAccess.WRITE)
 	file.store_string(var_to_str(state_))
 
-func _stop_pressed():
-	stop()
-
 func jump(scene) -> void:
-	stop()
 	for i in %TabContainer.get_child_count():
 		if %TabContainer.get_child(i).name == scene:
 			%TabContainer.current_tab = i
-			play()
 			break
 
 func _tab_clicked(tab):
 	%Inspector.virtual_properties = null
 	%Inspector.node = %TabContainer.get_current_tab_control()
-
-
-func _debug_pressed():
-	play()

@@ -19,5 +19,5 @@ func hook(p):
 	n.value_changed.connect(_value_changed)
 
 func _value_changed(r) -> void:
-	PureData.send_bang(receiver_symbol)
+	Camera.audio_service.emit_bang(receiver_symbol)
 	p_.value_changed.emit(p_.get_node(node), 1, 1)

@@ -95,7 +95,7 @@ func invalidate_() -> void:
 
 	path_follow_.progress_ratio = value
 
-	Camera.cursor.try_set_position(self, $Nob.global_position + Vector3.UP * 0.002)
+	Camera.cursor.try_set_position(self, $Nob.global_position)
 
 	#Camera.look_at_node(self.get_parent())
 

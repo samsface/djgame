@@ -13,6 +13,8 @@ var auto := false
 @onready var timer_ := $Timer
 @onready var arrow__ := $Arrow___/Arrow_
 
+var dilema_group := 0
+
 func color_() -> Color:
 	if auto:
 		return Color.PURPLE
@@ -124,7 +126,8 @@ func judge_accuracy_() -> void:
 			points_.hit(100)
 			points_.commit()
 		else:
-			points_.miss(off)
+			if dilema_group == 0:
+				points_.miss(off)
 
 		points_.global_position = global_position
 

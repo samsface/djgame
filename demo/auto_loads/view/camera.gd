@@ -15,6 +15,7 @@ var recording := false
 var recorder
 var level:Level
 var guide_service:GuideService
+var audio_service:AudioService
 
 var stack_ := []
 var head_pos_:Vector3
@@ -129,3 +130,14 @@ func pop_look_at(node) -> void:
 func shift():
 	var tween = create_tween()
 	pass
+
+func is_looking_at_parent(node:Node):
+	var looking_at = stack_.front()[1]
+	
+	while node.get_parent():
+		if node == looking_at:
+			return true
+
+		node = node.get_parent()
+
+	return false

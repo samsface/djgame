@@ -12,10 +12,9 @@ var p_
 
 func hook(p):
 	p_ = p
-	PureData.bind(send_symbol)
-	PureData.float.connect(func(s, v): if s == send_symbol: _float(s, v))
+	Camera.audio_service.connect_to_float(send_symbol, _float)
 
-func _float(r:String, v:float) -> void:
+func _float(v:float) -> void:
 	var vi = int(v)
 	if node.size() <= vi:
 		return

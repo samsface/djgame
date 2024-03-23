@@ -8,15 +8,22 @@ func _mouse_entered() -> void:
 func _mouse_exited() -> void:
 	mouse_entered_ = false
 
-func click(pos:Vector3) -> void:
+func click(pos) -> void:
 	pos = $StaticBody3D.to_local(pos)
+	
+	pos = Vector2(pos.x, pos.z)
+	
+	var shape_size = $StaticBody3D/CollisionShape3D.shape.size
+	shape_size = Vector2(shape_size.x, shape_size.z)
+	pos += shape_size * 0.5
+	pos /= shape_size
 	
 	var e := InputEventMouseButton.new()
 	e.button_index = MOUSE_BUTTON_LEFT
 	e.pressed = true
 	e.button_mask = 1
 	e.position.x = pos.x
-	e.position.y = pos.z
+	e.position.y = pos.y
 	e.global_position = e.position
 	e.device = 444
 

@@ -25,14 +25,12 @@ func hook(p:Node) -> void:
 
 		node.value_changed.connect(_value_changed.bind(i))
 
-	PureData.bind("r-RESET")
-	PureData.bang.connect(reset_)
+	Camera.audio_service.connect_to_bang("RESET", _reset)
 
-func reset_(s:String) -> void:
-	if s == "r-RESET":
-		# freeze without this wait
-		await p_.get_tree().process_frame
-		refresh()
+func _reset() -> void:
+	# game freezes without this wait
+	await p_.get_tree().process_frame
+	refresh()
 
 func refresh() -> void:
 	var array_size = PureData.get_array_size(array_name)

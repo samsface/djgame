@@ -5,6 +5,9 @@ var last_notification_
 func show_notification(message:PhoneChatMessage, chat:PhoneChat) -> void:
 	#get_parent().get_parent().get_parent().vibrate()
 	
+	if Camera.is_looking_at_parent(self):
+		return
+
 	var chat_notification := preload("res://models/phone/chat_notification.tscn").instantiate()
 	chat_notification.message = message.message
 	chat_notification.contact_name = chat.contact_name
@@ -22,7 +25,7 @@ func show_notification(message:PhoneChatMessage, chat:PhoneChat) -> void:
 
 	last_notification_ = chat
 
-	await get_tree().create_timer(3.0).timeout
+	await get_tree().create_timer(6.0).timeout
 	chat_notification.queue_free()
 
 func _chat_notification_pressed() -> void:

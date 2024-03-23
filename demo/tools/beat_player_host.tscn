@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://0xf0dcjgbmqj" path="res://addons/inspector/inspector.tscn" id="3_em7m1"]
 
 [node name="MarginContainer" type="MarginContainer"]
-offset_left = 4.0
-offset_top = 20.0
-offset_right = 1652.0
-offset_bottom = 1029.0
+offset_left = 9.0
+offset_top = 49.0
+offset_right = 1519.0
+offset_bottom = 932.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("2_gk3x2")

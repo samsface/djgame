@@ -113,7 +113,7 @@ func dialog(db:Object, length:float, who:String, value:String, db_name:String, r
 	message.message = value
 	message.sent_time = GameTime.now
 	message.replies = [replay_a, reply_b]
-	
+
 	message.reply.connect(func(reply_idx:int):
 		db.set(db_name, reply_idx)
 		)

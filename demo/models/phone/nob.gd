@@ -58,7 +58,7 @@ func pressed() -> void:
 		$Sound.play()
 
 	Camera.cursor.push(self, Cursor.Action.grab)
-	Camera.cursor.try_set_position(self, global_position + Vector3.UP * 0.002)
+	#Camera.cursor.try_set_position(self, global_position)
 
 func released() -> void:
 	if not down_:

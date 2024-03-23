@@ -14,14 +14,14 @@ node = Array[NodePath]([NodePath("seq-1"), NodePath("seq-2"), NodePath("seq-3"),
 [sub_resource type="Resource" id="Resource_0c266"]
 script = ExtResource("2_5ypay")
 node = NodePath("preset-rock")
-receiver_symbol = "r-toykit-preset0"
-send_symbol = "r-toykit-preset0"
+receiver_symbol = "toykit-preset0"
+send_symbol = "toykit-preset0"
 
 [sub_resource type="Resource" id="Resource_iwce1"]
 script = ExtResource("2_5ypay")
 node = NodePath("preset-house")
-receiver_symbol = "r-toykit-preset1"
-send_symbol = "r-toykit-preset1"
+receiver_symbol = "toykit-preset1"
+send_symbol = "toykit-preset1"
 
 [sub_resource type="Resource" id="Resource_4l3wh"]
 script = ExtResource("2_gmc4h")
@@ -40,7 +40,7 @@ expr = "set_array_name(0, \"toykit-array3\")"
 
 [sub_resource type="Resource" id="Resource_scfs4"]
 script = ExtResource("1_7kknr")
-send_symbol = "s-toykit-step"
+send_symbol = "toykit-step"
 receive_symbol = ""
 node = Array[NodePath]([NodePath("seq-1"), NodePath("seq-2"), NodePath("seq-3"), NodePath("seq-4"), NodePath("seq-5"), NodePath("seq-6"), NodePath("seq-7"), NodePath("seq-8"), NodePath("seq-9"), NodePath("seq-10"), NodePath("seq-11"), NodePath("seq-12"), NodePath("seq-13"), NodePath("seq-14"), NodePath("seq-15"), NodePath("seq-16")])
 

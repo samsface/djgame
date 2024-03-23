@@ -7,11 +7,6 @@
 "name": "/root/Game",
 "notes": [{
 "length": "16",
-"method": "&\"play__\"",
-"time": "0",
-"type": "2"
-}, {
-"length": "16",
 "method": "&\"clap\"",
 "time": "16",
 "type": "2"
@@ -517,19 +512,19 @@
 "name": "/root/Game/phone/ChatApp",
 "notes": [{
 "db_name": "\"guess_where_i_am\"",
-"length": "32",
+"length": "24",
 "replay_a": "\"Who are you?\"",
 "replay_b": "\"Idk?\"",
-"time": "32",
+"time": "40",
 "type": "3",
 "value": "\"Guess where I am? \"",
 "who": "\"Giada\""
 }, {
 "db_name": "\"i_am_the_dj\"",
-"length": "16",
+"length": "8",
 "replay_a": "\"I'm the DJ\"",
 "replay_b": "\"lol sure\"",
-"time": "112",
+"time": "120",
 "type": "3",
 "value": "\"Can you be louder though :)\"",
 "who": "\"Giada\""
@@ -548,10 +543,10 @@
 "name": "/root/Game/phone/ChatApp",
 "notes": [{
 "db_name": "\"\"",
-"length": "16",
+"length": "12",
 "replay_a": "\"\"",
 "replay_b": "\"\"",
-"time": "80",
+"time": "84",
 "type": "3",
 "value": "\"HERE!\"",
 "who": "\"Giada\""
@@ -570,28 +565,28 @@
 "name": "/root/Game/phone/ChatApp",
 "notes": [{
 "db_name": "\"\"",
-"length": "8",
+"length": "4",
 "replay_a": "\"\"",
 "replay_b": "\"\"",
-"time": "80",
+"time": "84",
 "type": "3",
 "value": "\"Oh no! I ignored you : )\"",
 "who": "\"Giada\""
 }, {
 "db_name": "\"\"",
-"length": "12",
+"length": "4",
 "replay_a": "\"\"",
 "replay_b": "\"\"",
-"time": "88",
+"time": "92",
 "type": "3",
 "value": "\"Was busy sorry\"",
 "who": "\"Giada\""
 }, {
 "db_name": "\"\"",
-"length": "12",
+"length": "8",
 "replay_a": "\"\"",
 "replay_b": "\"\"",
-"time": "100",
+"time": "104",
 "type": "3",
 "value": "\"But now I'm here!\"",
 "who": "\"Giada\""

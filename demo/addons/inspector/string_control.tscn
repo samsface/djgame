@@ -30,4 +30,4 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[connection signal="text_changed" from="HBoxContainer4/Value" to="HBoxContainer4" method="_value_changed"]
+[connection signal="text_changed" from="HBoxContainer4/Value" to="." method="_value_changed"]

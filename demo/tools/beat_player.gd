@@ -5,8 +5,6 @@ signal finished
 var undo_ = UndoRedo.new()
 var inspector
 
-var playing := false
-
 var hover_tween_ : Tween
 
 var db
@@ -78,7 +76,7 @@ func _piano_roll_bang(item:Control, idx:int) -> void:
 		if not e.execute([], db):
 			return
 
-	var length = %Virtual2.length / %PianoRoll.tempo
+	var length = %Virtual2.length / (1000.0/130.0)
 
 	item.op(db, node, length)
 
@@ -106,15 +104,8 @@ func _gui_input(event):
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			$ScrollContainer.scroll_vertical += 20.0
 
-func play():
-	playing = true
-	%PianoRoll.playing = true
-
-func stop():
-	%PianoRoll.time_ = 0.0
-	playing = false
-	%PianoRoll.playing = false
-	%PianoRoll.cursor.position.x = 0
+func seek(time:float) -> void:
+	%PianoRoll.seek(time)
 
 func add_track(node_path) -> void:
 	%TrackNames.add_track(node_path)
@@ -170,9 +161,6 @@ func reload(dict:Dictionary) -> void:
 			Dictializer.from_dict(note, %Virtual)
 			Dictializer.from_dict(note, n)
 			%PianoRoll.add_item(n, i, false)
-
-func _play_pressed():
-	%PianoRoll.play()
 
 func change_type_(node, new_type:int) -> void:
 	var current_type = node.get_meta("__type__", 0)

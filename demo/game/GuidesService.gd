@@ -20,6 +20,7 @@ func bang(nob:Node3D, length:float, value:float, auto:bool, dilema_group:int, si
 	d.position = pos
 	d.length = length
 	d.visible = not silent
+	d.dilema_group = dilema_group
 	d.watch(nob, value)
 	nob.intended_value = value
 
@@ -42,3 +43,10 @@ func try_add_to_dilema_group(guide:Guide, dilema_group:int):
 			)
 
 		group.push_back(guide)
+
+func nob_has_guide(nob:Nob) -> bool:
+	for node in get_children():
+		if node.get_nob() == nob:
+			return true
+
+	return false

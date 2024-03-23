@@ -32,8 +32,6 @@ enum Tool {
 	zooming
 }
 
-var playing := false
-var tempo = 1000.0/130.0
 var supress_hack_ := false
 var time_range := Vector2i(0, 16) :
 	set(v):
@@ -41,7 +39,6 @@ var time_range := Vector2i(0, 16) :
 		if not supress_hack_:
 			%TimeRange.position.x = time_range.x * grid_size
 			%TimeRange.size.x = (time_range.x + time_range.y) * grid_size
-
 
 var grid_size := 4 :
 	set(value):
@@ -191,22 +188,17 @@ func _physics_process(delta:float) -> void:
 		var zoom = %Headings.get_local_mouse_position().y
 		grid_size = clamp(grid_size_old_ + zoom * 0.1, 3, 32)
 
-	play_(delta)
+var offset_ := 0.0
+var active_ := false
 
-func play_(delta) -> void:
-	if not playing:
-		return
+func seek(time:float) -> void:
+	if not active_:
+		active_ = true
+		offset_ = time
+
+	time_ = time - offset_
 	
-	var time = time_
-	time_ += delta * tempo
-
-	if (floor(time_) <= floor(time)) and time != 0.0:
-		return
-
 	var t := int(floor(time_))
-	
-	if t >= time_range.y:
-		finished.emit()
 
 	t = t % (time_range.y - time_range.x) + time_range.x
 

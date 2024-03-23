@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://bfo1bxbj7knm0"]
+[gd_scene load_steps=53 format=3 uid="uid://bfo1bxbj7knm0"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_5uhe0"]
 [ext_resource type="PackedScene" uid="uid://bl7d8jwotcuws" path="res://models/phone/phone.tscn" id="2_4rjj7"]
@@ -24,6 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://b0sodcqt4qvjc" path="res://game/crowd_service/clap.wav" id="19_7l1e6"]
 [ext_resource type="PackedScene" uid="uid://dn18w300jjfpl" path="res://models/static_cable/cable_poly.tscn" id="20_p7nhh"]
 [ext_resource type="Script" path="res://game/points_service/PointsService.gd" id="22_7tagj"]
+[ext_resource type="Script" path="res://game/AudioService.gd" id="25_uoe2k"]
 
 [sub_resource type="Gradient" id="Gradient_655s4"]
 
@@ -291,7 +292,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/autohide = 0
-split_offset = 50000
 
 [node name="ColorRect" type="ColorRect" parent="Recorder/CanvasLayer/VSplitContainer"]
 layout_mode = 2
@@ -583,6 +583,7 @@ transform = Transform3D(1, 0, 0, 0, 0.0375349, -0.999295, 0, 0.999295, 0.0375349
 
 [node name="Poly" parent="." instance=ExtResource("20_p7nhh")]
 snap = 1e-06
+polygon = PackedVector2Array(0.0038, 0, 0.00268701, 0.00268701, 2.32683e-19, 0.0038, -0.00268701, 0.00268701, -0.0038, 4.65366e-19, -0.00268701, -0.00268701, -6.98049e-19, -0.0038, 0.00268701, -0.00268701)
 path_node = NodePath("Path3D2")
 path_continuous_u = false
 
@@ -618,3 +619,8 @@ draw_pass_1 = SubResource("PlaneMesh_8eiyc")
 offset_right = 266.0
 offset_bottom = 252.0
 bbcode_enabled = true
+
+[node name="AudioService" type="Node" parent="."]
+script = ExtResource("25_uoe2k")
+
+[connection signal="play" from="Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost" to="." method="_play"]
