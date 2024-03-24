@@ -18,7 +18,6 @@ var db
 		return name
 
 func _ready():
-	undo_.clear_history()
 	%TrackNames.track_focused.connect(_track_focused)
 	%TrackNames.undo = undo_
 	inspector.undo = undo_
@@ -56,6 +55,9 @@ func _track_focused(track) -> void:
 	inspector.node = track
 
 func _input(event:InputEvent) -> void:
+	if not is_visible_in_tree():
+		return
+
 	if event.is_action_pressed("redo"):
 		undo_.redo()
 	elif event.is_action_pressed("undo"):
@@ -161,6 +163,8 @@ func reload(dict:Dictionary) -> void:
 			Dictializer.from_dict(note, %Virtual)
 			Dictializer.from_dict(note, n)
 			%PianoRoll.add_item(n, i, false)
+
+	undo_.clear_history()
 
 func change_type_(node, new_type:int) -> void:
 	var current_type = node.get_meta("__type__", 0)
