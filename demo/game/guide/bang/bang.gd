@@ -2,7 +2,7 @@ extends Guide
 
 signal hit
 
-const proximity_ := 0.1
+const proximity_ := 0.025
 
 var nob_
 var for_value_ := 0.0

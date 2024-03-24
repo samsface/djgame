@@ -2,6 +2,7 @@ extends Node3D
 class_name GuideService
 
 var active_dilema_groups_ := {}
+var slides_ := {}
 
 func slide(nob:Node3D, length:float, from_value:float, to_value:float):
 	var pos = nob.get_guide_position_for_value(from_value)

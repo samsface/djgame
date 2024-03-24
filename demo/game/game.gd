@@ -31,7 +31,7 @@ func _rumble() -> void:
 	Camera.rumble.emit()
 
 func _clock(value:float) -> void:
-	beat_player_.seek(value)
+	beat_player_.call_deferred("seek", value)
 
 func _device_nob_value_changed(nob:Nob, new_value:float, old_value:float) -> void:
 	#print(nob.get_path())

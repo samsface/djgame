@@ -10,7 +10,10 @@ var value := 0.0 :
 		await get_tree().process_frame
 		value = 0.0
 
-var electric := Color.TRANSPARENT
+var electric:Color = Color.TRANSPARENT :
+	set(v):
+		electric = v
+		$StaticBody3D.electric = v
 
 @onready var path_follow = $Path/PathFollow
 @onready var remote_transform = $Path/PathFollow/RemoteTransform

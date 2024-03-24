@@ -1,4 +1,4 @@
-#N canvas 859 514 1461 990 12;
+#N canvas 849 373 1461 990 12;
 #X obj 568 645 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
 #fcfcfc #000000 #000000 0 256;
 #X obj 535 761 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
@@ -56,7 +56,7 @@
 #X obj 241 780 + 16;
 #X obj 145 901 array set \$0-xxx;
 #X obj 1213 250 inlet;
-#X obj 1307 233 inlet;
+#X obj 1292 224 inlet;
 #X connect 0 0 2 1;
 #X connect 1 0 7 0;
 #X connect 2 0 1 0;

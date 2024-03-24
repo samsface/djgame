@@ -68,4 +68,4 @@ layout_mode = 2
 [connection signal="pressed" from="BeatPlayerHost/Menu/Debug" to="." method="_debug_pressed"]
 [connection signal="pressed" from="BeatPlayerHost/Menu/Stop" to="." method="_stop_pressed"]
 [connection signal="pressed" from="BeatPlayerHost/Menu/New" to="." method="_new_pressed"]
-[connection signal="tab_clicked" from="BeatPlayerHost/HSplitContainer/TabContainer" to="BeatPlayerHost" method="_tab_clicked"]
+[connection signal="tab_clicked" from="BeatPlayerHost/HSplitContainer/TabContainer" to="." method="_tab_clicked"]

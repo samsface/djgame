@@ -1,4 +1,4 @@
-#N canvas 526 265 1864 990 12;
+#N canvas 686 190 1864 990 12;
 #X obj 473 1114 dac~;
 #X obj 298 209 swing;
 #X obj 969 276 toykit toykit;
@@ -56,7 +56,7 @@
 #X msg 92 166 70;
 #X msg 177 152 42;
 #X msg 139 199 0;
-#X msg 193 215 1;
+#X msg 486 160 1, f 5;
 #X obj 334 827 redux;
 #X obj 609 697 hsl 128 15 32 4 0 0 s-acid-redux r-acid-redux empty
 -2 -8 0 10 #fcfcfc #000000 #000000 0 1;
@@ -64,6 +64,7 @@
 0 10 #fcfcfc #000000 #000000 0 256;
 #X obj 567 70 i++;
 #X obj 391 50 s r-RESET;
+#X floatatom 530 227 5 0 0 0 - r-acid-preset - 0;
 #X connect 1 0 6 0;
 #X connect 1 0 30 0;
 #X connect 1 0 29 0;
@@ -93,6 +94,7 @@
 #X connect 18 0 33 0;
 #X connect 18 0 34 0;
 #X connect 18 0 35 0;
+#X connect 18 0 36 0;
 #X connect 19 0 17 0;
 #X connect 19 0 41 0;
 #X connect 22 0 21 0;
@@ -113,3 +115,4 @@
 #X connect 37 0 32 0;
 #X connect 38 0 37 1;
 #X connect 40 0 39 0;
+#X connect 42 0 30 2;
