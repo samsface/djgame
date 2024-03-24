@@ -25,7 +25,7 @@ func show_notification(message:PhoneChatMessage, chat:PhoneChat) -> void:
 
 	last_notification_ = chat
 
-	await get_tree().create_timer(6.0).timeout
+	await get_tree().create_timer(9.0).timeout
 	chat_notification.queue_free()
 
 func _chat_notification_pressed() -> void:

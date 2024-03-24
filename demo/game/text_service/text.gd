@@ -13,6 +13,11 @@ var text :
 		text = value
 		mesh.text = text
 
+var sub_text :
+	set(value):
+		sub_text = value
+		$Sub.mesh.text = sub_text
+
 var random_rotation_ := Vector3.ZERO
 
 func _ready() -> void:

@@ -2,37 +2,25 @@ extends Node3D
 class_name Points
 
 var points_ := 0 
-var lock_ := false
 
 @onready var text_ = $Text
 
-func hit(points:int) -> void:
-	lock_ = false
-	
+func hit(points:int, hint:String) -> void:
 	points_ = points
 	
-	text_.text = str(points_) + " pts"
-	
-	if get_parent().combo > 0:
-		text_.text += " x %d" % (get_parent().combo + 1)
-		
+	text_.text = "+%s hp" % points_
+	text_.sub_text = hint
+
 	text_.ok()
 
-func miss(off:float) -> void:
-	get_parent().miss()
+func miss(points:int, hint:String, commit := false) -> void:
+	points_ = -points
 
-	if lock_:
-		return
-	
-	lock_ = true
+	text_.text = "-%s hp" % abs(points)
+	text_.sub_text = hint
 
-	if get_parent().combo > 0:
-		text_.text = "COMBO LOST"
-		get_parent().combo = 0
-	elif off > 0:
-		text_.text = "TOO HIGH"
-	else:
-		text_.text = "TOO LOW"
+	if commit:
+		get_parent().hp -= points * 0.001
 
 	text_.danger()
 
@@ -45,5 +33,11 @@ func commit():
 	tween.set_trans(Tween.TRANS_QUAD)
 	tween.tween_property(self, "scale", scale * 1.5, 0.1)
 	tween.tween_property(self, "scale", scale, 0.1)
-	get_parent().combo += 1
-	get_parent().points += points_ * get_parent().combo
+	if points_ > 0:
+		get_parent().combo += 1
+	else:
+		PureData.pitch_scale = 2.0 + randf()
+		get_tree().create_timer(randf_range(0.1, 0.3)).timeout.connect(func(): PureData.pitch_scale = 1.0)
+
+	#get_parent().points += points_ * 0.1 #* get_parent().combo
+	get_parent().hp += points_ * 0.001

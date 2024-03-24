@@ -3,12 +3,21 @@ extends Node3D
 signal points_changed
 
 var damage_tween_:Tween
+var decay := 0.0
 
-@export var points:int :
-	set(value):
-		points = value
-		points_changed.emit(points)
-		%Score.set_points(points)
+@onready var hp_ = $CanvasLayer/MarginContainer2/HP
+
+var hp := 0.5 : 
+	set(v):
+		if v == hp_.value_:
+			return
+
+		if hp_.value_ > v:
+			miss()
+
+		hp_.set_points(v)
+	get:
+		return hp_.value
 
 var combo := 0
 var no_touch_:Node3D
@@ -16,13 +25,21 @@ var no_touch_:Node3D
 func _ready() -> void:
 	$CanvasLayer/ColorRect.material.set_shader_parameter("damage", 0.0)
 
+func _physics_process(delta:float) -> void:
+	hp_.decay(decay * delta)
+
+func play() -> void:
+	decay = 0.025
+
 func miss() -> void:
+	$RecordScratch.play()
+	
 	if damage_tween_:
 		damage_tween_.kill()
 
 	damage_tween_ = create_tween()
 	damage_tween_.tween_property($CanvasLayer/ColorRect.material, "shader_parameter/damage", 1.0, 0.05)
-	damage_tween_.tween_property($CanvasLayer/ColorRect.material, "shader_parameter/damage", 0.0, 0.2)
+	damage_tween_.tween_property($CanvasLayer/ColorRect.material, "shader_parameter/damage", 0.0, 1.0)
 
 func make_points():
 	var points = preload("res://game/points_service/points.tscn").instantiate()

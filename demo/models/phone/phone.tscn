@@ -44,7 +44,6 @@ monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
 shape = SubResource("BoxShape3D_lea2s")
-disabled = true
 
 [node name="Phone" parent="." index="1"]
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0, 0, 0)

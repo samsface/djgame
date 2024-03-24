@@ -2,6 +2,22 @@ extends Device
 
 var mouse_entered_ := false
 
+@export var free_click:bool :
+	set(v):
+		free_click = v
+		
+		if free_click:
+			$StaticBody3D/CollisionShape3D.disabled = false
+			$"0/StaticBody3D/CollisionShape3D".disabled = true
+			$"ReplyA/StaticBody3D/CollisionShape3D".disabled = true
+			$"ReplyB/StaticBody3D/CollisionShape3D".disabled = true
+		else:
+			$StaticBody3D/CollisionShape3D.disabled = true
+			$"0/StaticBody3D/CollisionShape3D".disabled = false
+			$"ReplyA/StaticBody3D/CollisionShape3D".disabled = false
+			$"ReplyB/StaticBody3D/CollisionShape3D".disabled = false
+
+
 func _mouse_entered() -> void:
 	mouse_entered_ = true
 

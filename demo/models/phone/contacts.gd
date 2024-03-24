@@ -52,10 +52,6 @@ func _new_message(message:PhoneChatMessage, chat:PhoneChat, contact_list_item:No
 	if message.contact_name == "me":
 		return
 	
-	if chat_:
-		if message.contact_name == chat_.chat.contact_name:
-			return
-	
 	contacts_.move_child(contact_list_item, 0)
 	
 	var notification_service = get_node_or_null(notification_service_node_path)

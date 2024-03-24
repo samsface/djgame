@@ -46,8 +46,6 @@ func _ready() -> void:
 	points_ = points_service.make_points()
 
 	Camera.rumble.connect(_rumble)
-	
-	
 
 func _rumble() -> void:
 	if rumble_tween_:
@@ -72,10 +70,10 @@ func test_() -> void:
 
 	if abs(off) <= 0.2:
 		score_tween_.play()
-		points_.hit(score_)
+		points_.hit(score_, "")
 	else:
 		score_tween_.pause()
-		points_.miss(off)
+		points_.miss(10, "", true)
 
 	points_.global_position = get_nob().get_nob_position()
 

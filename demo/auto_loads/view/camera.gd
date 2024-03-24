@@ -78,7 +78,8 @@ func _physics_process(delta: float) -> void:
 		
 		if hovering_ and next_hovering != hovering_:
 			logi("MOUSE EXIT")
-			hovering_._mouse_exited()
+			if is_instance_valid(hovering_):
+				hovering_._mouse_exited()
 
 		var point = ray_cast_.get_collision_point()
 		cursor.try_set_position(self, point + Vector3.UP * 0.002)

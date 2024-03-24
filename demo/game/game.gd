@@ -52,5 +52,7 @@ func clap() -> void:
 	$CrowdService.clap()
 
 func _play():
+	$phone.free_click = false
+	$PointsService.play()
 	Camera.cursor.reset()
 	audio_.play()
