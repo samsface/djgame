@@ -1,5 +1,7 @@
 extends ProgressBar
 
+signal zero
+
 var inc_tween_:Tween
 var dec_tween_:Tween
 var value_ := 0.0
@@ -16,6 +18,9 @@ func set_points(v:float) -> void:
 		dec_(v)
 	else:
 		inc_(v)
+		
+	if value_ == 0.0:
+		zero.emit()
 
 func decay(v:float) -> void:
 	if inc_tween_ and inc_tween_.is_running():
@@ -23,9 +28,13 @@ func decay(v:float) -> void:
 		
 	if dec_tween_ and dec_tween_.is_running():
 		return
-	
+
 	value_ -= v
+	value_ = clampf(value_, 0.0, 1.0)
 	value = value_
+	
+	#if value_ <= 0.0:
+	#	zero.emit()
 
 func dec_(v):
 	value_ = clampf(v, 0.0, 1.0)

@@ -26,6 +26,19 @@ public:
 
 };
 
+class PDHandle : public RefCounted {
+	GDCLASS(PDHandle, RefCounted)
+
+protected:
+	static void _bind_methods();
+
+public:
+	void* handle{};
+
+	PDHandle() = default;
+	~PDHandle() = default;
+};
+
 class GDExample : public AudioStreamPlayer {
 	GDCLASS(GDExample, AudioStreamPlayer)
 
@@ -53,7 +66,8 @@ public:
 	void add_symbol(String value);
 	bool finish_list(String receiver);
 	bool finish_message(String receiver, String message);
-	void bind(String receiver);
+	Ref<PDHandle> bind(String receiver);
+	Ref<PDHandle> bind(Ref<PDHandle>  receiver);
 	bool start_gui(String pure_data_bin_dir_path);
 	int get_array_size(String array_name);
 	int set_array_size(String array_name, int size);

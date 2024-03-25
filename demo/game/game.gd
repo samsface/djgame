@@ -21,6 +21,8 @@ func _ready() -> void:
 	for child in get_children():
 		if child is Device:
 			child.value_changed.connect(_device_nob_value_changed)
+			
+	$PointsService.zero.connect(_died)
 
 func _input(event) -> void:
 	if event.is_action("reset"):
@@ -51,8 +53,14 @@ func meta(array:Array = []) -> void:
 func clap() -> void:
 	$CrowdService.clap()
 
+func play() -> void:
+	_play()
+
 func _play():
 	$phone.free_click = false
 	$PointsService.play()
 	Camera.cursor.reset()
 	audio_.play()
+
+func _died() -> void:
+	pass

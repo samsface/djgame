@@ -92,6 +92,7 @@ mouse_filter = 2
 script = ExtResource("5_pqb1u")
 
 [node name="ChatApp" type="CanvasLayer" parent="." index="4"]
+visible = false
 script = ExtResource("6_vrhos")
 
 [node name="Button" type="Button" parent="ChatApp" index="0"]

@@ -310,7 +310,7 @@
 }]
 },
 "dull": {
-"time_range": Vector2i(0, 272),
+"time_range": Vector2i(0, 464),
 "tracks": [{
 "condition_ex": "",
 "name": "/root/Game",
@@ -338,6 +338,21 @@
 "method": "&\"look 0\"",
 "time": "0",
 "type": "2"
+}, {
+"length": "16",
+"method": "&\"look 1\"",
+"time": "144",
+"type": "2"
+}, {
+"length": "16",
+"method": "&\"look 0\"",
+"time": "336",
+"type": "2"
+}, {
+"length": "16",
+"method": "&\"look\"",
+"time": "96",
+"type": "2"
 }]
 }, {
 "condition_ex": "",
@@ -363,25 +378,49 @@
 }, {
 "from_value": "0.0",
 "length": "16",
-"time": "144",
+"time": "140",
 "type": "1",
 "value": "0.3"
 }, {
 "from_value": "0.0",
 "length": "16",
-"time": "160",
+"time": "156",
 "type": "1",
 "value": "0.3"
 }, {
 "from_value": "0.0",
 "length": "28",
-"time": "176",
+"time": "172",
 "type": "1",
 "value": "0.66"
 }, {
 "from_value": "0.01",
 "length": "36",
-"time": "204",
+"time": "200",
+"type": "1",
+"value": "0.0"
+}, {
+"from_value": "0.0",
+"length": "16",
+"time": "236",
+"type": "1",
+"value": "0.3"
+}, {
+"from_value": "0.0",
+"length": "16",
+"time": "252",
+"type": "1",
+"value": "0.3"
+}, {
+"from_value": "0.0",
+"length": "28",
+"time": "268",
+"type": "1",
+"value": "0.66"
+}, {
+"from_value": "0.01",
+"length": "36",
+"time": "296",
 "type": "1",
 "value": "0.0"
 }]
@@ -398,6 +437,12 @@
 "time": "112",
 "type": "1",
 "value": "0.1"
+}, {
+"from_value": "0.0",
+"length": "64",
+"time": "336",
+"type": "1",
+"value": "1.0"
 }]
 }, {
 "condition_ex": "",
@@ -407,10 +452,55 @@
 "length": "16",
 "replay_a": "\"\"",
 "replay_b": "\"\"",
-"time": "224",
+"time": "208",
 "type": "3",
-"value": "\"BAW BAW BAW BAW\"",
+"value": "\"BADABADABDABDBABADAa\"",
 "who": "\"Mano\""
+}, {
+"db_name": "\"\"",
+"length": "16",
+"replay_a": "\"\"",
+"replay_b": "\"\"",
+"time": "336",
+"type": "3",
+"value": "\"You killed it man!\"",
+"who": "\"Gorpho\""
+}, {
+"db_name": "\"\"",
+"length": "16",
+"replay_a": "\"\"",
+"replay_b": "\"\"",
+"time": "368",
+"type": "3",
+"value": "\"You're pretty good\"",
+"who": "\"Giada\""
+}, {
+"db_name": "\"\"",
+"length": "16",
+"replay_a": "\"\"",
+"replay_b": "\"\"",
+"time": "384",
+"type": "3",
+"value": "\"I wasn't expecting lol\"",
+"who": "\"Giada\""
+}]
+}, {
+"condition_ex": "",
+"name": "/root/Game/PointsService",
+"notes": [{
+"length": "16",
+"method": "&\"win\"",
+"time": "416",
+"type": "2"
+}]
+}, {
+"condition_ex": "",
+"name": "/root/Game/CrowdService",
+"notes": [{
+"length": "16",
+"method": "&\"look 1\"",
+"time": "16",
+"type": "2"
 }]
 }]
 },
@@ -571,15 +661,6 @@
 "time": "96",
 "type": "3",
 "value": "\"YES!!!!\"",
-"who": "\"Giada\""
-}, {
-"db_name": "\"\"",
-"length": "16",
-"replay_a": "\"\"",
-"replay_b": "\"\"",
-"time": "64",
-"type": "3",
-"value": "\"NOT EVEN LOUD\"",
 "who": "\"Giada\""
 }]
 }, {
@@ -742,6 +823,14 @@
 "length": "32",
 "silent": "false",
 "time": "48",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "false",
+"dilema_group": "2",
+"length": "32",
+"silent": "false",
+"time": "128",
 "type": "0",
 "value": "1.0"
 }]

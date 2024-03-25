@@ -12,6 +12,7 @@ offset_bottom = 932.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("2_gk3x2")
+save_path = "res://junk/sam.lol"
 
 [node name="DB" type="Node" parent="."]
 script = ExtResource("3_6y6es")

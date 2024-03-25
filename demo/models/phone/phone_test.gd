@@ -1,6 +1,7 @@
 extends Node
 
 var chats := PhoneChats.new()
+var chat_app_
 
 var last_notification_
 
@@ -12,12 +13,12 @@ func _input(event: InputEvent) -> void:
 func _ready() -> void:
 	get_parent().look()
 	
-	var chat_app := preload("res://models/phone/contacts.tscn").instantiate()
+	chat_app_ = preload("res://models/phone/contacts.tscn").instantiate()
 	
-	chat_app.chats = chats
-	chat_app.notification_service_node_path = $"../CanvasLayer2/MarginContainer/Notifications".get_path()
+	chat_app_.chats = chats
+	chat_app_.notification_service_node_path = $"../CanvasLayer2/MarginContainer/Notifications".get_path()
 
-	$"../SubViewport/PhoneGui".start_app(chat_app)
+	$"../SubViewport/PhoneGui".start_app(chat_app_)
 	
 	setup_gf_chat_()
 	setup_bf_chat_()
@@ -96,7 +97,7 @@ func setup_mm_chat_() -> void:
 		
 	var message := PhoneChatMessage.new()
 	message.message = "Cool, txt me when you want to start"
-	message.replies = ["Let's go."]
+	message.replies = ["Let's go.", "Ready!"]
 	message.reply.connect(_reply)
 	
 	chat.messages.push_back(message)
@@ -105,6 +106,9 @@ func setup_mm_chat_() -> void:
 	chats.new_chat.emit(chat)
 
 func _reply(reply_idx:int):
+	if chat_app_.chat_:
+		chat_app_.chat_.queue_free()
+
 	Camera.level.play()
 
 func dialog(db:Object, length:float, who:String, value:String, db_name:String, replay_a:String, reply_b:String) -> void:

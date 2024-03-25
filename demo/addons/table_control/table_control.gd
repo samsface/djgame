@@ -51,7 +51,11 @@ var quantinize_snap := 16
 var selection_ := []
 
 var border_ = 8
-var tool_ := Tool.none
+var tool_ := Tool.none :
+	set(v):
+		tool_ = v
+		prints("tool", tool_)
+		
 var grab_offet_ := 0
 var external_undo_ := false
 var undo := UndoRedo.new() : 
@@ -89,13 +93,27 @@ func connect_row_item_(row_item:Button) -> void:
 	row_item.gui_input.connect(_item_gui_input.bind(row_item))
 
 func connect_row_(row) -> void:
-	row.gui_input.connect(func(event): 
+	row.gui_input.connect(func(event:InputEvent): 
 		var row_index = row.get_index()
 		if event.is_action_pressed("click"): 
-			row_pressed.emit(row_index, row.get_local_mouse_position())
+			var selection_size = selection_.size()
+			clear_selection_()
+			
+			if selection_size <= 1:
+				row_pressed.emit(row_index, row.get_local_mouse_position())
 	)
 	row.mouse_entered.connect(func(): var row_index = row.get_index(); row_mouse_entered.emit(row_index))
 	row.mouse_exited.connect(func(): var row_index = row.get_index(); row_mouse_exited.emit(row_index))
+
+
+
+func clear_selection_() -> void:
+	print("clear_selection")
+	for node in selection_:
+		node.button_pressed = false
+	selection_.clear()
+	last_item_down_ = null
+	selection_changed.emit([])
 
 func quantinize_to_grid(value:float) -> int:
 	return clamp(floor(value / grid_size) * grid_size, 0 , 2048)
@@ -106,12 +124,20 @@ func get_local_mouse_table_position() -> int:
 
 var grab_position_ := Vector2.ZERO
 
+var last_item_down_
+
 func _table_item_button_down(item):
+	print("item down", item)
+	
 	grab_position_ = get_global_mouse_position()
-	
-	selection_.clear()
-	selection_.push_back(item)
-	
+
+	if not item in selection_:
+		if Input.is_action_pressed("shift"):
+			selection_.push_back(item)
+		else:
+			clear_selection_()
+			selection_.push_back(item)
+
 	var w := where_(item)
 
 	#if w.x == 0:
@@ -124,10 +150,15 @@ func _table_item_button_down(item):
 	time_ = item.position.x / grid_size
 	cursor.position.x = item.position.x
 		
+	last_item_down_ = item
+
+		
 	selection_changed.emit([item])
 
+	print("new selection", selection_)
+
+
 func _table_item_button_up(item):
-	print(tool_)
 	if tool_ == Tool.move:
 		translation_end_()
 	elif tool_ == Tool.resize_east:
@@ -136,20 +167,13 @@ func _table_item_button_up(item):
 		translation_end_()
 
 	tool_ = Tool.none
-	selection_.clear()
+	#selection_.clear()
 	#selection_changed.emit([])
 
 func should_auto_scroll_() -> bool:
 	return (
 		tool_ != Tool.none
 	)
-
-func _input(event:InputEvent) -> void:
-	if not external_undo_:
-		if event.is_action_pressed("redo"):
-			undo.redo()
-		elif event.is_action_pressed("undo"):
-			undo.undo()
 
 func quantinize(value:float, q:int) -> float:
 	return (floor((value / grid_size) / q) * q) * grid_size
@@ -169,16 +193,23 @@ func _physics_process(delta:float) -> void:
 			scroll_horizontal += mpx * delta * 10.0
 			_input(InputEventMouseMotion.new())
 
+func is_event_in_control_rect_(event) -> bool:
+	if event is InputEventMouse:
+		return Rect2(Vector2.ZERO, size).has_point(get_local_mouse_position())
+
+	return false
+
+func _input(event):
 	var row_position = get_local_mouse_table_position()
 
-
-	if not selection_.is_empty() and tool_ == Tool.none:
-		if abs(get_global_mouse_position().x - grab_position_.x) > 0.1:
-			move_begin_()
+	if last_item_down_ and last_item_down_.button_pressed and tool_ == Tool.none:
+		# button input order hack fix
+		await get_tree().process_frame
+		if last_item_down_ and last_item_down_.button_pressed:
+			if abs(get_global_mouse_position().x - grab_position_.x) > 0.1:
+				move_begin_()
 	elif tool_ == Tool.move:
-		for item in selection_:
-			item.position.x = row_position * grid_size - quantinize_to_grid(grab_offet_)
-			item.position.x = quantinize(item.position.x, quantinize_snap)
+		move_process_()
 	elif tool_ == Tool.resize_east:
 		for item in selection_:
 			item.size.x = quantinize((row_position + quantinize_snap) * grid_size, quantinize_snap) - item.position.x
@@ -234,11 +265,26 @@ func translation_end_() -> void:
 	undo.commit_action()
 
 func move_begin_() -> void:
+	print("move begin")
 	tool_ = Tool.move
 	# should be an average of the selection
 	grab_offet_ = selection_[0].get_local_mouse_position().x
 	undo.create_action("move")
 	translation_begin_()
+
+func move_process_() -> void:
+	var row_position := get_local_mouse_table_position()
+	
+	var handle_item = last_item_down_
+	var handle_item_position = handle_item.position
+
+	handle_item_position.x = row_position * grid_size - quantinize_to_grid(grab_offet_)
+	handle_item_position.x = quantinize(handle_item_position.x, quantinize_snap)
+
+	var move = handle_item_position - handle_item.position
+	
+	for item in selection_:
+		item.position.x += move.x
 
 func resize_east_begin_() -> void:
 	tool_ = Tool.resize_east
@@ -270,6 +316,8 @@ func where_(control:Control) -> Vector2i:
 	return where
 
 func add_item(node:Button, row_idx:int, quantinize := true) -> void:
+	prints("add_item", node, row_idx, node.position, node.size)
+	
 	if node == null:
 		return
 

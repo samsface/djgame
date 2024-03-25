@@ -34,5 +34,4 @@ void fragment() {
 	ALBEDO.rgb *= aoc.r;
 
 	ALBEDO = mix(ALBEDO, vec3(0.02), aoc.g);
-	
 }

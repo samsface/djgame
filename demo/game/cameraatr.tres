@@ -3,5 +3,5 @@
 [resource]
 dof_blur_far_distance = 0.26
 dof_blur_far_transition = 0.1
-dof_blur_near_distance = 0.42
-dof_blur_near_transition = -1.0
+dof_blur_near_distance = 0.09
+dof_blur_near_transition = 201.8
