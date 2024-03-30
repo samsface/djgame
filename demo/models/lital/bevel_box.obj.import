@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cpq67cej18yn6"
+path="res://.godot/imported/bevel_box.obj-15c327601e8250b2770a9fa7970bf812.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bevel_box.obj-15c327601e8250b2770a9fa7970bf812.mesh"]
+
+source_file="res://models/lital/bevel_box.obj"
+dest_files=["res://.godot/imported/bevel_box.obj-15c327601e8250b2770a9fa7970bf812.mesh", "res://.godot/imported/bevel_box.obj-15c327601e8250b2770a9fa7970bf812.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

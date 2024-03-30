@@ -28,8 +28,9 @@ func _ready() -> void:
 	$CanvasLayer/ColorRect.material.set_shader_parameter("damage", 0.0)
 
 func _zero() -> void:
-	$CanvasLayer/Dead.visible = true
-	Camera.audio_service.stop()
+	pass
+	#$CanvasLayer/Dead.visible = true
+	#Camera.audio_service.stop()
 
 func _physics_process(delta:float) -> void:
 	hp_.decay(decay * delta)

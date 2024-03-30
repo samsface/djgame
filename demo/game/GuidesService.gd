@@ -4,14 +4,13 @@ class_name GuideService
 var active_dilema_groups_ := {}
 var slides_ := {}
 
-func slide(nob:Node3D, length:float, from_value:float, to_value:float):
-	var pos = nob.get_guide_position_for_value(from_value)
-	var d = preload("res://game/guide/slide/slide.tscn").instantiate()
-	d.points_service = $"../PointsService"
-	d.position = pos
-	d.watch(nob, from_value, to_value, length)
+func slide(nob:Node3D, length:float, from_value:float, to_value:float, gluide:float):
+	var guide = preload("res://game/guide/slide/slide.tscn").instantiate()
+	guide.points_service = $"../PointsService"
+	add_child(guide)
 
-	add_child(d)
+	guide.watch(nob, from_value, to_value, length, gluide, false)
+	slides_[nob] = guide
 
 func bang(nob:Node3D, length:float, value:float, auto:bool, dilema_group:int, silent:bool):
 	var pos = nob.get_guide_position_for_value(value)

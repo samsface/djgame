@@ -6,6 +6,7 @@ var sanitize = RegEx.new()
 var open_patches_ := {}
 
 var files := {}
+var metro := 130.0
 
 func _ready() -> void:
 

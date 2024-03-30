@@ -269,12 +269,14 @@
 "value": "0.05"
 }, {
 "from_value": "0.0",
+"gluide": "0.5",
 "length": "64",
 "time": "192",
 "type": "1",
 "value": "1.0"
 }, {
 "from_value": "1.0",
+"gluide": "0.5",
 "length": "64",
 "time": "256",
 "type": "1",
@@ -293,6 +295,7 @@
 "value": "1.0"
 }, {
 "from_value": "1.0",
+"gluide": "0.5",
 "length": "64",
 "time": "320",
 "type": "1",
@@ -310,7 +313,7 @@
 }]
 },
 "dull": {
-"time_range": Vector2i(0, 464),
+"time_range": Vector2i(0, 592),
 "tracks": [{
 "condition_ex": "",
 "name": "/root/Game",
@@ -341,17 +344,22 @@
 }, {
 "length": "16",
 "method": "&\"look 1\"",
-"time": "144",
+"time": "112",
 "type": "2"
 }, {
 "length": "16",
-"method": "&\"look 0\"",
+"method": "&\"look 2\"",
 "time": "336",
 "type": "2"
 }, {
 "length": "16",
-"method": "&\"look\"",
-"time": "96",
+"method": "&\"look 0\"",
+"time": "176",
+"type": "2"
+}, {
+"length": "16",
+"method": "&\"look 1\"",
+"time": "240",
 "type": "2"
 }]
 }, {
@@ -362,7 +370,7 @@
 "dilema_group": "0",
 "length": "16",
 "silent": "false",
-"time": "16",
+"time": "0",
 "type": "0",
 "value": "1.0"
 }]
@@ -371,56 +379,65 @@
 "name": "/root/Game/acid/a",
 "notes": [{
 "from_value": "1.0",
+"gluide": "0.5",
 "length": "112",
 "time": "0",
 "type": "1",
 "value": "0.0"
 }, {
 "from_value": "0.0",
+"gluide": "0.5",
 "length": "16",
-"time": "140",
+"time": "144",
 "type": "1",
 "value": "0.3"
 }, {
 "from_value": "0.0",
-"length": "16",
-"time": "156",
-"type": "1",
-"value": "0.3"
-}, {
-"from_value": "0.0",
-"length": "28",
-"time": "172",
+"gluide": "0.3",
+"length": "32",
+"time": "176",
 "type": "1",
 "value": "0.66"
 }, {
+"from_value": "0.0",
+"gluide": "0.3",
+"length": "16",
+"time": "240",
+"type": "1",
+"value": "0.3"
+}, {
+"from_value": "0.0",
+"gluide": "0.3",
+"length": "32",
+"time": "272",
+"type": "1",
+"value": "0.66"
+}, {
+"from_value": "0.0",
+"gluide": "0.3",
+"length": "16",
+"time": "256",
+"type": "1",
+"value": "0.3"
+}, {
 "from_value": "0.01",
-"length": "36",
-"time": "200",
+"gluide": "0.3",
+"length": "32",
+"time": "208",
 "type": "1",
 "value": "0.0"
 }, {
 "from_value": "0.0",
+"gluide": "0.3",
 "length": "16",
-"time": "236",
+"time": "160",
 "type": "1",
 "value": "0.3"
-}, {
-"from_value": "0.0",
-"length": "16",
-"time": "252",
-"type": "1",
-"value": "0.3"
-}, {
-"from_value": "0.0",
-"length": "28",
-"time": "268",
-"type": "1",
-"value": "0.66"
 }, {
 "from_value": "0.01",
-"length": "36",
-"time": "296",
+"gluide": "0.3",
+"length": "32",
+"time": "304",
 "type": "1",
 "value": "0.0"
 }]
@@ -433,12 +450,14 @@
 "name": "/root/Game/acid/d",
 "notes": [{
 "from_value": "0.0",
+"gluide": "0.5",
 "length": "32",
 "time": "112",
 "type": "1",
 "value": "0.1"
 }, {
 "from_value": "0.0",
+"gluide": "0.5",
 "length": "64",
 "time": "336",
 "type": "1",
@@ -595,6 +614,7 @@
 "name": "/root/Game/acid/a",
 "notes": [{
 "from_value": "0.0",
+"gluide": "0.5",
 "length": "48",
 "time": "16",
 "type": "1",

@@ -105,8 +105,6 @@ func connect_row_(row) -> void:
 	row.mouse_entered.connect(func(): var row_index = row.get_index(); row_mouse_entered.emit(row_index))
 	row.mouse_exited.connect(func(): var row_index = row.get_index(); row_mouse_exited.emit(row_index))
 
-
-
 func clear_selection_() -> void:
 	print("clear_selection")
 	for node in selection_:
@@ -120,6 +118,10 @@ func quantinize_to_grid(value:float) -> int:
 
 func get_local_mouse_table_position() -> int:
 	return clamp(floor($VBoxContainer/ScrollContainer/MarginContainer.get_local_mouse_position().x / grid_size), 0 , 2048)
+
+func get_local_mouse_table_position_row() -> int:
+	return clamp(floor($VBoxContainer/ScrollContainer/MarginContainer.get_local_mouse_position().y / 36), 0 , %Rows.get_child_count() - 1)
+
 
 
 var grab_position_ := Vector2.ZERO
@@ -273,6 +275,8 @@ func move_begin_() -> void:
 	translation_begin_()
 
 func move_process_() -> void:
+	var track_index = get_local_mouse_table_position_row()
+	
 	var row_position := get_local_mouse_table_position()
 	
 	var handle_item = last_item_down_
@@ -285,6 +289,11 @@ func move_process_() -> void:
 	
 	for item in selection_:
 		item.position.x += move.x
+		
+	if handle_item.get_parent().get_index() != track_index:
+		handle_item.get_parent().remove_child(handle_item)
+		%Rows.get_child(track_index).add_child(handle_item)
+		print("MOVE!")
 
 func resize_east_begin_() -> void:
 	tool_ = Tool.resize_east

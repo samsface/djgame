@@ -10,6 +10,11 @@ extends Button
 		value = v
 		invalidate_value_()
 
+@export var gluide:float = 0.5 :
+	set(v):
+		gluide = v
+		invalidate_value_()
+
 func _ready():
 	self_modulate = Color.DARK_SLATE_GRAY
 	$Polygon2D.self_modulate = Color.LIGHT_GREEN
@@ -42,4 +47,4 @@ func invalidate_value_() -> void:
 	$Polygon2D.polygon = polygon
 
 func op(db, node, length) -> void:
-	node.slide(length, from_value, value)
+	node.slide(length, from_value, value, gluide)

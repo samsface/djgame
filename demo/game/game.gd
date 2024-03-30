@@ -23,6 +23,8 @@ func _ready() -> void:
 			child.value_changed.connect(_device_nob_value_changed)
 			
 	$PointsService.zero.connect(_died)
+	
+	audio_.set_metro(130)
 
 func _input(event) -> void:
 	if event.is_action("reset"):

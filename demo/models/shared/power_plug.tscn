@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://du6gatur0vum5"]
+
+[ext_resource type="PackedScene" uid="uid://co60wwtos12vi" path="res://models/shared/power_plug.glb" id="1_521qd"]
+
+[node name="power_plug" instance=ExtResource("1_521qd")]
+
+[node name="CutOut" type="CSGBox3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0209566, 0)
+visible = false
+operation = 2
+size = Vector3(0.33, 0.3, 0.27)

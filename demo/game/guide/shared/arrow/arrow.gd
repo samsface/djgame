@@ -30,7 +30,7 @@ func explode(scale := 1.0) -> Tween:
 	tween.set_parallel()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_EXPO)
-	tween.tween_property(mesh, "instance_shader_parameters/ttl", 1.0, 0.35)
+	tween.tween_property(mesh, "instance_shader_parameters/ttl", 1.0, 0.35).from(0.2)
 	tween.tween_property(light, "light_energy", 8.0, 0.1)
 	tween.tween_property(light, "light_energy", 0.0, 0.2).set_delay(0.1)
 

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dw25wwjo7a1uo"]
+
+[ext_resource type="PackedScene" uid="uid://c6gjynfkm6pvx" path="res://models/shared/plug.glb" id="1_s33k0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_50h22"]
+metallic = 1.0
+metallic_specular = 0.68
+roughness = 0.25
+
+[node name="plug" instance=ExtResource("1_s33k0")]
+
+[node name="Plug" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_50h22")

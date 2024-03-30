@@ -78,7 +78,7 @@ func _piano_roll_bang(item:Control, idx:int) -> void:
 		if not e.execute([], db):
 			return
 
-	var length = %Virtual2.length / (1000.0/130.0)
+	var length = %Virtual2.length / (1000.0/PureData.metro)
 
 	item.op(db, node, length)
 

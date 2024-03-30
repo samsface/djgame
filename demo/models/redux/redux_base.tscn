@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://tdpy3fd8uikf"]
+
+[ext_resource type="PackedScene" uid="uid://v8n5xbvrdio6" path="res://models/redux/redux_base.glb" id="1_ck1ir"]
+[ext_resource type="Material" uid="uid://qitngf1gw2gt" path="res://models/redux/redux_base_material.tres" id="2_m30eu"]
+[ext_resource type="PackedScene" uid="uid://c6gjynfkm6pvx" path="res://models/shared/plug.glb" id="3_ud4it"]
+
+[node name="redux_base" instance=ExtResource("1_ck1ir")]
+
+[node name="ReduxBase" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_m30eu")
+
+[node name="plug" parent="." index="1" instance=ExtResource("3_ud4it")]
+transform = Transform3D(-2.18557e-10, -0.005, 0, 0.005, -2.18557e-10, 0, 0, 0, 0.005, -0.0267916, 0, -0.00166928)

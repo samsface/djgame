@@ -1,51 +1,54 @@
 extends Guide
 
+signal done
+
 var nob_
 var to_value_ := 0.0
 var duration_ := 0.0
 var expected_value_ := 0.0
 var score_ := 0
+var slide_tween_:Tween
 var score_tween_:Tween
 var rumble_tween_:Tween
 var rumble_scale_ := 1.2
+var legato := false
+var gluide_ := 0.0
+var ref_count_ := 0
 
 @onready var arrow_ = $arrow
 
 func _ready() -> void:
-	var fall_duration := 0.5
-	
-	arrow_.orient(
-		nob_.get_guide_position_for_value(to_value_),
-		nob_.get_guide_position_for_value(expected_value_)
-	)
+	points_ = points_service.make_points()
 
+func fall_() -> void:
+	if fall_tween_:
+		fall_tween_.kill()
+	
 	var g = Color("#00e659")
 	g.a = 0.9
 
 	fall_tween_ = create_tween()
 	fall_tween_.set_parallel()
-	
 	fall_tween_.tween_property(nob_, "electric", g, 0.2)
-	
-	arrow_.position.y = 0.04
-	fall_tween_.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
-	fall_tween_.tween_property(arrow_, "position:y", 0.0, fall_duration)
+	fall_tween_.tween_property(arrow_, "position:y", 0.0, gluide_).from(0.1)
 
-	await fall_tween_.finished
-
-	var tween := create_tween()
-	tween.set_parallel()
-	tween.tween_property(arrow_, "global_position", nob_.get_guide_position_for_value(to_value_), duration_ - fall_duration)
-	tween.tween_property(self, "expected_value_", to_value_, duration_ - fall_duration)
+func slide_() -> void:
+	Camera.rumble.connect(_rumble)
 	
-	tween.finished.connect(_done)
+	if slide_tween_:
+		slide_tween_.kill()
+
+	slide_tween_ = create_tween()
+	slide_tween_.set_parallel()
+	slide_tween_.tween_property(arrow_, "global_position", nob_.get_guide_position_for_value(to_value_), duration_ - gluide_)
+	slide_tween_.tween_property(self, "expected_value_", to_value_, duration_ - gluide_)
+	slide_tween_.finished.connect(_done)
+
+	if score_tween_:
+		score_tween_.kill()
 
 	score_tween_ = create_tween()
-	score_tween_.tween_property(self, "score_", 300, duration_ - fall_duration)
-
-	points_ = points_service.make_points()
-
-	Camera.rumble.connect(_rumble)
+	score_tween_.tween_property(self, "score_", 300, duration_ - gluide_)
 
 func _rumble() -> void:
 	if rumble_tween_:
@@ -56,7 +59,7 @@ func _rumble() -> void:
 	rumble_tween_.tween_property(self, "scale", Vector3.ONE * rumble_scale_, 0.05)
 	rumble_tween_.tween_property(self, "scale", Vector3.ONE, 0.1)
 
-func watch(nob:Nob, from_value:float, to_value:float, duration:float) -> void:
+func watch(nob:Nob, from_value:float, to_value:float, duration:float, gluide:float, should_gluide:bool) -> void:
 	if not nob:
 		return
 
@@ -64,6 +67,18 @@ func watch(nob:Nob, from_value:float, to_value:float, duration:float) -> void:
 	expected_value_ = from_value
 	to_value_ = to_value
 	duration_ = duration
+	gluide_ = 1.5
+
+	position = nob_.get_guide_position_for_value(expected_value_)
+	arrow_.orient(
+		nob_.get_guide_position_for_value(to_value_),
+		nob_.get_guide_position_for_value(expected_value_)
+	)
+
+	fall_()
+	await fall_tween_.finished
+
+	slide_()
 
 func test_() -> void:
 	var off = nob_.value - expected_value_
@@ -101,6 +116,7 @@ func _done() -> void:
 	points_.commit()
 
 	await arrow_.explode(explode_size).finished
+	
 	queue_free()
 
 func _exit_tree() -> void:

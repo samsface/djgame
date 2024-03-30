@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://g88avlvd762w"]
+
+[ext_resource type="PackedScene" uid="uid://dhqbvfelrpemr" path="res://models/shared/pedal_raw.glb" id="1_uw2tw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cxsyi"]
+metallic = 0.87
+metallic_specular = 0.58
+roughness = 0.4
+
+[node name="pedal_raw" instance=ExtResource("1_uw2tw")]
+
+[node name="PedalRaw" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_cxsyi")

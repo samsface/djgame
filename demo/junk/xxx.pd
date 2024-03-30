@@ -65,6 +65,7 @@
 #X obj 567 70 i++;
 #X obj 391 50 s r-RESET;
 #X floatatom 530 227 5 0 0 0 - r-acid-preset - 0;
+#X floatatom 491 54 5 0 0 0 - r-metro - 0;
 #X connect 1 0 6 0;
 #X connect 1 0 30 0;
 #X connect 1 0 29 0;
@@ -116,3 +117,4 @@
 #X connect 38 0 37 1;
 #X connect 40 0 39 0;
 #X connect 42 0 30 2;
+#X connect 43 0 3 1;

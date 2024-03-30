@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxa6fkhajwhvd"]
+
+[ext_resource type="PackedScene" uid="uid://fjx35b3rg45x" path="res://models/shared/nobx.glb" id="1_pup2a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o27mf"]
+metallic = 0.86
+metallic_specular = 0.85
+roughness = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h21it"]
+albedo_color = Color(0, 0, 0, 1)
+metallic = 0.79
+metallic_specular = 0.75
+roughness = 0.57
+
+[node name="nobx" instance=ExtResource("1_pup2a")]
+
+[node name="Nob2" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_o27mf")
+surface_material_override/1 = SubResource("StandardMaterial3D_h21it")

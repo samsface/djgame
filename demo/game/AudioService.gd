@@ -25,6 +25,10 @@ func _float(signal_name:String, value:float) -> void:
 	if callback:
 		callback.call(value)
 
+func set_metro(value:float) -> void:
+	PureData.metro = value
+	emit_float("metro", value)
+
 func play() -> void:
 	emit_bang("PLAY")
 
