@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dtnc8e2uktfb5"]
+
+[ext_resource type="Shader" path="res://models/redux/void.gdshader" id="1_tkumg"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_tkumg")

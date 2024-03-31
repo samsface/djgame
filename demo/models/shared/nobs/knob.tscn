@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://bstjrojno6rcv"]
+
+[ext_resource type="Script" path="res://models/shared/nobs/knob.gd" id="1_djh4w"]
+[ext_resource type="Texture2D" uid="uid://nmmckq1qygfk" path="res://models/shared/smudges_basecolor (copy).png" id="1_lvh7v"]
+[ext_resource type="PackedScene" uid="uid://cxa6fkhajwhvd" path="res://models/redux/nobx.tscn" id="2_kfeh7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5wxlg"]
+albedo_color = Color(0, 0, 0, 1)
+metallic = 1.0
+metallic_specular = 0.48
+roughness = 0.15
+
+[sub_resource type="TextMesh" id="TextMesh_i1i4c"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_5wxlg")
+text = "PRESENCE"
+font_size = 32
+curve_step = 10.0
+depth = 0.01
+width = 1.0
+
+[node name="Node3D2" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.079, 0.609877)
+script = ExtResource("1_djh4w")
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(0.920002, 0, 2.38419e-07, 0, 0.92, 0, -2.38419e-07, 0, 0.920002, 0, -0.032319, 0)
+size = Vector3(1, 0.1, 1)
+texture_albedo = ExtResource("1_lvh7v")
+emission_energy = 0.0
+albedo_mix = 0.26
+lower_fade = 49.8789
+
+[node name="Model" parent="." instance=ExtResource("2_kfeh7")]
+transform = Transform3D(-0.946592, 0, -0.322433, 0, 1, 0, 0.322433, 0, -0.946592, 0, 0.193559, 0)
+
+[node name="Label" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0, 0, -0.389678)
+cast_shadow = 0
+mesh = SubResource("TextMesh_i1i4c")
+skeleton = NodePath("")

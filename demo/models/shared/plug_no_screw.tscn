@@ -1,13 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://gvof4s182p4h"]
+[gd_scene load_steps=4 format=3 uid="uid://gvof4s182p4h"]
 
 [ext_resource type="PackedScene" uid="uid://c1midsktuy41j" path="res://models/shared/plug_no_screw.glb" id="1_oygru"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5tj4b"]
-metallic = 0.87
-metallic_specular = 0.58
-roughness = 0.4
+[ext_resource type="Material" uid="uid://ht354kco75b0" path="res://models/shared/plug_material.tres" id="2_pvhx2"]
+[ext_resource type="Material" uid="uid://dtnc8e2uktfb5" path="res://models/redux/black_void_material.tres" id="3_ulvlx"]
 
 [node name="plug_no_screw" instance=ExtResource("1_oygru")]
 
-[node name="Plug_001" parent="." index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_5tj4b")
+[node name="JackInputSansScrew" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_pvhx2")
+surface_material_override/1 = ExtResource("3_ulvlx")

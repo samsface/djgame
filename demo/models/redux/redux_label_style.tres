@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="LabelStyle" load_steps=2 format=3 uid="uid://bjicn3fhgiiyj"]
+
+[ext_resource type="Script" path="res://models/shared/nobs/label_style.gd" id="1_3kdee"]
+
+[resource]
+script = ExtResource("1_3kdee")
+size = 13
+font = ""

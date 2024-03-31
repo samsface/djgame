@@ -1,178 +1,115 @@
-[gd_scene load_steps=18 format=3 uid="uid://cnnors0cf4oai"]
+[gd_scene load_steps=16 format=3 uid="uid://cnnors0cf4oai"]
 
 [ext_resource type="PackedScene" uid="uid://dw25wwjo7a1uo" path="res://models/redux/plug.tscn" id="1_0d8gi"]
 [ext_resource type="Script" path="res://models/redux/device.gd" id="1_gcvpy"]
 [ext_resource type="PackedScene" uid="uid://g88avlvd762w" path="res://models/redux/pedal_raw.tscn" id="2_j5j27"]
-[ext_resource type="Texture2D" uid="uid://nmmckq1qygfk" path="res://models/shared/smudges_basecolor (copy).png" id="3_x6fh4"]
-[ext_resource type="PackedScene" uid="uid://cxa6fkhajwhvd" path="res://models/redux/nobx.tscn" id="5_itttq"]
+[ext_resource type="PackedScene" uid="uid://bpx0380hsh5kf" path="res://models/shared/nobs/knob_slits.tscn" id="3_m8anw"]
+[ext_resource type="PackedScene" uid="uid://b77oywlnttw32" path="res://models/shared/label.tscn" id="3_yojx2"]
+[ext_resource type="Texture2D" uid="uid://ccyrxw1cvcj2y" path="res://models/shared/circle.png" id="6_kck4j"]
 [ext_resource type="PackedScene" uid="uid://gvof4s182p4h" path="res://models/shared/plug_no_screw.tscn" id="6_uvxa3"]
 [ext_resource type="PackedScene" uid="uid://du6gatur0vum5" path="res://models/shared/power_plug.tscn" id="7_7uqgx"]
-[ext_resource type="Script" path="res://models/redux/CSGMesh3D.gd" id="8_c3qqb"]
+[ext_resource type="Material" uid="uid://qitngf1gw2gt" path="res://models/redux/redux_base_material.tres" id="10_c188u"]
+[ext_resource type="ArrayMesh" uid="uid://cpq67cej18yn6" path="res://models/lital/bevel_box.obj" id="12_vaimc"]
+[ext_resource type="Script" path="res://models/shared/nobs/label_style.gd" id="13_d54gs"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5wxlg"]
-albedo_color = Color(0, 0, 0, 1)
-metallic = 1.0
-metallic_specular = 0.48
-roughness = 0.15
+[sub_resource type="Resource" id="Resource_aldri"]
+script = ExtResource("13_d54gs")
+size = 4
+font = ""
+curve = 0.0
 
-[sub_resource type="TextMesh" id="TextMesh_pntfl"]
-material = SubResource("StandardMaterial3D_5wxlg")
-text = "MASTER"
-font_size = 32
-curve_step = 10.0
-depth = 0.01
-width = 1.0
+[sub_resource type="Resource" id="Resource_ucqdy"]
+script = ExtResource("13_d54gs")
+size = 7
+font = ""
+curve = 0.4616
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvyxc"]
-albedo_color = Color(0.701961, 0, 0.0627451, 1)
-ao_enabled = true
+[sub_resource type="Resource" id="Resource_n3mww"]
+script = ExtResource("13_d54gs")
+size = 10
+font = ""
+curve = 0.0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_itxno"]
-_surfaces = [{
-"aabb": AABB(-1.06773, -1.013, -2.34723, 1.986, 0.96, 3.38949),
-"attribute_data": PackedByteArray(255, 0, 255, 255, 158, 8, 30, 63, 248, 32, 120, 62, 0, 0, 255, 255, 192, 254, 191, 62, 248, 32, 120, 62, 255, 0, 0, 255, 158, 8, 30, 63, 252, 128, 251, 59, 0, 0, 0, 255, 192, 254, 191, 62, 252, 128, 251, 59, 255, 255, 255, 255, 158, 8, 30, 63, 252, 16, 252, 62, 0, 255, 255, 255, 192, 254, 191, 62, 252, 16, 252, 62, 255, 0, 255, 255, 158, 8, 30, 63, 132, 236, 131, 62, 0, 0, 255, 255, 192, 254, 191, 62, 132, 236, 131, 62, 255, 255, 0, 255, 222, 7, 94, 63, 252, 16, 252, 62, 255, 255, 255, 255, 162, 246, 33, 63, 252, 16, 252, 62, 255, 49, 0, 255, 222, 7, 94, 63, 132, 236, 131, 62, 255, 0, 255, 255, 162, 246, 33, 63, 132, 236, 131, 62, 255, 0, 0, 255, 158, 8, 30, 63, 254, 7, 126, 63, 0, 0, 0, 255, 192, 254, 191, 62, 254, 7, 126, 63, 255, 255, 0, 255, 158, 8, 30, 63, 194, 246, 65, 63, 0, 255, 0, 255, 192, 254, 191, 62, 194, 246, 65, 63, 255, 255, 0, 255, 158, 8, 30, 63, 190, 8, 62, 63, 0, 255, 0, 255, 192, 254, 191, 62, 190, 8, 62, 63, 255, 255, 255, 255, 158, 8, 30, 63, 130, 246, 1, 63, 0, 255, 255, 255, 192, 254, 191, 62, 130, 246, 1, 63, 255, 0, 0, 255, 158, 8, 30, 63, 0, 0, 128, 63, 0, 0, 0, 255, 192, 254, 191, 62, 0, 0, 128, 63, 0, 255, 0, 255, 136, 220, 7, 62, 0, 255, 255, 62, 0, 255, 0, 255, 0, 249, 255, 61, 252, 16, 252, 62, 0, 255, 255, 255, 188, 16, 188, 62, 0, 255, 255, 62, 0, 255, 255, 255, 192, 254, 191, 62, 252, 16, 252, 62, 0, 0, 255, 255, 192, 254, 191, 62, 132, 236, 131, 62, 0, 0, 255, 255, 188, 16, 188, 62, 0, 253, 127, 62, 0, 0, 0, 255, 136, 220, 7, 62, 0, 253, 127, 62, 0, 0, 0, 255, 0, 249, 255, 61, 132, 236, 131, 62, 255, 0, 0, 255, 222, 7, 94, 63, 0, 253, 127, 62, 255, 0, 0, 255, 224, 255, 95, 63, 132, 236, 131, 62, 255, 255, 0, 255, 222, 7, 94, 63, 0, 255, 255, 62, 255, 255, 0, 255, 224, 255, 95, 63, 252, 16, 252, 62, 255, 0, 255, 255, 162, 246, 33, 63, 0, 253, 127, 62, 255, 0, 255, 255, 160, 255, 31, 63, 132, 236, 131, 62, 255, 255, 255, 255, 160, 255, 31, 63, 252, 16, 252, 62, 255, 255, 255, 255, 162, 246, 33, 63, 0, 255, 255, 62),
-"format": 34359742495,
-"index_count": 108,
-"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 2, 0, 1, 0, 3, 0, 4, 0, 5, 0, 6, 0, 6, 0, 5, 0, 7, 0, 8, 0, 9, 0, 10, 0, 10, 0, 9, 0, 11, 0, 12, 0, 13, 0, 14, 0, 14, 0, 13, 0, 15, 0, 16, 0, 17, 0, 18, 0, 18, 0, 17, 0, 19, 0, 20, 0, 21, 0, 12, 0, 12, 0, 21, 0, 13, 0, 17, 0, 16, 0, 15, 0, 15, 0, 16, 0, 14, 0, 5, 0, 4, 0, 19, 0, 19, 0, 4, 0, 18, 0, 1, 0, 0, 0, 7, 0, 7, 0, 0, 0, 6, 0, 22, 0, 23, 0, 24, 0, 24, 0, 23, 0, 25, 0, 25, 0, 23, 0, 26, 0, 26, 0, 23, 0, 27, 0, 27, 0, 23, 0, 28, 0, 28, 0, 23, 0, 29, 0, 10, 0, 30, 0, 31, 0, 32, 0, 8, 0, 33, 0, 34, 0, 11, 0, 35, 0, 36, 0, 9, 0, 37, 0, 8, 0, 10, 0, 33, 0, 33, 0, 10, 0, 31, 0, 9, 0, 8, 0, 37, 0, 37, 0, 8, 0, 32, 0, 11, 0, 9, 0, 6, 0, 6, 0, 9, 0, 4, 0, 10, 0, 11, 0, 30, 0, 30, 0, 11, 0, 34, 0),
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 38,
-"vertex_data": PackedByteArray(91, 89, 91, 63, 48, 90, 234, 189, 60, 104, 133, 63, 91, 89, 91, 63, 227, 169, 129, 191, 60, 104, 133, 63, 130, 207, 128, 191, 48, 90, 234, 189, 60, 104, 133, 63, 130, 207, 128, 191, 227, 169, 129, 191, 60, 104, 133, 63, 107, 19, 107, 63, 48, 90, 234, 189, 20, 75, 18, 192, 107, 19, 107, 63, 227, 169, 129, 191, 20, 75, 18, 192, 107, 19, 107, 63, 48, 90, 234, 189, 101, 22, 123, 63, 107, 19, 107, 63, 227, 169, 129, 191, 101, 22, 123, 63, 130, 207, 128, 191, 96, 19, 89, 189, 20, 75, 18, 192, 91, 89, 91, 63, 96, 19, 89, 189, 20, 75, 18, 192, 130, 207, 128, 191, 96, 19, 89, 189, 194, 63, 209, 190, 91, 89, 91, 63, 96, 19, 89, 189, 101, 22, 123, 63, 138, 171, 136, 191, 48, 90, 234, 189, 101, 22, 123, 63, 138, 171, 136, 191, 227, 169, 129, 191, 101, 22, 123, 63, 138, 171, 136, 191, 48, 90, 234, 189, 20, 75, 18, 192, 138, 171, 136, 191, 227, 169, 129, 191, 20, 75, 18, 192, 130, 207, 128, 191, 48, 90, 234, 189, 25, 57, 22, 192, 130, 207, 128, 191, 227, 169, 129, 191, 25, 57, 22, 192, 91, 89, 91, 63, 48, 90, 234, 189, 25, 57, 22, 192, 91, 89, 91, 63, 227, 169, 129, 191, 25, 57, 22, 192, 130, 207, 128, 191, 48, 90, 234, 189, 60, 104, 133, 63, 130, 207, 128, 191, 227, 169, 129, 191, 60, 104, 133, 63, 130, 207, 128, 191, 227, 169, 129, 191, 25, 57, 22, 192, 138, 171, 136, 191, 227, 169, 129, 191, 20, 75, 18, 192, 91, 89, 91, 63, 227, 169, 129, 191, 25, 57, 22, 192, 107, 19, 107, 63, 227, 169, 129, 191, 20, 75, 18, 192, 107, 19, 107, 63, 227, 169, 129, 191, 101, 22, 123, 63, 91, 89, 91, 63, 227, 169, 129, 191, 60, 104, 133, 63, 130, 207, 128, 191, 227, 169, 129, 191, 60, 104, 133, 63, 138, 171, 136, 191, 227, 169, 129, 191, 101, 22, 123, 63, 130, 207, 128, 191, 48, 90, 234, 189, 60, 104, 133, 63, 138, 171, 136, 191, 48, 90, 234, 189, 101, 22, 123, 63, 130, 207, 128, 191, 48, 90, 234, 189, 25, 57, 22, 192, 138, 171, 136, 191, 48, 90, 234, 189, 20, 75, 18, 192, 91, 89, 91, 63, 48, 90, 234, 189, 60, 104, 133, 63, 107, 19, 107, 63, 48, 90, 234, 189, 101, 22, 123, 63, 107, 19, 107, 63, 48, 90, 234, 189, 20, 75, 18, 192, 91, 89, 91, 63, 48, 90, 234, 189, 25, 57, 22, 192, 11, 156, 12, 156, 8, 87, 63, 250, 30, 151, 241, 78, 76, 147, 13, 223, 242, 99, 12, 156, 248, 168, 62, 250, 224, 104, 242, 78, 180, 108, 14, 223, 240, 227, 24, 184, 13, 94, 66, 237, 241, 206, 211, 55, 225, 193, 179, 232, 228, 199, 11, 156, 136, 90, 5, 239, 209, 183, 241, 78, 150, 174, 13, 223, 229, 71, 240, 227, 29, 36, 38, 174, 23, 184, 241, 227, 174, 35, 13, 210, 242, 99, 229, 199, 175, 35, 241, 173, 11, 156, 228, 199, 26, 36, 214, 209, 26, 56, 13, 156, 247, 168, 65, 241, 41, 72, 241, 78, 106, 81, 14, 223, 13, 28, 26, 184, 119, 157, 130, 235, 11, 49, 210, 55, 30, 62, 180, 232, 14, 28, 242, 227, 125, 139, 131, 235, 15, 49, 30, 23, 26, 62, 87, 246, 244, 227, 242, 227, 144, 116, 136, 235, 241, 206, 32, 23, 226, 193, 88, 246, 242, 99, 12, 156, 248, 168, 62, 250, 224, 104, 242, 78, 180, 108, 14, 223, 0, 128, 1, 0, 254, 255, 255, 191, 0, 128, 1, 0, 254, 255, 255, 191, 0, 128, 1, 0, 254, 255, 255, 191, 0, 128, 1, 0, 254, 255, 255, 191, 0, 128, 1, 0, 254, 255, 255, 191, 0, 128, 1, 0, 254, 255, 255, 191, 0, 128, 1, 0, 254, 255, 255, 191, 1, 128, 2, 0, 253, 255, 0, 192, 242, 99, 10, 156, 186, 32, 218, 166, 24, 56, 10, 156, 197, 79, 244, 145, 12, 28, 241, 227, 72, 50, 161, 175, 12, 28, 23, 184, 20, 92, 28, 152, 12, 156, 11, 156, 72, 50, 92, 208, 227, 199, 12, 156, 18, 92, 225, 231, 241, 227, 23, 184, 198, 79, 9, 238, 240, 227, 242, 227, 184, 32, 34, 217)
-}]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fyfkw"]
-
-[sub_resource type="TextMesh" id="TextMesh_i1i4c"]
-material = SubResource("StandardMaterial3D_5wxlg")
-text = "PRESENCE"
-font_size = 32
-curve_step = 10.0
-depth = 0.01
-width = 1.0
-
-[sub_resource type="TextMesh" id="TextMesh_08nqf"]
-material = SubResource("StandardMaterial3D_5wxlg")
-text = "DISTORT"
-font_size = 32
-curve_step = 10.0
-depth = 0.01
-width = 1.0
-
-[sub_resource type="TextMesh" id="TextMesh_pbbrj"]
-material = SubResource("StandardMaterial3D_5wxlg")
-text = "IN"
-font_size = 32
-curve_step = 10.0
-depth = 0.01
-width = 1.0
-
-[sub_resource type="TextMesh" id="TextMesh_yb0i4"]
-material = SubResource("StandardMaterial3D_5wxlg")
-text = "OUT"
-font_size = 32
-curve_step = 10.0
-depth = 0.01
-width = 1.0
+[sub_resource type="Resource" id="Resource_pqj4l"]
+script = ExtResource("13_d54gs")
+size = 4
+font = ""
+curve = 0.0
 
 [node name="Redux" type="Node3D"]
 script = ExtResource("1_gcvpy")
 
-[node name="plug" parent="." instance=ExtResource("1_0d8gi")]
-transform = Transform3D(-0.187866, 0, 0.0782221, 0, 0.2035, 0, -0.0782221, 0, -0.187866, -0.0448751, -0.705285, -1.40482)
+[node name="NorthFace" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.016, 0)
 
-[node name="pedal_raw" parent="plug" instance=ExtResource("2_j5j27")]
-transform = Transform3D(1, 0, 8.9407e-08, 0, 1, 0, -8.9407e-08, 0, 1, 0, 0.665063, 0)
+[node name="OutLabel" parent="NorthFace" instance=ExtResource("3_yojx2")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.018888, -9.93013e-05, -0.00616814)
+label_style = SubResource("Resource_aldri")
+label = "OUT"
 
-[node name="Decal" type="Decal" parent="plug"]
-transform = Transform3D(4.914, 0, 0, 0, 4.914, 0, 0, 0, 4.914, 0.0068078, -0.746912, -0.0274198)
-size = Vector3(0.8, 0.8, 0.8)
-texture_albedo = ExtResource("3_x6fh4")
+[node name="InLabel" parent="NorthFace" instance=ExtResource("3_yojx2")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -0.0180217, -9.93013e-05, 0.00205946)
+label_style = SubResource("Resource_aldri")
+label = "IN"
+
+[node name="TrueBypassLabel" parent="NorthFace" instance=ExtResource("3_yojx2")]
+transform = Transform3D(-1, 0, -8.74226e-08, 0, 1, 0, 8.74226e-08, 0, -1, 0.000117008, -9.93013e-05, -0.0385675)
+label_style = SubResource("Resource_ucqdy")
+label = "TRUE BYPASS"
+
+[node name="InLabel3" parent="NorthFace" instance=ExtResource("3_yojx2")]
+transform = Transform3D(-1, 0, -8.74226e-08, 0, 1, 0, 8.74226e-08, 0, -1, 0.000117008, -9.93013e-05, -0.01428)
+label_style = SubResource("Resource_n3mww")
+label = "Supa Overdrive"
+
+[node name="InLabel4" parent="NorthFace" instance=ExtResource("3_yojx2")]
+transform = Transform3D(-1, 0, -8.74226e-08, 0, 1, 0, 8.74226e-08, 0, -1, 0.000117008, -9.93013e-05, 0.0422961)
+label_style = SubResource("Resource_pqj4l")
+label = "DC9V +="
+
+[node name="plug" parent="NorthFace" instance=ExtResource("1_0d8gi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.88614e-05, -0.0287832)
+
+[node name="pedal_raw" parent="NorthFace/plug" instance=ExtResource("2_j5j27")]
+visible = false
+
+[node name="Decal" type="Decal" parent="NorthFace/plug"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0034411, -0.000158211)
+size = Vector3(0.02, 0.02, 0.02)
+texture_albedo = ExtResource("6_kck4j")
 emission_energy = 0.0
-albedo_mix = 0.26
+modulate = Color(0, 0, 0, 1)
+albedo_mix = 0.31
 lower_fade = 49.8789
 
-[node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.517933, 0.260557, 0.632566)
+[node name="knob_slits" parent="NorthFace" instance=ExtResource("3_m8anw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01, -7.73016e-05, 0.033)
 
-[node name="nobx" parent="Node3D" instance=ExtResource("5_itttq")]
-transform = Transform3D(-0.981627, 0, 0.190809, 0, 1, 0, -0.190809, 0, -0.981627, 0, -0.867453, 0)
+[node name="knob_slits2" parent="NorthFace" instance=ExtResource("3_m8anw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01, 0, 0.033)
 
-[node name="Decal2" type="Decal" parent="Node3D"]
-transform = Transform3D(0.920002, 0, 0, 0, 0.92, 0, 0, 0, 0.920002, 0, -1.08948, 0)
-size = Vector3(1, 0.1, 1)
-texture_albedo = ExtResource("3_x6fh4")
-emission_energy = 0.0
-albedo_mix = 0.26
-lower_fade = 49.8789
+[node name="knob_slits3" parent="NorthFace" instance=ExtResource("3_m8anw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.015)
 
-[node name="Label" type="MeshInstance3D" parent="Node3D"]
-transform = Transform3D(-0.230001, 2.01073e-08, 8.78916e-16, 0, -1.00536e-08, 0.23, 2.01073e-08, 0.23, 1.00536e-08, 0, -1.04623, -0.32522)
-mesh = SubResource("TextMesh_pntfl")
-skeleton = NodePath("")
+[node name="WestFace" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.021296, 0, 0)
 
-[node name="PowerPlug" parent="." instance=ExtResource("7_7uqgx")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.944318, -1.5054, -1.42615)
+[node name="plug_no_screw2" parent="WestFace" instance=ExtResource("6_uvxa3")]
+transform = Transform3D(-1, 1.06581e-14, 6.60024e-15, 1.06581e-14, 1, -1.50996e-07, -6.60023e-15, -1.50996e-07, -1, 0.00492395, -7.50609e-05, -0.00517411)
+
+[node name="EastFace" type="Node3D" parent="."]
+transform = Transform3D(4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, 0, 3.82137e-15, -8.74228e-08, -1, -0.0211913, 0, 0)
+
+[node name="plug_no_screw2" parent="EastFace" instance=ExtResource("6_uvxa3")]
+transform = Transform3D(-1, 1.06581e-14, 6.60024e-15, 1.06581e-14, 1, -1.50996e-07, -6.60023e-15, -1.50996e-07, -1, 0.00492395, -7.50609e-05, -0.00283733)
+
+[node name="power_plug" parent="." instance=ExtResource("7_7uqgx")]
+transform = Transform3D(-4.37114e-08, 0, 1, 1, -4.37114e-08, 4.37114e-08, 4.37114e-08, 1, 1.91069e-15, 0, -0.00606457, 0.0466156)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
-material_override = SubResource("StandardMaterial3D_kvyxc")
+material_override = ExtResource("10_c188u")
+calculate_tangents = false
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.731874, 0)
-mesh = SubResource("ArrayMesh_itxno")
-material = SubResource("StandardMaterial3D_fyfkw")
-script = ExtResource("8_c3qqb")
-size = Vector3(0.014, -1.04, 1.3895)
-
-[node name="Node3D2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0900176, 0.260557, 0.237831)
-
-[node name="nobx" parent="Node3D2" instance=ExtResource("5_itttq")]
-transform = Transform3D(-0.946592, 0, -0.322433, 0, 1, 0, 0.322433, 0, -0.946592, 0, -0.863599, 0)
-
-[node name="Decal2" type="Decal" parent="Node3D2/nobx"]
-transform = Transform3D(-0.870867, 0, 0.296639, 0, 0.92, 0, -0.296639, 0, -0.870867, 0, -0.225878, 0)
-size = Vector3(1, 0.1, 1)
-texture_albedo = ExtResource("3_x6fh4")
-emission_energy = 0.0
-albedo_mix = 0.26
-lower_fade = 49.8789
-
-[node name="Decal" type="MeshInstance3D" parent="Node3D2"]
-transform = Transform3D(-0.230001, 2.01073e-08, 8.78916e-16, 0, -1.00536e-08, 0.23, 2.01073e-08, 0.23, 1.00536e-08, 0, -1.04623, -0.32522)
-mesh = SubResource("TextMesh_i1i4c")
-skeleton = NodePath("")
-
-[node name="Node3D3" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.67315, 0.260557, 0.632566)
-
-[node name="nobx" parent="Node3D3" instance=ExtResource("5_itttq")]
-transform = Transform3D(0.691038, 0, 0.722819, 0, 1, 0, -0.722819, 0, 0.691038, 0, -0.867113, 0)
-
-[node name="Decal2" type="Decal" parent="Node3D3"]
-transform = Transform3D(0.920002, 0, 0, 0, 0.92, 0, 0, 0, 0.920002, 0, -1.08948, 0)
-size = Vector3(1, 0.1, 1)
-texture_albedo = ExtResource("3_x6fh4")
-emission_energy = 0.0
-albedo_mix = 0.26
-lower_fade = 49.8789
-
-[node name="Decal" type="MeshInstance3D" parent="Node3D3"]
-transform = Transform3D(-0.230001, 2.01073e-08, 8.78916e-16, 0, -1.00536e-08, 0.23, 2.01073e-08, 0.23, 1.00536e-08, 0, -1.04623, -0.32522)
-mesh = SubResource("TextMesh_08nqf")
-skeleton = NodePath("")
-
-[node name="plug_no_screw" parent="." instance=ExtResource("6_uvxa3")]
-transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 0, 0, 0, 1, -1.08804, -1.3739, -0.617876)
-
-[node name="Label2" type="MeshInstance3D" parent="plug_no_screw"]
-transform = Transform3D(1.00537e-08, 8.88178e-16, 0.23, 2.01073e-08, -0.23, 0, 0.230001, 2.01072e-08, -1.00536e-08, 0.588, -0.109, 0)
-mesh = SubResource("TextMesh_pbbrj")
-skeleton = NodePath("")
-
-[node name="plug_no_screw2" parent="." instance=ExtResource("6_uvxa3")]
-transform = Transform3D(4.37114e-08, 1, -8.74228e-08, 1, -4.37114e-08, 0, -3.82137e-15, -8.74228e-08, -1, 0.941567, -1.3739, -0.617876)
-
-[node name="Label3" type="MeshInstance3D" parent="plug_no_screw2"]
-transform = Transform3D(1.00537e-08, 3.19909e-09, 0.23, -4.02147e-08, 0.23, -3.19909e-09, -0.230001, -4.02145e-08, 1.00536e-08, 0.588, -0.100195, -5.96046e-08)
-mesh = SubResource("TextMesh_yb0i4")
-skeleton = NodePath("")
+snap = 1e-06
+mesh = ExtResource("12_vaimc")
