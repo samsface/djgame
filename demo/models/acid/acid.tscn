@@ -1,0 +1,132 @@
+[gd_scene load_steps=12 format=3 uid="uid://rbuf4nqmcmjx"]
+
+[ext_resource type="Script" path="res://models/redux/device.gd" id="1_636gy"]
+[ext_resource type="PackedScene" uid="uid://bvxsm2x52fp42" path="res://models/lital/slider.tscn" id="2_4wliu"]
+[ext_resource type="PackedScene" uid="uid://cyqgaxwtbp2kl" path="res://models/shared/lines/square.tscn" id="3_vvl8k"]
+[ext_resource type="Script" path="res://models/shared/nobs/line_style.gd" id="4_pik7k"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="7_3c2t0"]
+[ext_resource type="PackedScene" uid="uid://gvof4s182p4h" path="res://models/shared/plug_no_screw.tscn" id="8_4k742"]
+[ext_resource type="PackedScene" uid="uid://du6gatur0vum5" path="res://models/shared/power_plug.tscn" id="9_d6sye"]
+[ext_resource type="ArrayMesh" uid="uid://bihsv7t48c5h3" path="res://models/lital/wide.obj" id="11_6h82h"]
+
+[sub_resource type="Resource" id="Resource_u0ocg"]
+script = ExtResource("4_pik7k")
+line_width = 0.0064
+fill_line_width = 0.3125
+fill_line_spacing = 0.0
+
+[sub_resource type="Resource" id="Resource_hvvqv"]
+script = ExtResource("4_pik7k")
+line_width = 0.0
+fill_line_width = 0.3991
+fill_line_spacing = 0.0048
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cejxp"]
+albedo_color = Color(0.216137, 0.492522, 0.0568668, 1)
+metallic = 0.48
+metallic_specular = 0.47
+metallic_texture = ExtResource("7_3c2t0")
+roughness_texture = ExtResource("7_3c2t0")
+normal_scale = 0.44
+normal_texture = ExtResource("7_3c2t0")
+rim = 0.78
+rim_tint = 1.0
+clearcoat_roughness = 1.0
+anisotropy = -1.0
+heightmap_scale = 16.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = ExtResource("7_3c2t0")
+backlight = Color(0, 1, 0, 1)
+
+[node name="Redux" type="Node3D"]
+script = ExtResource("1_636gy")
+
+[node name="NorthFace" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.016, 0)
+
+[node name="Fader" parent="NorthFace" instance=ExtResource("2_4wliu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0454369, 0.00129691, -0.00387538)
+
+[node name="Fader2" parent="NorthFace" instance=ExtResource("2_4wliu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.025807, 0.00129691, -0.00387538)
+
+[node name="Fader3" parent="NorthFace" instance=ExtResource("2_4wliu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00462981, 0.00129691, -0.00387538)
+
+[node name="Fader4" parent="NorthFace" instance=ExtResource("2_4wliu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0173052, 0.00129691, -0.00387538)
+
+[node name="Fader5" parent="NorthFace" instance=ExtResource("2_4wliu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0410689, 0.00129691, -0.00387538)
+
+[node name="Node3D5" parent="NorthFace" instance=ExtResource("3_vvl8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.040968, -4.41037e-05, -0.00361695)
+line_style = SubResource("Resource_u0ocg")
+size = Vector2(0.019, 0.118)
+
+[node name="Node3D6" parent="NorthFace" instance=ExtResource("3_vvl8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0170888, -4.41037e-05, -0.00361695)
+line_style = SubResource("Resource_u0ocg")
+size = Vector2(0.019, 0.118)
+
+[node name="Node3D9" parent="NorthFace" instance=ExtResource("3_vvl8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00470391, -4.41037e-05, -0.00361695)
+line_style = SubResource("Resource_u0ocg")
+size = Vector2(0.019, 0.118)
+
+[node name="Node3D10" parent="NorthFace" instance=ExtResource("3_vvl8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0258799, -4.41037e-05, -0.00361695)
+line_style = SubResource("Resource_u0ocg")
+size = Vector2(0.019, 0.118)
+
+[node name="Node3D12" parent="NorthFace" instance=ExtResource("3_vvl8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0321148, -4.41037e-05, -0.00361695)
+line_style = SubResource("Resource_hvvqv")
+size = Vector2(0.005, 0.11)
+
+[node name="Node3D13" parent="NorthFace" instance=ExtResource("3_vvl8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0198144, -4.41037e-05, -0.00361695)
+line_style = SubResource("Resource_hvvqv")
+size = Vector2(0.005, 0.11)
+
+[node name="Node3D11" parent="NorthFace" instance=ExtResource("3_vvl8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0456254, -4.41037e-05, -0.00361695)
+line_style = SubResource("Resource_u0ocg")
+size = Vector2(0.019, 0.118)
+
+[node name="Node3D7" parent="NorthFace" instance=ExtResource("3_vvl8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000563075, -4.41037e-05, -0.00361695)
+line_style = SubResource("Resource_u0ocg")
+size = Vector2(0.2095, 0.128)
+
+[node name="Node3D8" parent="NorthFace" instance=ExtResource("3_vvl8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000563075, -4.41037e-05, 0.0331626)
+line_style = SubResource("Resource_u0ocg")
+size = Vector2(0.2095, 0.018)
+
+[node name="WestFace" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0642776, 0, 0)
+
+[node name="plug_no_screw2" parent="WestFace" instance=ExtResource("8_4k742")]
+transform = Transform3D(-1, 1.06581e-14, 6.60024e-15, 1.06581e-14, 1, -1.50996e-07, -6.60023e-15, -1.50996e-07, -1, 0.00492395, -7.50646e-05, -0.0060631)
+
+[node name="EastFace" type="Node3D" parent="."]
+transform = Transform3D(4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, 0, 3.82137e-15, -8.74228e-08, -1, -0.0211913, 0, 0)
+
+[node name="plug_no_screw2" parent="EastFace" instance=ExtResource("8_4k742")]
+transform = Transform3D(-1, 1.06581e-14, 6.60024e-15, 1.06581e-14, 1, -1.50996e-07, -6.60023e-15, -1.50996e-07, -1, 0.00492395, 0.0428956, -0.00140666)
+
+[node name="BackFace" type="Node3D" parent="."]
+
+[node name="power_plug" parent="BackFace" instance=ExtResource("9_d6sye")]
+transform = Transform3D(-4.37114e-08, 0, 1, 1, -4.37114e-08, 4.37114e-08, 4.37114e-08, 1, 1.91069e-15, 0.0525268, -0.00606457, 0.0466156)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+material_override = SubResource("StandardMaterial3D_cejxp")
+calculate_tangents = false
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="CSGCombiner3D"]
+snap = 1e-06
+mesh = ExtResource("11_6h82h")

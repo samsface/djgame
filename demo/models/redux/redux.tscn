@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cnnors0cf4oai"]
+[gd_scene load_steps=17 format=3 uid="uid://cnnors0cf4oai"]
 
 [ext_resource type="PackedScene" uid="uid://dw25wwjo7a1uo" path="res://models/redux/plug.tscn" id="1_0d8gi"]
 [ext_resource type="Script" path="res://models/redux/device.gd" id="1_gcvpy"]
@@ -36,6 +36,12 @@ size = 4
 font = ""
 curve = 0.0
 
+[sub_resource type="Resource" id="Resource_vi17s"]
+script = ExtResource("13_d54gs")
+size = 7
+font = ""
+curve = 0.0
+
 [node name="Redux" type="Node3D"]
 script = ExtResource("1_gcvpy")
 
@@ -67,13 +73,13 @@ transform = Transform3D(-1, 0, -8.74226e-08, 0, 1, 0, 8.74226e-08, 0, -1, 0.0001
 label_style = SubResource("Resource_pqj4l")
 label = "DC9V +="
 
-[node name="plug" parent="NorthFace" instance=ExtResource("1_0d8gi")]
+[node name="plug2" parent="NorthFace" instance=ExtResource("1_0d8gi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.88614e-05, -0.0287832)
 
-[node name="pedal_raw" parent="NorthFace/plug" instance=ExtResource("2_j5j27")]
-visible = false
+[node name="pedal_raw" parent="NorthFace/plug2" instance=ExtResource("2_j5j27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0042111, 0)
 
-[node name="Decal" type="Decal" parent="NorthFace/plug"]
+[node name="Decal" type="Decal" parent="NorthFace/plug2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0034411, -0.000158211)
 size = Vector3(0.02, 0.02, 0.02)
 texture_albedo = ExtResource("6_kck4j")
@@ -85,25 +91,42 @@ lower_fade = 49.8789
 [node name="knob_slits" parent="NorthFace" instance=ExtResource("3_m8anw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01, -7.73016e-05, 0.033)
 
+[node name="Label" parent="NorthFace/knob_slits" instance=ExtResource("3_yojx2")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -0.00959578)
+label_style = SubResource("Resource_vi17s")
+label = "Gain"
+
 [node name="knob_slits2" parent="NorthFace" instance=ExtResource("3_m8anw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01, 0, 0.033)
 
+[node name="Label" parent="NorthFace/knob_slits2" instance=ExtResource("3_yojx2")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -0.00959578)
+label_style = SubResource("Resource_vi17s")
+label = "Drive"
+
 [node name="knob_slits3" parent="NorthFace" instance=ExtResource("3_m8anw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.015)
+
+[node name="Label" parent="NorthFace/knob_slits3" instance=ExtResource("3_yojx2")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -0.00959578)
+label_style = SubResource("Resource_vi17s")
+label = "Mix"
 
 [node name="WestFace" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.021296, 0, 0)
 
 [node name="plug_no_screw2" parent="WestFace" instance=ExtResource("6_uvxa3")]
-transform = Transform3D(-1, 1.06581e-14, 6.60024e-15, 1.06581e-14, 1, -1.50996e-07, -6.60023e-15, -1.50996e-07, -1, 0.00492395, -7.50609e-05, -0.00517411)
+transform = Transform3D(-1, 1.06581e-14, 6.60024e-15, 1.06581e-14, 1, -1.50996e-07, -6.60023e-15, -1.50996e-07, -1, 0.00492395, -7.50609e-05, -0.0060631)
 
 [node name="EastFace" type="Node3D" parent="."]
 transform = Transform3D(4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, 0, 3.82137e-15, -8.74228e-08, -1, -0.0211913, 0, 0)
 
 [node name="plug_no_screw2" parent="EastFace" instance=ExtResource("6_uvxa3")]
-transform = Transform3D(-1, 1.06581e-14, 6.60024e-15, 1.06581e-14, 1, -1.50996e-07, -6.60023e-15, -1.50996e-07, -1, 0.00492395, -7.50609e-05, -0.00283733)
+transform = Transform3D(-1, 1.06581e-14, 6.60024e-15, 1.06581e-14, 1, -1.50996e-07, -6.60023e-15, -1.50996e-07, -1, 0.00492395, -7.50609e-05, -0.00140666)
 
-[node name="power_plug" parent="." instance=ExtResource("7_7uqgx")]
+[node name="BackFace" type="Node3D" parent="."]
+
+[node name="power_plug" parent="BackFace" instance=ExtResource("7_7uqgx")]
 transform = Transform3D(-4.37114e-08, 0, 1, 1, -4.37114e-08, 4.37114e-08, 4.37114e-08, 1, 1.91069e-15, 0, -0.00606457, 0.0466156)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]

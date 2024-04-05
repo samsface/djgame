@@ -31,3 +31,13 @@ static func random_vector2() -> Vector2:
 	var green = randf() - 0.5
 
 	return Vector2(red, green)
+
+static func call_recursive(node:Node, depth:int, callable:Callable, stack_depth := 0):
+	callable.call(node)
+	
+	if stack_depth >= depth:
+		return
+
+	for child in node.get_children():
+		call_recursive(child, depth, callable, stack_depth + 1)
+		call_recursive(child, depth, callable, stack_depth + 1)
