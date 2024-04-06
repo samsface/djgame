@@ -14,5 +14,7 @@ extends Node3D
 
 func invalidate_labels_() -> void:
 	$Node3D.set_instance_shader_parameter("line_width", line_style.line_width)
+	$Node3D.set_instance_shader_parameter("fill_line_count", line_style.fill_line_count)
 	$Node3D.set_instance_shader_parameter("fill_line_width", line_style.fill_line_width)
-	$Node3D.set_instance_shader_parameter("fill_line_spacing", line_style.fill_line_spacing)
+	$Node3D.set_instance_shader_parameter("fill_line_accent", line_style.fill_line_accent)
+	$Node3D.set_instance_shader_parameter("fill_line_accent_width", line_style.fill_line_accent_width)

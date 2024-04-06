@@ -12,14 +12,18 @@
 [sub_resource type="Resource" id="Resource_u0ocg"]
 script = ExtResource("4_pik7k")
 line_width = 0.0064
-fill_line_width = 0.3125
-fill_line_spacing = 0.0
+fill_line_count = 4
+fill_line_width = 0.0
+fill_line_accent = 0
+fill_line_accent_width = 0.0
 
 [sub_resource type="Resource" id="Resource_hvvqv"]
 script = ExtResource("4_pik7k")
 line_width = 0.0
-fill_line_width = 0.3991
-fill_line_spacing = 0.0048
+fill_line_count = 14
+fill_line_width = 0.0097
+fill_line_accent = 14
+fill_line_accent_width = 0.024
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cejxp"]
 albedo_color = Color(0.216137, 0.492522, 0.0568668, 1)
@@ -82,14 +86,14 @@ line_style = SubResource("Resource_u0ocg")
 size = Vector2(0.019, 0.118)
 
 [node name="Node3D12" parent="NorthFace" instance=ExtResource("3_vvl8k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0321148, -4.41037e-05, -0.00361695)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0327652, -4.41037e-05, -0.00361695)
 line_style = SubResource("Resource_hvvqv")
-size = Vector2(0.005, 0.11)
+size = Vector2(0.008, 0.11)
 
 [node name="Node3D13" parent="NorthFace" instance=ExtResource("3_vvl8k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0198144, -4.41037e-05, -0.00361695)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018577, -4.41037e-05, -0.00361695)
 line_style = SubResource("Resource_hvvqv")
-size = Vector2(0.005, 0.11)
+size = Vector2(0.009, 0.11)
 
 [node name="Node3D11" parent="NorthFace" instance=ExtResource("3_vvl8k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0456254, -4.41037e-05, -0.00361695)

@@ -102,7 +102,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01, 0, 0.033)
 [node name="Label" parent="NorthFace/knob_slits2" instance=ExtResource("3_yojx2")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -0.00959578)
 label_style = SubResource("Resource_vi17s")
-label = "Drive"
+label = "TING"
 
 [node name="knob_slits3" parent="NorthFace" instance=ExtResource("3_m8anw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.015)
