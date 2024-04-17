@@ -3,7 +3,6 @@ class_name Device
 
 signal value_changed
 
-@export var patch:String
 @export var map:DeviceData
 
 var tween_:Tween

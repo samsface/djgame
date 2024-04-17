@@ -45,7 +45,7 @@ void fragment()
 	float position_in_segment = fract(segment);
 
 	float is_accent_enabled = float(clamp(fill_line_accent, 0, 1));
-	float is_accent = float(int(segment) % fill_line_accent == 0 ? 1 : 0);
+	float is_accent = float(int(segment-1.0) % fill_line_accent == 0 ? 1 : 0);
 	float fill_line_thickness = mix(fill_line_width, fill_line_accent_width, is_accent);
 	fill_line_thickness = fill_line_thickness * 0.1;
 	// fixes the line thickness for count of lines and height
@@ -58,7 +58,10 @@ void fragment()
 	
 	alpha = max(is_not_fill_line * mask, alpha);
 
-	ALBEDO = vec3(0.0);
+	ALBEDO = vec3(0.0, 0.0, 0.0);
 	ALPHA_SCISSOR_THRESHOLD = 1.0;
 	ALPHA = alpha;
+	ROUGHNESS = 0.0;
+	SPECULAR = 1.0;
+	METALLIC = 0.5;
 }

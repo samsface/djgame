@@ -6,7 +6,7 @@ class_name LabelStyle
 	set(v):
 		size = v
 		emit_changed()
-@export var font:String :
+@export var font:Font :
 	set(v):
 		font = v
 		emit_changed()

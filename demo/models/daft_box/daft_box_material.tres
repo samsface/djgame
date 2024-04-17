@@ -10,6 +10,7 @@ render_priority = 0
 shader = ExtResource("1_3rsoq")
 shader_parameter/smudge_scale = 2.0
 shader_parameter/color = Color(1, 0.372549, 0.788235, 1)
+shader_parameter/color2 = null
 shader_parameter/debug_uv1 = false
 shader_parameter/debug_uv2 = false
 shader_parameter/ambient_occlusion = 0.0

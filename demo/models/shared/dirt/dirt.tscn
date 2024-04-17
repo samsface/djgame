@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://caoujb3rdrjup"]
+
+[ext_resource type="Shader" path="res://models/shared/dirt/dirt.gdshader" id="1_3b67l"]
+[ext_resource type="Script" path="res://models/shared/dirt/dirt.gd" id="1_sxk2g"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6nkkt"]
+frequency = 0.0606
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_70dkq"]
+noise = SubResource("FastNoiseLite_6nkkt")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y30ei"]
+render_priority = 0
+shader = ExtResource("1_3b67l")
+shader_parameter/upper_left_ = Vector2(0.5, 0.5)
+shader_parameter/width_height_ = Vector2(0.0115, 0.1045)
+shader_parameter/corner_radius_ = 0.005
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_70dkq")
+
+[sub_resource type="QuadMesh" id="QuadMesh_vjw31"]
+material = SubResource("ShaderMaterial_y30ei")
+size = Vector2(0.5, 0.5)
+orientation = 1
+
+[node name="Node" type="Node3D"]
+script = ExtResource("1_sxk2g")
+
+[node name="Dirt" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_vjw31")
+skeleton = NodePath("../..")

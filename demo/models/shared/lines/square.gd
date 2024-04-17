@@ -1,3 +1,4 @@
+@icon("res://models/shared/lines/icon.png")
 @tool
 extends Node3D
 

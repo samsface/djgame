@@ -74,6 +74,8 @@ func _physics_process(delta: float) -> void:
 			$Nob/Sparks.spark()
 
 func _mouse_entered() -> void:
+	print(get_path())
+	
 	mouse_over_ = true
 	set_process_input(true)
 	

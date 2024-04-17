@@ -258,7 +258,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/acid/a",
+"name": "/root/Game/acid/Model/NorthFace/Res",
 "notes": [{
 "auto": "true",
 "dilema_group": "0",
@@ -284,7 +284,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/acid/d",
+"name": "/root/Game/acid/Model/NorthFace/Cutoff",
 "notes": [{
 "auto": "true",
 "dilema_group": "0",
@@ -376,7 +376,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/acid/a",
+"name": "/root/Game/acid/Model/NorthFace/Res",
 "notes": [{
 "from_value": "1.0",
 "gluide": "0.5",
@@ -443,11 +443,11 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/acid/a",
+"name": "/root/Game/acid/Model/NorthFace/Res",
 "notes": []
 }, {
 "condition_ex": "",
-"name": "/root/Game/acid/d",
+"name": "/root/Game/acid/Model/NorthFace/Cutoff",
 "notes": [{
 "from_value": "0.0",
 "gluide": "0.5",
@@ -611,7 +611,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/acid/a",
+"name": "/root/Game/acid/Model/NorthFace/Res",
 "notes": [{
 "from_value": "0.0",
 "gluide": "0.5",

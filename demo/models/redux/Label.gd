@@ -1,3 +1,4 @@
+@icon("res://models/shared/label/icon.png")
 @tool
 extends Node3D
 
@@ -15,4 +16,5 @@ extends Node3D
 
 func invalidate_labels_() -> void:
 	$Mesh.mesh.font_size = label_style.size
+	$Mesh.mesh.font = label_style.font
 	$Mesh.set_instance_shader_parameter("curve", label_style.curve)

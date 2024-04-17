@@ -9,12 +9,13 @@
 render_priority = 0
 next_pass = ExtResource("1_g40p2")
 shader = ExtResource("2_lnv87")
-shader_parameter/smudge_scale = 0.05
-shader_parameter/color = Color(1, 0.372549, 0.788235, 1)
+shader_parameter/smudge_scale = 0.366
+shader_parameter/color = Color(0.65098, 0.65098, 0.65098, 1)
+shader_parameter/color2 = Color(1, 0, 0, 1)
 shader_parameter/debug_uv1 = false
 shader_parameter/debug_uv2 = false
-shader_parameter/ambient_occlusion = 1.0
-shader_parameter/metalic = 0.5
+shader_parameter/ambient_occlusion = 4.84211
+shader_parameter/metalic = 0.631579
 shader_parameter/edge_color = Color(1, 1, 1, 0.745098)
 shader_parameter/map = ExtResource("3_rpip3")
 shader_parameter/smudges = ExtResource("5_xjxn5")

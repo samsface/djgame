@@ -1,13 +1,35 @@
-[gd_scene load_steps=12 format=3 uid="uid://rbuf4nqmcmjx"]
+[gd_scene load_steps=25 format=3 uid="uid://rbuf4nqmcmjx"]
 
 [ext_resource type="Script" path="res://models/redux/device.gd" id="1_636gy"]
+[ext_resource type="Script" path="res://models/lital/little2.gd" id="1_u4dod"]
 [ext_resource type="PackedScene" uid="uid://bvxsm2x52fp42" path="res://models/lital/slider.tscn" id="2_4wliu"]
+[ext_resource type="Resource" uid="uid://d2v2vxmias8e0" path="res://models/daft_box/mappings.tres" id="2_xo2e7"]
+[ext_resource type="FontFile" uid="uid://ca4jgypv8bjcn" path="res://ui/fonts/RetroGaming.ttf" id="3_1bv3f"]
 [ext_resource type="PackedScene" uid="uid://cyqgaxwtbp2kl" path="res://models/shared/lines/square.tscn" id="3_vvl8k"]
 [ext_resource type="Script" path="res://models/shared/nobs/line_style.gd" id="4_pik7k"]
+[ext_resource type="PackedScene" uid="uid://b77oywlnttw32" path="res://models/shared/label.tscn" id="6_nqd61"]
 [ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="7_3c2t0"]
+[ext_resource type="Script" path="res://models/shared/nobs/label_style.gd" id="7_dom38"]
+[ext_resource type="PackedScene" uid="uid://caoujb3rdrjup" path="res://models/shared/dirt/dirt.tscn" id="7_t4w5v"]
 [ext_resource type="PackedScene" uid="uid://gvof4s182p4h" path="res://models/shared/plug_no_screw.tscn" id="8_4k742"]
 [ext_resource type="PackedScene" uid="uid://du6gatur0vum5" path="res://models/shared/power_plug.tscn" id="9_d6sye"]
+[ext_resource type="Texture2D" uid="uid://bcvmpvpwk1nvp" path="res://models/shared/stickers/smiley.png" id="9_xy7ad"]
 [ext_resource type="ArrayMesh" uid="uid://bihsv7t48c5h3" path="res://models/lital/wide.obj" id="11_6h82h"]
+[ext_resource type="Texture2D" uid="uid://pl7gf7bptldf" path="res://models/acid/albedo.png" id="12_u5yes"]
+
+[sub_resource type="Resource" id="Resource_arge0"]
+script = ExtResource("7_dom38")
+size = 12
+font = ExtResource("3_1bv3f")
+curve = 0.0
+
+[sub_resource type="Resource" id="Resource_hvvqv"]
+script = ExtResource("4_pik7k")
+line_width = 0.0
+fill_line_count = 13
+fill_line_width = 0.0097
+fill_line_accent = 13
+fill_line_accent_width = 0.0192
 
 [sub_resource type="Resource" id="Resource_u0ocg"]
 script = ExtResource("4_pik7k")
@@ -17,16 +39,81 @@ fill_line_width = 0.0
 fill_line_accent = 0
 fill_line_accent_width = 0.0
 
-[sub_resource type="Resource" id="Resource_hvvqv"]
-script = ExtResource("4_pik7k")
-line_width = 0.0
-fill_line_count = 14
-fill_line_width = 0.0097
-fill_line_accent = 14
-fill_line_accent_width = 0.024
+[sub_resource type="Resource" id="Resource_wwkmm"]
+script = ExtResource("7_dom38")
+size = 7
+font = ExtResource("3_1bv3f")
+curve = 0.0
+
+[sub_resource type="Shader" id="Shader_6pv00"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.2.1.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color,filter_linear_mipmap,repeat_enable;
+uniform float alpha_scissor_threshold;
+uniform float point_size : hint_range(0,128);
+uniform float roughness : hint_range(0,1);
+uniform sampler2D texture_metallic : hint_default_white,filter_linear_mipmap,repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r,filter_linear_mipmap,repeat_enable;
+uniform float specular;
+uniform float metallic;
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+
+void vertex() {
+	UV=UV*uv1_scale.xy+uv1_offset.xy;
+}
+
+
+
+
+
+
+void fragment() {
+	vec2 base_uv = UV;
+	vec4 albedo_tex = texture(texture_albedo,base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	float metallic_tex = dot(texture(texture_metallic,base_uv),metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	vec4 roughness_texture_channel = vec4(1.0,0.0,0.0,0.0);
+	float roughness_tex = dot(texture(texture_roughness,base_uv),roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+	SPECULAR = specular;
+	ALPHA *= albedo.a * albedo_tex.a;
+	ALPHA_SCISSOR_THRESHOLD = alpha_scissor_threshold;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t76b5"]
+render_priority = 0
+shader = SubResource("Shader_6pv00")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/alpha_scissor_threshold = 0.5
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.55
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.97
+shader_parameter/metallic = 0.62
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/texture_albedo = ExtResource("9_xy7ad")
+
+[sub_resource type="QuadMesh" id="QuadMesh_8nlrd"]
+material = SubResource("ShaderMaterial_t76b5")
+size = Vector2(0.01, 0.01)
+orientation = 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cejxp"]
-albedo_color = Color(0.216137, 0.492522, 0.0568668, 1)
+albedo_color = Color(0.956863, 0.580392, 0.698039, 1)
+albedo_texture = ExtResource("12_u5yes")
 metallic = 0.48
 metallic_specular = 0.47
 metallic_texture = ExtResource("7_3c2t0")
@@ -37,6 +124,7 @@ rim = 0.78
 rim_tint = 1.0
 clearcoat_roughness = 1.0
 anisotropy = -1.0
+ao_light_affect = 1.0
 heightmap_scale = 16.0
 heightmap_deep_parallax = true
 heightmap_min_layers = 8
@@ -44,93 +132,177 @@ heightmap_max_layers = 32
 heightmap_texture = ExtResource("7_3c2t0")
 backlight = Color(0, 1, 0, 1)
 
-[node name="Redux" type="Node3D"]
+[node name="DaftBox" type="Node3D"]
+script = ExtResource("1_u4dod")
+map = ExtResource("2_xo2e7")
+
+[node name="Model" type="Node3D" parent="."]
 script = ExtResource("1_636gy")
 
-[node name="NorthFace" type="Node3D" parent="."]
+[node name="NorthFace" type="Node3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.016, 0)
 
-[node name="Fader" parent="NorthFace" instance=ExtResource("2_4wliu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0454369, 0.00129691, -0.00387538)
+[node name="DaftBox" parent="Model/NorthFace" instance=ExtResource("6_nqd61")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00226821, -5.92321e-05, -0.0368096)
+label_style = SubResource("Resource_arge0")
+label = "LE DAFT BOX 94"
 
-[node name="Fader2" parent="NorthFace" instance=ExtResource("2_4wliu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.025807, 0.00129691, -0.00387538)
+[node name="Gain" parent="Model/NorthFace" instance=ExtResource("2_4wliu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.036, 0, 0.00294859)
 
-[node name="Fader3" parent="NorthFace" instance=ExtResource("2_4wliu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00462981, 0.00129691, -0.00387538)
+[node name="LinesAndDirt" type="Node3D" parent="Model/NorthFace/Gain"]
 
-[node name="Fader4" parent="NorthFace" instance=ExtResource("2_4wliu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0173052, 0.00129691, -0.00387538)
-
-[node name="Fader5" parent="NorthFace" instance=ExtResource("2_4wliu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0410689, 0.00129691, -0.00387538)
-
-[node name="Node3D5" parent="NorthFace" instance=ExtResource("3_vvl8k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.040968, -4.41037e-05, -0.00361695)
-line_style = SubResource("Resource_u0ocg")
-size = Vector2(0.019, 0.118)
-
-[node name="Node3D6" parent="NorthFace" instance=ExtResource("3_vvl8k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0170888, -4.41037e-05, -0.00361695)
-line_style = SubResource("Resource_u0ocg")
-size = Vector2(0.019, 0.118)
-
-[node name="Node3D9" parent="NorthFace" instance=ExtResource("3_vvl8k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00470391, -4.41037e-05, -0.00361695)
-line_style = SubResource("Resource_u0ocg")
-size = Vector2(0.019, 0.118)
-
-[node name="Node3D10" parent="NorthFace" instance=ExtResource("3_vvl8k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0258799, -4.41037e-05, -0.00361695)
-line_style = SubResource("Resource_u0ocg")
-size = Vector2(0.019, 0.118)
-
-[node name="Node3D12" parent="NorthFace" instance=ExtResource("3_vvl8k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0327652, -4.41037e-05, -0.00361695)
+[node name="Node3D12" parent="Model/NorthFace/Gain/LinesAndDirt" instance=ExtResource("3_vvl8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007, 0, 0)
 line_style = SubResource("Resource_hvvqv")
 size = Vector2(0.008, 0.11)
 
-[node name="Node3D13" parent="NorthFace" instance=ExtResource("3_vvl8k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018577, -4.41037e-05, -0.00361695)
+[node name="Node3D13" parent="Model/NorthFace/Gain/LinesAndDirt" instance=ExtResource("3_vvl8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00719332, 0, 0)
 line_style = SubResource("Resource_hvvqv")
 size = Vector2(0.009, 0.11)
 
-[node name="Node3D11" parent="NorthFace" instance=ExtResource("3_vvl8k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0456254, -4.41037e-05, -0.00361695)
+[node name="Node3D10" parent="Model/NorthFace/Gain/LinesAndDirt" instance=ExtResource("3_vvl8k")]
 line_style = SubResource("Resource_u0ocg")
 size = Vector2(0.019, 0.118)
 
-[node name="Node3D7" parent="NorthFace" instance=ExtResource("3_vvl8k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000563075, -4.41037e-05, -0.00361695)
-line_style = SubResource("Resource_u0ocg")
-size = Vector2(0.2095, 0.128)
+[node name="Dirt" parent="Model/NorthFace/Gain/LinesAndDirt" instance=ExtResource("7_t4w5v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000163678, 0.000176145, 0.000107184)
 
-[node name="Node3D8" parent="NorthFace" instance=ExtResource("3_vvl8k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000563075, -4.41037e-05, 0.0331626)
+[node name="Label" parent="Model/NorthFace/Gain" instance=ExtResource("6_nqd61")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0322543)
+label_style = SubResource("Resource_wwkmm")
+label = "Gain"
+
+[node name="Res" parent="Model/NorthFace" instance=ExtResource("2_4wliu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013, 0, 0.00294859)
+
+[node name="LinesAndDirt" type="Node3D" parent="Model/NorthFace/Res"]
+
+[node name="Node3D12" parent="Model/NorthFace/Res/LinesAndDirt" instance=ExtResource("3_vvl8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007, 0, 0)
+line_style = SubResource("Resource_hvvqv")
+size = Vector2(0.008, 0.11)
+
+[node name="Node3D13" parent="Model/NorthFace/Res/LinesAndDirt" instance=ExtResource("3_vvl8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00719332, 0, 0)
+line_style = SubResource("Resource_hvvqv")
+size = Vector2(0.009, 0.11)
+
+[node name="Node3D10" parent="Model/NorthFace/Res/LinesAndDirt" instance=ExtResource("3_vvl8k")]
+line_style = SubResource("Resource_u0ocg")
+size = Vector2(0.019, 0.118)
+
+[node name="Dirt" parent="Model/NorthFace/Res/LinesAndDirt" instance=ExtResource("7_t4w5v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000163678, 0.000208022, 0.000107184)
+
+[node name="Label" parent="Model/NorthFace/Res" instance=ExtResource("6_nqd61")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0322543)
+label_style = SubResource("Resource_wwkmm")
+label = "Res"
+
+[node name="Cutoff" parent="Model/NorthFace" instance=ExtResource("2_4wliu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.012, 0, 0.00294859)
+
+[node name="LinesAndDirt" type="Node3D" parent="Model/NorthFace/Cutoff"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8573e-05, 0)
+
+[node name="Node3D12" parent="Model/NorthFace/Cutoff/LinesAndDirt" instance=ExtResource("3_vvl8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007, 0, 0)
+line_style = SubResource("Resource_hvvqv")
+size = Vector2(0.008, 0.11)
+
+[node name="Node3D13" parent="Model/NorthFace/Cutoff/LinesAndDirt" instance=ExtResource("3_vvl8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00719332, 0, 0)
+line_style = SubResource("Resource_hvvqv")
+size = Vector2(0.009, 0.11)
+
+[node name="Node3D10" parent="Model/NorthFace/Cutoff/LinesAndDirt" instance=ExtResource("3_vvl8k")]
+line_style = SubResource("Resource_u0ocg")
+size = Vector2(0.019, 0.118)
+
+[node name="Dirt" parent="Model/NorthFace/Cutoff/LinesAndDirt" instance=ExtResource("7_t4w5v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000163678, 0.000135368, 0.000107184)
+
+[node name="Label" parent="Model/NorthFace/Cutoff" instance=ExtResource("6_nqd61")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0322543)
+label_style = SubResource("Resource_wwkmm")
+label = "Cutoff"
+
+[node name="Decay" parent="Model/NorthFace" instance=ExtResource("2_4wliu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0356056, -7.36844e-05, 0.00307322)
+
+[node name="LinesAndDirt" type="Node3D" parent="Model/NorthFace/Decay"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.38195e-05, 0)
+
+[node name="Node3D12" parent="Model/NorthFace/Decay/LinesAndDirt" instance=ExtResource("3_vvl8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007, 0, 0)
+line_style = SubResource("Resource_hvvqv")
+size = Vector2(0.008, 0.11)
+
+[node name="Node3D13" parent="Model/NorthFace/Decay/LinesAndDirt" instance=ExtResource("3_vvl8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00719332, 0, 0)
+line_style = SubResource("Resource_hvvqv")
+size = Vector2(0.009, 0.11)
+
+[node name="Node3D10" parent="Model/NorthFace/Decay/LinesAndDirt" instance=ExtResource("3_vvl8k")]
+line_style = SubResource("Resource_u0ocg")
+size = Vector2(0.019, 0.118)
+
+[node name="Dirt" parent="Model/NorthFace/Decay/LinesAndDirt" instance=ExtResource("7_t4w5v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000163678, 0.000154497, 0.000107184)
+
+[node name="Label" parent="Model/NorthFace/Decay" instance=ExtResource("6_nqd61")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0322543)
+label_style = SubResource("Resource_wwkmm")
+label = "Decay"
+
+[node name="BigSquare" parent="Model/NorthFace" instance=ExtResource("3_vvl8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000563075, -4.41037e-05, 0.00333164)
+line_style = SubResource("Resource_u0ocg")
+size = Vector2(0.2095, 0.139)
+
+[node name="TopSquare" parent="Model/NorthFace" instance=ExtResource("3_vvl8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000563075, -4.41037e-05, -0.0363437)
 line_style = SubResource("Resource_u0ocg")
 size = Vector2(0.2095, 0.018)
 
-[node name="WestFace" type="Node3D" parent="."]
+[node name="SmileySticker" type="MeshInstance3D" parent="Model/NorthFace"]
+transform = Transform3D(0.932598, 0, 0.360917, 0, 1, 0, -0.360917, 0, 0.932598, -0.0507204, 0.000285132, -0.0397606)
+mesh = SubResource("QuadMesh_8nlrd")
+
+[node name="WestFace" type="Node3D" parent="Model"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0642776, 0, 0)
 
-[node name="plug_no_screw2" parent="WestFace" instance=ExtResource("8_4k742")]
-transform = Transform3D(-1, 1.06581e-14, 6.60024e-15, 1.06581e-14, 1, -1.50996e-07, -6.60023e-15, -1.50996e-07, -1, 0.00492395, -7.50646e-05, -0.0060631)
+[node name="plug_no_screw2" parent="Model/WestFace" instance=ExtResource("8_4k742")]
+transform = Transform3D(-1, 1.06581e-14, 6.60024e-15, 1.06581e-14, 1, -1.50996e-07, -6.60023e-15, -1.50996e-07, -1, -0.00820689, -7.50646e-05, -0.0060631)
 
-[node name="EastFace" type="Node3D" parent="."]
+[node name="EastFace" type="Node3D" parent="Model"]
 transform = Transform3D(4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, 0, 3.82137e-15, -8.74228e-08, -1, -0.0211913, 0, 0)
 
-[node name="plug_no_screw2" parent="EastFace" instance=ExtResource("8_4k742")]
-transform = Transform3D(-1, 1.06581e-14, 6.60024e-15, 1.06581e-14, 1, -1.50996e-07, -6.60023e-15, -1.50996e-07, -1, 0.00492395, 0.0428956, -0.00140666)
+[node name="plug_no_screw2" parent="Model/EastFace" instance=ExtResource("8_4k742")]
+transform = Transform3D(-1, 1.06581e-14, 6.60024e-15, 1.06581e-14, 1, -1.50996e-07, -6.60023e-15, -1.50996e-07, -1, -0.00802023, 0.0428956, -0.00140666)
 
-[node name="BackFace" type="Node3D" parent="."]
+[node name="BackFace" type="Node3D" parent="Model"]
 
-[node name="power_plug" parent="BackFace" instance=ExtResource("9_d6sye")]
-transform = Transform3D(-4.37114e-08, 0, 1, 1, -4.37114e-08, 4.37114e-08, 4.37114e-08, 1, 1.91069e-15, 0.0525268, -0.00606457, 0.0466156)
+[node name="power_plug" parent="Model/BackFace" instance=ExtResource("9_d6sye")]
+transform = Transform3D(-4.37114e-08, 0, 1, 1, -4.37114e-08, 4.37114e-08, 4.37114e-08, 1, 1.91069e-15, 0.0525268, 0.00746907, 0.0466156)
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Model"]
 material_override = SubResource("StandardMaterial3D_cejxp")
 calculate_tangents = false
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="CSGCombiner3D"]
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Model/CSGCombiner3D"]
 snap = 1e-06
 mesh = ExtResource("11_6h82h")
+
+[node name="Views" type="Node3D" parent="."]
+
+[node name="View" type="Marker3D" parent="Views"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0667845, 0.132594, 0.0857208)
+
+[node name="View2" type="Marker3D" parent="Views"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0135922, 0.0931738, 0.0421634)
+
+[node name="View3" type="Marker3D" parent="Views"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0144488, 0.0665829, 0.106457)

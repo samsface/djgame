@@ -8,6 +8,7 @@ uniform sampler2D emission_map : source_color;
 uniform float smudge_scale : hint_range(0.0, 10.0);
 uniform sampler2D smudges : source_color;
 uniform vec3 color : source_color;
+uniform vec3 color2 : source_color;
 uniform bool debug_uv1 = false;
 uniform bool debug_uv2 = false;
 uniform float ambient_occlusion : hint_range(0.0, 10.0, 0.0) = 1.0;
@@ -25,7 +26,8 @@ void fragment()
 	float b = texture(tex, UV2).g;
 	b = round(b);
 
-	vec3 alb = color;
+	vec3 alb =  mix(color, color2, UV2.x);
+
 	alb = mix(vec3(b), alb, b);
 
 	vec2 uv = UV;

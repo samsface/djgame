@@ -98,13 +98,13 @@ script = ExtResource("2_uhddo")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.000427401, 0)
 
 [node name="CutOut" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00603976, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00315733, 0)
 operation = 2
 size = Vector3(0.005, 0.01, 0.05)
 material = SubResource("StandardMaterial3D_3v7bt")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00853035, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00784409, 0)
 size = Vector3(0.01, 0.01, 0.05)
 material = SubResource("StandardMaterial3D_3v7bt")
 
