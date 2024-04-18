@@ -47,11 +47,11 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/preset-rock",
+"name": "/root/Game/toykit/NorthFace/preset-rock",
 "notes": []
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/seq-1",
+"name": "/root/Game/toykit/NorthFace/seq-1",
 "notes": [{
 "auto": "false",
 "dilema_group": "0",
@@ -63,7 +63,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/seq-3",
+"name": "/root/Game/toykit/NorthFace/seq-3",
 "notes": [{
 "auto": "false",
 "dilema_group": "0",
@@ -83,7 +83,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/seq-5",
+"name": "/root/Game/toykit/NorthFace/seq-5",
 "notes": [{
 "auto": "false",
 "dilema_group": "0",
@@ -103,7 +103,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/seq-7",
+"name": "/root/Game/toykit/NorthFace/seq-7",
 "notes": [{
 "auto": "false",
 "dilema_group": "0",
@@ -123,7 +123,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/seq-9",
+"name": "/root/Game/toykit/NorthFace/seq-9",
 "notes": [{
 "auto": "false",
 "dilema_group": "0",
@@ -135,7 +135,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/seq-11",
+"name": "/root/Game/toykit/NorthFace/seq-11",
 "notes": [{
 "auto": "false",
 "dilema_group": "0",
@@ -155,7 +155,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/seq-13",
+"name": "/root/Game/toykit/NorthFace/seq-13",
 "notes": [{
 "auto": "false",
 "dilema_group": "0",
@@ -175,7 +175,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/seq-15",
+"name": "/root/Game/toykit/NorthFace/seq-15",
 "notes": [{
 "auto": "false",
 "dilema_group": "0",
@@ -195,7 +195,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/seq-16",
+"name": "/root/Game/toykit/NorthFace/seq-16",
 "notes": [{
 "auto": "false",
 "dilema_group": "0",
@@ -215,7 +215,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/select-clap",
+"name": "/root/Game/toykit/NorthFace/select-clap",
 "notes": [{
 "auto": "true",
 "dilema_group": "0",
@@ -227,7 +227,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/select-closed",
+"name": "/root/Game/toykit/NorthFace/select-closed",
 "notes": [{
 "auto": "true",
 "dilema_group": "0",
@@ -364,7 +364,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/preset-rock",
+"name": "/root/Game/toykit/NorthFace/preset-rock",
 "notes": [{
 "auto": "false",
 "dilema_group": "0",
@@ -558,7 +558,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/preset-rock",
+"name": "/root/Game/toykit/NorthFace/preset-rock",
 "notes": [{
 "auto": "false",
 "dilema_group": "0",
@@ -570,7 +570,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/preset-house",
+"name": "/root/Game/toykit/NorthFace/preset-house",
 "notes": [{
 "auto": "true",
 "dilema_group": "0",

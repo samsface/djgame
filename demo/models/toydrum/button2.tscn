@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bjfihtm5t424l"]
+[gd_scene load_steps=13 format=3 uid="uid://bjfihtm5t424l"]
 
 [ext_resource type="Script" path="res://models/toydrum/button.gd" id="1_3a06k"]
 [ext_resource type="Script" path="res://models/shared/nob_model.gd" id="2_c5q1x"]
-[ext_resource type="PackedScene" uid="uid://dq1tbhw4jpqju" path="res://models/toydrum/button_2.tscn" id="2_cn54l"]
+[ext_resource type="PackedScene" uid="uid://bi76febq42c75" path="res://models/shared/nobs/keyboard_key_long_and_short.tscn" id="3_gwa4g"]
+[ext_resource type="PackedScene" uid="uid://xto5mxvhhovs" path="res://models/shared/nobs/keyboard_key_long_and_short_base.tscn" id="4_b2lsx"]
 [ext_resource type="AudioStream" uid="uid://bmkr5qf551e58" path="res://models/shared/sounds/key_press_0.wav" id="4_v73w6"]
 [ext_resource type="AudioStream" uid="uid://bgxedw1j0conq" path="res://models/shared/sounds/key_press_1.wav" id="5_wy74t"]
 [ext_resource type="AudioStream" uid="uid://bxoki7ft7c3na" path="res://models/shared/sounds/key_press_loud_1.wav" id="6_02xft"]
@@ -10,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://dh5tiwpnwbg3a" path="res://models/shared/sounds/key_press_loud_2.wav" id="8_vnh2c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fygew"]
-size = Vector3(0.02, 0.005, 0.005)
+size = Vector3(0.0165, 0.0195, 0.0385)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2uwsy"]
 streams_count = 5
@@ -45,11 +46,17 @@ shape = SubResource("BoxShape3D_fygew")
 [node name="Model" type="Node3D" parent="Nob"]
 script = ExtResource("2_c5q1x")
 
-[node name="Button" parent="Nob/Model" instance=ExtResource("2_cn54l")]
+[node name="Button" parent="Nob/Model" instance=ExtResource("3_gwa4g")]
+
+[node name="Base" parent="Nob/Model/Button" instance=ExtResource("4_b2lsx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.000263814, 0)
 
 [node name="Sound" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_2uwsy")
 bus = &"KeyPresses"
+
+[node name="Base" parent="." instance=ExtResource("4_b2lsx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.02836e-05, 0)
 
 [node name="Top" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00224168, 0)

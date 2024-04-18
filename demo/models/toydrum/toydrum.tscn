@@ -10,7 +10,6 @@ size = Vector3(0.2, 0.025, 0.045)
 
 [node name="base" instance=ExtResource("1_geond")]
 script = ExtResource("2_g4yco")
-patch = "toykit"
 map = ExtResource("3_t4x0b")
 
 [node name="Widgets" parent="." index="0"]

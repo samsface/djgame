@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi76febq42c75"]
+
+[ext_resource type="PackedScene" uid="uid://cywkpyvenrldh" path="res://models/shared/nobs/keyboard_key_long_and_short.glb" id="1_2el4n"]
+[ext_resource type="Script" path="res://models/toydrum/buttonm.gd" id="2_xtqe5"]
+
+[node name="keyboard_key_long_and_short" instance=ExtResource("1_2el4n")]
+script = ExtResource("2_xtqe5")

@@ -50,7 +50,7 @@ func pressed() -> void:
 
 	down_ = true
 	var tween = create_tween()
-	tween.tween_property($Nob, "position:y", -0.001, 0.01)
+	tween.tween_property($Nob, "position:y", -0.006, 0.01)
 
 	value_ = intended_value# 1.0 - value
 
@@ -71,7 +71,7 @@ func released() -> void:
 	down_ = false
 
 	var tween = create_tween()
-	tween.tween_property($Nob, "position:y", 0.000, 0.05)
+	tween.tween_property($Nob, "position:y", 0, 0.05)
 	
 	Camera.cursor.pop(self)
 

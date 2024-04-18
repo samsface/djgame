@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://cld6mbchnrp3"]
+[gd_scene load_steps=14 format=3 uid="uid://cld6mbchnrp3"]
 
 [ext_resource type="Script" path="res://models/toydrum/button.gd" id="1_hygni"]
 [ext_resource type="Script" path="res://models/shared/nob_model.gd" id="2_4hhqy"]
-[ext_resource type="PackedScene" uid="uid://dhounssqfe2jw" path="res://models/toydrum/buttonm.tscn" id="2_nny25"]
+[ext_resource type="PackedScene" uid="uid://dc3vppk01vhed" path="res://models/shared/nobs/keyboard_key.tscn" id="3_8kkj6"]
 [ext_resource type="AudioStream" uid="uid://bmkr5qf551e58" path="res://models/shared/sounds/key_press_0.wav" id="4_52ygk"]
+[ext_resource type="PackedScene" uid="uid://bfkdsompjx7fu" path="res://models/shared/nobs/keyboard_key_base.tscn" id="4_fs83j"]
 [ext_resource type="Material" uid="uid://dtnc8e2uktfb5" path="res://models/redux/black_void_material.tres" id="4_hniaj"]
 [ext_resource type="AudioStream" uid="uid://bgxedw1j0conq" path="res://models/shared/sounds/key_press_1.wav" id="5_aplqg"]
 [ext_resource type="AudioStream" uid="uid://c3p1l42revws3" path="res://models/shared/sounds/key_press_loud_0.wav" id="7_nqskc"]
@@ -11,7 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://dh5tiwpnwbg3a" path="res://models/shared/sounds/key_press_loud_2.wav" id="9_uva1n"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fygew"]
-size = Vector3(0.01, 0.01, 0.01)
+size = Vector3(0.02, 0.02, 0.02)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qnwah"]
 streams_count = 5
@@ -43,16 +44,22 @@ collision_layer = 9
 [node name="Model" type="Node3D" parent="Nob"]
 script = ExtResource("2_4hhqy")
 
-[node name="Button" parent="Nob/Model" instance=ExtResource("2_nny25")]
+[node name="Button" parent="Nob/Model" instance=ExtResource("3_8kkj6")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Base" parent="Nob/Model/Button" instance=ExtResource("4_fs83j")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Nob"]
 shape = SubResource("BoxShape3D_fygew")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00126357, 0)
+visible = false
 material_override = ExtResource("4_hniaj")
-size = Vector3(0.009, 0.0025, 0.009)
+size = Vector3(0.02, 0.0025, 0.02)
+
+[node name="Base2" parent="." instance=ExtResource("4_fs83j")]
 
 [node name="Sound" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_qnwah")
@@ -69,7 +76,7 @@ transform = Transform3D(-1, 8.33649e-08, -2.63257e-08, 0, 0.301131, 0.953583, 8.
 loop = false
 
 [node name="RemoteTransform" type="RemoteTransform3D" parent="Path/PathFollow"]
-transform = Transform3D(1, -1.82169e-44, 2.11758e-22, 0, 1, 8.35187e-23, -2.11758e-22, -8.35187e-23, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 2.11758e-22, 0, 1, 8.35187e-23, -2.11758e-22, -8.35187e-23, 1, 0, 0, 0)
 update_scale = false
 
 [connection signal="mouse_entered" from="Nob" to="." method="_mouse_entered"]
