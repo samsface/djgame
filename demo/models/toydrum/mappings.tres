@@ -1,15 +1,9 @@
-[gd_resource type="Resource" script_class="DeviceData" load_steps=13 format=3 uid="uid://cqmulviu26gd3"]
+[gd_resource type="Resource" script_class="DeviceData" load_steps=14 format=3 uid="uid://cqmulviu26gd3"]
 
 [ext_resource type="Script" path="res://models/shared/nob_mapping_hradio.gd" id="1_7kknr"]
-[ext_resource type="Script" path="res://models/shared/nob_mapping_array.gd" id="1_24r56"]
 [ext_resource type="Script" path="res://models/shared/nob_mapping_bang.gd" id="2_5ypay"]
 [ext_resource type="Script" path="res://models/shared/nob_mapping_expr.gd" id="2_gmc4h"]
 [ext_resource type="Script" path="res://models/shared/NobMappingArray.gd" id="2_ymg7s"]
-
-[sub_resource type="Resource" id="Resource_ca0ll"]
-script = ExtResource("1_24r56")
-array_name = "toykit-array1"
-node = Array[NodePath]([NodePath("seq-1"), NodePath("seq-2"), NodePath("seq-3"), NodePath("seq-4"), NodePath("seq-5"), NodePath("seq-6"), NodePath("seq-7"), NodePath("seq-8"), NodePath("seq-9"), NodePath("seq-10"), NodePath("seq-11"), NodePath("seq-12"), NodePath("seq-13"), NodePath("seq-14"), NodePath("seq-15"), NodePath("seq-16")])
 
 [sub_resource type="Resource" id="Resource_0c266"]
 script = ExtResource("2_5ypay")
@@ -22,6 +16,24 @@ script = ExtResource("2_5ypay")
 node = NodePath("preset-house")
 receiver_symbol = "toykit-preset1"
 send_symbol = "toykit-preset1"
+
+[sub_resource type="Resource" id="Resource_io3e3"]
+script = ExtResource("2_5ypay")
+node = NodePath("NorthFace/seq-1")
+receiver_symbol = "toykit-kick"
+send_symbol = ""
+
+[sub_resource type="Resource" id="Resource_ywh5s"]
+script = ExtResource("2_5ypay")
+node = NodePath("NorthFace/seq-2")
+receiver_symbol = "toykit-snare"
+send_symbol = ""
+
+[sub_resource type="Resource" id="Resource_6e5on"]
+script = ExtResource("2_5ypay")
+node = NodePath("NorthFace/seq-3")
+receiver_symbol = "toykit-closed"
+send_symbol = ""
 
 [sub_resource type="Resource" id="Resource_4l3wh"]
 script = ExtResource("2_gmc4h")
@@ -46,8 +58,8 @@ node = Array[NodePath]([NodePath("seq-1"), NodePath("seq-2"), NodePath("seq-3"),
 
 [resource]
 script = ExtResource("2_ymg7s")
-arrays = Array[ExtResource("1_24r56")]([SubResource("Resource_ca0ll")])
+arrays = Array[Resource("res://models/shared/nob_mapping_array.gd")]([])
 radios = Array[ExtResource("1_7kknr")]([SubResource("Resource_scfs4")])
 exprs = Array[ExtResource("2_gmc4h")]([SubResource("Resource_4l3wh"), SubResource("Resource_8bj34"), SubResource("Resource_av6lp")])
 sliders = Array[Resource("res://models/shared/nob_mapping_slider.gd")]([])
-bangs = Array[ExtResource("2_5ypay")]([SubResource("Resource_0c266"), SubResource("Resource_iwce1")])
+bangs = Array[ExtResource("2_5ypay")]([SubResource("Resource_0c266"), SubResource("Resource_iwce1"), SubResource("Resource_io3e3"), SubResource("Resource_ywh5s"), SubResource("Resource_6e5on")])

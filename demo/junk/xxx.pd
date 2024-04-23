@@ -1,35 +1,26 @@
-#N canvas 686 190 1864 990 12;
+#N canvas 363 267 1864 990 12;
 #X obj 473 1114 dac~;
 #X obj 298 209 swing;
-#X obj 969 276 toykit toykit;
+#X obj 931 243 toykit toykit;
 #X obj 298 157 metro 130;
 #X obj 247 738 acid acid;
 #X obj 774 928 compressor;
-#X obj 673 297 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
-#fcfcfc #000000 #000000 0 256;
+#X obj 673 297 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10 #fcfcfc #000000 #000000 0 256;
 #X obj 648 429 == 0;
-#X obj 680 512 bng 15 250 50 0 s-clock-bar r-clock-bar empty 17 7 0
-10 #fcfcfc #000000 #000000;
+#X obj 680 512 bng 15 250 50 0 s-clock-bar r-clock-bar empty 17 7 0 10 #fcfcfc #000000 #000000;
 #X obj 648 459 sel 0;
 #X obj 1420 710 noise~;
 #X obj 1416 800 *~;
 #X obj 1500 742 vline~;
 #X msg 1560 659 0.5 0 \, 0 5000;
-#X obj 1570 579 bng 15 250 50 0 s-noise r-noise empty 17 7 0 10 #fcfcfc
-#000000 #000000;
-#X obj 1169 517 bng 15 250 50 0 s-rumble r-rumble Rumble 17 7 0 10
-#fcfcfc #000000 #000000;
-#X obj 746 430 bng 15 250 50 0 s-clock-beat r-clock-beat empty 17 7
-0 10 #fcfcfc #000000 #000000;
+#X obj 1570 579 bng 15 250 50 0 s-noise r-noise empty 17 7 0 10 #fcfcfc #000000 #000000;
+#X obj 1127 564 bng 15 250 50 0 s-rumble r-rumble Rumble 17 7 0 10 #fcfcfc #000000 #000000;
+#X obj 746 430 bng 15 250 50 0 s-clock-beat r-clock-beat empty 17 7 0 10 #fcfcfc #000000 #000000;
 #X msg 208 53 stop;
-#X obj 120 58 bng 15 250 50 0 s-PLAY r-PLAY play 17 7 0 10 #fcfcfc
-#000000 #000000;
-#X obj 208 25 bng 15 250 50 0 s-STOP r-STOP stop 17 7 0 10 #fcfcfc
-#000000 #000000;
-#X obj 802 443 bng 15 250 50 0 s-clock-beat r-clock-beat empty 17 7
-0 10 #fcfcfc #000000 #000000;
-#X obj 566 535 bng 15 250 50 0 s-clock-4 r-clock-4 empty 17 7 0 10
-#fcfcfc #000000 #000000;
+#X obj 120 58 bng 15 250 50 0 s-PLAY r-PLAY play 17 7 0 10 #fcfcfc #000000 #000000;
+#X obj 208 25 bng 15 250 50 0 s-STOP r-STOP stop 17 7 0 10 #fcfcfc #000000 #000000;
+#X obj 802 443 bng 15 250 50 0 s-clock-beat r-clock-beat empty 17 7 0 10 #fcfcfc #000000 #000000;
+#X obj 566 535 bng 15 250 50 0 s-clock-4 r-clock-4 empty 17 7 0 10 #fcfcfc #000000 #000000;
 #X obj 577 460 sel 0;
 #X obj 577 430 % 4;
 #X obj 529 992;
@@ -41,15 +32,7 @@
 #X obj 285 272 midibash;
 #N canvas 0 0 450 250 (subpatch) 0;
 #X array midibashbank 64 float 3;
-#A 0 -0.599835 -0.599835 -0.599835 -0.599835 -0.599835 -0.599835 -0.599835
--0.599835 -0.599835 -0.599835 -0.77126 -0.942685 -0.942685 -0.942685
--0.942685 -0.942685 5.61702 -1.19148 -1.19148 -2.38294 5.87234 -1.78719
--2.72336 -1.19148 5.53192 -1.19148 -1.19148 -1.19148 5.3617 -1.19148
--1.19148 -1.27659 -0.685531 -0.342681 6.94286 -0.342807 -1.19993 9.7714
--0.514194 -0.514194 11.7429 -0.0857124 -0.34285 4.19995 9.77126 2.82855
-2.05715 -0.599936 1.36171 1.53192 1.61703 -2.55317 -2.63827 -2.80848
--2.80848 -0.425522 -1.95743 -2.80849 -1.02126 1.53192 1.53192 1.53192
-1.61702 1.87234;
+#A 0 -0.599835 -0.599835 -0.599835 -0.599835 -0.599835 -0.599835 -0.599835 -0.599835 -0.599835 -0.599835 -0.77126 -0.942685 -0.942685 -0.942685 -0.942685 -0.942685 5.61702 -1.19148 -1.19148 -2.38294 5.87234 -1.78719 -2.72336 -1.19148 5.53192 -1.19148 -1.19148 -1.19148 5.3617 -1.19148 -1.19148 -1.27659 -0.685531 -0.342681 6.94286 -0.342807 -1.19993 9.7714 -0.514194 -0.514194 11.7429 -0.0857124 -0.34285 4.19995 9.77126 2.82855 2.05715 -0.599936 1.36171 1.53192 1.61703 -2.55317 -2.63827 -2.80848 -2.80848 -0.425522 -1.95743 -2.80849 -1.02126 1.53192 1.53192 1.53192 1.61702 1.87234;
 #X coords 0 12 64 0 200 140 1 0 0;
 #X restore 724 19 graph;
 #X obj 390 875 *~ 0.9;
@@ -58,14 +41,15 @@
 #X msg 139 199 0;
 #X msg 486 160 1, f 5;
 #X obj 334 827 redux;
-#X obj 609 697 hsl 128 15 32 4 0 0 s-acid-redux r-acid-redux empty
--2 -8 0 10 #fcfcfc #000000 #000000 0 1;
-#X obj 574 119 nbx 5 14 -1e+37 1e+37 0 0 s-clock r-clock empty 0 -8
-0 10 #fcfcfc #000000 #000000 0 256;
+#X obj 609 697 hsl 128 15 32 4 0 0 s-acid-redux r-acid-redux empty -2 -8 0 10 #fcfcfc #000000 #000000 0 1;
+#X obj 574 119 nbx 5 14 -1e+37 1e+37 0 0 s-clock r-clock empty 0 -8 0 10 #fcfcfc #000000 #000000 0 256;
 #X obj 567 70 i++;
 #X obj 391 50 s r-RESET;
 #X floatatom 530 227 5 0 0 0 - r-acid-preset - 0;
 #X floatatom 491 54 5 0 0 0 - r-metro - 0;
+#X obj 999 209 bng 19 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
+#X obj 1059 209 bng 19 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
+#X obj 1111 209 bng 19 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
 #X connect 1 0 6 0;
 #X connect 1 0 30 0;
 #X connect 1 0 29 0;

@@ -26,7 +26,7 @@ func _ready() -> void:
 	
 	audio_.set_metro(130)
 
-func _input(event) -> void:
+func _inputx(event) -> void:
 	if event.is_action("reset"):
 		get_tree().reload_current_scene()
 

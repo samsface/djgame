@@ -4,6 +4,8 @@ class_name NobButton
 signal value_changed(float)
 signal impulse(Vector3, float)
 
+@export var action:InputEventAction
+
 var value : 
 	set(v):
 		if v == value_:
@@ -12,6 +14,7 @@ var value :
 		value_ = clamp(v, 0.0, 1.0)
 		$Nob/Model/Button.light = light_color_()
 		value_changed.emit(value_)
+		value_ = 0
 	get:
 		return value_
 
@@ -33,16 +36,25 @@ var electric:Color = Color.TRANSPARENT :
 @onready var remote_transform = $Path/PathFollow/RemoteTransform
 
 func _ready() -> void:
-	set_process_input(false)
+	#set_process_input(false)
+	pass
+
 
 func _input(event: InputEvent) -> void:
 	if down_:
 		if event.is_action_released("click"):
 			released()
+		elif action and event.is_action_released(action.action):
+			released()
 		
-	if mouse_over_:
+	elif mouse_over_:
 		if event.is_action_pressed("click"):
 			pressed()
+		elif action and event.is_action_pressed(action.action):
+			pressed()
+
+	elif action and action.action and event.is_action_pressed(action.action):
+		pressed()
 
 func pressed() -> void:
 	if down_:
@@ -77,14 +89,14 @@ func released() -> void:
 
 func _mouse_entered() -> void:
 	mouse_over_ = true
-	set_process_input(true)
+	#set_process_input(true)
 	
 	$Nob/Model.hover_begin()
 	
 func _mouse_exited() -> void:
 	mouse_over_ = false
 	if not down_:
-		set_process_input(false)
+		#set_process_input(false)
 		$Nob/Model.hover_end()
 
 func light_color_() -> float:
@@ -98,3 +110,4 @@ func radio():
 	if value > 0.0:
 		tween.tween_property(self, "scale", Vector3.ONE * 1.2, 0.0)
 		tween.tween_property(self, "scale", Vector3.ONE, 0.1).set_delay(0.1)
+
