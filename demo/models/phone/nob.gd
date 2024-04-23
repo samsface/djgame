@@ -60,8 +60,8 @@ func pressed() -> void:
 	if has_node("Sound"):
 		$Sound.play()
 
-	Camera.cursor.push(self, Cursor.Action.grab)
-	#Camera.cursor.try_set_position(self, global_position)
+	Bus.camera_service.cursor.push(self, Cursor.Action.grab)
+	#Bus.camera_service.cursor.try_set_position(self, global_position)
 
 func released() -> void:
 	if not down_:
@@ -69,4 +69,4 @@ func released() -> void:
 
 	down_ = false
 
-	Camera.cursor.pop(self)
+	Bus.camera_service.cursor.pop(self)

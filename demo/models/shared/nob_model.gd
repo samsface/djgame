@@ -17,10 +17,10 @@ func hover_begin() -> void:
 	hover_tween_.tween_property(self, "scale", Vector3.ONE * hover_scale, 0.3)
 
 func _grab_begin() -> void:
-	Camera.rumble.connect(_rumble)
+	Bus.camera_service.rumble.connect(_rumble)
 	
 func _grab_end() -> void:
-	Camera.rumble.disconnect(_rumble)
+	Bus.camera_service.rumble.disconnect(_rumble)
 
 func hover_end() -> void:
 	if hover_tween_:

@@ -20,9 +20,8 @@ config/icon="res://icon.svg"
 NodeDb="*res://addons/libpd/script/objects/node_db.gd"
 SelectionBus="*res://addons/libpd/script/selection_bus.gd"
 PureData="*res://addons/libpd/pure_data.gd"
-Camera="*res://auto_loads/camera.tscn"
-VerletPhysicsServer="*res://addons/verlet_physics/verlet_physics_server.gd"
 GameTime="*res://models/phone/clock.gd"
+Bus="*res://bus.gd"
 
 [display]
 

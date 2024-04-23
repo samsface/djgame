@@ -25,7 +25,7 @@ func _ready() -> void:
 	random_rotation_ *= 0.1
 
 func _physics_process(delta: float) -> void:
-	look_at(Camera.get_head_position(), Vector3.DOWN)
+	look_at(Bus.camera_service.get_head_position(), Vector3.DOWN)
 	scale = Vector3(1, -1, -1)
 	rotation += random_rotation_
 

@@ -43,7 +43,7 @@ func pop(node:Node) -> void:
 	if owner_stack_.size() > 0:
 		cursor_.frame = owner_stack_.back()[1]
 
-	Camera.cursor.position2D = camera_.unproject_position(position)
+	Bus.camera_service.cursor.position2D = camera_.unproject_position(position)
 	next_position_ = position
 
 	popped.emit()
@@ -68,9 +68,6 @@ func _physics_process(delta: float) -> void:
 var x := Vector2.ZERO
 
 func _unhandled_input(event:InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		relative = event.relative
-	
 	if event.is_action_pressed("ui_cancel"):
 		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 			reset()
@@ -82,6 +79,6 @@ func reset() -> void:
 	position2D = get_viewport().size * 0.5
 
 func update() -> void:
-	position2D += relative * 1.5
+	position2D += Bus.input_service.relative * 1.5
 	cursor_.position = position2D
-	relative = Vector2.ZERO
+	Bus.input_service.relative = Vector2.ZERO

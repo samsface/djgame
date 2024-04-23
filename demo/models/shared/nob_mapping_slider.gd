@@ -21,5 +21,5 @@ func hook(p:Node) -> void:
 func _value_changed(new_value:float, old_value:float) -> void:
 	#print("v", new_value * (max_value - min_value) + min_value)
 	
-	Camera.audio_service.emit_float("%s-%s" % [p_.name, symbol], new_value * (max_value - min_value) + min_value)
+	Bus.camera_service.audio_service.emit_float("%s-%s" % [p_.name, symbol], new_value * (max_value - min_value) + min_value)
 	p_.value_changed.emit(nob_, new_value, old_value)

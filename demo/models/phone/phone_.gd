@@ -13,7 +13,7 @@ func _input(event) -> void:
 		return
 
 	if event.is_action("click"):
-		var p = $StaticBody3D.to_local(Camera.cursor.position) + Vector3(0.25, 0.0, 0.5)
+		var p = $StaticBody3D.to_local(Bus.camera_service.cursor.position) + Vector3(0.25, 0.0, 0.5)
 
 		var e = event.duplicate()
 		e.position = Vector2(p.x, p.z)
@@ -22,8 +22,8 @@ func _input(event) -> void:
 		e.global_position = event.position
 		$SubViewport.push_input(e, false)
 		
-		Camera.smooth_look_at(self)
-		Camera.set_head_position($Head.global_position)
+		Bus.camera_service.smooth_look_at(self)
+		Bus.camera_service.set_head_position($Head.global_position)
 
 func _input_event(camera: Node, event: InputEvent, position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event is InputEventMouseButton:

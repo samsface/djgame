@@ -22,4 +22,4 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	if grabbed_:
-		$Jack.global_position = Camera.cursor.position
+		$Jack.global_position = Bus.camera_service.cursor.position

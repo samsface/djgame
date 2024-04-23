@@ -35,7 +35,6 @@ debug_shape_thickness = 1
 
 [node name="Debug" type="CSGSphere3D" parent="."]
 transform = Transform3D(0.025, 0, 0, 0, 0.025, 0, 0, 0, 0.025, 0, 0, 0)
-visible = false
 radius = 0.1
 radial_segments = 8
 rings = 4

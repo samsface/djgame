@@ -33,7 +33,7 @@ func fall_() -> void:
 	fall_tween_.tween_property(arrow_, "position:y", 0.0, gluide_).from(0.1)
 
 func slide_() -> void:
-	Camera.rumble.connect(_rumble)
+	Bus.camera_service.rumble.connect(_rumble)
 	
 	if slide_tween_:
 		slide_tween_.kill()

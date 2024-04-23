@@ -25,7 +25,7 @@ func hook(p:Node) -> void:
 
 		node.value_changed.connect(_value_changed.bind(i))
 
-	Camera.audio_service.connect_to_bang("RESET", _reset)
+	Bus.camera_service.audio_service.connect_to_bang("RESET", _reset)
 
 func _reset() -> void:
 	# game freezes without this wait

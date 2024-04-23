@@ -9,9 +9,7 @@ var tween_:Tween
 var rumble := 1.0
 
 func _ready() -> void:
-	Camera.level = self
-	Camera.guide_service = $Guides
-	Camera.audio_service = audio_
+	Bus.level = self
 
 	$WorldEnvironment.camera_attributes.dof_blur_far_enabled = true
 	
@@ -31,8 +29,8 @@ func _inputx(event) -> void:
 		get_tree().reload_current_scene()
 
 func _rumble() -> void:
-	Camera.shake(0.7, 0.001 * rumble)
-	Camera.rumble.emit()
+	Bus.camera_service.shake(0.7, 0.001 * rumble)
+	Bus.camera_service.rumble.emit()
 
 func _clock(value:float) -> void:
 	beat_player_.call_deferred("seek", value)
@@ -61,7 +59,7 @@ func play() -> void:
 func _play():
 	$phone.free_click = false
 	$PointsService.play()
-	Camera.cursor.reset()
+	Bus.camera_service.cursor.reset()
 	audio_.play()
 
 func _died() -> void:

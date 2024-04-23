@@ -18,8 +18,8 @@ signal impulse(Vector3, float)
 		
 		value_changed.emit(value, old_value)
 		
-		if not Camera.recording:
-			invalidate_()
+		#if not Bus.camera_service.recording:
+		invalidate_()
 
 var electric:Color = Color.TRANSPARENT :
 	set(v):
@@ -47,28 +47,28 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_released("click"):
 			dragging_ = false
 			$Nob/Model._grab_end()
-			Camera.cursor.pop(self)
+			Bus.camera_service.cursor.pop(self)
 
 	if mouse_over_:
 		if event.is_action_pressed("click"):
 			dragging_ = true
 			$Nob/Model._grab_begin()
-			Camera.cursor.push(self, Cursor.Action.grab)
+			Bus.camera_service.cursor.push(self, Cursor.Action.grab)
 			dragging_start_ = get_window().get_mouse_position()
 
 func _physics_process(delta: float) -> void:
 	if dragging_:
-		var diff = Camera.cursor.relative.y * 0.005
+		var diff = Bus.camera_service.cursor.relative.y * 0.005
 		if diff == 0.0:
 			return
 
-		Camera.cursor.relative = Vector2.ZERO
+		Bus.camera_service.cursor.relative = Vector2.ZERO
 		
 		var new_value = value - diff
 
 		value = clamp(new_value, 0.00, 1.0)
 
-		Camera.cursor.try_set_position(self, $Nob.global_position)
+		Bus.camera_service.cursor.try_set_position(self, $Nob.global_position)
 
 		if abs(diff) > 0.1:
 			$Nob/Sparks.spark()
@@ -97,9 +97,9 @@ func invalidate_() -> void:
 
 	path_follow_.progress_ratio = value
 
-	Camera.cursor.try_set_position(self, $Nob.global_position)
+	Bus.camera_service.cursor.try_set_position(self, $Nob.global_position)
 
-	#Camera.look_at_node(self.get_parent())
+	#Bus.camera_service.look_at_node(self.get_parent())
 
 func get_guide_position_for_value(value:float) -> Vector3:
 	shadow_path_follow_.progress_ratio = value

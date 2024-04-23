@@ -4,6 +4,9 @@ class_name GuideService
 var active_dilema_groups_ := {}
 var slides_ := {}
 
+func _ready() -> void:
+	Bus.guide_service = self
+
 func slide(nob:Node3D, length:float, from_value:float, to_value:float, gluide:float):
 	var guide = preload("res://game/guide/slide/slide.tscn").instantiate()
 	guide.points_service = $"../PointsService"

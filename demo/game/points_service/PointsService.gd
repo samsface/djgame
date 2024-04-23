@@ -24,13 +24,14 @@ var combo := 0
 var no_touch_:Node3D
 
 func _ready() -> void:
+	Bus.points_service = self
 	hp_.zero.connect(_zero)
 	$CanvasLayer/ColorRect.material.set_shader_parameter("damage", 0.0)
 
 func _zero() -> void:
 	pass
 	#$CanvasLayer/Dead.visible = true
-	#Camera.audio_service.stop()
+	#Bus.camera_service.audio_service.stop()
 
 func _physics_process(delta:float) -> void:
 	hp_.decay(decay * delta)
@@ -74,4 +75,4 @@ func no_touch(node:Node3D) -> void:
 
 func win():
 	$CanvasLayer/Win.visible = true
-	Camera.audio_service.stop()
+	Bus.camera_service.audio_service.stop()

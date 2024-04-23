@@ -72,9 +72,9 @@ func pressed() -> void:
 	
 	value_changed.emit(value_)
 	
-	Camera.cursor.push(self, Cursor.Action.grab)
-	Camera.cursor.try_set_position(self, global_position)
-	#Camera.look_at_node(self.get_parent())
+	Bus.camera_service.cursor.push(self, Cursor.Action.grab)
+	Bus.camera_service.cursor.try_set_position(self, global_position)
+	#Bus.camera_service.look_at_node(self.get_parent())
 
 func released() -> void:
 	if not down_:
@@ -85,7 +85,7 @@ func released() -> void:
 	var tween = create_tween()
 	tween.tween_property($Nob, "position:y", 0, 0.05)
 	
-	Camera.cursor.pop(self)
+	Bus.camera_service.cursor.pop(self)
 
 func _mouse_entered() -> void:
 	mouse_over_ = true

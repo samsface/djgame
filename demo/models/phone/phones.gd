@@ -52,6 +52,7 @@ func click(pos) -> void:
 	Input.parse_input_event(e2)
 
 func _input(event) -> void:
+	print(event)
 	var automated = event.device == 444
 
 	if not automated and not mouse_entered_:
@@ -59,13 +60,13 @@ func _input(event) -> void:
 
 	if event.is_action("click"):
 			
-		#Camera.camera_.fov = 50
+		#Bus.camera_service.camera_.fov = 50
 
 		var p
 		if automated:
 			p = event.position
 		else:
-			p = $StaticBody3D.to_local(Camera.cursor.position)
+			p = $StaticBody3D.to_local(Bus.camera_service.cursor.position)
 			p = Vector2(p.x, p.z)
 			var shape_size = $StaticBody3D/CollisionShape3D.shape.size
 			shape_size = Vector2(shape_size.x, shape_size.z)

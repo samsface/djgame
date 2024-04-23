@@ -12,7 +12,7 @@ var p_
 
 func hook(p):
 	p_ = p
-	Camera.audio_service.connect_to_float(send_symbol, _float)
+	Bus.audio_service.connect_to_float(send_symbol, _float)
 
 func _float(v:float) -> void:
 	var vi = int(v)

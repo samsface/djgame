@@ -1,4 +1,5 @@
 extends Node3D
+class_name CameraService
 
 signal rumble
 
@@ -13,9 +14,7 @@ var hovering_
 
 var recording := false
 var recorder
-var level:Level
-var guide_service:GuideService
-var audio_service:AudioService
+
 
 var stack_ := []
 var head_pos_:Vector3
@@ -27,6 +26,7 @@ func looking_at() -> void:
 	pass
 
 func _ready() -> void:
+	Bus.camera_service = self
 	cursor.push(self, Cursor.Action.point)
 
 func rv(scale:float = 1.0) -> Vector3:

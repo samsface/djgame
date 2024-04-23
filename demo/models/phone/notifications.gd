@@ -5,7 +5,7 @@ var last_notification_
 func show_notification(message:PhoneChatMessage, chat:PhoneChat) -> void:
 	#get_parent().get_parent().get_parent().vibrate()
 	
-	if Camera.is_looking_at_parent(self):
+	if Bus.camera_service.is_looking_at_parent(self):
 		return
 
 	var chat_notification := preload("res://models/phone/chat_notification.tscn").instantiate()

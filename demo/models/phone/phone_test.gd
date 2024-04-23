@@ -109,7 +109,7 @@ func _reply(reply_idx:int):
 	if chat_app_.chat_:
 		chat_app_.chat_.queue_free()
 
-	Camera.level.play()
+	Bus.camera_service.level.play()
 
 func dialog(db:Object, length:float, who:String, value:String, db_name:String, replay_a:String, reply_b:String) -> void:
 	var message := PhoneChatMessage.new()

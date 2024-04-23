@@ -7,6 +7,8 @@ var bang_signals_ := {}
 var float_signals_ := {}
 
 func _ready() -> void:
+	Bus.audio_service = self
+	
 	var p = ProjectSettings.globalize_path("res://junk/xxx.pd")
 
 	if not patch_file_handle_.open(p):
