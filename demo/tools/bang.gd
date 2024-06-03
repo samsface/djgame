@@ -1,6 +1,6 @@
-extends Button
+extends PianoRollItem
 
-@export var value:float : 
+@export var value:float = 1.0 : 
 	set(v):
 		value = v
 		invalidate_value_()
@@ -17,6 +17,8 @@ extends Button
 @export var silent:bool : 
 	set(v):
 		silent = v
+		
+const lol = true
 
 func _ready():
 	invalidate_value_()

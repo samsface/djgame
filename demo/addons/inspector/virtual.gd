@@ -18,23 +18,35 @@ enum Type {
 	slide,
 	method,
 	dialog,
-	tween
+	tween,
+	scene
 }
 
 @export var type:Type : 
 	set(value):
 		parent.change_type_(node, value)
 	get:
-		return node.get_meta("__type__", Type.bang)
+		if node:
+			return node.get_meta("__type__", Type.bang)
+		else:
+			return 0
 
 @export var time:int : 
 	set(value):
-		node.position.x = value * grid_size
+		if node:
+			node.position.x = value * grid_size
 	get:
-		return int(node.position.x / grid_size)
+		if node:
+			return int(node.position.x / grid_size)
+		else:
+			return 0
 
 @export var length:int = 1 : 
 	set(value):
-		node.size.x = value * grid_size
+		if node:
+			node.size.x = value * grid_size
 	get:
-		return int(node.size.x / grid_size)
+		if node:
+			return int(node.size.x / grid_size)#
+		else:
+			return 0

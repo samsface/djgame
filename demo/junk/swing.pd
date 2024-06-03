@@ -3,14 +3,13 @@
 #X obj 373 343 spigot;
 #X obj 326 282 % 2;
 #X obj 326 202 % 16;
-#X obj 424 387 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
-#000000 #000000;
+#X obj 424 387 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000;
 #X obj 355 461 int;
 #X obj 442 354 inlet;
 #X obj 424 423 del;
 #X obj 326 313 == 0;
 #X obj 412 309 != 0;
-#X obj 326 106 inlet;
+#X obj 335 92 inlet;
 #X obj 287 571 outlet;
 #X obj 715 519 outlet;
 #X obj 715 338 sel 0;

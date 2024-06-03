@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://tools/db.gd" id="3_6y6es"]
 [ext_resource type="PackedScene" uid="uid://0xf0dcjgbmqj" path="res://addons/inspector/inspector.tscn" id="3_em7m1"]
 
-[node name="MarginContainer" type="MarginContainer"]
+[node name="BeatPlayerHost" type="MarginContainer"]
 offset_left = 9.0
 offset_top = 49.0
 offset_right = 1519.0
@@ -21,52 +21,58 @@ script = ExtResource("3_6y6es")
 layout_mode = 2
 color = Color(0.14902, 0.152941, 0.192157, 1)
 
-[node name="BeatPlayerHost" type="VBoxContainer" parent="."]
+[node name="V" type="VBoxContainer" parent="."]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Menu" type="HBoxContainer" parent="BeatPlayerHost"]
+[node name="Menu" type="HBoxContainer" parent="V"]
 layout_mode = 2
 
-[node name="Save" type="Button" parent="BeatPlayerHost/Menu"]
+[node name="Save" type="Button" parent="V/Menu"]
 layout_mode = 2
 text = "Save"
 
-[node name="Play" type="Button" parent="BeatPlayerHost/Menu"]
+[node name="Play" type="Button" parent="V/Menu"]
 layout_mode = 2
 text = "Play"
 
-[node name="Debug" type="Button" parent="BeatPlayerHost/Menu"]
+[node name="Debug" type="Button" parent="V/Menu"]
 layout_mode = 2
 text = "Debug"
 
-[node name="Stop" type="Button" parent="BeatPlayerHost/Menu"]
+[node name="Stop" type="Button" parent="V/Menu"]
 layout_mode = 2
 text = "Stop"
 
-[node name="New" type="Button" parent="BeatPlayerHost/Menu"]
+[node name="New" type="Button" parent="V/Menu"]
 layout_mode = 2
 text = "New +"
 
-[node name="HSplitContainer" type="HSplitContainer" parent="BeatPlayerHost"]
+[node name="Duplicate" type="Button" parent="V/Menu"]
+auto_translate_mode = 1
+layout_mode = 2
+text = "Duplicate"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="V"]
 layout_mode = 2
 size_flags_vertical = 3
 split_offset = 1300
 
-[node name="TabContainer" type="TabContainer" parent="BeatPlayerHost/HSplitContainer"]
+[node name="TabContainer" type="TabContainer" parent="V/HSplitContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 drag_to_rearrange_enabled = true
 
-[node name="Inspector" parent="BeatPlayerHost/HSplitContainer" instance=ExtResource("3_em7m1")]
+[node name="Inspector" parent="V/HSplitContainer" instance=ExtResource("3_em7m1")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[connection signal="pressed" from="BeatPlayerHost/Menu/Save" to="." method="_save_pressed"]
-[connection signal="pressed" from="BeatPlayerHost/Menu/Play" to="." method="_play_pressed"]
-[connection signal="pressed" from="BeatPlayerHost/Menu/Debug" to="." method="_debug_pressed"]
-[connection signal="pressed" from="BeatPlayerHost/Menu/Stop" to="." method="_stop_pressed"]
-[connection signal="pressed" from="BeatPlayerHost/Menu/New" to="." method="_new_pressed"]
-[connection signal="tab_clicked" from="BeatPlayerHost/HSplitContainer/TabContainer" to="." method="_tab_clicked"]
+[connection signal="pressed" from="V/Menu/Save" to="." method="_save_pressed"]
+[connection signal="pressed" from="V/Menu/Play" to="." method="_play_pressed"]
+[connection signal="pressed" from="V/Menu/Debug" to="." method="_debug_pressed"]
+[connection signal="pressed" from="V/Menu/Stop" to="." method="_stop_pressed"]
+[connection signal="pressed" from="V/Menu/New" to="." method="_new_pressed"]
+[connection signal="pressed" from="V/Menu/Duplicate" to="." method="_duplicate_pressed"]
+[connection signal="tab_clicked" from="V/HSplitContainer/TabContainer" to="." method="_tab_clicked"]

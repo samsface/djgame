@@ -32,11 +32,13 @@ func set_metro(value:float) -> void:
 	emit_float("metro", value)
 
 func play() -> void:
+	emit_float("CLOCK", -16)
 	emit_bang("PLAY")
-
+	
 func stop() -> void:
 	PureData.send_bang("r-STOP")
 	PureData.send_bang("r-RESET")
+	emit_float("CLOCK", -16)
 
 func connect_to_bang(signal_name:StringName, callable:Callable) -> void:
 	PureData.bind("s-" + signal_name)

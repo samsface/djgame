@@ -2,7 +2,7 @@ extends Guide
 
 signal hit
 
-const proximity_ := 0.025
+const proximity_ := 0.1
 
 var nob_
 var for_value_ := 0.0
@@ -33,12 +33,14 @@ func _ready() -> void:
 
 	last_off_ = get_off_()
 
-	nob_.update_path_follow_position_for_value(for_value_)
-	nob_.remote_transform.remote_path = get_path()
-	nob_.remote_transform.rotation.z = 0
-	nob_.path_follow.progress_ratio = 0.0
+	var path_follow = nob_.get_new_path_follow_and_remote_transform(for_value_)
+	var remote_transform:RemoteTransform3D = path_follow.get_child(0)
+	#nob_.update_path_follow_position_for_value(for_value_)
+	remote_transform.remote_path = get_path()
+	remote_transform.rotation.z = 0
+	path_follow.progress_ratio = 0.0
 
-	fall_time_ = length - (1.0 / 60)
+	fall_time_ = length #- (1.0 / 60.0)
 
 	fall_tween_ = create_tween()
 	fall_tween_.set_parallel()
@@ -47,16 +49,20 @@ func _ready() -> void:
 
 	var g = emission_color_()
 	g.a = 0.8
-	fall_tween_.tween_property(nob_, "electric", g, 0.2)
+	fall_tween_.tween_property(nob_, "electric", g, min(fall_time_, 0.2))
 
-	fall_tween_.tween_property(nob_.remote_transform, "rotation:z", 5, fall_time_)
-	fall_tween_.tween_property(nob_.path_follow, "progress_ratio", 1.0, fall_time_)
+	fall_tween_.tween_property(remote_transform, "rotation:z", 5, fall_time_)
+	fall_tween_.tween_property(path_follow, "progress_ratio", 1.0, fall_time_)
 	fall_tween_.finished.connect(_miss)
 
 	points_ = points_service.make_points()
 	points_.scale = Vector3.ONE * nob_.scale_guide
+	
+	tree_exited.connect(path_follow.queue_free)
 
 func _miss() -> void:
+	#await get_tree().create_timer(0.05).timeout
+	
 	if hit_:
 		return
 
@@ -94,8 +100,8 @@ func _physics_process(delta: float) -> void:
 	if hit_ or miss_:
 		return
 
-	if not timer_.is_stopped():
-		return
+	#if not timer_.is_stopped():
+	#	return
 
 	for node in get_parent().get_children():
 		if node == self:
@@ -129,6 +135,8 @@ func judge_accuracy_() -> void:
 	if not auto:
 		var off := get_off_()
 
+		prints("off", off)
+
 		if abs(off) < proximity_:
 			var off_time := get_off_time_()
 			points_.hit(score_(off_time), "< " + str(int(off_time * 10)) + " ms")
@@ -153,7 +161,6 @@ func wait_then_free_() -> void:
 	end_tween.tween_property(nob_, "electric", ec, 0.1)
 	end_tween.tween_property(nob_, "electric", eca, 0.1).set_delay(0.1)
 
-	nob_.remote_transform.remote_path = NodePath()
 	$Arrow___/Arrow_/Particles.emitting = false
 	end_tween.tween_interval(0.8).finished.connect(queue_free)
 

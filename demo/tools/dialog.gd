@@ -1,4 +1,4 @@
-extends Button
+extends PianoRollItem
 
 @export var who:String :
 	set(v):

@@ -66,8 +66,7 @@ public:
 	void add_symbol(String value);
 	bool finish_list(String receiver);
 	bool finish_message(String receiver, String message);
-	Ref<PDHandle> bind(String receiver);
-	Ref<PDHandle> bind(Ref<PDHandle>  receiver);
+	void bind(String receiver);
 	bool start_gui(String pure_data_bin_dir_path);
 	int get_array_size(String array_name);
 	int set_array_size(String array_name, int size);

@@ -3,6 +3,7 @@ extends Control
 signal play
 
 @export var save_path:String
+@export var root_node:NodePath
 
 var state_ = { clips = {} }
 var beat_player_
@@ -11,9 +12,28 @@ var current_clip_
 var playing
 
 #var node_db := GraphControlNodeDatabase.new()
+var active_scenes_ := []
 
 func seek(time:float) -> void:
-	%TabContainer.get_current_tab_control().seek(time)
+	%TabContainer.get_child(0).seek(time)
+	
+	for node in active_scenes_:
+		node.seek(time)
+
+func play_scene(scene) -> void:
+	var node = %TabContainer.get_node_or_null(scene)
+	if node and not node in active_scenes_:
+		active_scenes_.push_back(node)
+
+func stop_scene(scene) -> void:
+	var node = %TabContainer.get_node_or_null(scene)
+	if node:
+		active_scenes_.erase(node)
+
+func show_scene(scene) -> void:
+	var node = %TabContainer.get_node_or_null(scene)
+	if node:
+		%TabContainer.current_tab = node.get_index()
 
 func get_save_file_path_() -> String:
 	return save_path
@@ -38,6 +58,7 @@ func _ready():
 		var bp := preload("beat_player.tscn").instantiate()
 		bp.inspector = %Inspector
 		bp.name = clip_id
+		bp.root_node = get_node(root_node)
 		bp.db = $DB
 		%TabContainer.add_child(bp)
 		%TabContainer.set_tab_icon(bp.get_index(), preload("tab_icon.png"))
@@ -53,18 +74,6 @@ func _ready():
 			return null
 		)
 
-func _graph_node_selected(node) -> void:
-	if not node:
-		return
-	
-	if not node.node_model_:
-		return
-		
-	if node.node_model_.specialized == preload("res://tools/graph/scene.tscn"):
-		for child in %TabContainer.get_children():
-			if child.name == node.node_model_.title:
-				%TabContainer.current_tab = child.get_index()
-				break
 
 func _play_pressed() -> void:
 	visible = false
@@ -79,10 +88,12 @@ func _new_pressed():
 	var bp := preload("beat_player.tscn").instantiate()
 	bp.name = "scene"
 	bp.inspector = %Inspector
+	bp.root_node = get_node(root_node)
 	%TabContainer.add_child(bp)
 	bp.set_meta("id", new_clip_id)
 	bp.reload(state_.clips[new_clip_id])
 	#node_db.add(bp.name, preload("res://tools/graph/scene.tscn"))
+	return new_clip_id
 
 func _save_pressed():
 	state_ = { clips = {} }
@@ -102,3 +113,10 @@ func jump(scene) -> void:
 func _tab_clicked(tab):
 	%Inspector.virtual_properties = null
 	%Inspector.node = %TabContainer.get_current_tab_control()
+
+func _duplicate_pressed() -> void:
+	var current_id = %TabContainer.get_current_tab_control().get_meta("id")
+	var n = _new_pressed()
+	state_.clips[n] = state_.clips[current_id].duplicate()
+	%TabContainer.get_child(-1).reload(state_.clips[n])
+

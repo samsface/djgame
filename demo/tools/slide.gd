@@ -1,4 +1,4 @@
-extends Button
+extends PianoRollItem
 
 @export var from_value:float : 
 	set(v):

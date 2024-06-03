@@ -1,10 +1,11 @@
 {
 "clips": {
 "a_intro": {
+"start": 0,
 "time_range": Vector2i(0, 400),
 "tracks": [{
 "condition_ex": "",
-"name": "/root/Game",
+"name": ".",
 "notes": [{
 "length": "16",
 "method": "&\"clap\"",
@@ -28,7 +29,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit",
+"name": "toykit",
 "notes": [{
 "length": "16",
 "method": "&\"look\"",
@@ -47,47 +48,19 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/NorthFace/preset-rock",
+"name": "toykit/NorthFace/preset-rock",
 "notes": []
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/NorthFace/seq-1",
-"notes": [{
-"auto": "false",
-"dilema_group": "0",
-"length": "16",
-"silent": "false",
-"time": "0",
-"type": "0",
-"value": "1.0"
-}, {
-"auto": "false",
-"dilema_group": "0",
-"length": "16",
-"silent": "false",
-"time": "16",
-"type": "0",
-"value": "1.0"
-}, {
-"auto": "false",
-"dilema_group": "0",
-"length": "16",
-"silent": "false",
-"time": "32",
-"type": "0",
-"value": "1.0"
-}, {
-"auto": "false",
-"dilema_group": "0",
-"length": "16",
-"silent": "false",
-"time": "48",
-"type": "0",
-"value": "1.0"
-}]
+"name": "toykit/NorthFace/seq-1",
+"notes": []
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/NorthFace/seq-3",
+"name": "toykit/NorthFace/seq-2",
+"notes": []
+}, {
+"condition_ex": "",
+"name": "toykit/NorthFace/seq-3",
 "notes": [{
 "auto": "true",
 "dilema_group": "0",
@@ -99,11 +72,11 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/NorthFace/seq-5",
+"name": "toykit/NorthFace/seq-5",
 "notes": []
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/NorthFace/seq-7",
+"name": "toykit/NorthFace/seq-7",
 "notes": [{
 "auto": "true",
 "dilema_group": "0",
@@ -115,11 +88,11 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/NorthFace/seq-9",
+"name": "toykit/NorthFace/seq-9",
 "notes": []
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/NorthFace/seq-11",
+"name": "toykit/NorthFace/seq-11",
 "notes": [{
 "auto": "false",
 "dilema_group": "0",
@@ -139,11 +112,11 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/NorthFace/seq-13",
+"name": "toykit/NorthFace/seq-13",
 "notes": []
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/NorthFace/seq-15",
+"name": "toykit/NorthFace/seq-15",
 "notes": [{
 "auto": "false",
 "dilema_group": "0",
@@ -163,7 +136,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/NorthFace/seq-16",
+"name": "toykit/NorthFace/seq-16",
 "notes": [{
 "auto": "false",
 "dilema_group": "0",
@@ -183,31 +156,15 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/NorthFace/select-clap",
-"notes": [{
-"auto": "true",
-"dilema_group": "0",
-"length": "16",
-"silent": "false",
-"time": "64",
-"type": "0",
-"value": "1.0"
-}]
+"name": "toykit/NorthFace/select-clap",
+"notes": []
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/NorthFace/select-closed",
-"notes": [{
-"auto": "true",
-"dilema_group": "0",
-"length": "16",
-"silent": "false",
-"time": "96",
-"type": "0",
-"value": "1.0"
-}]
+"name": "toykit/NorthFace/select-closed",
+"notes": []
 }, {
 "condition_ex": "",
-"name": "/root/Game/acid",
+"name": "acid",
 "notes": [{
 "length": "16",
 "method": "&\"look\"",
@@ -226,16 +183,8 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/acid/Model/NorthFace/Res",
+"name": "acid/Model/NorthFace/Res",
 "notes": [{
-"auto": "true",
-"dilema_group": "0",
-"length": "4",
-"silent": "true",
-"time": "0",
-"type": "0",
-"value": "0.05"
-}, {
 "from_value": "0.0",
 "gluide": "0.5",
 "length": "64",
@@ -249,42 +198,68 @@
 "time": "256",
 "type": "1",
 "value": "0.0"
-}]
 }, {
-"condition_ex": "",
-"name": "/root/Game/acid/Model/NorthFace/Cutoff",
-"notes": [{
 "auto": "true",
 "dilema_group": "0",
 "length": "4",
 "silent": "true",
 "time": "0",
 "type": "0",
-"value": "1.0"
+"value": "0.05"
+}]
 }, {
+"condition_ex": "",
+"name": "acid/Model/NorthFace/Cutoff",
+"notes": [{
 "from_value": "1.0",
 "gluide": "0.5",
 "length": "64",
 "time": "320",
 "type": "1",
 "value": "0.0"
+}, {
+"auto": "true",
+"dilema_group": "0",
+"length": "2",
+"silent": "true",
+"time": "0",
+"type": "0",
+"value": "1.0"
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
+"name": "../../../Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
 "notes": [{
 "length": "16",
 "method": "&\"jump text\"",
 "time": "384",
 "type": "2"
+}, {
+"length": "112",
+"scene": "\"just_kiks\"",
+"time": "-4",
+"type": "5"
+}]
+}, {
+"condition_ex": "",
+"name": "../../../Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
+"notes": [{
+"auto": "false",
+"dilema_group": "0",
+"length": "16",
+"silent": "false",
+"time": "160",
+"type": "0",
+"value": "1.0"
 }]
 }]
 },
 "dull": {
+"start": 0,
 "time_range": Vector2i(0, 592),
 "tracks": [{
 "condition_ex": "",
-"name": "/root/Game",
+"name": ".",
 "notes": [{
 "length": "128",
 "property": "\"rumble\"",
@@ -294,7 +269,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/AudioService",
+"name": "AudioService",
 "notes": [{
 "length": "16",
 "method": "&\"emit_float acid-preset 0\"",
@@ -303,7 +278,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/acid",
+"name": "acid",
 "notes": [{
 "length": "16",
 "method": "&\"look 0\"",
@@ -332,7 +307,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/NorthFace/preset-rock",
+"name": "toykit/NorthFace/preset-rock",
 "notes": [{
 "auto": "false",
 "dilema_group": "0",
@@ -344,7 +319,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/acid/Model/NorthFace/Res",
+"name": "acid/Model/NorthFace/Res",
 "notes": [{
 "from_value": "1.0",
 "gluide": "0.5",
@@ -411,11 +386,11 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/acid/Model/NorthFace/Res",
+"name": "acid/Model/NorthFace/Res",
 "notes": []
 }, {
 "condition_ex": "",
-"name": "/root/Game/acid/Model/NorthFace/Cutoff",
+"name": "acid/Model/NorthFace/Cutoff",
 "notes": [{
 "from_value": "0.0",
 "gluide": "0.5",
@@ -433,7 +408,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/phone/ChatApp",
+"name": "phone/ChatApp",
 "notes": [{
 "db_name": "\"\"",
 "length": "16",
@@ -473,7 +448,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/PointsService",
+"name": "PointsService",
 "notes": [{
 "length": "16",
 "method": "&\"win\"",
@@ -482,7 +457,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/CrowdService",
+"name": "CrowdService",
 "notes": [{
 "length": "16",
 "method": "&\"look 1\"",
@@ -492,10 +467,11 @@
 }]
 },
 "impress": {
+"start": 0,
 "time_range": Vector2i(0, 176),
 "tracks": [{
 "condition_ex": "",
-"name": "/root/Game",
+"name": ".",
 "notes": [{
 "length": "44",
 "property": "\"rumble\"",
@@ -517,7 +493,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit",
+"name": "toykit",
 "notes": [{
 "length": "16",
 "method": "&\"look\"",
@@ -526,7 +502,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/NorthFace/preset-rock",
+"name": "toykit/NorthFace/preset-rock",
 "notes": [{
 "auto": "false",
 "dilema_group": "0",
@@ -538,7 +514,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/toykit/NorthFace/preset-house",
+"name": "toykit/NorthFace/preset-house",
 "notes": [{
 "auto": "true",
 "dilema_group": "0",
@@ -550,7 +526,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/acid",
+"name": "acid",
 "notes": [{
 "length": "16",
 "method": "&\"look 2\"",
@@ -579,7 +555,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/acid/Model/NorthFace/Res",
+"name": "acid/Model/NorthFace/Res",
 "notes": [{
 "from_value": "0.0",
 "gluide": "0.5",
@@ -622,7 +598,7 @@
 }]
 }, {
 "condition_ex": "not missing",
-"name": "/root/Game/phone/ChatApp",
+"name": "phone/ChatApp",
 "notes": [{
 "db_name": "\"\"",
 "length": "16",
@@ -653,7 +629,7 @@
 }]
 }, {
 "condition_ex": "missing",
-"name": "/root/Game/phone/ChatApp",
+"name": "phone/ChatApp",
 "notes": [{
 "db_name": "\"\"",
 "length": "16",
@@ -666,7 +642,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
+"name": "Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
 "notes": [{
 "length": "32",
 "method": "&\"jump dull\"",
@@ -675,11 +651,245 @@
 }]
 }]
 },
+"just_kiks": {
+"start": 0,
+"time_range": Vector2i(0, 16),
+"tracks": [{
+"condition_ex": "",
+"name": "toykit/NorthFace/seq-1",
+"notes": [{
+"auto": "false",
+"dilema_group": "0",
+"length": "4",
+"silent": "false",
+"time": "4",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "false",
+"dilema_group": "0",
+"length": "4",
+"silent": "false",
+"time": "0",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "false",
+"dilema_group": "0",
+"length": "4",
+"silent": "false",
+"time": "8",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "false",
+"dilema_group": "0",
+"length": "4",
+"silent": "false",
+"time": "12",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"condition_ex": "",
+"name": "",
+"notes": [{
+"auto": "false",
+"dilema_group": "0",
+"length": "4",
+"silent": "false",
+"time": "8",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "false",
+"dilema_group": "0",
+"length": "4",
+"silent": "false",
+"time": "0",
+"type": "0",
+"value": "1.0"
+}]
+}]
+},
+"kick_hat_snare": {
+"start": 0,
+"time_range": Vector2i(0, 16),
+"tracks": [{
+"condition_ex": "",
+"name": "toykit/NorthFace/seq-3",
+"notes": [{
+"auto": "false",
+"dilema_group": "0",
+"length": "4",
+"silent": "false",
+"time": "2",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "false",
+"dilema_group": "0",
+"length": "4",
+"silent": "false",
+"time": "6",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "false",
+"dilema_group": "0",
+"length": "4",
+"silent": "false",
+"time": "10",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "false",
+"dilema_group": "0",
+"length": "4",
+"silent": "false",
+"time": "14",
+"type": "0",
+"value": "1.0"
+}]
+}]
+},
+"kik_snare": {
+"start": 0,
+"time_range": Vector2i(0, 16),
+"tracks": [{
+"condition_ex": "",
+"name": "toykit/NorthFace/seq-1",
+"notes": [{
+"auto": "false",
+"dilema_group": "0",
+"length": "4",
+"silent": "false",
+"time": "0",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "false",
+"dilema_group": "0",
+"length": "4",
+"silent": "false",
+"time": "4",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "false",
+"dilema_group": "0",
+"length": "4",
+"silent": "false",
+"time": "8",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "false",
+"dilema_group": "0",
+"length": "4",
+"silent": "false",
+"time": "12",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"condition_ex": "",
+"name": "toykit/NorthFace/seq-2",
+"notes": [{
+"auto": "false",
+"dilema_group": "0",
+"length": "4",
+"silent": "false",
+"time": "4",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "false",
+"dilema_group": "0",
+"length": "4",
+"silent": "false",
+"time": "12",
+"type": "0",
+"value": "1.0"
+}]
+}]
+},
+"kik_snare_auto": {
+"start": 0,
+"time_range": Vector2i(0, 16),
+"tracks": [{
+"condition_ex": "",
+"name": "toykit/NorthFace/seq-1",
+"notes": [{
+"auto": "true",
+"dilema_group": "0",
+"length": "4",
+"silent": "true",
+"time": "4",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "true",
+"dilema_group": "0",
+"length": "4",
+"silent": "true",
+"time": "8",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "true",
+"dilema_group": "0",
+"length": "4",
+"silent": "true",
+"time": "12",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "true",
+"dilema_group": "0",
+"length": "4",
+"silent": "true",
+"time": "0",
+"type": "0",
+"value": "1.0"
+}]
+}, {
+"condition_ex": "",
+"name": "toykit/NorthFace/seq-2",
+"notes": [{
+"auto": "true",
+"dilema_group": "0",
+"length": "4",
+"silent": "true",
+"time": "0",
+"type": "0",
+"value": "1.0"
+}, {
+"auto": "true",
+"dilema_group": "0",
+"length": "4",
+"silent": "true",
+"time": "8",
+"type": "0",
+"value": "1.0"
+}]
+}]
+},
+"rec_test": {
+"start": 0,
+"time_range": Vector2i(0, 16),
+"tracks": [{
+"condition_ex": "",
+"name": ".",
+"notes": []
+}]
+},
 "text": {
+"start": 0,
 "time_range": Vector2i(0, 208),
 "tracks": [{
 "condition_ex": "",
-"name": "/root/Game/phone",
+"name": "phone",
 "notes": [{
 "length": "32",
 "method": "&\"look\"",
@@ -688,7 +898,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/phone/ChatApp",
+"name": "phone/ChatApp",
 "notes": [{
 "db_name": "\"guess_where_i_am\"",
 "length": "24",
@@ -719,7 +929,7 @@
 }]
 }, {
 "condition_ex": "guess_where_i_am",
-"name": "/root/Game/phone/ChatApp",
+"name": "phone/ChatApp",
 "notes": [{
 "db_name": "\"\"",
 "length": "12",
@@ -741,7 +951,7 @@
 }]
 }, {
 "condition_ex": "not guess_where_i_am",
-"name": "/root/Game/phone/ChatApp",
+"name": "phone/ChatApp",
 "notes": [{
 "db_name": "\"\"",
 "length": "4",
@@ -772,7 +982,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/phone/0",
+"name": "phone/0",
 "notes": [{
 "auto": "false",
 "dilema_group": "0",
@@ -784,7 +994,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/phone/ReplyA",
+"name": "phone/ReplyA",
 "notes": [{
 "auto": "false",
 "dilema_group": "1",
@@ -804,7 +1014,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/phone/ReplyB",
+"name": "phone/ReplyB",
 "notes": [{
 "auto": "false",
 "dilema_group": "1",
@@ -824,7 +1034,7 @@
 }]
 }, {
 "condition_ex": "",
-"name": "/root/Game/Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
+"name": "Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
 "notes": [{
 "length": "32",
 "method": "&\"jump impress\"",

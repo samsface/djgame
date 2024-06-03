@@ -6,7 +6,8 @@ func _ready() -> void:
 	Bus.crowd_service = self
 
 func clap() -> void:
-	$Clap.play()
+	pass
+	#$Clap.play()
 
 func _physics_process(delta: float) -> void:
 	delta_sum_ += delta

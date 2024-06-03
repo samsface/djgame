@@ -18,6 +18,7 @@ func invalidate_() -> void:
 		$H/Condition.text = condition_ex.replace("\n", " ")
 		
 	$H/Value.text = str(value).get_file()
+	tooltip_text = str(value)
 
 func set_indent(level:int) -> void:
 	$H/Value.visible = level == 0

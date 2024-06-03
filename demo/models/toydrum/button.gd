@@ -32,15 +32,11 @@ var electric:Color = Color.TRANSPARENT :
 		electric = v
 		$Nob/Model/Button.electric = v
 
-@onready var path_follow = $Path/PathFollow
-@onready var remote_transform = $Path/PathFollow/RemoteTransform
-
 func _ready() -> void:
-	#set_process_input(false)
-	pass
-
+	path_follow = $Path/PathFollow
 
 func _input(event: InputEvent) -> void:
+	return
 	if down_:
 		if event.is_action_released("click"):
 			released()
@@ -64,23 +60,29 @@ func pressed() -> void:
 	var tween = create_tween()
 	tween.tween_property($Nob, "position:y", -0.006, 0.01)
 
-	value_ = intended_value# 1.0 - value
+	value_ = intended_value
 
-	$Nob/Model/Button.light = light_color_()
-	if has_node("Sound"):
-		$Sound.play()
+	#$Nob/Model/Button.light = light_color_()
+	#if has_node("Sound"):
+	#	$Sound.play()
 	
 	value_changed.emit(value_)
-	
+		
 	Bus.camera_service.cursor.push(self, Cursor.Action.grab)
 	Bus.camera_service.cursor.try_set_position(self, global_position)
 	#Bus.camera_service.look_at_node(self.get_parent())
+	
+	await get_tree().process_frame
+	await get_tree().process_frame
+	value_ = 0
 
 func released() -> void:
 	if not down_:
 		return
 
 	down_ = false
+	value_ = 0
+	
 
 	var tween = create_tween()
 	tween.tween_property($Nob, "position:y", 0, 0.05)
@@ -110,4 +112,3 @@ func radio():
 	if value > 0.0:
 		tween.tween_property(self, "scale", Vector3.ONE * 1.2, 0.0)
 		tween.tween_property(self, "scale", Vector3.ONE, 0.1).set_delay(0.1)
-

@@ -63,7 +63,7 @@ func distance_to_camera_(distance):
 func _physics_process(delta: float) -> void:
 	position = next_position_
 	cursor_.position = camera_.unproject_position(position)
-	cursor_.scale = distance_to_camera_(global_position.distance_to(camera_.global_position))
+	cursor_.scale = distance_to_camera_(global_position.distance_to(camera_.global_position)) * 0.25
 	
 var x := Vector2.ZERO
 

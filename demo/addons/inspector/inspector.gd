@@ -152,6 +152,7 @@ func get_node_value_(property_name:String):
 		push_error("UNKNOWN PROPERTY", property_name, node.name)
 
 func poll_node_properties_() -> void:
+	return
 	if not node:
 		return
 	

@@ -40,6 +40,7 @@ func play() -> void:
 	decay = 0.025
 
 func miss() -> void:
+	return
 	$RecordScratch.play()
 	
 	if damage_tween_:

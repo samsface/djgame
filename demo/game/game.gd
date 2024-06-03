@@ -11,7 +11,8 @@ var rumble := 1.0
 func _ready() -> void:
 	Bus.level = self
 
-	$WorldEnvironment.camera_attributes.dof_blur_far_enabled = true
+	if has_node("WorldEnvironment"):
+		$WorldEnvironment.camera_attributes.dof_blur_far_enabled = true
 	
 	audio_.connect_to_bang("rumble", _rumble)
 	audio_.connect_to_float("clock", _clock)
@@ -22,7 +23,7 @@ func _ready() -> void:
 			
 	$PointsService.zero.connect(_died)
 	
-	audio_.set_metro(130)
+	audio_.set_metro(150)
 
 func _inputx(event) -> void:
 	if event.is_action("reset"):

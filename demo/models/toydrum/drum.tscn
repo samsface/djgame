@@ -174,10 +174,10 @@ mesh = ExtResource("9_u0gxs")
 [node name="Views" type="Node3D" parent="."]
 
 [node name="Marker3D" type="Marker3D" parent="Views"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0876014, 0.0808042, 0.0617226)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.235958, 0.0817123, 0.0617226)
 
 [node name="Marker3D2" type="Marker3D" parent="Views"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0831002, 0.11372, 0.0287572)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.273001, 0.0959186, 0.0287572)
 
 [node name="Marker3D3" type="Marker3D" parent="Views"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.115283, 0.0709294, -0.0310543)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275147, 0.151859, -0.0310543)

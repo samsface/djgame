@@ -1,18 +1,13 @@
 #N canvas 673 480 887 460 12;
 #X obj 326 170 int;
 #X obj 446 182 + 1;
-#X obj 531 30 bng 15 250 50 0 s-RESET r-RESET RESET 17 7 0 10 #fcfcfc
-#000000 #000000;
-#X msg 531 51 0;
 #X obj 326 288 outlet;
-#X obj 285 61 inlet;
-#X obj 353 57 inlet;
-#X obj 531 1 loadbang;
+#X obj 276 21 inlet;
+#X obj 344 21 inlet;
+#X obj 601 43 nbx 5 17 -1e+37 1e+37 0 0 empty r-CLOCK empty 0 -10 0 12 #fcfcfc #000000 #000000 0 256;
 #X connect 0 0 1 0;
-#X connect 0 0 4 0;
+#X connect 0 0 2 0;
 #X connect 1 0 0 1;
-#X connect 2 0 3 0;
-#X connect 3 0 0 1;
-#X connect 5 0 0 0;
-#X connect 6 0 0 1;
-#X connect 7 0 2 0;
+#X connect 3 0 0 0;
+#X connect 4 0 0 1;
+#X connect 5 0 0 1;

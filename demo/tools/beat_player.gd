@@ -2,6 +2,7 @@ extends Control
 
 signal finished
 
+var root_node:Node
 var undo_ = UndoRedo.new()
 var inspector
 
@@ -23,29 +24,9 @@ func _ready():
 	inspector.undo = undo_
 	%PianoRoll.undo = undo_
 	%PianoRoll.row_pressed.connect(_piano_roll_pressed)
-	%PianoRoll.bang.connect(_piano_roll_bang)
+	%PianoRoll.begin.connect(_piano_roll_begin)
+	%PianoRoll.end.connect(_piano_roll_end)
 	%PianoRoll.selection_changed.connect(_piano_roll_selection_changed)
-	%PianoRoll.row_mouse_entered.connect(func(row_index:int):
-		return
-		print(row_index)
-		if hover_tween_:
-			hover_tween_.kill()
-		hover_tween_ = create_tween()
-		var n = get_node_or_null(%TrackNames.get_track_node_path(row_index))
-		if n:
-			hover_tween_.set_loops(-1)
-			hover_tween_.tween_property(n, "visible", false, 0.1)
-			hover_tween_.tween_property(n, "visible", true, 0.3)
-	)
-	%PianoRoll.row_mouse_exited.connect(func(row_index:int):
-		return
-		print(row_index)
-		if hover_tween_:
-			hover_tween_.kill()
-		var n = get_node_or_null(%TrackNames.get_track_node_path(row_index))
-		if n:
-			n.visible = true
-	)
 	%PianoRoll.finished.connect(func():
 		finished.emit()
 	)
@@ -63,11 +44,11 @@ func _input(event:InputEvent) -> void:
 	elif event.is_action_pressed("undo"):
 		undo_.undo()
 
-func _piano_roll_bang(item:Control, idx:int) -> void:
+func _piano_roll_begin(item:Control, idx:int) -> void:
 	%Virtual2.node = item
 
 	var node_path = %TrackNames.get_track_node_path(idx)
-	var node = get_node(node_path)
+	var node = root_node.get_node(node_path)
 	if not node:
 		return
 		
@@ -81,6 +62,25 @@ func _piano_roll_bang(item:Control, idx:int) -> void:
 	var length = %Virtual2.length / (1000.0/PureData.metro)
 
 	item.op(db, node, length)
+
+func _piano_roll_end(item:Control, idx:int) -> void:
+	%Virtual2.node = item
+
+	var node_path = %TrackNames.get_track_node_path(idx)
+	var node = root_node.get_node(node_path)
+	if not node:
+		return
+		
+	var c:String = %TrackNames.get_condition(idx)
+	if not c.is_empty():
+		var e = Expression.new()
+		e.parse(c)
+		if not e.execute([], db):
+			return
+
+	var length = %Virtual2.length / (1000.0/PureData.metro)
+
+	item.end(db, node)
 
 func _piano_roll_pressed(row_idx:int, pos:Vector2i) -> void:
 	var note = preload("bang.tscn").instantiate()
@@ -97,7 +97,7 @@ func _piano_roll_selection_changed(selection:Array) -> void:
 	
 	if Input.is_action_pressed("ctrl"):
 		for node in selection:
-			_piano_roll_bang(node, node.get_parent().get_index())
+			_piano_roll_begin(node, node.get_parent().get_index())
 
 func _gui_input(event):
 	if event is InputEventMouseButton:
@@ -117,6 +117,7 @@ func get_state() -> Dictionary:
 	
 	var state := {
 		time_range = %PianoRoll.time_range,
+		start = %PianoRoll.start,
 		tracks = []
 	}
 
@@ -139,6 +140,7 @@ func get_state() -> Dictionary:
 
 func reload(dict:Dictionary) -> void:
 	%PianoRoll.time_range = dict.time_range
+	%PianoRoll.start = dict.get("start", 0)
 	
 	for i in dict.tracks.size():
 		add_track(dict.tracks[i].name)
@@ -157,16 +159,27 @@ func reload(dict:Dictionary) -> void:
 				n = preload("dialog.tscn").instantiate()
 			elif int(note.type) == 4:
 				n = preload("tween.tscn").instantiate()
-				
+			elif int(note.type) == 5:
+				n = preload("scene.tscn").instantiate()
+			
 			%Virtual.node = n
 			var grid_size = %PianoRoll.grid_size
 			Dictializer.from_dict(note, %Virtual)
 			Dictializer.from_dict(note, n)
+	
+			if n.position.x < 0:
+				pass
+			
 			%PianoRoll.add_item(n, i, false)
-
+		
+	%PianoRoll.fit()
+		
 	undo_.clear_history()
 
 func change_type_(node, new_type:int) -> void:
+	if not node:
+		return
+
 	var current_type = node.get_meta("__type__", 0)
 	
 	if new_type == current_type:
@@ -191,6 +204,8 @@ func change_type_(node, new_type:int) -> void:
 		n = preload("res://tools/dialog.tscn").instantiate()
 	elif int(new_type) == 4:
 		n = preload("res://tools/tween.tscn").instantiate()
+	elif int(new_type) == 5:
+		n = preload("res://tools/scene.tscn").instantiate()
 	
 	%PianoRoll.add_item(n, row_idx)
 

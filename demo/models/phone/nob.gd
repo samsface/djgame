@@ -15,7 +15,6 @@ var electric:Color = Color.TRANSPARENT :
 		electric = v
 		$StaticBody3D.electric = v
 
-@onready var path_follow = $Path/PathFollow
 @onready var remote_transform = $Path/PathFollow/RemoteTransform
 
 var mouse_over_ := false
@@ -24,6 +23,7 @@ var down_ := false
 func _ready() -> void:
 	$StaticBody3D.mouse_entered.connect(_mouse_entered)
 	$StaticBody3D.mouse_exited.connect(_mouse_exited)
+	path_follow = $Path/PathFollow
 
 func bang_() -> void:
 	get_parent().click(global_position)

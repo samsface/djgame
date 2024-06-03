@@ -1,0 +1,111 @@
+[gd_scene load_steps=7 format=3 uid="uid://cwilpnax30ixm"]
+
+[ext_resource type="Theme" uid="uid://dbvpa0vlu34gu" path="res://ui/beat_player.tres" id="1_ip7sm"]
+[ext_resource type="Script" path="res://addons/table_control/piano_roll_control.gd" id="2_ehl6k"]
+[ext_resource type="Script" path="res://addons/table_control/selection_box.gd" id="3_q74ke"]
+[ext_resource type="Script" path="res://addons/table_control/grid.gd" id="4_cptms"]
+[ext_resource type="Script" path="res://addons/table_control/negative_scroll_container.gd" id="4_kbd8x"]
+[ext_resource type="Script" path="res://addons/table_control/overlay.gd" id="6_s47bi"]
+
+[node name="MarginContainer" type="PanelContainer"]
+offset_right = 1060.0
+offset_bottom = 621.0
+theme = ExtResource("1_ip7sm")
+script = ExtResource("2_ehl6k")
+
+[node name="Node2D" type="Node2D" parent="."]
+visible = false
+script = ExtResource("3_q74ke")
+
+[node name="Selection" type="Polygon2D" parent="Node2D"]
+color = Color(0.521569, 1, 1, 0.333333)
+
+[node name="VBoxContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="ScrollContainer" type="Control" parent="VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("4_kbd8x")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="Grid" type="Control" parent="VBoxContainer/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("4_cptms")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Headings" type="Control" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="TimeRangeRow" type="Control" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(500, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TimeRange" type="Button" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/TimeRangeRow"]
+unique_name_in_owner = true
+self_modulate = Color(1, 0.533333, 1, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_right = 103.0
+offset_bottom = 18.0
+theme = ExtResource("1_ip7sm")
+
+[node name="StartRow" type="Control" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2"]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(500, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Start" type="Button" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/StartRow"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+self_modulate = Color(0.0905386, 0.85926, 0.722289, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+theme = ExtResource("1_ip7sm")
+
+[node name="Rows" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Cursor" type="ColorRect" parent="VBoxContainer/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+color = Color(1, 0, 1, 0.356863)
+
+[node name="Overlay" type="MarginContainer" parent="VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_right = 1060.0
+offset_bottom = 621.0
+mouse_filter = 2
+script = ExtResource("6_s47bi")
+
+[connection signal="gui_input" from="VBoxContainer/ScrollContainer" to="." method="_scroll_container_gui_input"]

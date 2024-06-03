@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c5yhj5m3qblia"]
 
 [ext_resource type="Script" path="res://tools/beat_player.gd" id="1_cu0vf"]
-[ext_resource type="PackedScene" uid="uid://cwilpnax30ixm" path="res://addons/table_control/table_control.tscn" id="2_aoyoc"]
+[ext_resource type="PackedScene" uid="uid://cwilpnax30ixm" path="res://addons/table_control/piano_roll_control.tscn" id="2_aoyoc"]
 [ext_resource type="PackedScene" uid="uid://djt43y0g843nn" path="res://addons/table_control/node_path_tracks.tscn" id="2_pot1g"]
 [ext_resource type="Script" path="res://addons/inspector/virtual.gd" id="6_hnn6r"]
 
@@ -130,8 +130,8 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-item_count = 3
 selected = 2
+item_count = 3
 popup/item_0/text = "1/16"
 popup/item_0/id = 0
 popup/item_1/text = "1/4"

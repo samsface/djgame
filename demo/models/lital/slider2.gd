@@ -33,12 +33,8 @@ var mouse_over_ := false
 @onready var path_follow_ = $Path3D/PathFollow3D
 @onready var shadow_path_follow_ = $Path3D/PathFollow3D2
 
-
-@onready var path_follow = $Path/PathFollow
-@onready var remote_transform = $Path/PathFollow/RemoteTransform
-
-
 func _ready() -> void:
+	path_follow = $Path/PathFollow
 	set_process_input(false)
 	value = randf()
 

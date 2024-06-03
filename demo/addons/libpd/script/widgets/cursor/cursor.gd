@@ -18,9 +18,11 @@ func _play_mode_end() -> void:
 
 
 func _area_entered(area):
+	return
 	if area.has_method("_mouse_entered"):
 		area._mouse_entered(area)
 
 func _area_exited(area):
+	return
 	if area.has_method("_mouse_exited"):
 		area._mouse_exited(area)

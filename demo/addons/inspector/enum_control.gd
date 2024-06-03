@@ -5,3 +5,4 @@ func set_value(v):
 
 func _item_selected(index):
 	value_changed.emit(index)
+	
