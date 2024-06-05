@@ -4,8 +4,6 @@
 [ext_resource type="Script" path="res://tools/scene.gd" id="2_77nl1"]
 
 [node name="Scene" type="Button"]
-clip_children = 2
-clip_contents = true
 offset_right = 32.0
 offset_bottom = 32.0
 theme = ExtResource("1_wdlgr")
@@ -18,12 +16,9 @@ polygon = PackedVector2Array(1, 1, 31, 1, 31, 31, 1, 31)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 9
 anchor_bottom = 1.0
-offset_left = -7.0
-offset_right = 7.0
-grow_horizontal = 2
+offset_right = 46.0
 grow_vertical = 2
 text = "BANG"
 vertical_alignment = 1

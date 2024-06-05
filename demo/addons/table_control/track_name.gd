@@ -1,9 +1,14 @@
 extends Control
 
+signal value_changed
+
 @export var value:NodePath : 
 	set(v):
 		value = v
 		invalidate_()
+		if not is_visible_in_tree():
+			await tree_entered
+		value_changed.emit()
 
 @export_multiline var condition_ex:String :
 	set(v):

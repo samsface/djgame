@@ -1,27 +1,31 @@
 {
 "clips": {
 "a_intro": {
-"start": 0,
-"time_range": Vector2i(0, 400),
+"start": -16,
+"time_range": Vector2i(0, 16),
 "tracks": [{
 "condition_ex": "",
 "name": ".",
 "notes": [{
+"active": "false",
 "length": "16",
 "method": "&\"clap\"",
 "time": "16",
 "type": "2"
 }, {
+"active": "false",
 "length": "16",
 "method": "&\"clap\"",
 "time": "76",
 "type": "2"
 }, {
+"active": "false",
 "length": "16",
 "method": "&\"clap\"",
 "time": "144",
 "type": "2"
 }, {
+"active": "false",
 "length": "16",
 "method": "&\"clap\"",
 "time": "176",
@@ -31,19 +35,22 @@
 "condition_ex": "",
 "name": "toykit",
 "notes": [{
-"length": "16",
-"method": "&\"look\"",
-"time": "0",
-"type": "2"
-}, {
+"active": "false",
 "length": "16",
 "method": "&\"look 1\"",
 "time": "80",
 "type": "2"
 }, {
+"active": "false",
 "length": "8",
 "method": "&\"look 2\"",
 "time": "170",
+"type": "2"
+}, {
+"active": "false",
+"length": "16",
+"method": "&\"look\"",
+"time": "0",
 "type": "2"
 }]
 }, {
@@ -62,6 +69,7 @@
 "condition_ex": "",
 "name": "toykit/NorthFace/seq-3",
 "notes": [{
+"active": "false",
 "auto": "true",
 "dilema_group": "0",
 "length": "4",
@@ -78,6 +86,7 @@
 "condition_ex": "",
 "name": "toykit/NorthFace/seq-7",
 "notes": [{
+"active": "false",
 "auto": "true",
 "dilema_group": "0",
 "length": "4",
@@ -94,6 +103,7 @@
 "condition_ex": "",
 "name": "toykit/NorthFace/seq-11",
 "notes": [{
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "16",
@@ -102,6 +112,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "true",
 "dilema_group": "0",
 "length": "4",
@@ -118,6 +129,7 @@
 "condition_ex": "",
 "name": "toykit/NorthFace/seq-15",
 "notes": [{
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "16",
@@ -126,6 +138,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "true",
 "dilema_group": "0",
 "length": "4",
@@ -138,6 +151,7 @@
 "condition_ex": "",
 "name": "toykit/NorthFace/seq-16",
 "notes": [{
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "16",
@@ -146,6 +160,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "true",
 "dilema_group": "0",
 "length": "4",
@@ -166,16 +181,19 @@
 "condition_ex": "",
 "name": "acid",
 "notes": [{
+"active": "false",
 "length": "16",
 "method": "&\"look\"",
 "time": "192",
 "type": "2"
 }, {
+"active": "false",
 "length": "16",
 "method": "&\"look 1\"",
 "time": "256",
 "type": "2"
 }, {
+"active": "false",
 "length": "16",
 "method": "&\"look 2\"",
 "time": "320",
@@ -185,6 +203,7 @@
 "condition_ex": "",
 "name": "acid/Model/NorthFace/Res",
 "notes": [{
+"active": "false",
 "from_value": "0.0",
 "gluide": "0.5",
 "length": "64",
@@ -192,6 +211,7 @@
 "type": "1",
 "value": "1.0"
 }, {
+"active": "false",
 "from_value": "1.0",
 "gluide": "0.5",
 "length": "64",
@@ -199,6 +219,7 @@
 "type": "1",
 "value": "0.0"
 }, {
+"active": "false",
 "auto": "true",
 "dilema_group": "0",
 "length": "4",
@@ -211,6 +232,7 @@
 "condition_ex": "",
 "name": "acid/Model/NorthFace/Cutoff",
 "notes": [{
+"active": "false",
 "from_value": "1.0",
 "gluide": "0.5",
 "length": "64",
@@ -218,6 +240,7 @@
 "type": "1",
 "value": "0.0"
 }, {
+"active": "false",
 "auto": "true",
 "dilema_group": "0",
 "length": "2",
@@ -230,20 +253,35 @@
 "condition_ex": "",
 "name": "../../../Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
 "notes": [{
-"length": "16",
-"method": "&\"jump text\"",
-"time": "384",
-"type": "2"
-}, {
+"active": "false",
 "length": "112",
 "scene": "\"just_kiks\"",
-"time": "-4",
+"time": "336",
+"type": "5"
+}, {
+"active": "false",
+"length": "16",
+"scene": "\"just_kiks\"",
+"time": "0",
+"type": "5"
+}, {
+"active": "true",
+"length": "28",
+"scene": "\"just_kiks\"",
+"time": "64",
+"type": "5"
+}, {
+"active": "false",
+"length": "28",
+"scene": "\"kik_snare\"",
+"time": "96",
 "type": "5"
 }]
 }, {
 "condition_ex": "",
 "name": "../../../Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
 "notes": [{
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "16",
@@ -261,6 +299,7 @@
 "condition_ex": "",
 "name": ".",
 "notes": [{
+"active": "false",
 "length": "128",
 "property": "\"rumble\"",
 "time": "0",
@@ -271,6 +310,7 @@
 "condition_ex": "",
 "name": "AudioService",
 "notes": [{
+"active": "false",
 "length": "16",
 "method": "&\"emit_float acid-preset 0\"",
 "time": "0",
@@ -280,26 +320,31 @@
 "condition_ex": "",
 "name": "acid",
 "notes": [{
+"active": "false",
 "length": "16",
 "method": "&\"look 0\"",
 "time": "0",
 "type": "2"
 }, {
+"active": "false",
 "length": "16",
 "method": "&\"look 1\"",
 "time": "112",
 "type": "2"
 }, {
+"active": "false",
 "length": "16",
 "method": "&\"look 2\"",
 "time": "336",
 "type": "2"
 }, {
+"active": "false",
 "length": "16",
 "method": "&\"look 0\"",
 "time": "176",
 "type": "2"
 }, {
+"active": "false",
 "length": "16",
 "method": "&\"look 1\"",
 "time": "240",
@@ -309,6 +354,7 @@
 "condition_ex": "",
 "name": "toykit/NorthFace/preset-rock",
 "notes": [{
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "16",
@@ -321,6 +367,7 @@
 "condition_ex": "",
 "name": "acid/Model/NorthFace/Res",
 "notes": [{
+"active": "false",
 "from_value": "1.0",
 "gluide": "0.5",
 "length": "112",
@@ -328,6 +375,7 @@
 "type": "1",
 "value": "0.0"
 }, {
+"active": "false",
 "from_value": "0.0",
 "gluide": "0.5",
 "length": "16",
@@ -335,6 +383,7 @@
 "type": "1",
 "value": "0.3"
 }, {
+"active": "false",
 "from_value": "0.0",
 "gluide": "0.3",
 "length": "32",
@@ -342,6 +391,7 @@
 "type": "1",
 "value": "0.66"
 }, {
+"active": "false",
 "from_value": "0.0",
 "gluide": "0.3",
 "length": "16",
@@ -349,6 +399,7 @@
 "type": "1",
 "value": "0.3"
 }, {
+"active": "false",
 "from_value": "0.0",
 "gluide": "0.3",
 "length": "32",
@@ -356,6 +407,7 @@
 "type": "1",
 "value": "0.66"
 }, {
+"active": "false",
 "from_value": "0.0",
 "gluide": "0.3",
 "length": "16",
@@ -363,6 +415,7 @@
 "type": "1",
 "value": "0.3"
 }, {
+"active": "false",
 "from_value": "0.01",
 "gluide": "0.3",
 "length": "32",
@@ -370,6 +423,7 @@
 "type": "1",
 "value": "0.0"
 }, {
+"active": "false",
 "from_value": "0.0",
 "gluide": "0.3",
 "length": "16",
@@ -377,6 +431,7 @@
 "type": "1",
 "value": "0.3"
 }, {
+"active": "false",
 "from_value": "0.01",
 "gluide": "0.3",
 "length": "32",
@@ -392,6 +447,7 @@
 "condition_ex": "",
 "name": "acid/Model/NorthFace/Cutoff",
 "notes": [{
+"active": "false",
 "from_value": "0.0",
 "gluide": "0.5",
 "length": "32",
@@ -399,6 +455,7 @@
 "type": "1",
 "value": "0.1"
 }, {
+"active": "false",
 "from_value": "0.0",
 "gluide": "0.5",
 "length": "64",
@@ -410,6 +467,7 @@
 "condition_ex": "",
 "name": "phone/ChatApp",
 "notes": [{
+"active": "false",
 "db_name": "\"\"",
 "length": "16",
 "replay_a": "\"\"",
@@ -419,6 +477,7 @@
 "value": "\"BADABADABDABDBABADAa\"",
 "who": "\"Mano\""
 }, {
+"active": "false",
 "db_name": "\"\"",
 "length": "16",
 "replay_a": "\"\"",
@@ -428,6 +487,7 @@
 "value": "\"You killed it man!\"",
 "who": "\"Gorpho\""
 }, {
+"active": "false",
 "db_name": "\"\"",
 "length": "16",
 "replay_a": "\"\"",
@@ -437,6 +497,7 @@
 "value": "\"You're pretty good\"",
 "who": "\"Giada\""
 }, {
+"active": "false",
 "db_name": "\"\"",
 "length": "16",
 "replay_a": "\"\"",
@@ -450,6 +511,7 @@
 "condition_ex": "",
 "name": "PointsService",
 "notes": [{
+"active": "false",
 "length": "16",
 "method": "&\"win\"",
 "time": "416",
@@ -459,6 +521,7 @@
 "condition_ex": "",
 "name": "CrowdService",
 "notes": [{
+"active": "false",
 "length": "16",
 "method": "&\"look 1\"",
 "time": "16",
@@ -473,18 +536,21 @@
 "condition_ex": "",
 "name": ".",
 "notes": [{
+"active": "false",
 "length": "44",
 "property": "\"rumble\"",
 "time": "32",
 "to_value": "10.0",
 "type": "4"
 }, {
+"active": "false",
 "length": "4",
 "property": "\"rumble\"",
 "time": "92",
 "to_value": "10.0",
 "type": "4"
 }, {
+"active": "false",
 "length": "4",
 "property": "\"rumble\"",
 "time": "76",
@@ -495,6 +561,7 @@
 "condition_ex": "",
 "name": "toykit",
 "notes": [{
+"active": "false",
 "length": "16",
 "method": "&\"look\"",
 "time": "0",
@@ -504,6 +571,7 @@
 "condition_ex": "",
 "name": "toykit/NorthFace/preset-rock",
 "notes": [{
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "16",
@@ -516,6 +584,7 @@
 "condition_ex": "",
 "name": "toykit/NorthFace/preset-house",
 "notes": [{
+"active": "false",
 "auto": "true",
 "dilema_group": "0",
 "length": "8",
@@ -528,26 +597,31 @@
 "condition_ex": "",
 "name": "acid",
 "notes": [{
+"active": "false",
 "length": "16",
 "method": "&\"look 2\"",
 "time": "16",
 "type": "2"
 }, {
+"active": "false",
 "length": "16",
 "method": "&\"look \"",
 "time": "64",
 "type": "2"
 }, {
+"active": "false",
 "length": "16",
 "method": "&\"look 1\"",
 "time": "92",
 "type": "2"
 }, {
+"active": "false",
 "length": "16",
 "method": "&\"look 1\"",
 "time": "152",
 "type": "2"
 }, {
+"active": "false",
 "length": "16",
 "method": "&\"look 0\"",
 "time": "128",
@@ -557,6 +631,7 @@
 "condition_ex": "",
 "name": "acid/Model/NorthFace/Res",
 "notes": [{
+"active": "false",
 "from_value": "0.0",
 "gluide": "0.5",
 "length": "48",
@@ -564,6 +639,7 @@
 "type": "1",
 "value": "0.8"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "16",
@@ -572,6 +648,7 @@
 "type": "0",
 "value": "0.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "16",
@@ -580,6 +657,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "16",
@@ -588,6 +666,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "16",
@@ -600,6 +679,7 @@
 "condition_ex": "not missing",
 "name": "phone/ChatApp",
 "notes": [{
+"active": "false",
 "db_name": "\"\"",
 "length": "16",
 "replay_a": "\"\"",
@@ -609,6 +689,7 @@
 "value": "\"LOUDER!\"",
 "who": "\"Giada\""
 }, {
+"active": "false",
 "db_name": "\"\"",
 "length": "16",
 "replay_a": "\"\"",
@@ -618,6 +699,7 @@
 "value": "\"MORE  LOUDER!\"",
 "who": "\"Giada\""
 }, {
+"active": "false",
 "db_name": "\"\"",
 "length": "16",
 "replay_a": "\"\"",
@@ -631,6 +713,7 @@
 "condition_ex": "missing",
 "name": "phone/ChatApp",
 "notes": [{
+"active": "false",
 "db_name": "\"\"",
 "length": "16",
 "replay_a": "\"\"",
@@ -644,6 +727,7 @@
 "condition_ex": "",
 "name": "Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
 "notes": [{
+"active": "false",
 "length": "32",
 "method": "&\"jump dull\"",
 "time": "160",
@@ -658,6 +742,16 @@
 "condition_ex": "",
 "name": "toykit/NorthFace/seq-1",
 "notes": [{
+"active": "false",
+"auto": "false",
+"dilema_group": "0",
+"length": "4",
+"silent": "false",
+"time": "0",
+"type": "0",
+"value": "1.0"
+}, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -666,14 +760,7 @@
 "type": "0",
 "value": "1.0"
 }, {
-"auto": "false",
-"dilema_group": "0",
-"length": "4",
-"silent": "false",
-"time": "0",
-"type": "0",
-"value": "1.0"
-}, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -682,6 +769,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -690,10 +778,74 @@
 "type": "0",
 "value": "1.0"
 }]
+}]
+},
+"kick_hat_snare": {
+"start": -8,
+"time_range": Vector2i(0, 16),
+"tracks": [{
+"condition_ex": "",
+"name": "toykit/NorthFace/seq-1",
+"notes": [{
+"active": "false",
+"auto": "false",
+"dilema_group": "0",
+"length": "8",
+"silent": "false",
+"time": "-8",
+"type": "0",
+"value": "1.0"
+}, {
+"active": "false",
+"auto": "false",
+"dilema_group": "0",
+"length": "8",
+"silent": "false",
+"time": "-4",
+"type": "0",
+"value": "1.0"
+}, {
+"active": "false",
+"auto": "false",
+"dilema_group": "0",
+"length": "8",
+"silent": "false",
+"time": "0",
+"type": "0",
+"value": "1.0"
+}, {
+"active": "false",
+"auto": "false",
+"dilema_group": "0",
+"length": "8",
+"silent": "false",
+"time": "4",
+"type": "0",
+"value": "1.0"
+}, {
+"active": "false",
+"auto": "false",
+"dilema_group": "0",
+"length": "8",
+"silent": "false",
+"time": "8",
+"type": "0",
+"value": "1.0"
+}]
 }, {
 "condition_ex": "",
-"name": "",
+"name": "toykit/NorthFace/seq-2",
 "notes": [{
+"active": "false",
+"auto": "false",
+"dilema_group": "0",
+"length": "8",
+"silent": "false",
+"time": "-4",
+"type": "0",
+"value": "1.0"
+}, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -701,24 +853,12 @@
 "time": "8",
 "type": "0",
 "value": "1.0"
+}]
 }, {
-"auto": "false",
-"dilema_group": "0",
-"length": "4",
-"silent": "false",
-"time": "0",
-"type": "0",
-"value": "1.0"
-}]
-}]
-},
-"kick_hat_snare": {
-"start": 0,
-"time_range": Vector2i(0, 16),
-"tracks": [{
 "condition_ex": "",
 "name": "toykit/NorthFace/seq-3",
 "notes": [{
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -727,6 +867,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -735,6 +876,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -743,6 +885,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -750,45 +893,67 @@
 "time": "14",
 "type": "0",
 "value": "1.0"
+}, {
+"active": "false",
+"auto": "false",
+"dilema_group": "0",
+"length": "4",
+"silent": "false",
+"time": "-2",
+"type": "0",
+"value": "1.0"
 }]
 }]
 },
 "kik_snare": {
-"start": 0,
-"time_range": Vector2i(0, 16),
+"start": -8,
+"time_range": Vector2i(0, 32),
 "tracks": [{
 "condition_ex": "",
 "name": "toykit/NorthFace/seq-1",
 "notes": [{
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
-"length": "4",
+"length": "8",
 "silent": "false",
 "time": "0",
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
-"length": "4",
-"silent": "false",
-"time": "4",
-"type": "0",
-"value": "1.0"
-}, {
-"auto": "false",
-"dilema_group": "0",
-"length": "4",
+"length": "8",
 "silent": "false",
 "time": "8",
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
 "silent": "false",
-"time": "12",
+"time": "16",
+"type": "0",
+"value": "1.0"
+}, {
+"active": "false",
+"auto": "false",
+"dilema_group": "0",
+"length": "8",
+"silent": "false",
+"time": "24",
+"type": "0",
+"value": "1.0"
+}, {
+"active": "false",
+"auto": "false",
+"dilema_group": "0",
+"length": "4",
+"silent": "false",
+"time": "20",
 "type": "0",
 "value": "1.0"
 }]
@@ -796,19 +961,21 @@
 "condition_ex": "",
 "name": "toykit/NorthFace/seq-2",
 "notes": [{
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
-"length": "4",
+"length": "8",
 "silent": "false",
-"time": "4",
+"time": "8",
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
-"length": "4",
+"length": "8",
 "silent": "false",
-"time": "12",
+"time": "24",
 "type": "0",
 "value": "1.0"
 }]
@@ -821,6 +988,7 @@
 "condition_ex": "",
 "name": "toykit/NorthFace/seq-1",
 "notes": [{
+"active": "false",
 "auto": "true",
 "dilema_group": "0",
 "length": "4",
@@ -829,6 +997,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "true",
 "dilema_group": "0",
 "length": "4",
@@ -837,6 +1006,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "true",
 "dilema_group": "0",
 "length": "4",
@@ -845,6 +1015,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "true",
 "dilema_group": "0",
 "length": "4",
@@ -857,6 +1028,7 @@
 "condition_ex": "",
 "name": "toykit/NorthFace/seq-2",
 "notes": [{
+"active": "false",
 "auto": "true",
 "dilema_group": "0",
 "length": "4",
@@ -865,6 +1037,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "true",
 "dilema_group": "0",
 "length": "4",
@@ -891,6 +1064,7 @@
 "condition_ex": "",
 "name": "phone",
 "notes": [{
+"active": "false",
 "length": "32",
 "method": "&\"look\"",
 "time": "0",
@@ -900,6 +1074,7 @@
 "condition_ex": "",
 "name": "phone/ChatApp",
 "notes": [{
+"active": "false",
 "db_name": "\"guess_where_i_am\"",
 "length": "24",
 "replay_a": "\"Who are you?\"",
@@ -909,6 +1084,7 @@
 "value": "\"Guess where I am? \"",
 "who": "\"Giada\""
 }, {
+"active": "false",
 "db_name": "\"i_am_the_dj\"",
 "length": "8",
 "replay_a": "\"I'm the DJ\"",
@@ -918,6 +1094,7 @@
 "value": "\"Can you be louder though :)\"",
 "who": "\"Giada\""
 }, {
+"active": "false",
 "db_name": "\"\"",
 "length": "32",
 "replay_a": "\"\"",
@@ -931,6 +1108,7 @@
 "condition_ex": "guess_where_i_am",
 "name": "phone/ChatApp",
 "notes": [{
+"active": "false",
 "db_name": "\"\"",
 "length": "12",
 "replay_a": "\"\"",
@@ -940,6 +1118,7 @@
 "value": "\"HERE!\"",
 "who": "\"Giada\""
 }, {
+"active": "false",
 "db_name": "\"\"",
 "length": "16",
 "replay_a": "\"\"",
@@ -953,6 +1132,7 @@
 "condition_ex": "not guess_where_i_am",
 "name": "phone/ChatApp",
 "notes": [{
+"active": "false",
 "db_name": "\"\"",
 "length": "4",
 "replay_a": "\"\"",
@@ -962,6 +1142,7 @@
 "value": "\"Oh no! I ignored you : )\"",
 "who": "\"Giada\""
 }, {
+"active": "false",
 "db_name": "\"\"",
 "length": "4",
 "replay_a": "\"\"",
@@ -971,6 +1152,7 @@
 "value": "\"Was busy sorry\"",
 "who": "\"Giada\""
 }, {
+"active": "false",
 "db_name": "\"\"",
 "length": "8",
 "replay_a": "\"\"",
@@ -984,6 +1166,7 @@
 "condition_ex": "",
 "name": "phone/0",
 "notes": [{
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "32",
@@ -996,6 +1179,7 @@
 "condition_ex": "",
 "name": "phone/ReplyA",
 "notes": [{
+"active": "false",
 "auto": "false",
 "dilema_group": "1",
 "length": "32",
@@ -1004,6 +1188,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "2",
 "length": "32",
@@ -1016,6 +1201,7 @@
 "condition_ex": "",
 "name": "phone/ReplyB",
 "notes": [{
+"active": "false",
 "auto": "false",
 "dilema_group": "1",
 "length": "32",
@@ -1024,6 +1210,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "2",
 "length": "32",
@@ -1036,6 +1223,7 @@
 "condition_ex": "",
 "name": "Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost",
 "notes": [{
+"active": "false",
 "length": "32",
 "method": "&\"jump impress\"",
 "time": "160",

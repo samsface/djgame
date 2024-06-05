@@ -1,12 +1,15 @@
 {
 "clips": {
 "_MarginContainer_280": {
+"grid_size": 3,
+"scroll_horizontal": 438.0,
 "start": 0,
 "time_range": Vector2i(0, 48),
 "tracks": [{
 "condition_ex": "",
 "name": "123123123",
 "notes": [{
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -15,6 +18,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -23,6 +27,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -31,6 +36,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -39,6 +45,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -47,6 +54,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -55,6 +63,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -63,6 +72,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -71,6 +81,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -79,6 +90,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -87,6 +99,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -95,6 +108,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -107,6 +121,7 @@
 "condition_ex": "",
 "name": "asdasd",
 "notes": [{
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -115,6 +130,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -123,6 +139,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -131,6 +148,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -139,6 +157,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -147,6 +166,7 @@
 "type": "0",
 "value": "1.0"
 }, {
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "4",
@@ -159,6 +179,7 @@
 "condition_ex": "",
 "name": "aaaaasdasda",
 "notes": [{
+"active": "false",
 "length": "16",
 "scene": "\"scene\"",
 "time": "16",
@@ -168,6 +189,7 @@
 "condition_ex": "",
 "name": "",
 "notes": [{
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
 "length": "7",
@@ -183,17 +205,20 @@
 }]
 },
 "scene": {
-"start": -9223372036854775808,
+"grid_size": 4,
+"scroll_horizontal": 0.0,
+"start": 0,
 "time_range": Vector2i(0, 64),
 "tracks": [{
 "condition_ex": "",
 "name": "123123123",
 "notes": [{
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
-"length": "-9223372036854775808",
+"length": "2",
 "silent": "false",
-"time": "-9223372036854775808",
+"time": "0",
 "type": "0",
 "value": "0.0"
 }]
@@ -201,11 +226,12 @@
 "condition_ex": "",
 "name": "asdasd",
 "notes": [{
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
-"length": "-9223372036854775808",
+"length": "2",
 "silent": "false",
-"time": "-9223372036854775808",
+"time": "0",
 "type": "0",
 "value": "0.0"
 }]
@@ -213,11 +239,12 @@
 "condition_ex": "",
 "name": "aaaaasdasda",
 "notes": [{
+"active": "false",
 "auto": "false",
 "dilema_group": "0",
-"length": "-9223372036854775808",
+"length": "2",
 "silent": "false",
-"time": "-9223372036854775808",
+"time": "0",
 "type": "0",
 "value": "0.0"
 }]

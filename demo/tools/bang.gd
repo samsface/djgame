@@ -24,6 +24,9 @@ func _ready():
 	invalidate_value_()
 	item_rect_changed.connect(invalidate_value_)
 
+func get_lookahead() -> int:
+	return 3
+
 func invalidate_value_() -> void:
 	self_modulate = Color.DARK_SLATE_GRAY
 	
@@ -65,5 +68,8 @@ func invalidate_value_() -> void:
 	
 	$Polygon2D.polygon = polygon
 
-func op(db, node, length) -> void:
-	node.bang(length, value, auto, dilema_group, silent)
+func op(db, node, length_) -> void:
+	if node.has_method("bang"):
+		var length = (1000.0/PureData.metro) * (get_lookahead() / 16.0)
+		print(node)
+		node.bang(length, value, auto, dilema_group, silent)

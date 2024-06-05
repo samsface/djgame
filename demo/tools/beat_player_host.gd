@@ -12,23 +12,12 @@ var current_clip_
 var playing
 
 #var node_db := GraphControlNodeDatabase.new()
-var active_scenes_ := []
 
 func seek(time:float) -> void:
 	%TabContainer.get_child(0).seek(time)
-	
-	for node in active_scenes_:
-		node.seek(time)
 
-func play_scene(scene) -> void:
-	var node = %TabContainer.get_node_or_null(scene)
-	if node and not node in active_scenes_:
-		active_scenes_.push_back(node)
-
-func stop_scene(scene) -> void:
-	var node = %TabContainer.get_node_or_null(scene)
-	if node:
-		active_scenes_.erase(node)
+func get_scene(scene) -> Node:
+	return  %TabContainer.get_node_or_null(scene)
 
 func show_scene(scene) -> void:
 	var node = %TabContainer.get_node_or_null(scene)

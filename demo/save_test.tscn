@@ -1,0 +1,2114 @@
+[gd_scene load_steps=21 format=3]
+
+[ext_resource type="PackedScene" path="res://tools/beat_player.tscn" id="1_8bay3"]
+[ext_resource type="Script" path="res://tools/beat_player.gd" id="2_r0eto"]
+[ext_resource type="Script" path="res://addons/inspector/virtual.gd" id="3_14pvm"]
+[ext_resource type="PackedScene" path="res://addons/table_control/node_path_tracks.tscn" id="4_dwqm3"]
+[ext_resource type="Script" path="res://addons/table_control/node_path_tracks.gd" id="5_hsfga"]
+[ext_resource type="PackedScene" path="res://addons/table_control/track_name.tscn" id="6_4rr7p"]
+[ext_resource type="Script" path="res://addons/table_control/track_name.gd" id="7_m3280"]
+[ext_resource type="PackedScene" path="res://addons/table_control/piano_roll_control.tscn" id="8_gt067"]
+[ext_resource type="Script" path="res://addons/table_control/piano_roll_control.gd" id="9_1bxfm"]
+[ext_resource type="Script" path="res://addons/table_control/selection_box.gd" id="10_76wko"]
+[ext_resource type="Script" path="res://addons/table_control/negative_scroll_container.gd" id="11_b5oyh"]
+[ext_resource type="Script" path="res://addons/table_control/grid.gd" id="12_cky2n"]
+[ext_resource type="Theme" path="res://ui/beat_player.tres" id="13_f8348"]
+[ext_resource type="Script" path="res://addons/table_control/row.gd" id="14_7dvrt"]
+[ext_resource type="PackedScene" path="res://tools/bang.tscn" id="15_hqvob"]
+[ext_resource type="Script" path="res://tools/bang.gd" id="16_g54hi"]
+[ext_resource type="PackedScene" path="res://tools/scene.tscn" id="17_p3lcy"]
+[ext_resource type="Script" path="res://tools/scene.gd" id="18_kkfjr"]
+[ext_resource type="Script" path="res://addons/table_control/overlay.gd" id="19_rgho7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l8uc4"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.25, 0.25, 0.25, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.175, 0.175, 0.175, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="TabContainer" type="TabContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+current_tab = 0
+drag_to_rearrange_enabled = true
+
+[node name="_MarginContainer_280" type="MarginContainer" parent="." instance=ExtResource("1_8bay3")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_r0eto")
+title = "_MarginContainer_280"
+metadata/id = "_MarginContainer_280"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="_MarginContainer_280"]
+layout_mode = 2
+mouse_filter = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="BeatPlayer" type="VBoxContainer" parent="_MarginContainer_280/ScrollContainer"]
+custom_minimum_size = Vector2(0, 256)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Virtual" type="Node" parent="_MarginContainer_280/ScrollContainer/BeatPlayer" node_paths=PackedStringArray("node", "parent")]
+unique_name_in_owner = true
+script = ExtResource("3_14pvm")
+node = NodePath("../HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@33/Bang")
+parent = NodePath("../../..")
+type = 0
+time = 32
+length = 7
+
+[node name="Virtual2" type="Node" parent="_MarginContainer_280/ScrollContainer/BeatPlayer" node_paths=PackedStringArray("parent")]
+unique_name_in_owner = true
+script = ExtResource("3_14pvm")
+parent = NodePath("../../..")
+type = 0
+time = 0
+length = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/PanelContainer"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Save" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+text = "BUTTON"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+theme_override_constants/autohide = 0
+split_offset = 150
+
+[node name="TrackNames" type="PanelContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer" node_paths=PackedStringArray("piano_roll") instance=ExtResource("4_dwqm3")]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("5_hsfga")
+piano_roll = NodePath("../PianoRoll")
+
+[node name="MarginContainer" type="VBoxContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Spacer" type="ReferenceRect" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer"]
+custom_minimum_size = Vector2(32, 96)
+layout_mode = 2
+
+[node name="TrackNames" type="VBoxContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames" instance=ExtResource("6_4rr7p")]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+tooltip_text = "123123123"
+script = ExtResource("7_m3280")
+value = NodePath("123123123")
+condition_ex = ""
+
+[node name="H" type="HBoxContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/HBoxContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Indent" type="MarginContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/HBoxContainer/H"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Value" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/HBoxContainer/H"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "123123123"
+text_overrun_behavior = 3
+
+[node name="Condition" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/HBoxContainer/H"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1234123"
+text_overrun_behavior = 3
+
+[node name="MoveUp" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/HBoxContainer/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "UP"
+
+[node name="MoveDown" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/HBoxContainer/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "DN"
+
+[node name="Delete" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/HBoxContainer/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "X"
+
+[node name="@Button@25" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames" instance=ExtResource("6_4rr7p")]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+tooltip_text = "asdasd"
+script = ExtResource("7_m3280")
+value = NodePath("asdasd")
+condition_ex = ""
+
+[node name="H" type="HBoxContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@25"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Indent" type="MarginContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@25/H"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Value" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@25/H"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "asdasd"
+text_overrun_behavior = 3
+
+[node name="Condition" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@25/H"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1234123"
+text_overrun_behavior = 3
+
+[node name="MoveUp" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@25/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "UP"
+
+[node name="MoveDown" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@25/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "DN"
+
+[node name="Delete" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@25/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "X"
+
+[node name="@Button@32" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames" instance=ExtResource("6_4rr7p")]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+tooltip_text = "aaaaasdasda"
+script = ExtResource("7_m3280")
+value = NodePath("aaaaasdasda")
+condition_ex = ""
+
+[node name="H" type="HBoxContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@32"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Indent" type="MarginContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@32/H"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Value" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@32/H"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "aaaaasdasda"
+text_overrun_behavior = 3
+
+[node name="Condition" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@32/H"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1234123"
+text_overrun_behavior = 3
+
+[node name="MoveUp" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@32/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "UP"
+
+[node name="MoveDown" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@32/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "DN"
+
+[node name="Delete" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@32/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "X"
+
+[node name="@Button@34" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames" instance=ExtResource("6_4rr7p")]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("7_m3280")
+value = NodePath("")
+condition_ex = ""
+
+[node name="H" type="HBoxContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@34"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Indent" type="MarginContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@34/H"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Value" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@34/H"]
+layout_mode = 2
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+
+[node name="Condition" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@34/H"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1234123"
+text_overrun_behavior = 3
+
+[node name="MoveUp" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@34/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "UP"
+
+[node name="MoveDown" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@34/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "DN"
+
+[node name="Delete" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@34/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "X"
+
+[node name="@Button@36" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames" instance=ExtResource("6_4rr7p")]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("7_m3280")
+value = NodePath("")
+condition_ex = ""
+
+[node name="H" type="HBoxContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@36"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Indent" type="MarginContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@36/H"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Value" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@36/H"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+
+[node name="Condition" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@36/H"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1234123"
+text_overrun_behavior = 3
+
+[node name="MoveUp" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@36/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "UP"
+
+[node name="MoveDown" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@36/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "DN"
+
+[node name="Delete" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@36/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "X"
+
+[node name="AddTrackButton" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer"]
+layout_mode = 2
+text = "ADD TRACK"
+
+[node name="PianoRoll" type="PanelContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer" instance=ExtResource("8_gt067")]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("9_1bxfm")
+scroll_horizontal_ratio = 0.0
+scroll_horizontal = 0.0
+
+[node name="Node2D" type="Node2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll"]
+visible = false
+script = ExtResource("10_76wko")
+size = Vector2(-276, -47)
+
+[node name="Selection" type="Polygon2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/Node2D"]
+color = Color(0.521569, 1, 1, 0.333333)
+
+[node name="VBoxContainer" type="MarginContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="Control" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("11_b5oyh")
+scroll_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="Grid" type="Control" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("12_cky2n")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Headings" type="Control" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="TimeRangeRow" type="Control" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(500, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TimeRange" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/TimeRangeRow"]
+unique_name_in_owner = true
+self_modulate = Color(1, 0.533333, 1, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 32.0
+mouse_default_cursor_shape = 6
+theme = ExtResource("13_f8348")
+
+[node name="StartRow" type="Control" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2"]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(500, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Start" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/StartRow"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+self_modulate = Color(0.0905386, 0.85926, 0.722289, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+theme = ExtResource("13_f8348")
+
+[node name="Rows" type="VBoxContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="@Control@12" type="Control" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("14_7dvrt")
+
+[node name="Bang" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 36.0
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 1.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/Bang"]
+position = Vector2(2, 2)
+scale = Vector2(0.958333, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 96, 0, 96, 36, 0, 36)
+
+[node name="Label" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/Bang"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="@Button@13" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_left = 192.0
+offset_right = 288.0
+offset_bottom = 36.0
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 1.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@13"]
+position = Vector2(2, 2)
+scale = Vector2(0.958333, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 96, 0, 96, 36, 0, 36)
+
+[node name="Label" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@13"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="@Button@14" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_left = 96.0
+offset_right = 192.0
+offset_bottom = 36.0
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 1.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@14"]
+position = Vector2(2, 2)
+scale = Vector2(0.958333, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 96, 0, 96, 36, 0, 36)
+
+[node name="Label" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@14"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="@Button@15" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_left = 288.0
+offset_right = 384.0
+offset_bottom = 36.0
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 1.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@15"]
+position = Vector2(2, 2)
+scale = Vector2(0.958333, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 96, 0, 96, 36, 0, 36)
+
+[node name="Label" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@15"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="@Button@16" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_left = 384.0
+offset_right = 480.0
+offset_bottom = 36.0
+mouse_default_cursor_shape = 9
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 1.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@16"]
+position = Vector2(2, 2)
+scale = Vector2(0.958333, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 96, 0, 96, 36, 0, 36)
+
+[node name="Label" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@16"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="@Button@17" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_left = 576.0
+offset_right = 672.0
+offset_bottom = 36.0
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 1.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@17"]
+position = Vector2(2, 2)
+scale = Vector2(0.958333, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 96, 0, 96, 36, 0, 36)
+
+[node name="Label" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@17"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="@Button@18" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_left = 480.0
+offset_right = 576.0
+offset_bottom = 36.0
+mouse_default_cursor_shape = 6
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 1.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@18"]
+position = Vector2(2, 2)
+scale = Vector2(0.958333, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 96, 0, 96, 36, 0, 36)
+
+[node name="Label" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@18"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="@Button@19" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_left = 672.0
+offset_right = 768.0
+offset_bottom = 36.0
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 1.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@19"]
+position = Vector2(2, 2)
+scale = Vector2(0.958333, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 96, 0, 96, 36, 0, 36)
+
+[node name="Label" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@19"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="@Button@20" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_left = 768.0
+offset_right = 864.0
+offset_bottom = 36.0
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 1.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@20"]
+position = Vector2(2, 2)
+scale = Vector2(0.958333, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 96, 0, 96, 36, 0, 36)
+
+[node name="Label" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@20"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="@Button@21" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_left = 960.0
+offset_right = 1056.0
+offset_bottom = 36.0
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 1.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@21"]
+position = Vector2(2, 2)
+scale = Vector2(0.958333, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 96, 0, 96, 36, 0, 36)
+
+[node name="Label" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@21"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="@Button@22" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_left = 864.0
+offset_right = 960.0
+offset_bottom = 36.0
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 1.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@22"]
+position = Vector2(2, 2)
+scale = Vector2(0.958333, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 96, 0, 96, 36, 0, 36)
+
+[node name="Label" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@22"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="@Button@23" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_left = 1056.0
+offset_right = 1152.0
+offset_bottom = 36.0
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 1.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@23"]
+position = Vector2(2, 2)
+scale = Vector2(0.958333, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 96, 0, 96, 36, 0, 36)
+
+[node name="Label" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@12/@Button@23"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="@Control@24" type="Control" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("14_7dvrt")
+
+[node name="Bang" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@24" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_left = 96.0
+offset_right = 192.0
+offset_bottom = 36.0
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 1.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@24/Bang"]
+position = Vector2(2, 2)
+scale = Vector2(0.958333, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 96, 0, 96, 36, 0, 36)
+
+[node name="Label" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@24/Bang"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="@Button@26" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@24" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_left = 288.0
+offset_right = 384.0
+offset_bottom = 36.0
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 1.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@24/@Button@26"]
+position = Vector2(2, 2)
+scale = Vector2(0.958333, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 96, 0, 96, 36, 0, 36)
+
+[node name="Label" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@24/@Button@26"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="@Button@27" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@24" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_left = 480.0
+offset_right = 576.0
+offset_bottom = 36.0
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 1.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@24/@Button@27"]
+position = Vector2(2, 2)
+scale = Vector2(0.958333, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 96, 0, 96, 36, 0, 36)
+
+[node name="Label" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@24/@Button@27"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="@Button@28" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@24" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_left = 672.0
+offset_right = 768.0
+offset_bottom = 36.0
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 1.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@24/@Button@28"]
+position = Vector2(2, 2)
+scale = Vector2(0.958333, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 96, 0, 96, 36, 0, 36)
+
+[node name="Label" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@24/@Button@28"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="@Button@29" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@24" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_left = 864.0
+offset_right = 960.0
+offset_bottom = 36.0
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 1.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@24/@Button@29"]
+position = Vector2(2, 2)
+scale = Vector2(0.958333, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 96, 0, 96, 36, 0, 36)
+
+[node name="Label" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@24/@Button@29"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="@Button@30" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@24" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_left = 1056.0
+offset_right = 1152.0
+offset_bottom = 36.0
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 1.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@24/@Button@30"]
+position = Vector2(2, 2)
+scale = Vector2(0.958333, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 96, 0, 96, 36, 0, 36)
+
+[node name="Label" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@24/@Button@30"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="@Control@31" type="Control" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("14_7dvrt")
+
+[node name="Scene" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@31" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("17_p3lcy")]
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_left = 384.0
+offset_right = 768.0
+offset_bottom = 36.0
+theme = ExtResource("13_f8348")
+script = ExtResource("18_kkfjr")
+scene = "scene"
+piano_roll_ = NodePath("../../../../../../..")
+metadata/__type__ = 5
+
+[node name="Polygon2D" type="Polygon2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@31/Scene"]
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(1, 1, 31, 1, 31, 31, 1, 31)
+
+[node name="Label" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@31/Scene"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 46.0
+grow_vertical = 2
+text = "scene"
+vertical_alignment = 1
+
+[node name="@Control@33" type="Control" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("14_7dvrt")
+
+[node name="Bang" type="Button" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@33" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_left = 768.0
+offset_right = 936.0
+offset_bottom = 36.0
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 1.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@33/Bang"]
+position = Vector2(2, 2)
+scale = Vector2(0.97619, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 168, 0, 168, 36, 0, 36)
+
+[node name="Label" type="Label" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@33/Bang"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="@Control@35" type="Control" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("14_7dvrt")
+
+[node name="Cursor" type="ColorRect" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+color = Color(1, 0, 1, 0.356863)
+
+[node name="Overlay" type="MarginContainer" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_right = 1060.0
+offset_bottom = 621.0
+mouse_filter = 2
+script = ExtResource("19_rgho7")
+
+[node name="@SplitContainerDragger@5" type="SplitContainerDragger" parent="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+auto_translate = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 0
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+script = null
+
+[node name="_h_scroll" type="HScrollBar" parent="_MarginContainer_280/ScrollContainer"]
+visible = false
+layout_mode = 2
+max_value = 308.0
+page = 308.0
+
+[node name="_v_scroll" type="VScrollBar" parent="_MarginContainer_280/ScrollContainer"]
+visible = false
+layout_mode = 2
+max_value = 307.0
+page = 307.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="_MarginContainer_280"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="GhostHSplitContainer" type="HSplitContainer" parent="_MarginContainer_280/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+split_offset = 300
+dragger_visibility = 1
+
+[node name="Control" type="Control" parent="_MarginContainer_280/MarginContainer2/GhostHSplitContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Control2" type="MarginContainer" parent="_MarginContainer_280/MarginContainer2/GhostHSplitContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="_MarginContainer_280/MarginContainer2/GhostHSplitContainer/Control2"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="_MarginContainer_280/MarginContainer2/GhostHSplitContainer/Control2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/margin_top = 64
+
+[node name="VScrollBar" type="VScrollBar" parent="_MarginContainer_280/MarginContainer2/GhostHSplitContainer/Control2/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+max_value = 1.0
+page = 0.05
+
+[node name="HBoxContainer" type="MarginContainer" parent="_MarginContainer_280/MarginContainer2/GhostHSplitContainer/Control2/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 10
+
+[node name="HScrollBar" type="HScrollBar" parent="_MarginContainer_280/MarginContainer2/GhostHSplitContainer/Control2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+page = 0.05
+
+[node name="MarginContainer" type="MarginContainer" parent="_MarginContainer_280/MarginContainer2/GhostHSplitContainer/Control2"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="MenuButton" type="OptionButton" parent="_MarginContainer_280/MarginContainer2/GhostHSplitContainer/Control2/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+selected = 2
+item_count = 3
+popup/item_0/text = "1/16"
+popup/item_0/id = 0
+popup/item_1/text = "1/4"
+popup/item_1/id = 1
+popup/item_2/text = "1"
+popup/item_2/id = 2
+
+[node name="@PopupMenu@11" type="PopupMenu" parent="_MarginContainer_280/MarginContainer2/GhostHSplitContainer/Control2/MarginContainer/MenuButton"]
+item_count = 3
+item_0/text = "1/16"
+item_0/checkable = 2
+item_1/text = "1/4"
+item_1/checkable = 2
+item_1/id = 1
+item_2/text = "1"
+item_2/checkable = 2
+item_2/checked = true
+item_2/id = 2
+
+[node name="@ScrollContainer@7" type="ScrollContainer" parent="_MarginContainer_280/MarginContainer2/GhostHSplitContainer/Control2/MarginContainer/MenuButton/@PopupMenu@11"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_l8uc4")
+
+[node name="@Control@8" type="Control" parent="_MarginContainer_280/MarginContainer2/GhostHSplitContainer/Control2/MarginContainer/MenuButton/@PopupMenu@11/@ScrollContainer@7"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="_h_scroll" type="HScrollBar" parent="_MarginContainer_280/MarginContainer2/GhostHSplitContainer/Control2/MarginContainer/MenuButton/@PopupMenu@11/@ScrollContainer@7"]
+visible = false
+layout_mode = 2
+max_value = 0.0
+
+[node name="_v_scroll" type="VScrollBar" parent="_MarginContainer_280/MarginContainer2/GhostHSplitContainer/Control2/MarginContainer/MenuButton/@PopupMenu@11/@ScrollContainer@7"]
+visible = false
+layout_mode = 2
+max_value = 0.0
+
+[node name="@Timer@9" type="Timer" parent="_MarginContainer_280/MarginContainer2/GhostHSplitContainer/Control2/MarginContainer/MenuButton/@PopupMenu@11"]
+wait_time = 0.3
+one_shot = true
+
+[node name="@Timer@10" type="Timer" parent="_MarginContainer_280/MarginContainer2/GhostHSplitContainer/Control2/MarginContainer/MenuButton/@PopupMenu@11"]
+wait_time = 0.3
+one_shot = true
+
+[node name="@SplitContainerDragger@6" type="SplitContainerDragger" parent="_MarginContainer_280/MarginContainer2/GhostHSplitContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+auto_translate_mode = 0
+editor_description = ""
+visible = false
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+auto_translate = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 0
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+script = null
+
+[node name="scene" type="MarginContainer" parent="." instance=ExtResource("1_8bay3")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_r0eto")
+title = "scene"
+metadata/id = "scene"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="scene"]
+layout_mode = 2
+mouse_filter = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="BeatPlayer" type="VBoxContainer" parent="scene/ScrollContainer"]
+custom_minimum_size = Vector2(0, 256)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Virtual" type="Node" parent="scene/ScrollContainer/BeatPlayer" node_paths=PackedStringArray("node", "parent")]
+script = ExtResource("3_14pvm")
+node = NodePath("../HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@47/Bang")
+parent = NodePath("../../..")
+type = 0
+time = 0
+length = 2
+
+[node name="Virtual2" type="Node" parent="scene/ScrollContainer/BeatPlayer" node_paths=PackedStringArray("parent")]
+script = ExtResource("3_14pvm")
+parent = NodePath("../../..")
+type = 0
+time = 0
+length = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="scene/ScrollContainer/BeatPlayer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="scene/ScrollContainer/BeatPlayer/PanelContainer"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Save" type="Button" parent="scene/ScrollContainer/BeatPlayer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+text = "BUTTON"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="scene/ScrollContainer/BeatPlayer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+theme_override_constants/autohide = 0
+split_offset = 150
+
+[node name="TrackNames" type="PanelContainer" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer" node_paths=PackedStringArray("piano_roll") instance=ExtResource("4_dwqm3")]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("5_hsfga")
+piano_roll = NodePath("../PianoRoll")
+
+[node name="MarginContainer" type="VBoxContainer" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Spacer" type="ReferenceRect" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer"]
+custom_minimum_size = Vector2(32, 96)
+layout_mode = 2
+
+[node name="TrackNames" type="VBoxContainer" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="Button" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames" instance=ExtResource("6_4rr7p")]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+tooltip_text = "123123123"
+script = ExtResource("7_m3280")
+value = NodePath("123123123")
+condition_ex = ""
+
+[node name="H" type="HBoxContainer" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/HBoxContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Indent" type="MarginContainer" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/HBoxContainer/H"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Value" type="Label" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/HBoxContainer/H"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "123123123"
+text_overrun_behavior = 3
+
+[node name="Condition" type="Label" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/HBoxContainer/H"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1234123"
+text_overrun_behavior = 3
+
+[node name="MoveUp" type="Button" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/HBoxContainer/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "UP"
+
+[node name="MoveDown" type="Button" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/HBoxContainer/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "DN"
+
+[node name="Delete" type="Button" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/HBoxContainer/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "X"
+
+[node name="@Button@46" type="Button" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames" instance=ExtResource("6_4rr7p")]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+tooltip_text = "asdasd"
+script = ExtResource("7_m3280")
+value = NodePath("asdasd")
+condition_ex = ""
+
+[node name="H" type="HBoxContainer" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@46"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Indent" type="MarginContainer" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@46/H"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Value" type="Label" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@46/H"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "asdasd"
+text_overrun_behavior = 3
+
+[node name="Condition" type="Label" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@46/H"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1234123"
+text_overrun_behavior = 3
+
+[node name="MoveUp" type="Button" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@46/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "UP"
+
+[node name="MoveDown" type="Button" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@46/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "DN"
+
+[node name="Delete" type="Button" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@46/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "X"
+
+[node name="@Button@48" type="Button" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames" instance=ExtResource("6_4rr7p")]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+tooltip_text = "aaaaasdasda"
+script = ExtResource("7_m3280")
+value = NodePath("aaaaasdasda")
+condition_ex = ""
+
+[node name="H" type="HBoxContainer" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@48"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Indent" type="MarginContainer" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@48/H"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Value" type="Label" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@48/H"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "aaaaasdasda"
+text_overrun_behavior = 3
+
+[node name="Condition" type="Label" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@48/H"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1234123"
+text_overrun_behavior = 3
+
+[node name="MoveUp" type="Button" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@48/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "UP"
+
+[node name="MoveDown" type="Button" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@48/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "DN"
+
+[node name="Delete" type="Button" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames/@Button@48/H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "X"
+
+[node name="AddTrackButton" type="Button" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer"]
+layout_mode = 2
+text = "ADD TRACK"
+
+[node name="PianoRoll" type="PanelContainer" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer" instance=ExtResource("8_gt067")]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("9_1bxfm")
+scroll_horizontal_ratio = 0.0
+scroll_horizontal = 0.0
+
+[node name="Node2D" type="Node2D" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll"]
+visible = false
+script = ExtResource("10_76wko")
+size = Vector2(-276, 6)
+
+[node name="Selection" type="Polygon2D" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/Node2D"]
+color = Color(0.521569, 1, 1, 0.333333)
+
+[node name="VBoxContainer" type="MarginContainer" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="Control" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("11_b5oyh")
+scroll_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="Grid" type="Control" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("12_cky2n")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Headings" type="Control" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="TimeRangeRow" type="Control" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(500, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TimeRange" type="Button" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/TimeRangeRow"]
+self_modulate = Color(1, 0.533333, 1, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 32.0
+theme = ExtResource("13_f8348")
+
+[node name="StartRow" type="Control" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2"]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(500, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Start" type="Button" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/StartRow"]
+auto_translate_mode = 1
+self_modulate = Color(0.0905386, 0.85926, 0.722289, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+theme = ExtResource("13_f8348")
+
+[node name="Rows" type="VBoxContainer" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="@Control@44" type="Control" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("14_7dvrt")
+
+[node name="Bang" type="Button" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@44" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 0.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@44/Bang"]
+position = Vector2(2, 2)
+scale = Vector2(0.5, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 36, 8, 36, 8, 36, 0, 36)
+
+[node name="Label" type="Label" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@44/Bang"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="@Control@45" type="Control" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("14_7dvrt")
+
+[node name="Bang" type="Button" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@45" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 0.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@45/Bang"]
+position = Vector2(2, 2)
+scale = Vector2(0.5, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 36, 8, 36, 8, 36, 0, 36)
+
+[node name="Label" type="Label" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@45/Bang"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="@Control@47" type="Control" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("14_7dvrt")
+
+[node name="Bang" type="Button" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@47" node_paths=PackedStringArray("piano_roll_") instance=ExtResource("15_hqvob")]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
+clip_children = 2
+clip_contents = true
+custom_minimum_size = Vector2(4, 36)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+theme = ExtResource("13_f8348")
+script = ExtResource("16_g54hi")
+value = 0.0
+auto = false
+dilema_group = 0
+silent = false
+piano_roll_ = NodePath("../../../../../../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@47/Bang"]
+position = Vector2(2, 2)
+scale = Vector2(0.5, 0.888889)
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 36, 8, 36, 8, 36, 0, 36)
+
+[node name="Label" type="Label" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/Rows/@Control@47/Bang"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Bang"
+vertical_alignment = 1
+
+[node name="Cursor" type="ColorRect" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer/MarginContainer"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+color = Color(1, 0, 1, 0.356863)
+
+[node name="Overlay" type="MarginContainer" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+offset_right = 1060.0
+offset_bottom = 621.0
+mouse_filter = 2
+script = ExtResource("19_rgho7")
+
+[node name="@SplitContainerDragger@37" type="SplitContainerDragger" parent="scene/ScrollContainer/BeatPlayer/HSplitContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+auto_translate = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 0
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+script = null
+
+[node name="_h_scroll" type="HScrollBar" parent="scene/ScrollContainer"]
+visible = false
+layout_mode = 2
+max_value = 308.0
+page = 308.0
+
+[node name="_v_scroll" type="VScrollBar" parent="scene/ScrollContainer"]
+visible = false
+layout_mode = 2
+max_value = 256.0
+page = 256.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="scene"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="GhostHSplitContainer" type="HSplitContainer" parent="scene/MarginContainer2"]
+layout_mode = 2
+mouse_filter = 2
+split_offset = 300
+dragger_visibility = 1
+
+[node name="Control" type="Control" parent="scene/MarginContainer2/GhostHSplitContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Control2" type="MarginContainer" parent="scene/MarginContainer2/GhostHSplitContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="scene/MarginContainer2/GhostHSplitContainer/Control2"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="scene/MarginContainer2/GhostHSplitContainer/Control2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/margin_top = 64
+
+[node name="VScrollBar" type="VScrollBar" parent="scene/MarginContainer2/GhostHSplitContainer/Control2/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+max_value = 1.0
+page = 0.05
+
+[node name="HBoxContainer" type="MarginContainer" parent="scene/MarginContainer2/GhostHSplitContainer/Control2/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 10
+
+[node name="HScrollBar" type="HScrollBar" parent="scene/MarginContainer2/GhostHSplitContainer/Control2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+page = 0.05
+
+[node name="MarginContainer" type="MarginContainer" parent="scene/MarginContainer2/GhostHSplitContainer/Control2"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="MenuButton" type="OptionButton" parent="scene/MarginContainer2/GhostHSplitContainer/Control2/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+selected = 2
+item_count = 3
+popup/item_0/text = "1/16"
+popup/item_0/id = 0
+popup/item_1/text = "1/4"
+popup/item_1/id = 1
+popup/item_2/text = "1"
+popup/item_2/id = 2
+
+[node name="@PopupMenu@43" type="PopupMenu" parent="scene/MarginContainer2/GhostHSplitContainer/Control2/MarginContainer/MenuButton"]
+item_count = 3
+item_0/text = "1/16"
+item_0/checkable = 2
+item_1/text = "1/4"
+item_1/checkable = 2
+item_1/id = 1
+item_2/text = "1"
+item_2/checkable = 2
+item_2/checked = true
+item_2/id = 2
+
+[node name="@ScrollContainer@39" type="ScrollContainer" parent="scene/MarginContainer2/GhostHSplitContainer/Control2/MarginContainer/MenuButton/@PopupMenu@43"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_l8uc4")
+
+[node name="@Control@40" type="Control" parent="scene/MarginContainer2/GhostHSplitContainer/Control2/MarginContainer/MenuButton/@PopupMenu@43/@ScrollContainer@39"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="_h_scroll" type="HScrollBar" parent="scene/MarginContainer2/GhostHSplitContainer/Control2/MarginContainer/MenuButton/@PopupMenu@43/@ScrollContainer@39"]
+visible = false
+layout_mode = 2
+max_value = 0.0
+
+[node name="_v_scroll" type="VScrollBar" parent="scene/MarginContainer2/GhostHSplitContainer/Control2/MarginContainer/MenuButton/@PopupMenu@43/@ScrollContainer@39"]
+visible = false
+layout_mode = 2
+max_value = 0.0
+
+[node name="@Timer@41" type="Timer" parent="scene/MarginContainer2/GhostHSplitContainer/Control2/MarginContainer/MenuButton/@PopupMenu@43"]
+wait_time = 0.3
+one_shot = true
+
+[node name="@Timer@42" type="Timer" parent="scene/MarginContainer2/GhostHSplitContainer/Control2/MarginContainer/MenuButton/@PopupMenu@43"]
+wait_time = 0.3
+one_shot = true
+
+[node name="@SplitContainerDragger@38" type="SplitContainerDragger" parent="scene/MarginContainer2/GhostHSplitContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+auto_translate_mode = 0
+editor_description = ""
+visible = false
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+auto_translate = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 0
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+script = null
+
+[connection signal="tab_clicked" from="." to="../../.." method="_tab_clicked"]
+[connection signal="dragged" from="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer" to="_MarginContainer_280" method="_split_container_dragged"]
+[connection signal="child_order_changed" from="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames" to="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames" method="_order_changed"]
+[connection signal="pressed" from="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/AddTrackButton" to="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames" method="_add_track_pressed"]
+[connection signal="gui_input" from="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer" to="_MarginContainer_280/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll" method="_scroll_container_gui_input"]
+[connection signal="value_changed" from="_MarginContainer_280/MarginContainer2/GhostHSplitContainer/Control2/VBoxContainer/MarginContainer/VScrollBar" to="_MarginContainer_280" method="_scroll_vertical"]
+[connection signal="value_changed" from="_MarginContainer_280/MarginContainer2/GhostHSplitContainer/Control2/VBoxContainer/HBoxContainer/HScrollBar" to="_MarginContainer_280" method="_scroll_horizontal"]
+[connection signal="item_selected" from="_MarginContainer_280/MarginContainer2/GhostHSplitContainer/Control2/MarginContainer/MenuButton" to="_MarginContainer_280" method="_quant_selected"]
+[connection signal="dragged" from="scene/ScrollContainer/BeatPlayer/HSplitContainer" to="scene" method="_split_container_dragged"]
+[connection signal="child_order_changed" from="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/TrackNames" to="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames" method="_order_changed"]
+[connection signal="pressed" from="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames/MarginContainer/AddTrackButton" to="scene/ScrollContainer/BeatPlayer/HSplitContainer/TrackNames" method="_add_track_pressed"]
+[connection signal="gui_input" from="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll/VBoxContainer/ScrollContainer" to="scene/ScrollContainer/BeatPlayer/HSplitContainer/PianoRoll" method="_scroll_container_gui_input"]
+[connection signal="value_changed" from="scene/MarginContainer2/GhostHSplitContainer/Control2/VBoxContainer/MarginContainer/VScrollBar" to="scene" method="_scroll_vertical"]
+[connection signal="value_changed" from="scene/MarginContainer2/GhostHSplitContainer/Control2/VBoxContainer/HBoxContainer/HScrollBar" to="scene" method="_scroll_horizontal"]
+[connection signal="item_selected" from="scene/MarginContainer2/GhostHSplitContainer/Control2/MarginContainer/MenuButton" to="scene" method="_quant_selected"]

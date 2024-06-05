@@ -52,7 +52,6 @@ func click(pos) -> void:
 	Input.parse_input_event(e2)
 
 func _input(event) -> void:
-	print(event)
 	var automated = event.device == 444
 
 	if not automated and not mouse_entered_:

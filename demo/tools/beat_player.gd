@@ -20,6 +20,7 @@ var db
 
 func _ready():
 	%TrackNames.track_focused.connect(_track_focused)
+	%TrackNames.track_name_changed.connect(_track_name_changed)
 	%TrackNames.undo = undo_
 	inspector.undo = undo_
 	%PianoRoll.undo = undo_
@@ -35,6 +36,10 @@ func _track_focused(track) -> void:
 	inspector.virtual_properties = null
 	inspector.node = track
 
+func _track_name_changed(track:Node) -> void:
+	var node = root_node.get_node_or_null(track.value)
+	%PianoRoll.set_row_target_node(track.get_index(), node)
+	
 func _input(event:InputEvent) -> void:
 	if not is_visible_in_tree():
 		return
@@ -118,7 +123,9 @@ func get_state() -> Dictionary:
 	var state := {
 		time_range = %PianoRoll.time_range,
 		start = %PianoRoll.start,
-		tracks = []
+		tracks = [],
+		scroll_horizontal = %PianoRoll.scroll_horizontal,
+		grid_size = %PianoRoll.grid_size
 	}
 
 	var track_names = %TrackNames.get_all_track_names()
@@ -141,6 +148,8 @@ func get_state() -> Dictionary:
 func reload(dict:Dictionary) -> void:
 	%PianoRoll.time_range = dict.time_range
 	%PianoRoll.start = dict.get("start", 0)
+	%PianoRoll.grid_size = dict.get("grid_size", 4)
+	%PianoRoll.scroll_horizontal = dict.get("scroll_horizontal", 0)
 	
 	for i in dict.tracks.size():
 		add_track(dict.tracks[i].name)
@@ -171,9 +180,7 @@ func reload(dict:Dictionary) -> void:
 				pass
 			
 			%PianoRoll.add_item(n, i, false)
-		
-	%PianoRoll.fit()
-		
+
 	undo_.clear_history()
 
 func change_type_(node, new_type:int) -> void:

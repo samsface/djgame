@@ -7,6 +7,7 @@ class_name NegativeScrollContainer
 		scroll_horizontal = v
 		if get_child_count() > 0:
 			get_child(0).position.x = scroll_horizontal
+			get_child(0).position.y = 0
 
 
 func auto_scroll(delta) -> bool:

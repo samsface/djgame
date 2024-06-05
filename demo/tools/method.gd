@@ -25,6 +25,8 @@ func parse_args_(object:Object, method_name:StringName, args:PackedStringArray) 
 	return res
 
 func op(db, node, length) -> void:
+	node = get_target_node()
+
 	var method_args_generic = method.split(" ")
 	var method_name = method_args_generic[0]
 

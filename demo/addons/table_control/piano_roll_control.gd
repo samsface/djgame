@@ -8,6 +8,8 @@ signal selection_changed
 signal row_pressed
 signal row_mouse_entered
 signal row_mouse_exited
+signal changed
+signal seeked
 
 @export var scroll_horizontal_ratio:float :
 	set(v):
@@ -36,31 +38,34 @@ var time_range := Vector2i(0, 16) :
 	set(v):
 		time_range = v
 		if not supress_hack_:
-			%TimeRange.position.x = time_range.x * grid_size
-			%TimeRange.size.x = (time_range.y - time_range.x) * grid_size
+			%TimeRange.position.x = to_local(time_range.x * grid_size)
+			%TimeRange.size.x = to_local(time_range.y - time_range.x)
 
 var start := 0 :
 	set(v):
 		%Start.position.x = v * grid_size
 	get:
-		return %Start.position.x / grid_size
+		return to_world(%Start.position.x / grid_size)
 
 var grid_size := 4 :
 	set(value):
+
 		var old_grid_size = grid_size
 		grid_size = value
+
 		invalidate_grid_size_(old_grid_size)
+		
 var grid_size_old_ := grid_size
 var zoom_grab_time_ := 0
 var quantinize_snap := 16
+var invalidate_queue_queued_ := false
 var selection_:Array[Control]
 
 var border_ = 8
 var tool_ := Tool.none :
 	set(v):
 		tool_ = v
-		prints("tool", tool_)
-		
+
 var grab_offet_ := 0
 
 var undo := UndoRedo.new()
@@ -71,6 +76,12 @@ var queue_off_ := []
 @onready var cursor := %Cursor
 @onready var scroll_container_ := %ScrollContainer
 @onready var grid_ := %Grid
+
+func to_world(v) -> float:
+	return v / grid_size
+
+func to_local(v):
+	return v * grid_size
 
 func _ready() -> void:
 	grid_.grid_size = grid_size
@@ -91,6 +102,8 @@ func connect_row_item_(row_item:Button) -> void:
 	row_item.button_down.connect(_table_item_button_down.bind(row_item))
 	row_item.button_up.connect(_table_item_button_up.bind(row_item)) 
 	row_item.gui_input.connect(_item_gui_input.bind(row_item))
+	if row_item.has_signal("changed"):
+		row_item.changed.connect(queue_invalidate_queue_)
 
 func connect_row_(row) -> void:
 	row.gui_input.connect(func(event:InputEvent): 
@@ -132,8 +145,6 @@ var grab_position_ := Vector2.ZERO
 var last_item_down_
 
 func _table_item_button_down(item):
-	print("item down", item)
-	
 	grab_position_ = get_global_mouse_position()
 
 	if not item in selection_:
@@ -188,6 +199,9 @@ func _physics_process(delta:float) -> void:
 			_input(InputEventMouseMotion.new())
 	
 func _input(event):
+	if not is_visible_in_tree():
+		return
+
 	var row_position = get_local_mouse_table_position()
 
 	if event.is_action_pressed("duplicate"):
@@ -255,8 +269,15 @@ func duplicate_(items:Array[Control]) -> void:
 	undo.add_do_property(self, "selection_", new_selection.duplicate())
 	undo.add_undo_property(self, "selection_", items.duplicate())
 	
+	commit_action_()
+
+func commit_action_() -> void:
 	undo.add_do_method(%Overlay.queue_redraw)
+	undo.add_do_method(emit_signal.bind("changed"))
+	undo.add_do_method(invalidate_queue_)
 	undo.add_undo_method(%Overlay.queue_redraw)
+	undo.add_undo_method(emit_signal.bind("changed"))
+	undo.add_undo_method(invalidate_queue_)
 	
 	undo.commit_action()
 
@@ -265,7 +286,6 @@ func erase_(items:Array[Control]) -> void:
 		return
 		
 	undo.create_action("delete")
-
 
 	var new_selection = selection_.duplicate()
 
@@ -278,20 +298,18 @@ func erase_(items:Array[Control]) -> void:
 	undo.add_do_property(self, "selection_", new_selection.duplicate())
 	undo.add_undo_property(self, "selection_", selection_.duplicate())
 
-	undo.add_do_method(%Overlay.queue_redraw)
-	undo.add_undo_method(%Overlay.queue_redraw)
-	undo.commit_action()
+	commit_action_()
 
 func seek(time:float) -> void:
 	time_ = time
 	
-	var t := int(floor(time_))
+	var t := int(time)
 	
 	var l = (time_range.y - time_range.x) 
 	
-	t =  int(fposmod(t, l))
-	
-	
+	if time >= time_range.y:
+		t =  int(t % l)
+
 	t += time_range.x
 	
 	cursor.position.x = t * grid_size
@@ -305,6 +323,8 @@ func seek(time:float) -> void:
 		var item = queue_on_[i].get(t)
 		if item:
 			begin.emit(item, i)
+			
+	seeked.emit(t)
 
 func translation_begin_() -> void:
 	for item in selection_:
@@ -325,17 +345,11 @@ func translation_end_() -> void:
 		undo.add_do_property(item, "position", item.position)
 		undo.add_do_property(item, "size", item.size)
 	
-	undo.add_do_method(%Overlay.queue_redraw)
-	undo.add_undo_method(%Overlay.queue_redraw)
-
-	undo.commit_action()
-	
-	invalidate_queue_()
+	commit_action_()
 
 func move_begin_() -> void:
 	print("move begin")
 	tool_ = Tool.move
-	# should be an average of the selection
 	grab_offet_ = last_item_down_.get_local_mouse_position().x
 	undo.create_action("move")
 	translation_begin_()
@@ -382,7 +396,6 @@ func resize_west_begin_() -> void:
 func where_(control:Control) -> Vector2i:
 	var where := Vector2i.ZERO
 	
-	
 	if control == %Start:
 		return where
 	
@@ -402,9 +415,10 @@ func where_(control:Control) -> Vector2i:
 
 	return where
 
+func set_row_target_node(row_idx:int, target_node:Node) -> void:
+	%Rows.get_child(row_idx).target_node = target_node
+
 func add_item(node:Button, row_idx:int, quantinize := true) -> void:
-	prints("add_item", node, row_idx, node.position, node.size)
-	
 	if node == null:
 		return
 
@@ -415,6 +429,7 @@ func add_item(node:Button, row_idx:int, quantinize := true) -> void:
 
 	node.custom_minimum_size = Vector2i(grid_size, 36)
 	node.size.y *= 0
+	node.piano_roll_ = self
 	if quantinize:
 		node.position.x = quantinize(node.position.x, quantinize_snap)
 		node.size.x = quantinize_snap * grid_size
@@ -422,14 +437,11 @@ func add_item(node:Button, row_idx:int, quantinize := true) -> void:
 
 	undo.create_action("add")
 	undo.add_do_method(row.add_child.bind(node))
-	undo.add_do_method(%Overlay.queue_redraw)
+	undo.add_do_property(node, "owner", row)
 	undo.add_do_reference(node)
 	undo.add_undo_method(row.remove_child.bind(node))
-	undo.add_undo_method(%Overlay.queue_redraw)
 
-	undo.commit_action()
-	
-	invalidate_queue_()
+	commit_action_()
 
 func remove_item(node:Control) -> void:
 	if node == null or node.get_parent() == null:
@@ -440,9 +452,7 @@ func remove_item(node:Control) -> void:
 	undo.add_undo_method(node.get_parent().add_child.bind(node))
 	undo.add_undo_reference(node)
 
-	undo.commit_action()
-	
-	invalidate_queue_()
+	commit_action_()
 
 func invalidate_grid_size_(old_grid_size) -> void:
 	grid_.grid_size = grid_size
@@ -456,7 +466,16 @@ func invalidate_grid_size_(old_grid_size) -> void:
 			if item != %Start:
 				item.size.x = l * grid_size
 
-	scroll_horizontal = -(zoom_grab_time_ * grid_size) +  %ScrollContainer.get_local_mouse_position().x
+	if is_visible_in_tree():
+		scroll_horizontal = -(zoom_grab_time_ * grid_size) + %ScrollContainer.get_local_mouse_position().x
+
+func queue_invalidate_queue_() -> void:
+	if invalidate_queue_queued_:
+		return
+	
+	invalidate_queue_queued_ = true
+	call_deferred("invalidate_queue_")
+	set_deferred("invalidate_queue_queued_", false)
 
 func invalidate_queue_() -> void:
 	queue_on_.clear()
@@ -466,24 +485,25 @@ func invalidate_queue_() -> void:
 		var dict_on := {}
 		var dict_off := {}
 		for item in row.get_children():
-			if item.get("lol"):
-				dict_on[int(item.position.x / grid_size) - 16] = item
-				#dict_off[int(item.position.x / grid_size)] = item
-			else:	
-				dict_on[int(item.position.x / grid_size)] = item
-				dict_off[int(item.position.x / grid_size) + int(item.size.x / grid_size)] = item
+			var begin = int(item.position.x / grid_size) - item.get_lookahead()
+			var end = int(item.position.x / grid_size) + int(item.size.x / grid_size)
+
+			if item.fill():
+				for i in range(begin, end - 1):
+					dict_on[i] = item
+			
+			dict_on[begin] = item
+			dict_off[end] = item
 		
 		queue_on_.push_back(dict_on)
 		queue_off_.push_back(dict_off)
-		
-	print(queue_on_)
 
 func get_queue() -> Array:
 	invalidate_queue_()
 
 	var res := []
 	
-	for q in queue_on_:
+	for q in queue_off_:
 		var items := []
 		for item in q.values():
 			items.push_back(item)
@@ -493,14 +513,15 @@ func get_queue() -> Array:
 	return res
 
 func add_row() -> void:
-	var row := Control.new()
+	var row := PianoRollRow.new()
 	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	row.custom_minimum_size.y = 36
 	connect_row_(row)
 	undo.add_do_method(%Rows.add_child.bind(row))
+	undo.add_do_property(row, "owner", %Rows)
 	undo.add_do_reference(row)
 	undo.add_undo_method(%Rows.remove_child.bind(row))
-	
+
 func remove_row(idx:int) -> void:
 	var row = %Rows.get_child(idx)
 
@@ -546,7 +567,7 @@ func move_row_down(row_idx:int) -> void:
 	row.get_parent().move_child(row, row.get_index() + 1)
 
 func _scroll_container_gui_input(event: InputEvent) -> void:
-	if selection_box_ and event is InputEventMouseMotion:	
+	if selection_box_ and event is InputEventMouseMotion:
 		selection_box_.size = event.position - selection_box_.position
 		#selection_box_ = selection_box_.abs()
 		var globalized = selection_box_.abs()
@@ -555,11 +576,13 @@ func _scroll_container_gui_input(event: InputEvent) -> void:
 		%Overlay.queue_redraw()
 	elif event is InputEventMouseButton:
 		if event.pressed:
+			tool_ = Tool.selecting
 			selection_box_ = Rect2(event.position, Vector2.ZERO)
 			selection_ = []
 			%Overlay.queue_redraw()
 		else:
 			selection_box_ = null
+			tool_ = Tool.none
 			%Overlay.queue_redraw()
 
 func get_items_in_rect_(rect:Rect2) -> Array[Control]:

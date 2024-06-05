@@ -1,6 +1,7 @@
 extends Control
 
 signal track_focused
+signal track_name_changed
 
 var undo := UndoRedo.new()
 @export var piano_roll:Control
@@ -18,6 +19,7 @@ func add_track(node_path:NodePath = "") -> Node:
 	
 	var track_name := preload("track_name.tscn").instantiate()
 	track_name.pressed.connect(_focus_entered.bind(track_name))
+	track_name.value_changed.connect(_track_value_changed.bind(track_name))
 	track_name.get_node("H/Delete").pressed.connect(_erase_track.bind(track_name))
 	track_name.get_node("H/MoveUp").pressed.connect(_move_track_up.bind(track_name))
 	track_name.get_node("H/MoveDown").pressed.connect(_move_track_down.bind(track_name))
@@ -44,8 +46,8 @@ func get_all_track_names() -> Array:
 
 	return res
 
-func _track_value_changed(new_text, track) -> void:
-	track.node_path = NodePath(new_text)
+func _track_value_changed(track) -> void:
+	track_name_changed.emit(track)
 
 func _focus_entered(track) -> void:
 	track_focused.emit(track)
