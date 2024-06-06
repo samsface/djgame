@@ -139,7 +139,9 @@ func get_state() -> Dictionary:
 		}
 
 		for note in piano_roll[i]:
-			track.notes.push_back(inspector.to_dict(note))
+			var d = inspector.to_dict(note)
+			d.erase("active")
+			track.notes.push_back(d)
 
 		state.tracks.push_back(track)
 

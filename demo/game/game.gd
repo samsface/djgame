@@ -23,7 +23,7 @@ func _ready() -> void:
 			
 	$PointsService.zero.connect(_died)
 	
-	audio_.set_metro(150)
+	#audio_.set_metro(150)
 
 func _inputx(event) -> void:
 	if event.is_action("reset"):
@@ -34,6 +34,7 @@ func _rumble() -> void:
 	Bus.camera_service.rumble.emit()
 
 func _clock(value:float) -> void:
+	audio_.clock = value
 	beat_player_.call_deferred("seek", value)
 
 func _device_nob_value_changed(nob:Nob, new_value:float, old_value:float) -> void:

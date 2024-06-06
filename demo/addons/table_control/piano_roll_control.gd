@@ -45,7 +45,7 @@ var start := 0 :
 	set(v):
 		%Start.position.x = v * grid_size
 	get:
-		return to_world(%Start.position.x / grid_size)
+		return to_world(%Start.position.x)
 
 var grid_size := 4 :
 	set(value):
@@ -230,7 +230,7 @@ func _input(event):
 		%Overlay.queue_redraw()
 	elif tool_ == Tool.zooming:
 		var zoom = %Headings.get_local_mouse_position().y
-		grid_size = clamp(grid_size_old_ + zoom * 0.1, 3, 32)
+		grid_size = clamp(grid_size_old_ + zoom * 0.1, 4, 32)
 		%Overlay.queue_redraw()
 
 func get_bounding_box(items:Array[Control]) -> Rect2:
@@ -301,8 +301,6 @@ func erase_(items:Array[Control]) -> void:
 	commit_action_()
 
 func seek(time:float) -> void:
-	time_ = time
-	
 	var t := int(time)
 	
 	var l = (time_range.y - time_range.x) 
@@ -311,6 +309,8 @@ func seek(time:float) -> void:
 		t =  int(t % l)
 
 	t += time_range.x
+	
+	time_ = t
 	
 	cursor.position.x = t * grid_size
 
@@ -323,7 +323,7 @@ func seek(time:float) -> void:
 		var item = queue_on_[i].get(t)
 		if item:
 			begin.emit(item, i)
-			
+
 	seeked.emit(t)
 
 func translation_begin_() -> void:
@@ -455,6 +455,7 @@ func remove_item(node:Control) -> void:
 	commit_action_()
 
 func invalidate_grid_size_(old_grid_size) -> void:
+	print(old_grid_size)
 	grid_.grid_size = grid_size
 
 	for row in %Rows.get_children() + [%TimeRange.get_parent(), %Start.get_parent()]:

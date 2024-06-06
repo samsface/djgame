@@ -24,3 +24,6 @@ func op(db, node, length) -> void:
 
 func end(db, node) -> void:
 	pass
+
+func get_time() -> int:
+	return position.x / piano_roll_.grid_size

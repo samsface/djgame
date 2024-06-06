@@ -17,15 +17,13 @@ extends PianoRollItem
 @export var silent:bool : 
 	set(v):
 		silent = v
-		
-const lol = true
 
 func _ready():
 	invalidate_value_()
 	item_rect_changed.connect(invalidate_value_)
 
 func get_lookahead() -> int:
-	return 3
+	return 10
 
 func invalidate_value_() -> void:
 	self_modulate = Color.DARK_SLATE_GRAY
@@ -70,6 +68,5 @@ func invalidate_value_() -> void:
 
 func op(db, node, length_) -> void:
 	if node.has_method("bang"):
-		var length = (1000.0/PureData.metro) * (get_lookahead() / 16.0)
-		print(node)
-		node.bang(length, value, auto, dilema_group, silent)
+		var length = (get_lookahead() / 16.0) * (PureData.metro) * (1.0/60.0)
+		node.bang(get_lookahead(), value, auto, dilema_group, silent)

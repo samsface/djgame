@@ -56,3 +56,5 @@ func emit_float(signal_name:StringName, v:float) -> void:
 
 func _exit_tree() -> void:
 	patch_file_handle_.close()
+
+var clock := 0

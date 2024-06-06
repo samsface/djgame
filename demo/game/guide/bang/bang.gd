@@ -40,9 +40,11 @@ func _ready() -> void:
 	remote_transform.rotation.z = 0
 	path_follow.progress_ratio = 0.0
 
-	fall_time_ = length #- (1.0 / 60.0)
+	fall_time_ = (PureData.metro) * length * 0.001
 
 	fall_tween_ = create_tween()
+	#fall_tween_.pause()
+	
 	fall_tween_.set_parallel()
 	
 	arrow__.albedo = color_()
@@ -135,7 +137,7 @@ func judge_accuracy_() -> void:
 	if not auto:
 		var off := get_off_()
 
-		prints("off", off)
+		#prints("off", off)
 
 		if abs(off) < proximity_:
 			var off_time := get_off_time_()

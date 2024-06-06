@@ -16,7 +16,7 @@ func fill() -> bool:
 
 func _seeked(t:int) -> void:
 	if target_beat_player_:
-		target_beat_player_.seek(t - position.x / piano_roll_.grid_size)
+		target_beat_player_.seek(t - get_time())
 
 func invalidate_target_beat_player_() -> void:
 	if target_beat_player_:
