@@ -1,4 +1,5 @@
 extends PianoRollItem
+class_name PianoRollItemBang
 
 @export var value:float = 1.0 : 
 	set(v):

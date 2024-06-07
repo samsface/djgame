@@ -11,6 +11,7 @@ signal row_mouse_exited
 signal changed
 signal seeked
 
+
 @export var scroll_horizontal_ratio:float :
 	set(v):
 		scroll_container_.scroll_horizontal = v * scroll_container_.get_child(0).size.x
@@ -29,7 +30,8 @@ enum Tool {
 	resize_west,
 	resize_east,
 	zooming,
-	selecting
+	selecting,
+	paint
 }
 
 var selection_box_
@@ -49,11 +51,8 @@ var start := 0 :
 
 var grid_size := 4 :
 	set(value):
-
-		var old_grid_size = grid_size
 		grid_size = value
-
-		invalidate_grid_size_(old_grid_size)
+		invalidate_grid_size_()
 		
 var grid_size_old_ := grid_size
 var zoom_grab_time_ := 0
@@ -168,8 +167,7 @@ func _table_item_button_down(item):
 		
 	last_item_down_ = item
 
-		
-	selection_changed.emit([item])
+	selection_changed.emit(selection_)
 
 	print("new selection", selection_)
 
@@ -194,7 +192,7 @@ func _physics_process(delta:float) -> void:
 	if not is_visible_in_tree():
 		return
 	
-	if tool_ != Tool.none:
+	if tool_ != Tool.none and tool_ != Tool.paint:
 		if scroll_container_.auto_scroll(delta):
 			_input(InputEventMouseMotion.new())
 	
@@ -220,13 +218,13 @@ func _input(event):
 		move_process_()
 	elif tool_ == Tool.resize_east:
 		for item in selection_:
-			item.size.x = quantinize((row_position + quantinize_snap) * grid_size, quantinize_snap) - item.position.x
+			item.length = to_world(quantinize((row_position + quantinize_snap) * grid_size, quantinize_snap) - item.position.x)
 		%Overlay.queue_redraw()
 	elif tool_ == Tool.resize_west:
 		for item in selection_:
 			var c = item.position.x
-			item.position.x = quantinize(row_position * grid_size, quantinize_snap)
-			item.size.x += c - item.position.x
+			item.time = to_world(quantinize(row_position * grid_size, quantinize_snap))
+			item.length += to_world(c - item.position.x)
 		%Overlay.queue_redraw()
 	elif tool_ == Tool.zooming:
 		var zoom = %Headings.get_local_mouse_position().y
@@ -329,8 +327,8 @@ func seek(time:float) -> void:
 func translation_begin_() -> void:
 	for item in selection_:
 		undo.add_undo_method(item.reparent.bind(item.get_parent()))
-		undo.add_undo_property(item, "position", item.position)
-		undo.add_undo_property(item, "size", item.size)
+		undo.add_undo_property(item, "time", item.time)
+		undo.add_undo_property(item, "length", item.length)
 
 func translation_end_() -> void:
 	if selection_[0] == %TimeRange:
@@ -342,8 +340,8 @@ func translation_end_() -> void:
 	
 	for item in selection_:
 		undo.add_do_method(item.reparent.bind(item.get_parent()))
-		undo.add_do_property(item, "position", item.position)
-		undo.add_do_property(item, "size", item.size)
+		undo.add_do_property(item, "time", item.time)
+		undo.add_do_property(item, "length", item.length)
 	
 	commit_action_()
 
@@ -373,7 +371,7 @@ func move_process_() -> void:
 	var move = handle_item_position - handle_item.position
 	
 	for item in selection_:
-		item.position.x += move.x
+		item.time += to_world(move.x)
 	
 	if selection_.size() == 1:
 		if handle_item != %TimeRange and handle_item != %Start:
@@ -418,7 +416,7 @@ func where_(control:Control) -> Vector2i:
 func set_row_target_node(row_idx:int, target_node:Node) -> void:
 	%Rows.get_child(row_idx).target_node = target_node
 
-func add_item(node:Button, row_idx:int, quantinize := true) -> void:
+func add_item(node:Button, row_idx:int) -> void:
 	if node == null:
 		return
 
@@ -430,9 +428,9 @@ func add_item(node:Button, row_idx:int, quantinize := true) -> void:
 	node.custom_minimum_size = Vector2i(grid_size, 36)
 	node.size.y *= 0
 	node.piano_roll_ = self
-	if quantinize:
-		node.position.x = quantinize(node.position.x, quantinize_snap)
-		node.size.x = quantinize_snap * grid_size
+	node.time = node.time
+	node.length = node.length
+
 	connect_row_item_(node)
 
 	undo.create_action("add")
@@ -454,19 +452,16 @@ func remove_item(node:Control) -> void:
 
 	commit_action_()
 
-func invalidate_grid_size_(old_grid_size) -> void:
-	print(old_grid_size)
+func invalidate_grid_size_() -> void:
 	grid_.grid_size = grid_size
 
 	for row in %Rows.get_children() + [%TimeRange.get_parent(), %Start.get_parent()]:
 		for item in row.get_children():
-			var t = item.position.x / old_grid_size
-			var l = item.size.x / old_grid_size
-			item.position.x = t * grid_size 
+			item.time = item.time
 			
-			if item != %Start:
-				item.size.x = l * grid_size
-
+			if not item.disable_resize:
+				item.length = item.length
+		
 	if is_visible_in_tree():
 		scroll_horizontal = -(zoom_grab_time_ * grid_size) + %ScrollContainer.get_local_mouse_position().x
 
@@ -577,14 +572,21 @@ func _scroll_container_gui_input(event: InputEvent) -> void:
 		%Overlay.queue_redraw()
 	elif event is InputEventMouseButton:
 		if event.pressed:
-			tool_ = Tool.selecting
-			selection_box_ = Rect2(event.position, Vector2.ZERO)
-			selection_ = []
-			%Overlay.queue_redraw()
+			if event.button_index == MOUSE_BUTTON_RIGHT:
+				if %Rows.get_child_count() > 0:
+					var table_idx := get_local_mouse_table_position_row()
+					row_pressed.emit(get_local_mouse_table_position_row(), %Rows.get_child(table_idx).get_local_mouse_position())
+			else:
+				tool_ = Tool.selecting
+				selection_box_ = Rect2(event.position, Vector2.ZERO)
+				selection_ = []
+				%Overlay.queue_redraw()
 		else:
-			selection_box_ = null
-			tool_ = Tool.none
-			%Overlay.queue_redraw()
+			if selection_box_:
+				selection_changed.emit(selection_)
+				selection_box_ = null
+				tool_ = Tool.none
+				%Overlay.queue_redraw()
 
 func get_items_in_rect_(rect:Rect2) -> Array[Control]:
 	var items:Array[Control]

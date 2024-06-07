@@ -10,7 +10,7 @@ var data_ := {}
 
 @onready var track_names_ = $MarginContainer/TrackNames
 
-func add_track(node_path:NodePath = "") -> Node:
+func add_track(node_path:NodePath = "") -> Control:
 	#for track_name in track_names_.get_children():
 	#	if track_name.get_node("H/Value").text == str(node_path):
 	#		return

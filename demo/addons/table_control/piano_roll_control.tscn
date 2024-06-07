@@ -2,23 +2,16 @@
 
 [ext_resource type="Theme" uid="uid://dbvpa0vlu34gu" path="res://ui/beat_player.tres" id="1_ip7sm"]
 [ext_resource type="Script" path="res://addons/table_control/piano_roll_control.gd" id="2_ehl6k"]
-[ext_resource type="Script" path="res://addons/table_control/selection_box.gd" id="3_q74ke"]
 [ext_resource type="Script" path="res://addons/table_control/grid.gd" id="4_cptms"]
 [ext_resource type="Script" path="res://addons/table_control/negative_scroll_container.gd" id="4_kbd8x"]
+[ext_resource type="Script" path="res://tools/piano_roll_item.gd" id="5_viuck"]
 [ext_resource type="Script" path="res://addons/table_control/overlay.gd" id="6_s47bi"]
 
-[node name="MarginContainer" type="PanelContainer"]
+[node name="PianoRoll" type="PanelContainer"]
 offset_right = 1060.0
 offset_bottom = 621.0
 theme = ExtResource("1_ip7sm")
 script = ExtResource("2_ehl6k")
-
-[node name="Node2D" type="Node2D" parent="."]
-visible = false
-script = ExtResource("3_q74ke")
-
-[node name="Selection" type="Polygon2D" parent="Node2D"]
-color = Color(0.521569, 1, 1, 0.333333)
 
 [node name="VBoxContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -61,7 +54,7 @@ custom_minimum_size = Vector2(500, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TimeRange" type="Button" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/TimeRangeRow"]
+[node name="TimeRange" type="Button" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/TimeRangeRow" node_paths=PackedStringArray("piano_roll_")]
 unique_name_in_owner = true
 self_modulate = Color(1, 0.533333, 1, 1)
 custom_minimum_size = Vector2(32, 32)
@@ -69,6 +62,8 @@ layout_mode = 0
 offset_right = 103.0
 offset_bottom = 18.0
 theme = ExtResource("1_ip7sm")
+script = ExtResource("5_viuck")
+piano_roll_ = NodePath("../../../../../..")
 
 [node name="StartRow" type="Control" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2"]
 auto_translate_mode = 1
@@ -77,7 +72,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Start" type="Button" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/StartRow"]
+[node name="Start" type="Button" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/StartRow" node_paths=PackedStringArray("piano_roll_")]
 unique_name_in_owner = true
 auto_translate_mode = 1
 self_modulate = Color(0.0905386, 0.85926, 0.722289, 1)
@@ -86,6 +81,9 @@ layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
 theme = ExtResource("1_ip7sm")
+script = ExtResource("5_viuck")
+piano_roll_ = NodePath("../../../../../..")
+disable_resize = true
 
 [node name="Rows" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2"]
 unique_name_in_owner = true

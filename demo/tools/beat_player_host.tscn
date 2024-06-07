@@ -59,7 +59,7 @@ layout_mode = 2
 size_flags_vertical = 3
 split_offset = 1300
 
-[node name="TabContainer" type="TabContainer" parent="V/HSplitContainer"]
+[node name="Tabs" type="TabContainer" parent="V/HSplitContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
@@ -69,6 +69,7 @@ drag_to_rearrange_enabled = true
 [node name="Inspector" parent="V/HSplitContainer" instance=ExtResource("3_em7m1")]
 unique_name_in_owner = true
 layout_mode = 2
+visible_properties = Array[StringName]([&"value", &"auto", &"scene", &"method", &"silent", &"title", &"type", &"to_value", &"property", &"condition_ex", &"length", &"time"])
 
 [connection signal="pressed" from="V/Menu/Save" to="." method="_save_pressed"]
 [connection signal="pressed" from="V/Menu/Play" to="." method="_play_pressed"]
@@ -76,4 +77,4 @@ layout_mode = 2
 [connection signal="pressed" from="V/Menu/Stop" to="." method="_stop_pressed"]
 [connection signal="pressed" from="V/Menu/New" to="." method="_new_pressed"]
 [connection signal="pressed" from="V/Menu/Duplicate" to="." method="_duplicate_pressed"]
-[connection signal="tab_clicked" from="V/HSplitContainer/TabContainer" to="." method="_tab_clicked"]
+[connection signal="tab_clicked" from="V/HSplitContainer/Tabs" to="." method="_tab_clicked"]

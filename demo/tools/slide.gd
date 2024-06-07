@@ -1,4 +1,5 @@
 extends PianoRollItem
+class_name PianoRollItemSlide
 
 @export var from_value:float : 
 	set(v):

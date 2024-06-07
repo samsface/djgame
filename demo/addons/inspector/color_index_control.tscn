@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://c06kubk17mg06"]
+
+[ext_resource type="Script" path="res://addons/inspector/color_index_control.gd" id="1_4fnd0"]
+[ext_resource type="Script" path="res://widgets/color_index_button.gd" id="2_g84nr"]
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(200, 32)
+offset_left = 71.0
+offset_right = 725.0
+offset_bottom = 32.0
+text_overrun_behavior = 3
+script = ExtResource("1_4fnd0")
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Time"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ShiftLeftButton" type="Button" parent="HBoxContainer4/HBoxContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+text = "<<"
+
+[node name="Value" type="GridContainer" parent="HBoxContainer4/HBoxContainer"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 8
+script = ExtResource("2_g84nr")
+
+[node name="ShiftRightButton" type="Button" parent="HBoxContainer4/HBoxContainer"]
+layout_mode = 2
+text = ">>"
+
+[connection signal="pressed" from="HBoxContainer4/HBoxContainer/ShiftLeftButton" to="HBoxContainer4/HBoxContainer/Value" method="_shift_left_button_pressed"]
+[connection signal="changed" from="HBoxContainer4/HBoxContainer/Value" to="." method="_value_changed"]
+[connection signal="pressed" from="HBoxContainer4/HBoxContainer/ShiftRightButton" to="HBoxContainer4/HBoxContainer/Value" method="_shift_right_button_pressed"]

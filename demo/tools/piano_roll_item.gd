@@ -5,6 +5,20 @@ signal changed
 
 @export var piano_roll_:Node
 
+@export var disable_resize:bool
+
+@export var time:int :
+	set(v):
+		time = v
+		if piano_roll_:
+			position.x = piano_roll_.to_local(time)
+
+@export var length:int :
+	set(v):
+		length = v
+		if piano_roll_:
+			size.x = piano_roll_.to_local(length)
+
 var active := false
 
 func get_lookahead() -> int:

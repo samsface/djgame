@@ -29,7 +29,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-min_value = -1e+17
+min_value = -1e+13
 max_value = 1e+18
 
 [connection signal="value_changed" from="HBoxContainer4/Value" to="." method="_value_changed"]

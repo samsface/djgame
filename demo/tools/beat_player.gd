@@ -5,6 +5,7 @@ signal finished
 var root_node:Node
 var undo_ = UndoRedo.new()
 var inspector
+var painting_scene_:PackedScene = preload("res://tools/bang.tscn")
 
 var hover_tween_ : Tween
 
@@ -34,7 +35,7 @@ func _ready():
 
 func _track_focused(track) -> void:
 	inspector.virtual_properties = null
-	inspector.node = track
+	inspector.selection = track
 
 func _track_name_changed(track:Node) -> void:
 	var node = root_node.get_node_or_null(track.value)
@@ -50,8 +51,6 @@ func _input(event:InputEvent) -> void:
 		undo_.undo()
 
 func _piano_roll_begin(item:Control, idx:int) -> void:
-	%Virtual2.node = item
-
 	var node_path = %TrackNames.get_track_node_path(idx)
 	var node = root_node.get_node(node_path)
 	if not node:
@@ -64,13 +63,9 @@ func _piano_roll_begin(item:Control, idx:int) -> void:
 		if not e.execute([], db):
 			return
 
-	var length = %Virtual2.length / (1000.0/PureData.metro)
-
-	item.op(db, node, length)
+	item.op(db, node, 0)
 
 func _piano_roll_end(item:Control, idx:int) -> void:
-	%Virtual2.node = item
-
 	var node_path = %TrackNames.get_track_node_path(idx)
 	var node = root_node.get_node(node_path)
 	if not node:
@@ -88,23 +83,24 @@ func _piano_roll_end(item:Control, idx:int) -> void:
 	item.end(db, node)
 
 func _piano_roll_pressed(row_idx:int, pos:Vector2i) -> void:
-	var note = preload("bang.tscn").instantiate()
-	note.position.x = pos.x
+	var note = painting_scene_.instantiate()
+	note.time = floor(piano_roll_.to_world(pos.x) / piano_roll_.quantinize_snap) *  piano_roll_.quantinize_snap
+	note.length = piano_roll_.quantinize_snap
 	%PianoRoll.add_item(note, row_idx)
 
 func _piano_roll_selection_changed(selection:Array) -> void:
 	if not selection:
-		inspector.node = null
+		inspector.selection = null
 		return
 
-	inspector.virtual_properties = %Virtual
-	inspector.node = selection[0]
-	
+	inspector.selection = selection
+
 	if Input.is_action_pressed("ctrl"):
 		for node in selection:
 			_piano_roll_begin(node, node.get_parent().get_index())
 
 func _gui_input(event):
+	return
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			$ScrollContainer.scroll_vertical -= 20.0
@@ -114,119 +110,11 @@ func _gui_input(event):
 func seek(time:float) -> void:
 	%PianoRoll.seek(time)
 
-func add_track(node_path) -> void:
-	%TrackNames.add_track(node_path)
-
-func get_state() -> Dictionary:
-	inspector.virtual_properties = %Virtual
-	
-	var state := {
-		time_range = %PianoRoll.time_range,
-		start = %PianoRoll.start,
-		tracks = [],
-		scroll_horizontal = %PianoRoll.scroll_horizontal,
-		grid_size = %PianoRoll.grid_size
-	}
-
-	var track_names = %TrackNames.get_all_track_names()
-	var piano_roll = %PianoRoll.get_queue()
-
-	for i in range(piano_roll.size()):
-		var track := {
-			name = track_names[i][0],
-			condition_ex = track_names[i][1],
-			notes = []
-		}
-
-		for note in piano_roll[i]:
-			var d = inspector.to_dict(note)
-			d.erase("active")
-			track.notes.push_back(d)
-
-		state.tracks.push_back(track)
-
-	return state
-
-func reload(dict:Dictionary) -> void:
-	%PianoRoll.time_range = dict.time_range
-	%PianoRoll.start = dict.get("start", 0)
-	%PianoRoll.grid_size = dict.get("grid_size", 4)
-	%PianoRoll.scroll_horizontal = dict.get("scroll_horizontal", 0)
-	
-	for i in dict.tracks.size():
-		add_track(dict.tracks[i].name)
-		%TrackNames.set_track_condition(i, dict.tracks[i].get("condition_ex", ""))
-		
-		
-		for note in dict.tracks[i].notes:
-			var n:Control
-			if int(note.type) == 0:
-				n = preload("bang.tscn").instantiate()
-			elif int(note.type) == 1:
-				n = preload("slide.tscn").instantiate()
-			elif int(note.type) == 2:
-				n = preload("method.tscn").instantiate()
-			elif int(note.type) == 3:
-				n = preload("dialog.tscn").instantiate()
-			elif int(note.type) == 4:
-				n = preload("tween.tscn").instantiate()
-			elif int(note.type) == 5:
-				n = preload("scene.tscn").instantiate()
-			
-			%Virtual.node = n
-			var grid_size = %PianoRoll.grid_size
-			Dictializer.from_dict(note, %Virtual)
-			Dictializer.from_dict(note, n)
-	
-			if n.position.x < 0:
-				pass
-			
-			%PianoRoll.add_item(n, i, false)
-
-	undo_.clear_history()
-
-func change_type_(node, new_type:int) -> void:
-	if not node:
-		return
-
-	var current_type = node.get_meta("__type__", 0)
-	
-	if new_type == current_type:
-		return
-
-	if not node.get_parent():
-		node.set_meta("__type__", new_type)
-		return
-		
-	var row_idx = node.get_parent().get_index()
-		
-	%PianoRoll.remove_item(node)
-	
-	var n:Control
-	if int(new_type) == 0:
-		n = preload("res://tools/bang.tscn").instantiate()
-	elif int(new_type) == 1:
-		n = preload("res://tools/slide.tscn").instantiate()
-	elif int(new_type) == 2:
-		n = preload("res://tools/method.tscn").instantiate()
-	elif int(new_type) == 3:
-		n = preload("res://tools/dialog.tscn").instantiate()
-	elif int(new_type) == 4:
-		n = preload("res://tools/tween.tscn").instantiate()
-	elif int(new_type) == 5:
-		n = preload("res://tools/scene.tscn").instantiate()
-	
-	%PianoRoll.add_item(n, row_idx)
-
-	inspector.node = n
-	inspector.copy_all_possible_property_values(node, n)
-	n.size = node.size
-	n.position = node.position
-
-	n.set_meta("__type__", new_type)
+func add_track(node_path) -> Control:
+	return %TrackNames.add_track(node_path)
 
 func _next_pressed():
-	reload({time_range = Vector2i(0, 16), tracks = [] })
+	pass
 
 func _split_container_dragged(offset):
 	%GhostHSplitContainer.split_offset = offset
@@ -239,3 +127,46 @@ func _scroll_vertical(value):
 
 func _quant_selected(index):
 	%PianoRoll.set_quantinize_snap(index)
+
+func _paint_bang_pressed() -> void:
+	%PianoRoll.tool_ = %PianoRoll.Tool.paint
+
+func _paint_id_pressed(id: int) -> void:
+	match id:
+		0: 
+			painting_scene_ = preload("res://tools/bang.tscn")
+		1: 
+			painting_scene_ = preload("res://tools/slide.tscn")
+		2: 
+			painting_scene_ = preload("res://tools/method.tscn")
+		3: 
+			painting_scene_ = preload("res://tools/tween.tscn")
+		4: 
+			painting_scene_ = preload("res://tools/scene.tscn")
+		5: 
+			painting_scene_ = preload("res://tools/dialog.tscn")
+
+
+func to_dict() -> Dictionary:
+	var res := {
+		tracks = []
+	}
+	
+	for i in %PianoRoll.get_node("%Rows").get_child_count():
+		res.tracks.push_back({ frames = [] })
+		res.tracks.back().merge(inspector.scene_to_dict(%TrackNames.track_names_.get_child(i)))
+		
+		for item in %PianoRoll.get_node("%Rows").get_child(i).get_children():
+			res.tracks.back().frames.push_back(inspector.scene_to_dict(item))
+	
+	return res
+
+func from_dict(dict) -> void:
+	for track in dict.get("tracks", []):
+		var track_node = add_track(track.value)
+		for property in track:
+			track_node.set(property, track[property])
+
+		for frame in track.frames:
+			var frame_node = inspector.scene_from_dict(frame)
+			%PianoRoll.add_item(frame_node, track_node.get_index())

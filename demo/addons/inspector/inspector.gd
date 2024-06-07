@@ -2,16 +2,29 @@ extends Control
 
 var undo = UndoRedo.new()
 
-@export var node:Node :
+var selection_:InspectorMultiSelection
+
+var selection :
 	set(value):
-		if node != value:
-			node = value
-			invalidate_()
+		selection = value
+		selection_ = InspectorMultiSelection.new()
 		
+		if not selection:
+			pass
+		elif not value is Array:
+			selection_.selection = [selection]
+		else:
+			selection_.selection = value
+			
+		invalidate_()
+
 @export var virtual_properties:Node
 @export var custom_rules:Array[Callable]
+@export var hidden_properties:Array[StringName]
+@export var visible_properties:Array[StringName]
 
 var properties_to_poll_ := {}
+var textures_:Array[Texture]
 
 func invalidate_() -> void:
 	for control in %Controls.get_children():
@@ -23,17 +36,20 @@ func invalidate_() -> void:
 	if virtual_properties:
 		virtual_properties.node = null
 	
-	if not node:
+	if not selection:
 		return
 	
-	var properties := node.get_property_list()
+	var properties := selection_.get_property_list()
 	
-	if virtual_properties:
-		virtual_properties.node = node
-		properties = virtual_properties.get_property_list() + properties
-
 	for property in properties:
 		if property.usage & PROPERTY_USAGE_SCRIPT_VARIABLE == 0:
+			continue
+		
+		if not visible_properties.is_empty():
+			if not visible_properties.has(property.name):
+				continue
+			
+		if property.name in hidden_properties:
 			continue
 
 		var control
@@ -45,6 +61,10 @@ func invalidate_() -> void:
 
 		if not control:
 			match property.type:
+				TYPE_OBJECT:
+					if not property.class_name == "PackedScene":
+						control = add_resource_control_(property)
+						control.get_node("%Value").custom_rules = custom_rules
 				TYPE_INT:
 					if property.hint & PROPERTY_HINT_ENUM:
 						control = add_enum_control_(property)
@@ -52,6 +72,8 @@ func invalidate_() -> void:
 						control = add_int_control_(property)
 				TYPE_FLOAT:
 					control = add_float_control_(property)
+				TYPE_VECTOR2:
+					control = add_vector2_control_(property)
 				TYPE_STRING:
 					if property.hint & PROPERTY_HINT_MULTILINE_TEXT:
 						control = add_multiline_string_control_(property)
@@ -67,6 +89,7 @@ func invalidate_() -> void:
 		if not control:
 			continue
 
+		control.set_property(property)
 		control.set_label(property.name)
 		control.set_value(get_node_value_(property.name))
 		properties_to_poll_[property.name] = [get_node_value_(property.name), control]
@@ -75,6 +98,18 @@ func invalidate_() -> void:
 
 func _physics_process(delta):
 	poll_node_properties_()
+
+func register_textures(textures:Array[Texture]) -> void:
+	textures_ = textures
+
+func add_texture_picker_(property:Dictionary) -> Control:
+	var control = load("res://addons/inspector/texture_picker.tscn").instantiate()
+	control.items = textures_
+	return control
+
+func add_resource_control_(property:Dictionary) -> Control:
+	var control = load("res://addons/inspector/resource_control.tscn").instantiate()
+	return control
 
 func add_enum_control_(property:Dictionary) -> Control:
 	var control = preload("enum_control.tscn").instantiate()
@@ -98,8 +133,12 @@ func add_int_control_(property:Dictionary) -> Control:
 	var control = preload("int_control.tscn").instantiate()
 	return control
 
+func add_vector2_control_(property:Dictionary) -> Control:
+	var control = preload("vector2_control.tscn").instantiate()
+	return control
+
 func add_multiline_string_control_(property:Dictionary) -> Control:
-	var control = preload("res://addons/inspector/multiline_string_control.tscn").instantiate()
+	var control = preload("multiline_string_control.tscn").instantiate()
 	return control
 
 func add_string_control_(property:Dictionary) -> Control:
@@ -110,8 +149,11 @@ func add_bool_control_(property:Dictionary) -> Control:
 	var control = preload("bool_control.tscn").instantiate()
 	return control
 
+class Box:
+	var x := 1
+
 func _control_value_changed(new_value, property_name:String) -> void:
-	if not node:
+	if not selection:
 		return
 
 	if properties_to_poll_[property_name][0] is NodePath:
@@ -123,37 +165,43 @@ func _control_value_changed(new_value, property_name:String) -> void:
 	undo.create_action("update " + property_name)
 
 	var old_value = properties_to_poll_[property_name][0]
+	
+	var b := Box.new()
 
-	undo.add_do_method(set_node_value_.bind(property_name, new_value, true))
-	undo.add_undo_method(set_node_value_.bind(property_name, old_value))
+	undo.add_do_method(set_node_value_.bind(selection_, property_name, new_value, b))
+	undo.add_undo_method(set_node_value_.bind(selection_, property_name, old_value))
 
 	undo.commit_action()
 
 func set_poll_value(property_name, new_value) -> void:
 	properties_to_poll_[property_name][0] = new_value
 
-func set_node_value_(property_name:String, value, set_poll := false) -> void:
-	if set_poll:
+func set_node_value_(object:InspectorMultiSelection, property_name:String, value, set_poll = null) -> void:
+	var is_active_object = object == selection_
+	
+	if is_active_object and set_poll and set_poll.x > 0:
+		set_poll.x = 0 
 		properties_to_poll_[property_name][0] = value
 	
-	if property_name in node:
-		node.set(property_name, value)
+	if object.has_property(property_name):
+		object.set(property_name, value)
+		if is_active_object and value is Object:
+			properties_to_poll_[property_name][1].set_value(value)
 	elif virtual_properties and property_name in virtual_properties:
 		virtual_properties.set(property_name, value)
 	else:
-		push_error("UNKNOWN PROPERTY", property_name, node.name)
+		push_error("UNKNOWN PROPERTY", property_name, object.name)
 
 func get_node_value_(property_name:String):
-	if property_name in node:
-		return node.get(property_name)
+	if selection_.has_property(property_name):
+		return selection_.get(property_name)
 	elif virtual_properties and property_name in virtual_properties:
 		return virtual_properties.get(property_name)
 	else:
-		push_error("UNKNOWN PROPERTY", property_name, node.name)
+		push_error("UNKNOWN PROPERTY", property_name)
 
 func poll_node_properties_() -> void:
-	return
-	if not node:
+	if not selection:
 		return
 	
 	for property_name in properties_to_poll_:
@@ -171,16 +219,32 @@ func copy_all_possible_property_values(from:Node, to:Node) -> void:
 		if property.name in from:
 			to.set(property.name, from.get(property.name))
 
-func to_dict(node_to_dict:Node) -> Dictionary:
-	var current_node = node
+func add_custom_control(control:Control) -> void:
+	%Controls.add_child(control)
 
-	var res := {}
+func scene_to_dict(node:Node):
+	var res := {} 
 
-	node = node_to_dict
-	
-	for property_name in properties_to_poll_:
-		res[property_name] = var_to_str(get_node_value_(property_name))
+	for property in node.get_property_list():
+		if not property.name in visible_properties:
+			continue
 
-	node = current_node
-	
+		if property.usage & PROPERTY_USAGE_SCRIPT_VARIABLE == 0:
+			continue
+		
+		res[property.name] = node.get(property.name)
+
+	res["scene_file_path"] = node.scene_file_path
+
 	return res
+	
+func scene_from_dict(dict:Dictionary) -> Object:
+	if "scene_file_path" in dict:
+		var scene = load(dict.scene_file_path).instantiate()
+		
+		for key in dict:
+			scene.set(key, dict[key])
+
+		return scene
+	
+	return null
