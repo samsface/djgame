@@ -14,13 +14,15 @@ signal seeked
 
 @export var scroll_horizontal_ratio:float :
 	set(v):
-		scroll_container_.scroll_horizontal = v * scroll_container_.get_child(0).size.x
+		if scroll_container_:
+			scroll_container_.scroll_horizontal = v * scroll_container_.get_child(0).size.x
 	get:
 		return scroll_container_.scroll_horizontal * scroll_container_.get_child(0).size.x 
 
 @export var scroll_horizontal:float :
 	set(v):
-		scroll_container_.scroll_horizontal = v 
+		if scroll_container_:
+			scroll_container_.scroll_horizontal = v 
 	get:
 		return scroll_container_.scroll_horizontal
 

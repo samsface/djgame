@@ -4,7 +4,7 @@ signal finished
 
 var root_node:Node
 var undo_ = UndoRedo.new()
-var inspector
+@export var inspector:Node
 var painting_scene_:PackedScene = preload("res://tools/bang.tscn")
 
 var hover_tween_ : Tween
