@@ -12,7 +12,7 @@ offset_bottom = 932.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("2_gk3x2")
-save_path = "res://junk/sam.lol"
+save_path = "res://junk/sam2.lol"
 root_node = NodePath(".")
 
 [node name="DB" type="Node" parent="."]
@@ -59,14 +59,28 @@ layout_mode = 2
 size_flags_vertical = 3
 split_offset = 1300
 
-[node name="Tabs" type="TabContainer" parent="V/HSplitContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="V/HSplitContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Tabs" type="TabContainer" parent="V/HSplitContainer/MarginContainer2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 drag_to_rearrange_enabled = true
 
-[node name="Inspector" parent="V/HSplitContainer" instance=ExtResource("3_em7m1")]
+[node name="MarginContainer" type="MarginContainer" parent="V/HSplitContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Inspector" parent="V/HSplitContainer/MarginContainer" instance=ExtResource("3_em7m1")]
 unique_name_in_owner = true
 layout_mode = 2
 visible_properties = Array[StringName]([&"value", &"auto", &"scene", &"method", &"silent", &"title", &"type", &"to_value", &"property", &"condition_ex", &"length", &"time"])
@@ -77,4 +91,4 @@ visible_properties = Array[StringName]([&"value", &"auto", &"scene", &"method", 
 [connection signal="pressed" from="V/Menu/Stop" to="." method="_stop_pressed"]
 [connection signal="pressed" from="V/Menu/New" to="." method="_new_pressed"]
 [connection signal="pressed" from="V/Menu/Duplicate" to="." method="_duplicate_pressed"]
-[connection signal="tab_clicked" from="V/HSplitContainer/Tabs" to="." method="_tab_clicked"]
+[connection signal="tab_clicked" from="V/HSplitContainer/MarginContainer2/Tabs" to="." method="_tab_clicked"]

@@ -23,7 +23,8 @@ func _ready() -> void:
 			
 	$PointsService.zero.connect(_died)
 	
-	#audio_.set_metro(150)
+
+	audio_.set_metro(130)
 
 func _inputx(event) -> void:
 	if event.is_action("reset"):
@@ -61,7 +62,7 @@ func play() -> void:
 func _play():
 	$phone.free_click = false
 	$PointsService.play()
-	Bus.camera_service.cursor.reset()
+	Bus.camera_service.cursor.disabled = false
 	audio_.play()
 
 func _died() -> void:

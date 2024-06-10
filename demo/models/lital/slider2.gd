@@ -35,31 +35,30 @@ var mouse_over_ := false
 
 func _ready() -> void:
 	path_follow = $Path/PathFollow
-	set_process_input(false)
+	set_physics_process(false)
 	value = randf()
 
-func _input(event: InputEvent) -> void:
+func _physics_process(delta: float) -> void:
 	if dragging_:
-		if event.is_action_released("click"):
+		if Input.is_action_just_released("click"):
 			dragging_ = false
 			$Nob/Model._grab_end()
 			Bus.camera_service.cursor.pop(self)
+			set_physics_process(false)
 
 	if mouse_over_:
-		if event.is_action_pressed("click"):
+		if Input.is_action_just_pressed("click"):
 			dragging_ = true
 			$Nob/Model._grab_begin()
 			Bus.camera_service.cursor.push(self, Cursor.Action.grab)
 			dragging_start_ = get_window().get_mouse_position()
-
-func _physics_process(delta: float) -> void:
+	
 	if dragging_:
-		var diff = Bus.camera_service.cursor.relative.y * 0.005
+		var diff = Bus.input_service.relative.y * 0.005
+		
 		if diff == 0.0:
 			return
 
-		Bus.camera_service.cursor.relative = Vector2.ZERO
-		
 		var new_value = value - diff
 
 		value = clamp(new_value, 0.00, 1.0)
@@ -70,17 +69,19 @@ func _physics_process(delta: float) -> void:
 			$Nob/Sparks.spark()
 
 func _mouse_entered() -> void:
-	print(get_path())
+	print_debug(get_path())
 	
 	mouse_over_ = true
-	set_process_input(true)
+	set_physics_process(true)
 	
 	$Nob/Model.hover_begin()
 
 func _mouse_exited() -> void:
+	print_debug(get_path())
+	
 	mouse_over_ = false
 	if not dragging_:
-		set_process_input(false)
+		set_physics_process(false)
 		
 		$Nob/Model.hover_end()
 

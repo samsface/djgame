@@ -64,7 +64,7 @@ func get_lookahead() -> int:
 	if not target_beat_player_:
 		return 0
 
-	var look_ahead = abs(target_beat_player_.piano_roll_.time_range.x - target_beat_player_.piano_roll_.start)
+	var look_ahead = target_beat_player_.piano_roll_.get_look_ahead()
 	return look_ahead
 
 func get_target_beat_player_():

@@ -38,7 +38,12 @@ func _track_focused(track) -> void:
 	inspector.selection = track
 
 func _track_name_changed(track:Node) -> void:
-	var node = root_node.get_node_or_null(track.value)
+	var node
+	if track.value == NodePath("HOST"):
+		node = find_parent("BeatPlayerHost")
+	else:
+		node = root_node.get_node_or_null(track.value)
+
 	%PianoRoll.set_row_target_node(track.get_index(), node)
 	
 func _input(event:InputEvent) -> void:
@@ -51,11 +56,6 @@ func _input(event:InputEvent) -> void:
 		undo_.undo()
 
 func _piano_roll_begin(item:Control, idx:int) -> void:
-	var node_path = %TrackNames.get_track_node_path(idx)
-	var node = root_node.get_node(node_path)
-	if not node:
-		return
-		
 	var c:String = %TrackNames.get_condition(idx)
 	if not c.is_empty():
 		var e = Expression.new()
@@ -63,7 +63,7 @@ func _piano_roll_begin(item:Control, idx:int) -> void:
 		if not e.execute([], db):
 			return
 
-	item.op(db, node, 0)
+	item.op(db, null, 0)
 
 func _piano_roll_end(item:Control, idx:int) -> void:
 	var node_path = %TrackNames.get_track_node_path(idx)
@@ -77,8 +77,6 @@ func _piano_roll_end(item:Control, idx:int) -> void:
 		e.parse(c)
 		if not e.execute([], db):
 			return
-
-	var length = %Virtual2.length / (1000.0/PureData.metro)
 
 	item.end(db, node)
 
@@ -149,6 +147,8 @@ func _paint_id_pressed(id: int) -> void:
 
 func to_dict() -> Dictionary:
 	var res := {
+		"name" = name,
+		time_range = %PianoRoll.time_range,
 		tracks = []
 	}
 	
@@ -162,6 +162,12 @@ func to_dict() -> Dictionary:
 	return res
 
 func from_dict(dict) -> void:
+	if dict.has("name"):
+		name = dict.name
+	
+	if dict.has("time_range"):
+		%PianoRoll.time_range = dict.time_range
+	
 	for track in dict.get("tracks", []):
 		var track_node = add_track(track.value)
 		for property in track:
@@ -170,3 +176,6 @@ func from_dict(dict) -> void:
 		for frame in track.frames:
 			var frame_node = inspector.scene_from_dict(frame)
 			%PianoRoll.add_item(frame_node, track_node.get_index())
+		
+	
+	

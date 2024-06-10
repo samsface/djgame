@@ -8,6 +8,7 @@ var nob_
 var for_value_ := 0.0
 var last_off_ := 0.0
 var length := 0.0
+var time := 0
 var auto := false
 
 @onready var timer_ := $Timer
@@ -34,19 +35,18 @@ func _ready() -> void:
 	last_off_ = get_off_()
 
 	var path_follow = nob_.get_new_path_follow_and_remote_transform(for_value_)
+	tree_exited.connect(path_follow.queue_free)
+		
 	var remote_transform:RemoteTransform3D = path_follow.get_child(0)
 	#nob_.update_path_follow_position_for_value(for_value_)
 	remote_transform.remote_path = get_path()
 	remote_transform.rotation.z = 0
 	path_follow.progress_ratio = 0.0
 
-	fall_time_ = (PureData.metro) * length * 0.001
+	fall_time_ = length
 
 	fall_tween_ = create_tween()
-	#fall_tween_.pause()
-	
 	fall_tween_.set_parallel()
-	
 	arrow__.albedo = color_()
 
 	var g = emission_color_()
@@ -58,27 +58,55 @@ func _ready() -> void:
 	fall_tween_.finished.connect(_miss)
 
 	points_ = points_service.make_points()
+	tree_exited.connect(points_.queue_free)
 	points_.scale = Vector3.ONE * nob_.scale_guide
 	
-	tree_exited.connect(path_follow.queue_free)
-
-func _miss() -> void:
-	#await get_tree().create_timer(0.05).timeout
+	nob_.value_changed.connect(_nob_value_changed)
 	
-	if hit_:
+	nob_.buffer_change(time, for_value_)
+
+func _nob_value_changed(value:float) -> void:
+	if not active:
 		return
 
+	if value != for_value_:
+		return
+	
+	# too far away, ignore
+	if ((fall_time_) - fall_tween_.get_total_elapsed_time()) > 0.2:
+		return
+			
+	_hit()
+
+func _miss() -> void:
+	if hit_:
+		return
+	
+	if miss_:
+		return
+	
+
+	done.emit()
+	
 	miss_ = true
 	
 	visible = false
 
-	judge_accuracy_()
-	
 	nob_.value = for_value_
+	
+	await get_tree().physics_frame
+
+	judge_accuracy_()
 
 func _hit() -> void:
+	if hit_:
+		return
+	
 	if miss_:
 		return
+	
+	done.emit()
+	
 
 	var combo:float = min(points_service.combo, 10.0)
 	combo = combo / 10.0
@@ -137,8 +165,6 @@ func judge_accuracy_() -> void:
 	if not auto:
 		var off := get_off_()
 
-		#prints("off", off)
-
 		if abs(off) < proximity_:
 			var off_time := get_off_time_()
 			points_.hit(score_(off_time), "< " + str(int(off_time * 10)) + " ms")
@@ -175,8 +201,3 @@ func get_off_() -> float:
 func get_off_time_() -> float:
 	return fall_time_ - fall_tween_.get_total_elapsed_time()
 
-func _exit_tree() -> void:
-	points_.queue_free()
-	# just for when we reset during testing
-	#nob_.scale.y = 1.0
-	#nob_.electric = Color.TRANSPARENT

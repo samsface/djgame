@@ -13,17 +13,14 @@ offset_bottom = 621.0
 theme = ExtResource("1_ip7sm")
 script = ExtResource("2_ehl6k")
 
-[node name="VBoxContainer" type="MarginContainer" parent="."]
-layout_mode = 2
-
-[node name="ScrollContainer" type="Control" parent="VBoxContainer"]
+[node name="ScrollContainer" type="Control" parent="."]
 unique_name_in_owner = true
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("4_kbd8x")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -34,27 +31,27 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
 
-[node name="Grid" type="Control" parent="VBoxContainer/ScrollContainer/MarginContainer"]
+[node name="Grid" type="Control" parent="ScrollContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("4_cptms")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="ScrollContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Headings" type="Control" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2"]
+[node name="Headings" type="Control" parent="ScrollContainer/MarginContainer/VBoxContainer2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
-[node name="TimeRangeRow" type="Control" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2"]
+[node name="TimeRangeRow" type="Control" parent="ScrollContainer/MarginContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(500, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TimeRange" type="Button" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/TimeRangeRow" node_paths=PackedStringArray("piano_roll_")]
+[node name="TimeRange" type="Button" parent="ScrollContainer/MarginContainer/VBoxContainer2/TimeRangeRow" node_paths=PackedStringArray("piano_roll_")]
 unique_name_in_owner = true
 self_modulate = Color(1, 0.533333, 1, 1)
 custom_minimum_size = Vector2(32, 32)
@@ -63,16 +60,16 @@ offset_right = 103.0
 offset_bottom = 18.0
 theme = ExtResource("1_ip7sm")
 script = ExtResource("5_viuck")
-piano_roll_ = NodePath("../../../../../..")
+piano_roll_ = NodePath("../../../../..")
 
-[node name="StartRow" type="Control" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2"]
+[node name="StartRow" type="Control" parent="ScrollContainer/MarginContainer/VBoxContainer2"]
 auto_translate_mode = 1
 custom_minimum_size = Vector2(500, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Start" type="Button" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2/StartRow" node_paths=PackedStringArray("piano_roll_")]
+[node name="Start" type="Button" parent="ScrollContainer/MarginContainer/VBoxContainer2/StartRow" node_paths=PackedStringArray("piano_roll_")]
 unique_name_in_owner = true
 auto_translate_mode = 1
 self_modulate = Color(0.0905386, 0.85926, 0.722289, 1)
@@ -82,15 +79,15 @@ offset_right = 32.0
 offset_bottom = 32.0
 theme = ExtResource("1_ip7sm")
 script = ExtResource("5_viuck")
-piano_roll_ = NodePath("../../../../../..")
+piano_roll_ = NodePath("../../../../..")
 disable_resize = true
 
-[node name="Rows" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer2"]
+[node name="Rows" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Cursor" type="ColorRect" parent="VBoxContainer/ScrollContainer/MarginContainer"]
+[node name="Cursor" type="ColorRect" parent="ScrollContainer/MarginContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(4, 0)
 layout_mode = 2
@@ -98,7 +95,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 3
 color = Color(1, 0, 1, 0.356863)
 
-[node name="Overlay" type="MarginContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="Overlay" type="MarginContainer" parent="ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 offset_right = 1060.0
@@ -106,4 +103,4 @@ offset_bottom = 621.0
 mouse_filter = 2
 script = ExtResource("6_s47bi")
 
-[connection signal="gui_input" from="VBoxContainer/ScrollContainer" to="." method="_scroll_container_gui_input"]
+[connection signal="gui_input" from="ScrollContainer" to="." method="_scroll_container_gui_input"]

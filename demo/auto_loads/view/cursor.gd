@@ -24,9 +24,16 @@ var next_position_ := Vector3.ZERO
 @onready var cursor_ = $CanvasLayer/Cursor2D
 @onready var camera_ = get_node("../CameraArm/Camera3D")
 
+@export var disabled := false :
+	set(v):
+		if v != disabled:
+			disabled = v
+			invalidate_disabled_()
+
 func _ready() -> void:
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	position2D = get_window().get_visible_rect().size / 2
+	invalidate_disabled_()
 
 func is_owner(node:Node) -> bool:
 	return owner_stack_.size() > 0 and owner_stack_.back()[0] == node
@@ -67,18 +74,21 @@ func _physics_process(delta: float) -> void:
 	
 var x := Vector2.ZERO
 
-func _unhandled_input(event:InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
-		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
-			reset()
-		else:
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+func invalidate_disabled_() -> void:
+	if not disabled:
+		reset()
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func reset() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	position2D = get_viewport().size * 0.5
 
 func update() -> void:
-	position2D += Bus.input_service.relative * 1.5
+	if disabled:
+		return
+		
+		
+	position2D += Bus.input_service.relative * 1.5 * 0.3
 	cursor_.position = position2D
 	Bus.input_service.relative = Vector2.ZERO

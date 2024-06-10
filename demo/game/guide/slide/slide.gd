@@ -1,6 +1,5 @@
 extends Guide
 
-signal done
 
 var nob_
 var to_value_ := 0.0

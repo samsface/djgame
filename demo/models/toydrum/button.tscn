@@ -30,12 +30,15 @@ stream_4/weight = 1.0
 [sub_resource type="Curve3D" id="Curve3D_haa4w"]
 bake_interval = 0.01
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0.1, -0.03, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
 [node name="Button" type="Node3D"]
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 1
 script = ExtResource("1_hygni")
 
 [node name="Nob" type="Area3D" parent="."]
@@ -69,10 +72,11 @@ bus = &"KeyPresses"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00499544, 0)
 
 [node name="Path" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00839129, 0)
 curve = SubResource("Curve3D_haa4w")
 
 [node name="PathFollow" type="PathFollow3D" parent="Path"]
-transform = Transform3D(-1, 8.37359e-08, -2.51208e-08, 0, 0.287348, 0.957827, 8.74228e-08, 0.957827, -0.287348, 0, 0.1, -0.03)
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0, 0.1, 0)
 loop = false
 
 [node name="RemoteTransform" type="RemoteTransform3D" parent="Path/PathFollow"]

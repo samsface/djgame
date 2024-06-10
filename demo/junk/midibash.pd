@@ -1,53 +1,35 @@
 #N canvas 849 373 1461 990 12;
-#X obj 568 645 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
-#fcfcfc #000000 #000000 0 256;
-#X obj 535 761 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
-#fcfcfc #000000 #000000 0 256;
+#X obj 568 645 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10 #fcfcfc #000000 #000000 0 256;
+#X obj 535 761 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10 #fcfcfc #000000 #000000 0 256;
 #X obj 535 728 snap2scale;
 #X obj 568 612 +;
 #X obj 568 573 clip 0 12;
-#X obj 753 616 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
-#fcfcfc #000000 #000000 0 256;
+#X obj 753 616 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10 #fcfcfc #000000 #000000 0 256;
 #X obj 753 573 clip 0 1;
 #X obj 535 827 outlet;
 #X obj 753 673 outlet;
-#X obj 104 187 nbx 5 14 -1e+37 1e+37 0 0 empty empty key 0 -8 0 10
-#fcfcfc #000000 #000000 0 256;
-#X obj 165 187 nbx 5 14 0 2 0 0 empty empty scale 0 -8 0 10 #fcfcfc
-#000000 #000000 0 256;
+#X obj 104 187 nbx 5 14 -1e+37 1e+37 0 0 empty empty key 0 -8 0 10 #fcfcfc #000000 #000000 0 256;
+#X obj 165 187 nbx 5 14 0 2 0 0 empty empty scale 0 -8 0 10 #fcfcfc #000000 #000000 0 256;
 #N canvas 0 0 1343 909 (subpatch) 0;
 #X array \$0-sss 16 float 3;
-#A 0 -0.685531 -0.342681 6.94286 -0.342807 -1.19993 9.7714 -0.514194
--0.514194 11.7429 -0.0857124 -0.34285 4.19995 9.77126 2.82855 2.05715
--0.599936;
+#A 0 -0.685531 -0.342681 6.94286 -0.342807 -1.19993 9.7714 -0.514194 -0.514194 11.7429 -0.0857124 -0.34285 4.19995 9.77126 2.82855 2.05715 -0.599936;
 #X coords 0 12 16 0 208 140 2 0 0;
 #X restore 100 220 graph;
-#X obj 227 187 nbx 5 14 1 4 0 0 empty empty bar\\\ count 0 -8 0 10
-#fcfcfc #000000 #000000 0 256;
-#X obj 569 508 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
-#fcfcfc #000000 #000000 0 256;
-#X obj 569 436 simpleseq \$0-sss;
-#X obj 753 508 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
-#fcfcfc #000000 #000000 0 256;
-#X obj 753 436 simpleseq \$0-xxx;
+#X obj 227 187 nbx 5 14 1 4 0 0 empty empty bar\ count 0 -8 0 10 #fcfcfc #000000 #000000 0 256;
+#X obj 569 508 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10 #fcfcfc #000000 #000000 0 256;
+#X obj 753 508 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10 #fcfcfc #000000 #000000 0 256;
 #N canvas 0 0 1343 909 (subpatch) 0;
 #X array \$0-xxx 16 float 3;
-#A 0 1.36171 1.53192 1.61703 -2.55317 -2.63827 -2.80848 -2.80848 -0.425522
--1.95743 -2.80849 -1.02126 1.53192 1.53192 1.53192 1.61702 1.87234
-;
+#A 0 1.36171 1.53192 1.61703 -2.55317 -2.63827 -2.80848 -2.80848 -0.425522 -1.95743 -2.80849 -1.02126 1.53192 1.53192 1.53192 1.61702 1.87234;
 #X coords 0 12 16 0 208 141 1 0 0;
 #X restore 100 373 graph;
-#X obj 100 360 hradio 13 1 0 16 empty empty empty 0 -8 0 10 #ffffff
-#000000 #000000 0;
+#X obj 100 360 hradio 13 1 0 16 empty empty empty 0 -8 0 10 #ffffff #000000 #000000 0;
 #X obj 681 159 inlet;
-#X obj 101 204 cnv 15 100 12 empty empty empty 20 12 0 14 #ffffff #404040
-0;
+#X obj 101 204 cnv 15 100 12 empty empty empty 20 12 0 14 #ffffff #404040 0;
 #X obj 103 0 loadbang;
 #X msg 143 28 1;
-#X obj 263 154 bng 15 250 50 0 empty empty save 17 7 0 10 #fcfcfc #000000
-#000000;
-#X obj 204 154 nbx 5 14 -1e+37 1e+37 0 0 empty empty preset 0 -8 0
-10 #fcfcfc #000000 #000000 0 256;
+#X obj 263 154 bng 15 250 50 0 empty empty save 17 7 0 10 #fcfcfc #000000 #000000;
+#X obj 204 154 nbx 5 14 -1e+37 1e+37 0 0 empty empty preset 0 -8 0 10 #fcfcfc #000000 #000000 0 256;
 #X obj 45 712 array get midibashbank 0 16;
 #X obj 210 -53 packarray \$0-sss \$0-xxx midibashbank;
 #X obj 44 773 array set \$0-sss;
@@ -57,6 +39,8 @@
 #X obj 145 901 array set \$0-xxx;
 #X obj 1213 250 inlet;
 #X obj 1292 224 inlet;
+#X obj 569 436 buffer \$0-sss;
+#X obj 753 436 buffer \$0-xxx;
 #X connect 0 0 2 1;
 #X connect 1 0 7 0;
 #X connect 2 0 1 0;
@@ -67,25 +51,23 @@
 #X connect 9 0 3 1;
 #X connect 9 0 2 0;
 #X connect 10 0 2 2;
-#X connect 12 0 14 1;
-#X connect 12 0 16 1;
 #X connect 13 0 4 0;
-#X connect 14 0 13 0;
-#X connect 15 0 6 0;
-#X connect 16 0 15 0;
-#X connect 19 0 14 0;
-#X connect 19 0 16 0;
-#X connect 19 0 18 0;
-#X connect 21 0 22 0;
-#X connect 22 0 10 0;
-#X connect 23 0 26 0;
-#X connect 24 0 26 1;
-#X connect 24 0 28 0;
-#X connect 25 0 27 0;
-#X connect 28 0 25 0;
-#X connect 28 0 30 0;
-#X connect 29 0 31 0;
-#X connect 30 0 29 0;
-#X connect 32 0 9 0;
-#X connect 33 0 24 0;
+#X connect 14 0 6 0;
+#X connect 17 0 16 0;
+#X connect 17 0 32 0;
+#X connect 17 0 33 0;
+#X connect 19 0 20 0;
+#X connect 20 0 10 0;
+#X connect 21 0 24 0;
+#X connect 22 0 24 1;
+#X connect 22 0 26 0;
+#X connect 23 0 25 0;
+#X connect 26 0 23 0;
+#X connect 26 0 28 0;
+#X connect 27 0 29 0;
+#X connect 28 0 27 0;
+#X connect 30 0 9 0;
+#X connect 31 0 22 0;
+#X connect 32 0 13 0;
+#X connect 33 0 14 0;
 #X coords 0 -1 1 1 208 374 1 100 140;

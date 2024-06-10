@@ -46,6 +46,8 @@ func _ready():
 	for clip in state_:
 		_new_pressed()
 		%Tabs.get_child(%Tabs.current_tab).from_dict(clip)
+		
+	%Tabs.current_tab = 0
 
 func _play_pressed() -> void:
 	visible = false

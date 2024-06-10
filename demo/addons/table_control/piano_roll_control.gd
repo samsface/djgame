@@ -34,14 +34,16 @@ enum Tool {
 	paint
 }
 
+
+var look_ahead_ := 0
 var selection_box_
 var supress_hack_ := false
 var time_range := Vector2i(0, 16) :
 	set(v):
-		time_range = v
-		if not supress_hack_:
-			%TimeRange.position.x = to_local(time_range.x * grid_size)
-			%TimeRange.size.x = to_local(time_range.y - time_range.x)
+		%TimeRange.time = v.x
+		%TimeRange.length = v.y - v.x
+	get:
+		return Vector2i(%TimeRange.time, %TimeRange.time + %TimeRange.length)
 
 var start := 0 :
 	set(v):
@@ -250,12 +252,12 @@ func duplicate_(items:Array[Control]) -> void:
 	var bounding_box := get_bounding_box(items)
 	bounding_box.position -= %Rows.global_position
 	var max_x := bounding_box.position.x + bounding_box.size.x
-
+	
 	var new_selection:Array[Control]
 
 	for item in items:
 		var duplicate = item.duplicate()
-		duplicate.position.x = max_x + (item.position.x - bounding_box.position.x)
+		duplicate.time = to_world(max_x + (item.position.x - bounding_box.position.x))
 		connect_row_item_(duplicate)
 		
 		undo.add_do_method(item.get_parent().add_child.bind(duplicate))
@@ -331,13 +333,6 @@ func translation_begin_() -> void:
 		undo.add_undo_property(item, "length", item.length)
 
 func translation_end_() -> void:
-	if selection_[0] == %TimeRange:
-		supress_hack_ = true
-		time_range = Vector2i(%TimeRange.position.x, %TimeRange.position.x + %TimeRange.size.x) / grid_size
-		supress_hack_ = false
-		undo.commit_action(false)
-		return
-	
 	for item in selection_:
 		undo.add_do_method(item.reparent.bind(item.get_parent()))
 		undo.add_do_property(item, "time", item.time)
@@ -477,12 +472,22 @@ func invalidate_queue_() -> void:
 	queue_on_.clear()
 	queue_off_.clear()
 
+	look_ahead_= 0
+
 	for row in %Rows.get_children():
 		var dict_on := {}
 		var dict_off := {}
 		for item in row.get_children():
-			var begin = int(item.position.x / grid_size) - item.get_lookahead()
-			var end = int(item.position.x / grid_size) + int(item.size.x / grid_size)
+			var begin = item.time - item.get_lookahead()
+			var end = item.time + item.length
+
+			if item.time < time_range.x or item.time > time_range.y:
+				continue
+	
+			if begin < time_range.x:
+				dict_on[time_range.y + begin] = item
+				print(time_range.y - begin)
+				#dict_off[time_range.y - begin] = item
 
 			if item.fill():
 				for i in range(begin, end - 1):
@@ -490,23 +495,14 @@ func invalidate_queue_() -> void:
 			
 			dict_on[begin] = item
 			dict_off[end] = item
+			
+			look_ahead_ = min(look_ahead_, time_range.x + begin)
 		
 		queue_on_.push_back(dict_on)
 		queue_off_.push_back(dict_off)
 
-func get_queue() -> Array:
-	invalidate_queue_()
-
-	var res := []
-	
-	for q in queue_off_:
-		var items := []
-		for item in q.values():
-			items.push_back(item)
-		
-		res.push_back(items)
-
-	return res
+func get_look_ahead() -> int:
+	return abs(look_ahead_)
 
 func add_row() -> void:
 	var row := PianoRollRow.new()

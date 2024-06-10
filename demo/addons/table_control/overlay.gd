@@ -1,8 +1,7 @@
 extends MarginContainer
 
-
 func _draw() -> void:
-	var p =  get_parent().get_parent().get_parent()
+	var p =  get_parent().get_parent()
 	for s in p.selection_:
 		draw_rect(Rect2(s.global_position - global_position, s.size), Color.AZURE, false, 1.0)
 	

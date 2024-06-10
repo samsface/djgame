@@ -8,32 +8,27 @@
 [sub_resource type="Resource" id="Resource_0c266"]
 script = ExtResource("2_5ypay")
 node = NodePath("preset-rock")
-receiver_symbol = "toykit-preset0"
-send_symbol = "toykit-preset0"
+symbol = ""
 
 [sub_resource type="Resource" id="Resource_iwce1"]
 script = ExtResource("2_5ypay")
 node = NodePath("preset-house")
-receiver_symbol = "toykit-preset1"
-send_symbol = "toykit-preset1"
+symbol = ""
 
 [sub_resource type="Resource" id="Resource_io3e3"]
 script = ExtResource("2_5ypay")
 node = NodePath("NorthFace/seq-1")
-receiver_symbol = "toykit-kick"
-send_symbol = ""
+symbol = "toykit-kick"
 
 [sub_resource type="Resource" id="Resource_ywh5s"]
 script = ExtResource("2_5ypay")
 node = NodePath("NorthFace/seq-2")
-receiver_symbol = "toykit-snare"
-send_symbol = ""
+symbol = "toykit-snare"
 
 [sub_resource type="Resource" id="Resource_6e5on"]
 script = ExtResource("2_5ypay")
 node = NodePath("NorthFace/seq-3")
-receiver_symbol = "toykit-closed"
-send_symbol = ""
+symbol = "toykit-hat"
 
 [sub_resource type="Resource" id="Resource_4l3wh"]
 script = ExtResource("2_gmc4h")

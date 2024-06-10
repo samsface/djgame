@@ -68,6 +68,7 @@ func invalidate_value_() -> void:
 	$Polygon2D.polygon = polygon
 
 func op(db, node, length_) -> void:
-	if node.has_method("bang"):
-		var length = (get_lookahead() / 16.0) * (PureData.metro) * (1.0/60.0)
-		node.bang(get_lookahead(), value, auto, dilema_group, silent)
+	var target_node = get_target_node()
+	if target_node.has_method("bang"):
+		var length_in_seconds = get_lookahead() * (PureData.metro) * 0.001
+		target_node.bang(time, length_in_seconds, value, auto, dilema_group, silent)
