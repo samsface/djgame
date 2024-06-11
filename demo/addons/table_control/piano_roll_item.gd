@@ -36,7 +36,7 @@ func get_target_node():
 func op(db, node, length) -> void:
 	pass
 
-func end(db, node) -> void:
+func end() -> void:
 	pass
 
 func get_time() -> int:

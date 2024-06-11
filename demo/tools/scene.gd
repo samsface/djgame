@@ -51,7 +51,7 @@ func op(db, node, length) -> void:
 	active = true
 	piano_roll_.seeked.connect(_seeked)
 
-func end(db, node) -> void:
+func end() -> void:
 	active = false
 	piano_roll_.seeked.disconnect(_seeked)
 

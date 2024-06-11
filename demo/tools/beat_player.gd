@@ -66,11 +66,7 @@ func _piano_roll_begin(item:Control, idx:int) -> void:
 	item.op(db, null, 0)
 
 func _piano_roll_end(item:Control, idx:int) -> void:
-	var node_path = %TrackNames.get_track_node_path(idx)
-	var node = root_node.get_node(node_path)
-	if not node:
-		return
-		
+
 	var c:String = %TrackNames.get_condition(idx)
 	if not c.is_empty():
 		var e = Expression.new()
@@ -78,11 +74,11 @@ func _piano_roll_end(item:Control, idx:int) -> void:
 		if not e.execute([], db):
 			return
 
-	item.end(db, node)
+	item.end()
 
-func _piano_roll_pressed(row_idx:int, pos:Vector2i) -> void:
+func _piano_roll_pressed(row_idx:int, time:int) -> void:
 	var note = painting_scene_.instantiate()
-	note.time = floor(piano_roll_.to_world(pos.x) / piano_roll_.quantinize_snap) *  piano_roll_.quantinize_snap
+	note.time = floor(time / piano_roll_.quantinize_snap) *  piano_roll_.quantinize_snap
 	note.length = piano_roll_.quantinize_snap
 	%PianoRoll.add_item(note, row_idx)
 

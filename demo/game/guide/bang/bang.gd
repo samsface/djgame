@@ -79,8 +79,13 @@ func _nob_value_changed(value:float) -> void:
 	_hit()
 
 func _miss() -> void:
-	if hit_:
-		return
+	
+	for i in 10:
+		await get_tree().process_frame
+	
+		if hit_:
+			return
+	
 	
 	if miss_:
 		return

@@ -84,7 +84,9 @@ func _tab_clicked(tab):
 	%Inspector.selection = %Tabs.get_current_tab_control()
 
 func _duplicate_pressed() -> void:
-	var a = %Tabs.get_child(%Tabs.current_tab).duplicate()
-	%Tabs.add_child(a)
+	var clip = %Tabs.get_child(%Tabs.current_tab).to_dict()
+	_new_pressed()
+	%Tabs.get_child(%Tabs.current_tab).from_dict(clip)
+	
 
 

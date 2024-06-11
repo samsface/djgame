@@ -109,17 +109,7 @@ func connect_row_item_(row_item:Button) -> void:
 		row_item.changed.connect(queue_invalidate_queue_)
 
 func connect_row_(row) -> void:
-	row.gui_input.connect(func(event:InputEvent): 
-		var row_index = row.get_index()
-		if event.is_action_pressed("click"): 
-			var selection_size = selection_.size()
-			clear_selection_()
-			
-			#if selection_size <= 1:
-			#	row_pressed.emit(row_index, row.get_local_mouse_position())
-	)
-	#row.mouse_entered.connect(func(): var row_index = row.get_index(); row_mouse_entered.emit(row_index))
-	#row.mouse_exited.connect(func(): var row_index = row.get_index(); row_mouse_exited.emit(row_index))
+	pass
 
 func clear_selection_() -> void:
 	print("clear_selection")
@@ -232,7 +222,8 @@ func _input(event):
 		%Overlay.queue_redraw()
 	elif tool_ == Tool.zooming:
 		var zoom = %Headings.get_local_mouse_position().y
-		grid_size = clamp(grid_size_old_ + zoom * 0.1, 4, 32)
+		grid_size = clamp(grid_size_old_ + zoom * 0.1, 2, 32)
+		print(grid_size)
 		%Overlay.queue_redraw()
 
 func get_bounding_box(items:Array[Control]) -> Rect2:
@@ -488,8 +479,7 @@ func invalidate_queue_() -> void:
 	
 			if begin < time_range.x:
 				dict_on[time_range.y + begin] = item
-				print(time_range.y - begin)
-				#dict_off[time_range.y - begin] = item
+				#dict_off[time_range.x] = item
 
 			if item.fill():
 				for i in range(begin, end - 1):
@@ -507,6 +497,8 @@ func get_look_ahead() -> int:
 	return abs(look_ahead_)
 
 func add_row() -> void:
+	undo.create_action("add row")
+	
 	var row := PianoRollRow.new()
 	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	row.custom_minimum_size.y = 36
@@ -515,14 +507,20 @@ func add_row() -> void:
 	undo.add_do_property(row, "owner", %Rows)
 	undo.add_do_reference(row)
 	undo.add_undo_method(%Rows.remove_child.bind(row))
+	
+	commit_action_()
 
 func remove_row(idx:int) -> void:
+	undo.create_action("remove row")
+	
 	var row = %Rows.get_child(idx)
 
 	undo.add_do_method(%Rows.remove_child.bind(row))
 	undo.add_undo_method(%Rows.add_child.bind(row))
 	undo.add_undo_method(%Rows.move_child.bind(row, idx))
 	undo.add_undo_reference(row)
+	
+	commit_action_()
 
 func _item_gui_input(event:InputEvent, item:Control):
 	update_cursor_(item, where_(item))
@@ -573,7 +571,7 @@ func _scroll_container_gui_input(event: InputEvent) -> void:
 			if event.button_index == MOUSE_BUTTON_RIGHT:
 				if %Rows.get_child_count() > 0:
 					var table_idx := get_local_mouse_table_position_row()
-					row_pressed.emit(get_local_mouse_table_position_row(), %Rows.get_child(table_idx).get_local_mouse_position())
+					row_pressed.emit(get_local_mouse_table_position_row(), get_local_mouse_table_position())
 			else:
 				tool_ = Tool.selecting
 				selection_box_ = Rect2(event.position, Vector2.ZERO)

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://addons/table_control/piano_roll_control.gd" id="2_ehl6k"]
 [ext_resource type="Script" path="res://addons/table_control/grid.gd" id="4_cptms"]
 [ext_resource type="Script" path="res://addons/table_control/negative_scroll_container.gd" id="4_kbd8x"]
-[ext_resource type="Script" path="res://tools/piano_roll_item.gd" id="5_viuck"]
+[ext_resource type="Script" path="res://addons/table_control/piano_roll_item.gd" id="5_viuck"]
 [ext_resource type="Script" path="res://addons/table_control/overlay.gd" id="6_s47bi"]
 
 [node name="PianoRoll" type="PanelContainer"]
