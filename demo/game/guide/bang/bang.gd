@@ -43,7 +43,7 @@ func _ready() -> void:
 	remote_transform.rotation.z = 0
 	path_follow.progress_ratio = 0.0
 
-	fall_time_ = length + ((1.0/60.0) * 8)
+	fall_time_ = length + ((1.0/60.0) * 10)
 
 	fall_tween_ = create_tween()
 	fall_tween_.set_parallel()

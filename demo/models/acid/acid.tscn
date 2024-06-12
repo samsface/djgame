@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://models/redux/device.gd" id="1_636gy"]
 [ext_resource type="Script" path="res://models/lital/little2.gd" id="1_u4dod"]
 [ext_resource type="PackedScene" uid="uid://bvxsm2x52fp42" path="res://models/lital/slider.tscn" id="2_4wliu"]
-[ext_resource type="Resource" uid="uid://d2v2vxmias8e0" path="res://models/daft_box/mappings.tres" id="2_xo2e7"]
+[ext_resource type="Resource" uid="uid://d2v2vxmias8e0" path="res://models/acid/mappings.tres" id="2_xo2e7"]
 [ext_resource type="FontFile" uid="uid://ca4jgypv8bjcn" path="res://ui/fonts/RetroGaming.ttf" id="3_1bv3f"]
 [ext_resource type="PackedScene" uid="uid://cyqgaxwtbp2kl" path="res://models/shared/lines/square.tscn" id="3_vvl8k"]
 [ext_resource type="Script" path="res://models/shared/nobs/line_style.gd" id="4_pik7k"]
