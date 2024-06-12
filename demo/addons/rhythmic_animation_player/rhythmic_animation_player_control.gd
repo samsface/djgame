@@ -32,12 +32,12 @@ func seek(time:float) -> void:
 	for i in queue_off_.size():
 		var item = queue_off_[i].get(t)
 		if item:
-			end.emit(item, i)
+			item.end()
 
 	for i in queue_on_.size():
 		var item = queue_on_[i].get(t)
 		if item:
-			begin.emit(item, i)
+			item.begin()
 
 	seeked.emit(t)
 
@@ -165,3 +165,12 @@ func _input(event: InputEvent) -> void:
 func _visibility_changed() -> void:
 	if visible:
 		inspector.undo = undo_
+
+func _paint_item_selected(index: int) -> void:
+	match index:
+		0:
+			painting_item = preload("res://addons/rhythmic_animation_player/ops/bang.tscn")
+		1:
+			painting_item = preload("res://addons/rhythmic_animation_player/ops/slide.tscn")
+		2:
+			painting_item = preload("res://addons/rhythmic_animation_player/ops/method.tscn")

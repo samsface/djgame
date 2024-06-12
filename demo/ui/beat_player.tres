@@ -1,32 +1,15 @@
 [gd_resource type="Theme" load_steps=5 format=3 uid="uid://dbvpa0vlu34gu"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uxryt"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbbnw"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f2kco"]
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_po5td"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fl1bg"]
-bg_color = Color(0.901961, 0.901961, 0.901961, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_07ond"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ivg0h"]
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_85b44"]
 
 [resource]
-Button/colors/font_color = Color(0, 0, 0, 1)
-Button/styles/focus = SubResource("StyleBoxEmpty_uxryt")
-Button/styles/hover = SubResource("StyleBoxFlat_f2kco")
-Button/styles/normal = SubResource("StyleBoxFlat_fl1bg")
-Button/styles/pressed = SubResource("StyleBoxFlat_ivg0h")
-Label/colors/font_color = Color(0, 0, 0, 1)
+Panel/styles/panel = SubResource("StyleBoxFlat_lbbnw")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_po5td")
+TabContainer/styles/panel = SubResource("StyleBoxFlat_07ond")
+TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_85b44")

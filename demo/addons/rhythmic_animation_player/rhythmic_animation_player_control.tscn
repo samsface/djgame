@@ -4,8 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cwilpnax30ixm" path="res://addons/timeline_control/timeline_control.tscn" id="1_jvpvm"]
 [ext_resource type="PackedScene" uid="uid://74pwn2qyav8l" path="res://addons/rhythmic_animation_player/ops/bang.tscn" id="2_2pt32"]
 
-[node name="RhythmicAnimationPlayerControl" type="Control"]
-layout_mode = 3
+[node name="RhythmicAnimationPlayerControl" type="VBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -14,17 +13,24 @@ grow_vertical = 2
 script = ExtResource("1_44qf0")
 painting_item = ExtResource("2_2pt32")
 
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Button" type="OptionButton" parent="HBoxContainer"]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "Bang"
+popup/item_0/id = 0
+popup/item_1/text = "Slide"
+popup/item_1/id = 1
+popup/item_2/text = "Method"
+popup/item_2/id = 2
+
 [node name="TimelineControl" parent="." instance=ExtResource("1_jvpvm")]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
 [connection signal="visibility_changed" from="." to="." method="_visibility_changed"]
+[connection signal="item_selected" from="HBoxContainer/Button" to="." method="_paint_item_selected"]
 [connection signal="add_row_pressed" from="TimelineControl" to="." method="_add_row_pressed"]
 [connection signal="changed" from="TimelineControl" to="." method="_changed"]
 [connection signal="row_header_pressed" from="TimelineControl" to="." method="_row_header_pressed"]

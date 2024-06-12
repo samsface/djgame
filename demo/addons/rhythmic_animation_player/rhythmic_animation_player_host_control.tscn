@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://lb3oq22iphka"]
+[gd_scene load_steps=5 format=3 uid="uid://lb3oq22iphka"]
 
+[ext_resource type="Theme" uid="uid://dbvpa0vlu34gu" path="res://ui/beat_player.tres" id="1_q05ha"]
 [ext_resource type="Script" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_host_control.gd" id="2_gk3x2"]
 [ext_resource type="Script" path="res://addons/rhythmic_animation_player/ops/db.gd" id="3_6y6es"]
 [ext_resource type="PackedScene" uid="uid://0xf0dcjgbmqj" path="res://addons/inspector/inspector.tscn" id="3_em7m1"]
@@ -11,16 +12,17 @@ offset_right = 1519.0
 offset_bottom = 932.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_q05ha")
 script = ExtResource("2_gk3x2")
 save_path = "res://junk/sam2.lol"
 root_node = NodePath(".")
 
-[node name="DB" type="Node" parent="."]
-script = ExtResource("3_6y6es")
-
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 2
-color = Color(0.14902, 0.152941, 0.192157, 1)
+color = Color(0.396889, 0.396889, 0.396889, 1)
+
+[node name="DB" type="Node" parent="."]
+script = ExtResource("3_6y6es")
 
 [node name="V" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -83,7 +85,7 @@ theme_override_constants/margin_bottom = 8
 [node name="Inspector" parent="V/HSplitContainer/MarginContainer" instance=ExtResource("3_em7m1")]
 unique_name_in_owner = true
 layout_mode = 2
-visible_properties = Array[StringName]([&"value", &"auto", &"scene", &"method", &"silent", &"title", &"type", &"to_value", &"property", &"condition_ex", &"length", &"time", &"node_path"])
+visible_properties = Array[StringName]([&"value", &"auto", &"scene", &"method", &"silent", &"title", &"type", &"to_value", &"property", &"condition_ex", &"length", &"time", &"node_path", &"from_value"])
 
 [connection signal="pressed" from="V/Menu/Save" to="." method="_save_pressed"]
 [connection signal="pressed" from="V/Menu/Play" to="." method="_play_pressed"]

@@ -67,3 +67,6 @@ func _play():
 
 func _died() -> void:
 	pass
+
+func _stop() -> void:
+	audio_.stop()

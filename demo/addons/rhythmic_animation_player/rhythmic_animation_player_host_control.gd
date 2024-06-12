@@ -1,6 +1,7 @@
 extends Control
 
 signal play
+signal stop
 
 @export var save_path:String
 @export var root_node:NodePath
@@ -88,3 +89,5 @@ func _duplicate_pressed() -> void:
 	_new_pressed()
 	%Tabs.get_child(%Tabs.current_tab).from_dict(clip)
 
+func _stop_pressed() -> void:
+	stop.emit()

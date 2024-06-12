@@ -1,4 +1,4 @@
-extends PianoRollItem
+extends RythmicAnimationPlayerControlItem
 class_name PianoRollItemSlide
 
 @export var from_value:float : 

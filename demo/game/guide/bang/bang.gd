@@ -43,7 +43,7 @@ func _ready() -> void:
 	remote_transform.rotation.z = 0
 	path_follow.progress_ratio = 0.0
 
-	fall_time_ = length
+	fall_time_ = length + ((1.0/60.0) * 8)
 
 	fall_tween_ = create_tween()
 	fall_tween_.set_parallel()
@@ -79,17 +79,14 @@ func _nob_value_changed(value:float) -> void:
 	_hit()
 
 func _miss() -> void:
+	#for i in 20:
+	#	await get_tree().physics_frame
 	
-	for i in 10:
-		await get_tree().process_frame
-	
-		if hit_:
-			return
-	
-	
+	if hit_:
+		return
+
 	if miss_:
 		return
-	
 
 	done.emit()
 	
@@ -97,9 +94,9 @@ func _miss() -> void:
 	
 	visible = false
 
-	nob_.value = for_value_
+	#nob_.value = for_value_
 	
-	await get_tree().physics_frame
+	#await get_tree().physics_frame
 
 	judge_accuracy_()
 

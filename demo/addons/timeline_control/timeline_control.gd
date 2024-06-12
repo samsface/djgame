@@ -59,6 +59,7 @@ var zoom_grab_time_ := 0.0
 var zoom_grab_position_ := Vector2.ZERO
 var zoom_previous_ := 0
 var quantinize_snap := 16
+var quantinize_snap_auto := false
 var invalidate_queue_queued_ := false
 var selection_:Array[Control]
 
@@ -218,10 +219,9 @@ func _input(event):
 		%Overlay.queue_redraw()
 	elif tool_ == Tool.zooming:
 		var new_zoom = zoom_grab_position_.y - header_scroll_container_.get_local_mouse_position().y
-		new_zoom *= 0.01
+		new_zoom *= 0.1
 		
-		zoom = clamp(zoom_previous_ - new_zoom, 2, 32)
-	
+		zoom = clamp(zoom_previous_ - new_zoom, 2, 64)
 		%Overlay.queue_redraw()
 
 	elif tool_ == Tool.move_row:
@@ -439,6 +439,9 @@ func invalidate_grid_size_() -> void:
 	if is_visible_in_tree():
 		scroll_horizontal = -(zoom_grab_time_ * zoom) + scroll_container_.get_local_mouse_position().x
 
+	if quantinize_snap_auto:
+		quantinize_snap = get_quantinize_snap_()
+
 func queue_invalidate_queue_() -> void:
 	if invalidate_queue_queued_:
 		return
@@ -493,15 +496,6 @@ func update_cursor_(item:Control, where) -> void:
 		item.mouse_default_cursor_shape = Control.CURSOR_VSIZE
 	else:
 		item.mouse_default_cursor_shape = Control.CURSOR_DRAG
-
-func set_quantinize_snap(index):
-	match index:
-		0:
-			quantinize_snap = 1
-		1:
-			quantinize_snap = 4
-		2:
-			quantinize_snap = 16
 
 func move_row_up(row_idx:int) -> void:
 	var row = %Rows.get_child(row_idx)
@@ -574,3 +568,30 @@ func get_row_header(row_idx:int) -> Control:
 
 func get_row_count() -> int:
 	return %Rows.get_child_count()
+
+func get_quantinize_snap_() -> int:
+	if zoom < 2:
+		return 16
+	elif zoom < 8:
+		return 8
+	elif zoom < 16:
+		return 2
+	return 1
+
+func _snap_selected(index: int) -> void:
+	quantinize_snap_auto = false
+	
+	match index:
+		0:
+			quantinize_snap = get_quantinize_snap_()
+			quantinize_snap_auto = true
+		1:
+			quantinize_snap = 1
+		2:
+			quantinize_snap = 2
+		3:
+			quantinize_snap = 4
+		4:
+			quantinize_snap = 8
+		5:
+			quantinize_snap = 16

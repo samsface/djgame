@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://game/animation.gd" id="1_bom6f"]
 [ext_resource type="PackedScene" uid="uid://lb3oq22iphka" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_host_control.tscn" id="2_4xqqn"]
 [ext_resource type="Script" path="res://game/game.gd" id="3_y2bhj"]
-[ext_resource type="Script" path="res://game/AudioService.gd" id="4_2dxkm"]
+[ext_resource type="Script" path="res://game/audio_service.gd" id="4_2dxkm"]
 [ext_resource type="Script" path="res://game/crowd_service/crowd_service.gd" id="5_5w6ll"]
 [ext_resource type="PackedScene" uid="uid://bfbaeyuhh3hun" path="res://game/crowd_service/dancers/dancer_test.tscn" id="6_42avf"]
 [ext_resource type="AudioStream" uid="uid://b0l0fdwmx47o7" path="res://models/lital/woo.wav" id="7_jis0o"]
