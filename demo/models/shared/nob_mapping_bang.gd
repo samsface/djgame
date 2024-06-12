@@ -32,4 +32,4 @@ func _value_changed(r) -> void:
 	p_.value_changed.emit(p_.get_node(node), 1, 1)
 
 func _value_will_change(time, value) -> void:
-	PureData.write_at_array_index(array_symbol_, int(time) % 16, value)
+	Bus.audio_service.write_at_array_index(array_symbol_, int(time) % 16, value)

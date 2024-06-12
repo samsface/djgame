@@ -1,5 +1,0 @@
-#N canvas 194 89 1698 1013 10;
-#X obj 608 468 subpatch;
-#X obj 611 396 bng 8 250 50 0 empty empty empty 0 -3 0 10 #fcfcfc #000000
-#000000;
-#X connect 1 0 0 0;
