@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0tfn3v6nghop"]
+
+[ext_resource type="Script" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_control.gd" id="1_44qf0"]
+[ext_resource type="PackedScene" uid="uid://cwilpnax30ixm" path="res://addons/timeline_control/timeline_control.tscn" id="1_jvpvm"]
+[ext_resource type="PackedScene" uid="uid://74pwn2qyav8l" path="res://addons/rhythmic_animation_player/ops/bang.tscn" id="2_2pt32"]
+
+[node name="RhythmicAnimationPlayerControl" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_44qf0")
+painting_item = ExtResource("2_2pt32")
+
+[node name="TimelineControl" parent="." instance=ExtResource("1_jvpvm")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="visibility_changed" from="." to="." method="_visibility_changed"]
+[connection signal="add_row_pressed" from="TimelineControl" to="." method="_add_row_pressed"]
+[connection signal="changed" from="TimelineControl" to="." method="_changed"]
+[connection signal="row_header_pressed" from="TimelineControl" to="." method="_row_header_pressed"]
+[connection signal="row_pressed" from="TimelineControl" to="." method="_row_right_clicked"]
+[connection signal="selection_changed" from="TimelineControl" to="." method="_selection_changed"]

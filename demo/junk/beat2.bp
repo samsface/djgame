@@ -1,0 +1,48 @@
+[{
+"name": &"scene",
+"time_range": Vector2i(0, 64),
+"tracks": [{
+"condition_ex": "",
+"frames": [{
+"auto": false,
+"length": 16,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/bang.tscn",
+"silent": false,
+"time": 0,
+"value": 1.0
+}, {
+"auto": false,
+"length": 16,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/bang.tscn",
+"silent": false,
+"time": 16,
+"value": 1.0
+}, {
+"auto": false,
+"length": 16,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/bang.tscn",
+"silent": false,
+"time": 32,
+"value": 1.0
+}, {
+"auto": false,
+"length": 16,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/bang.tscn",
+"silent": false,
+"time": 48,
+"value": 1.0
+}],
+"node_path": NodePath("toykit/NorthFace/seq-1"),
+"scene_file_path": "res://addons/timeline_control/timeline_control_row_header.tscn"
+}, {
+"condition_ex": "",
+"frames": [],
+"node_path": NodePath("toykit/NorthFace/seq-2"),
+"scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
+}, {
+"condition_ex": "",
+"frames": [],
+"node_path": NodePath("toykit"),
+"scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
+}]
+}]

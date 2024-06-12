@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://game/points_service/score.gd" id="6_3q4nq"]
 [ext_resource type="PackedScene" uid="uid://bl7d8jwotcuws" path="res://models/phone/phone.tscn" id="7_3n0u3"]
 [ext_resource type="Script" path="res://game/animation.gd" id="9_vwu5x"]
-[ext_resource type="PackedScene" uid="uid://lb3oq22iphka" path="res://tools/beat_player_host.tscn" id="10_rvaid"]
+[ext_resource type="PackedScene" uid="uid://lb3oq22iphka" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_host_control.tscn" id="10_rvaid"]
 [ext_resource type="Texture2D" uid="uid://48p1jkwhm4wh" path="res://models/club/samm0363_texture_of_a_bar_table_with_stains_and_wear_tile_5a36bd34-3c9c-4c2b-a62c-8adabec8fccf.png" id="11_5tiql"]
 [ext_resource type="Script" path="res://game/GuidesService.gd" id="14_afyj4"]
 [ext_resource type="Script" path="res://game/crowd_service/crowd_service.gd" id="15_h2jxo"]

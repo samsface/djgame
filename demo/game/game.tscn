@@ -9,7 +9,7 @@
 [ext_resource type="Shader" path="res://game/points_service/damage.gdshader" id="6_8dwcl"]
 [ext_resource type="Script" path="res://game/animation.gd" id="9_ds76j"]
 [ext_resource type="Script" path="res://game/crowd_service/crowd_service.gd" id="10_aypd4"]
-[ext_resource type="PackedScene" uid="uid://lb3oq22iphka" path="res://tools/beat_player_host.tscn" id="10_cc86w"]
+[ext_resource type="PackedScene" uid="uid://lb3oq22iphka" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_host_control.tscn" id="10_cc86w"]
 [ext_resource type="Script" path="res://game/GuidesService.gd" id="14_y06of"]
 [ext_resource type="Script" path="res://game/points_service/PointsService.gd" id="22_7tagj"]
 [ext_resource type="Script" path="res://game/AudioService.gd" id="25_uoe2k"]
@@ -110,7 +110,7 @@ color = Color(1, 1, 1, 0)
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.882353)
 layout_mode = 2
-save_path = "res://junk/beat.bp"
+save_path = "res://junk/beat2.bp"
 root_node = NodePath("../../../../SubViewportContainer/SubViewport/Game")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
@@ -121,7 +121,7 @@ stretch_shrink = 4
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(420, 262)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="Game" type="Node3D" parent="SubViewportContainer/SubViewport"]

@@ -19,6 +19,7 @@ next_pass = ExtResource("3_mcv0o")
 shader = ExtResource("4_we6k2")
 shader_parameter/smudge_scale = 0.142
 shader_parameter/color = Color(0.890196, 0.819608, 0.827451, 1)
+shader_parameter/color2 = null
 shader_parameter/debug_uv1 = false
 shader_parameter/debug_uv2 = false
 shader_parameter/ambient_occlusion = 1.0

@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl1mirff335m"]
+
+[ext_resource type="Theme" uid="uid://dbvpa0vlu34gu" path="res://ui/beat_player.tres" id="1_wdlgr"]
+[ext_resource type="Script" path="res://addons/rhythmic_animation_player/ops/scene.gd" id="2_77nl1"]
+
+[node name="Scene" type="Button"]
+offset_right = 32.0
+offset_bottom = 32.0
+theme = ExtResource("1_wdlgr")
+script = ExtResource("2_77nl1")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.556863, 0.823529, 0.490196, 1)
+antialiased = true
+polygon = PackedVector2Array(1, 1, 31, 1, 31, 31, 1, 31)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 46.0
+grow_vertical = 2
+text = "BANG"
+vertical_alignment = 1

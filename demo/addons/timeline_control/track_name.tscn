@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfr7o1tvoy1ur"]
+
+[ext_resource type="Script" path="res://addons/timeline_control/track_name.gd" id="1_po4w0"]
+[ext_resource type="PackedScene" uid="uid://bjk82apdpepv" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn" id="2_245l5"]
+
+[node name="TrackName" type="Button"]
+custom_minimum_size = Vector2(0, 32)
+offset_right = 290.0
+offset_bottom = 32.0
+script = ExtResource("1_po4w0")
+
+[node name="H" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Indent" type="MarginContainer" parent="H"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoveUp" type="Button" parent="H"]
+visible = false
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "UP"
+
+[node name="MoveDown" type="Button" parent="H"]
+visible = false
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "DN"
+
+[node name="Delete" type="Button" parent="H"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "X"
+
+[node name="MarginContainer" parent="H" instance=ExtResource("2_245l5")]
+layout_mode = 2

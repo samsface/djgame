@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjk82apdpepv"]
+
+[ext_resource type="Script" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.gd" id="1_rqhl2"]
+
+[node name="MarginContainer" type="HBoxContainer"]
+auto_translate_mode = 1
+offset_right = 239.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_rqhl2")
+
+[node name="Value" type="Label" parent="."]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+
+[node name="Condition" type="Label" parent="."]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 3
+text_overrun_behavior = 3
