@@ -7,6 +7,7 @@ var guide_service:GuideService
 var audio_service:AudioService
 var points_service
 var input_service:InputService
+var config_service:ConfigService
 
 func _ready() -> void:
 	input_service = InputService.new()

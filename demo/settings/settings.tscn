@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgg103ssmbg32"]
+
+[ext_resource type="Script" path="res://settings/settings.gd" id="1_nnp4p"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_nnp4p")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+auto_translate_mode = 1
+offset_right = 1680.0
+offset_bottom = 1050.0
+
+[node name="MarginContainer" type="PanelContainer" parent="CenterContainer"]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+text = "Quality"
+
+[node name="GraphicsQuality" type="OptionButton" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 2
+item_count = 4
+popup/item_0/text = "High"
+popup/item_0/id = 0
+popup/item_1/text = "Medium"
+popup/item_1/id = 1
+popup/item_2/text = "Low"
+popup/item_2/id = 3
+popup/item_3/text = "Potato"
+popup/item_3/id = 2
+
+[connection signal="item_selected" from="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/GraphicsQuality" to="." method="_graphics_quality_selected"]

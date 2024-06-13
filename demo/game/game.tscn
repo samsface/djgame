@@ -1,44 +1,20 @@
-[gd_scene load_steps=24 format=3 uid="uid://bfo1bxbj7knm0"]
+[gd_scene load_steps=19 format=3 uid="uid://bfo1bxbj7knm0"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_5uhe0"]
 [ext_resource type="PackedScene" uid="uid://lprkgl2wh3cd" path="res://auto_loads/camera.tscn" id="2_1yirq"]
 [ext_resource type="PackedScene" uid="uid://bl7d8jwotcuws" path="res://models/phone/phone.tscn" id="2_4rjj7"]
-[ext_resource type="AudioStream" uid="uid://dkqau0j3qyfq1" path="res://game/points_service/369673__filmsndfx__record-scratches.wav" id="4_3igub"]
 [ext_resource type="Texture2D" uid="uid://48p1jkwhm4wh" path="res://models/club/samm0363_texture_of_a_bar_table_with_stains_and_wear_tile_5a36bd34-3c9c-4c2b-a62c-8adabec8fccf.png" id="4_g7021"]
-[ext_resource type="Script" path="res://game/HP.gd" id="4_tlvfu"]
-[ext_resource type="Shader" path="res://game/points_service/damage.gdshader" id="6_8dwcl"]
+[ext_resource type="Script" path="res://game/world_viewport.gd" id="4_oqmxi"]
+[ext_resource type="PackedScene" uid="uid://df031doltiks0" path="res://game/points_service/points_service.tscn" id="6_2emse"]
 [ext_resource type="Script" path="res://game/animation.gd" id="9_ds76j"]
 [ext_resource type="Script" path="res://game/crowd_service/crowd_service.gd" id="10_aypd4"]
 [ext_resource type="PackedScene" uid="uid://lb3oq22iphka" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_host_control.tscn" id="10_cc86w"]
+[ext_resource type="PackedScene" uid="uid://dgg103ssmbg32" path="res://settings/settings.tscn" id="14_anos2"]
 [ext_resource type="Script" path="res://game/GuidesService.gd" id="14_y06of"]
-[ext_resource type="Script" path="res://game/points_service/PointsService.gd" id="22_7tagj"]
 [ext_resource type="Script" path="res://game/audio_service.gd" id="25_uoe2k"]
 [ext_resource type="PackedScene" uid="uid://rbuf4nqmcmjx" path="res://models/acid/acid.tscn" id="27_daa16"]
 [ext_resource type="PackedScene" uid="uid://cnnors0cf4oai" path="res://models/redux/redux.tscn" id="27_rrm5u"]
 [ext_resource type="PackedScene" uid="uid://dfkhn8atn11hq" path="res://models/toydrum/drum.tscn" id="27_w54s6"]
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ty5xm"]
-random_pitch = 1.23
-streams_count = 1
-stream_0/stream = ExtResource("4_3igub")
-stream_0/weight = 1.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hy0nu"]
-bg_color = Color(0, 0, 0, 0.313726)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jd5w2"]
-bg_color = Color(22.485, 26.036, 29.586, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-shadow_color = Color(1, 1, 1, 1)
-shadow_size = 10
-anti_aliasing = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2qps5"]
-shader = ExtResource("6_8dwcl")
-shader_parameter/damage = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ij4h"]
 albedo_color = Color(0.235294, 0.235294, 0.235294, 1)
@@ -85,6 +61,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="ConfigService" parent="." instance=ExtResource("14_anos2")]
+
 [node name="Recorder" type="Node" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Recorder"]
@@ -111,174 +89,65 @@ unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.882353)
 layout_mode = 2
 save_path = "res://junk/beat2.bp"
-root_node = NodePath("../../../../SubViewportContainer/SubViewport/Game")
+root_node = NodePath("../../../../WorldViewport/SubViewport/Game")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="WorldViewport" type="SubViewportContainer" parent="."]
 layout_mode = 2
 mouse_filter = 2
 stretch = true
+script = ExtResource("4_oqmxi")
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="WorldViewport"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+gui_snap_controls_to_pixels = false
+size = Vector2i(1680, 1050)
 render_target_update_mode = 4
 
-[node name="Game" type="Node3D" parent="SubViewportContainer/SubViewport"]
+[node name="Game" type="Node3D" parent="WorldViewport/SubViewport"]
 script = ExtResource("1_5uhe0")
 metadata/_edit_lock_ = true
 
-[node name="AudioService" type="Node" parent="SubViewportContainer/SubViewport/Game"]
+[node name="AudioService" type="Node" parent="WorldViewport/SubViewport/Game"]
 script = ExtResource("25_uoe2k")
 
-[node name="CrowdService" type="Node3D" parent="SubViewportContainer/SubViewport/Game"]
+[node name="CrowdService" type="Node3D" parent="WorldViewport/SubViewport/Game"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.29723)
 script = ExtResource("10_aypd4")
 
-[node name="PointsService" type="Node3D" parent="SubViewportContainer/SubViewport/Game"]
-script = ExtResource("22_7tagj")
+[node name="PointsService" parent="WorldViewport/SubViewport/Game" instance=ExtResource("6_2emse")]
 
-[node name="RecordScratch" type="AudioStreamPlayer" parent="SubViewportContainer/SubViewport/Game/PointsService"]
-stream = SubResource("AudioStreamRandomizer_ty5xm")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport/Game/PointsService"]
-layer = 0
-
-[node name="Win" type="ColorRect" parent="SubViewportContainer/SubViewport/Game/PointsService/CanvasLayer"]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 1, 1, 0.309804)
-
-[node name="CenterContainer" type="CenterContainer" parent="SubViewportContainer/SubViewport/Game/PointsService/CanvasLayer/Win"]
-layout_mode = 0
-offset_right = 1686.0
-offset_bottom = 1053.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewportContainer/SubViewport/Game/PointsService/CanvasLayer/Win/CenterContainer"]
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="SubViewportContainer/SubViewport/Game/PointsService/CanvasLayer/Win/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(1000, 0)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 55
-bbcode_enabled = true
-text = "[tornado]
-[center]
-STAGE COMPLETE!
-Max COMBO: 23
-Total HP Gained: 500
-Average Timing: 0.2ms
-Secrets Discovered: 0/3
-Misses: 4
-[/center]
-[/tornado]"
-fit_content = true
-
-[node name="Dead" type="ColorRect" parent="SubViewportContainer/SubViewport/Game/PointsService/CanvasLayer"]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
-
-[node name="VBoxContainer" type="CenterContainer" parent="SubViewportContainer/SubViewport/Game/PointsService/CanvasLayer/Dead"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewportContainer/SubViewport/Game/PointsService/CanvasLayer/Dead/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/Game/PointsService/CanvasLayer/Dead/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 6
-text = "Your HP hit zero and you died :("
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="SubViewportContainer/SubViewport/Game/PointsService/CanvasLayer/Dead/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 6
-text = "Press ctrl-shift-0 to restart"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MarginContainer2" type="MarginContainer" parent="SubViewportContainer/SubViewport/Game/PointsService/CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 128
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 128
-
-[node name="HP" type="ProgressBar" parent="SubViewportContainer/SubViewport/Game/PointsService/CanvasLayer/MarginContainer2"]
-modulate = Color(0, 0.729412, 0, 1)
-show_behind_parent = true
-custom_minimum_size = Vector2(0, 16)
-layout_mode = 2
-mouse_filter = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_hy0nu")
-theme_override_styles/fill = SubResource("StyleBoxFlat_jd5w2")
-max_value = 1.0
-step = 0.0
-value = 0.5
-show_percentage = false
-script = ExtResource("4_tlvfu")
-
-[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport/Game/PointsService/CanvasLayer"]
-material = SubResource("ShaderMaterial_2qps5")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Guides" type="Node3D" parent="SubViewportContainer/SubViewport/Game"]
+[node name="Guides" type="Node3D" parent="WorldViewport/SubViewport/Game"]
 script = ExtResource("14_y06of")
 
-[node name="Camera" parent="SubViewportContainer/SubViewport/Game" instance=ExtResource("2_1yirq")]
+[node name="Camera" parent="WorldViewport/SubViewport/Game" instance=ExtResource("2_1yirq")]
 
-[node name="phone" parent="SubViewportContainer/SubViewport/Game" instance=ExtResource("2_4rjj7")]
+[node name="phone" parent="WorldViewport/SubViewport/Game" instance=ExtResource("2_4rjj7")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0.0847787, 0.00177433, 0.187085)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Game"]
+[node name="StaticBody3D" type="StaticBody3D" parent="WorldViewport/SubViewport/Game"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.500806, 0.363653)
 collision_layer = 8
 collision_mask = 0
 
-[node name="CSGBox3D" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Game/StaticBody3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldViewport/SubViewport/Game/StaticBody3D"]
 collision_layer = 8
 collision_mask = 8
 material = SubResource("StandardMaterial3D_3ij4h")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Game/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldViewport/SubViewport/Game/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00122625, 0)
 shape = SubResource("BoxShape3D_ml2c8")
 
-[node name="Redux" parent="SubViewportContainer/SubViewport/Game" instance=ExtResource("27_rrm5u")]
+[node name="Redux" parent="WorldViewport/SubViewport/Game" instance=ExtResource("27_rrm5u")]
 transform = Transform3D(-0.979535, 0, -0.201273, 0, 1, 0, 0.201273, 0, -0.979535, 0.184669, 0.012781, 0.105101)
 
-[node name="acid" parent="SubViewportContainer/SubViewport/Game" instance=ExtResource("27_daa16")]
+[node name="acid" parent="WorldViewport/SubViewport/Game" instance=ExtResource("27_daa16")]
 transform = Transform3D(0.938384, 0, -0.345594, 0.000366128, 0.999999, 0.000994138, 0.345594, -0.00105941, 0.938384, 0.0540479, 0.00244257, 0.055736)
 
-[node name="toykit" parent="SubViewportContainer/SubViewport/Game" instance=ExtResource("27_w54s6")]
+[node name="toykit" parent="WorldViewport/SubViewport/Game" instance=ExtResource("27_w54s6")]
 transform = Transform3D(-0.44806, 0, -0.894003, 0, 1, 0, 0.894003, 0, -0.44806, 0.109198, 0.0174311, -0.0306898)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Game"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="WorldViewport/SubViewport/Game"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.499829, 0.377878)
 visible = false
 use_collision = true
@@ -287,5 +156,5 @@ collision_mask = 0
 size = Vector3(100, 1, 100)
 material = SubResource("StandardMaterial3D_2x22v")
 
-[connection signal="play" from="Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost" to="SubViewportContainer/SubViewport/Game" method="_play"]
-[connection signal="stop" from="Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost" to="SubViewportContainer/SubViewport/Game" method="_stop"]
+[connection signal="play" from="Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost" to="WorldViewport/SubViewport/Game" method="_play"]
+[connection signal="stop" from="Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost" to="WorldViewport/SubViewport/Game" method="_stop"]

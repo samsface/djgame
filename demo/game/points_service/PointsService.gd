@@ -26,7 +26,7 @@ var no_touch_:Node3D
 func _ready() -> void:
 	Bus.points_service = self
 	hp_.zero.connect(_zero)
-	$CanvasLayer/ColorRect.material.set_shader_parameter("damage", 0.0)
+	#$CanvasLayer/ColorRect.material.set_shader_parameter("damage", 0.0)
 
 func _zero() -> void:
 	pass

@@ -68,12 +68,13 @@ func distance_to_camera_(distance):
 	return Vector2(0.25, 0.25) * distance * 1.5
 
 func _physics_process(delta: float) -> void:
-	position = next_position_
-	cursor_.position = camera_.unproject_position(position)
-	cursor_.scale = distance_to_camera_(global_position.distance_to(camera_.global_position)) * 0.25
+	if Input.is_action_just_pressed("os_cursor"):
+		disabled = not disabled
 	
-var x := Vector2.ZERO
-
+	position = next_position_
+	cursor_.position = camera_.unproject_position(position) 
+	cursor_.scale = distance_to_camera_(global_position.distance_to(camera_.global_position))
+	
 func invalidate_disabled_() -> void:
 	if not disabled:
 		reset()
@@ -87,8 +88,7 @@ func reset() -> void:
 func update() -> void:
 	if disabled:
 		return
-		
-		
-	position2D += Bus.input_service.relative * 1.5 * 0.3
+
+	position2D += Bus.input_service.relative * 1.5
 	cursor_.position = position2D
 	Bus.input_service.relative = Vector2.ZERO

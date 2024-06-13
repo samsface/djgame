@@ -28,7 +28,7 @@ func looking_at() -> void:
 func _ready() -> void:
 	Bus.camera_service = self
 	cursor.push(self, Cursor.Action.point)
-
+	
 func rv(scale:float = 1.0) -> Vector3:
 	return Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)) * scale
 
