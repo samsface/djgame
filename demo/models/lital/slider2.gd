@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 			dragging_start_ = get_window().get_mouse_position()
 	
 	if dragging_:
-		var diff = Bus.input_service.relative.y * 0.005
+		var diff = Bus.input_service.relative.y * 0.001
 		
 		if diff == 0.0:
 			return
