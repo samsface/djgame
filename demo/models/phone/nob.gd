@@ -40,7 +40,6 @@ func buffer_change(time, value):
 	value_will_change.emit(time, value)
 
 func _input(event: InputEvent) -> void:
-	print(event)
 	if action and action.action and event.is_action_pressed(action.action):
 		pressed()
 
@@ -61,7 +60,7 @@ func pressed() -> void:
 
 	value_ = 1.0
 
-	print(value_)
+
 	#$Nob/Model/Button.light = light_color_()
 	#if has_node("Sound"):
 	#	$Sound.play()

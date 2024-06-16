@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://lprkgl2wh3cd"]
 
-[ext_resource type="Script" path="res://auto_loads/view/camera.gd" id="1_o37hp"]
-[ext_resource type="Script" path="res://auto_loads/view/cursor.gd" id="2_rcdnn"]
-[ext_resource type="Script" path="res://auto_loads/hud.gd" id="3_5v3r4"]
-[ext_resource type="Texture2D" uid="uid://cwhxcbe4nkdvd" path="res://auto_loads/view/cursor.png" id="3_6dawb"]
+[ext_resource type="Script" path="res://game/camera/camera.gd" id="1_o37hp"]
+[ext_resource type="Script" path="res://game/camera/cursor.gd" id="2_rcdnn"]
+[ext_resource type="Script" path="res://game/hud_canvas_layer.gd" id="3_5v3r4"]
+[ext_resource type="Texture2D" uid="uid://cwhxcbe4nkdvd" path="res://game/camera/cursor.png" id="3_6dawb"]
 
 [node name="Camera" type="Node3D"]
 script = ExtResource("1_o37hp")

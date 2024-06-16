@@ -10,4 +10,3 @@ func _ready() -> void:
 	get_parent().remove_child(self)
 
 	root.add_child(self)
-
