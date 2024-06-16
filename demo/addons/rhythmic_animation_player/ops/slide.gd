@@ -47,5 +47,6 @@ func invalidate_value_() -> void:
 	
 	$Polygon2D.polygon = polygon
 
-func op(db, node, length) -> void:
-	node.slide(length, from_value, value, gluide)
+func begin() -> void:
+	var length_in_seconds = length * (Bus.audio_service.metro) * 0.001
+	get_target_node().slide(length_in_seconds, from_value, value, gluide)

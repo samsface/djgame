@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bl7d8jwotcuws"]
+[gd_scene load_steps=21 format=3 uid="uid://bl7d8jwotcuws"]
 
 [ext_resource type="PackedScene" uid="uid://v8jvhtuvyeij" path="res://models/phone/phone.glb" id="1_qnpo2"]
 [ext_resource type="Script" path="res://models/phone/phones.gd" id="2_hu3e3"]
@@ -28,6 +28,10 @@ shader_parameter/scuff = ExtResource("4_v74j0")
 shader_parameter/ao = ExtResource("4_mdlhq")
 shader_parameter/marc = ExtResource("5_s4yx2")
 
+[sub_resource type="InputEventAction" id="InputEventAction_xin02"]
+action = &"1"
+pressed = true
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_xlqpk"]
 material = ExtResource("12_n07xt")
 size = Vector2(0.04, 0.01)
@@ -44,6 +48,7 @@ size = Vector3(0.02, 0.0025, 0.02)
 
 [node name="phone" instance=ExtResource("1_qnpo2")]
 script = ExtResource("2_hu3e3")
+free_click = true
 
 [node name="StaticBody3D" type="Area3D" parent="." index="0"]
 collision_layer = 8
@@ -123,6 +128,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00131534, 0.0789503, 0.0048
 
 [node name="0" parent="." index="6" instance=ExtResource("10_agbu1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0185696, -9.78545e-05, -0.0262739)
+action = SubResource("InputEventAction_xin02")
 
 [node name="StaticBody3D" type="Area3D" parent="0" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.019272, 0, 0)
@@ -135,7 +141,8 @@ script = ExtResource("11_3ktek")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="0/StaticBody3D" index="0"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0.001, 0)
-instance_shader_parameters/electric_albedo = Color(0, 1, 0, 0)
+instance_shader_parameters/electric_albedo = Color(0.360784, 0.733333, 0, 0)
+instance_shader_parameters/rand = 0.0
 mesh = SubResource("PlaneMesh_xlqpk")
 skeleton = NodePath("../../../ReplyA")
 

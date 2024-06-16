@@ -40,7 +40,7 @@ action = &"4"
 [sub_resource type="InputEventAction" id="InputEventAction_5bmuq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g43ny"]
-albedo_color = Color(0.956863, 0.580392, 0.698039, 1)
+albedo_color = Color(0.936617, 0.923601, 0.681464, 1)
 albedo_texture = ExtResource("1_kpr7j")
 metallic = 0.48
 metallic_specular = 0.47

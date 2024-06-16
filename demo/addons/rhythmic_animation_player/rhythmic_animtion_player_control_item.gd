@@ -3,6 +3,7 @@ extends TimelineControlItem
 class_name RythmicAnimationPlayerControlItem
 
 var active := false
+var db = Object.new()
 
 func get_lookahead() -> int:
 	return 0

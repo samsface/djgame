@@ -69,6 +69,9 @@ func watch(nob:Nob, from_value:float, to_value:float, duration:float, gluide:flo
 	gluide_ = 1.5
 
 	position = nob_.get_guide_position_for_value(expected_value_)
+	
+	#DebugDraw.line(self, nob_.get_guide_position_for_value(to_value_), nob_.get_guide_position_for_value(expected_value_), Color.WHITE, 10000)
+	
 	arrow_.orient(
 		nob_.get_guide_position_for_value(to_value_),
 		nob_.get_guide_position_for_value(expected_value_)

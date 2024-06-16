@@ -174,3 +174,5 @@ func _paint_item_selected(index: int) -> void:
 			painting_item = preload("res://addons/rhythmic_animation_player/ops/slide.tscn")
 		2:
 			painting_item = preload("res://addons/rhythmic_animation_player/ops/method.tscn")
+		3:
+			painting_item = preload("res://addons/rhythmic_animation_player/ops/dialog.tscn")

@@ -6,6 +6,9 @@ var mouse_entered_ := false
 	set(v):
 		free_click = v
 		
+		if not is_node_ready():
+			await ready
+		
 		if free_click:
 			$StaticBody3D/CollisionShape3D.disabled = false
 			$"0/StaticBody3D/CollisionShape3D".disabled = true
@@ -20,9 +23,11 @@ var mouse_entered_ := false
 
 func _mouse_entered() -> void:
 	mouse_entered_ = true
+	print_debug("mouse entered")
 
 func _mouse_exited() -> void:
 	mouse_entered_ = false
+	print_debug("mouse exit")
 
 func click(pos) -> void:
 	pos = $StaticBody3D.to_local(pos)
@@ -43,13 +48,13 @@ func click(pos) -> void:
 	e.global_position = e.position
 	e.device = 444
 
-	Input.parse_input_event(e)
+	_input(e)
 
 	var e2 := e.duplicate()
 	e2.pressed = false
 	e2.button_mask = 0
 
-	Input.parse_input_event(e2)
+	_input(e2)
 
 func _input(event) -> void:
 	var automated = event.device == 444

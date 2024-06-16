@@ -23,4 +23,4 @@ offset_left = 1306.0
 offset_top = 21.0
 offset_right = -18.0
 offset_bottom = -411.0
-visible_properties = Array[StringName]([&"time", &"length", &"condition_ex", &"node_path"])
+visible_properties = Array[StringName]([&"time", &"length", &"condition_ex", &"node_path", &"who", &"reply_a", &"reply_b"])

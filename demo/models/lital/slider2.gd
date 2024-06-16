@@ -37,6 +37,9 @@ func _ready() -> void:
 	path_follow = $Path/PathFollow
 	set_physics_process(false)
 	value = randf()
+	
+func buffer_change(time, v):
+	value = v
 
 func _physics_process(delta: float) -> void:
 	if dragging_:
@@ -99,8 +102,8 @@ func invalidate_() -> void:
 	#Bus.camera_service.look_at_node(self.get_parent())
 
 func get_guide_position_for_value(value:float) -> Vector3:
-	shadow_path_follow_.progress_ratio = value
-	return shadow_path_follow_.global_position
+	var a = $Path3D.curve.get_baked_length()
+	return $Path3D.to_global($Path3D.curve.sample_baked(value * a))
 
 func update_path_follow_position_for_value(for_value:float) -> void:
 	$Path.global_position = get_guide_position_for_value(for_value)

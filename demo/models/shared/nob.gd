@@ -6,7 +6,9 @@ class_name Nob
 var intended_value := 0.0
 var reset_to_intended_value_tween_:Tween
 var path_follow:PathFollow3D
-var lock := false
+var lock := false : 
+	set(v):
+		lock = v
 
 func get_guide_position_for_value(value:float) -> Vector3:
 	return global_position

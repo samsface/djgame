@@ -25,3 +25,6 @@ func get_view_position(from_position := Vector3.ZERO) -> Vector3:
 func look(view_position_idx:int = 0) -> void:
 	current_view_position_ = $Views.get_child(view_position_idx)
 	Bus.camera_service.look_at_node(self)
+
+func set_swing(value:float):
+	Bus.audio_service.emit_float("toykit-swing", value)

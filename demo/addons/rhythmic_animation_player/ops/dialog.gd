@@ -1,4 +1,4 @@
-extends PianoRollItem
+extends RythmicAnimationPlayerControlItem
 
 @export var who:String :
 	set(v):
@@ -12,8 +12,8 @@ extends PianoRollItem
 
 @export var db_name:String
 
-@export var replay_a:String
-@export var replay_b:String
+@export var reply_a:String
+@export var reply_b:String
 
 func _ready():
 	invalidate_value_()
@@ -23,5 +23,5 @@ func invalidate_value_() -> void:
 	text = value.replace("\n", " ")
 	tooltip_text = text
 
-func op(db:Object, node:Node, length:float) -> void:
-	node.dialog(db, length, who, value, db_name, replay_a, replay_b)
+func begin() -> void:
+	get_target_node().dialog(db, length, who, value, db_name, reply_a, reply_b)

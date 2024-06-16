@@ -12,8 +12,22 @@ var root_node:Node
 		condition_ex = v
 		invalidate_()
 
+func pretty_name(np:NodePath):
+	var split = str(np).split("/")
+
+	if split.size() > 1:
+		return split[0] + "/" + split[split.size() - 1]
+	
+	return str(np)
+	
+
 func invalidate_() -> void:
-	$Value.text = str(node_path)
+	$Value.text = pretty_name(node_path)
+	
+	if try_get_node() == null:
+		modulate = Color.RED
+	else:
+		modulate = Color.WHITE
 	
 	if condition_ex.is_empty():
 		$Condition.visible = false
