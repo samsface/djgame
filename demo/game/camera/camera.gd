@@ -38,6 +38,8 @@ func shake(duration:float = 0.5, scale:float = 0.001) -> void:
 
 	shake_tween_ = create_tween()
 	shake_tween_.set_speed_scale(0.2)
+	shake_tween_.tween_interval(Bus.audio_service.latency * 0.2)
+	
 	for i in int(duration / 0.1):
 		shake_tween_.tween_property(camera_, "position", position + rv(scale / (i+1)), 0.01)
 

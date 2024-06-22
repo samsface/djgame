@@ -6,10 +6,10 @@ volume_db = -13.94
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_oif8r"]
 resource_name = "Reverb"
-room_size = 0.06
+room_size = 0.14
 damping = 0.78
 spread = 0.13
-wet = 0.12
+wet = 0.16
 
 [sub_resource type="AudioEffectChorus" id="AudioEffectChorus_r80rm"]
 resource_name = "Chorus"
@@ -19,7 +19,7 @@ resource_name = "Limiter"
 ceiling_db = -6.6
 
 [resource]
-bus/0/volume_db = -9.63278
+bus/0/volume_db = -0.528235
 bus/0/effect/0/effect = SubResource("AudioEffectAmplify_gby66")
 bus/0/effect/0/enabled = true
 bus/0/effect/1/effect = SubResource("AudioEffectReverb_oif8r")

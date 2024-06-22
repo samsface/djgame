@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp46bep2k8li2"]
+
+[ext_resource type="PackedScene" uid="uid://dhyu14x4pcjpd" path="res://models/club/corner_bar_roof.glb" id="1_4xrt5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_06t8e"]
+albedo_color = Color(0.461756, 0.634198, 0.559849, 1)
+
+[node name="corner_bar_roof" instance=ExtResource("1_4xrt5")]
+
+[node name="BézierCurve_001" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_06t8e")

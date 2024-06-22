@@ -36,7 +36,8 @@ func commit():
 	if points_ > 0:
 		get_parent().combo += 1
 	else:
-		Bus.camera_service.camera_.rotation_degrees.z = randf_range(7.0, 12.0)
+		pass
+		#Bus.camera_service.camera_.rotation_degrees.z = randf_range(7.0, 12.0)
 		#PureData.pitch_scale = 2.0 + randf()
 		#get_tree().create_timer(randf_range(0.1, 0.3)).timeout.connect(func(): PureData.pitch_scale = 1.0; Bus.camera_service.camera_.rotation_degrees.z = 0)
 

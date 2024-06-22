@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://btlti17abjtib"]
+
+[ext_resource type="PackedScene" uid="uid://cdc5ycno8273x" path="res://models/club/support_struts.glb" id="1_fx34f"]
+[ext_resource type="Material" uid="uid://dbeol6ssg61sw" path="res://models/club/support_struts.tres" id="2_sxeb2"]
+
+[node name="support_struts" instance=ExtResource("1_fx34f")]
+
+[node name="SupportStrutsBake" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.158413, -0.944258, -0.0291866)
+surface_material_override/0 = ExtResource("2_sxeb2")

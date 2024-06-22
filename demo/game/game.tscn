@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bfo1bxbj7knm0"]
+[gd_scene load_steps=34 format=3 uid="uid://bfo1bxbj7knm0"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_5uhe0"]
 [ext_resource type="PackedScene" uid="uid://lprkgl2wh3cd" path="res://game/camera/camera.tscn" id="2_1yirq"]
@@ -6,18 +6,30 @@
 [ext_resource type="Texture2D" uid="uid://48p1jkwhm4wh" path="res://models/club/samm0363_texture_of_a_bar_table_with_stains_and_wear_tile_5a36bd34-3c9c-4c2b-a62c-8adabec8fccf.png" id="4_g7021"]
 [ext_resource type="Script" path="res://game/world_viewport.gd" id="4_oqmxi"]
 [ext_resource type="PackedScene" uid="uid://df031doltiks0" path="res://game/points_service/points_service.tscn" id="6_2emse"]
+[ext_resource type="AudioStream" uid="uid://cox0cypa0r0wf" path="res://game/crowd_service/Bar Ambience Sound Effect- No Copyright.mp3" id="8_3ww8b"]
+[ext_resource type="AudioStream" uid="uid://b3hkravd23cph" path="res://game/crowd_service/400587__misjoc__medium-crowd-cheering-01(1).wav" id="9_cepbh"]
 [ext_resource type="Script" path="res://game/animation.gd" id="9_ds76j"]
 [ext_resource type="Script" path="res://game/crowd_service/crowd_service.gd" id="10_aypd4"]
 [ext_resource type="PackedScene" uid="uid://lb3oq22iphka" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_host_control.tscn" id="10_cc86w"]
+[ext_resource type="AudioStream" uid="uid://b0sodcqt4qvjc" path="res://game/crowd_service/clap.wav" id="10_pwek6"]
+[ext_resource type="PackedScene" uid="uid://bqej7kilkwxxl" path="res://mixamo/ch_03_non_pbr.tscn" id="11_dbcca"]
 [ext_resource type="PackedScene" uid="uid://dgg103ssmbg32" path="res://settings/settings.tscn" id="14_anos2"]
 [ext_resource type="Script" path="res://game/GuidesService.gd" id="14_y06of"]
 [ext_resource type="CameraAttributesPractical" uid="uid://ev1eo0cru0we" path="res://game/cameraatr.tres" id="16_2sje1"]
-[ext_resource type="Environment" uid="uid://b8uhvyo3rc3m8" path="res://settings/environment_potato.tres" id="16_cgs7w"]
 [ext_resource type="Script" path="res://game/world_environment.gd" id="18_sypot"]
+[ext_resource type="Environment" uid="uid://b8uhvyo3rc3m8" path="res://settings/environment_potato.tres" id="20_m1yfn"]
+[ext_resource type="PackedScene" uid="uid://ddflkpqn6dlb2" path="res://models/club/ceiling.glb" id="23_5otcv"]
+[ext_resource type="PackedScene" uid="uid://b1nl0hf3y08em" path="res://models/club/bus.glb" id="23_dn6o6"]
+[ext_resource type="PackedScene" uid="uid://bsqoavbapde8k" path="res://models/club/stool.glb" id="24_4kufa"]
 [ext_resource type="Script" path="res://game/audio_service.gd" id="25_uoe2k"]
+[ext_resource type="PackedScene" uid="uid://b52j7vr3riih1" path="res://models/club/beam.tscn" id="26_otakv"]
+[ext_resource type="PackedScene" uid="uid://dp46bep2k8li2" path="res://models/club/corner_bar_roof.tscn" id="26_sxcco"]
+[ext_resource type="PackedScene" uid="uid://hrc3u1iu4mgh" path="res://models/club/corner_bar.tscn" id="26_vbtwx"]
 [ext_resource type="PackedScene" uid="uid://rbuf4nqmcmjx" path="res://models/acid/acid.tscn" id="27_daa16"]
+[ext_resource type="PackedScene" uid="uid://03x3y7xp68cb" path="res://models/club/wavey_bit.tscn" id="27_pss2n"]
 [ext_resource type="PackedScene" uid="uid://cnnors0cf4oai" path="res://models/redux/redux.tscn" id="27_rrm5u"]
 [ext_resource type="PackedScene" uid="uid://dfkhn8atn11hq" path="res://models/toydrum/drum.tscn" id="27_w54s6"]
+[ext_resource type="PackedScene" uid="uid://btlti17abjtib" path="res://models/club/support_struts.tscn" id="30_1irv8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ij4h"]
 albedo_color = Color(0.235294, 0.235294, 0.235294, 1)
@@ -104,7 +116,7 @@ script = ExtResource("4_oqmxi")
 [node name="SubViewport" type="SubViewport" parent="WorldViewport"]
 handle_input_locally = false
 gui_snap_controls_to_pixels = false
-size = Vector2i(2, 2)
+size = Vector2i(1680, 1050)
 render_target_update_mode = 4
 
 [node name="Game" type="Node3D" parent="WorldViewport/SubViewport"]
@@ -115,8 +127,34 @@ metadata/_edit_lock_ = true
 script = ExtResource("25_uoe2k")
 
 [node name="CrowdService" type="Node3D" parent="WorldViewport/SubViewport/Game"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.29723)
 script = ExtResource("10_aypd4")
+
+[node name="Marker3D" type="Marker3D" parent="WorldViewport/SubViewport/Game/CrowdService"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0404572, 0.211978, 0.332187)
+
+[node name="Marker3D2" type="Marker3D" parent="WorldViewport/SubViewport/Game/CrowdService"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.9854e-05, 0.442598, -0.773063)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="WorldViewport/SubViewport/Game/CrowdService"]
+stream = ExtResource("8_3ww8b")
+autoplay = true
+
+[node name="Scream" type="AudioStreamPlayer" parent="WorldViewport/SubViewport/Game/CrowdService"]
+stream = ExtResource("9_cepbh")
+volume_db = 5.0
+
+[node name="Clap" type="AudioStreamPlayer" parent="WorldViewport/SubViewport/Game/CrowdService"]
+stream = ExtResource("10_pwek6")
+volume_db = 5.0
+
+[node name="Ch03_nonPBR" parent="WorldViewport/SubViewport/Game/CrowdService" instance=ExtResource("11_dbcca")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.531129, -1.19139, -1.99893)
+
+[node name="Ch03_nonPBR2" parent="WorldViewport/SubViewport/Game/CrowdService" instance=ExtResource("11_dbcca")]
+transform = Transform3D(0.527519, 0, -0.849543, 0, 1, 0, 0.849543, 0, 0.527519, 3.01797, -1.18293, -2.02649)
+
+[node name="Ch03_nonPBR3" parent="WorldViewport/SubViewport/Game/CrowdService" instance=ExtResource("11_dbcca")]
+transform = Transform3D(0.89913, 0, -0.437681, 0, 1, 0, 0.437681, 0, 0.89913, 1.21694, -1.16179, -9.00183)
 
 [node name="PointsService" parent="WorldViewport/SubViewport/Game" instance=ExtResource("6_2emse")]
 
@@ -160,23 +198,23 @@ collision_mask = 0
 size = Vector3(100, 1, 100)
 material = SubResource("StandardMaterial3D_2x22v")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldViewport/SubViewport/Game"]
-transform = Transform3D(0.128796, -0.863107, 0.488322, 0, 0.492424, 0.870356, -0.991671, -0.112098, 0.0634222, 0, 0.26248, 0.363653)
-light_energy = 0.1
-light_angular_distance = 3.13
+[node name="WorldEnvironment" type="WorldEnvironment" parent="WorldViewport/SubViewport/Game"]
+environment = ExtResource("20_m1yfn")
+camera_attributes = ExtResource("16_2sje1")
+script = ExtResource("18_sypot")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldViewport/SubViewport/Game/WorldEnvironment"]
+transform = Transform3D(0.665226, -0.735288, -0.129714, 0.655863, 0.492436, 0.572146, -0.356816, -0.465681, 0.80983, 0, 0.26248, 0.363653)
+shadow_reverse_cull_face = true
+shadow_blur = 0.159
 directional_shadow_mode = 0
 directional_shadow_split_1 = 0.0
 directional_shadow_split_2 = 0.117
 directional_shadow_split_3 = 1.0
 directional_shadow_blend_splits = true
-directional_shadow_fade_start = 0.0
-directional_shadow_max_distance = 0.9
-directional_shadow_pancake_size = 0.1
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="WorldViewport/SubViewport/Game"]
-environment = ExtResource("16_cgs7w")
-camera_attributes = ExtResource("16_2sje1")
-script = ExtResource("18_sypot")
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 15.0
+directional_shadow_pancake_size = 0.2
 
 [node name="OmniLight3D" type="OmniLight3D" parent="WorldViewport/SubViewport/Game" groups=["light"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0340311, 0.145733, -0.103002)
@@ -186,6 +224,12 @@ omni_range = 0.188
 [node name="OmniLight3D4" type="OmniLight3D" parent="WorldViewport/SubViewport/Game" groups=["light"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.269406, 0.341738, -1.06024)
 light_color = Color(1, 0, 1, 1)
+shadow_enabled = true
+omni_range = 1.47
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="WorldViewport/SubViewport/Game" groups=["light"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.16853, 0.768919, -3.68455)
+light_color = Color(0.90044, 0.511822, 1.92523e-07, 1)
 shadow_enabled = true
 omni_range = 1.47
 
@@ -214,6 +258,106 @@ light_size = 0.003
 shadow_bias = 0.03
 shadow_blur = 1.45
 omni_range = 0.188
+
+[node name="Garden" type="Node3D" parent="WorldViewport/SubViewport/Game"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0039897, 2.38419e-07, -0.00944376)
+
+[node name="corner_bar" parent="WorldViewport/SubViewport/Game/Garden" instance=ExtResource("26_vbtwx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.74418, -1.13006, -8.87296)
+
+[node name="corner_bar2" parent="WorldViewport/SubViewport/Game/Garden" instance=ExtResource("26_vbtwx")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 3.234, -1.13, -7.433)
+
+[node name="corner_bar3" parent="WorldViewport/SubViewport/Game/Garden" instance=ExtResource("26_vbtwx")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 3.234, -1.13, -7.433)
+
+[node name="corner_bar4" parent="WorldViewport/SubViewport/Game/Garden" instance=ExtResource("26_vbtwx")]
+transform = Transform3D(0.414884, 0, 0.909874, 0, 1, 0, -0.909874, 0, 0.414884, 5.34276, -1.13, -6.9969)
+
+[node name="bus" parent="WorldViewport/SubViewport/Game/Garden" instance=ExtResource("23_dn6o6")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -0.672053, 1.4213, -13.4932)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldViewport/SubViewport/Game/Garden"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25964, 0.238457, -16.5099)
+size = Vector3(10, 6, 1)
+
+[node name="CSGBox3D7" type="CSGCylinder3D" parent="WorldViewport/SubViewport/Game/Garden"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.50298, -0.720827, -3.02008)
+radius = 0.3
+height = 1.0
+
+[node name="CSGBox3D8" type="CSGCylinder3D" parent="WorldViewport/SubViewport/Game/Garden"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.57974, -0.622269, -4.79196)
+radius = 0.3
+height = 1.0
+
+[node name="CSGBox3D9" type="CSGCylinder3D" parent="WorldViewport/SubViewport/Game/Garden"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.204374, -0.622269, -5.95046)
+radius = 0.3
+height = 1.0
+
+[node name="CSGBox3D14" type="CSGCylinder3D" parent="WorldViewport/SubViewport/Game/Garden"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.02046, -0.951742, -5.97786)
+radius = 0.3
+height = 1.0
+
+[node name="CSGBox3D15" type="CSGCylinder3D" parent="WorldViewport/SubViewport/Game/Garden"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.02046, -0.951742, -5.23828)
+radius = 0.3
+height = 1.0
+
+[node name="CSGBox3D16" type="CSGCylinder3D" parent="WorldViewport/SubViewport/Game/Garden"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.02046, -0.951742, -4.47449)
+radius = 0.3
+height = 1.0
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="WorldViewport/SubViewport/Game/Garden"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5804, 0, -11.3289)
+size = Vector3(10, 3, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="WorldViewport/SubViewport/Game/Garden"]
+transform = Transform3D(0.999753, 0, 0.0222341, 0, 1, 0, -0.0222341, 0, 0.999753, 8.93153, 0, -7.32017)
+size = Vector3(5.14, 3, 3.195)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="WorldViewport/SubViewport/Game/Garden"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.87471, 0, -2.00098)
+size = Vector3(10, 3, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="WorldViewport/SubViewport/Game/Garden"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.12608, 0, 4.5843)
+size = Vector3(5, 3, 30)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="WorldViewport/SubViewport/Game/Garden"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0365267, -1.64918, 0.0107279)
+size = Vector3(20, 1, 34.2)
+
+[node name="stool4" parent="WorldViewport/SubViewport/Game/Garden" instance=ExtResource("24_4kufa")]
+transform = Transform3D(0.0147633, 0, 0.499782, 0, 0.5, 0, -0.499782, 0, 0.0147633, 5.25819, -0.882788, -5.94864)
+
+[node name="stool3" parent="WorldViewport/SubViewport/Game/Garden" instance=ExtResource("24_4kufa")]
+transform = Transform3D(0.0147633, 0, 0.499782, 0, 0.5, 0, -0.499782, 0, 0.0147633, 5.22626, -0.882788, -4.86791)
+
+[node name="wavey_bit" parent="WorldViewport/SubViewport/Game/Garden" instance=ExtResource("27_pss2n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.12593, 1.43474, -1.07182)
+
+[node name="stool" parent="WorldViewport/SubViewport/Game/Garden" instance=ExtResource("24_4kufa")]
+transform = Transform3D(0.0147633, 0, 0.499782, 0, 0.5, 0, -0.499782, 0, 0.0147633, 5.14816, -0.882788, -2.22369)
+
+[node name="stool2" parent="WorldViewport/SubViewport/Game/Garden" instance=ExtResource("24_4kufa")]
+transform = Transform3D(0.0147633, 0, 0.499782, 0, 0.5, 0, -0.499782, 0, 0.0147633, 5.18, -0.882788, -3.30188)
+
+[node name="corner_bar_roof" parent="WorldViewport/SubViewport/Game/Garden" instance=ExtResource("26_sxcco")]
+transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 4.42617, -1.12103, -9.78897)
+
+[node name="ceiling2" parent="WorldViewport/SubViewport/Game/Garden" instance=ExtResource("23_5otcv")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.724, 0, -0.232)
+visible = false
+
+[node name="support_struts" parent="." instance=ExtResource("30_1irv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25267, 1.38533, -0.973205)
+
+[node name="beam" parent="." instance=ExtResource("26_otakv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.103, -1.157, -1.9716)
 
 [connection signal="play" from="Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost" to="WorldViewport/SubViewport/Game" method="_play"]
 [connection signal="stop" from="Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost" to="WorldViewport/SubViewport/Game" method="_stop"]

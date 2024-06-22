@@ -1,4 +1,4 @@
-extends PianoRollItem
+extends RythmicAnimationPlayerControlItem
 
 @export var property:String : 
 	set(v):
@@ -18,5 +18,7 @@ func invalidate_value_() -> void:
 	
 	$Label.text = "%s->%s" % [property, to_value]
 
-func op(db, node:Node, length:float) -> void:
-	create_tween().tween_property(node, property, to_value, length)
+func begin():
+	var target_node = get_target_node()
+	if target_node:
+		target_node.create_tween().tween_property(target_node, property, to_value, length)

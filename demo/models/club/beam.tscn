@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b52j7vr3riih1"]
+
+[ext_resource type="PackedScene" uid="uid://b1gdid57s8e73" path="res://models/club/beam.glb" id="1_uj331"]
+[ext_resource type="Material" uid="uid://tobfaearleyw" path="res://models/club/beam_shader.tres" id="2_ill3i"]
+
+[node name="beam" instance=ExtResource("1_uj331")]
+
+[node name="BeamBake" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_ill3i")

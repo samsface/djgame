@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://03x3y7xp68cb"]
+
+[ext_resource type="PackedScene" uid="uid://b8nopeultcmdp" path="res://models/club/wavey_bit.glb" id="1_qh5ck"]
+[ext_resource type="Shader" path="res://transparent_plastic.gdshader" id="2_wra3t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a6h6b"]
+render_priority = 0
+shader = ExtResource("2_wra3t")
+
+[node name="wavey_bit" instance=ExtResource("1_qh5ck")]
+
+[node name="WaveyBitBake" parent="." index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_a6h6b")

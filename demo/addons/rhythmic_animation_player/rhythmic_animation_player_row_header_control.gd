@@ -37,5 +37,8 @@ func invalidate_() -> void:
 func try_get_node() -> Node:
 	if not root_node:
 		return null
+	
+	if not node_path:
+		return root_node
 		
 	return root_node.get_node_or_null(node_path)

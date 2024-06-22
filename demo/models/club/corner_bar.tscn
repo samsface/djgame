@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://hrc3u1iu4mgh"]
+
+[ext_resource type="PackedScene" uid="uid://di2mmm7gxcho5" path="res://models/club/corner_bar.glb" id="1_f47cp"]
+[ext_resource type="Material" uid="uid://j6iijf0lge6d" path="res://models/club/wood.tres" id="2_psu45"]
+
+[node name="corner_bar" instance=ExtResource("1_f47cp")]
+
+[node name="Section" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_psu45")

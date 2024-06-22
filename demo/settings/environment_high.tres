@@ -1,12 +1,18 @@
-[gd_resource type="Environment" load_steps=3 format=3 uid="uid://chtmgmwa87swx"]
+[gd_resource type="Environment" load_steps=5 format=3 uid="uid://chtmgmwa87swx"]
 
 [sub_resource type="Gradient" id="Gradient_t2320"]
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_h8e78"]
 gradient = SubResource("Gradient_t2320")
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_krpdd"]
+
+[sub_resource type="Sky" id="Sky_s34c4"]
+sky_material = SubResource("ProceduralSkyMaterial_krpdd")
+
 [resource]
 background_mode = 2
+sky = SubResource("Sky_s34c4")
 ssr_enabled = true
 ssr_fade_in = 0.579562
 ssr_fade_out = 10.1965
