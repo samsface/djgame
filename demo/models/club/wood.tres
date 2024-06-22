@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://b3djoj2tvomr1" path="res://models/club/Seamless_Natural_Wood_Texture_NORMAL-2401978555.jpg" id="2_bjv48"]
 
 [sub_resource type="Gradient" id="Gradient_mw576"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(2.11775e-06, 0.663246, 0.864774, 1)
+offsets = PackedFloat32Array(0, 0.467577, 0.931741)
+colors = PackedColorArray(0, 0.71927, 0.444724, 1, 2.11775e-06, 0.663246, 0.864774, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_3x3v5"]
 gradient = SubResource("Gradient_mw576")
@@ -28,6 +28,7 @@ shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
 shader_parameter/edge_wear = 0.4
+shader_parameter/random_color_pallet = null
 shader_parameter/texture_albedo = ExtResource("1_xpd2t")
 shader_parameter/texture_metallic = ExtResource("1_1a6vk")
 shader_parameter/texture_ambient_occlusion = ExtResource("1_1a6vk")

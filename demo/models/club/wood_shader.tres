@@ -35,9 +35,11 @@ uniform vec3 uv2_offset;
 uniform sampler2D color_pallet : hint_default_white, filter_linear_mipmap, repeat_enable;
 uniform sampler2D texture_detail : hint_default_white, filter_linear_mipmap, repeat_enable;
 uniform float edge_wear : hint_range(0.0, 1.0);
+uniform float random_color_pallet : hint_range(0.0, 1.0);
 
 void vertex() {
 	UV = UV * uv1_scale.xy + uv1_offset.xy;
+
 }
 
 void fragment() {
@@ -47,7 +49,7 @@ void fragment() {
 	vec4 detail_tex = texture(texture_detail, base_uv * 2.0);
 
 	vec4 albedo_tex = texture(texture_albedo, base_uv);
-	ALBEDO = texture(color_pallet, vec2(albedo_tex.b)).rgb;
+	ALBEDO = texture(color_pallet, vec2(mod(albedo_tex.b + NODE_POSITION_WORLD.x * random_color_pallet, 1.0))).rgb;
 
 	float e = aoe_tex.g;
 	e = round(e - edge_wear * 0.5);

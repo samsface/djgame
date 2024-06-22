@@ -1,14 +1,10 @@
-[gd_resource type="Environment" load_steps=5 format=3 uid="uid://chtmgmwa87swx"]
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://chtmgmwa87swx"]
 
-[sub_resource type="Gradient" id="Gradient_t2320"]
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_h8e78"]
-gradient = SubResource("Gradient_t2320")
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_krpdd"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_why1r"]
+sun_angle_max = 360.0
 
 [sub_resource type="Sky" id="Sky_s34c4"]
-sky_material = SubResource("ProceduralSkyMaterial_krpdd")
+sky_material = SubResource("ProceduralSkyMaterial_why1r")
 
 [resource]
 background_mode = 2
@@ -17,7 +13,7 @@ ssr_enabled = true
 ssr_fade_in = 0.579562
 ssr_fade_out = 10.1965
 ssao_enabled = true
-ssao_radius = 0.01
+ssao_radius = 0.1
 ssao_intensity = 16.0
 ssao_detail = 5.0
 ssao_horizon = 0.0
@@ -28,10 +24,9 @@ ssil_radius = 0.3
 ssil_intensity = 5.0
 ssil_sharpness = 0.97
 ssil_normal_rejection = 0.55
+sdfgi_enabled = true
 sdfgi_use_occlusion = true
-sdfgi_bounce_feedback = 1.99
 glow_enabled = true
 fog_enabled = true
 volumetric_fog_enabled = true
 adjustment_enabled = true
-adjustment_color_correction = SubResource("GradientTexture1D_h8e78")

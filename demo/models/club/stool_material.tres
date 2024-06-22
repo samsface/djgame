@@ -1,0 +1,35 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://c1vbo6bpm0lxv"]
+
+[ext_resource type="Shader" uid="uid://bq8nrvsjwegq0" path="res://models/club/wood_shader.tres" id="1_6wcks"]
+[ext_resource type="Texture2D" uid="uid://b8jcspfw8s2a0" path="res://models/club/stool_maps.png" id="2_6htre"]
+[ext_resource type="Texture2D" uid="uid://b3djoj2tvomr1" path="res://models/club/Seamless_Natural_Wood_Texture_NORMAL-2401978555.jpg" id="4_3cq68"]
+
+[sub_resource type="Gradient" id="Gradient_64ou2"]
+offsets = PackedFloat32Array(0, 0.931741)
+colors = PackedColorArray(2.11775e-06, 0.663246, 0.864774, 1, 1, 0.443684, 0.375096, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6c6d4"]
+gradient = SubResource("Gradient_64ou2")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_6wcks")
+shader_parameter/albedo = Color(0.715543, 1, 0.689872, 1)
+shader_parameter/albedo2 = Color(0.722958, 0.674764, 0.446239, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 1.0
+shader_parameter/metallic = 0.3
+shader_parameter/ao_light_affect = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/edge_wear = 0.0
+shader_parameter/random_color_pallet = 1.0
+shader_parameter/texture_albedo = ExtResource("2_6htre")
+shader_parameter/texture_metallic = ExtResource("2_6htre")
+shader_parameter/texture_ambient_occlusion = ExtResource("2_6htre")
+shader_parameter/color_pallet = SubResource("GradientTexture1D_6c6d4")
+shader_parameter/texture_detail = ExtResource("4_3cq68")

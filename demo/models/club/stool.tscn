@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b62iupev6i1wx"]
+
+[ext_resource type="PackedScene" uid="uid://bsqoavbapde8k" path="res://models/club/stool.glb" id="1_hco6m"]
+[ext_resource type="Material" uid="uid://c1vbo6bpm0lxv" path="res://models/club/stool_material.tres" id="2_n76wa"]
+
+[node name="stool" instance=ExtResource("1_hco6m")]
+
+[node name="StoolBake" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0782638, 0, 0)
+surface_material_override/0 = ExtResource("2_n76wa")
