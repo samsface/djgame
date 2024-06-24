@@ -16,10 +16,6 @@ void fragment() {
 
 	ROUGHNESS = 0.5;
 	METALLIC = 0.0;
-
-
-
-
 }
 
 //void light() {

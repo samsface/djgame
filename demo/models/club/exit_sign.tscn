@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbqtlcaws2qy3"]
+
+[ext_resource type="PackedScene" uid="uid://cmvj2y74erhek" path="res://models/club/exit_sign.glb" id="1_rk6vj"]
+[ext_resource type="Material" uid="uid://dvpx365frqqc2" path="res://models/club/exit_sign_material.tres" id="2_oep3m"]
+[ext_resource type="Texture2D" uid="uid://divuby7d6p6k7" path="res://models/club/exit_sign_graphic.png" id="3_4yr0e"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3j5xp"]
+albedo_texture = ExtResource("3_4yr0e")
+metallic_specular = 1.0
+roughness = 0.47
+emission = Color(0, 0.818051, 0, 1)
+emission_energy_multiplier = 0.0
+
+[node name="exit_sign" instance=ExtResource("1_rk6vj")]
+
+[node name="ExitSign" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_oep3m")
+surface_material_override/1 = SubResource("StandardMaterial3D_3j5xp")

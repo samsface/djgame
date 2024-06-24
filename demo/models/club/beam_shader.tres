@@ -4,12 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://dr4pfrcr0r7b7" path="res://models/club/beam_maps.png" id="2_8d2fb"]
 [ext_resource type="Texture2D" uid="uid://b3djoj2tvomr1" path="res://models/club/Seamless_Natural_Wood_Texture_NORMAL-2401978555.jpg" id="4_x4ia4"]
 
-[sub_resource type="Gradient" id="Gradient_mw576"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.542675, 0.974446, 0, 1)
+[sub_resource type="Gradient" id="Gradient_64ou2"]
+offsets = PackedFloat32Array(0, 0.931741)
+colors = PackedColorArray(2.11775e-06, 0.663246, 0.864774, 1, 1, 0.443684, 0.375096, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_3x3v5"]
-gradient = SubResource("Gradient_mw576")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_oahb0"]
+gradient = SubResource("Gradient_64ou2")
 
 [resource]
 render_priority = 0
@@ -27,9 +27,9 @@ shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
 shader_parameter/edge_wear = 0.079
-shader_parameter/random_color_pallet = null
+shader_parameter/random_color_pallet = 1.0
 shader_parameter/texture_albedo = ExtResource("2_8d2fb")
 shader_parameter/texture_metallic = ExtResource("2_8d2fb")
 shader_parameter/texture_ambient_occlusion = ExtResource("2_8d2fb")
-shader_parameter/color_pallet = SubResource("GradientTexture1D_3x3v5")
+shader_parameter/color_pallet = SubResource("GradientTexture1D_oahb0")
 shader_parameter/texture_detail = ExtResource("4_x4ia4")

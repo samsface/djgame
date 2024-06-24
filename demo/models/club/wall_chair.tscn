@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvvgnbpej38xm"]
+
+[ext_resource type="PackedScene" uid="uid://i03bmf81kljr" path="res://models/club/wall_chair.glb" id="1_ybg8y"]
+[ext_resource type="Material" uid="uid://cd36shpmxekgy" path="res://models/club/wall_chair_material.tres" id="2_xwuou"]
+
+[node name="wall_chair" instance=ExtResource("1_ybg8y")]
+
+[node name="WallChairBake" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_xwuou")

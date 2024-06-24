@@ -49,7 +49,7 @@ void fragment() {
 	vec4 detail_tex = texture(texture_detail, base_uv * 2.0);
 
 	vec4 albedo_tex = texture(texture_albedo, base_uv);
-	ALBEDO = texture(color_pallet, vec2(mod(albedo_tex.b + NODE_POSITION_WORLD.x * random_color_pallet, 1.0))).rgb;
+	ALBEDO = texture(color_pallet, vec2(mod(albedo_tex.b + (NODE_POSITION_WORLD.z + NODE_POSITION_WORLD.x) * random_color_pallet, 1.0))).rgb;
 
 	float e = aoe_tex.g;
 	e = round(e - edge_wear * 0.5);

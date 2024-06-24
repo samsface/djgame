@@ -1,0 +1,37 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://t0vg521ilqlp"]
+
+[ext_resource type="Shader" uid="uid://bq8nrvsjwegq0" path="res://models/club/wood_shader.tres" id="1_h6cj1"]
+[ext_resource type="Texture2D" uid="uid://twqw0ofby0h8" path="res://models/club/fence_maps.png" id="2_tvqm6"]
+
+[sub_resource type="Gradient" id="Gradient_v8asf"]
+offsets = PackedFloat32Array(0, 0.25256, 0.56314, 1)
+colors = PackedColorArray(0.533216, 0.414966, 0.189052, 1, 0.682231, 0.440643, 0.272666, 1, 0.59844, 0.412055, 0.258698, 1, 0.636199, 0.500131, 0.289363, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_30cih"]
+gradient = SubResource("Gradient_v8asf")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3fse0"]
+load_path = "res://.godot/imported/Seamless_Natural_Wood_Texture_NORMAL-2401978555.jpg-c670475c3d0ffcdc4ff839d25db68dc3.s3tc.ctex"
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_h6cj1")
+shader_parameter/albedo = Color(0.715543, 1, 0.689872, 1)
+shader_parameter/albedo2 = Color(0.867728, 0.800754, 0.687155, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 1.0
+shader_parameter/metallic = 0.31
+shader_parameter/ao_light_affect = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/edge_wear = 0.333
+shader_parameter/random_color_pallet = 1.0
+shader_parameter/texture_albedo = ExtResource("2_tvqm6")
+shader_parameter/texture_metallic = ExtResource("2_tvqm6")
+shader_parameter/texture_ambient_occlusion = ExtResource("2_tvqm6")
+shader_parameter/color_pallet = SubResource("GradientTexture1D_30cih")
+shader_parameter/texture_detail = SubResource("CompressedTexture2D_3fse0")

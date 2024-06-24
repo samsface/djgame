@@ -1,5 +1,41 @@
-[gd_scene load_steps=2 format=3 uid="uid://lndcipgnpctm"]
+[gd_scene load_steps=8 format=3 uid="uid://lndcipgnpctm"]
 
 [ext_resource type="PackedScene" uid="uid://bbrwl67db4l0b" path="res://models/club/table.glb" id="1_or5ac"]
+[ext_resource type="Shader" uid="uid://bq8nrvsjwegq0" path="res://models/club/wood_shader.tres" id="2_hbpy8"]
+[ext_resource type="Texture2D" uid="uid://bwjavhn4u5103" path="res://models/club/table_maps.png" id="3_j50ra"]
+[ext_resource type="Texture2D" uid="uid://b3djoj2tvomr1" path="res://models/club/Seamless_Natural_Wood_Texture_NORMAL-2401978555.jpg" id="5_n3jut"]
+
+[sub_resource type="Gradient" id="Gradient_64ou2"]
+offsets = PackedFloat32Array(0, 0.931741)
+colors = PackedColorArray(2.11775e-06, 0.663246, 0.864774, 1, 1, 0.443684, 0.375096, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h1imp"]
+gradient = SubResource("Gradient_64ou2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1lauq"]
+render_priority = 0
+shader = ExtResource("2_hbpy8")
+shader_parameter/albedo = Color(0.715543, 1, 0.689872, 1)
+shader_parameter/albedo2 = Color(0.722958, 0.674764, 0.446239, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 1.0
+shader_parameter/metallic = 0.3
+shader_parameter/ao_light_affect = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/edge_wear = 0.4
+shader_parameter/random_color_pallet = 0.0
+shader_parameter/texture_albedo = ExtResource("3_j50ra")
+shader_parameter/texture_metallic = ExtResource("3_j50ra")
+shader_parameter/texture_ambient_occlusion = ExtResource("3_j50ra")
+shader_parameter/color_pallet = SubResource("GradientTexture1D_h1imp")
+shader_parameter/texture_detail = ExtResource("5_n3jut")
 
 [node name="table" instance=ExtResource("1_or5ac")]
+
+[node name="TableBake" parent="." index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_1lauq")
