@@ -1,9 +1,66 @@
-[gd_scene load_steps=3 format=3 uid="uid://hrc3u1iu4mgh"]
+[gd_scene load_steps=19 format=3 uid="uid://hrc3u1iu4mgh"]
 
 [ext_resource type="PackedScene" uid="uid://di2mmm7gxcho5" path="res://models/club/corner_bar.glb" id="1_f47cp"]
-[ext_resource type="Material" uid="uid://j6iijf0lge6d" path="res://models/club/wood.tres" id="2_psu45"]
+[ext_resource type="Material" uid="uid://csrnb122rugjl" path="res://models/club/corner_bar_material.tres" id="2_lqryi"]
+[ext_resource type="Material" uid="uid://cx0c2jrlgoc32" path="res://models/club/corner_bar_roof_wood_material.tres" id="3_6y6hc"]
+[ext_resource type="Material" uid="uid://c7pof13cy68dg" path="res://corner_bar_roof_material.tres" id="3_wfw6v"]
+[ext_resource type="Material" uid="uid://by3yjcfm2j61r" path="res://models/club/corner_bar_rings_material.tres" id="4_xkjy5"]
+[ext_resource type="Material" uid="uid://u6vpvu1k1hpd" path="res://models/club/corner_bar_support_beams_material.tres" id="5_a4xx8"]
+[ext_resource type="Material" uid="uid://c6t74brp2ij2m" path="res://models/club/corner_bar_gutter_material.tres" id="6_ahng8"]
+
+[sub_resource type="Gradient" id="Gradient_nknui"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.111, 0.222, 0.333, 0.444, 0.555, 0.666, 0.778, 0.888)
+colors = PackedColorArray(0, 0.833333, 1, 1, 1, 0, 0, 1, 1, 0.966667, 0, 1, 0, 1, 0.366667, 1, 0.733333, 0, 1, 1, 1, 0, 0.0166664, 1, 0, 1, 0.233333, 1, 0.883333, 0, 1, 1, 1, 0.9, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tay10"]
+gradient = SubResource("Gradient_nknui")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oumfp"]
+albedo_texture = SubResource("GradientTexture1D_tay10")
+
+[sub_resource type="Gradient" id="Gradient_ohu16"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.645963, 0.757764, 0.86646, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_68ej3"]
+gradient = SubResource("Gradient_ohu16")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ekpgp"]
+albedo_texture = SubResource("GradientTexture1D_68ej3")
+
+[sub_resource type="Gradient" id="Gradient_m8l7b"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.226708, 0.409938, 0.590062, 0.785714)
+colors = PackedColorArray(0, 0, 0, 1, 0.780114, 0.365174, 0.529884, 1, 0, 0, 0, 1, 0.780392, 0.364706, 0.529412, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_p8ynd"]
+gradient = SubResource("Gradient_m8l7b")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4u2dw"]
+albedo_texture = SubResource("GradientTexture1D_p8ynd")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cickx"]
+albedo_color = Color(0.888323, 0.762195, 0.847205, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8lh0j"]
+albedo_color = Color(0.497474, 0.497474, 0.497474, 1)
 
 [node name="corner_bar" instance=ExtResource("1_f47cp")]
 
-[node name="Section" parent="." index="0"]
-surface_material_override/0 = ExtResource("2_psu45")
+[node name="CornerBarBake" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_oumfp")
+surface_material_override/1 = SubResource("StandardMaterial3D_ekpgp")
+surface_material_override/2 = SubResource("StandardMaterial3D_4u2dw")
+surface_material_override/3 = SubResource("StandardMaterial3D_cickx")
+surface_material_override/4 = SubResource("StandardMaterial3D_ekpgp")
+surface_material_override/5 = SubResource("StandardMaterial3D_oumfp")
+surface_material_override/6 = SubResource("StandardMaterial3D_8lh0j")
+surface_material_override/7 = SubResource("StandardMaterial3D_ekpgp")
+surface_material_override/8 = ExtResource("2_lqryi")
+surface_material_override/9 = ExtResource("3_wfw6v")
+surface_material_override/10 = ExtResource("3_6y6hc")
+surface_material_override/11 = ExtResource("4_xkjy5")
+surface_material_override/12 = ExtResource("5_a4xx8")
+surface_material_override/13 = ExtResource("6_ahng8")

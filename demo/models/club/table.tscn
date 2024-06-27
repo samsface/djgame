@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://lndcipgnpctm"]
+[gd_scene load_steps=10 format=3 uid="uid://lndcipgnpctm"]
 
 [ext_resource type="PackedScene" uid="uid://bbrwl67db4l0b" path="res://models/club/table.glb" id="1_or5ac"]
 [ext_resource type="Shader" uid="uid://bq8nrvsjwegq0" path="res://models/club/wood_shader.tres" id="2_hbpy8"]
@@ -11,6 +11,14 @@ colors = PackedColorArray(2.11775e-06, 0.663246, 0.864774, 1, 1, 0.443684, 0.375
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_h1imp"]
 gradient = SubResource("Gradient_64ou2")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tq7lg"]
+frequency = 0.0957
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8ffnh"]
+in_3d_space = true
+seamless = true
+noise = SubResource("FastNoiseLite_tq7lg")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1lauq"]
 render_priority = 0
@@ -29,11 +37,13 @@ shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
 shader_parameter/edge_wear = 0.4
 shader_parameter/random_color_pallet = 0.0
+shader_parameter/surface_dirt_height = 0.05
 shader_parameter/texture_albedo = ExtResource("3_j50ra")
 shader_parameter/texture_metallic = ExtResource("3_j50ra")
 shader_parameter/texture_ambient_occlusion = ExtResource("3_j50ra")
 shader_parameter/color_pallet = SubResource("GradientTexture1D_h1imp")
 shader_parameter/texture_detail = ExtResource("5_n3jut")
+shader_parameter/texture_noise = SubResource("NoiseTexture2D_8ffnh")
 
 [node name="table" instance=ExtResource("1_or5ac")]
 

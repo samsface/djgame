@@ -1,0 +1,47 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://csrnb122rugjl"]
+
+[ext_resource type="Shader" uid="uid://bq8nrvsjwegq0" path="res://models/club/wood_shader.tres" id="1_1036d"]
+[ext_resource type="Texture2D" uid="uid://du37yqfui8c1r" path="res://models/club/corner_bar_maps.png" id="1_wgbhf"]
+
+[sub_resource type="Gradient" id="Gradient_6d43a"]
+offsets = PackedFloat32Array(0, 0.931741)
+colors = PackedColorArray(8.42288e-08, 0.0752058, 0.111739, 1, 0.0605303, 0.0605303, 0.0605303, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6y7vu"]
+gradient = SubResource("Gradient_6d43a")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8pkfv"]
+load_path = "res://.godot/imported/Seamless_Natural_Wood_Texture_NORMAL-2401978555.jpg-c670475c3d0ffcdc4ff839d25db68dc3.s3tc.ctex"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tq7lg"]
+frequency = 0.0957
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3m54c"]
+in_3d_space = true
+seamless = true
+noise = SubResource("FastNoiseLite_tq7lg")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_1036d")
+shader_parameter/albedo = Color(0.715543, 1, 0.689872, 1)
+shader_parameter/albedo2 = Color(0.52, 0.510293, 0.4472, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 1.0
+shader_parameter/metallic = 0.3
+shader_parameter/ao_light_affect = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/edge_wear = 0.275
+shader_parameter/random_color_pallet = 0.0
+shader_parameter/surface_dirt_height = 0.212
+shader_parameter/texture_albedo = ExtResource("1_wgbhf")
+shader_parameter/texture_metallic = ExtResource("1_wgbhf")
+shader_parameter/texture_ambient_occlusion = ExtResource("1_wgbhf")
+shader_parameter/color_pallet = SubResource("GradientTexture1D_6y7vu")
+shader_parameter/texture_detail = SubResource("CompressedTexture2D_8pkfv")
+shader_parameter/texture_noise = SubResource("NoiseTexture2D_3m54c")

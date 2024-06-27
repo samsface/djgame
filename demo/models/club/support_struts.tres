@@ -28,6 +28,7 @@ shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
 shader_parameter/edge_wear = 0.4
 shader_parameter/random_color_pallet = null
+shader_parameter/surface_dirt_height = null
 shader_parameter/texture_metallic = ExtResource("2_e63kp")
 shader_parameter/texture_ambient_occlusion = ExtResource("2_e63kp")
 shader_parameter/color_pallet = SubResource("GradientTexture1D_3x3v5")

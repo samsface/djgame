@@ -1,0 +1,127 @@
+[gd_scene load_steps=10 format=3 uid="uid://bkoxmlgy3ynno"]
+
+[ext_resource type="PackedScene" uid="uid://x1gsrod6llwq" path="res://models/club/ground_tiles.glb" id="1_sd7eg"]
+[ext_resource type="Texture2D" uid="uid://b3n5yvfw2v66t" path="res://models/club/ground_tiles_maps.png" id="2_6krfi"]
+
+[sub_resource type="Shader" id="Shader_b240r"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.3.dev5's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
+
+uniform vec4 albedo : source_color;
+uniform vec4 albedo2 : source_color;
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_g, filter_linear_mipmap, repeat_enable;
+
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+
+uniform sampler2D texture_ambient_occlusion : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform float ao_light_affect : hint_range(0.0, 1.0, 0.01);
+
+uniform sampler2D texture_detail_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform sampler2D texture_detail_normal : hint_normal, filter_linear_mipmap, repeat_enable;
+uniform sampler2D texture_detail_mask : hint_default_white, filter_linear_mipmap, repeat_enable;
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+
+uniform sampler2D color_pallet : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform sampler2D texture_detail : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform float edge_wear : hint_range(0.0, 1.0);
+uniform float random_color_pallet : hint_range(0.0, 1.0);
+
+void vertex() {
+	UV = UV * uv1_scale.xy + uv1_offset.xy;
+
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+
+	vec4 aoe_tex = texture(texture_ambient_occlusion, base_uv);
+	vec4 detail_tex = texture(texture_detail, base_uv * 2.0);
+
+	vec4 albedo_tex = texture(texture_albedo, base_uv);
+	ALBEDO = texture(color_pallet, vec2(mod(albedo_tex.b + (NODE_POSITION_WORLD.z + NODE_POSITION_WORLD.x) * random_color_pallet, 1.0))).rgb;
+
+	float e = aoe_tex.g;
+	e = round(e - edge_wear * 0.5);
+
+
+
+
+	ALBEDO = mix(ALBEDO, albedo2.rgb, e);
+
+	ALBEDO = mix(ALBEDO, albedo2.rgb, round(detail_tex.r - 0.04));
+
+
+
+
+	// Ambient Occlusion: Enabled
+	AO = pow(aoe_tex.r, 1.0);
+	AO_LIGHT_AFFECT = ao_light_affect;
+
+
+
+
+}
+"
+
+[sub_resource type="Gradient" id="Gradient_3qvis"]
+offsets = PackedFloat32Array(0, 0.822526, 1)
+colors = PackedColorArray(0.405846, 0.387858, 0.3507, 1, 0.464742, 0.445242, 0.40496, 1, 0.170794, 0.161298, 0.14168, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bc38f"]
+gradient = SubResource("Gradient_3qvis")
+
+[sub_resource type="Gradient" id="Gradient_844in"]
+offsets = PackedFloat32Array(0.590444, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3jbxk"]
+noise_type = 2
+frequency = 0.0286
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w7l1q"]
+width = 1024
+height = 1024
+color_ramp = SubResource("Gradient_844in")
+noise = SubResource("FastNoiseLite_3jbxk")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3fd8r"]
+render_priority = 0
+shader = SubResource("Shader_b240r")
+shader_parameter/albedo = Color(0.715543, 1, 0.689872, 1)
+shader_parameter/albedo2 = Color(0.592405, 0.558191, 0.533813, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/ao_light_affect = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/edge_wear = 0.0
+shader_parameter/random_color_pallet = 0.0
+shader_parameter/texture_albedo = ExtResource("2_6krfi")
+shader_parameter/texture_metallic = ExtResource("2_6krfi")
+shader_parameter/texture_ambient_occlusion = ExtResource("2_6krfi")
+shader_parameter/color_pallet = SubResource("GradientTexture1D_bc38f")
+shader_parameter/texture_detail = SubResource("NoiseTexture2D_w7l1q")
+
+[node name="ground_tiles" instance=ExtResource("1_sd7eg")]
+
+[node name="GroundTilesBakes" parent="." index="0"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("ShaderMaterial_3fd8r")

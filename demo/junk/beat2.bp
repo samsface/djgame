@@ -1184,7 +1184,7 @@
 "condition_ex": "",
 "frames": [{
 "length": 16,
-"method": &"look 1",
+"method": &"look 3",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 0
 }, {
@@ -1207,6 +1207,11 @@
 "method": &"look 1",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 128
+}, {
+"length": 16,
+"method": &"look 0",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
+"time": 48
 }],
 "node_path": NodePath("toykit"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"

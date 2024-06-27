@@ -1,5 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://brd4uell7hfpi"]
+[gd_scene load_steps=3 format=3 uid="uid://brd4uell7hfpi"]
 
 [ext_resource type="PackedScene" uid="uid://ddqlqpe30omqs" path="res://models/club/oil_drum_table.glb" id="1_a4vid"]
+[ext_resource type="Material" uid="uid://c4cq6laub03x3" path="res://models/club/oil_drum_table_material.tres" id="2_ckwf0"]
 
 [node name="oil_drum_table" instance=ExtResource("1_a4vid")]
+
+[node name="OilDrumTableBake" parent="." index="0"]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+surface_material_override/0 = ExtResource("2_ckwf0")

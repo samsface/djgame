@@ -267,6 +267,7 @@ left={
 [rendering]
 
 textures/canvas_textures/default_texture_repeat=1
+textures/default_filters/anisotropic_filtering_level=0
 environment/ssil/quality=1
 anti_aliasing/screen_space_roughness_limiter/enabled=false
 viewport/hdr_2d=true

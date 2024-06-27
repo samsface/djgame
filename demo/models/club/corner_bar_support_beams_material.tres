@@ -1,0 +1,48 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://u6vpvu1k1hpd"]
+
+[ext_resource type="Shader" uid="uid://bq8nrvsjwegq0" path="res://models/club/wood_shader.tres" id="1_5u0ya"]
+[ext_resource type="Texture2D" uid="uid://c5tgjixasgsmd" path="res://models/club/corner_bar_support_beams_maps.png" id="1_pkj0g"]
+
+[sub_resource type="Gradient" id="Gradient_6wwnd"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.509317, 0.857143)
+colors = PackedColorArray(0, 0.331115, 0.549065, 1, 1.44392e-07, 0.3904, 0.0513472, 1, 1, 0.783333, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wyfi1"]
+gradient = SubResource("Gradient_6wwnd")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i2rtx"]
+load_path = "res://.godot/imported/Seamless_Natural_Wood_Texture_NORMAL-2401978555.jpg-c670475c3d0ffcdc4ff839d25db68dc3.s3tc.ctex"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tq7lg"]
+frequency = 0.0957
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_550wi"]
+in_3d_space = true
+seamless = true
+noise = SubResource("FastNoiseLite_tq7lg")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_5u0ya")
+shader_parameter/albedo = Color(0.715543, 1, 0.689872, 1)
+shader_parameter/albedo2 = Color(0.722958, 0.674764, 0.446239, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.253
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 1.0
+shader_parameter/metallic = 0.12
+shader_parameter/ao_light_affect = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/edge_wear = 0.4
+shader_parameter/random_color_pallet = 0.0
+shader_parameter/surface_dirt_height = 0.317
+shader_parameter/texture_albedo = ExtResource("1_pkj0g")
+shader_parameter/texture_metallic = ExtResource("1_pkj0g")
+shader_parameter/texture_ambient_occlusion = ExtResource("1_pkj0g")
+shader_parameter/color_pallet = SubResource("GradientTexture1D_wyfi1")
+shader_parameter/texture_detail = SubResource("CompressedTexture2D_i2rtx")
+shader_parameter/texture_noise = SubResource("NoiseTexture2D_550wi")

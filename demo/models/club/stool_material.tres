@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://c1vbo6bpm0lxv"]
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://c1vbo6bpm0lxv"]
 
 [ext_resource type="Shader" uid="uid://bq8nrvsjwegq0" path="res://models/club/wood_shader.tres" id="1_6wcks"]
 [ext_resource type="Texture2D" uid="uid://b8jcspfw8s2a0" path="res://models/club/stool_maps.png" id="2_6htre"]
@@ -10,6 +10,14 @@ colors = PackedColorArray(2.11775e-06, 0.663246, 0.864774, 1, 1, 0.443684, 0.375
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_6c6d4"]
 gradient = SubResource("Gradient_64ou2")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tq7lg"]
+frequency = 0.0957
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wir1x"]
+in_3d_space = true
+seamless = true
+noise = SubResource("FastNoiseLite_tq7lg")
 
 [resource]
 render_priority = 0
@@ -28,8 +36,10 @@ shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
 shader_parameter/edge_wear = 0.0
 shader_parameter/random_color_pallet = 1.0
+shader_parameter/surface_dirt_height = 0.106
 shader_parameter/texture_albedo = ExtResource("2_6htre")
 shader_parameter/texture_metallic = ExtResource("2_6htre")
 shader_parameter/texture_ambient_occlusion = ExtResource("2_6htre")
 shader_parameter/color_pallet = SubResource("GradientTexture1D_6c6d4")
 shader_parameter/texture_detail = ExtResource("4_3cq68")
+shader_parameter/texture_noise = SubResource("NoiseTexture2D_wir1x")

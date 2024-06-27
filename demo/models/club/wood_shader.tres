@@ -36,9 +36,17 @@ uniform sampler2D color_pallet : hint_default_white, filter_linear_mipmap, repea
 uniform sampler2D texture_detail : hint_default_white, filter_linear_mipmap, repeat_enable;
 uniform float edge_wear : hint_range(0.0, 1.0);
 uniform float random_color_pallet : hint_range(0.0, 1.0);
+uniform float surface_dirt_height : hint_range(0.0, 10.0);
+
+
+uniform sampler2D texture_noise : source_color, filter_linear_mipmap, repeat_enable;
+
+varying vec3 vert;
 
 void vertex() {
 	UV = UV * uv1_scale.xy + uv1_offset.xy;
+
+	vert = VERTEX;
 
 }
 
@@ -58,11 +66,19 @@ void fragment() {
 
 
 	ALBEDO = mix(ALBEDO, albedo2.rgb, e);
+	
+	if(vert.y < texture(texture_noise, base_uv * vec2(1.0, 5.0)).r * surface_dirt_height) {
+		ALBEDO = albedo2.rgb;
+	}
+	
+
 
 	ALBEDO = mix(ALBEDO, albedo2.rgb, round(detail_tex.r - 0.04));
 
 
-
+	ROUGHNESS = roughness;
+	METALLIC = metallic;
+	SPECULAR = specular;
 
 	// Ambient Occlusion: Enabled
 	AO = pow(aoe_tex.r, 1.0);
