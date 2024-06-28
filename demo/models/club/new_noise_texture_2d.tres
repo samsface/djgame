@@ -1,0 +1,13 @@
+[gd_resource type="NoiseTexture2D" load_steps=3 format=3 uid="uid://cq6tf1u0nww5j"]
+
+[sub_resource type="Gradient" id="Gradient_fpybo"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_l3ut8"]
+frequency = 0.0032
+
+[resource]
+in_3d_space = true
+seamless = true
+as_normal_map = true
+color_ramp = SubResource("Gradient_fpybo")
+noise = SubResource("FastNoiseLite_l3ut8")

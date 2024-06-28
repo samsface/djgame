@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://game/GuidesService.gd" id="14_y06of"]
 [ext_resource type="CameraAttributesPractical" uid="uid://ev1eo0cru0we" path="res://game/cameraatr.tres" id="16_2sje1"]
 [ext_resource type="Script" path="res://game/world_environment.gd" id="18_sypot"]
-[ext_resource type="Environment" uid="uid://chtmgmwa87swx" path="res://settings/environment_high.tres" id="20_yy0xb"]
+[ext_resource type="Environment" uid="uid://b8uhvyo3rc3m8" path="res://settings/environment_potato.tres" id="20_mi1su"]
 [ext_resource type="PackedScene" uid="uid://brd4uell7hfpi" path="res://models/club/oil_drum_table.tscn" id="23_kacgu"]
 [ext_resource type="Texture2D" uid="uid://bcvmpvpwk1nvp" path="res://models/shared/stickers/smiley.png" id="24_u45so"]
 [ext_resource type="Script" path="res://game/audio_service.gd" id="25_uoe2k"]
@@ -40,6 +40,7 @@
 [ext_resource type="Texture2D" uid="uid://cmauoe2tu6iq5" path="res://models/club/pink_paint.png" id="34_whk0o"]
 [ext_resource type="PackedScene" uid="uid://dbqtlcaws2qy3" path="res://models/club/exit_sign.tscn" id="34_xl4m4"]
 [ext_resource type="PackedScene" uid="uid://dn18w300jjfpl" path="res://models/static_cable/cable_poly.tscn" id="39_eu8cl"]
+[ext_resource type="PackedScene" uid="uid://dubsbp7lv8nrh" path="res://models/club/stool_spin.tscn" id="41_8setv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ij4h"]
 albedo_color = Color(0.235294, 0.235294, 0.235294, 1)
@@ -91,10 +92,6 @@ subsurf_scatter_strength = 0.14
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d2ls5"]
 albedo_texture = ExtResource("28_abwgw")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o1qa0"]
-albedo_color = Color(0, 0, 0, 1)
-uv1_scale = Vector3(12, 4, 4)
 
 [sub_resource type="Curve3D" id="Curve3D_ibt1d"]
 bake_interval = 0.01
@@ -254,12 +251,12 @@ size = Vector3(100, 1, 100)
 material = SubResource("StandardMaterial3D_2x22v")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="WorldViewport/SubViewport/Game"]
-environment = ExtResource("20_yy0xb")
+environment = ExtResource("20_mi1su")
 camera_attributes = ExtResource("16_2sje1")
 script = ExtResource("18_sypot")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldViewport/SubViewport/Game/WorldEnvironment"]
-transform = Transform3D(0.816137, 0.577858, -3.70912e-09, -0.226715, 0.320201, 0.919822, 0.531526, -0.750701, 0.392337, 0.0125005, 0.329456, 0.245015)
+transform = Transform3D(0.816137, 0.577858, 0, -0.554347, 0.782932, 0.282342, 0.163153, -0.23043, 0.959314, 0.0125005, 0.329456, 0.245015)
 shadow_enabled = true
 shadow_reverse_cull_face = true
 shadow_blur = 0.05
@@ -319,7 +316,7 @@ omni_range = 0.188
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0039897, 2.38419e-07, -0.957186)
 
 [node name="corner_bar2" parent="WorldViewport/SubViewport/Game/Garden" instance=ExtResource("26_vbtwx")]
-transform = Transform3D(0.86028, 0, 0.509822, 0, 1, 0, -0.509822, 0, 0.86028, 2.66151, -1.13617, -10.7117)
+transform = Transform3D(0.86028, 0, 0.509822, 0, 1, 0, -0.509822, 0, 0.86028, 2.66151, -1.13617, -10.694)
 
 [node name="Bus" parent="WorldViewport/SubViewport/Game/Garden" instance=ExtResource("26_r2yb5")]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -2.79176, 0.671477, -14.0673)
@@ -378,10 +375,10 @@ size = Vector3(3, 0.25, 5)
 material = SubResource("StandardMaterial3D_d2ls5")
 
 [node name="PinkPaintDecal" type="Decal" parent="WorldViewport/SubViewport/Game/Garden"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 6.84946, 0.420443, -7.75932)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 6.86551, 0.420443, -7.75932)
 size = Vector3(3.5, 0.1, 4)
 texture_albedo = ExtResource("34_whk0o")
-modulate = Color(0.431373, 0.882353, 0.960784, 1)
+modulate = Color(3.46541e-06, 0.630687, 0.88657, 1)
 normal_fade = 0.999
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="WorldViewport/SubViewport/Game/Garden"]
@@ -394,11 +391,6 @@ size = Vector3(3.5, 0.1, 2)
 texture_albedo = ExtResource("34_whk0o")
 modulate = Color(1, 0.620315, 0.993059, 1)
 normal_fade = 0.999
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="WorldViewport/SubViewport/Game/Garden"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0365267, -1.6766, 0.0107279)
-size = Vector3(50, 1, 50)
-material = SubResource("StandardMaterial3D_o1qa0")
 
 [node name="fence" parent="WorldViewport/SubViewport/Game/Garden" instance=ExtResource("32_esd66")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.84416, -1.14058, -5.61957)
@@ -520,6 +512,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.99992, -1.14292, -0.8662)
 
 [node name="Poly" parent="WorldViewport/SubViewport/Game" instance=ExtResource("39_eu8cl")]
 snap = 1e-06
+polygon = PackedVector2Array(0.0038, 0, 0.00268701, 0.00268701, 2.32683e-19, 0.0038, -0.00268701, 0.00268701, -0.0038, 4.65366e-19, -0.00268701, -0.00268701, -6.98049e-19, -0.0038, 0.00268701, -0.00268701)
 path_node = NodePath("Path3D2")
 path_continuous_u = false
 
@@ -544,6 +537,18 @@ diameter = 0.0021
 [node name="Path3D2" type="Path3D" parent="WorldViewport/SubViewport/Game/Poly4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00132504, -0.00774931, -0.00174123)
 curve = SubResource("Curve3D_vr3fm")
+
+[node name="stool_spin" parent="WorldViewport/SubViewport/Game" instance=ExtResource("41_8setv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.991064, -1.12702, -11.4691)
+
+[node name="stool_spin2" parent="WorldViewport/SubViewport/Game" instance=ExtResource("41_8setv")]
+transform = Transform3D(0.311705, 0, -0.950179, 0, 1, 0, 0.950179, 0, 0.311705, 2.17259, -1.12702, -10.4579)
+
+[node name="stool_spin3" parent="WorldViewport/SubViewport/Game" instance=ExtResource("41_8setv")]
+transform = Transform3D(0.311705, 0, -0.950179, 0, 1, 0, 0.950179, 0, 0.311705, 3.74301, -1.12702, -9.96324)
+
+[node name="stool_spin4" parent="WorldViewport/SubViewport/Game" instance=ExtResource("41_8setv")]
+transform = Transform3D(-0.00520113, 0, -0.999986, 0, 1, 0, 0.999986, 0, -0.00520113, 5.14992, -1.12702, -9.81846)
 
 [connection signal="play" from="Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost" to="WorldViewport/SubViewport/Game" method="_play"]
 [connection signal="stop" from="Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost" to="WorldViewport/SubViewport/Game" method="_stop"]

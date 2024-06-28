@@ -1,66 +1,104 @@
-[gd_scene load_steps=19 format=3 uid="uid://hrc3u1iu4mgh"]
+[gd_scene load_steps=22 format=3 uid="uid://hrc3u1iu4mgh"]
 
 [ext_resource type="PackedScene" uid="uid://di2mmm7gxcho5" path="res://models/club/corner_bar.glb" id="1_f47cp"]
 [ext_resource type="Material" uid="uid://csrnb122rugjl" path="res://models/club/corner_bar_material.tres" id="2_lqryi"]
+[ext_resource type="Texture2D" uid="uid://bk55tdfry0jv3" path="res://models/club/metal_shutter.png" id="2_qmt5n"]
 [ext_resource type="Material" uid="uid://cx0c2jrlgoc32" path="res://models/club/corner_bar_roof_wood_material.tres" id="3_6y6hc"]
+[ext_resource type="Shader" uid="uid://bq8nrvsjwegq0" path="res://models/club/wood_shader.tres" id="3_mrlll"]
 [ext_resource type="Material" uid="uid://c7pof13cy68dg" path="res://corner_bar_roof_material.tres" id="3_wfw6v"]
+[ext_resource type="Texture2D" uid="uid://cq6tf1u0nww5j" path="res://models/club/new_noise_texture_2d.tres" id="4_mt8sq"]
 [ext_resource type="Material" uid="uid://by3yjcfm2j61r" path="res://models/club/corner_bar_rings_material.tres" id="4_xkjy5"]
 [ext_resource type="Material" uid="uid://u6vpvu1k1hpd" path="res://models/club/corner_bar_support_beams_material.tres" id="5_a4xx8"]
 [ext_resource type="Material" uid="uid://c6t74brp2ij2m" path="res://models/club/corner_bar_gutter_material.tres" id="6_ahng8"]
 
-[sub_resource type="Gradient" id="Gradient_nknui"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.111, 0.222, 0.333, 0.444, 0.555, 0.666, 0.778, 0.888)
-colors = PackedColorArray(0, 0.833333, 1, 1, 1, 0, 0, 1, 1, 0.966667, 0, 1, 0, 1, 0.366667, 1, 0.733333, 0, 1, 1, 1, 0, 0.0166664, 1, 0, 1, 0.233333, 1, 0.883333, 0, 1, 1, 1, 0.9, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_tay10"]
-gradient = SubResource("Gradient_nknui")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oumfp"]
-albedo_texture = SubResource("GradientTexture1D_tay10")
-
-[sub_resource type="Gradient" id="Gradient_ohu16"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.645963, 0.757764, 0.86646, 1)
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_68ej3"]
-gradient = SubResource("Gradient_ohu16")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ekpgp"]
-albedo_texture = SubResource("GradientTexture1D_68ej3")
-
 [sub_resource type="Gradient" id="Gradient_m8l7b"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.226708, 0.409938, 0.590062, 0.785714)
-colors = PackedColorArray(0, 0, 0, 1, 0.780114, 0.365174, 0.529884, 1, 0, 0, 0, 1, 0.780392, 0.364706, 0.529412, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0, 0.579677, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.727294, 0.159055, 0.277362, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_p8ynd"]
 gradient = SubResource("Gradient_m8l7b")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4u2dw"]
-albedo_texture = SubResource("GradientTexture1D_p8ynd")
+[sub_resource type="Gradient" id="Gradient_ivvrm"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.182448, 0.387991, 0.605081, 0.82448, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.834614, 0.834614, 0.834614, 1, 0, 0, 0, 1, 0.886262, 0.886261, 0.886262, 1, 0, 0, 0, 1, 1, 1, 1, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cickx"]
-albedo_color = Color(0.888323, 0.762195, 0.847205, 1)
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_boynj"]
+gradient = SubResource("Gradient_ivvrm")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8lh0j"]
-albedo_color = Color(0.497474, 0.497474, 0.497474, 1)
+[sub_resource type="Gradient" id="Gradient_7p7lg"]
+offsets = PackedFloat32Array(0.979215, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0, 0.0352941, 0.0313726, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_iwe4d"]
+gradient = SubResource("Gradient_7p7lg")
+height = 256
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_owadm"]
+load_path = "res://.godot/imported/Seamless_Natural_Wood_Texture_NORMAL-2401978555.jpg-c670475c3d0ffcdc4ff839d25db68dc3.s3tc.ctex"
+
+[sub_resource type="Gradient" id="Gradient_13m44"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.967667)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dyiur"]
+gradient = SubResource("Gradient_13m44")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kcw3u"]
+render_priority = 0
+shader = ExtResource("3_mrlll")
+shader_parameter/albedo = Color(0.715543, 1, 0.689872, 1)
+shader_parameter/albedo2 = Color(0.447211, 0.370832, 0.286475, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.852
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.99
+shader_parameter/metallic = 0.24
+shader_parameter/ao_light_affect = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/edge_wear = 1.0
+shader_parameter/random_color_pallet = 0.0
+shader_parameter/surface_dirt_height = 0.0
+shader_parameter/texture_albedo = SubResource("GradientTexture2D_boynj")
+shader_parameter/texture_ambient_occlusion = SubResource("GradientTexture2D_iwe4d")
+shader_parameter/color_pallet = SubResource("GradientTexture1D_p8ynd")
+shader_parameter/texture_detail = SubResource("CompressedTexture2D_owadm")
+shader_parameter/y_dirt_max = 3.2
+shader_parameter/texture_y_dirt = SubResource("GradientTexture1D_dyiur")
+shader_parameter/texture_y_dirt_noise = ExtResource("4_mt8sq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h0euq"]
+albedo_texture = ExtResource("2_qmt5n")
+metallic = 0.96
+metallic_specular = 1.0
+roughness = 0.24
+heightmap_scale = -7.393
+heightmap_flip_tangent = true
+heightmap_flip_binormal = true
+heightmap_texture = ExtResource("2_qmt5n")
 
 [node name="corner_bar" instance=ExtResource("1_f47cp")]
 
 [node name="CornerBarBake" parent="." index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_oumfp")
-surface_material_override/1 = SubResource("StandardMaterial3D_ekpgp")
-surface_material_override/2 = SubResource("StandardMaterial3D_4u2dw")
-surface_material_override/3 = SubResource("StandardMaterial3D_cickx")
-surface_material_override/4 = SubResource("StandardMaterial3D_ekpgp")
-surface_material_override/5 = SubResource("StandardMaterial3D_oumfp")
-surface_material_override/6 = SubResource("StandardMaterial3D_8lh0j")
-surface_material_override/7 = SubResource("StandardMaterial3D_ekpgp")
-surface_material_override/8 = ExtResource("2_lqryi")
-surface_material_override/9 = ExtResource("3_wfw6v")
-surface_material_override/10 = ExtResource("3_6y6hc")
-surface_material_override/11 = ExtResource("4_xkjy5")
-surface_material_override/12 = ExtResource("5_a4xx8")
-surface_material_override/13 = ExtResource("6_ahng8")
+surface_material_override/0 = SubResource("ShaderMaterial_kcw3u")
+surface_material_override/1 = SubResource("StandardMaterial3D_h0euq")
+surface_material_override/2 = SubResource("ShaderMaterial_kcw3u")
+surface_material_override/3 = SubResource("ShaderMaterial_kcw3u")
+surface_material_override/4 = SubResource("StandardMaterial3D_h0euq")
+surface_material_override/5 = SubResource("ShaderMaterial_kcw3u")
+surface_material_override/6 = SubResource("ShaderMaterial_kcw3u")
+surface_material_override/7 = SubResource("StandardMaterial3D_h0euq")
+surface_material_override/8 = SubResource("ShaderMaterial_kcw3u")
+surface_material_override/9 = ExtResource("2_lqryi")
+surface_material_override/10 = ExtResource("3_wfw6v")
+surface_material_override/11 = ExtResource("3_6y6hc")
+surface_material_override/12 = ExtResource("4_xkjy5")
+surface_material_override/13 = ExtResource("5_a4xx8")
+surface_material_override/14 = ExtResource("6_ahng8")
+metadata/_edit_lock_ = true

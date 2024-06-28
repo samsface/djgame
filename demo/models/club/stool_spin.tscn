@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://dubsbp7lv8nrh"]
+
+[ext_resource type="PackedScene" uid="uid://dbfuk4b5anv4c" path="res://models/club/stool_spin.glb" id="1_kfg83"]
+[ext_resource type="Material" uid="uid://62qultppd282" path="res://models/club/stool_spin_leather_material.tres" id="2_uadeu"]
+[ext_resource type="Material" uid="uid://b4x0ffrvlrapu" path="res://models/club/stool_spin_metal_material.tres" id="3_xs5rf"]
+
+[node name="stool_spin" instance=ExtResource("1_kfg83")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.148473, 0.00466865, 0.134719)
+
+[node name="Plane_003" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00347334, 0.00176281, 0.00140953)
+surface_material_override/0 = ExtResource("2_uadeu")
+surface_material_override/1 = ExtResource("3_xs5rf")

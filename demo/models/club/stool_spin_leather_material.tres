@@ -1,0 +1,37 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://62qultppd282"]
+
+[ext_resource type="Shader" uid="uid://bq8nrvsjwegq0" path="res://models/club/wood_shader.tres" id="1_iltkp"]
+[ext_resource type="Texture2D" uid="uid://cownt4qf7yx37" path="res://models/club/stool_spin_leather.png" id="2_q3kje"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="3_1u7dy"]
+
+[sub_resource type="Gradient" id="Gradient_u4by5"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1.05286e-08, 0.00692821, 0.012543, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_m165c"]
+gradient = SubResource("Gradient_u4by5")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_iltkp")
+shader_parameter/albedo = Color(0.715543, 1, 0.689872, 1)
+shader_parameter/albedo2 = Color(0.165124, 0.169183, 0.180373, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.852
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.32
+shader_parameter/metallic = 0.23
+shader_parameter/ao_light_affect = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/edge_wear = 0.0
+shader_parameter/random_color_pallet = 0.0
+shader_parameter/surface_dirt_height = null
+shader_parameter/texture_albedo = ExtResource("2_q3kje")
+shader_parameter/texture_metallic = ExtResource("2_q3kje")
+shader_parameter/texture_ambient_occlusion = ExtResource("2_q3kje")
+shader_parameter/color_pallet = SubResource("GradientTexture1D_m165c")
+shader_parameter/texture_detail = ExtResource("3_1u7dy")
+shader_parameter/y_dirt_max = 0.0

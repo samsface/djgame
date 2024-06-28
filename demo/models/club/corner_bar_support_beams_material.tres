@@ -1,7 +1,8 @@
-[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://u6vpvu1k1hpd"]
+[gd_resource type="ShaderMaterial" load_steps=9 format=3 uid="uid://u6vpvu1k1hpd"]
 
 [ext_resource type="Shader" uid="uid://bq8nrvsjwegq0" path="res://models/club/wood_shader.tres" id="1_5u0ya"]
 [ext_resource type="Texture2D" uid="uid://c5tgjixasgsmd" path="res://models/club/corner_bar_support_beams_maps.png" id="1_pkj0g"]
+[ext_resource type="Texture2D" uid="uid://cq6tf1u0nww5j" path="res://models/club/new_noise_texture_2d.tres" id="3_w1t8v"]
 
 [sub_resource type="Gradient" id="Gradient_6wwnd"]
 interpolation_mode = 1
@@ -14,13 +15,13 @@ gradient = SubResource("Gradient_6wwnd")
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i2rtx"]
 load_path = "res://.godot/imported/Seamless_Natural_Wood_Texture_NORMAL-2401978555.jpg-c670475c3d0ffcdc4ff839d25db68dc3.s3tc.ctex"
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_tq7lg"]
-frequency = 0.0957
+[sub_resource type="Gradient" id="Gradient_phn0c"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.0877598, 0.928406)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1)
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_550wi"]
-in_3d_space = true
-seamless = true
-noise = SubResource("FastNoiseLite_tq7lg")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vs7v8"]
+gradient = SubResource("Gradient_phn0c")
 
 [resource]
 render_priority = 0
@@ -45,4 +46,6 @@ shader_parameter/texture_metallic = ExtResource("1_pkj0g")
 shader_parameter/texture_ambient_occlusion = ExtResource("1_pkj0g")
 shader_parameter/color_pallet = SubResource("GradientTexture1D_wyfi1")
 shader_parameter/texture_detail = SubResource("CompressedTexture2D_i2rtx")
-shader_parameter/texture_noise = SubResource("NoiseTexture2D_550wi")
+shader_parameter/y_dirt_max = 3.0
+shader_parameter/texture_y_dirt = SubResource("GradientTexture1D_vs7v8")
+shader_parameter/texture_y_dirt_noise = ExtResource("3_w1t8v")

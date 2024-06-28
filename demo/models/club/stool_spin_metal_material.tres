@@ -1,0 +1,37 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://b4x0ffrvlrapu"]
+
+[ext_resource type="Shader" uid="uid://cg43cfc5yi0ma" path="res://models/club/metal_shader.tres" id="1_me6be"]
+[ext_resource type="Texture2D" uid="uid://ck6w1yddisn2w" path="res://models/club/stool_spin_metal.png" id="2_5dunt"]
+
+[sub_resource type="Gradient" id="Gradient_w6wq2"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.269734, 0.288865, 0.255913, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sxolr"]
+gradient = SubResource("Gradient_w6wq2")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p52bb"]
+load_path = "res://.godot/imported/smudges_basecolor.png-3511eb0c08099d7c64a86f26f93565dd.s3tc.ctex"
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_me6be")
+shader_parameter/albedo = Color(0.715543, 1, 0.689872, 1)
+shader_parameter/albedo2 = Color(0.766041, 0.701399, 0.676072, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.59
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 1.0
+shader_parameter/metallic = 0.91
+shader_parameter/ao_light_affect = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/edge_wear = 0.226
+shader_parameter/random_color_pallet = 0.0
+shader_parameter/texture_albedo = ExtResource("2_5dunt")
+shader_parameter/texture_metallic = ExtResource("2_5dunt")
+shader_parameter/texture_ambient_occlusion = ExtResource("2_5dunt")
+shader_parameter/color_pallet = SubResource("GradientTexture1D_sxolr")
+shader_parameter/texture_detail = SubResource("CompressedTexture2D_p52bb")

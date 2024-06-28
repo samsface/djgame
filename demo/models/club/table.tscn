@@ -1,24 +1,25 @@
-[gd_scene load_steps=10 format=3 uid="uid://lndcipgnpctm"]
+[gd_scene load_steps=11 format=3 uid="uid://lndcipgnpctm"]
 
 [ext_resource type="PackedScene" uid="uid://bbrwl67db4l0b" path="res://models/club/table.glb" id="1_or5ac"]
 [ext_resource type="Shader" uid="uid://bq8nrvsjwegq0" path="res://models/club/wood_shader.tres" id="2_hbpy8"]
 [ext_resource type="Texture2D" uid="uid://bwjavhn4u5103" path="res://models/club/table_maps.png" id="3_j50ra"]
+[ext_resource type="Texture2D" uid="uid://cq6tf1u0nww5j" path="res://models/club/new_noise_texture_2d.tres" id="5_l5v1i"]
 [ext_resource type="Texture2D" uid="uid://b3djoj2tvomr1" path="res://models/club/Seamless_Natural_Wood_Texture_NORMAL-2401978555.jpg" id="5_n3jut"]
 
-[sub_resource type="Gradient" id="Gradient_64ou2"]
-offsets = PackedFloat32Array(0, 0.931741)
-colors = PackedColorArray(2.11775e-06, 0.663246, 0.864774, 1, 1, 0.443684, 0.375096, 1)
+[sub_resource type="Gradient" id="Gradient_6wwnd"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.509317, 0.857143)
+colors = PackedColorArray(0, 0.331115, 0.549065, 1, 1.44392e-07, 0.3904, 0.0513472, 1, 1, 0.783333, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_h1imp"]
-gradient = SubResource("Gradient_64ou2")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g8iuv"]
+gradient = SubResource("Gradient_6wwnd")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_tq7lg"]
-frequency = 0.0957
+[sub_resource type="Gradient" id="Gradient_t4ej4"]
+offsets = PackedFloat32Array(0, 0.856813)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8ffnh"]
-in_3d_space = true
-seamless = true
-noise = SubResource("FastNoiseLite_tq7lg")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_psot1"]
+gradient = SubResource("Gradient_t4ej4")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1lauq"]
 render_priority = 0
@@ -26,7 +27,7 @@ shader = ExtResource("2_hbpy8")
 shader_parameter/albedo = Color(0.715543, 1, 0.689872, 1)
 shader_parameter/albedo2 = Color(0.722958, 0.674764, 0.446239, 1)
 shader_parameter/point_size = 1.0
-shader_parameter/roughness = 1.0
+shader_parameter/roughness = 0.615
 shader_parameter/metallic_texture_channel = null
 shader_parameter/specular = 1.0
 shader_parameter/metallic = 0.3
@@ -41,9 +42,11 @@ shader_parameter/surface_dirt_height = 0.05
 shader_parameter/texture_albedo = ExtResource("3_j50ra")
 shader_parameter/texture_metallic = ExtResource("3_j50ra")
 shader_parameter/texture_ambient_occlusion = ExtResource("3_j50ra")
-shader_parameter/color_pallet = SubResource("GradientTexture1D_h1imp")
+shader_parameter/color_pallet = SubResource("GradientTexture1D_g8iuv")
 shader_parameter/texture_detail = ExtResource("5_n3jut")
-shader_parameter/texture_noise = SubResource("NoiseTexture2D_8ffnh")
+shader_parameter/y_dirt_max = 1.0
+shader_parameter/texture_y_dirt = SubResource("GradientTexture1D_psot1")
+shader_parameter/texture_y_dirt_noise = ExtResource("5_l5v1i")
 
 [node name="table" instance=ExtResource("1_or5ac")]
 

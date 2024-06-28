@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dc3vppk01vhed"]
+[gd_scene load_steps=4 format=3 uid="uid://dc3vppk01vhed"]
 
 [ext_resource type="PackedScene" uid="uid://blvgfb2xmxm0w" path="res://models/shared/nobs/keyboard_key.glb" id="1_addu6"]
 [ext_resource type="Script" path="res://models/toydrum/buttonm.gd" id="2_bpvfb"]
+[ext_resource type="Material" uid="uid://mei1e4ck7coi" path="res://models/shared/nobs/keyboard_key_material.tres" id="3_04fjq"]
 
 [node name="keyboard_key" instance=ExtResource("1_addu6")]
 script = ExtResource("2_bpvfb")
+
+[node name="KeybardButton" parent="." index="0"]
+surface_material_override/0 = ExtResource("3_04fjq")

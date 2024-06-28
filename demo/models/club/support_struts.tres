@@ -33,3 +33,4 @@ shader_parameter/texture_metallic = ExtResource("2_e63kp")
 shader_parameter/texture_ambient_occlusion = ExtResource("2_e63kp")
 shader_parameter/color_pallet = SubResource("GradientTexture1D_3x3v5")
 shader_parameter/texture_detail = ExtResource("4_jeqbf")
+shader_parameter/y_dirt_max = 1.0

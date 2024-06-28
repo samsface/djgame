@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://cld6mbchnrp3"]
+[gd_scene load_steps=13 format=3 uid="uid://cld6mbchnrp3"]
 
 [ext_resource type="Script" path="res://models/toydrum/button.gd" id="1_hygni"]
 [ext_resource type="Script" path="res://models/shared/nob_model.gd" id="2_4hhqy"]
 [ext_resource type="PackedScene" uid="uid://dc3vppk01vhed" path="res://models/shared/nobs/keyboard_key.tscn" id="3_8kkj6"]
 [ext_resource type="AudioStream" uid="uid://bmkr5qf551e58" path="res://models/shared/sounds/key_press_0.wav" id="4_52ygk"]
-[ext_resource type="PackedScene" uid="uid://bfkdsompjx7fu" path="res://models/shared/nobs/keyboard_key_base.tscn" id="4_fs83j"]
 [ext_resource type="Material" uid="uid://dtnc8e2uktfb5" path="res://models/redux/black_void_material.tres" id="4_hniaj"]
 [ext_resource type="AudioStream" uid="uid://bgxedw1j0conq" path="res://models/shared/sounds/key_press_1.wav" id="5_aplqg"]
 [ext_resource type="AudioStream" uid="uid://c3p1l42revws3" path="res://models/shared/sounds/key_press_loud_0.wav" id="7_nqskc"]
@@ -50,26 +49,17 @@ script = ExtResource("2_4hhqy")
 [node name="Button" parent="Nob/Model" instance=ExtResource("3_8kkj6")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
-[node name="Base" parent="Nob/Model/Button" instance=ExtResource("4_fs83j")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Nob"]
 shape = SubResource("BoxShape3D_fygew")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="BlackVoid" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00126357, 0)
-visible = false
 material_override = ExtResource("4_hniaj")
 size = Vector3(0.02, 0.0025, 0.02)
-
-[node name="Base2" parent="." instance=ExtResource("4_fs83j")]
 
 [node name="Sound" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_qnwah")
 bus = &"KeyPresses"
-
-[node name="Top" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00499544, 0)
 
 [node name="Path" type="Path3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0116102, 0)

@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://cld6mbchnrp3" path="res://models/toydrum/button.tscn" id="1_24f65"]
 [ext_resource type="Script" path="res://models/lital/little2.gd" id="1_i84dm"]
-[ext_resource type="Texture2D" uid="uid://pl7gf7bptldf" path="res://models/acid/albedo.png" id="1_kpr7j"]
 [ext_resource type="PackedScene" uid="uid://cyqgaxwtbp2kl" path="res://models/shared/lines/square.tscn" id="1_kqc44"]
 [ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="2_1kyq3"]
 [ext_resource type="Resource" uid="uid://cqmulviu26gd3" path="res://models/toydrum/mappings.tres" id="2_6gioe"]
@@ -10,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bjfihtm5t424l" path="res://models/toydrum/button2.tscn" id="3_5te0k"]
 [ext_resource type="PackedScene" uid="uid://b77oywlnttw32" path="res://models/shared/label.tscn" id="4_48ppo"]
 [ext_resource type="Script" path="res://models/shared/nobs/label_style.gd" id="5_2kcmv"]
+[ext_resource type="FontFile" uid="uid://ca4jgypv8bjcn" path="res://ui/fonts/RetroGaming.ttf" id="8_nib8j"]
 [ext_resource type="ArrayMesh" uid="uid://ddv7b246ohcvy" path="res://models/lital/long_slanted.obj" id="9_u0gxs"]
 
 [sub_resource type="Resource" id="Resource_fuono"]
@@ -26,6 +26,7 @@ action = &"1"
 [sub_resource type="Resource" id="Resource_lhxru"]
 script = ExtResource("5_2kcmv")
 size = 20
+font = ExtResource("8_nib8j")
 curve = 0.0
 
 [sub_resource type="InputEventAction" id="InputEventAction_soxuo"]
@@ -41,11 +42,10 @@ action = &"4"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g43ny"]
 albedo_color = Color(0.936617, 0.923601, 0.681464, 1)
-albedo_texture = ExtResource("1_kpr7j")
-metallic = 0.48
-metallic_specular = 0.47
+metallic = 0.04
+metallic_specular = 0.72
 metallic_texture = ExtResource("2_1kyq3")
-roughness_texture = ExtResource("2_1kyq3")
+roughness = 0.35
 normal_scale = 0.44
 normal_texture = ExtResource("2_1kyq3")
 rim = 0.78
@@ -97,7 +97,7 @@ transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 
 action = SubResource("InputEventAction_fui70")
 
 [node name="Label" parent="NorthFace/seq-1" instance=ExtResource("4_48ppo")]
-transform = Transform3D(-4.37114e-08, 0, 1, -6.21725e-15, 1, 0, -1, 0, -4.37114e-08, -0.016, 0, 0)
+transform = Transform3D(-4.37114e-08, 8.9407e-08, 1, -6.21725e-15, 1, -8.9407e-08, -1, 0, -4.37114e-08, 0.00112958, 0.00990623, 0)
 label_style = SubResource("Resource_lhxru")
 label = "1"
 
@@ -106,7 +106,7 @@ transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 
 action = SubResource("InputEventAction_soxuo")
 
 [node name="Label" parent="NorthFace/seq-2" instance=ExtResource("4_48ppo")]
-transform = Transform3D(-4.37114e-08, 0, 1, -6.21725e-15, 1, 0, -1, 0, -4.37114e-08, -0.016, 0, 0)
+transform = Transform3D(-4.37114e-08, 8.9407e-08, 1, -6.21725e-15, 1, -8.9407e-08, -1, 0, -4.37114e-08, 0.00112958, 0.00990623, 0)
 label_style = SubResource("Resource_lhxru")
 label = "2"
 
@@ -115,7 +115,7 @@ transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 
 action = SubResource("InputEventAction_4bmxy")
 
 [node name="Label" parent="NorthFace/seq-3" instance=ExtResource("4_48ppo")]
-transform = Transform3D(-4.37114e-08, 0, 1, -6.21725e-15, 1, 0, -1, 0, -4.37114e-08, -0.016, 0, 0)
+transform = Transform3D(-4.37114e-08, 8.9407e-08, 1, -6.21725e-15, 1, -8.9407e-08, -1, 0, -4.37114e-08, 0.00112958, 0.00990623, 0)
 label_style = SubResource("Resource_lhxru")
 label = "3"
 
@@ -124,7 +124,7 @@ transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 
 action = SubResource("InputEventAction_uwtms")
 
 [node name="Label" parent="NorthFace/seq-4" instance=ExtResource("4_48ppo")]
-transform = Transform3D(-4.37114e-08, 0, 1, -6.21725e-15, 1, 0, -1, 0, -4.37114e-08, -0.016, 0, 0)
+transform = Transform3D(-4.37114e-08, 8.9407e-08, 1, -6.21725e-15, 1, -8.9407e-08, -1, 0, -4.37114e-08, 0.00112958, 0.00990623, 0)
 label_style = SubResource("Resource_lhxru")
 label = "4"
 
@@ -133,7 +133,7 @@ transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 
 action = SubResource("InputEventAction_5bmuq")
 
 [node name="Label" parent="NorthFace/seq-5" instance=ExtResource("4_48ppo")]
-transform = Transform3D(-4.37114e-08, 0, 1, -6.21725e-15, 1, 0, -1, 0, -4.37114e-08, -0.016, 0, 0)
+transform = Transform3D(-4.37114e-08, 8.9407e-08, 1, -6.21725e-15, 1, -8.9407e-08, -1, 0, -4.37114e-08, 0.00112958, 0.00990623, 0)
 label_style = SubResource("Resource_lhxru")
 label = "5"
 
@@ -141,7 +141,7 @@ label = "5"
 transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.00481866, 8.61278e-05, -0.0348214)
 
 [node name="Label" parent="NorthFace/seq-6" instance=ExtResource("4_48ppo")]
-transform = Transform3D(-4.37114e-08, 0, 1, -6.21725e-15, 1, 0, -1, 0, -4.37114e-08, -0.016, 0, 0)
+transform = Transform3D(-4.37114e-08, 8.9407e-08, 1, -6.21725e-15, 1, -8.9407e-08, -1, 0, -4.37114e-08, 0.00112958, 0.00990624, 0)
 label_style = SubResource("Resource_lhxru")
 label = "6"
 
@@ -149,7 +149,7 @@ label = "6"
 transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.00481866, 8.61278e-05, -0.0580357)
 
 [node name="Label" parent="NorthFace/seq-7" instance=ExtResource("4_48ppo")]
-transform = Transform3D(-4.37114e-08, 0, 1, -6.21725e-15, 1, 0, -1, 0, -4.37114e-08, -0.016, 0, 0)
+transform = Transform3D(-4.37114e-08, 8.9407e-08, 1, -6.21725e-15, 1, -8.9407e-08, -1, 0, -4.37114e-08, 0.00112958, 0.00990624, 0)
 label_style = SubResource("Resource_lhxru")
 label = "7"
 
@@ -157,7 +157,7 @@ label = "7"
 transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.00481867, 0.000246845, -0.08125)
 
 [node name="Label" parent="NorthFace/seq-8" instance=ExtResource("4_48ppo")]
-transform = Transform3D(-4.37114e-08, 0, 1, -6.21725e-15, 1, 0, -1, 0, -4.37114e-08, -0.016, 0, 0)
+transform = Transform3D(-4.37114e-08, 8.9407e-08, 1, -6.21725e-15, 1, -8.9407e-08, -1, 0, -4.37114e-08, 0.00112958, 0.00990623, 0)
 label_style = SubResource("Resource_lhxru")
 label = "8"
 

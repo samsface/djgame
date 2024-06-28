@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bi76febq42c75"]
+[gd_scene load_steps=4 format=3 uid="uid://bi76febq42c75"]
 
 [ext_resource type="PackedScene" uid="uid://cywkpyvenrldh" path="res://models/shared/nobs/keyboard_key_long_and_short.glb" id="1_2el4n"]
 [ext_resource type="Script" path="res://models/toydrum/buttonm.gd" id="2_xtqe5"]
+[ext_resource type="Material" uid="uid://mei1e4ck7coi" path="res://models/shared/nobs/keyboard_key_material.tres" id="3_we10x"]
 
 [node name="keyboard_key_long_and_short" instance=ExtResource("1_2el4n")]
 script = ExtResource("2_xtqe5")
+
+[node name="KeyBoardButtonLongAndShort" parent="." index="0"]
+surface_material_override/0 = ExtResource("3_we10x")

@@ -1,23 +1,16 @@
-[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://cd36shpmxekgy"]
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://cd36shpmxekgy"]
 
 [ext_resource type="Shader" uid="uid://bq8nrvsjwegq0" path="res://models/club/wood_shader.tres" id="1_yxo0v"]
 [ext_resource type="Texture2D" uid="uid://yfucbepbono7" path="res://models/club/wall_chair_maps.png" id="2_3q126"]
 [ext_resource type="Texture2D" uid="uid://b3djoj2tvomr1" path="res://models/club/Seamless_Natural_Wood_Texture_NORMAL-2401978555.jpg" id="3_ddp3u"]
 
-[sub_resource type="Gradient" id="Gradient_04tg0"]
-offsets = PackedFloat32Array(0, 0.931741)
-colors = PackedColorArray(2.11775e-06, 0.663246, 0.864774, 1, 1, 0.443684, 0.375096, 1)
+[sub_resource type="Gradient" id="Gradient_6wwnd"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.509317, 0.857143)
+colors = PackedColorArray(0, 0.331115, 0.549065, 1, 1.44392e-07, 0.3904, 0.0513472, 1, 1, 0.783333, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_fjhd0"]
-gradient = SubResource("Gradient_04tg0")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_tq7lg"]
-frequency = 0.0957
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ph4si"]
-in_3d_space = true
-seamless = true
-noise = SubResource("FastNoiseLite_tq7lg")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gsx2y"]
+gradient = SubResource("Gradient_6wwnd")
 
 [resource]
 render_priority = 0
@@ -25,7 +18,7 @@ shader = ExtResource("1_yxo0v")
 shader_parameter/albedo = Color(0.715543, 1, 0.689872, 1)
 shader_parameter/albedo2 = Color(0.722958, 0.674764, 0.446239, 1)
 shader_parameter/point_size = 1.0
-shader_parameter/roughness = 1.0
+shader_parameter/roughness = 0.629
 shader_parameter/metallic_texture_channel = null
 shader_parameter/specular = 1.0
 shader_parameter/metallic = 0.3
@@ -40,6 +33,6 @@ shader_parameter/surface_dirt_height = 0.106
 shader_parameter/texture_albedo = ExtResource("2_3q126")
 shader_parameter/texture_metallic = ExtResource("2_3q126")
 shader_parameter/texture_ambient_occlusion = ExtResource("2_3q126")
-shader_parameter/color_pallet = SubResource("GradientTexture1D_fjhd0")
+shader_parameter/color_pallet = SubResource("GradientTexture1D_gsx2y")
 shader_parameter/texture_detail = ExtResource("3_ddp3u")
-shader_parameter/texture_noise = SubResource("NoiseTexture2D_ph4si")
+shader_parameter/y_dirt_max = 1.0

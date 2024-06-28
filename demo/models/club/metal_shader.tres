@@ -32,7 +32,7 @@ uniform vec3 uv2_scale;
 uniform vec3 uv2_offset;
 
 
-uniform sampler2D color_pallet : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform sampler2D color_pallet : hint_default_white, filter_linear_mipmap, repeat_enable, source_color;
 uniform sampler2D texture_detail : hint_default_white, filter_linear_mipmap, repeat_enable;
 uniform float edge_wear : hint_range(0.0, 1.0);
 uniform float random_color_pallet : hint_range(0.0, 1.0);

@@ -1199,11 +1199,6 @@
 "time": 368
 }, {
 "length": 16,
-"method": &"set_swing 0",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 48
-}, {
-"length": 16,
 "method": &"look 1",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 128

@@ -38,8 +38,11 @@ uniform float edge_wear : hint_range(0.0, 1.0);
 uniform float random_color_pallet : hint_range(0.0, 1.0);
 uniform float surface_dirt_height : hint_range(0.0, 10.0);
 
-
-uniform sampler2D texture_noise : source_color, filter_linear_mipmap, repeat_enable;
+group_uniforms dirt;
+uniform sampler2D texture_y_dirt :  source_color, filter_linear_mipmap, hint_default_black;
+uniform sampler2D texture_y_dirt_noise : source_color, filter_linear_mipmap, repeat_enable, hint_default_black;
+uniform float y_dirt_max : hint_range(0.0, 100.0) = 1.0;
+group_uniforms;
 
 varying vec3 vert;
 
@@ -47,7 +50,6 @@ void vertex() {
 	UV = UV * uv1_scale.xy + uv1_offset.xy;
 
 	vert = VERTEX;
-
 }
 
 void fragment() {
@@ -66,11 +68,15 @@ void fragment() {
 
 
 	ALBEDO = mix(ALBEDO, albedo2.rgb, e);
-	
-	if(vert.y < texture(texture_noise, base_uv * vec2(1.0, 5.0)).r * surface_dirt_height) {
+
+
+	float y_dirt_noise_tex = texture(texture_y_dirt_noise, UV).r;
+	float y_dirt = texture(texture_y_dirt, vec2((vert.y + y_dirt_noise_tex) / y_dirt_max)).r;
+
+	if(y_dirt > 0.5) {
 		ALBEDO = albedo2.rgb;
 	}
-	
+
 
 
 	ALBEDO = mix(ALBEDO, albedo2.rgb, round(detail_tex.r - 0.04));
