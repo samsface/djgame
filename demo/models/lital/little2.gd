@@ -28,3 +28,6 @@ func look(view_position_idx:int = 0) -> void:
 
 func set_swing(value:float):
 	Bus.audio_service.emit_float("toykit-swing", value)
+
+func set_preset(value:float):
+	Bus.audio_service.emit_float("acid-preset", value)

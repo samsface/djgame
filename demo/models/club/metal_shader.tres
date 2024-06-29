@@ -25,6 +25,7 @@ uniform float ao_light_affect : hint_range(0.0, 1.0, 0.01);
 uniform sampler2D texture_detail_albedo : source_color, filter_linear_mipmap, repeat_enable;
 uniform sampler2D texture_detail_normal : hint_normal, filter_linear_mipmap, repeat_enable;
 uniform sampler2D texture_detail_mask : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform vec2 detail_scale = vec2(1.0);
 
 uniform vec3 uv1_scale;
 uniform vec3 uv1_offset;
@@ -46,7 +47,7 @@ void fragment() {
 	vec2 base_uv = UV;
 
 	vec4 aoe_tex = texture(texture_ambient_occlusion, base_uv);
-	vec4 detail_tex = texture(texture_detail, base_uv * 2.0);
+	vec4 detail_tex = texture(texture_detail, base_uv * detail_scale);
 
 	vec4 albedo_tex = texture(texture_albedo, base_uv);
 	ALBEDO = texture(color_pallet, vec2(mod(albedo_tex.b + (NODE_POSITION_WORLD.z + NODE_POSITION_WORLD.x) * random_color_pallet, 1.0))).rgb;

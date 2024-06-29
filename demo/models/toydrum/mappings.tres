@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DeviceData" load_steps=14 format=3 uid="uid://cqmulviu26gd3"]
+[gd_resource type="Resource" script_class="DeviceData" load_steps=15 format=3 uid="uid://cqmulviu26gd3"]
 
 [ext_resource type="Script" path="res://models/shared/nob_mapping_hradio.gd" id="1_7kknr"]
 [ext_resource type="Script" path="res://models/shared/nob_mapping_bang.gd" id="2_5ypay"]
@@ -30,6 +30,11 @@ script = ExtResource("2_5ypay")
 node = NodePath("NorthFace/seq-3")
 symbol = "toykit-hat"
 
+[sub_resource type="Resource" id="Resource_jsy5u"]
+script = ExtResource("2_5ypay")
+node = NodePath("NorthFace/seq-8")
+symbol = "toykit-seq-3"
+
 [sub_resource type="Resource" id="Resource_4l3wh"]
 script = ExtResource("2_gmc4h")
 node = NodePath("select-kick")
@@ -57,4 +62,4 @@ arrays = Array[Resource("res://models/shared/nob_mapping_array.gd")]([])
 radios = Array[ExtResource("1_7kknr")]([SubResource("Resource_scfs4")])
 exprs = Array[ExtResource("2_gmc4h")]([SubResource("Resource_4l3wh"), SubResource("Resource_8bj34"), SubResource("Resource_av6lp")])
 sliders = Array[Resource("res://models/shared/nob_mapping_slider.gd")]([])
-bangs = Array[ExtResource("2_5ypay")]([SubResource("Resource_0c266"), SubResource("Resource_iwce1"), SubResource("Resource_io3e3"), SubResource("Resource_ywh5s"), SubResource("Resource_6e5on")])
+bangs = Array[ExtResource("2_5ypay")]([SubResource("Resource_0c266"), SubResource("Resource_iwce1"), SubResource("Resource_io3e3"), SubResource("Resource_ywh5s"), SubResource("Resource_6e5on"), SubResource("Resource_jsy5u")])

@@ -5,6 +5,7 @@ class_name NobMappingSlider
 @export var symbol:String
 @export var max_value:float
 @export var min_value:float
+@export var logarithmic:bool
 
 var p_
 var nob_:Nob
@@ -19,7 +20,13 @@ func hook(p:Node) -> void:
 	nob_.value_changed.connect(_value_changed)
 
 func _value_changed(new_value:float, old_value:float) -> void:
-	#print("v", new_value * (max_value - min_value) + min_value)
+
+	if logarithmic:
+		new_value = (pow(10.0, new_value) - 1.0) / 9.0
 	
-	Bus.audio_service.emit_float("%s-%s" % [p_.name, symbol], new_value * (max_value - min_value) + min_value)
+	print(new_value)
+	
+	var v = new_value * (max_value - min_value) + min_value
+
+	Bus.audio_service.emit_float("%s-%s" % [p_.name, symbol], v)
 	p_.value_changed.emit(nob_, new_value, old_value)

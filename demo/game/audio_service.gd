@@ -7,7 +7,7 @@ var audio_stream_:PureDataAudioStreamPlayer
 var bang_signals_ := {}
 var float_signals_ := {}
 var metro := 130
-var latency := -0.1
+var latency := 0.25
 
 func _ready() -> void:
 	Bus.audio_service = self

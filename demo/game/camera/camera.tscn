@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://lprkgl2wh3cd"]
+[gd_scene load_steps=6 format=3 uid="uid://lprkgl2wh3cd"]
 
 [ext_resource type="Script" path="res://game/camera/camera.gd" id="1_o37hp"]
 [ext_resource type="Script" path="res://game/camera/cursor.gd" id="2_rcdnn"]
 [ext_resource type="Script" path="res://game/hud_canvas_layer.gd" id="3_5v3r4"]
 [ext_resource type="Texture2D" uid="uid://cwhxcbe4nkdvd" path="res://game/camera/cursor.png" id="3_6dawb"]
+[ext_resource type="CameraAttributesPractical" uid="uid://ev1eo0cru0we" path="res://game/cameraatr.tres" id="5_am7l2"]
 
 [node name="Camera" type="Node3D"]
 script = ExtResource("1_o37hp")
@@ -24,6 +25,7 @@ vframes = 2
 [node name="CameraArm" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="CameraArm"]
+attributes = ExtResource("5_am7l2")
 current = true
 fov = 55.0
 

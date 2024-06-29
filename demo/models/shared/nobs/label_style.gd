@@ -14,3 +14,7 @@ class_name LabelStyle
 	set(v):
 		curve = v
 		emit_changed()
+@export var color:Color :
+	set(v):
+		color = v
+		emit_changed()

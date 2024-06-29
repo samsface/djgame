@@ -7,7 +7,7 @@ code = "// NOTE: Shader automatically converted from Godot Engine 4.2.1.stable's
 
 shader_type spatial;
 render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
-uniform vec4 albedo : source_color;
+
 uniform sampler2D texture_albedo : source_color,filter_linear_mipmap,repeat_enable;
 uniform float point_size : hint_range(0,128);
 uniform float roughness : hint_range(0,1);
@@ -22,12 +22,13 @@ uniform vec3 uv2_scale;
 uniform vec3 uv2_offset;
 
 instance uniform float curve : hint_range(-1.0, 1.0) = 0.0;
+instance uniform vec4 albedo : source_color;
 
 void vertex() {
 	UV=UV*uv1_scale.xy+uv1_offset.xy;
-	
+
 	float side = UV.x > 0.5 ? 1.0 : -1.0;
-	
+
 	float cc = curve;
 	float a = cc * abs(0.5 - UV.x) * side * 1.0;
 
@@ -56,7 +57,6 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ta8ku"]
 render_priority = 0
 shader = SubResource("Shader_k20kr")
-shader_parameter/albedo = Color(0, 0, 0, 1)
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 0.15
 shader_parameter/metallic_texture_channel = null
@@ -83,6 +83,7 @@ script = ExtResource("1_jnaqk")
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 cast_shadow = 0
+instance_shader_parameters/albedo = Color(0, 0, 0, 1)
 instance_shader_parameters/curve = 0.0
 mesh = SubResource("TextMesh_pbbrj")
 skeleton = NodePath("")

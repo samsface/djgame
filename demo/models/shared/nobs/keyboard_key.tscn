@@ -2,10 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://blvgfb2xmxm0w" path="res://models/shared/nobs/keyboard_key.glb" id="1_addu6"]
 [ext_resource type="Script" path="res://models/toydrum/buttonm.gd" id="2_bpvfb"]
-[ext_resource type="Material" uid="uid://mei1e4ck7coi" path="res://models/shared/nobs/keyboard_key_material.tres" id="3_04fjq"]
+[ext_resource type="Material" uid="uid://c7ewiicv8488q" path="res://models/shared/nobs/keyboard_key_material_good.tres" id="3_qgc1y"]
 
 [node name="keyboard_key" instance=ExtResource("1_addu6")]
 script = ExtResource("2_bpvfb")
 
 [node name="KeybardButton" parent="." index="0"]
-surface_material_override/0 = ExtResource("3_04fjq")
+surface_material_override/0 = ExtResource("3_qgc1y")

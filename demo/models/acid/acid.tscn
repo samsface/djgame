@@ -22,6 +22,7 @@ script = ExtResource("7_dom38")
 size = 12
 font = ExtResource("3_1bv3f")
 curve = 0.0
+color = null
 
 [sub_resource type="Resource" id="Resource_hvvqv"]
 script = ExtResource("4_pik7k")
@@ -44,6 +45,7 @@ script = ExtResource("7_dom38")
 size = 7
 font = ExtResource("3_1bv3f")
 curve = 0.0
+color = null
 
 [sub_resource type="Shader" id="Shader_6pv00"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.2.1.stable's StandardMaterial3D.

@@ -52,7 +52,7 @@ func _physics_process(delta: float) -> void:
 		camera_arm_.rotation = lerp(r, rr, delta * 6.0)
 
 		if stack_[0][1].has_method("get_view_position"):
-			set_head_position_(stack_[0][1].get_view_position())
+			set_head_position_(stack_[0][1].get_view_position(), stack_[0][1].global_position)
 
 	
 	if not cursor.is_owner(self):
@@ -98,11 +98,20 @@ func _physics_process(delta: float) -> void:
 			logi("MOUSE ENTER NOTING")
 			hovering_ = null
 
-func set_head_position_(pos:Vector3) -> void:
+func set_head_position_(pos:Vector3, pos2:Vector3) -> void:
 	if head_pos_ != pos:
 		head_pos_ = pos
 		var tween := create_tween()
+		tween.set_parallel()
 		tween.tween_property(camera_arm_, "position", pos, 0.5)
+		
+		var d := auto_focus(pos, pos2)
+		
+		tween.tween_property(camera_.attributes, "dof_blur_near_transition", d * 0.99, 1.0)
+		tween.tween_property(camera_.attributes, "dof_blur_near_distance", d, 1.0)
+
+func auto_focus(from:Vector3, to:Vector3) -> float:
+	return sqrt(from.distance_to(to)) * 0.33
 
 func get_head_position() -> Vector3:
 	return camera_arm_.global_position
@@ -144,3 +153,7 @@ func is_looking_at_parent(node:Node):
 		node = node.get_parent()
 
 	return false
+
+func tweak() -> void:
+	camera_.rotation_degrees.z = randf_range(3.0, 5.0)
+	get_tree().create_timer(randf_range(0.1, 0.3)).timeout.connect(func():  camera_.rotation_degrees.z = 0)

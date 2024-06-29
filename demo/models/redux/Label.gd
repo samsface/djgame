@@ -18,3 +18,4 @@ func invalidate_labels_() -> void:
 	$Mesh.mesh.font_size = label_style.size
 	$Mesh.mesh.font = label_style.font
 	$Mesh.set_instance_shader_parameter("curve", label_style.curve)
+	$Mesh.set_instance_shader_parameter("albedo", label_style.color)
