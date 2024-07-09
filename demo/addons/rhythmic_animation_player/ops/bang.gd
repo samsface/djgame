@@ -19,6 +19,8 @@ class_name PianoRollItemBang
 	set(v):
 		silent = v
 
+var tween_:Tween
+
 func _ready():
 	invalidate_value_()
 	item_rect_changed.connect(invalidate_value_)
@@ -68,6 +70,8 @@ func invalidate_value_() -> void:
 	$Polygon2D.polygon = polygon
 
 func begin() -> void:
+	flash()
+
 	var target_node = get_target_node()
 	if target_node and target_node.has_method("bang"):
 		var length_in_seconds = get_lookahead() * (Bus.audio_service.metro) * 0.001

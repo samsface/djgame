@@ -24,4 +24,6 @@ func invalidate_value_() -> void:
 	tooltip_text = text
 
 func begin() -> void:
-	get_target_node().dialog(db, length, who, value, db_name, reply_a, reply_b)
+	var target_node = get_target_node()
+	if target_node:
+		target_node.dialog(db, length, who, value, db_name, reply_a, reply_b)

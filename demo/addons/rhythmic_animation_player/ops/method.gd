@@ -25,6 +25,8 @@ func parse_args_(object:Object, method_name:StringName, args:PackedStringArray) 
 	return res
 
 func begin() -> void:
+	flash()
+	
 	var node = get_target_node()
 
 	var method_args_generic = method.split(" ")

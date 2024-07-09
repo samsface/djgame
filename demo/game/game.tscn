@@ -408,6 +408,7 @@ transform = Transform3D(-6.18623e-08, -0.20891, 1.46972, -1.25145e-08, 1.0239, 0
 transform = Transform3D(-6.18623e-08, -0.20891, 1.46972, -1.25145e-08, 1.0239, 0.299873, -1.46, 7.53514e-11, -6.48445e-08, 4.88211, 1.74093, -0.906767)
 
 [node name="Ground" type="Node3D" parent="WorldViewport/SubViewport/Game/Garden"]
+visible = false
 
 [node name="ground_tiles" parent="WorldViewport/SubViewport/Game/Garden/Ground" instance=ExtResource("32_1aq1y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8135, -1.06538, -11.6737)

@@ -4,6 +4,7 @@ class_name RythmicAnimationPlayerControlItem
 
 var active := false
 var db = Object.new()
+var tween:Tween
 
 func get_lookahead() -> int:
 	return 0
@@ -23,3 +24,11 @@ func begin() -> void:
 
 func end() -> void:
 	pass
+
+func flash() -> void:
+	if tween:
+		tween.kill()
+	
+	tween = create_tween()
+	tween.tween_property(self, "modulate", Color.GREEN, 0.1)
+	tween.tween_property(self, "modulate", Color.WHITE, 0.1)

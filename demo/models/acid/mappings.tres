@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DeviceData" load_steps=6 format=3 uid="uid://d2v2vxmias8e0"]
+[gd_resource type="Resource" script_class="DeviceData" load_steps=7 format=3 uid="uid://d2v2vxmias8e0"]
 
 [ext_resource type="Script" path="res://models/shared/NobMappingArray.gd" id="1_7af2q"]
 [ext_resource type="Script" path="res://models/shared/nob_mapping_slider.gd" id="2_07fgk"]
@@ -27,10 +27,18 @@ max_value = 1000.0
 min_value = 22.0
 logarithmic = true
 
+[sub_resource type="Resource" id="Resource_c5auu"]
+script = ExtResource("2_07fgk")
+node = NodePath("Model/NorthFace/Gain")
+symbol = "gain"
+max_value = 0.9
+min_value = 0.0
+logarithmic = false
+
 [resource]
 script = ExtResource("1_7af2q")
 arrays = Array[Resource("res://models/shared/nob_mapping_array.gd")]([])
 radios = Array[Resource("res://models/shared/nob_mapping_hradio.gd")]([])
 exprs = Array[Resource("res://models/shared/nob_mapping_expr.gd")]([])
-sliders = Array[ExtResource("2_07fgk")]([SubResource("Resource_rkmgh"), SubResource("Resource_f6ar4"), SubResource("Resource_kxsjv")])
+sliders = Array[ExtResource("2_07fgk")]([SubResource("Resource_rkmgh"), SubResource("Resource_f6ar4"), SubResource("Resource_kxsjv"), SubResource("Resource_c5auu")])
 bangs = Array[Resource("res://models/shared/nob_mapping_bang.gd")]([])

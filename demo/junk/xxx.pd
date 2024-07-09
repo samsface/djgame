@@ -49,6 +49,8 @@
 #X obj 1125 253 nbx 5 17 -1e+37 1e+37 0 0 s-clock empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 256;
 #X obj 1070 204 i++;
 #X msg 1000 400 1, f 5;
+#X obj 1798 353 vstplugin~;
+#X obj 1081 1017 nbx 5 17 0 0.9 0 0 empty r-acid-gain empty 0 -10 0 12 #fcfcfc #000000 #000000 0 256;
 #X connect 1 0 6 0;
 #X connect 1 0 29 0;
 #X connect 1 0 28 0;
@@ -101,3 +103,4 @@
 #X connect 39 0 3 1;
 #X connect 44 0 43 0;
 #X connect 45 0 29 2;
+#X connect 47 0 31 1;

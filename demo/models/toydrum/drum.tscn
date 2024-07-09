@@ -1,8 +1,7 @@
-[gd_scene load_steps=41 format=3 uid="uid://dfkhn8atn11hq"]
+[gd_scene load_steps=40 format=3 uid="uid://dfkhn8atn11hq"]
 
 [ext_resource type="Script" path="res://models/lital/little2.gd" id="1_i84dm"]
 [ext_resource type="PackedScene" uid="uid://cyqgaxwtbp2kl" path="res://models/shared/lines/square.tscn" id="1_kqc44"]
-[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="2_1kyq3"]
 [ext_resource type="Resource" uid="uid://cqmulviu26gd3" path="res://models/toydrum/mappings.tres" id="2_6gioe"]
 [ext_resource type="Script" path="res://models/shared/nobs/line_style.gd" id="2_cak2j"]
 [ext_resource type="PackedScene" uid="uid://bjfihtm5t424l" path="res://models/toydrum/button2.tscn" id="3_5te0k"]
@@ -22,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://c3p1l42revws3" path="res://models/shared/sounds/key_press_loud_0.wav" id="16_hy66t"]
 [ext_resource type="AudioStream" uid="uid://dh5tiwpnwbg3a" path="res://models/shared/sounds/key_press_loud_2.wav" id="17_sk8gg"]
 [ext_resource type="PackedScene" uid="uid://c1midsktuy41j" path="res://models/shared/plug_no_screw.glb" id="18_ek7yc"]
+[ext_resource type="Material" uid="uid://cvedaj7ghb1bw" path="res://models/lital/long_slanted_material.tres" id="21_uvrst"]
 
 [sub_resource type="Resource" id="Resource_7wmo2"]
 script = ExtResource("5_2kcmv")
@@ -116,26 +116,6 @@ action = &"7"
 
 [sub_resource type="InputEventAction" id="InputEventAction_e8bk3"]
 action = &"8"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g43ny"]
-albedo_color = Color(0.776471, 0.756863, 0.607843, 1)
-metallic = 0.04
-metallic_specular = 0.72
-metallic_texture = ExtResource("2_1kyq3")
-roughness = 0.35
-normal_scale = 0.44
-normal_texture = ExtResource("2_1kyq3")
-rim = 0.78
-rim_tint = 1.0
-clearcoat_roughness = 1.0
-anisotropy = -1.0
-ao_light_affect = 1.0
-heightmap_scale = 16.0
-heightmap_deep_parallax = true
-heightmap_min_layers = 8
-heightmap_max_layers = 32
-heightmap_texture = ExtResource("2_1kyq3")
-backlight = Color(0, 1, 0, 1)
 
 [node name="Drum" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018667, 0.00447031, 0.0409039)
@@ -593,7 +573,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00384321, 0, 0.00670357)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_g43ny")
+material_override = ExtResource("21_uvrst")
 calculate_tangents = false
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="CSGCombiner3D"]

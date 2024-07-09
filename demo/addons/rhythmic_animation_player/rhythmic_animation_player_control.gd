@@ -3,6 +3,10 @@ extends Control
 @export var root_node:Node
 @export var inspector:Node
 @export var painting_item:PackedScene
+@export var id:String :
+	set(v):
+		id = v
+		name = id
 
 signal seeked
 signal begin
@@ -14,11 +18,16 @@ var look_ahead_ := 0
 
 var undo_ := UndoRedo.new()
 
+var timeline_control
+var offset := 0
+
+
 func _ready() -> void:
+	timeline_control = $TimelineControl
 	$TimelineControl.undo = undo_
 
 func seek(time:float) -> void:
-	var t := int(time)
+	var t := int(time + offset)
 	
 	var l = ($TimelineControl.time_range.y - $TimelineControl.time_range.x) 
 	
@@ -178,3 +187,5 @@ func _paint_item_selected(index: int) -> void:
 			painting_item = preload("res://addons/rhythmic_animation_player/ops/dialog.tscn")
 		4:
 			painting_item = preload("res://addons/rhythmic_animation_player/ops/tween.tscn")
+		5:
+			painting_item = preload("res://addons/rhythmic_animation_player/ops/jump.tscn")

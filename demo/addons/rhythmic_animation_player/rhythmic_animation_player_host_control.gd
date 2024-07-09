@@ -14,9 +14,12 @@ var playing
 
 #var node_db := GraphControlNodeDatabase.new()
 
-func seek(time:float) -> void:
-	%Tabs.get_child(0).seek(time)
+var time_ := 0
 
+func seek(time:float) -> void:
+	time_ = time
+	%Tabs.get_child(%Tabs.current_tab).seek(time_)
+	
 func get_scene(scene) -> Node:
 	return %Tabs.get_node_or_null(scene)
 
@@ -50,6 +53,11 @@ func _ready():
 		
 	%Tabs.current_tab = 0
 
+	await get_tree().process_frame
+
+	for child in %Tabs.get_children():
+		child._changed()
+
 func _play_pressed() -> void:
 	visible = false
 	play.emit()
@@ -78,10 +86,10 @@ func jump(scene) -> void:
 	for i in %Tabs.get_child_count():
 		if %Tabs.get_child(i).name == scene:
 			%Tabs.current_tab = i
+			%Tabs.get_child(i).offset = -(time_ + %Tabs.get_child(i).get_look_ahead() + 1) 
 			break
 
 func _tab_clicked(tab):
-	%Inspector.virtual_properties = null
 	%Inspector.selection = %Tabs.get_current_tab_control()
 
 func _duplicate_pressed() -> void:

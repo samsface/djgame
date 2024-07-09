@@ -48,3 +48,6 @@ func load_() -> void:
 	graphics_quality = file.get_value("graphics", "graphics_quality", GraphicsQuality.MEDIUM)
 	%GraphicsQuality.select(graphics_quality)
 	is_loading_ = false
+
+func _metro_changed(value: float) -> void:
+	Bus.audio_service.set_metro(int(value))
