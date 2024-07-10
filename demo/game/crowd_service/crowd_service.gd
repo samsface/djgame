@@ -39,3 +39,7 @@ func set_cheer(value:float) -> void:
 	tween.tween_property($Ch03_nonPBR, "cheer", value, 0.4)
 	tween.tween_property($Ch03_nonPBR2, "cheer", value, 0.4)
 
+func set_tired(value:float) -> void:
+	var tween := create_tween()
+	tween.tween_property($Ch03_nonPBR, "tired", value, 0.4)
+	tween.tween_property($Ch03_nonPBR2, "tired", value, 0.4)

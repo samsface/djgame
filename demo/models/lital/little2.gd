@@ -31,3 +31,6 @@ func set_swing(value:float):
 
 func set_preset(value:float):
 	Bus.audio_service.emit_float("acid-preset", value)
+
+func set_sample(idx:int, sample_path:String) -> void:
+	Bus.audio_service.emit_message("toykit-set-sample-" + str(idx), [sample_path])

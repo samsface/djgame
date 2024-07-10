@@ -8,8 +8,11 @@ var bang_signals_ := {}
 var float_signals_ := {}
 var metro := 130
 var latency := 0.2
+var regex_ = RegEx.new()
 
 func _ready() -> void:
+	regex_.compile("^[+-]?\\d+(\\.\\d+)?$")
+	
 	Bus.audio_service = self
 	
 	audio_stream_ = PureDataAudioStreamPlayer.new()
@@ -43,6 +46,7 @@ func set_metro(value:float) -> void:
 	emit_float("metro", value)
 
 func play() -> void:
+	emit_bang("WIPE-BUFFER")
 	emit_float("CLOCK", -16)
 	emit_bang("PLAY")
 	
@@ -64,6 +68,17 @@ func emit_bang(signal_name:StringName) -> void:
 
 func emit_float(signal_name:StringName, v:float) -> void:
 	audio_stream_.send_float("r-" + signal_name, v)
+
+func emit_message(signal_name, args:Array) -> void:
+	audio_stream_.start_message(args.size())
+
+	for i in range(1, args.size()):
+		if regex_.search(str(args[i])):
+			audio_stream_.add_float(float(args[i]))
+		else:
+			audio_stream_.add_symbol(args[i])
+
+	audio_stream_.finish_message(signal_name, args[0])
 
 func _exit_tree() -> void:
 	patch_file_handle_.close()

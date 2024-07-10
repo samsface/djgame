@@ -47,7 +47,6 @@ func _physics_process(delta: float) -> void:
 			dragging_ = false
 			$Nob/Model._grab_end()
 			Bus.camera_service.cursor.pop(self)
-			set_physics_process(false)
 
 	if mouse_over_:
 		if Input.is_action_just_pressed("click"):

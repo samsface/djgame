@@ -9,7 +9,7 @@ func hit(points:int, hint:String) -> void:
 	points_ = points
 	
 	text_.text = "+%s hp" % points_
-	text_.sub_text = hint
+	#text_.sub_text = hint
 
 	text_.ok()
 

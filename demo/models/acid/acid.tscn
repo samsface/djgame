@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://rbuf4nqmcmjx"]
+[gd_scene load_steps=30 format=3 uid="uid://rbuf4nqmcmjx"]
 
 [ext_resource type="Script" path="res://models/redux/device.gd" id="1_636gy"]
 [ext_resource type="Script" path="res://models/lital/little2.gd" id="1_u4dod"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://du6gatur0vum5" path="res://models/shared/power_plug.tscn" id="9_d6sye"]
 [ext_resource type="Texture2D" uid="uid://bcvmpvpwk1nvp" path="res://models/shared/stickers/smiley.png" id="9_xy7ad"]
 [ext_resource type="ArrayMesh" uid="uid://bihsv7t48c5h3" path="res://models/lital/wide.obj" id="11_6h82h"]
+[ext_resource type="PackedScene" uid="uid://bjfihtm5t424l" path="res://models/toydrum/button2.tscn" id="12_gqpmd"]
 [ext_resource type="Texture2D" uid="uid://pl7gf7bptldf" path="res://models/acid/albedo.png" id="12_u5yes"]
 
 [sub_resource type="Resource" id="Resource_arge0"]
@@ -112,6 +113,18 @@ shader_parameter/texture_albedo = ExtResource("9_xy7ad")
 material = SubResource("ShaderMaterial_t76b5")
 size = Vector2(0.01, 0.01)
 orientation = 1
+
+[sub_resource type="InputEventAction" id="InputEventAction_dnlut"]
+action = &"u"
+
+[sub_resource type="InputEventAction" id="InputEventAction_87mva"]
+action = &"i"
+
+[sub_resource type="InputEventAction" id="InputEventAction_eqkrx"]
+action = &"o"
+
+[sub_resource type="InputEventAction" id="InputEventAction_qlhyv"]
+action = &"p"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cejxp"]
 albedo_color = Color(0.956863, 0.580392, 0.698039, 1)
@@ -272,6 +285,22 @@ size = Vector2(0.2095, 0.018)
 [node name="SmileySticker" type="MeshInstance3D" parent="Model/NorthFace"]
 transform = Transform3D(0.932598, 0, 0.360917, 0, 1, 0, -0.360917, 0, 0.932598, -0.0507204, 0.000285132, -0.0397606)
 mesh = SubResource("QuadMesh_8nlrd")
+
+[node name="Preset1" parent="Model/NorthFace" instance=ExtResource("12_gqpmd")]
+transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, -0.0359784, 0, 0.0393107)
+action = SubResource("InputEventAction_dnlut")
+
+[node name="Preset2" parent="Model/NorthFace" instance=ExtResource("12_gqpmd")]
+transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, -0.0123241, 0, 0.0393107)
+action = SubResource("InputEventAction_87mva")
+
+[node name="Preset3" parent="Model/NorthFace" instance=ExtResource("12_gqpmd")]
+transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 0.0139931, 0, 0.0393107)
+action = SubResource("InputEventAction_eqkrx")
+
+[node name="Preset4" parent="Model/NorthFace" instance=ExtResource("12_gqpmd")]
+transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 0.0356559, 0, 0.0393107)
+action = SubResource("InputEventAction_qlhyv")
 
 [node name="WestFace" type="Node3D" parent="Model"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0642776, 0, 0)

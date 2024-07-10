@@ -257,6 +257,7 @@ script = ExtResource("18_sypot")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldViewport/SubViewport/Game/WorldEnvironment"]
 transform = Transform3D(0.816137, 0.577858, 0, -0.554347, 0.782932, 0.282342, 0.163153, -0.23043, 0.959314, 0.0125005, 0.329456, 0.245015)
+light_energy = 0.05
 shadow_enabled = true
 shadow_reverse_cull_face = true
 shadow_blur = 0.05
@@ -408,7 +409,6 @@ transform = Transform3D(-6.18623e-08, -0.20891, 1.46972, -1.25145e-08, 1.0239, 0
 transform = Transform3D(-6.18623e-08, -0.20891, 1.46972, -1.25145e-08, 1.0239, 0.299873, -1.46, 7.53514e-11, -6.48445e-08, 4.88211, 1.74093, -0.906767)
 
 [node name="Ground" type="Node3D" parent="WorldViewport/SubViewport/Game/Garden"]
-visible = false
 
 [node name="ground_tiles" parent="WorldViewport/SubViewport/Game/Garden/Ground" instance=ExtResource("32_1aq1y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8135, -1.06538, -11.6737)
@@ -441,7 +441,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1534, -1.06538, -1.65838)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1534, -1.06538, 3.35208)
 
 [node name="oil_drum_table" parent="WorldViewport/SubViewport/Game/Garden" instance=ExtResource("23_kacgu")]
-transform = Transform3D(0.988988, 0, 0.147999, 0, 1, 0, -0.147999, 0, 0.988988, -3.49122, -1.13426, -4.18508)
+transform = Transform3D(0.988988, 0, 0.147999, 0, 1, 0, -0.147999, 0, 0.988988, -3.43969, -1.13426, -5.05777)
 
 [node name="Decal" type="Decal" parent="WorldViewport/SubViewport/Game/Garden/oil_drum_table"]
 transform = Transform3D(0.385567, -0.696568, -0.605088, 0.696567, -0.210318, 0.685974, -0.605088, -0.685974, 0.404114, 0.18632, 0.695713, 0.183485)
@@ -449,13 +449,13 @@ size = Vector3(0.1, 0.1, 0.1)
 texture_albedo = ExtResource("24_u45so")
 
 [node name="oil_drum_table4" parent="WorldViewport/SubViewport/Game/Garden" instance=ExtResource("23_kacgu")]
-transform = Transform3D(0.664813, 0, -0.74701, 0, 1, 0, 0.74701, 0, 0.664813, -0.416557, -1.13426, -4.18184)
+transform = Transform3D(0.664813, 0, -0.74701, 0, 1, 0, 0.74701, 0, 0.664813, -1.03997, -1.13426, -4.18184)
 
 [node name="oil_drum_table2" parent="WorldViewport/SubViewport/Game/Garden" instance=ExtResource("23_kacgu")]
 transform = Transform3D(0.723835, 0, 0.689973, 0, 1, 0, -0.689973, 0, 0.723835, -0.13218, -1.12196, -7.38365)
 
 [node name="oil_drum_table3" parent="WorldViewport/SubViewport/Game/Garden" instance=ExtResource("23_kacgu")]
-transform = Transform3D(0.565917, 0, 0.824462, 0, 1, 0, -0.824462, 0, 0.565917, -3.44789, -1.13426, -7.63526)
+transform = Transform3D(0.565917, 0, 0.824462, 0, 1, 0, -0.824462, 0, 0.565917, -2.71831, -1.13426, -7.63526)
 
 [node name="support_struts" parent="WorldViewport/SubViewport/Game/Garden" instance=ExtResource("30_1irv8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25666, 1.38533, -0.963761)

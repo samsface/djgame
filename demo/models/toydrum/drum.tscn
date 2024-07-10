@@ -596,7 +596,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.271468, 0.1728, -0.0310543)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0966436, 0.139137, -0.0310543)
 
 [node name="Marker3D5" type="Marker3D" parent="Views"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.174824, 0.0441562, 0.0170877)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19563, 0.0362972, 0.0858325)
 
 [connection signal="mouse_entered" from="NorthFace/Button12/Nob" to="NorthFace/Button12" method="_mouse_entered"]
 [connection signal="mouse_exited" from="NorthFace/Button12/Nob" to="NorthFace/Button12" method="_mouse_exited"]

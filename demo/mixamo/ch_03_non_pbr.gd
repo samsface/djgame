@@ -18,6 +18,11 @@ var r := randf()
 		clap = v
 		invalidate_attention_()
 
+@export_range(0.0, 1.0) var tired:float :
+	set(v):
+		tired = v
+		invalidate_attention_()
+
 func _ready() -> void:
 	pass
 
@@ -34,3 +39,4 @@ func invalidate_attention_() -> void:
 	
 	$AnimationTree.set("parameters/Cheer/blend_amount", cheer)
 	$AnimationTree.set("parameters/Clap/blend_amount", clap)
+	$AnimationTree.set("parameters/Tired/blend_amount", tired)

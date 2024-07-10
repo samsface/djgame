@@ -28,6 +28,7 @@ vframes = 2
 attributes = ExtResource("5_am7l2")
 current = true
 fov = 55.0
+near = 0.01
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, 0)

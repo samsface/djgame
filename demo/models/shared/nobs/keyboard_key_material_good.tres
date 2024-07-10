@@ -4,12 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://cpks26ymejva2" path="res://models/shared/nobs/keyboard_button.png" id="2_xfp4x"]
 [ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="3_dkrkj"]
 
-[sub_resource type="Gradient" id="Gradient_rscpi"]
+[sub_resource type="Gradient" id="Gradient_e6334"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(0.777652, 0.756564, 0.607167, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_l20k7"]
-gradient = SubResource("Gradient_rscpi")
+gradient = SubResource("Gradient_e6334")
 
 [resource]
 resource_local_to_scene = true
