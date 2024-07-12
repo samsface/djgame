@@ -1,4 +1,4 @@
-#N canvas 73 26 2486 1344 12;
+#N canvas 0 32 2560 1497 12;
 #X obj 913 -134 abs~;
 #X obj 914 -32 -~;
 #X obj 915 36 *~;
@@ -10,22 +10,18 @@
 #X obj 1200 19 +~ 0;
 #X obj 900 435 *~;
 #X obj 918 321 lop~;
-#X obj 1502 119 nbx 5 14 -1e+37 1e+37 0 0 empty empty thresh 0 -8 0
-10 #fcfcfc #000000 #000000 0 256;
-#X obj 1559 119 nbx 5 14 -1e+37 1e+37 0 0 empty empty ratio 0 -8 0
-10 #fcfcfc #000000 #000000 0 256;
+#X obj 1502 119 nbx 5 14 -1e+37 1e+37 0 0 empty empty thresh 0 -8 0 10 #fcfcfc #000000 #000000 0 256;
+#X obj 1559 119 nbx 5 14 -1e+37 1e+37 0 0 empty empty ratio 0 -8 0 10 #fcfcfc #000000 #000000 0 256;
 #X obj 1522 278 s \$0-threshold;
 #X obj 1636 275 s \$0-ratio;
 #X obj 943 290 r \$0-response;
 #X obj 1730 291 s \$0-response;
-#X obj 1616 119 nbx 5 14 -1e+37 1e+37 0 0 empty empty response 0 -8
-0 10 #fcfcfc #000000 #000000 0 256;
+#X obj 1616 119 nbx 5 14 -1e+37 1e+37 0 0 empty empty response 0 -8 0 10 #fcfcfc #000000 #000000 0 256;
 #X obj 959 504 line~;
 #X obj 959 461 pack f 5;
 #X obj 959 417 r \$0-gain;
 #X obj 901 564 *~;
-#X obj 1673 119 nbx 5 14 -1e+37 1e+37 0 0 empty empty gain 0 -8 0 10
-#fcfcfc #000000 #000000 0 256;
+#X obj 1673 119 nbx 5 14 -1e+37 1e+37 0 0 empty empty gain 0 -8 0 10 #fcfcfc #000000 #000000 0 256;
 #X obj 1849 259 s \$0-gain;
 #X obj 917 256 clip~ 0 1;
 #X obj 1522 175 + 100;
@@ -39,35 +35,33 @@
 #X obj 917 370 *~ 1;
 #X obj 633 -62 delwrite~ \$0-lookaheadbuf 1000;
 #X obj 640 113 delread~ \$0-lookaheadbuf 0;
-#X obj 752 -353 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
+#X obj 752 -353 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000 0 1;
 #X obj 734 -244 *~;
 #X obj 817 -245 *~;
 #X obj 901 634 outlet~;
 #X obj 733 -482 inlet~;
 #X obj 817 -379 inlet~;
-#X obj 835 -292 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
+#X obj 835 -292 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000 0 1;
 #X obj 752 -398 - 1;
 #X obj 1528 13 inlet;
 #X obj 1642 13 inlet;
 #X obj 1736 12 inlet;
 #X obj 1855 7 inlet;
-#X obj 1731 119 nbx 5 14 -1e+37 1e+37 0 0 empty empty lookahead 0 -8
-0 10 #fcfcfc #000000 #000000 0 256;
+#X obj 1731 119 nbx 5 14 -1e+37 1e+37 0 0 empty empty lookahead 0 -8 0 10 #fcfcfc #000000 #000000 0 256;
 #X obj 1942 7 inlet;
 #X obj 1936 259 s \$0-lookahead;
 #X obj 640 61 r \$0-lookahead;
 #X msg 1788 11 40;
 #X obj 1666 -72 loadbang;
-#X obj 1790 118 tgl 15 0 empty empty side\\\ chain 17 7 0 10 #fcfcfc
-#000000 #000000 0 1;
+#X obj 1790 118 tgl 15 0 empty empty side\ chain 17 7 0 10 #fcfcfc #000000 #000000 0 1;
 #X obj 2016 218 s \$0-sidechain;
 #X obj 752 -445 r \$0-sidechain;
 #X msg 2027 7 1;
 #X msg 1578 11 -33;
 #X msg 1691 13 18;
 #X msg 1825 12 9;
+#X obj 994 -379 loadbang;
+#X obj 988 -313 sig~ 0.001;
 #X connect 0 0 1 0;
 #X connect 0 0 8 0;
 #X connect 1 0 2 0;
@@ -132,4 +126,6 @@
 #X connect 58 0 11 0;
 #X connect 59 0 12 0;
 #X connect 60 0 22 0;
+#X connect 61 0 62 0;
+#X connect 62 0 38 0;
 #X coords 0 -1 1 1 370 33 2 1500 100;

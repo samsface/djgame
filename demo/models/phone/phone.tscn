@@ -97,10 +97,10 @@ mouse_filter = 2
 script = ExtResource("5_pqb1u")
 
 [node name="ChatApp" type="CanvasLayer" parent="." index="4"]
-visible = false
 script = ExtResource("6_vrhos")
 
 [node name="Button" type="Button" parent="ChatApp" index="0"]
+visible = false
 offset_left = 1403.0
 offset_top = 50.0
 offset_right = 1528.0
@@ -108,6 +108,7 @@ offset_bottom = 81.0
 text = "NEW CONTACT"
 
 [node name="Button2" type="Button" parent="ChatApp" index="1"]
+visible = false
 offset_left = 1403.0
 offset_top = 99.0
 offset_right = 1528.0
@@ -115,16 +116,57 @@ offset_bottom = 130.0
 text = "NEW MESSAGE"
 
 [node name="Button3" type="Button" parent="ChatApp" index="2"]
+visible = false
 offset_left = 1400.0
 offset_top = 144.0
 offset_right = 1525.0
 offset_bottom = 175.0
 text = "VIBRATE"
 
+[node name="GameOver" type="ColorRect" parent="ChatApp" index="3"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ChatApp/GameOver" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center]You went home to your girlfriend and went to bed on time and lived a happy lfe.[/center]
+
+[center]GAME OVER. YOU FAILED. YOU DID NOT BECOME A DJ HERO. PATHETIC.[/center]"
+
+[node name="Button" type="Button" parent="ChatApp/GameOver" index="1"]
+layout_mode = 0
+offset_left = 734.0
+offset_top = 529.0
+offset_right = 950.0
+offset_bottom = 679.0
+text = "Rewind"
+
 [node name="Views" type="Node3D" parent="." index="5"]
 
 [node name="Marker3D" type="Marker3D" parent="Views" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00131534, 0.0789503, 0.00488686)
+
+[node name="Marker3D2" type="Marker3D" parent="Views" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000201339, 0.070263, 0.00905273)
+
+[node name="Marker3D3" type="Marker3D" parent="Views" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00916721, 0.065366, 0.00711268)
+
+[node name="Marker3D4" type="Marker3D" parent="Views" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0142805, 0.0621105, -0.00512058)
 
 [node name="0" parent="." index="6" instance=ExtResource("10_agbu1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0185696, -9.78545e-05, -0.0262739)

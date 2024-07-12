@@ -3,6 +3,8 @@ extends Resource
 
 signal new_message
 signal status_changed
+signal begin_viewing
+signal end_viewing
 
 @export var contact_name:String
 @export var contact_image:Texture

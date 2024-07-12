@@ -1,79 +1,31 @@
 extends Node3D
+class_name PointsService
 
-signal points_changed
-signal zero
-
-var damage_tween_:Tween
-var decay := 0.0
-
-@onready var hp_ = $CanvasLayer/MarginContainer2/HP
-
-var hp := 0.5 : 
-	set(v):
-		if v == hp_.value_:
-			return
-
-		if hp_.value_ > v:
-			miss()
-
-		hp_.set_points(v)
-	get:
-		return hp_.value
-
-var combo := 0
-var no_touch_:Node3D
+var stats_ := {}
 
 func _ready() -> void:
 	Bus.points_service = self
-	hp_.zero.connect(_zero)
-	#$CanvasLayer/ColorRect.material.set_shader_parameter("damage", 0.0)
-
-func _zero() -> void:
-	pass
-	#$CanvasLayer/Dead.visible = true
-	#Bus.camera_service.audio_service.stop()
-
-func _physics_process(delta:float) -> void:
-	hp_.decay(decay * delta)
+	stats_["hp"]= $CanvasLayer/MarginContainer2/VBoxContainer/HP
+	stats_["love"]= $CanvasLayer/MarginContainer2/VBoxContainer/Love
 
 func play() -> void:
-	decay = 0.025
+	stats_.hp.decay_rate = 0.01
 
-func miss() -> void:
-	return
-	$RecordScratch.play()
-	
-	if damage_tween_:
-		damage_tween_.kill()
-
-	damage_tween_ = create_tween()
-	damage_tween_.tween_property($CanvasLayer/ColorRect.material, "shader_parameter/damage", 1.0, 0.05)
-	damage_tween_.tween_property($CanvasLayer/ColorRect.material, "shader_parameter/damage", 0.0, 1.0)
-
-func make_points():
+func make_points(stat:String):
 	var points = preload("res://game/points_service/points.tscn").instantiate()
+	points.bar = stats_[stat]
 	add_child(points)
 	return points
 
-func no_touch(node:Node3D) -> void:
-	if no_touch_ == node:
-		return
+func build_points(stat:String, value:int, pos:Vector3, delay:float) -> void:
+	if delay:
+		await get_tree().create_timer(delay).timeout
 
-	no_touch_ = node
+	var p = make_points(stat)
+	p.position = pos
+	p.points = value
+	p.commit()
+	get_tree().create_timer(0.8).timeout.connect(p.queue_free)
 
-	var points = make_points()
-	points.position = node.global_position
-	points.no_touch()
-	points.commit()
-	
-	var tween := create_tween()
-	tween.tween_interval(1.0)
-	tween.finished.connect(func(): 
-		points.queue_free(); 
-		if no_touch_ == node:
-			no_touch_ = null
-	)
-
-func win():
-	$CanvasLayer/Win.visible = true
-	Bus.camera_service.audio_service.stop()
+func show_bar(stat:String, value:bool) -> void:
+	stats_[stat].visible = value

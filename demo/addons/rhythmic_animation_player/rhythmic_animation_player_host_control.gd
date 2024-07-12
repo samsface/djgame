@@ -32,6 +32,8 @@ func get_save_file_path_() -> String:
 	return save_path
 
 func _ready():
+	Bus.beat_service = self
+
 	%Inspector.custom_rules.push_back(func(property:Dictionary):
 		if property.type == TYPE_STRING and property.name.ends_with("_ex"):
 			var ex = preload("res://addons/inspector/expression.tscn").instantiate()
@@ -52,6 +54,11 @@ func _ready():
 		%Tabs.get_child(%Tabs.current_tab).from_dict(clip)
 		
 	%Tabs.current_tab = 0
+	
+	%Tabs.get_tab_bar().tab_close_display_policy = TabBar.CLOSE_BUTTON_SHOW_ACTIVE_ONLY
+	%Tabs.get_tab_bar().tab_close_pressed.connect(func(tab_idx:int):
+		%Tabs.remove_child(%Tabs.get_child(tab_idx))
+		pass)
 
 	await get_tree().process_frame
 
@@ -82,11 +89,12 @@ func _save_pressed():
 	var file := FileAccess.open(get_save_file_path_(), FileAccess.WRITE)
 	file.store_string(var_to_str(res))
 	
-func jump(scene) -> void:
+func jump(scene, offset:bool = true) -> void:
 	for i in %Tabs.get_child_count():
 		if %Tabs.get_child(i).name == scene:
 			%Tabs.current_tab = i
-			%Tabs.get_child(i).offset = -(time_ + %Tabs.get_child(i).get_look_ahead() + 1) 
+			if offset:
+				%Tabs.get_child(i).offset = -(time_ + %Tabs.get_child(i).get_look_ahead() + 1) 
 			break
 
 func _tab_clicked(tab):

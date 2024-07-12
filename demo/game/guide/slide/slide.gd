@@ -17,7 +17,7 @@ var ref_count_ := 0
 @onready var arrow_ = $arrow
 
 func _ready() -> void:
-	points_ = points_service.make_points()
+	points_ = points_service.make_points("hp")
 
 func fall_() -> void:
 	if fall_tween_:
@@ -87,10 +87,10 @@ func test_() -> void:
 
 	if abs(off) <= 0.2:
 		score_tween_.play()
-		points_.hit(score_, "")
+		points_.points = score_
 	else:
 		score_tween_.pause()
-		points_.miss(10, "", true)
+		points_.miss()
 
 	points_.global_position = get_nob().get_nob_position()
 
@@ -112,7 +112,7 @@ func _done() -> void:
 
 	hit_ = true
 
-	var explode_size:float = min(points_service.combo, 10.0)
+	var explode_size:float = min(points_.bar.combo, 10.0)
 	explode_size = explode_size / 10.0
 	
 	points_.commit()

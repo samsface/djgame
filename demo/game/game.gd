@@ -20,9 +20,7 @@ func _ready() -> void:
 	for child in get_children():
 		if child is Device:
 			child.value_changed.connect(_device_nob_value_changed)
-			
-	$PointsService.zero.connect(_died)
-	
+
 
 	audio_.set_metro(130)
 

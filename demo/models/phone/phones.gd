@@ -23,11 +23,18 @@ var mouse_entered_ := false
 
 func _mouse_entered() -> void:
 	mouse_entered_ = true
+	set_physics_process(true)
 	print_debug("mouse entered")
 
 func _mouse_exited() -> void:
 	mouse_entered_ = false
+	set_physics_process(false)
 	print_debug("mouse exit")
+
+
+func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("click"):
+		click(Bus.camera_service.cursor.position)
 
 func click(pos) -> void:
 	pos = $StaticBody3D.to_local(pos)

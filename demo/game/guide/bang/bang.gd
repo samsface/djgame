@@ -57,7 +57,7 @@ func _ready() -> void:
 	fall_tween_.tween_property(path_follow, "progress_ratio", 1.0, fall_time_)
 	fall_tween_.finished.connect(_miss)
 
-	points_ = points_service.make_points()
+	points_ = points_service.make_points("hp")
 	tree_exited.connect(points_.queue_free)
 	points_.scale = Vector3.ONE * nob_.scale_guide
 	
@@ -100,7 +100,7 @@ func _miss() -> void:
 	miss_ = true
 	
 	if not auto:
-		points_service.combo = 0
+		points_.bar.combo = 0
 	
 	visible = false
 
@@ -121,7 +121,7 @@ func _hit() -> void:
 	
 	visible = true
 
-	var combo:float = min(points_service.combo, 10.0)
+	var combo:float = min(points_.bar.combo, 10.0)
 	combo = combo / 10.0
 	
 	arrow__.explode(combo)
@@ -180,11 +180,11 @@ func judge_accuracy_() -> void:
 
 		if abs(off) < proximity_:
 			var off_time := get_off_time_()
-			points_.hit(score_(off_time), "< " + str(int(off_time * 10)) + " ms")
+			points_.points = score_(off_time)
 			points_.commit()
 		else:
 			if dilema_group == 0:
-				points_.miss(100, "too slow")
+				points_.points = -100
 				points_.commit()
 
 		points_.global_position = global_position

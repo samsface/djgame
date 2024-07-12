@@ -3,6 +3,10 @@ class_name FlashText
 
 var tween_:Tween
 var accuracy := 0.0
+var color:Color : 
+	set(v):
+		color = v
+		mesh.material.albedo_color = color
 
 var hang_time_ := 0.0
 var hang_time:float :
@@ -28,14 +32,6 @@ func _physics_process(delta: float) -> void:
 	look_at(Bus.camera_service.get_head_position(), Vector3.DOWN)
 	scale = Vector3(1, -1, -1)
 	rotation += random_rotation_
-
-func danger() -> void:
-	mesh.material.albedo_color = Color("ff002c")
-	pass
-
-func ok() -> void:
-	mesh.material.albedo_color = Color("00ef6f")
-	pass
 
 func set_hang_time(time:float) -> void:
 	if hang_time == time:

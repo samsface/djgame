@@ -7,8 +7,99 @@ var last_notification_
 
 @onready var notifications_ = $"../CanvasLayer2/Notifications"
 
-func _input(event: InputEvent) -> void:
-	pass
+class ChatBuilder:
+	static func transform_string(input_string: String) -> String:
+		# Split the input string by underscores
+		var words = input_string.split("_")
+		
+		# Initialize an empty array to hold the final words
+		var final_words = []
+		
+		for word in words:
+			# Handle contractions manually
+			if word == "wouldnt":
+				final_words.append("wouldn't")
+			elif word == "didnt":
+				final_words.append("didn't")
+			elif word == "cant":
+				final_words.append("can't")
+			elif word == "dont":
+				final_words.append("don't")
+			elif word == "im":
+				final_words.append("I'm")
+			elif word == "ive":
+				final_words.append("I've")
+			elif word == "youre":
+				final_words.append("you're")
+			elif word == "theyre":
+				final_words.append("they're")
+			elif word == "hes":
+				final_words.append("he's")
+			elif word == "shes":
+				final_words.append("she's")
+			elif word == "its":
+				final_words.append("it's")
+			else:
+				# For other words, add them as they are
+				final_words.append(word)
+		
+		# Join the final words with spaces
+		var final_string = " ".join(final_words)
+		
+		return final_string
+		
+	var m_ := PhoneChatMessage.new()
+	var reply_callbacks_ := []
+	var sent_callbacks_ := []
+	var node_:Node
+
+	func _init(node) -> void:
+		node_ = node
+		m_.sent_time = GameTime.now
+		m_.reply.connect(func(idx):
+			reply_callbacks_[idx].call())
+
+	func from(who:String) -> ChatBuilder:
+		m_.contact_name = who
+		return self
+	
+	func text(message:String) -> ChatBuilder:
+		m_.message = message
+		return self
+	
+	func add_reply(callable:Callable) -> ChatBuilder:
+		var reply_text = transform_string(callable.get_method())
+		m_.replies.push_back(reply_text)
+		reply_callbacks_.push_back(callable)
+		return self
+
+	func send() -> void:
+		var chat = node_.chats.chats[m_.contact_name]
+		
+		await node_.get_tree().create_timer(1.0).timeout
+		chat.status = "Typing..."
+		await node_.get_tree().create_timer(1.0).timeout
+		chat.status = "Online"
+
+		chat.messages.push_back(m_)
+	
+		chat.unread_count += 1
+		chat.new_message.emit(m_)
+		
+		for c in sent_callbacks_:
+			c.call()
+		
+
+	func add_points(stat:String, points:int) -> ChatBuilder:
+		sent_callbacks_.push_back(func():
+			Bus.points_service.build_points(stat, points, node_.get_parent().position, 1.8))
+		return self
+
+func build_message() -> ChatBuilder:
+	return ChatBuilder.new(self)
+
+func giada(text:String) -> ChatBuilder:
+	return ChatBuilder.new(self).from("Giada").text(text)
 
 func _ready() -> void:
 	get_parent().look()
@@ -23,29 +114,6 @@ func _ready() -> void:
 	setup_gf_chat_()
 	setup_bf_chat_()
 	setup_mm_chat_()
-
-func _new_contact_pressed() -> void:
-	var message := PhoneChatMessage.new()
-	message.message = "Hey"
-	message.sent_time = GameTime.now
-	
-	var chat := PhoneChat.new()
-	chat.contact_image = preload("res://models/phone/giadi_small.png")
-	chat.contact_name = "Giada"
-	chat.messages.push_back(message)
-	
-	chats.chats[chat.contact_name] = chat
-	
-	chats.new_chat.emit(chat)
-
-func _new_message_pressed() -> void:
-	var message := PhoneChatMessage.new()
-	message.message = "I knew it. You've been out DJing again :("
-	message.sent_time =  GameTime.now
-	
-	chats.chats.values()[0].messages.push_back(message)
-	chats.chats.values()[0].unread_count += 1
-	chats.chats.values()[0].new_message.emit(message)
 
 func _vibrate_pressed() -> void:
 	get_parent().vibrate()
@@ -64,7 +132,42 @@ func setup_gf_chat_() -> void:
 	chat.from_simple(history)
 	chats.chats[chat.contact_name] = chat
 	chats.new_chat.emit(chat)
-	
+	chat.begin_viewing.connect(func():
+		
+		get_parent().look(1)
+		Bus.points_service.show_bar("love", true))
+		
+	chat.end_viewing.connect(func():
+		get_parent().look(0)
+		Bus.points_service.show_bar("love", false))
+
+	(giada("Hey did you play yet?")
+	.add_reply(_yep_was_fun)
+	.add_reply(_not_yet)
+	.send())
+
+func _yep_was_fun() -> void:
+	(giada("If you want. Up to you.")
+	.add_reply(_sorry_didnt_see_the_time)
+	.add_points("hp", -10)
+	.send())
+
+func _not_yet() -> void:
+	(giada("Ok.")
+	.add_reply(_sorry_didnt_see_the_time)
+	.add_points("hp", -10).send())
+
+func _sorry_didnt_see_the_time() -> void:
+	(giada("As usual.")
+	.add_reply(_i_can_go_home)
+	.add_points("hp", -10)
+	.send())
+
+func _i_can_go_home() -> void:
+	(giada("No it's fine.")
+	.add_points("hp", -10)
+	.send())
+
 func setup_bf_chat_() -> void:
 	var chat := PhoneChat.new()
 	chat.contact_image = preload("res://models/phone/toast.png")
@@ -94,22 +197,18 @@ func setup_mm_chat_() -> void:
 		"me:Hey just setting up now..."
 	]
 	chat.from_simple(history)
-		
-	var message := PhoneChatMessage.new()
-	message.message = "Cool, txt me when you want to start"
-	message.replies = ["Let's go.", "Ready!"]
-	message.reply.connect(_reply)
-	
-	chat.messages.push_back(message)
-
 	chats.chats[chat.contact_name] = chat
 	chats.new_chat.emit(chat)
+		
+	(build_message()
+	.from("Mano")
+	.text("Hey, txt my when to keep going.")
+	.add_reply(_lets_go)
+	.send())
 
-func _reply(reply_idx:int):
-	if chat_app_.chat_:
-		chat_app_.chat_.queue_free()
-
-	Bus.camera_service.level.play()
+func _lets_go() -> void:
+	Bus.beat_service.jump("scene", false)
+	Bus.level.play()
 
 func dialog(db:Object, length:float, who:String, value:String, db_name:String, replay_a:String, reply_b:String) -> void:
 	var message := PhoneChatMessage.new()

@@ -16,7 +16,8 @@ func _contact_pressed(chat:PhoneChat) -> void:
 
 	chat_ = preload("res://models/phone/chat.tscn").instantiate()
 	chat_.chat = chat
-	chat_.tree_exited.connect(_chat_exit)
+	chat.begin_viewing.emit()
+	chat_.tree_exited.connect(func(): _chat_exit(); chat.end_viewing.emit())
 	add_child(chat_)
 
 func _chat_exit() -> void:

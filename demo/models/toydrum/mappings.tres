@@ -52,9 +52,8 @@ expr = "set_array_name(0, \"toykit-array3\")"
 
 [sub_resource type="Resource" id="Resource_scfs4"]
 script = ExtResource("1_7kknr")
-send_symbol = "toykit-step"
-receive_symbol = ""
-node = Array[NodePath]([NodePath("seq-1"), NodePath("seq-2"), NodePath("seq-3"), NodePath("seq-4"), NodePath("seq-5"), NodePath("seq-6"), NodePath("seq-7"), NodePath("seq-8"), NodePath("seq-9"), NodePath("seq-10"), NodePath("seq-11"), NodePath("seq-12"), NodePath("seq-13"), NodePath("seq-14"), NodePath("seq-15"), NodePath("seq-16")])
+node_paths = Array[NodePath]([])
+symbol = ""
 
 [resource]
 script = ExtResource("2_ymg7s")
