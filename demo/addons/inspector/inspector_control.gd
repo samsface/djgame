@@ -3,6 +3,11 @@ class_name InspectorControl
 
 signal value_changed
 
+@export var label:String :
+	set(v):
+		label = v
+		set_label(label)
+
 var property_:Dictionary
 
 func set_property(property:Dictionary) -> void:

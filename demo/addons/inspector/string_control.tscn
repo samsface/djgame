@@ -7,6 +7,7 @@ custom_minimum_size = Vector2(200, 32)
 offset_left = 114.0
 offset_right = 314.0
 offset_bottom = 32.0
+focus_mode = 0
 text_overrun_behavior = 3
 script = ExtResource("1_4lisc")
 
@@ -30,4 +31,5 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
+[connection signal="focus_entered" from="." to="." method="_focus_entered"]
 [connection signal="text_changed" from="HBoxContainer4/Value" to="." method="_value_changed"]

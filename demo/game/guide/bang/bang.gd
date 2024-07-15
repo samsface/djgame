@@ -119,6 +119,8 @@ func _hit() -> void:
 	
 	done.emit()
 	
+	nob_.electric.a = 1.0
+	
 	visible = true
 
 	var combo:float = min(points_.bar.combo, 10.0)
@@ -180,7 +182,7 @@ func judge_accuracy_() -> void:
 
 		if abs(off) < proximity_:
 			var off_time := get_off_time_()
-			points_.points = score_(off_time)
+			points_.points = 10#score_(off_time)
 			points_.commit()
 		else:
 			if dilema_group == 0:

@@ -128,7 +128,7 @@ func setup_gf_chat_() -> void:
 		"me:Hey!",
 		"me:Hi",
 	]
-
+	
 	chat.from_simple(history)
 	chats.chats[chat.contact_name] = chat
 	chats.new_chat.emit(chat)
@@ -143,21 +143,29 @@ func setup_gf_chat_() -> void:
 
 	(giada("Hey did you play yet?")
 	.add_reply(_yep_was_fun)
-	.add_reply(_not_yet)
+	.add_reply(_if_you_came_youd_know)
 	.send())
 
 func _yep_was_fun() -> void:
-	(giada("If you want. Up to you.")
-	.add_reply(_sorry_didnt_see_the_time)
+	(giada("That's great : )")
+	.add_reply(_thanks)
 	.add_points("hp", -10)
 	.send())
 
-func _not_yet() -> void:
-	(giada("Ok.")
-	.add_reply(_sorry_didnt_see_the_time)
+func _if_you_came_youd_know() -> void:
+	(giada("I wanted to go. But I go stuck in a hole.")
+	.add_reply(_no_you_did_not)
+	.add_reply(understandable)
 	.add_points("hp", -10).send())
 
-func _sorry_didnt_see_the_time() -> void:
+func _no_you_did_not() -> void:
+	(giada("You never beleive me :(")
+	.add_points("hp", -10).send())
+
+func understandable() -> void:
+	pass
+
+func _thanks() -> void:
 	(giada("As usual.")
 	.add_reply(_i_can_go_home)
 	.add_points("hp", -10)

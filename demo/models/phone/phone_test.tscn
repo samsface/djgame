@@ -1,16 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://4s0i5u4b6lfr"]
+[gd_scene load_steps=5 format=3 uid="uid://4s0i5u4b6lfr"]
 
-[ext_resource type="Script" path="res://models/phone/s.gd" id="1_dxpna"]
+[ext_resource type="Script" path="res://models/phone/phone_test2.gd" id="1_l1ku3"]
 [ext_resource type="PackedScene" uid="uid://bl7d8jwotcuws" path="res://models/phone/phone.tscn" id="2_37awu"]
+[ext_resource type="PackedScene" uid="uid://lprkgl2wh3cd" path="res://game/camera/camera.tscn" id="3_066ar"]
+[ext_resource type="PackedScene" uid="uid://cdnp2ssrh2k6l" path="res://game/livestream_service/live_stream_service.tscn" id="3_pgupw"]
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_l1ku3")
 
-[node name="s" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.278639, 0.960396, 0, -0.960396, 0.278639, 0, 1.00749, 0.261644)
-current = true
-script = ExtResource("1_dxpna")
+[node name="Camera" parent="." instance=ExtResource("3_066ar")]
 
-[node name="phone" parent="." instance=ExtResource("2_37awu")]
+[node name="LiveStreamService" parent="." instance=ExtResource("3_pgupw")]
+size = Vector2i(128, 64)
+render_target_update_mode = 4
+
+[node name="LiveStreamCamera" type="Camera3D" parent="LiveStreamService"]
+transform = Transform3D(-0.998632, -2.32512e-10, -0.0522837, -0.0508711, -0.230882, 0.971651, -0.0120714, 0.972982, 0.230566, 0, 0.318628, 0.0505696)
+
+[node name="Phone" parent="." instance=ExtResource("2_37awu")]
 transform = Transform3D(0.999764, -0.0215095, 0.00331129, 0.02145, 0.94822, -0.316888, 0.00367615, 0.316885, 0.948457, 0, 0.192875, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

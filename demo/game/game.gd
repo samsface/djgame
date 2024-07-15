@@ -66,5 +66,37 @@ func _play():
 func _died() -> void:
 	pass
 
+func stop() -> void:
+	$phone.free_click = true
+	audio_.stop()
+	
+	$phone.look()
+	var stream := preload("res://models/phone/stream/live_stream_app.tscn").instantiate()
+	$phone.get_phone_gui().start_app(stream)
+	
+
+	stream.add_message_from_random_user("Love me some acid house")
+	stream.add_message_from_random_user("These guys can be play!")
+	stream.add_message_from_random_user("I think the ugly one is cute ")
+	stream.add_message_from_random_user("Then why call him ugly?")
+	stream.add_message_from_random_user("FIRST!")
+	stream.add_message_from_random_user("turn it up!!! So good!")
+	stream.add_message_from_random_user("Loud music is loud")
+	stream.add_message_from_random_user("Love me some acid house")
+	
+	await get_tree().create_timer(randf()).timeout
+	stream.add_message_from_random_user("Only [shake][b][color=green]missed 1[/color][/b][/shake] time!")
+	await get_tree().create_timer(randf()).timeout
+	stream.add_message_from_random_user("He's got [shake][b][color=salmon]C- timing[/color][/b][/shake] though...")
+	await get_tree().create_timer(randf()).timeout
+	stream.add_message_from_random_user("Pretty good. [shake][b][color=pink]B+ overall[/color][/b][/shake]")
+	await get_tree().create_timer(randf()).timeout
+	stream.add_message_from_random_user("Coolio")
+	
+	await get_tree().create_timer(1.0).timeout
+	stream.set_reply(0, "[center]thank[/center]")
+	stream.set_reply(1, "[center]dismiss[/center]")
+	
+
 func _stop() -> void:
 	audio_.stop()

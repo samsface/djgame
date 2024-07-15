@@ -33,7 +33,7 @@ movie_writer/movie_file="/home/sam/work/djgame/demo/test.avi"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/scripty/plugin.cfg", "res://addons/spread/plugin.cfg", "res://addons/verlet_physics/plugin.cfg")
+enabled=PackedStringArray("res://addons/spread/plugin.cfg", "res://addons/verlet_physics/plugin.cfg")
 
 [filesystem]
 
@@ -51,7 +51,8 @@ theme/default_font_multichannel_signed_distance_field=true
 
 ui_accept={
 "deadzone": 0.5,
-"events": []
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194309,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
 }
 search={
 "deadzone": 0.5,
@@ -277,6 +278,11 @@ o={
 p={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":80,"key_label":0,"unicode":112,"location":0,"echo":false,"script":null)
+]
+}
+toggle_dialog_editor={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":true,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":79,"key_label":0,"unicode":111,"location":0,"echo":false,"script":null)
 ]
 }
 

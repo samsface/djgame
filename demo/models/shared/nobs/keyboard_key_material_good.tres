@@ -1,5 +1,6 @@
-[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://c7ewiicv8488q"]
+[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://c7ewiicv8488q"]
 
+[ext_resource type="Material" uid="uid://c3pp76cx8xann" path="res://models/shared/electric.tres" id="1_0t005"]
 [ext_resource type="Shader" uid="uid://cg43cfc5yi0ma" path="res://models/club/metal_shader.tres" id="1_qhg80"]
 [ext_resource type="Texture2D" uid="uid://cpks26ymejva2" path="res://models/shared/nobs/keyboard_button.png" id="2_xfp4x"]
 [ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="3_dkrkj"]
@@ -14,6 +15,7 @@ gradient = SubResource("Gradient_e6334")
 [resource]
 resource_local_to_scene = true
 render_priority = 0
+next_pass = ExtResource("1_0t005")
 shader = ExtResource("1_qhg80")
 shader_parameter/albedo = Color(0.715543, 1, 0.689872, 1)
 shader_parameter/albedo2 = Color(0.634485, 0.545737, 0.430228, 1)

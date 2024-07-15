@@ -20,6 +20,8 @@ var mouse_entered_ := false
 			$"ReplyA/StaticBody3D/CollisionShape3D".disabled = false
 			$"ReplyB/StaticBody3D/CollisionShape3D".disabled = false
 
+func get_phone_gui() -> Control:
+	return $SubViewport/PhoneGui
 
 func _mouse_entered() -> void:
 	mouse_entered_ = true

@@ -162,11 +162,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00131534, 0.0789503, 0.0048
 [node name="Marker3D2" type="Marker3D" parent="Views" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000201339, 0.070263, 0.00905273)
 
-[node name="Marker3D3" type="Marker3D" parent="Views" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00916721, 0.065366, 0.00711268)
-
-[node name="Marker3D4" type="Marker3D" parent="Views" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0142805, 0.0621105, -0.00512058)
+[node name="Marker3D4" type="Marker3D" parent="Views" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00292485, 0.0671728, 0.0390485)
 
 [node name="0" parent="." index="6" instance=ExtResource("10_agbu1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0185696, -9.78545e-05, -0.0262739)

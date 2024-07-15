@@ -283,7 +283,7 @@ line_style = SubResource("Resource_u0ocg")
 size = Vector2(0.2095, 0.018)
 
 [node name="SmileySticker" type="MeshInstance3D" parent="Model/NorthFace"]
-transform = Transform3D(0.932598, 0, 0.360917, 0, 1, 0, -0.360917, 0, 0.932598, -0.0507204, 0.000285132, -0.0397606)
+transform = Transform3D(0.932598, 0, 0.360917, 0, 1, 0, -0.360917, 0, 0.932598, -0.0563792, 0.000285132, -0.0353506)
 mesh = SubResource("QuadMesh_8nlrd")
 
 [node name="Preset1" parent="Model/NorthFace" instance=ExtResource("12_gqpmd")]

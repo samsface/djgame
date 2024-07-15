@@ -9,6 +9,7 @@ var points_service:PointsService
 var input_service:InputService
 var config_service:ConfigService
 var beat_service
+var livestream_service
 
 func _ready() -> void:
 	input_service = InputService.new()

@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2x7ddx3v0k7l"]
+
+[ext_resource type="Script" path="res://addons/fuzzy_search/fuzzy_search_control.gd" id="1_5vhxy"]
+
+[node name="Search" type="VBoxContainer"]
+offset_right = 366.0
+offset_bottom = 416.0
+size_flags_horizontal = 0
+size_flags_vertical = 3
+script = ExtResource("1_5vhxy")
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+
+[node name="SearchResults" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="text_changed" from="LineEdit" to="." method="_search_text_changed"]

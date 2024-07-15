@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxbnfc7vygvgc"]
+
+[ext_resource type="Script" path="res://game/livestream_service/live_stream_app_comment.gd" id="1_518f8"]
+[ext_resource type="Texture2D" uid="uid://cgf6ai3wc4g3l" path="res://game/livestream_service/profile_pictures/4f8348f7c94de0b9c169cc97e9874b5c.webp" id="2_klwvv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_diiff"]
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pefku"]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+auto_translate_mode = 1
+offset_right = 423.0
+offset_bottom = 32.0
+script = ExtResource("1_518f8")
+
+[node name="MarginContainer" type="PanelContainer" parent="."]
+clip_children = 1
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_diiff")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+auto_translate_mode = 1
+show_behind_parent = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_klwvv")
+expand_mode = 1
+
+[node name="VSeparator" type="VSeparator" parent="."]
+auto_translate_mode = 1
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_pefku")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[font_size=14][color=gray]Username[/color]    Dam he only [b][color=gold]missed 5 times[/color][/b][/font_size]"
+fit_content = true

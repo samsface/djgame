@@ -1,0 +1,180 @@
+[gd_scene load_steps=30 format=3 uid="uid://dpy2uq3bpenmx"]
+
+[ext_resource type="Script" path="res://models/phone/stream/stream.gd" id="1_s1coy"]
+[ext_resource type="Texture2D" uid="uid://cdh2d41tr2xfb" path="res://game/livestream_service/profile_pictures/0a883eaa098b9a6171f23931b24f8db8.webp" id="2_bi0g1"]
+[ext_resource type="Script" path="res://models/phone/stream/smooth_scroll_container.gd" id="2_s48pk"]
+[ext_resource type="Texture2D" uid="uid://b4cctm0hdwx3v" path="res://game/livestream_service/profile_pictures/1a2fa79f909035e84ad18d4275ffc6e5.webp" id="3_tua3l"]
+[ext_resource type="Texture2D" uid="uid://yifp2c0owfmi" path="res://game/livestream_service/profile_pictures/1bca25952d149015ffdea93a8a89c9d0.webp" id="4_x2uv7"]
+[ext_resource type="Texture2D" uid="uid://q0i50ytg6qdv" path="res://game/livestream_service/profile_pictures/1c91b8a5f41577b36f139f49976de6b1.webp" id="5_yftgu"]
+[ext_resource type="Texture2D" uid="uid://drna7khlr8vhi" path="res://game/livestream_service/profile_pictures/1e5542f64d78a4c2425c54d8a39c6755.webp" id="6_ryb0l"]
+[ext_resource type="Texture2D" uid="uid://ix4oems4ug4k" path="res://game/livestream_service/profile_pictures/1ff9ee9a1cf8b86a220387bda904903c.webp" id="7_jlllp"]
+[ext_resource type="Texture2D" uid="uid://cnjmhnrihsy4x" path="res://game/livestream_service/profile_pictures/3ab9e1bc3f4305e02d5b51968d2513f6.webp" id="8_qxvlb"]
+[ext_resource type="Texture2D" uid="uid://u74prw1y0kr7" path="res://game/livestream_service/profile_pictures/04c6366d4b1352df9d68b3ab99e59941.webp" id="9_lmqf8"]
+[ext_resource type="Texture2D" uid="uid://cgf6ai3wc4g3l" path="res://game/livestream_service/profile_pictures/4f8348f7c94de0b9c169cc97e9874b5c.webp" id="10_64jd0"]
+[ext_resource type="Texture2D" uid="uid://dcsfp1kq6tq87" path="res://game/livestream_service/profile_pictures/6b3bf5c9aabe827b0590e47d1450abe1.webp" id="11_1stxy"]
+[ext_resource type="Texture2D" uid="uid://1npdw8tr6mhk" path="res://game/livestream_service/profile_pictures/7ae0f1b2b2c10a2498902e586a214b2d.webp" id="12_4wm5j"]
+[ext_resource type="Texture2D" uid="uid://ba2svtor7bvei" path="res://game/livestream_service/profile_pictures/7bbd8ac16a31f049d24a4813ed337b8d.webp" id="13_n6i2a"]
+[ext_resource type="Texture2D" uid="uid://cvrsu0gh7pl7u" path="res://game/livestream_service/profile_pictures/17cae4d6f433e6c3869b76e441620c43.webp" id="14_rsgss"]
+[ext_resource type="Texture2D" uid="uid://bwvxmotqlan6r" path="res://game/livestream_service/profile_pictures/24a0277cfbc26f6c714aa3ebbca07a3c.webp" id="15_oqqut"]
+[ext_resource type="Texture2D" uid="uid://bhhu3nby20xe" path="res://game/livestream_service/profile_pictures/42f76ee3273ebc761c692625320f6c6f.webp" id="16_imvoj"]
+[ext_resource type="Texture2D" uid="uid://c1wcos6lh6orj" path="res://game/livestream_service/profile_pictures/46e89f7fcf1db7c2d29565707b497855.webp" id="17_df11p"]
+[ext_resource type="Texture2D" uid="uid://c1xtc2libl4lh" path="res://game/livestream_service/profile_pictures/63eee207098bb230e3c9953354c2b996.webp" id="18_fbfpu"]
+[ext_resource type="Texture2D" uid="uid://dxmu887odf88u" path="res://game/livestream_service/profile_pictures/77ee8bdcdf61f46a073f88de512e1f5c.webp" id="19_eds7i"]
+[ext_resource type="Texture2D" uid="uid://dn1dea8df5c8m" path="res://game/livestream_service/profile_pictures/89c9d60da10e4b1313fa608ca9577e90.webp" id="20_q82oj"]
+[ext_resource type="Texture2D" uid="uid://bnghrj1c6byor" path="res://game/livestream_service/profile_pictures/651e2f4b4a485f3ed475b2a0697514c2.webp" id="21_x4qbg"]
+[ext_resource type="Texture2D" uid="uid://bqqkxgx78sor6" path="res://game/livestream_service/profile_pictures/208423c999cc4ecfd036581c85d0e3d7.webp" id="22_lr5g0"]
+[ext_resource type="Texture2D" uid="uid://dltk2ys67vkvh" path="res://game/livestream_service/profile_pictures/a98fbd97cea15cec082273ca05181ba8.webp" id="23_5fg15"]
+[ext_resource type="Texture2D" uid="uid://b8eukhetrdiyy" path="res://game/livestream_service/profile_pictures/dbbf195920325d37f68348131344eaa0.webp" id="24_6ojl4"]
+[ext_resource type="Texture2D" uid="uid://b3pl25w2l5rh5" path="res://game/livestream_service/profile_pictures/ef6a3e534f5c2c1551601e55e82ef7e3.webp" id="25_y278b"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_nm0v8"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ey81l"]
+color = Color(0.359069, 0.359069, 0.359069, 1)
+thickness = 3
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_2sot5"]
+color = Color(0.359069, 0.359069, 0.359069, 1)
+
+[node name="Stream" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s1coy")
+profile_pictures = Array[Texture]([ExtResource("2_bi0g1"), ExtResource("3_tua3l"), ExtResource("4_x2uv7"), ExtResource("5_yftgu"), ExtResource("6_ryb0l"), ExtResource("7_jlllp"), ExtResource("8_qxvlb"), ExtResource("9_lmqf8"), ExtResource("10_64jd0"), ExtResource("11_1stxy"), ExtResource("12_4wm5j"), ExtResource("13_n6i2a"), ExtResource("14_rsgss"), ExtResource("15_oqqut"), ExtResource("16_imvoj"), ExtResource("17_df11p"), ExtResource("18_fbfpu"), ExtResource("19_eds7i"), ExtResource("20_q82oj"), ExtResource("21_x4qbg"), ExtResource("22_lr5g0"), ExtResource("23_5fg15"), ExtResource("24_6ojl4"), ExtResource("25_y278b")])
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Video" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="VideoTexture" type="TextureRect" parent="VBoxContainer/Video"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 256)
+layout_mode = 2
+texture = SubResource("ViewportTexture_nm0v8")
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_ey81l")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=22]Live Chat - DJ Hero ft Mano[/font_size]"
+fit_content = true
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=12]Peeps 1.5K[/font_size]"
+fit_content = true
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_2sot5")
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="CommentsScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+script = ExtResource("2_s48pk")
+
+[node name="Comments" type="VBoxContainer" parent="VBoxContainer/MarginContainer2/CommentsScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_2sot5")
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer3"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/MarginContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ReplyText0" type="RichTextLabel" parent="VBoxContainer/MarginContainer3/HBoxContainer/Button"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+bbcode_enabled = true
+fit_content = true
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/MarginContainer3/HBoxContainer"]
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="VBoxContainer/MarginContainer3/HBoxContainer"]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ReplyText1" type="RichTextLabel" parent="VBoxContainer/MarginContainer3/HBoxContainer/Button2"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+bbcode_enabled = true
+fit_content = true
+
+[connection signal="pressed" from="VBoxContainer/MarginContainer3/HBoxContainer/Button" to="." method="_reply_0_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer3/HBoxContainer/Button2" to="." method="_reply_1_pressed"]

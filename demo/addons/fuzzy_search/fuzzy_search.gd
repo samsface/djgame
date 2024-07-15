@@ -265,10 +265,11 @@ func search(text:String) -> Array:
 
 	var total_score = 0
 
-	for t in data:
+	for i in data.size():
+		var t = data[i]
 		var sf = score_fuzzy_path(text, t)
 		if sf[0] > 0:
-			scores.push_back([t, sf[0], sf[1]])
+			scores.push_back([t, sf[0], sf[1], i])
 			total_score += sf[0]
 
 
@@ -281,6 +282,6 @@ func search(text:String) -> Array:
 
 		for s in scores:
 			if s[1] >= mean_score:
-				res.push_back([s[0], decorate(s[0], s[2])])
+				res.push_back([s[0], decorate(s[0], s[2]), s[3]])
 				
 	return res

@@ -1,3 +1,4 @@
+@tool
 extends InspectorControl
 
 func set_value(v):
@@ -9,3 +10,5 @@ func _value_changed(value):
 func _value_changed_alt():
 	value_changed.emit($Value.text)
 
+func grab_focus() -> void:
+	%Value.grab_focus()
