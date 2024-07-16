@@ -10,5 +10,5 @@ electric = Color(0, 1, 0, 0)
 
 [node name="KeybardButton" parent="." index="0"]
 instance_shader_parameters/electric_albedo = Color(0, 1, 0, 0)
-instance_shader_parameters/rand = 0.658665
+instance_shader_parameters/rand = 0.914807
 surface_material_override/0 = ExtResource("3_qgc1y")

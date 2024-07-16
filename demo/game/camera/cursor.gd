@@ -91,4 +91,4 @@ func update() -> void:
 
 	position2D += Bus.input_service.relative * 1.5
 	cursor_.position = position2D
-	Bus.input_service.relative = Vector2.ZERO
+	#Bus.input_service.relative = Vector2.ZERO

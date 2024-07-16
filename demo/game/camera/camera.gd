@@ -18,6 +18,7 @@ var recorder
 
 var stack_ := []
 var head_pos_:Vector3
+var free_walk_ := false
 
 func logi(str:String) -> void:
 	pass
@@ -28,7 +29,7 @@ func looking_at() -> void:
 func _ready() -> void:
 	Bus.camera_service = self
 	cursor.push(self, Cursor.Action.point)
-	
+
 func rv(scale:float = 1.0) -> Vector3:
 	return Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)) * scale
 
@@ -43,7 +44,35 @@ func shake(duration:float = 0.5, scale:float = 0.001) -> void:
 	for i in int(duration / 0.1):
 		shake_tween_.tween_property(camera_, "position", position + rv(scale / (i+1)), 0.01)
 
+func _input(event) -> void:
+	if event.is_action_pressed("debug_free_walk"):
+		free_walk_ = not free_walk_
+
 func _physics_process(delta: float) -> void:
+
+	if free_walk_:
+		camera_arm_.position = Vector3.ZERO
+		camera_arm_.rotation.y = 0
+		camera_arm_.rotation.z = 0
+		camera_.position = Vector3.ZERO
+		camera_.rotation = Vector3.ZERO
+		rotate_y(deg_to_rad(-Bus.input_service.relative.x * 0.8))
+		camera_arm_.rotate_x(deg_to_rad(-Bus.input_service.relative.y * 0.8))
+		camera_arm_.rotation.x = clamp(camera_arm_.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+		camera_arm_.rotation.z = 0
+		
+		var move := Input.get_vector("move_left", "move_right", "move_forward", "move_backward") * 0.1
+		var direction = (transform.basis * Vector3(move.x, 0, move.y)).normalized()
+
+		position.y = 0.28
+		position.x += direction.x * 0.05
+		position.z += direction.z * 0.05
+
+		
+		return
+	
+	position = Vector3.ZERO
+	
 	if not stack_.is_empty():
 		var r = camera_arm_.rotation
 		camera_arm_.look_at(stack_[0][1].global_position)

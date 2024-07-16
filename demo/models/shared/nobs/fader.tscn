@@ -8,4 +8,5 @@
 script = ExtResource("2_sw36p")
 
 [node name="Fader_001" parent="." index="0"]
+instance_shader_parameters/rand = 0.63362
 surface_material_override/0 = ExtResource("3_hcw2f")
