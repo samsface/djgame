@@ -1320,7 +1320,7 @@
 "time": 1152,
 "value": 1.0
 }],
-"node_path": NodePath("toykit/NorthFace/seq-1"),
+"node_path": NodePath("%toykit/%seq-1"),
 "scene_file_path": "res://addons/timeline_control/timeline_control_row_header.tscn"
 }, {
 "condition_ex": "",
@@ -2067,7 +2067,7 @@
 "time": 889,
 "value": 1.0
 }],
-"node_path": NodePath("toykit/NorthFace/seq-2"),
+"node_path": NodePath("%toykit/%seq-2"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -2157,7 +2157,7 @@
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 16
 }],
-"node_path": NodePath("toykit"),
+"node_path": NodePath("%toykit"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -3499,7 +3499,7 @@
 "time": 1146,
 "value": 1.0
 }],
-"node_path": NodePath("toykit/NorthFace/seq-3"),
+"node_path": NodePath("%toykit/%seq-3"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -3541,7 +3541,7 @@
 "time": 1168,
 "value": 0.0
 }],
-"node_path": NodePath("acid/Model/NorthFace/Res"),
+"node_path": NodePath("%acid/Model/NorthFace/Res"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -3571,12 +3571,12 @@
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 0
 }],
-"node_path": NodePath("acid"),
+"node_path": NodePath("%acid"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
 "frames": [],
-"node_path": NodePath("phone/0"),
+"node_path": NodePath("%Phone/0"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -3586,7 +3586,7 @@
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": -16
 }],
-"node_path": NodePath("phone"),
+"node_path": NodePath("%Phone"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -3615,7 +3615,7 @@
 "value": "Yeah! WAKAakakakaka",
 "who": "Mano"
 }],
-"node_path": NodePath("phone/ChatApp"),
+"node_path": NodePath("%Phone/ChatApp"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -3633,7 +3633,7 @@
 "time": 800,
 "value": 0.0
 }],
-"node_path": NodePath("acid/Model/NorthFace/Cutoff"),
+"node_path": NodePath("%acid/Model/NorthFace/Cutoff"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -3927,7 +3927,7 @@
 "time": 911,
 "value": 1.0
 }],
-"node_path": NodePath("toykit/NorthFace/seq-8"),
+"node_path": NodePath("%toykit/%seq-8"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -3950,7 +3950,7 @@
 "time": 1232,
 "value": 0.0
 }],
-"node_path": NodePath("acid/Model/NorthFace/Decay"),
+"node_path": NodePath("%acid/Model/NorthFace/Decay"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -4080,7 +4080,7 @@
 "time": 0,
 "value": 1.0
 }],
-"node_path": NodePath("acid/Model/NorthFace/Gain"),
+"node_path": NodePath("%acid/Model/NorthFace/Gain"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -4114,7 +4114,7 @@
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 256
 }],
-"node_path": NodePath("toykit"),
+"node_path": NodePath("%toykit"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -4567,7 +4567,7 @@
 "time": 188,
 "value": 1.0
 }],
-"node_path": NodePath("toykit/NorthFace/seq-1"),
+"node_path": NodePath("%toykit/NorthFace/seq-1"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -4810,7 +4810,7 @@
 "time": 254,
 "value": 1.0
 }],
-"node_path": NodePath("toykit/NorthFace/seq-2"),
+"node_path": NodePath("%toykit/NorthFace/seq-2"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -5228,7 +5228,7 @@
 "time": 233,
 "value": 1.0
 }],
-"node_path": NodePath("toykit/NorthFace/seq-3"),
+"node_path": NodePath("%toykit/NorthFace/seq-3"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -5329,7 +5329,7 @@
 "time": 216,
 "value": 0.5
 }],
-"node_path": NodePath("acid/Model/NorthFace/Decay"),
+"node_path": NodePath("%acid/Model/NorthFace/Decay"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -5354,7 +5354,7 @@
 "time": 304,
 "value": 1.0
 }],
-"node_path": NodePath("acid/Model/NorthFace/Cutoff"),
+"node_path": NodePath("%acid/Model/NorthFace/Cutoff"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -5369,7 +5369,7 @@
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 128
 }],
-"node_path": NodePath("acid"),
+"node_path": NodePath("%acid"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -5405,7 +5405,7 @@
 "time": 232,
 "value": 1.0
 }],
-"node_path": NodePath("acid/Model/NorthFace/Res"),
+"node_path": NodePath("%acid/Model/NorthFace/Res"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -5416,7 +5416,7 @@
 "time": 432,
 "value": 0.0
 }],
-"node_path": NodePath("acid/Model/NorthFace/Gain"),
+"node_path": NodePath("%acid/Model/NorthFace/Gain"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -5515,7 +5515,7 @@
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 976
 }],
-"node_path": NodePath("toykit"),
+"node_path": NodePath("%toykit"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -7361,7 +7361,7 @@
 "time": 1488,
 "value": 1.0
 }],
-"node_path": NodePath("toykit/NorthFace/seq-1"),
+"node_path": NodePath("%toykit/NorthFace/seq-1"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -8122,7 +8122,7 @@
 "time": 1348,
 "value": 1.0
 }],
-"node_path": NodePath("toykit/NorthFace/seq-2"),
+"node_path": NodePath("%toykit/NorthFace/seq-2"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -9611,7 +9611,7 @@
 "time": 846,
 "value": 1.0
 }],
-"node_path": NodePath("toykit/NorthFace/seq-3"),
+"node_path": NodePath("%toykit/NorthFace/seq-3"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -9693,7 +9693,7 @@
 "time": 254,
 "value": 1.0
 }],
-"node_path": NodePath("toykit/NorthFace/seq-8"),
+"node_path": NodePath("%toykit/NorthFace/seq-8"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -9733,7 +9733,7 @@
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 1487
 }],
-"node_path": NodePath("acid"),
+"node_path": NodePath("%acid"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -9801,7 +9801,7 @@
 "time": 1360,
 "value": 0.0996094
 }],
-"node_path": NodePath("acid/Model/NorthFace/Cutoff"),
+"node_path": NodePath("%acid/Model/NorthFace/Cutoff"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -9855,7 +9855,7 @@
 "time": 1265,
 "value": 1.0
 }],
-"node_path": NodePath("acid/Model/NorthFace/Res"),
+"node_path": NodePath("%acid/Model/NorthFace/Res"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -9885,12 +9885,12 @@
 "time": 1104,
 "value": 1.0
 }],
-"node_path": NodePath("acid/Model/NorthFace/Decay"),
+"node_path": NodePath("%acid/Model/NorthFace/Decay"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
 "frames": [],
-"node_path": NodePath("acid/Model/NorthFace/Gain"),
+"node_path": NodePath("%acid/Model/NorthFace/Gain"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -10154,7 +10154,7 @@
 "time": 1344,
 "value": 1.0
 }],
-"node_path": NodePath("acid/Model/NorthFace/Preset3"),
+"node_path": NodePath("%acid/Model/NorthFace/Preset3"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -10250,7 +10250,7 @@
 "time": 1424,
 "value": 1.0
 }],
-"node_path": NodePath("acid/Model/NorthFace/Preset4"),
+"node_path": NodePath("%acid/Model/NorthFace/Preset4"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -10423,12 +10423,12 @@
 "time": 1348,
 "value": 1.0
 }],
-"node_path": NodePath("acid/Model/NorthFace/Preset2"),
+"node_path": NodePath("%acid/Model/NorthFace/Preset2"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
 "frames": [],
-"node_path": NodePath("acid/Model/NorthFace/Preset1"),
+"node_path": NodePath("%acid/Model/NorthFace/Preset1"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -10473,7 +10473,7 @@
 "value": "Coming up!",
 "who": "Mano"
 }],
-"node_path": NodePath("phone/ChatApp"),
+"node_path": NodePath("%Phone/ChatApp"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -10485,7 +10485,7 @@
 "time": 76,
 "value": 1.0
 }],
-"node_path": NodePath("toykit/NorthFace/Record"),
+"node_path": NodePath("%toykit/NorthFace/Record"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -10505,7 +10505,7 @@
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 1520
 }],
-"node_path": NodePath("phone"),
+"node_path": NodePath("%Phone"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }]
 }]

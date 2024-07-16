@@ -13,12 +13,15 @@ var root_node:Node
 		invalidate_()
 
 func pretty_name(np:NodePath):
-	var split = str(np).split("/")
+	var str = str(np)
+	str = str.replace("%", "")
+
+	var split = str(str).split("/")
 
 	if split.size() > 1:
 		return split[0] + "/" + split[split.size() - 1]
 	
-	return str(np)
+	return str(str)
 	
 
 func invalidate_() -> void:

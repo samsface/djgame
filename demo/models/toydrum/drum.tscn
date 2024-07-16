@@ -202,6 +202,7 @@ loop = false
 update_scale = false
 
 [node name="seq-1" type="Node3D" parent="NorthFace"]
+unique_name_in_owner = true
 process_thread_group = 2
 process_thread_group_order = 0
 process_thread_messages = 1
@@ -248,6 +249,7 @@ transform = Transform3D(1, 0, 2.11758e-22, 0, 1, 8.35187e-23, -2.11758e-22, -8.3
 update_scale = false
 
 [node name="seq-2" type="Node3D" parent="NorthFace"]
+unique_name_in_owner = true
 process_thread_group = 2
 process_thread_group_order = 0
 process_thread_messages = 1
@@ -294,6 +296,7 @@ transform = Transform3D(1, 0, 2.11758e-22, 0, 1, 8.35187e-23, -2.11758e-22, -8.3
 update_scale = false
 
 [node name="seq-3" type="Node3D" parent="NorthFace"]
+unique_name_in_owner = true
 process_thread_group = 2
 process_thread_group_order = 0
 process_thread_messages = 1
@@ -340,6 +343,7 @@ transform = Transform3D(1, 0, 2.11758e-22, 0, 1, 8.35187e-23, -2.11758e-22, -8.3
 update_scale = false
 
 [node name="seq-4" type="Node3D" parent="NorthFace"]
+unique_name_in_owner = true
 process_thread_group = 2
 process_thread_group_order = 0
 process_thread_messages = 1
@@ -386,6 +390,7 @@ transform = Transform3D(1, 0, 2.11758e-22, 0, 1, 8.35187e-23, -2.11758e-22, -8.3
 update_scale = false
 
 [node name="seq-5" type="Node3D" parent="NorthFace"]
+unique_name_in_owner = true
 process_thread_group = 2
 process_thread_group_order = 0
 process_thread_messages = 1
@@ -432,6 +437,7 @@ transform = Transform3D(1, 0, 2.11758e-22, 0, 1, 8.35187e-23, -2.11758e-22, -8.3
 update_scale = false
 
 [node name="seq-6" type="Node3D" parent="NorthFace"]
+unique_name_in_owner = true
 process_thread_group = 2
 process_thread_group_order = 0
 process_thread_messages = 1
@@ -478,6 +484,7 @@ transform = Transform3D(1, 0, 2.11758e-22, 0, 1, 8.35187e-23, -2.11758e-22, -8.3
 update_scale = false
 
 [node name="seq-7" type="Node3D" parent="NorthFace"]
+unique_name_in_owner = true
 process_thread_group = 2
 process_thread_group_order = 0
 process_thread_messages = 1
@@ -524,6 +531,7 @@ transform = Transform3D(1, 0, 2.11758e-22, 0, 1, 8.35187e-23, -2.11758e-22, -8.3
 update_scale = false
 
 [node name="seq-8" type="Node3D" parent="NorthFace"]
+unique_name_in_owner = true
 process_thread_group = 2
 process_thread_group_order = 0
 process_thread_messages = 1
