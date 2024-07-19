@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://c255km5pqmctj"]
+
+[ext_resource type="PackedScene" uid="uid://bkrf55p533atu" path="res://models/club/side_rain_shelter_2.glb" id="1_tk3by"]
+
+[node name="side_rain_shelter_2" instance=ExtResource("1_tk3by")]

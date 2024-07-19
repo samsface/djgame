@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://b64y32x813hjl"]
+
+[ext_resource type="Shader" path="res://transparent_plastic.gdshader" id="1_q42fq"]
+[ext_resource type="Texture2D" uid="uid://c6agr58lvmcqk" path="res://models/club/side_rain_shelter_2_roof.png" id="2_wdujx"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_q42fq")
+shader_parameter/texture_aoe = ExtResource("2_wdujx")

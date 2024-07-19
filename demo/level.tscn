@@ -1,0 +1,30 @@
+[gd_scene load_steps=11 format=3 uid="uid://br6y8u83rjtcd"]
+
+[ext_resource type="PackedScene" uid="uid://dxqjwlwdq13j8" path="res://models/club/level.glb" id="1_65ei8"]
+[ext_resource type="Material" uid="uid://cpnytub4b3rg" path="res://models/club/hoisted_rain_shelter_struts_material.tres" id="2_1ka40"]
+[ext_resource type="Material" uid="uid://byde4i8x2wv8k" path="res://models/club/hoisted_rain_shelter_support_beams_material.tres" id="2_3bamt"]
+[ext_resource type="Material" uid="uid://bdefht2yrq0nm" path="res://models/club/rain_shelter_2_support_beams_material.tres" id="2_5vbv2"]
+[ext_resource type="Material" uid="uid://cjyyt2gib02p2" path="res://models/club/rain_shelter_2_gutter_material.tres" id="3_kb3dc"]
+[ext_resource type="Material" uid="uid://dyk52px3yjov2" path="res://models/club/side_rain_shelter_2_circles_material.tres" id="4_8ncf5"]
+[ext_resource type="Material" uid="uid://b64y32x813hjl" path="res://models/club/rain_shelter_2_roof_material.tres" id="5_0qof5"]
+[ext_resource type="Material" uid="uid://d0qtwxxvor8pt" path="res://models/club/rain_shelter_2_struts_material.tres" id="6_qlfpx"]
+[ext_resource type="Material" uid="uid://didpyw31017b4" path="res://models/club/hoisted_rain_shelter_roof_material.tres" id="6_tnxq2"]
+[ext_resource type="Material" uid="uid://xnupphf81gsn" path="res://models/club/side_rain_shelter_back_support_beam.tres" id="7_54k7a"]
+
+[node name="level" instance=ExtResource("1_65ei8")]
+
+[node name="SideRainShelter2Bake" parent="." index="2"]
+surface_material_override/0 = ExtResource("2_5vbv2")
+surface_material_override/1 = ExtResource("3_kb3dc")
+surface_material_override/2 = ExtResource("4_8ncf5")
+surface_material_override/3 = ExtResource("5_0qof5")
+surface_material_override/4 = ExtResource("6_qlfpx")
+surface_material_override/5 = ExtResource("7_54k7a")
+
+[node name="HoistedRainShelterBake" parent="." index="5"]
+surface_material_override/0 = ExtResource("2_3bamt")
+surface_material_override/1 = ExtResource("6_tnxq2")
+surface_material_override/2 = ExtResource("2_1ka40")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.946, 11.8594, 11.8229)

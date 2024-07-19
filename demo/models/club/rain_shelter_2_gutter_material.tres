@@ -1,0 +1,38 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://cjyyt2gib02p2"]
+
+[ext_resource type="Shader" uid="uid://cg43cfc5yi0ma" path="res://models/club/metal_shader.tres" id="1_japyl"]
+[ext_resource type="Texture2D" uid="uid://cxfnnh2mpjsco" path="res://models/club/side_rain_shelter_2_gutter.png" id="2_sxwnf"]
+
+[sub_resource type="Gradient" id="Gradient_6yomp"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3sm8b"]
+gradient = SubResource("Gradient_6yomp")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_foq1u"]
+load_path = "res://.godot/imported/smudges_basecolor.png-3511eb0c08099d7c64a86f26f93565dd.s3tc.ctex"
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_japyl")
+shader_parameter/albedo = Color(0.715543, 1, 0.689872, 1)
+shader_parameter/albedo2 = Color(0.208044, 0.186525, 0.0266504, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.213
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 1.0
+shader_parameter/metallic = 0.03
+shader_parameter/ao_light_affect = 1.0
+shader_parameter/detail_scale = Vector2(1, 1)
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/edge_wear = 0.0
+shader_parameter/random_color_pallet = 0.0
+shader_parameter/texture_albedo = ExtResource("2_sxwnf")
+shader_parameter/texture_metallic = ExtResource("2_sxwnf")
+shader_parameter/texture_ambient_occlusion = ExtResource("2_sxwnf")
+shader_parameter/color_pallet = SubResource("GradientTexture1D_3sm8b")
+shader_parameter/texture_detail = SubResource("CompressedTexture2D_foq1u")

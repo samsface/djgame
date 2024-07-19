@@ -72,7 +72,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="InputEventAction" id="InputEventAction_fui70"]
+[sub_resource type="InputEventAction" id="InputEventAction_sv6ye"]
 action = &"1"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bqlpe"]
@@ -208,7 +208,7 @@ process_thread_group_order = 0
 process_thread_messages = 1
 transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.00481867, 0.000246845, 0.08125)
 script = ExtResource("6_vqeto")
-action = SubResource("InputEventAction_fui70")
+action = SubResource("InputEventAction_sv6ye")
 
 [node name="Nob" type="Area3D" parent="NorthFace/seq-1"]
 collision_layer = 9

@@ -3698,7 +3698,7 @@
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": -16
 }],
-"node_path": NodePath("CrowdService"),
+"node_path": NodePath("%CrowdService"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -5328,6 +5328,12 @@
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/slide.tscn",
 "time": 216,
 "value": 0.5
+}, {
+"from_value": 0.0,
+"length": 128,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/slide.tscn",
+"time": 304,
+"value": 1.0
 }],
 "node_path": NodePath("%acid/Model/NorthFace/Decay"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
@@ -5347,12 +5353,6 @@
 "silent": false,
 "time": 128,
 "value": 0.0292969
-}, {
-"from_value": 0.0,
-"length": 128,
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/slide.tscn",
-"time": 304,
-"value": 1.0
 }],
 "node_path": NodePath("%acid/Model/NorthFace/Cutoff"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
@@ -5409,13 +5409,7 @@
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
-"frames": [{
-"from_value": 1.0,
-"length": 63,
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/slide.tscn",
-"time": 432,
-"value": 0.0
-}],
+"frames": [],
 "node_path": NodePath("%acid/Model/NorthFace/Gain"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
@@ -5446,7 +5440,17 @@
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 256
 }],
-"node_path": NodePath("CrowdService"),
+"node_path": NodePath("%CrowdService"),
+"scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
+}, {
+"condition_ex": "",
+"frames": [{
+"length": 16,
+"method": &"stop",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
+"time": 432
+}],
+"node_path": NodePath(""),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }]
 }, {
@@ -7354,7 +7358,7 @@
 "time": 1471,
 "value": 1.0
 }, {
-"auto": true,
+"auto": false,
 "length": 3,
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/bang.tscn",
 "silent": false,
@@ -9960,7 +9964,7 @@
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 1520
 }],
-"node_path": NodePath("CrowdService"),
+"node_path": NodePath("%CrowdService"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -10457,19 +10461,19 @@
 "value": "TWO HANDS THING!",
 "who": "Mano"
 }, {
-"length": 16,
+"length": 32,
+"reply_a": "",
+"reply_b": "",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/dialog.tscn",
+"time": 912,
+"value": "Wanna try that BOOM CAT thing",
+"who": "Mano"
+}, {
+"length": 32,
 "reply_a": "",
 "reply_b": "",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/dialog.tscn",
 "time": 944,
-"value": "Wanna try that BOOM CAT thing",
-"who": "Mano"
-}, {
-"length": 16,
-"reply_a": "",
-"reply_b": "",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/dialog.tscn",
-"time": 960,
 "value": "Coming up!",
 "who": "Mano"
 }],

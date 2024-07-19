@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bl7d8jwotcuws"]
+[gd_scene load_steps=20 format=3 uid="uid://bl7d8jwotcuws"]
 
 [ext_resource type="PackedScene" uid="uid://v8jvhtuvyeij" path="res://models/phone/phone.glb" id="1_qnpo2"]
 [ext_resource type="Script" path="res://models/phone/phones.gd" id="2_hu3e3"]
@@ -27,10 +27,6 @@ shader_parameter/albedo = SubResource("ViewportTexture_gv248")
 shader_parameter/scuff = ExtResource("4_v74j0")
 shader_parameter/ao = ExtResource("4_mdlhq")
 shader_parameter/marc = ExtResource("5_s4yx2")
-
-[sub_resource type="InputEventAction" id="InputEventAction_xin02"]
-action = &"1"
-pressed = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_xlqpk"]
 material = ExtResource("12_n07xt")
@@ -167,7 +163,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00292485, 0.0671728, 0.039
 
 [node name="0" parent="." index="6" instance=ExtResource("10_agbu1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0185696, -9.78545e-05, -0.0262739)
-action = SubResource("InputEventAction_xin02")
 
 [node name="StaticBody3D" type="Area3D" parent="0" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.019272, 0, 0)
@@ -181,7 +176,7 @@ script = ExtResource("11_3ktek")
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="0/StaticBody3D" index="0"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0.001, 0)
 instance_shader_parameters/electric_albedo = Color(0.360784, 0.733333, 0, 0)
-instance_shader_parameters/rand = 0.990928
+instance_shader_parameters/rand = 0.831066
 mesh = SubResource("PlaneMesh_xlqpk")
 skeleton = NodePath("../../../ReplyA")
 
@@ -203,7 +198,7 @@ script = ExtResource("11_3ktek")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ReplyA/StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00123587, 0)
 instance_shader_parameters/electric_albedo = Color(0, 1, 0, 0)
-instance_shader_parameters/rand = 0.534361
+instance_shader_parameters/rand = 0.146603
 mesh = SubResource("PlaneMesh_gcyo7")
 skeleton = NodePath("../..")
 
@@ -225,7 +220,7 @@ script = ExtResource("11_3ktek")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="ReplyB/StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00104139, 0)
 instance_shader_parameters/electric_albedo = Color(0, 1, 0, 0)
-instance_shader_parameters/rand = 0.260469
+instance_shader_parameters/rand = 0.0932302
 mesh = SubResource("PlaneMesh_gcyo7")
 skeleton = NodePath("../../../ReplyA")
 

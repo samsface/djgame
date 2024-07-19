@@ -64,5 +64,6 @@ shadow_mesh = SubResource("ArrayMesh_myq5w")
 [node name="fence" instance=ExtResource("1_8j126")]
 
 [node name="FenceBake" parent="." index="0"]
+layers = 3
 mesh = SubResource("ArrayMesh_r021s")
 surface_material_override/1 = ExtResource("2_u0d38")

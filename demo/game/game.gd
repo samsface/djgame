@@ -24,9 +24,14 @@ func _ready() -> void:
 
 	audio_.set_metro(130)
 
-func _inputx(event) -> void:
-	if event.is_action("reset"):
-		get_tree().reload_current_scene()
+func _input(event) -> void:
+	if event.is_action_pressed("debug_switch_env"):
+		$GardenOverGrown.visible = not $GardenOverGrown.visible
+		$GardenPretty.visible = not $GardenPretty.visible
+		
+		$WorldEnvironment.sun.light_energy = 1.0 if $GardenOverGrown.visible else 0.0
+		$WorldEnvironment.sky.energy_multiplier = 1.0 if $GardenOverGrown.visible else 0.05
+		$WorldEnvironment.sun.rotation_degrees = Vector3(-16.4, 0, -35.4) if not $GardenOverGrown.visible else Vector3(-10.4, 0, -35.4)
 
 func _rumble() -> void:
 	Bus.camera_service.shake(0.7, 0.001 * rumble)
@@ -58,7 +63,7 @@ func play() -> void:
 	_play()
 
 func _play():
-	$phone.free_click = false
+	%Phone.free_click = false
 	$PointsService.play()
 	Bus.camera_service.cursor.disabled = false
 	audio_.play()
@@ -67,12 +72,12 @@ func _died() -> void:
 	pass
 
 func stop() -> void:
-	$phone.free_click = true
+	%Phone.free_click = true
 	audio_.stop()
 	
-	$phone.look()
+	%Phone.look()
 	var stream := preload("res://models/phone/stream/live_stream_app.tscn").instantiate()
-	$phone.get_phone_gui().start_app(stream)
+	%Phone.get_phone_gui().start_app(stream)
 	
 
 	stream.add_message_from_random_user("Love me some acid house")
@@ -85,13 +90,14 @@ func stop() -> void:
 	stream.add_message_from_random_user("Love me some acid house")
 	
 	await get_tree().create_timer(randf()).timeout
+	$AudioStreamPlayer.play()
 	stream.add_message_from_random_user("Only [shake][b][color=green]missed 1[/color][/b][/shake] time!")
-	await get_tree().create_timer(randf()).timeout
+	await get_tree().create_timer(0.8).timeout
+	$AudioStreamPlayer.play()
 	stream.add_message_from_random_user("He's got [shake][b][color=salmon]C- timing[/color][/b][/shake] though...")
-	await get_tree().create_timer(randf()).timeout
+	await get_tree().create_timer(0.8).timeout
+	$AudioStreamPlayer.play()
 	stream.add_message_from_random_user("Pretty good. [shake][b][color=pink]B+ overall[/color][/b][/shake]")
-	await get_tree().create_timer(randf()).timeout
-	stream.add_message_from_random_user("Coolio")
 	
 	await get_tree().create_timer(1.0).timeout
 	stream.set_reply(0, "[center]thank[/center]")

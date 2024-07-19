@@ -1,10 +1,10 @@
 [gd_resource type="Environment" load_steps=3 format=3 uid="uid://chtmgmwa87swx"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_why1r"]
-sun_angle_max = 360.0
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_b2yfj"]
+sky_top_color = Color(0.0975379, 0.491815, 0.626645, 1)
 
 [sub_resource type="Sky" id="Sky_s34c4"]
-sky_material = SubResource("ProceduralSkyMaterial_why1r")
+sky_material = SubResource("ProceduralSkyMaterial_b2yfj")
 
 [resource]
 background_mode = 2
@@ -14,9 +14,7 @@ ssr_fade_in = 0.579562
 ssr_fade_out = 10.1965
 ssao_enabled = true
 ssao_radius = 0.1
-ssao_intensity = 16.0
 ssao_detail = 5.0
-ssao_horizon = 0.0
 ssao_light_affect = 1.0
 ssao_ao_channel_affect = 0.7
 ssil_enabled = true
@@ -27,6 +25,4 @@ ssil_normal_rejection = 0.55
 sdfgi_enabled = true
 sdfgi_bounce_feedback = 1.5
 glow_enabled = true
-fog_enabled = true
-volumetric_fog_enabled = true
 adjustment_enabled = true

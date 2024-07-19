@@ -25,6 +25,7 @@ vframes = 2
 [node name="CameraArm" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="CameraArm"]
+cull_mask = 1
 attributes = ExtResource("5_am7l2")
 current = true
 fov = 55.0

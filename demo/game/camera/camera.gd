@@ -44,7 +44,7 @@ func shake(duration:float = 0.5, scale:float = 0.001) -> void:
 	for i in int(duration / 0.1):
 		shake_tween_.tween_property(camera_, "position", position + rv(scale / (i+1)), 0.01)
 
-func _input(event) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("debug_free_walk"):
 		free_walk_ = not free_walk_
 

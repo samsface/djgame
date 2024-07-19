@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cq6tf1u0nww5j" path="res://models/club/new_noise_texture_2d.tres" id="4_mt8sq"]
 [ext_resource type="Material" uid="uid://by3yjcfm2j61r" path="res://models/club/corner_bar_rings_material.tres" id="4_xkjy5"]
 [ext_resource type="Material" uid="uid://u6vpvu1k1hpd" path="res://models/club/corner_bar_support_beams_material.tres" id="5_a4xx8"]
-[ext_resource type="Material" uid="uid://c6t74brp2ij2m" path="res://models/club/corner_bar_gutter_material.tres" id="6_ahng8"]
+[ext_resource type="Material" uid="uid://cjyyt2gib02p2" path="res://models/club/rain_shelter_2_gutter_material.tres" id="10_6ph02"]
 
 [sub_resource type="Gradient" id="Gradient_m8l7b"]
 interpolation_mode = 1
@@ -100,5 +100,5 @@ surface_material_override/10 = ExtResource("3_wfw6v")
 surface_material_override/11 = ExtResource("3_6y6hc")
 surface_material_override/12 = ExtResource("4_xkjy5")
 surface_material_override/13 = ExtResource("5_a4xx8")
-surface_material_override/14 = ExtResource("6_ahng8")
+surface_material_override/14 = ExtResource("10_6ph02")
 metadata/_edit_lock_ = true

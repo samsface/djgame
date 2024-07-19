@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://wci5j730tyjf"]
+
+[ext_resource type="PackedScene" uid="uid://dhdvwnwg6jgvb" path="res://models/club/back_wall.glb" id="1_xt0fu"]
+
+[node name="back_wall" instance=ExtResource("1_xt0fu")]
