@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://cq6tf1u0nww5j" path="res://models/club/new_noise_texture_2d.tres" id="3_w1t8v"]
 
 [sub_resource type="Gradient" id="Gradient_6wwnd"]
-offsets = PackedFloat32Array(0, 0.509317, 0.857143)
-colors = PackedColorArray(0, 0.968627, 0.917647, 1, 1.44392e-07, 0.3904, 0.0513472, 1, 1, 0.783333, 0, 1)
+offsets = PackedFloat32Array(0, 0.879093)
+colors = PackedColorArray(1, 0.133986, 0.725373, 1, 0.645691, 0.732294, 2.31028e-06, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_wyfi1"]
 gradient = SubResource("Gradient_6wwnd")

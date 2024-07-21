@@ -1,0 +1,161 @@
+[gd_resource type="Shader" format=3 uid="uid://dd4444mkbkqcy"]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform vec2 pixels_size;
+uniform sampler2D prev_tex;
+uniform sampler2D previous_bake;
+uniform int frame;
+uniform bool extend;
+uniform bool blur = true;
+uniform int blend_mode = 0;
+uniform float min_blend = 0.9;
+
+void fragment() {
+	vec4 col = texture(TEXTURE, UV);
+	vec4 ocol = col;
+	
+	vec4 r = texture(TEXTURE, UV + vec2(pixels_size.x, 0.0));
+	vec4 l = texture(TEXTURE, UV + vec2(-pixels_size.x, 0.0));
+	vec4 d = texture(TEXTURE, UV + vec2(0.0, pixels_size.y));
+	vec4 u = texture(TEXTURE, UV + vec2(0.0, -pixels_size.y));
+	
+	float dmul = 1.0;//1.9
+	vec4 ru = texture(TEXTURE, UV + vec2(pixels_size.x, -pixels_size.y)*dmul);
+	vec4 lu = texture(TEXTURE, UV + vec2(-pixels_size.x, -pixels_size.y)*dmul);
+	vec4 rd = texture(TEXTURE, UV + vec2(pixels_size.x, pixels_size.y)*dmul);
+	vec4 ld = texture(TEXTURE, UV + vec2(-pixels_size.x, pixels_size.y)*dmul);
+
+	vec4 newcol = col;
+	
+	col.a = pow(col.a, 16.0);
+	r.a = pow(r.a, 16.0);
+	l.a = pow(l.a, 16.0);
+	d.a = pow(d.a, 16.0);
+	u.a = pow(u.a, 16.0);
+	ru.a = pow(ru.a, 16.0);
+	lu.a = pow(lu.a, 16.0);
+	rd.a = pow(rd.a, 16.0);
+	ld.a = pow(ld.a, 16.0);
+	ld.a = pow(ld.a, 16.0);
+	
+	newcol = col * 0.25 * col.a;
+	newcol += r * 0.125 * r.a + l * 0.125 * l.a + d * 0.125 * d.a + u * 0.125 * u.a;
+	newcol += ru * 0.0625 * ru.a + lu * 0.0625 * lu.a + rd * 0.0625 * rd.a + ld * 0.0625 * ld.a;
+	
+	float div = 0.25 * col.a * col.a;
+	div += 0.125 * r.a + 0.125 * l.a + 0.125 * d.a + 0.125 * u.a;
+	div +=  0.0625 * ru.a + 0.0625 * lu.a + 0.0625 * rd.a + 0.0625 * ld.a;
+	if (div > 0.001) {
+		newcol = newcol / div;
+	}
+	
+	if (extend && div < 0.01) {
+		dmul = 3.0;
+		vec4 ru2 = texture(TEXTURE, UV + vec2(pixels_size.x, -pixels_size.y)*dmul);
+		vec4 lu2 = texture(TEXTURE, UV + vec2(-pixels_size.x, -pixels_size.y)*dmul);
+		vec4 rd2 = texture(TEXTURE, UV + vec2(pixels_size.x, pixels_size.y)*dmul);
+		vec4 ld2 = texture(TEXTURE, UV + vec2(-pixels_size.x, pixels_size.y)*dmul);
+		float div2 = 0.25 * ru2.a + 0.25 * lu2.a + 0.25 * rd2.a + 0.25 * ld2.a;
+		newcol = 0.25 * ru2 * ru2.a + 0.25 * lu2 * lu2.a + 0.25 * rd2 * rd2.a + 0.25 * ld2 * ld2.a;
+		if (div2 > 0.01) {
+			newcol = newcol / div2;
+		}
+	}
+	
+	/*
+	newcol = col * 0.2 * col.a * col.a;
+	newcol += r * 0.12 * r.a * r.a + l * 0.12 * l.a * l.a + d * 0.12 * d.a * d.a + u * 0.12 * u.a * u.a;
+	newcol += ru * 0.06 * ru.a * ru.a + lu * 0.06 *lu.a * lu.a + rd * 0.06 * rd.a * rd.a + ld * 0.06 * ld.a * ld.a;
+	newcol += ru2 * 0.02 * ru2.a * ru.a + lu2 * 0.02 *lu2.a * lu.a + rd2 * 0.02 * rd2.a * rd.a + ld2 * 0.02 * ld2.a * ld.a;
+	
+	float div = 0.2 * col.a * col.a;
+	div += 0.12 * r.a * r.a + 0.12 * l.a * l.a + 0.12 * d.a * d.a + 0.12 * u.a * u.a;
+	div +=  0.06 * ru.a * ru.a + 0.06 *lu.a * lu.a + 0.06 * rd.a * rd.a + 0.06 * ld.a * ld.a;
+	div += 0.02 * ru2.a * ru.a + 0.02 * lu2.a * lu.a +  0.02 * rd2.a * rd.a + 0.02 * ld2.a * ld.a;
+	if (div > 0.001) {
+		newcol = newcol / div;
+	}*/
+	
+	if (!blur) {
+		newcol = mix(newcol, ocol, col.a * col.a * col.a);
+	}
+	
+	
+	COLOR = newcol;
+	if (blend_mode == 0) {
+		float blendcoef = (float(frame) + 20.0) / 60.0;
+		COLOR = mix(newcol, texture(prev_tex, UV), min(blendcoef, min_blend));
+		
+	} else if (blend_mode == 1) {
+		COLOR = newcol * texture(prev_tex, UV).rgba;
+		
+	} else if (blend_mode == 2) {
+		vec4 curv = texture(prev_tex, UV);
+		float factor1 = (curv.r - 0.5) * 50.0 - 5.0;
+		COLOR = mix(newcol, newcol + vec4(0.1, 0.1, 0.1, 0.0), clamp(factor1, 0.0, 1.0) );
+		
+		factor1 = (curv.r - 0.5) * 50.0 - 10.0;
+		COLOR = mix(COLOR, COLOR + vec4(0.1, 0.1, 0.1, 0.0), clamp(factor1, 0.0, 1.0) );
+		
+		factor1 = (curv.r - 0.5) * 50.0 - 15.0;
+		COLOR = mix(COLOR, COLOR + vec4(0.1, 0.1, 0.1, 0.0), clamp(factor1, 0.0, 1.0) );
+			
+		float factor2 = (1.0 - curv.r) * 5.0 - 2.0;
+		COLOR = mix(COLOR, newcol - vec4(0.3, 0.2, 0.2, 0.0), clamp(factor2, 0.0, 1.0));
+		
+	} else if (blend_mode == 3) {
+		vec4 curv = texture(prev_tex, UV);
+		float factor1 = (curv.r - 0.5) * 50.0 - 5.0;
+		COLOR = mix(newcol, newcol + vec4(0.1, 0.1, 0.1, 0.0), clamp(factor1, 0.0, 1.0) );
+		
+		factor1 = (curv.r - 0.5) * 50.0 - 10.0;
+		COLOR = mix(COLOR, COLOR + vec4(0.1, 0.1, 0.1, 0.0), clamp(factor1, 0.0, 1.0) );
+		
+		factor1 = (curv.r - 0.5) * 50.0 - 15.0;
+		COLOR = mix(COLOR, COLOR + vec4(0.1, 0.1, 0.1, 0.0), clamp(factor1, 0.0, 1.0) );
+			
+		float factor2 = (1.0 - curv.r) * 5.0 - 2.0;
+		COLOR = mix(COLOR, newcol - vec4(0.3, 0.2, 0.2, 0.0), clamp(factor2, 0.0, 1.0));
+		
+			
+		COLOR = COLOR * texture(previous_bake, UV) * clamp(texture(previous_bake, UV)*1.5, 0.0, 1.0);	
+	
+	} else if (blend_mode == 4) {
+		vec4 curv = texture(prev_tex, UV);
+		float factor1 = (curv.r - 0.5) * 5.0 - 0.8;
+		COLOR = mix(newcol, newcol + vec4(0.3, 0.3, 0.3, 0.0), clamp(factor1, 0.0, 1.0));
+		float factor2 = (1.0 - curv.r) * 5.0 - 2.0;
+		COLOR = mix(COLOR, newcol - vec4(0.3, 0.2, 0.2, 0.0), clamp(factor2, 0.0, 1.0));	
+	
+	} else if (blend_mode == 5) {
+		vec4 curv = texture(prev_tex, UV);
+		float factor1 = (curv.r - 0.5) * 5.0 - 0.8;
+		COLOR = mix(newcol, newcol + vec4(0.3, 0.3, 0.3, 0.0), clamp(factor1, 0.0, 1.0));
+		float factor2 = (1.0 - curv.r) * 5.0 - 2.0;
+		COLOR = mix(COLOR, newcol - vec4(0.3, 0.2, 0.2, 0.0), clamp(factor2, 0.0, 1.0));	
+		COLOR = COLOR * texture(previous_bake, UV);	
+	} else if (blend_mode == 6) {
+		vec4 combi = texture(prev_tex, UV);
+		float factor1 = (combi.g - 0.5) * 50.0 - 5.0;
+		COLOR = mix(newcol, newcol + vec4(0.1, 0.1, 0.1, 0.0), clamp(factor1, 0.0, 1.0) );
+		
+		factor1 = (combi.g - 0.5) * 50.0 - 10.0;
+		COLOR = mix(COLOR, COLOR + vec4(0.1, 0.1, 0.1, 0.0), clamp(factor1, 0.0, 1.0) );
+		
+		factor1 = (combi.g - 0.5) * 50.0 - 15.0;
+		COLOR = mix(COLOR, COLOR + vec4(0.1, 0.1, 0.1, 0.0), clamp(factor1, 0.0, 1.0) );
+			
+		float factor2 = (1.0 - combi.g) * 5.0 - 2.0;
+		COLOR = mix(COLOR, newcol - vec4(0.3, 0.2, 0.2, 0.0), clamp(factor2, 0.0, 1.0));
+		
+		vec4 dcol = mix(COLOR, vec4(0.15, 0.3, 0.4, 1.0), clamp(0.6 - (1.0 - combi.b) * (1.0 - combi.b), 0.0, 1.0));
+		COLOR = dcol * combi.r * clamp(combi.r * 1.5, 0.0, 1.0);	
+		COLOR.a = 1.0;
+	}
+	if (frame < 3) {
+		COLOR = newcol;
+	}
+	
+}"

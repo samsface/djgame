@@ -1,0 +1,35 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://cldm83i43brvc"]
+
+[ext_resource type="Shader" uid="uid://s46n8ptm6mji" path="res://models/club/glass_shader.tres" id="1_yc1s3"]
+[ext_resource type="Texture2D" uid="uid://dy7gbt8nf7qlq" path="res://models/club/georgian_window_glass.png" id="2_73whk"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="3_x7trv"]
+
+[sub_resource type="Gradient" id="Gradient_2dxpj"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ipbjr"]
+gradient = SubResource("Gradient_2dxpj")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_yc1s3")
+shader_parameter/albedo = Color(0.715543, 1, 0.689872, 1)
+shader_parameter/albedo2 = Color(0.849271, 0.862447, 0.779431, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.387
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 1.0
+shader_parameter/metallic = 0.56
+shader_parameter/ao_light_affect = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/edge_wear = 0.0
+shader_parameter/random_color_pallet = 0.0
+shader_parameter/texture_albedo = ExtResource("2_73whk")
+shader_parameter/texture_metallic = ExtResource("2_73whk")
+shader_parameter/texture_ambient_occlusion = ExtResource("2_73whk")
+shader_parameter/color_pallet = SubResource("GradientTexture1D_ipbjr")
+shader_parameter/texture_detail = ExtResource("3_x7trv")

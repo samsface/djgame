@@ -1,0 +1,156 @@
+[gd_resource type="Shader" format=3 uid="uid://mjmn5yj0o2f3"]
+
+[resource]
+code = "shader_type spatial;
+render_mode skip_vertex_transform, cull_disabled, unshaded;
+
+const int tts = 256;
+const float ttsf = 0.00390625;
+
+uniform sampler2D main_tex;
+uniform sampler2D lightmap_tex;
+uniform vec3 bound_start;
+uniform vec3 bound_size;
+uniform int tri_count;
+uniform sampler2D tris : filter_nearest;
+uniform sampler2D uvs : filter_nearest;
+
+varying vec3 vert;
+
+struct Hit {
+    float dst;
+    float w;
+	float u;
+	float v;
+};
+
+float hash (vec2 st) {
+	//st.x *= 77331.0;
+	//st.y *= 91653.0;
+    return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+}
+
+Hit ray_tri(vec3 o, vec3 dir, vec3 a, vec3 b, vec3 c) {
+	vec3 ab = b - a;
+	vec3 ac = c - a;
+	vec3 norm = cross(ab, ac);
+	vec3 ao = o - a;
+	vec3 dao = cross(ao, dir);
+	float det = -dot(dir, norm);
+	float invdet = 1.0 / det;
+	float u = dot(ac, dao) * invdet;
+	float v = -dot(ab, dao) * invdet;
+	float w = 1.0 - u - v;
+	
+	float dst = dot(ao, norm) * invdet;
+	bool hit = det >= 0.000001 && dst >= 0.0 && u >= 0.0 && v >= 0.0 && w >= 0.0;
+	vec3 point = o + dir * dst;
+	//vec3 hitnorm = normalize(anorm * w + bnorm * u + cnorm * v);
+	if (!hit) {
+		dst = 0.0;
+	}
+	return Hit(dst, w, u, v);
+}
+
+float rand_value(inout int state)
+{
+	state = state * 747796405 + 2891336453;
+	int result = ((state >> ((state >> 28) + 4)) * state) + 277803737;
+	result = (result >> 22) ^ result;
+	return float(result) / 4294967295.0;
+}
+
+float rand_normal_dist(vec2 state) {
+	float theta = 2.0 * 3.1415926 * hash(state);
+	float rho = sqrt(-2.0 * log(hash(-state + vec2(311.7, 922.3))));
+	return rho * cos(theta);
+}
+
+vec3 rand_dir(inout vec2 state) {
+	float x = rand_normal_dist(state);
+	float y = rand_normal_dist(state * vec2(745.2, 222.5));
+	float z = rand_normal_dist(state * vec2(311.7, 922.3));
+	return normalize(vec3(x, y, z));
+}
+
+void trace() {
+	
+}
+
+vec3 adjust_rgb(vec3 color){
+	return mix(pow((color + vec3(0.055)) * (1.0 / (1.0 + 0.055)),vec3(2.4)),color * (1.0 / 12.92),lessThan(color,vec3(0.04045)));
+}
+
+void vertex() {
+    //VERTEX = (MODELVIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
+    //NORMAL = normalize((MODELVIEW_MATRIX * vec4(NORMAL, 0.0)).xyz);
+	vert = (VERTEX - bound_start) / bound_size;
+	VERTEX = (MODELVIEW_MATRIX * vec4(UV2.x, UV2.y, 0, 1)).xyz;
+}
+
+void fragment() {
+	
+	vec2 rstate = UV2 + fract(vec2(TIME, TIME)) * 0.5;
+	//ALBEDO = vec3(hash(rstate));
+	//ALBEDO = vec3(rand_normal_dist(rstate) * 0.5 + 0.5);
+	//ALBEDO = rand_dir(rstate) * vec3(0.5, 0.5, 0.5) + 0.5;
+	//ALBEDO = normalize(NORMAL + rand_dir(rstate)) * 0.5 + vec3(0.5);
+	
+	//ALBEDO = (NORMAL + 1.0) * 0.5;
+	//ALBEDO = ALBEDO * 0.5 + texture(main_tex, UV).xyz * 0.5;
+	vec3 col = texture(main_tex, UV).xyz;
+	
+	vec3 norm = NORMAL;
+	if (!OUTPUT_IS_SRGB && !FRONT_FACING) {
+		norm = -norm;
+	}
+	
+	vec3 dir = normalize(norm * 1.01 + rand_dir(rstate));
+	
+	
+	//dir = NORMAL;
+	float mindst = 0.0;
+	Hit besthit = Hit(999.0, 0.0, 0.0, 0.0);
+	int hiti = 0;
+	for (int i = 0; i<tts*tts; i += 6) {
+		if (i > tri_count * 6) break;
+		vec3 a = texture(tris, vec2(float(i % tts) * ttsf + ttsf*0.5, float(i / tts) * ttsf + ttsf*0.5)).xyz;
+		//		+texture(tris, vec2(float((i+1) % tts) * ttsf, float((i+1) / tts) * ttsf)).xyz * ttsf;
+		vec3 b = texture(tris, vec2(float((i+2) % tts) * ttsf + ttsf*0.5, float((i+2) / tts) * ttsf + ttsf*0.5)).xyz;
+		//		+texture(tris, vec2(float((i+3) % tts) * ttsf, float((i+3) / tts) * ttsf)).xyz * ttsf;
+		vec3 c = texture(tris, vec2(float((i+4) % tts) * ttsf + ttsf*0.5, float((i+4) / tts) * ttsf + ttsf*0.5)).xyz;
+		//		+texture(tris, vec2(float((i+5) % tts) * ttsf, float((i+5) / tts) * ttsf)).xyz * ttsf;
+
+		Hit hit = ray_tri(vert, dir, a, b, c);
+		if (hit.dst > 0.01 && hit.dst < besthit.dst) {
+			besthit = hit;
+			hiti = i;
+		}
+	}
+	col = vec3(1.0);
+	if (besthit.dst > 0.01 && besthit.dst < 998.0) {
+		vec4 ca = texture(uvs, vec2(float(hiti % tts) * ttsf, float(hiti / tts) * ttsf));		
+		vec4 cb = texture(uvs, vec2(float((hiti+2) % tts) * ttsf, float((hiti+2) / tts) * ttsf));
+		vec4 cc = texture(uvs, vec2(float((hiti+4) % tts) * ttsf, float((hiti+4) / tts) * ttsf));
+		
+		vec2 huv = besthit.w * ca.xy + besthit.u * cb.xy + besthit.v * cc.xy;
+		vec3 hitcol = texture(main_tex, huv).xyz;
+		
+		vec2 huv2 = besthit.w * ca.zw + besthit.u * cb.zw + besthit.v * cc.zw;
+		vec3 hitcol2 = texture(lightmap_tex, huv2).xyz;
+		
+		col = mix((hitcol * hitcol * hitcol * col * col), col, besthit.dst);
+		//col = mix(col, vec3(0.0, 0.0, 0.0), (1.0 - besthit.dst) * (1.0 - besthit.dst) + 1.0 - besthit.dst);
+	}
+	
+	ALBEDO = col;
+	//ALBEDO = texture(main_tex, UV).rgb;
+	//ALBEDO = texture(tris, UV * 20.0).rgb;
+	
+	
+	//if (!OUTPUT_IS_SRGB) {
+		//ALBEDO = adjust_rgb(ALBEDO);
+	//}
+	
+	//ALBEDO = vert;
+}"

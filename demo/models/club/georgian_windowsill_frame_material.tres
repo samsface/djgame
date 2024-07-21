@@ -1,0 +1,37 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://b1i26y68yqt7"]
+
+[ext_resource type="Shader" uid="uid://bq8nrvsjwegq0" path="res://models/club/wood_shader.tres" id="1_237ky"]
+[ext_resource type="Texture2D" uid="uid://i2meqh0c1se2" path="res://models/club/georgian_window_frame.png" id="2_um4cw"]
+[ext_resource type="Texture2D" uid="uid://b3djoj2tvomr1" path="res://models/club/Seamless_Natural_Wood_Texture_NORMAL-2401978555.jpg" id="3_53ltb"]
+
+[sub_resource type="Gradient" id="Gradient_mw576"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.973241, 0.858242, 0.872349, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3x3v5"]
+gradient = SubResource("Gradient_mw576")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_237ky")
+shader_parameter/albedo = Color(0.715543, 1, 0.689872, 1)
+shader_parameter/albedo2 = Color(0.722958, 0.674764, 0.446239, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 1.0
+shader_parameter/metallic = 0.3
+shader_parameter/ao_light_affect = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/edge_wear = 0.4
+shader_parameter/random_color_pallet = null
+shader_parameter/surface_dirt_height = null
+shader_parameter/texture_albedo = ExtResource("2_um4cw")
+shader_parameter/texture_metallic = ExtResource("2_um4cw")
+shader_parameter/texture_ambient_occlusion = ExtResource("2_um4cw")
+shader_parameter/color_pallet = SubResource("GradientTexture1D_3x3v5")
+shader_parameter/texture_detail = ExtResource("3_53ltb")
+shader_parameter/y_dirt_max = 1.0

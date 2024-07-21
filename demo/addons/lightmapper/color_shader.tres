@@ -1,0 +1,27 @@
+[gd_resource type="Shader" format=3 uid="uid://b3eyxblwg1prx"]
+
+[resource]
+code = "shader_type spatial;
+render_mode skip_vertex_transform, cull_disabled, unshaded;
+
+const int tts = 256;
+const float ttsf = 0.00390625;
+
+uniform sampler2D main_tex;
+uniform sampler2D lightmap_tex;
+uniform vec3 bound_start;
+uniform vec3 bound_size;
+uniform int tri_count;
+uniform sampler2D tris;
+uniform sampler2D uvs;
+
+varying vec3 vert;
+
+void vertex() {
+	VERTEX = (MODELVIEW_MATRIX * vec4(UV2.x, UV2.y, 0, 1)).xyz;
+}
+
+void fragment() {
+	vec3 col = texture(main_tex, UV).xyz;
+	ALBEDO = col;
+}"

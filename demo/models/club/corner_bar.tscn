@@ -13,8 +13,8 @@
 
 [sub_resource type="Gradient" id="Gradient_m8l7b"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.579677, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.727294, 0.159055, 0.277362, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0.00755668, 0.574307, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 0.474712, 0.777603, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_p8ynd"]
 gradient = SubResource("Gradient_m8l7b")

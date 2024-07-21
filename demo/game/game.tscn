@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bfo1bxbj7knm0"]
+[gd_scene load_steps=44 format=3 uid="uid://bfo1bxbj7knm0"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_5uhe0"]
 [ext_resource type="PackedScene" uid="uid://lprkgl2wh3cd" path="res://game/camera/camera.tscn" id="2_1yirq"]
@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://lb3oq22iphka" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_host_control.tscn" id="10_cc86w"]
 [ext_resource type="AudioStream" uid="uid://b0sodcqt4qvjc" path="res://game/crowd_service/clap.wav" id="10_pwek6"]
 [ext_resource type="PackedScene" uid="uid://bqej7kilkwxxl" path="res://mixamo/ch_03_non_pbr.tscn" id="11_dbcca"]
-[ext_resource type="Environment" uid="uid://b8uhvyo3rc3m8" path="res://settings/environment_potato.tres" id="12_djoqn"]
+[ext_resource type="Environment" uid="uid://chtmgmwa87swx" path="res://settings/environment_high.tres" id="12_tc8qy"]
 [ext_resource type="PackedScene" uid="uid://dgg103ssmbg32" path="res://settings/settings.tscn" id="14_anos2"]
 [ext_resource type="Script" path="res://game/GuidesService.gd" id="14_y06of"]
 [ext_resource type="CameraAttributesPractical" uid="uid://ev1eo0cru0we" path="res://game/cameraatr.tres" id="16_2sje1"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://rbuf4nqmcmjx" path="res://models/acid/acid.tscn" id="27_daa16"]
 [ext_resource type="PackedScene" uid="uid://cnnors0cf4oai" path="res://models/redux/redux.tscn" id="27_rrm5u"]
 [ext_resource type="PackedScene" uid="uid://dfkhn8atn11hq" path="res://models/toydrum/drum.tscn" id="27_w54s6"]
+[ext_resource type="Script" path="res://game/audio_stream_player.gd" id="31_1sjv5"]
 [ext_resource type="Texture2D" uid="uid://cmauoe2tu6iq5" path="res://models/club/pink_paint.png" id="34_whk0o"]
 [ext_resource type="PackedScene" uid="uid://dbqtlcaws2qy3" path="res://models/club/exit_sign.tscn" id="34_xl4m4"]
 [ext_resource type="PackedScene" uid="uid://dn18w300jjfpl" path="res://models/static_cable/cable_poly.tscn" id="39_eu8cl"]
@@ -191,22 +192,20 @@ script = ExtResource("14_y06of")
 [node name="Camera" parent="WorldViewport/SubViewport/Game" instance=ExtResource("2_1yirq")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="WorldViewport/SubViewport/Game"]
-environment = ExtResource("12_djoqn")
+environment = ExtResource("12_tc8qy")
 camera_attributes = ExtResource("16_2sje1")
 script = ExtResource("18_sypot")
 
 [node name="Sun" type="DirectionalLight3D" parent="WorldViewport/SubViewport/Game/WorldEnvironment"]
-transform = Transform3D(-0.314662, 0.709028, -0.631085, 0.363135, 0.7042, 0.610112, 0.876996, -0.0371899, -0.479057, 5.72989, 5.18985, -9.19963)
+transform = Transform3D(0.578922, 0.127831, -0.8053, 0.791957, -0.323192, 0.518027, -0.194046, -0.93766, -0.288339, 5.72989, 5.18985, -9.19963)
 shadow_enabled = true
 shadow_reverse_cull_face = true
-shadow_blur = 0.05
 directional_shadow_mode = 0
 directional_shadow_split_1 = 0.0
 directional_shadow_split_2 = 0.117
 directional_shadow_split_3 = 1.0
 directional_shadow_blend_splits = true
-directional_shadow_fade_start = 1.0
-directional_shadow_max_distance = 15.0
+directional_shadow_max_distance = 25.0
 directional_shadow_pancake_size = 0.2
 
 [node name="Table" type="StaticBody3D" parent="WorldViewport/SubViewport/Game"]
@@ -453,7 +452,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.9854e-05, 0.442598, -0.7730
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService"]
 stream = ExtResource("8_3ww8b")
-autoplay = true
+script = ExtResource("31_1sjv5")
 
 [node name="Scream" type="AudioStreamPlayer" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService"]
 stream = ExtResource("9_cepbh")

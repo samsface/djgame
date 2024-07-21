@@ -1,0 +1,150 @@
+[gd_resource type="Shader" format=3 uid="uid://q831tpmis0u2"]
+
+[resource]
+code = "shader_type spatial;
+render_mode skip_vertex_transform, cull_disabled, unshaded;
+
+const int tts = 256;
+const float ttsf = 0.00390625;
+
+uniform sampler2D main_tex;
+uniform sampler2D lightmap_tex;
+uniform vec3 bound_start;
+uniform vec3 bound_size;
+uniform int tri_count;
+uniform sampler2D tris : filter_nearest;
+uniform sampler2D uvs : filter_nearest;
+
+varying vec3 vert;
+
+struct Hit {
+    float dst;
+    float w;
+	float u;
+	float v;
+};
+
+float hash (vec2 st) {
+	//st.x *= 77331.0;
+	//st.y *= 91653.0;
+    return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+}
+
+Hit ray_tri(vec3 o, vec3 dir, vec3 a, vec3 b, vec3 c) {
+	vec3 ab = b - a;
+	vec3 ac = c - a;
+	vec3 norm = cross(ab, ac);
+	vec3 ao = o - a;
+	vec3 dao = cross(ao, dir);
+	float det = -dot(dir, norm);
+	float invdet = 1.0 / det;
+	float u = dot(ac, dao) * invdet;
+	float v = -dot(ab, dao) * invdet;
+	float w = 1.0 - u - v;
+	
+	float dst = dot(ao, norm) * invdet;
+	bool hit = det >= 0.000001 && dst >= 0.0 && u >= 0.0 && v >= 0.0 && w >= 0.0;
+	vec3 point = o + dir * dst;
+	//vec3 hitnorm = normalize(anorm * w + bnorm * u + cnorm * v);
+	if (!hit) {
+		dst = 0.0;
+	}
+	return Hit(dst, w, u, v);
+}
+
+float rand_value(inout int state)
+{
+	state = state * 747796405 + 2891336453;
+	int result = ((state >> ((state >> 28) + 4)) * state) + 277803737;
+	result = (result >> 22) ^ result;
+	return float(result) / 4294967295.0;
+}
+
+float rand_normal_dist(vec2 state) {
+	float theta = 2.0 * 3.1415926 * hash(state);
+	float rho = sqrt(-2.0 * log(hash(-state + vec2(311.7, 922.3))));
+	return rho * cos(theta);
+}
+
+vec3 rand_dir(inout vec2 state) {
+	float x = rand_normal_dist(state);
+	float y = rand_normal_dist(state * vec2(745.2, 222.5));
+	float z = rand_normal_dist(state * vec2(311.7, 922.3));
+	return normalize(vec3(x, y, z));
+}
+
+void vertex() {
+    //VERTEX = (MODELVIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
+    //NORMAL = normalize((MODELVIEW_MATRIX * vec4(NORMAL, 0.0)).xyz);
+	vert = (VERTEX - bound_start) / bound_size;
+	VERTEX = (MODELVIEW_MATRIX * vec4(UV2.x, UV2.y, 0, 1)).xyz;
+	
+}
+
+void fragment() {
+	
+	vec2 rstate = UV2 + fract(vec2(TIME, TIME)) * 0.5;
+	//ALBEDO = vec3(hash(rstate));
+	//ALBEDO = vec3(rand_normal_dist(rstate) * 0.5 + 0.5);
+	//ALBEDO = rand_dir(rstate) * vec3(0.5, 0.5, 0.5) + 0.5;
+	//ALBEDO = normalize(NORMAL + rand_dir(rstate)) * 0.5 + vec3(0.5);
+	
+	//ALBEDO = (NORMAL + 1.0) * 0.5;
+	//ALBEDO = ALBEDO * 0.5 + texture(main_tex, UV).xyz * 0.5;
+	vec3 col = texture(main_tex, UV).xyz;
+	
+	vec3 norm = NORMAL;
+	if (!OUTPUT_IS_SRGB && !FRONT_FACING) {
+		norm = -norm;
+	}
+	
+	vec3 dir = rand_dir(rstate);
+	
+	col = vec3(0.0);
+	vec2 curv = vec2(0.0);
+	
+	for (int i = 0; i<tts*tts; i += 6) {
+		if (i > tri_count * 6) break;
+		vec3 a = texture(tris, vec2(float(i % tts) * ttsf, float(i / tts) * ttsf)).xyz;
+		//		+texture(tris, vec2(float((i+1) % tts) * ttsf, float((i+1) / tts) * ttsf)).xyz * ttsf;
+		vec3 b = texture(tris, vec2(float((i+2) % tts) * ttsf, float((i+2) / tts) * ttsf)).xyz;
+		//		+texture(tris, vec2(float((i+3) % tts) * ttsf, float((i+3) / tts) * ttsf)).xyz * ttsf;
+		vec3 c = texture(tris, vec2(float((i+4) % tts) * ttsf, float((i+4) / tts) * ttsf)).xyz;
+		//		+texture(tris, vec2(float((i+5) % tts) * ttsf, float((i+5) / tts) * ttsf)).xyz * ttsf;
+			
+		
+		Hit hit = ray_tri(vert - norm * 0.01, dir, a, b, c);
+		if (hit.dst > 0.001 && hit.dst < 0.025) {
+			curv.x = 1.0;
+		}
+	
+		hit = ray_tri(vert + norm * 0.01, -dir, a, b, c);
+		if (hit.dst > 0.001 && hit.dst < 0.05) {
+			curv.y = 1.0;
+		}
+		
+		
+		/*
+		// depth: dir2 = normalize(-norm + rand_dir(rstate));
+		Hit hit = ray_tri(vert + norm * 0.01, dir2, a, b, c);
+		if (hit.dst > 0.001 && hit.dst < 0.125) {
+			curv2.x = 1.0;
+		}
+		*/
+		/*
+		Hit hit = ray_tri(vert + norm * 0.01, dir2, a, b, c);
+		if (hit.dst > 0.001) {
+			curv2.x = 1.0 - hit.dst * hit.dst * (dir2_cos*dir2_cos*dir2_cos);
+		}
+		*/
+	}
+	col = vec3(curv.x + 1.0 - curv.y) * 0.5;
+	//col = vec3(curv1.y);
+	
+	//if (besthit.dst > 0.01 && besthit.dst < 998.0) {
+	//	col = vec3(clamp(besthit.dst * 4.0, 0.0, 1.0));
+	//}
+	
+	ALBEDO = col;
+	
+}"

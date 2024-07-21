@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://mvyxqqr8kw28"]
+
+[ext_resource type="Texture2D" uid="uid://csehhg413e453" path="res://models/club/brick_texture.jpg" id="1_idp70"]
+[ext_resource type="PackedScene" uid="uid://dupvu8xmpqsgb" path="res://models/club/georgian_window.tscn" id="2_vdlqs"]
+[ext_resource type="PackedScene" uid="uid://dlqoda4f8vby" path="res://models/club/georgian_building.tscn" id="3_m1102"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1wwpv"]
+size = Vector3(6.215, 9.945, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u2iy5"]
+albedo_color = Color(0.757881, 0.877178, 0.81692, 1)
+albedo_texture = ExtResource("1_idp70")
+uv1_scale = Vector3(7.97, 7.97, 7.97)
+disable_receive_shadows = true
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -33.1092, 9.91191, 12.5375)
+mesh = SubResource("BoxMesh_1wwpv")
+skeleton = NodePath("georgian_building2")
+surface_material_override/0 = SubResource("StandardMaterial3D_u2iy5")
+
+[node name="georgian_window" parent="." instance=ExtResource("2_vdlqs")]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -1.43051e-06, -1.21183, 0.867086)
+
+[node name="georgian_window2" parent="." instance=ExtResource("2_vdlqs")]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -2.10179, -1.21183, 0.867086)
+
+[node name="georgian_window3" parent="." instance=ExtResource("2_vdlqs")]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 2.06931, -1.21183, 0.867085)
+
+[node name="georgian_window4" parent="." instance=ExtResource("2_vdlqs")]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 2.06931, 1.25927, 0.867085)
+
+[node name="georgian_window5" parent="." instance=ExtResource("2_vdlqs")]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0.0149465, 1.25927, 0.867086)
+
+[node name="georgian_window6" parent="." instance=ExtResource("2_vdlqs")]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -2.18986, 1.25927, 0.867086)
+
+[node name="georgian_window7" parent="." instance=ExtResource("2_vdlqs")]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -2.18986, 3.64469, 0.867086)
+
+[node name="georgian_window8" parent="." instance=ExtResource("2_vdlqs")]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -0.0122228, 3.64469, 0.867086)
+
+[node name="georgian_window9" parent="." instance=ExtResource("2_vdlqs")]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 2.07555, 3.64469, 0.867085)
+
+[node name="georgian_building2" parent="." instance=ExtResource("3_m1102")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.53674e-07, -4.95595, 0.810656)
+visible = false

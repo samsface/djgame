@@ -1,0 +1,36 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://cdu1rop48upja"]
+
+[ext_resource type="Shader" uid="uid://cg43cfc5yi0ma" path="res://models/club/metal_shader.tres" id="1_ccqof"]
+[ext_resource type="Texture2D" uid="uid://ithb1uroiy00" path="res://models/club/rain_shelter_big_support_griders.png" id="2_jtohc"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="3_wh78f"]
+
+[sub_resource type="Gradient" id="Gradient_rscpi"]
+offsets = PackedFloat32Array(0, 0.486146, 0.866499)
+colors = PackedColorArray(5.0056e-06, 0.86135, 0.858426, 1, 0, 0.893942, 0.553469, 1, 1, 0.616336, 0.792241, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_l20k7"]
+gradient = SubResource("Gradient_rscpi")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ccqof")
+shader_parameter/albedo = Color(0.715543, 1, 0.689872, 1)
+shader_parameter/albedo2 = Color(0.801142, 0.874657, 0.993184, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.806
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 1.0
+shader_parameter/metallic = 0.41
+shader_parameter/ao_light_affect = 1.0
+shader_parameter/detail_scale = Vector2(2, 2)
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/edge_wear = 0.0
+shader_parameter/random_color_pallet = 0.0
+shader_parameter/texture_albedo = ExtResource("2_jtohc")
+shader_parameter/texture_metallic = ExtResource("2_jtohc")
+shader_parameter/texture_ambient_occlusion = ExtResource("2_jtohc")
+shader_parameter/color_pallet = SubResource("GradientTexture1D_l20k7")
+shader_parameter/texture_detail = ExtResource("3_wh78f")

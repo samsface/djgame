@@ -11,9 +11,7 @@ var rumble := 1.0
 func _ready() -> void:
 	Bus.level = self
 
-	if has_node("WorldEnvironment"):
-		$WorldEnvironment.camera_attributes.dof_blur_far_enabled = true
-	
+
 	audio_.connect_to_bang("rumble", _rumble)
 	audio_.connect_to_float("clock", _clock)
 

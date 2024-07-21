@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlqoda4f8vby"]
+
+[ext_resource type="PackedScene" uid="uid://d3pwjbwlro54k" path="res://models/club/georgian_building.glb" id="1_11gag"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1eooy"]
+albedo_color = Color(0.684797, 0.569582, 0.461999, 1)
+
+[node name="georgian_building" instance=ExtResource("1_11gag")]
+
+[node name="GeorgianBuilding" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_1eooy")

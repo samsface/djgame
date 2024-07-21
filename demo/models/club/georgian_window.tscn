@@ -1,0 +1,15 @@
+[gd_scene load_steps=6 format=3 uid="uid://dupvu8xmpqsgb"]
+
+[ext_resource type="PackedScene" uid="uid://tns5gw1gy3qq" path="res://models/club/georgian_window.glb" id="1_mbwvq"]
+[ext_resource type="Material" uid="uid://di2u08wnnd7o5" path="res://models/club/georgian_wall_upper_bricks.tres" id="2_j4a65"]
+[ext_resource type="Material" uid="uid://c0xofuovmxcwk" path="res://models/club/georgian_wall_windowsill_material.tres" id="3_edipg"]
+[ext_resource type="Material" uid="uid://cldm83i43brvc" path="res://models/club/georgian_window_glass_material.tres" id="4_20n14"]
+[ext_resource type="Material" uid="uid://b1i26y68yqt7" path="res://models/club/georgian_windowsill_frame_material.tres" id="5_7hr66"]
+
+[node name="georgian_window" instance=ExtResource("1_mbwvq")]
+
+[node name="GeorgianWindow" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_j4a65")
+surface_material_override/1 = ExtResource("3_edipg")
+surface_material_override/2 = ExtResource("4_20n14")
+surface_material_override/3 = ExtResource("5_7hr66")

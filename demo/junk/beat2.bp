@@ -9970,10 +9970,10 @@
 "condition_ex": "",
 "frames": [{
 "auto": false,
-"length": 32,
+"length": 31,
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/bang.tscn",
 "silent": false,
-"time": 782,
+"time": 784,
 "value": 1.0
 }, {
 "auto": false,
@@ -10498,6 +10498,24 @@
 "method": &"stop",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 1520
+}, {
+"length": 368,
+"property": "rumble",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/tween.tscn",
+"time": 1136,
+"to_value": 50.0
+}, {
+"length": 16,
+"property": "rumble",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/tween.tscn",
+"time": 544,
+"to_value": 30.0
+}, {
+"length": 48,
+"property": "rumble",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/tween.tscn",
+"time": 560,
+"to_value": 10.0
 }],
 "node_path": NodePath("."),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"

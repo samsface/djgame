@@ -35,7 +35,7 @@ func rv(scale:float = 1.0) -> Vector3:
 
 func shake(duration:float = 0.5, scale:float = 0.001) -> void:
 	if shake_tween_ and shake_tween_.is_running():
-		return
+		shake_tween_.kill()	
 
 	shake_tween_ = create_tween()
 	shake_tween_.set_speed_scale(0.2)
