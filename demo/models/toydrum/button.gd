@@ -40,9 +40,6 @@ func buffer_change(time, value):
 	value_will_change.emit(time, value)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if name == "seq-1":
-		print(event)
-	
 	if down_:
 		if event.is_action_released("click"):
 			released()

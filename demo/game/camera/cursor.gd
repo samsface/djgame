@@ -7,7 +7,8 @@ signal popped
 enum Action {
 	point,
 	hover,
-	grab
+	grab,
+	dot
 }
 
 var relative:Vector2 :
@@ -70,10 +71,14 @@ func distance_to_camera_(distance):
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("os_cursor"):
 		disabled = not disabled
-	
-	position = next_position_
-	cursor_.position = camera_.unproject_position(position) 
-	cursor_.scale = distance_to_camera_(global_position.distance_to(camera_.global_position))
+		
+	if cursor_.frame == Action.dot:
+		cursor_.position = get_viewport().size * 0.5
+	else:
+		position = next_position_
+		cursor_.position = camera_.unproject_position(position) 
+		#position2D = cursor_.position
+		cursor_.scale = distance_to_camera_(global_position.distance_to(camera_.global_position))
 	
 func invalidate_disabled_() -> void:
 	if not disabled:
@@ -89,6 +94,6 @@ func update() -> void:
 	if disabled:
 		return
 
+	# this should go into the input service
 	position2D += Bus.input_service.relative * 1.5
-	cursor_.position = position2D
-	#Bus.input_service.relative = Vector2.ZERO
+

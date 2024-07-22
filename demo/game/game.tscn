@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bfo1bxbj7knm0"]
+[gd_scene load_steps=48 format=3 uid="uid://bfo1bxbj7knm0"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_5uhe0"]
 [ext_resource type="PackedScene" uid="uid://lprkgl2wh3cd" path="res://game/camera/camera.tscn" id="2_1yirq"]
@@ -15,12 +15,14 @@
 [ext_resource type="PackedScene" uid="uid://lb3oq22iphka" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_host_control.tscn" id="10_cc86w"]
 [ext_resource type="AudioStream" uid="uid://b0sodcqt4qvjc" path="res://game/crowd_service/clap.wav" id="10_pwek6"]
 [ext_resource type="PackedScene" uid="uid://bqej7kilkwxxl" path="res://mixamo/ch_03_non_pbr.tscn" id="11_dbcca"]
-[ext_resource type="Environment" uid="uid://chtmgmwa87swx" path="res://settings/environment_high.tres" id="12_tc8qy"]
+[ext_resource type="Environment" uid="uid://b8uhvyo3rc3m8" path="res://settings/environment_potato.tres" id="12_jtkg2"]
 [ext_resource type="PackedScene" uid="uid://dgg103ssmbg32" path="res://settings/settings.tscn" id="14_anos2"]
 [ext_resource type="Script" path="res://game/GuidesService.gd" id="14_y06of"]
 [ext_resource type="CameraAttributesPractical" uid="uid://ev1eo0cru0we" path="res://game/cameraatr.tres" id="16_2sje1"]
 [ext_resource type="Script" path="res://game/world_environment.gd" id="18_sypot"]
+[ext_resource type="Script" path="res://game/plane.gd" id="22_gkvti"]
 [ext_resource type="PackedScene" uid="uid://brd4uell7hfpi" path="res://models/club/oil_drum_table.tscn" id="23_kacgu"]
+[ext_resource type="PackedScene" uid="uid://da81hs1u0ymhf" path="res://models/poster/poster.tscn" id="23_picdr"]
 [ext_resource type="Texture2D" uid="uid://bcvmpvpwk1nvp" path="res://models/shared/stickers/smiley.png" id="24_u45so"]
 [ext_resource type="Script" path="res://game/audio_service.gd" id="25_uoe2k"]
 [ext_resource type="PackedScene" uid="uid://rbuf4nqmcmjx" path="res://models/acid/acid.tscn" id="27_daa16"]
@@ -81,22 +83,15 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2x22v"]
-albedo_color = Color(0.235294, 0.235294, 0.235294, 1)
-albedo_texture = ExtResource("4_g7021")
-metallic = 0.84
-metallic_specular = 0.28
-roughness = 0.42
-normal_scale = 0.05
-normal_texture = ExtResource("4_g7021")
-rim_tint = 1.0
-clearcoat_roughness = 0.0
-anisotropy = -1.0
-ao_light_affect = 1.0
-heightmap_scale = 1.0
-subsurf_scatter_strength = 0.3
-uv1_scale = Vector3(3, 3, 3)
-uv1_offset = Vector3(-0.1305, 0, 0)
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_4aqsh"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_uh3v1"]
+size = Vector3(1, 1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ksh1d"]
+shading_mode = 0
+albedo_color = Color(2, 2, 2, 1)
+disable_receive_shadows = true
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_hg8pg"]
 
@@ -192,7 +187,7 @@ script = ExtResource("14_y06of")
 [node name="Camera" parent="WorldViewport/SubViewport/Game" instance=ExtResource("2_1yirq")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="WorldViewport/SubViewport/Game"]
-environment = ExtResource("12_tc8qy")
+environment = ExtResource("12_jtkg2")
 camera_attributes = ExtResource("16_2sje1")
 script = ExtResource("18_sypot")
 
@@ -209,7 +204,7 @@ directional_shadow_max_distance = 25.0
 directional_shadow_pancake_size = 0.2
 
 [node name="Table" type="StaticBody3D" parent="WorldViewport/SubViewport/Game"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.500806, 0.365773)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.501, 0)
 collision_layer = 8
 collision_mask = 0
 
@@ -297,24 +292,45 @@ diameter = 0.0021
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00132504, -0.00774931, -0.00174123)
 curve = SubResource("Curve3D_vr3fm")
 
-[node name="BigPlaneToCatchMouseRayCast" type="CSGBox3D" parent="WorldViewport/SubViewport/Game/Table"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00097698, 0.012105)
-visible = false
-use_collision = true
+[node name="BigPlaneToCatchMouseRayCast" type="Area3D" parent="WorldViewport/SubViewport/Game/Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.515351, 0.012)
 collision_layer = 8
 collision_mask = 0
-size = Vector3(100, 1, 100)
-material = SubResource("StandardMaterial3D_2x22v")
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldViewport/SubViewport/Game/Table/BigPlaneToCatchMouseRayCast"]
+shape = SubResource("WorldBoundaryShape3D_4aqsh")
 
 [node name="toykit" parent="WorldViewport/SubViewport/Game/Table" instance=ExtResource("27_w54s6")]
 unique_name_in_owner = true
 transform = Transform3D(-0.255653, 0, -0.966768, 0, 1, 0, 0.966768, 0, -0.255653, 0.0641169, 0.518237, -0.400214)
 
+[node name="MountPoint" type="Marker3D" parent="WorldViewport/SubViewport/Game/Table"]
+
 [node name="level" parent="WorldViewport/SubViewport/Game" instance=ExtResource("54_tkkfd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.941458, -1.09446, -15.6042)
 
 [node name="GardenOverGrown" type="Node3D" parent="WorldViewport/SubViewport/Game"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0039897, 2.38419e-07, -0.957186)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.71997, -1.07333, -6.09394)
+
+[node name="Plane" type="MeshInstance3D" parent="WorldViewport/SubViewport/Game/GardenOverGrown"]
+transform = Transform3D(0.242435, -0.000760243, 0.0353506, -0.0353588, -0.00521253, 0.242379, 0, -0.244943, -0.00526768, 38.8756, 28.8276, 0)
+mesh = SubResource("PrismMesh_uh3v1")
+surface_material_override/0 = SubResource("StandardMaterial3D_ksh1d")
+script = ExtResource("22_gkvti")
+
+[node name="toykit2" parent="WorldViewport/SubViewport/Game/GardenOverGrown" instance=ExtResource("27_w54s6")]
+unique_name_in_owner = true
+transform = Transform3D(0.335723, 0, 2.98116, 0, 3, 0, -2.98116, 0, 0.335723, 0.0681066, 0.0480881, 0.922745)
+map = null
+
+[node name="acid2" parent="WorldViewport/SubViewport/Game/GardenOverGrown" instance=ExtResource("27_daa16")]
+unique_name_in_owner = true
+transform = Transform3D(-2.81613, 0.0553146, 1.03265, 0.00109838, 2.99586, -0.15748, -1.03413, -0.14745, -2.81227, 0.416705, 0.0199602, 0.643239)
+map = null
+
+[node name="DaftHousePoster" parent="WorldViewport/SubViewport/Game/GardenOverGrown" instance=ExtResource("23_picdr")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.81537, 1.39943, -0.412132)
 
 [node name="GardenPretty" type="Node3D" parent="WorldViewport/SubViewport/Game"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0039897, 2.38419e-07, -0.957186)

@@ -1,7 +1,7 @@
 extends Node
 class_name DebugDraw
 
-static func line(node:Node3D, pos1: Vector3, pos2: Vector3, color = Color.WHITE_SMOKE, persist_ms = 1):
+static func line(node:Node3D, pos1: Vector3, pos2: Vector3, color = Color.WHITE_SMOKE, persist_ms = 10):
 	var mesh_instance := MeshInstance3D.new()
 	var immediate_mesh := ImmediateMesh.new()
 	var material := ORMMaterial3D.new()

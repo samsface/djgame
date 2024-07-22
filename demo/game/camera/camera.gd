@@ -46,7 +46,13 @@ func shake(duration:float = 0.5, scale:float = 0.001) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("debug_free_walk"):
-		free_walk_ = not free_walk_
+		if free_walk_:
+			free_walk_ = not free_walk_
+			cursor.pop($Cursor)
+		
+		else:
+			cursor.push($Cursor, Cursor.Action.dot)
+			free_walk_ = not free_walk_
 
 func _physics_process(delta: float) -> void:
 
@@ -68,9 +74,16 @@ func _physics_process(delta: float) -> void:
 		position.x += direction.x * 0.05
 		position.z += direction.z * 0.05
 
+		ray_cast_.position = Vector3.ZERO
+		ray_cast_.global_rotation = camera_arm_.global_rotation
+		ray_cast_.target_position = Vector3.FORWARD * 10000
+		#ray_cast_.target_position = cursorPos - camera_arm_.position
+
+		ray_cast_at_()
 		
 		return
-	
+
+	rotation = Vector3.ZERO
 	position = Vector3.ZERO
 	
 	if not stack_.is_empty():
@@ -93,18 +106,16 @@ func _physics_process(delta: float) -> void:
 	
 	var from = camera_.project_ray_origin(pos)
 	var to = from + camera_.project_ray_normal(pos) * 100
-	var cursorPos = Plane(Vector3.UP, transform.origin.y).intersects_ray(from, to)
-	if not cursorPos:
-		return
 
 	ray_cast_.position = camera_arm_.position
-	ray_cast_.target_position = cursorPos - camera_arm_.position
+	ray_cast_.target_position = to 
+	
+	ray_cast_at_()
 
+func ray_cast_at_() -> void:
 	ray_cast_.force_raycast_update()
 
 	if ray_cast_.is_colliding():
-		$Debug.position = ray_cast_.get_collision_point()
-		
 		var next_hovering = ray_cast_.get_collider().get_parent()
 		
 		if hovering_ and next_hovering != hovering_:
@@ -113,7 +124,7 @@ func _physics_process(delta: float) -> void:
 				hovering_._mouse_exited()
 
 		var point = ray_cast_.get_collision_point()
-		cursor.try_set_position(self, point + Vector3.UP * 0.002)
+		cursor.try_set_position(self, point)
 		
 		#print(next_hovering)
 		
@@ -125,6 +136,10 @@ func _physics_process(delta: float) -> void:
 			hovering_._mouse_entered()
 		else:
 			logi("MOUSE ENTER NOTING")
+			hovering_ = null
+	elif hovering_:
+		if is_instance_valid(hovering_):
+			hovering_._mouse_exited()
 			hovering_ = null
 
 func set_head_position_(pos:Vector3, pos2:Vector3) -> void:
