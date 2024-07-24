@@ -1,5 +1,4 @@
 extends Node
-class_name AudioService
 
 var patch_file_handle_ := PureDataPatch.new()
 var audio_stream_:PureDataAudioStreamPlayer
@@ -15,13 +14,14 @@ func _ready() -> void:
 	
 	Bus.audio_service = self
 	
+	
 	audio_stream_ = PureDataAudioStreamPlayer.new()
 	audio_stream_.stream = AudioStreamGenerator.new()
 	audio_stream_.stream.buffer_length = 0.024
 	add_child(audio_stream_)
 	audio_stream_.play()
 
-	print_debug("Pure is ", audio_stream_.is_initialized())
+	print_debug("libpd init was ", audio_stream_.is_initialized())
 
 	var p = ProjectSettings.globalize_path("res://junk/xxx.pd")
 
@@ -30,7 +30,9 @@ func _ready() -> void:
 
 	audio_stream_.bang.connect(_bang)
 	audio_stream_.float.connect(_float)
-
+	
+	#audio_stream_.stop()
+	
 func _bang(signal_name:String) -> void:
 	var callback = bang_signals_.get(signal_name)
 	if callback:
@@ -46,7 +48,7 @@ func set_metro(value:float) -> void:
 	emit_float("metro", value)
 
 func play() -> void:
-	emit_bang("WIPE-BUFFER")
+	emit_float("WIPE-BUFFER", 1)
 	emit_float("CLOCK", -16)
 	emit_bang("PLAY")
 	

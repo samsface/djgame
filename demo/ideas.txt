@@ -1,2 +1,3 @@
 - car radio level should use that wipeout grass level
 - introduction to garden should start with camera pointed up looking at planes and player has to look down
+- frist level starts up really close on the drum kit to zoom out and reveal nobody gives a shit 

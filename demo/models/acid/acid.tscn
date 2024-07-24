@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://rbuf4nqmcmjx"]
+[gd_scene load_steps=31 format=3 uid="uid://rbuf4nqmcmjx"]
 
 [ext_resource type="Script" path="res://models/redux/device.gd" id="1_636gy"]
 [ext_resource type="Script" path="res://models/lital/little2.gd" id="1_u4dod"]
@@ -17,6 +17,7 @@
 [ext_resource type="ArrayMesh" uid="uid://bihsv7t48c5h3" path="res://models/lital/wide.obj" id="11_6h82h"]
 [ext_resource type="PackedScene" uid="uid://bjfihtm5t424l" path="res://models/toydrum/button2.tscn" id="12_gqpmd"]
 [ext_resource type="Texture2D" uid="uid://pl7gf7bptldf" path="res://models/acid/albedo.png" id="12_u5yes"]
+[ext_resource type="Script" path="res://models/toydrum/marker_3d.gd" id="18_4buks"]
 
 [sub_resource type="Resource" id="Resource_arge0"]
 script = ExtResource("7_dom38")
@@ -330,10 +331,13 @@ mesh = ExtResource("11_6h82h")
 [node name="Views" type="Node3D" parent="."]
 
 [node name="View" type="Marker3D" parent="Views"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0667845, 0.132594, 0.0857208)
+transform = Transform3D(0.810531, 0.467478, -0.352851, 0, 0.602448, 0.798158, 0.585696, -0.646932, 0.488303, -0.0564172, 0.120051, 0.0609291)
+script = ExtResource("18_4buks")
 
 [node name="View2" type="Marker3D" parent="Views"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0135922, 0.0931738, 0.0421634)
+transform = Transform3D(0.999981, 0.00535995, -0.0030073, 0, 0.489312, 0.872109, 0.00614596, -0.872092, 0.489303, -0.00468077, 0.117184, 0.0495496)
+script = ExtResource("18_4buks")
 
 [node name="View3" type="Marker3D" parent="Views"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0144488, 0.0665829, 0.106457)
+transform = Transform3D(0.999945, 0.00613323, -0.00853381, 0, 0.812036, 0.583608, 0.0105092, -0.583576, 0.811991, -0.00423019, 0.0542445, 0.0919209)
+script = ExtResource("18_4buks")

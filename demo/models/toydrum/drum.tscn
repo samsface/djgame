@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dfkhn8atn11hq"]
+[gd_scene load_steps=42 format=3 uid="uid://dfkhn8atn11hq"]
 
 [ext_resource type="Script" path="res://models/lital/little2.gd" id="1_i84dm"]
 [ext_resource type="PackedScene" uid="uid://cyqgaxwtbp2kl" path="res://models/shared/lines/square.tscn" id="1_kqc44"]
@@ -22,6 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://dh5tiwpnwbg3a" path="res://models/shared/sounds/key_press_loud_2.wav" id="17_sk8gg"]
 [ext_resource type="PackedScene" uid="uid://c1midsktuy41j" path="res://models/shared/plug_no_screw.glb" id="18_ek7yc"]
 [ext_resource type="Material" uid="uid://cvedaj7ghb1bw" path="res://models/lital/long_slanted_material.tres" id="21_uvrst"]
+[ext_resource type="Script" path="res://models/toydrum/marker_3d.gd" id="23_jxgk4"]
 
 [sub_resource type="Resource" id="Resource_7wmo2"]
 script = ExtResource("5_2kcmv")
@@ -121,7 +122,6 @@ action = &"7"
 action = &"8"
 
 [node name="Drum" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018667, 0.00447031, 0.0409039)
 script = ExtResource("1_i84dm")
 map = ExtResource("2_6gioe")
 
@@ -595,20 +595,33 @@ mesh = ExtResource("9_u0gxs")
 
 [node name="Views" type="Node3D" parent="."]
 
-[node name="Marker3D" type="Marker3D" parent="Views"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.224698, 0.0528537, 0.0617226)
+[node name="Front" type="Marker3D" parent="Views"]
+transform = Transform3D(0.0191991, -0.0515333, 0.998485, 0, 0.998671, 0.0515427, -0.999815, -0.000989575, 0.0191735, 0.2, 0.03, 0.006)
+script = ExtResource("23_jxgk4")
 
 [node name="Marker3D2" type="Marker3D" parent="Views"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.224698, 0.0528537, 0.0158775)
+transform = Transform3D(-0.0157054, -0.369775, 0.928987, 0, 0.929103, 0.36982, -0.999876, 0.0058082, -0.014592, 0.157991, 0.0658584, 0.00442371)
+script = ExtResource("23_jxgk4")
 
 [node name="Marker3D3" type="Marker3D" parent="Views"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.271468, 0.1728, -0.0310543)
+transform = Transform3D(-0.693396, -0.530863, 0.487221, 0, 0.676175, 0.73674, -0.720555, 0.510854, -0.468857, 0.0915213, 0.103574, -0.0830994)
+script = ExtResource("23_jxgk4")
 
-[node name="Marker3D4" type="Marker3D" parent="Views"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0966436, 0.139137, -0.0310543)
+[node name="ZoomOn1" type="Marker3D" parent="Views"]
+transform = Transform3D(0.00609675, -0.790188, 0.612833, 0, 0.612845, 0.790201, -0.999981, -0.00481768, 0.00373636, 0.0578976, 0.0765133, 0.0848299)
+script = ExtResource("23_jxgk4")
 
-[node name="Marker3D5" type="Marker3D" parent="Views"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19563, 0.0362972, 0.0858325)
+[node name="ZoomOn2" type="Marker3D" parent="Views"]
+transform = Transform3D(0.00609675, -0.790188, 0.612833, 0, 0.612845, 0.790201, -0.999981, -0.00481768, 0.00373636, 0.058, 0.077, 0.065)
+script = ExtResource("23_jxgk4")
+
+[node name="ZoomOn1FromRight" type="Marker3D" parent="Views"]
+transform = Transform3D(-0.969875, -0.197586, 0.14248, 0, 0.584896, 0.811107, -0.2436, 0.786675, -0.567275, 0.0319998, 0.0856247, 0.00238991)
+script = ExtResource("23_jxgk4")
+
+[node name="ZoomOn1FromLeft" type="Marker3D" parent="Views"]
+transform = Transform3D(0.998718, -0.0341589, 0.0373374, 0, 0.737815, 0.675002, -0.0506054, -0.674138, 0.736868, -0.00171971, 0.0549936, 0.138037)
+script = ExtResource("23_jxgk4")
 
 [connection signal="mouse_entered" from="NorthFace/Record/Nob" to="NorthFace/Record" method="_mouse_entered"]
 [connection signal="mouse_exited" from="NorthFace/Record/Nob" to="NorthFace/Record" method="_mouse_exited"]

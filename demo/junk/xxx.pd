@@ -18,7 +18,7 @@
 #X obj 1232 596 bng 15 250 50 0 s-clock-beat r-clock-beat CLOCK 17 7 0 10 #fcfcfc #000000 #000000;
 #X msg 760 98 stop;
 #X obj 516 89 bng 15 250 50 0 s-PLAY r-PLAY play 17 7 0 10 #fcfcfc #000000 #000000;
-#X obj 833 -16 bng 15 250 50 0 s-STOP r-STOP stop 17 7 0 10 #fcfcfc #000000 #000000;
+#X obj 833 -17 bng 15 250 50 0 s-STOP r-STOP stop 17 7 0 10 #fcfcfc #000000 #000000;
 #X obj 1080 775 bng 15 250 50 0 s-clock-4 r-clock-4 empty 17 7 0 10 #fcfcfc #000000 #000000;
 #X obj 1091 700 sel 0;
 #X obj 1091 670 % 4;
@@ -63,6 +63,8 @@
 #X obj 910 1176 *~ 1;
 #X obj 184 333 hradio 20 1 0 8 empty r-acid-preset empty 0 -10 0 12 #fcfcfc #000000 #000000 0;
 #X msg 691 955 0;
+#X obj 183 586 s r-CLOCK;
+#X msg 192 534 -16;
 #X connect 1 0 6 0;
 #X connect 1 0 29 0;
 #X connect 1 0 28 0;
@@ -129,3 +131,4 @@
 #X connect 57 0 5 0;
 #X connect 58 0 29 2;
 #X connect 59 0 25 0;
+#X connect 61 0 60 0;

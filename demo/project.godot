@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameTime="*res://models/phone/clock.gd"
 Bus="*res://bus.gd"
+AudioService="*res://game/audio_service.gd"
 
 [display]
 

@@ -20,6 +20,9 @@ var mouse_entered_ := false
 			$"ReplyA/StaticBody3D/CollisionShape3D".disabled = false
 			$"ReplyB/StaticBody3D/CollisionShape3D".disabled = false
 
+func _ready() -> void:
+	set_physics_process(false)
+
 func get_phone_gui() -> Control:
 	return $SubViewport/PhoneGui
 

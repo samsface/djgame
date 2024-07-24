@@ -18,7 +18,11 @@ var recorder
 
 var stack_ := []
 var head_pos_:Vector3
-var free_walk_ := false
+@export var free_walk:bool :
+	set(v):
+		await ready
+		set_free_walk_(v)
+		free_walk = v
 
 func logi(str:String) -> void:
 	pass
@@ -46,17 +50,21 @@ func shake(duration:float = 0.5, scale:float = 0.001) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("debug_free_walk"):
-		if free_walk_:
-			free_walk_ = not free_walk_
-			cursor.pop($Cursor)
-		
-		else:
-			cursor.push($Cursor, Cursor.Action.dot)
-			free_walk_ = not free_walk_
+		set_free_walk_(not free_walk)
+
+func set_free_walk_(value:bool) -> void:
+	if free_walk == value:
+		return
+
+	if free_walk:
+		cursor.pop($Cursor)
+	
+	else:
+		cursor.push($Cursor, Cursor.Action.dot)
 
 func _physics_process(delta: float) -> void:
 
-	if free_walk_:
+	if free_walk:
 		camera_arm_.position = Vector3.ZERO
 		camera_arm_.rotation.y = 0
 		camera_arm_.rotation.z = 0
@@ -87,16 +95,9 @@ func _physics_process(delta: float) -> void:
 	position = Vector3.ZERO
 	
 	if not stack_.is_empty():
-		var r = camera_arm_.rotation
-		camera_arm_.look_at(stack_[0][1].global_position)
-		var rr = camera_arm_.rotation
-		camera_arm_.rotation = r
-		camera_arm_.rotation = lerp(r, rr, delta * 6.0)
+		camera_arm_.rotation = lerp(camera_arm_.rotation, stack_[0][1].global_rotation, delta * 6.0)
+		camera_arm_.position = lerp(camera_arm_.position, stack_[0][1].global_position, delta * 6.0)
 
-		if stack_[0][1].has_method("get_view_position"):
-			set_head_position_(stack_[0][1].get_view_position(), stack_[0][1].global_position)
-
-	
 	if not cursor.is_owner(self):
 		return
 	
@@ -161,6 +162,9 @@ func get_head_position() -> Vector3:
 	return camera_arm_.global_position
 
 func look_at_node(node:Node3D) -> void:
+	if not node:
+		return
+
 	if not stack_.is_empty():
 		for i in stack_.size():
 			if stack_[i][2] == 1:
@@ -188,6 +192,9 @@ func shift():
 	pass
 
 func is_looking_at_parent(node:Node):
+	if stack_.is_empty():
+		return false
+
 	var looking_at = stack_.front()[1]
 	
 	while node.get_parent():

@@ -1,14 +1,18 @@
 extends Node3D
 class_name Level
 
+@export var patch:String
+
 @onready var guides_ := $Guides
-@onready var audio_ := $AudioService
+@onready var audio_ := AudioService
 @onready var beat_player_  := %BeatPlayerHost
 
 var tween_:Tween
 var rumble := 1.0
 
 func _ready() -> void:
+	%toykit.look("ZoomOn1")
+	
 	Bus.level = self
 
 
@@ -21,15 +25,8 @@ func _ready() -> void:
 
 
 	audio_.set_metro(130)
-
-func _input(event) -> void:
-	if event.is_action_pressed("debug_switch_env"):
-		$GardenOverGrown.visible = not $GardenOverGrown.visible
-		$GardenPretty.visible = not $GardenPretty.visible
-		
-		$WorldEnvironment.sun.light_energy = 1.0 if $GardenOverGrown.visible else 0.0
-		$WorldEnvironment.sky.energy_multiplier = 1.0 if $GardenOverGrown.visible else 0.05
-		$WorldEnvironment.sun.rotation_degrees = Vector3(-16.4, 0, -35.4) if not $GardenOverGrown.visible else Vector3(-10.4, 0, -35.4)
+	
+	_play()
 
 func _rumble() -> void:
 	Bus.camera_service.shake(0.7, 0.001 * rumble)

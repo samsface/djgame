@@ -14,6 +14,7 @@ enum Action {
 var relative:Vector2 :
 	set(v):
 		relative = v
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPT
 	get:
 		return relative
 
@@ -31,17 +32,21 @@ var next_position_ := Vector3.ZERO
 			disabled = v
 			invalidate_disabled_()
 
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPT
 func _ready() -> void:
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	position2D = get_window().get_visible_rect().size / 2
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPT
 	invalidate_disabled_()
 
 func is_owner(node:Node) -> bool:
 	return owner_stack_.size() > 0 and owner_stack_.back()[0] == node
 
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPT
 func push(node:Node, action:Action = Action.point) -> void:
 	owner_stack_.push_back([node, action])
 	cursor_.frame = action
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPT
 	
 	popped.emit()
 
@@ -49,6 +54,7 @@ func pop(node:Node) -> void:
 	owner_stack_.pop_back()
 
 	if owner_stack_.size() > 0:
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPT
 		cursor_.frame = owner_stack_.back()[1]
 
 	Bus.camera_service.cursor.position2D = camera_.unproject_position(position)
@@ -74,6 +80,7 @@ func _physics_process(delta: float) -> void:
 		
 	if cursor_.frame == Action.dot:
 		cursor_.position = get_viewport().size * 0.5
+		cursor_.scale = Vector2.ONE
 	else:
 		position = next_position_
 		cursor_.position = camera_.unproject_position(position) 
@@ -86,6 +93,7 @@ func invalidate_disabled_() -> void:
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPT
 func reset() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	position2D = get_viewport().size * 0.5
@@ -97,3 +105,5 @@ func update() -> void:
 	# this should go into the input service
 	position2D += Bus.input_service.relative * 1.5
 
+
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPT

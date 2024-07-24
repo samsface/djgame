@@ -102,8 +102,6 @@ func giada(text:String) -> ChatBuilder:
 	return ChatBuilder.new(self).from("Giada").text(text)
 
 func _ready() -> void:
-	get_parent().look()
-	
 	chat_app_ = preload("res://models/phone/contacts.tscn").instantiate()
 	
 	chat_app_.chats = chats
@@ -133,7 +131,6 @@ func setup_gf_chat_() -> void:
 	chats.chats[chat.contact_name] = chat
 	chats.new_chat.emit(chat)
 	chat.begin_viewing.connect(func():
-		
 		get_parent().look(1)
 		Bus.points_service.show_bar("love", true))
 		
@@ -141,10 +138,10 @@ func setup_gf_chat_() -> void:
 		get_parent().look(0)
 		Bus.points_service.show_bar("love", false))
 
-	(giada("Hey did you play yet?")
-	.add_reply(_yep_was_fun)
-	.add_reply(_if_you_came_youd_know)
-	.send())
+	#(giada("Hey did you play yet?")
+	#.add_reply(_yep_was_fun)
+	#.add_reply(_if_you_came_youd_know)
+	#.send())
 
 func _yep_was_fun() -> void:
 	(giada("That's great : )")
@@ -208,11 +205,11 @@ func setup_mm_chat_() -> void:
 	chats.chats[chat.contact_name] = chat
 	chats.new_chat.emit(chat)
 		
-	(build_message()
-	.from("Mano")
-	.text("Hey, txt my when to keep going.")
-	.add_reply(_lets_go)
-	.send())
+	#(build_message()
+	#.from("Mano")
+	#.text("Hey, txt my when to keep going.")
+	#.add_reply(_lets_go)
+	#.send())
 
 func _lets_go() -> void:
 	Bus.beat_service.jump("scene", false)
