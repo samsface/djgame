@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://c8c0isilrphjb"]
+[gd_scene load_steps=44 format=3 uid="uid://c8c0isilrphjb"]
 
 [ext_resource type="PackedScene" uid="uid://dgg103ssmbg32" path="res://game/settings/settings.tscn" id="1_rpjq6"]
 [ext_resource type="Script" path="res://game/animation.gd" id="2_phct8"]
@@ -30,6 +30,7 @@
 [ext_resource type="Script" path="res://game/crowd_service/crowd_service.gd" id="31_3j3sa"]
 [ext_resource type="AudioStream" uid="uid://cox0cypa0r0wf" path="res://game/crowd_service/Bar Ambience Sound Effect- No Copyright.mp3" id="32_rvjo4"]
 [ext_resource type="Script" path="res://game/audio_stream_player.gd" id="33_0b843"]
+[ext_resource type="PackedScene" uid="uid://bj2wjnpnv2ntw" path="res://models/characters/mano/mano.tscn" id="34_cx8of"]
 [ext_resource type="AudioStream" uid="uid://b3hkravd23cph" path="res://game/crowd_service/400587__misjoc__medium-crowd-cheering-01(1).wav" id="34_qie8a"]
 [ext_resource type="AudioStream" uid="uid://b0sodcqt4qvjc" path="res://game/crowd_service/clap.wav" id="35_d1q2r"]
 [ext_resource type="PackedScene" uid="uid://bqej7kilkwxxl" path="res://models/characters/dancer_0/dancer_0.tscn" id="36_cuhf5"]
@@ -81,6 +82,7 @@ _data = {
 point_count = 2
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_4aqsh"]
+margin = 0.0
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_hg8pg"]
 
@@ -191,8 +193,9 @@ directional_shadow_pancake_size = 0.2
 
 [node name="Table" type="StaticBody3D" parent="WorldViewport/SubViewport/Game"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.501, 0)
-collision_layer = 8
+collision_layer = 0
 collision_mask = 0
+input_ray_pickable = false
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="WorldViewport/SubViewport/Game/Table" groups=["light"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0617377, 0.590035, -0.266224)
@@ -221,7 +224,7 @@ transform = Transform3D(-0.945929, 0, 0.324373, 0, 1, 0, -0.324373, 0, -0.945929
 
 [node name="Phone" parent="WorldViewport/SubViewport/Game/Table" instance=ExtResource("18_6crkf")]
 unique_name_in_owner = true
-transform = Transform3D(1.42991, -0.0899029, -0.444148, 0, 1.47018, -0.297589, 0.453156, 0.283685, 1.40149, 0.131448, 0.513039, -0.205147)
+transform = Transform3D(0.953275, -0.0599356, -0.296099, -0.0300469, 0.956453, -0.290337, 0.300607, 0.285668, 0.909961, 0.131448, 0.515901, -0.232579)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="WorldViewport/SubViewport/Game/Table" groups=["light"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0340311, 0.646539, -0.466655)
@@ -279,9 +282,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00132504, -0.00774931, -0.
 curve = SubResource("Curve3D_vr3fm")
 
 [node name="BigPlaneToCatchMouseRayCast" type="Area3D" parent="WorldViewport/SubViewport/Game/Table"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.515351, 0.012)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.499541, 0.012)
 collision_layer = 8
 collision_mask = 0
+input_ray_pickable = false
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WorldViewport/SubViewport/Game/Table/BigPlaneToCatchMouseRayCast"]
@@ -442,16 +446,20 @@ stream = ExtResource("35_d1q2r")
 volume_db = 5.0
 
 [node name="Ch03_nonPBR" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("36_cuhf5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.531129, -1.19139, -1.99893)
+transform = Transform3D(0.0552119, 0, 0.998474, 0, 1, 0, -0.998474, 0, 0.0552119, -1.24834, -1.19139, -2.9996)
 
 [node name="Ch03_nonPBR2" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("36_cuhf5")]
-transform = Transform3D(0.527519, 0, -0.849543, 0, 1, 0, 0.849543, 0, 0.527519, 3.11932, -1.18293, -2.65621)
+transform = Transform3D(0.146532, 0, -0.989206, 0, 1, 0, 0.989206, 0, 0.146532, -0.561583, -1.18293, -3.08201)
 
 [node name="Ch03_nonPBR3" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("36_cuhf5")]
 transform = Transform3D(0.89913, 0, -0.437681, 0, 1, 0, 0.437681, 0, 0.89913, 0.0380758, -1.16179, -7.8824)
 
 [node name="Ch03_nonPBR4" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("36_cuhf5")]
 transform = Transform3D(-0.991947, 0, 0.126649, 0, 1, 0, -0.126649, 0, -0.991947, -0.13517, -1.16179, -6.64521)
+
+[node name="Mano" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("34_cx8of")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.881379, -1.13239, -2.64367)
+attention = 1.0
 
 [node name="LiveStreamService" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_8dclm")]
 size = Vector2i(128, 128)

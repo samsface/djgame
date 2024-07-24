@@ -26,7 +26,7 @@ func _ready() -> void:
 
 	audio_.set_metro(130)
 	
-	_play()
+	#_play()
 
 func _rumble() -> void:
 	Bus.camera_service.shake(0.7, 0.001 * rumble)
@@ -70,7 +70,7 @@ func stop() -> void:
 	%Phone.free_click = true
 	audio_.stop()
 	
-	%Phone.look()
+	%Phone.look("Top")
 	var stream := preload("res://models/phone/stream/live_stream_app.tscn").instantiate()
 	%Phone.get_phone_gui().start_app(stream)
 	

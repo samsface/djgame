@@ -330,14 +330,14 @@ mesh = ExtResource("11_6h82h")
 
 [node name="Views" type="Node3D" parent="."]
 
-[node name="View" type="Marker3D" parent="Views"]
+[node name="Top" type="Marker3D" parent="Views"]
 transform = Transform3D(0.810531, 0.467478, -0.352851, 0, 0.602448, 0.798158, 0.585696, -0.646932, 0.488303, -0.0564172, 0.120051, 0.0609291)
 script = ExtResource("18_4buks")
 
 [node name="View2" type="Marker3D" parent="Views"]
-transform = Transform3D(0.999981, 0.00535995, -0.0030073, 0, 0.489312, 0.872109, 0.00614596, -0.872092, 0.489303, -0.00468077, 0.117184, 0.0495496)
+transform = Transform3D(0.781496, 0.294875, -0.549829, 0, 0.881264, 0.472625, 0.62391, -0.369354, 0.688704, -0.0912988, 0.0926991, 0.075563)
 script = ExtResource("18_4buks")
 
-[node name="View3" type="Marker3D" parent="Views"]
+[node name="Low" type="Marker3D" parent="Views"]
 transform = Transform3D(0.999945, 0.00613323, -0.00853381, 0, 0.812036, 0.583608, 0.0105092, -0.583576, 0.811991, -0.00423019, 0.0542445, 0.0919209)
 script = ExtResource("18_4buks")

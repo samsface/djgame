@@ -95,8 +95,8 @@ func _physics_process(delta: float) -> void:
 	position = Vector3.ZERO
 	
 	if not stack_.is_empty():
-		camera_arm_.rotation = lerp(camera_arm_.rotation, stack_[0][1].global_rotation, delta * 6.0)
-		camera_arm_.position = lerp(camera_arm_.position, stack_[0][1].global_position, delta * 6.0)
+		camera_arm_.global_rotation = lerp(camera_arm_.global_rotation, stack_[0][1].global_rotation, delta * 6.0)
+		camera_arm_.global_position = lerp(camera_arm_.global_position, stack_[0][1].global_position, delta * 6.0)
 
 	if not cursor.is_owner(self):
 		return
@@ -120,6 +120,7 @@ func ray_cast_at_() -> void:
 		var next_hovering = ray_cast_.get_collider().get_parent()
 		
 		if hovering_ and next_hovering != hovering_:
+
 			logi("MOUSE EXIT")
 			if is_instance_valid(hovering_):
 				hovering_._mouse_exited()

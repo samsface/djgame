@@ -27,14 +27,18 @@ func _ready() -> void:
 	$TimelineControl.undo = undo_
 
 func seek(time:float) -> void:
+	print(time)
 	var t := int(time + offset)
 	
 	var l = ($TimelineControl.time_range.y - $TimelineControl.time_range.x) 
 	
-	if time >= $TimelineControl.time_range.y:
-		t =  int(t % l)
-
 	t += $TimelineControl.time_range.x
+	
+	
+	if t >= $TimelineControl.time_range.y:
+		t = $TimelineControl.time_range.x + int(t % l)
+
+	
 	
 	$TimelineControl.caret = t
 

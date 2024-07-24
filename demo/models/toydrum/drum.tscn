@@ -599,7 +599,11 @@ mesh = ExtResource("9_u0gxs")
 transform = Transform3D(0.0191991, -0.0515333, 0.998485, 0, 0.998671, 0.0515427, -0.999815, -0.000989575, 0.0191735, 0.2, 0.03, 0.006)
 script = ExtResource("23_jxgk4")
 
-[node name="Marker3D2" type="Marker3D" parent="Views"]
+[node name="FrontAlt" type="Marker3D" parent="Views"]
+transform = Transform3D(0.00610343, -0.0907071, 0.995857, 0, 0.995878, 0.0907086, -0.999981, -0.000553635, 0.00607826, 0.148972, 0.0418706, 0.0137224)
+script = ExtResource("23_jxgk4")
+
+[node name="Front2" type="Marker3D" parent="Views"]
 transform = Transform3D(-0.0157054, -0.369775, 0.928987, 0, 0.929103, 0.36982, -0.999876, 0.0058082, -0.014592, 0.157991, 0.0658584, 0.00442371)
 script = ExtResource("23_jxgk4")
 
@@ -612,7 +616,7 @@ transform = Transform3D(0.00609675, -0.790188, 0.612833, 0, 0.612845, 0.790201, 
 script = ExtResource("23_jxgk4")
 
 [node name="ZoomOn2" type="Marker3D" parent="Views"]
-transform = Transform3D(0.00609675, -0.790188, 0.612833, 0, 0.612845, 0.790201, -0.999981, -0.00481768, 0.00373636, 0.058, 0.077, 0.065)
+transform = Transform3D(0.0279132, -0.805659, 0.59172, 0, 0.591952, 0.805972, -0.99961, -0.0224973, 0.0165233, 0.0579367, 0.0767288, 0.0629224)
 script = ExtResource("23_jxgk4")
 
 [node name="ZoomOn1FromRight" type="Marker3D" parent="Views"]

@@ -1,0 +1,121 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=25 format=3 uid="uid://r41nobsuhc1r"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_udy5k"]
+animation = &"test/Breakdance Ready"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oprcj"]
+animation = &"test/Breakdance Ready"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1jwft"]
+animation = &"test/House Dancing"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x4ejo"]
+animation = &"splits/clap_middle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k2pku"]
+animation = &"test/Standing Using Touchscreen Tablet"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_j0yoa"]
+filter_enabled = true
+filters = ["%GeneralSkeleton:Head", "%GeneralSkeleton:Neck"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_8gnwf"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_y68o2"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_o53ma"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_vkfej"]
+filter_enabled = true
+filters = ["%GeneralSkeleton:Chest", "%GeneralSkeleton:Head", "%GeneralSkeleton:LeftHand", "%GeneralSkeleton:LeftIndexDistal", "%GeneralSkeleton:LeftIndexIntermediate", "%GeneralSkeleton:LeftIndexProximal", "%GeneralSkeleton:LeftLittleDistal", "%GeneralSkeleton:LeftLittleIntermediate", "%GeneralSkeleton:LeftLittleProximal", "%GeneralSkeleton:LeftLowerArm", "%GeneralSkeleton:LeftMiddleDistal", "%GeneralSkeleton:LeftMiddleIntermediate", "%GeneralSkeleton:LeftMiddleProximal", "%GeneralSkeleton:LeftRingDistal", "%GeneralSkeleton:LeftRingIntermediate", "%GeneralSkeleton:LeftRingProximal", "%GeneralSkeleton:LeftShoulder", "%GeneralSkeleton:LeftThumbDistal", "%GeneralSkeleton:LeftThumbMetacarpal", "%GeneralSkeleton:LeftThumbProximal", "%GeneralSkeleton:LeftUpperArm", "%GeneralSkeleton:Neck", "%GeneralSkeleton:RightHand", "%GeneralSkeleton:RightIndexDistal", "%GeneralSkeleton:RightIndexIntermediate", "%GeneralSkeleton:RightIndexProximal", "%GeneralSkeleton:RightLittleDistal", "%GeneralSkeleton:RightLittleIntermediate", "%GeneralSkeleton:RightLittleProximal", "%GeneralSkeleton:RightLowerArm", "%GeneralSkeleton:RightMiddleDistal", "%GeneralSkeleton:RightMiddleIntermediate", "%GeneralSkeleton:RightMiddleProximal", "%GeneralSkeleton:RightRingDistal", "%GeneralSkeleton:RightRingIntermediate", "%GeneralSkeleton:RightRingProximal", "%GeneralSkeleton:RightShoulder", "%GeneralSkeleton:RightThumbDistal", "%GeneralSkeleton:RightThumbMetacarpal", "%GeneralSkeleton:RightThumbProximal", "%GeneralSkeleton:RightUpperArm", "%GeneralSkeleton:Spine", "%GeneralSkeleton:UpperChest", "%GeneralSkeleton:mixamorig_LeftHandIndex1", "%GeneralSkeleton:mixamorig_LeftHandMiddle1", "%GeneralSkeleton:mixamorig_LeftHandPinky1", "%GeneralSkeleton:mixamorig_LeftHandRing1", "%GeneralSkeleton:mixamorig_LeftHandThumb1", "%GeneralSkeleton:mixamorig_RightHandIndex1", "%GeneralSkeleton:mixamorig_RightHandMiddle1", "%GeneralSkeleton:mixamorig_RightHandPinky1", "%GeneralSkeleton:mixamorig_RightHandRing1", "%GeneralSkeleton:mixamorig_RightHandThumb1"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fxn4h"]
+animation = &"test/Arm Stretching"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3uq54"]
+animation = &"test/Defeated"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xxhmy"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ha78k"]
+xfade_time = 0.3
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_te4jm"]
+xfade_time = 0.3
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_t3uj5"]
+states/Start/position = Vector2(321, 107)
+"states/test_Arm Stretching/node" = SubResource("AnimationNodeAnimation_fxn4h")
+"states/test_Arm Stretching/position" = Vector2(714, 269)
+states/test_Defeated/node = SubResource("AnimationNodeAnimation_3uq54")
+states/test_Defeated/position = Vector2(361, 269)
+transitions = ["Start", "test_Defeated", SubResource("AnimationNodeStateMachineTransition_xxhmy"), "test_Defeated", "test_Arm Stretching", SubResource("AnimationNodeStateMachineTransition_ha78k"), "test_Arm Stretching", "test_Defeated", SubResource("AnimationNodeStateMachineTransition_te4jm")]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i47lk"]
+animation = &"splits/waving_middle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t0gl1"]
+animation = &"splits/waving_middle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qnthb"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_02wly"]
+xfade_time = 0.3
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sjwfa"]
+xfade_time = 0.3
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_0c1xo"]
+states/waving_middle/node = SubResource("AnimationNodeAnimation_t0gl1")
+states/waving_middle/position = Vector2(435, 282)
+"states/waving_middle 2/node" = SubResource("AnimationNodeAnimation_i47lk")
+"states/waving_middle 2/position" = Vector2(683, 235)
+transitions = ["Start", "waving_middle", SubResource("AnimationNodeStateMachineTransition_qnthb"), "waving_middle", "waving_middle 2", SubResource("AnimationNodeStateMachineTransition_02wly"), "waving_middle 2", "waving_middle", SubResource("AnimationNodeStateMachineTransition_sjwfa")]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_6c7h3"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_0dplg"]
+
+[resource]
+graph_offset = Vector2(539.074, -256.928)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_k2pku")
+nodes/Animation/position = Vector2(0, 40)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_udy5k")
+"nodes/Animation 2/position" = Vector2(20, 280)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_oprcj")
+"nodes/Animation 3/position" = Vector2(400, 400)
+"nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_1jwft")
+"nodes/Animation 4/position" = Vector2(660, 560)
+"nodes/Animation 5/node" = SubResource("AnimationNodeAnimation_x4ejo")
+"nodes/Animation 5/position" = Vector2(1740, -240)
+nodes/AttentionA/node = SubResource("AnimationNodeBlend2_j0yoa")
+nodes/AttentionA/position = Vector2(580, 60)
+nodes/AttentionB/node = SubResource("AnimationNodeBlend2_8gnwf")
+nodes/AttentionB/position = Vector2(903.009, 206.956)
+nodes/AttentionC/node = SubResource("AnimationNodeBlend2_y68o2")
+nodes/AttentionC/position = Vector2(1200, 320)
+nodes/Cheer/node = SubResource("AnimationNodeBlend2_o53ma")
+nodes/Cheer/position = Vector2(1460, -100)
+nodes/Clap/node = SubResource("AnimationNodeBlend2_vkfej")
+nodes/Clap/position = Vector2(1980, -200)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_0c1xo")
+nodes/StateMachine/position = Vector2(1080, -80)
+"nodes/StateMachine 2/node" = SubResource("AnimationNodeStateMachine_t3uj5")
+"nodes/StateMachine 2/position" = Vector2(1940, -440)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_6c7h3")
+nodes/TimeScale/position = Vector2(1700, 100)
+nodes/Tired/node = SubResource("AnimationNodeBlend2_0dplg")
+nodes/Tired/position = Vector2(2340, -280)
+nodes/output/position = Vector2(2520, -260)
+node_connections = [&"AttentionA", 0, &"Animation", &"AttentionA", 1, &"Animation 2", &"AttentionB", 0, &"AttentionA", &"AttentionB", 1, &"Animation 3", &"AttentionC", 0, &"AttentionB", &"AttentionC", 1, &"Animation 4", &"Cheer", 0, &"AttentionC", &"Cheer", 1, &"StateMachine", &"Clap", 0, &"TimeScale", &"Clap", 1, &"Animation 5", &"TimeScale", 0, &"Cheer", &"Tired", 0, &"Clap", &"Tired", 1, &"StateMachine 2", &"output", 0, &"Tired"]
