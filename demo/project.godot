@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameTime="*res://models/phone/clock.gd"
-Bus="*res://bus.gd"
+Bus="*res://game/bus.gd"
 AudioService="*res://game/audio_service.gd"
 
 [display]

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bk55tdfry0jv3" path="res://models/club/metal_shutter.png" id="2_qmt5n"]
 [ext_resource type="Material" uid="uid://cx0c2jrlgoc32" path="res://models/club/corner_bar_roof_wood_material.tres" id="3_6y6hc"]
 [ext_resource type="Shader" uid="uid://bq8nrvsjwegq0" path="res://models/club/wood_shader.tres" id="3_mrlll"]
-[ext_resource type="Material" uid="uid://c7pof13cy68dg" path="res://corner_bar_roof_material.tres" id="3_wfw6v"]
+[ext_resource type="Material" uid="uid://c7pof13cy68dg" path="res://models/club/corner_bar_roof_material.tres" id="3_wfw6v"]
 [ext_resource type="Texture2D" uid="uid://cq6tf1u0nww5j" path="res://models/club/new_noise_texture_2d.tres" id="4_mt8sq"]
 [ext_resource type="Material" uid="uid://by3yjcfm2j61r" path="res://models/club/corner_bar_rings_material.tres" id="4_xkjy5"]
 [ext_resource type="Material" uid="uid://u6vpvu1k1hpd" path="res://models/club/corner_bar_support_beams_material.tres" id="5_a4xx8"]

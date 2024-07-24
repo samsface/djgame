@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://p4bandu5bay1"]
 
-[ext_resource type="Shader" path="res://transparent_plastic.gdshader" id="1_hvw8g"]
+[ext_resource type="Shader" path="res://models/club/transparent_plastic.gdshader" id="1_hvw8g"]
 [ext_resource type="Texture2D" uid="uid://dgnu1c5c8yn5t" path="res://models/club/rain_shelter_big_roof.png" id="2_db4hw"]
 
 [resource]

@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://ij1ky0f8flgr"]
+
+[ext_resource type="Script" path="res://addons/dialog_graph/dialog_graph.gd" id="1_3q41o"]
+[ext_resource type="PackedScene" uid="uid://d35xo7bbc8hio" path="res://addons/dialog_graph/ops/dialog_graph_text_op.tscn" id="2_ivshp"]
+[ext_resource type="PackedScene" uid="uid://dcnhf82qmy455" path="res://addons/dialog_graph/ops/dialog_graph_start_op.tscn" id="2_tyu8c"]
+[ext_resource type="PackedScene" uid="uid://bauswufvuer3m" path="res://addons/dialog_graph/ops/dialog_graph_snippet_op.tscn" id="4_4b4dn"]
+
+[node name="DialogGraph" type="GraphEdit"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+right_disconnects = true
+script = ExtResource("1_3q41o")
+ops = Array[PackedScene]([ExtResource("2_tyu8c"), ExtResource("2_ivshp"), ExtResource("4_4b4dn")])
+
+[connection signal="connection_request" from="." to="." method="_connection_request"]
+[connection signal="connection_to_empty" from="." to="." method="_connection_to_empty"]
+[connection signal="copy_nodes_request" from="." to="." method="_copy_nodes_request"]
+[connection signal="delete_nodes_request" from="." to="." method="_delete_nodes_request"]
+[connection signal="disconnection_request" from="." to="." method="_disconnection_request"]
+[connection signal="paste_nodes_request" from="." to="." method="_paste_nodes_request"]
+[connection signal="popup_request" from="." to="." method="_popup_request"]
