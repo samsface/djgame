@@ -21,4 +21,4 @@ func invalidate_value_() -> void:
 func begin():
 	var target_node = get_target_node()
 	if target_node:
-		target_node.create_tween().tween_property(target_node, property, to_value, length)
+		target_node.create_tween().tween_property(target_node, property, to_value, length * (Bus.audio_service.metro) * 0.001)

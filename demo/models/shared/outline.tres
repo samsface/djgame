@@ -1,3 +1,8 @@
-[gd_resource type="ShaderMaterial" format=3 uid="uid://dq63e5mx8jbve"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dq63e5mx8jbve"]
+
+[ext_resource type="Shader" path="res://models/lital/outline.gdshader" id="1_xl5jy"]
 
 [resource]
+render_priority = 0
+shader = ExtResource("1_xl5jy")
+shader_parameter/outline_color = null

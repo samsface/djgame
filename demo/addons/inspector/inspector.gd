@@ -74,6 +74,8 @@ func invalidate_() -> void:
 					control = add_float_control_(property)
 				TYPE_VECTOR2:
 					control = add_vector2_control_(property)
+				TYPE_VECTOR3:
+					control = add_vector3_control_(property)
 				TYPE_STRING:
 					if property.hint & PROPERTY_HINT_MULTILINE_TEXT:
 						control = add_multiline_string_control_(property)
@@ -135,6 +137,10 @@ func add_int_control_(property:Dictionary) -> Control:
 
 func add_vector2_control_(property:Dictionary) -> Control:
 	var control = preload("vector2_control.tscn").instantiate()
+	return control
+
+func add_vector3_control_(property:Dictionary) -> Control:
+	var control = preload("vector3_control.tscn").instantiate()
 	return control
 
 func add_multiline_string_control_(property:Dictionary) -> Control:

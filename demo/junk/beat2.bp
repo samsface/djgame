@@ -760,7 +760,7 @@
 "time": 852,
 "value": 1.0
 }, {
-"auto": false,
+"auto": true,
 "length": 4,
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/bang.tscn",
 "silent": true,
@@ -837,7 +837,7 @@
 "time": 868,
 "value": 1.0
 }, {
-"auto": false,
+"auto": true,
 "length": 4,
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/bang.tscn",
 "silent": true,
@@ -865,7 +865,7 @@
 "time": 884,
 "value": 1.0
 }, {
-"auto": false,
+"auto": true,
 "length": 4,
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/bang.tscn",
 "silent": true,
@@ -1995,16 +1995,6 @@
 }, {
 "condition_ex": "",
 "frames": [{
-"length": 16,
-"method": &"look ZoomOn1",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": -16
-}, {
-"length": 16,
-"method": &"look Front",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 368
-}, {
 "length": 11,
 "method": &"set_swing 23",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
@@ -2014,16 +2004,6 @@
 "method": &"set_preset 2",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 704
-}, {
-"length": 21,
-"method": &"look Front",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 732
-}, {
-"length": 16,
-"method": &"look Front",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 848
 }, {
 "length": 3,
 "method": &"set_swing 33",
@@ -2055,45 +2035,15 @@
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 960
 }, {
-"length": 15,
-"method": &"look ZoomOn1FromRight",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 2
-}, {
 "length": 16,
 "method": &"set_sample 3 funk_guitar.wav",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 224
 }, {
-"length": 14,
-"method": &"look ZoomOn1",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 34
-}, {
-"length": 16,
-"method": &"look ZoomOn1FromLeft",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 18
-}, {
-"length": 4,
-"method": &"look ZoomOn2",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 50
-}, {
 "length": 15,
 "method": &"set_swing 0",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 64
-}, {
-"length": 16,
-"method": &"look FrontAlt",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 112
-}, {
-"length": 16,
-"method": &"look Front",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 192
 }],
 "node_path": NodePath("%toykit"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
@@ -3484,16 +3434,6 @@
 }, {
 "condition_ex": "",
 "frames": [{
-"length": 16,
-"method": &"look Top",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 320
-}, {
-"length": 16,
-"method": &"look Top",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 576
-}, {
 "length": 4,
 "method": &"look 1",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
@@ -3503,16 +3443,6 @@
 "method": &"set_preset 1",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 0
-}, {
-"length": 21,
-"method": &"look Top",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 800
-}, {
-"length": 16,
-"method": &"look View2",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 960
 }],
 "node_path": NodePath("%acid"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
@@ -3534,7 +3464,7 @@
 "reply_b": "",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/dialog.tscn",
 "time": 464,
-"value": "Fuckin love knob",
+"value": "FREE HAT",
 "who": "Mano"
 }, {
 "length": 15,
@@ -3565,24 +3495,24 @@
 "reply_a": "",
 "reply_b": "",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/dialog.tscn",
-"time": 143,
-"value": "This is deadly man",
+"time": 352,
+"value": "Yeah, slide it! slide!",
 "who": "Mano"
 }, {
 "length": 16,
 "reply_a": "",
 "reply_b": "",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/dialog.tscn",
-"time": 272,
-"value": "Give me a little knob",
+"time": 128,
+"value": "Looks class man",
 "who": "Mano"
 }, {
 "length": 16,
 "reply_a": "",
 "reply_b": "",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/dialog.tscn",
-"time": 176,
-"value": "Unreal",
+"time": 304,
+"value": "2 in the live chat already!",
 "who": "Mano"
 }],
 "node_path": NodePath("%Phone/ChatApp"),
@@ -3623,11 +3553,6 @@
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 352
 }, {
-"length": 16,
-"method": &"set_tired 0",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 0
-}, {
 "length": 4,
 "method": &"scream",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
@@ -3637,6 +3562,11 @@
 "method": &"set_attention 1",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 452
+}, {
+"length": 16,
+"method": &"set_anger 0",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
+"time": 319
 }],
 "node_path": NodePath("%CrowdService"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
@@ -3895,95 +3825,138 @@
 }, {
 "condition_ex": "",
 "frames": [{
-"length": 3,
-"method": &"tweak",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
+"camera_position": Vector3(-0.0147195, 0.127323, -0.327579),
+"camera_rotation": Vector3(-0.900601, -0.251328, 0),
+"length": 32,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": -16
+}, {
+"camera_position": Vector3(0.0826277, 0.0777585, -0.386163),
+"camera_rotation": Vector3(-0.617931, 1.24267, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 2
+}, {
+"camera_position": Vector3(-0.0850081, 0.086594, -0.385125),
+"camera_rotation": Vector3(-0.492268, -1.52193, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 18
+}, {
+"camera_position": Vector3(-0.0147195, 0.127323, -0.327579),
+"camera_rotation": Vector3(-0.900601, -0.251328, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 50
+}, {
+"camera_position": Vector3(-0.00643709, 0.132932, -0.444007),
+"camera_rotation": Vector3(-1.31947, 2.8763, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 34
+}, {
+"camera_position": Vector3(0.00170977, 0.0583601, -0.287435),
+"camera_rotation": Vector3(0.06282, -0.293215, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 108
+}, {
+"camera_position": Vector3(-0.00576501, 0.0671549, -0.210559),
+"camera_rotation": Vector3(-0.132667, -0.223402, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 352
+}, {
+"camera_position": Vector3(-0.0708715, 0.0534721, -0.281513),
+"camera_rotation": Vector3(-0.230406, -1.00531, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 640
+}, {
+"camera_position": Vector3(-0.0452113, 0.098858, -0.237442),
+"camera_rotation": Vector3(-0.537584, -0.600394, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 320
+}, {
+"camera_position": Vector3(-0.0572772, 0.106259, -0.214163),
+"camera_rotation": Vector3(-0.471782, -0.440314, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 704
+}, {
+"camera_position": Vector3(-0.000981, 0.0340618, -0.301483),
+"camera_rotation": Vector3(0.230362, -0.26529, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 844
+}, {
+"camera_position": Vector3(0.0412625, 0.0847531, -0.282216),
+"camera_rotation": Vector3(-0.0768152, -0.698132, 0),
+"length": 4,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 898
+}, {
+"camera_position": Vector3(-0.0409255, 0.103039, -0.21045),
+"camera_rotation": Vector3(-0.328144, -0.390954, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
 "time": 912
 }, {
-"length": 3,
-"method": &"tweak",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 925
-}, {
-"length": 3,
-"method": &"tweak",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 928
-}, {
-"length": 1,
-"method": &"tweak",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 908
-}, {
-"length": 1,
-"method": &"tweak",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 909
-}, {
-"length": 1,
-"method": &"tweak",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 910
-}, {
-"length": 1,
-"method": &"tweak",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 911
-}, {
-"length": 3,
-"method": &"tweak",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 944
-}, {
-"length": 3,
-"method": &"tweak",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 960
-}, {
-"length": 3,
-"method": &"tweak",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 963
-}, {
-"length": 3,
-"method": &"tweak",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 966
-}, {
-"length": 3,
-"method": &"tweak",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
+"camera_position": Vector3(0.100647, 0.0955684, -0.221076),
+"camera_rotation": Vector3(-0.53759, 0.293215, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
 "time": 976
 }, {
-"length": 3,
-"method": &"tweak",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 992
+"camera_position": Vector3(-0.0806771, 0.156094, -0.234596),
+"camera_rotation": Vector3(-0.671652, -0.765762, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 1039
 }, {
-"length": 3,
-"method": &"tweak",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 1008
+"camera_position": Vector3(0.0158232, 0.159215, -0.242424),
+"camera_rotation": Vector3(-1.23663, -0.239301, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 1167
 }, {
-"length": 3,
-"method": &"tweak",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 1024
+"camera_position": Vector3(0.126757, 0.0882384, -0.24668),
+"camera_rotation": Vector3(-0.551548, 0.684169, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 576
 }, {
-"length": 3,
-"method": &"tweak",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 1027
+"camera_position": Vector3(0.0527582, 0.0689825, -0.255641),
+"camera_rotation": Vector3(-0.0233631, 0.0957204, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 192
 }, {
-"length": 3,
-"method": &"tweak",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 1030
-}, {
-"length": 3,
-"method": &"tweak",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 995
+"camera_position": Vector3(0.00170977, 0.0583601, -0.287435),
+"camera_rotation": Vector3(0.06282, -0.293215, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 256
 }],
 "node_path": NodePath("Camera"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
@@ -4037,6 +4010,136 @@
 }],
 "node_path": NodePath("%BeatPlayerHost"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
+}, {
+"condition_ex": "",
+"frames": [{
+"length": 16,
+"method": &"set_visible 0",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
+"time": 32
+}, {
+"length": 16,
+"method": &"set_visible 1",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
+"time": -16
+}, {
+"length": 16,
+"method": &"set_visible 0",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
+"time": 2
+}],
+"node_path": NodePath("2YearsAgoLabel"),
+"scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
+}, {
+"condition_ex": "",
+"frames": [{
+"length": 16,
+"method": &"set_visible 1",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
+"time": 2
+}, {
+"length": 16,
+"method": &"set_visible 0",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
+"time": 32
+}],
+"node_path": NodePath("DaftHouseNightLabel"),
+"scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
+}, {
+"condition_ex": "",
+"frames": [{
+"length": 10,
+"method": &"set_visible 0",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
+"time": 130
+}, {
+"length": 16,
+"method": &"set_visible 1",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
+"time": 0
+}],
+"node_path": NodePath("ManoLabel"),
+"scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
+}, {
+"condition_ex": "",
+"frames": [{
+"length": 16,
+"method": &"set_visible 0",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
+"time": 64
+}],
+"node_path": NodePath("AtTheUnicornLabel"),
+"scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
+}, {
+"condition_ex": "",
+"frames": [{
+"length": 16,
+"property": "attention",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/tween.tscn",
+"time": 0,
+"to_value": 0.660156
+}, {
+"length": 16,
+"property": "filming",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/tween.tscn",
+"time": 16,
+"to_value": 0.990234
+}, {
+"length": 16,
+"property": "speed_scale",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/tween.tscn",
+"time": 32,
+"to_value": 0.701172
+}, {
+"length": 192,
+"property": "attention",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/tween.tscn",
+"time": 320,
+"to_value": 1.0
+}, {
+"length": 32,
+"property": "filming",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/tween.tscn",
+"time": 800,
+"to_value": 1.0
+}],
+"node_path": NodePath("%Mano"),
+"scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
+}, {
+"condition_ex": "",
+"frames": [{
+"length": 16,
+"method": &"set_visible 0",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
+"time": 0
+}, {
+"length": 12,
+"method": &"set_visible 1",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
+"time": 52
+}, {
+"length": 4,
+"method": &"set_visible 0",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
+"time": 65
+}],
+"node_path": NodePath("KickNSnareLabel"),
+"scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
+}, {
+"condition_ex": "",
+"frames": [{
+"length": 16,
+"method": &"set_visible 1",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
+"time": 81
+}, {
+"length": 16,
+"method": &"set_visible 0",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
+"time": 97
+}],
+"node_path": NodePath("FeaturingLabel"),
+"scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }]
 }, {
 "name": &"second_act",
@@ -4048,11 +4151,6 @@
 "method": &"set_swing 23",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 0
-}, {
-"length": 16,
-"method": &"look",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 256
 }],
 "node_path": NodePath("%toykit"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
@@ -5270,7 +5368,7 @@
 "value": 0.5
 }, {
 "from_value": 0.0,
-"length": 128,
+"length": 95,
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/slide.tscn",
 "time": 304,
 "value": 1.0
@@ -5385,10 +5483,78 @@
 }, {
 "condition_ex": "",
 "frames": [{
+"camera_position": Vector3(-0.0544743, 0.0990647, -0.267389),
+"camera_rotation": Vector3(-0.747009, -1.11701, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 0
+}, {
+"camera_position": Vector3(-0.000992191, 0.108629, -0.247535),
+"camera_rotation": Vector3(-0.928524, -0.488694, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 40
+}, {
+"camera_position": Vector3(-0.0544743, 0.0990647, -0.267389),
+"camera_rotation": Vector3(-0.747009, -1.11701, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 60
+}, {
+"camera_position": Vector3(-0.000992191, 0.108629, -0.247535),
+"camera_rotation": Vector3(-0.928524, -0.488694, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 104
+}, {
+"camera_position": Vector3(-0.0544743, 0.0990647, -0.267389),
+"camera_rotation": Vector3(-0.747009, -1.11701, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 124
+}, {
+"camera_position": Vector3(-0.000992191, 0.108629, -0.247535),
+"camera_rotation": Vector3(-0.928524, -0.488694, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 168
+}, {
+"camera_position": Vector3(-0.0544743, 0.0990647, -0.267389),
+"camera_rotation": Vector3(-0.747009, -1.11701, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 188
+}, {
+"camera_position": Vector3(0.0350804, 0.0851005, -0.194315),
+"camera_rotation": Vector3(-0.300206, -0.0837759, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 232
+}, {
+"camera_position": Vector3(0.113704, 0.0865661, -0.204774),
+"camera_rotation": Vector3(-1.13796, -0.446804, 0),
+"length": 16,
+"match_viewport_camera_transform": false,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/camera.tscn",
+"time": 400
+}],
+"node_path": NodePath("Camera"),
+"scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
+}, {
+"condition_ex": "",
+"frames": [{
 "length": 16,
 "method": &"stop",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 432
+"time": 400
 }],
 "node_path": NodePath(""),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"

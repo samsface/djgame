@@ -9,9 +9,8 @@
 offset_left = 9.0
 offset_top = 49.0
 offset_right = 1519.0
-offset_bottom = 932.0
+offset_bottom = 388.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 theme = ExtResource("1_q05ha")
 script = ExtResource("2_gk3x2")
 save_path = "res://junk/sam2.lol"
@@ -85,7 +84,7 @@ theme_override_constants/margin_bottom = 8
 [node name="Inspector" parent="V/HSplitContainer/MarginContainer" instance=ExtResource("3_em7m1")]
 unique_name_in_owner = true
 layout_mode = 2
-visible_properties = Array[StringName]([&"value", &"auto", &"scene", &"method", &"silent", &"title", &"type", &"to_value", &"property", &"condition_ex", &"length", &"time", &"node_path", &"from_value", &"who", &"reply_a", &"reply_b", &"id"])
+visible_properties = Array[StringName]([&"value", &"auto", &"scene", &"method", &"silent", &"title", &"type", &"to_value", &"property", &"condition_ex", &"length", &"time", &"node_path", &"from_value", &"who", &"reply_a", &"reply_b", &"id", &"camera_position", &"camera_rotation", &"match_viewport_camera_transform"])
 
 [connection signal="pressed" from="V/Menu/Save" to="." method="_save_pressed"]
 [connection signal="pressed" from="V/Menu/Play" to="." method="_play_pressed"]

@@ -23,7 +23,11 @@ var head_pos_:Vector3
 		await ready
 		set_free_walk_(v)
 		free_walk = v
-
+		
+@export var noclip:bool :
+	set(v):
+		noclip = v
+	
 func logi(str:String) -> void:
 	pass
 
@@ -49,8 +53,11 @@ func shake(duration:float = 0.5, scale:float = 0.001) -> void:
 		shake_tween_.tween_property(camera_, "position", position + rv(scale / (i+1)), 0.01)
 
 func _unhandled_input(event: InputEvent) -> void:
+	print(event)
 	if event.is_action_pressed("debug_free_walk"):
 		set_free_walk_(not free_walk)
+	elif event.is_action_pressed("toggle_noclip"):
+		noclip = not noclip
 
 func set_free_walk_(value:bool) -> void:
 	if free_walk == value:
@@ -63,8 +70,52 @@ func set_free_walk_(value:bool) -> void:
 		cursor.push($Cursor, Cursor.Action.dot)
 
 func _physics_process(delta: float) -> void:
+	if noclip:
+		if Bus.camera_service.cursor.disabled:
+			return
+		
+		var speed := 0.01
+		var rotation_sped := 0.1
+		if Input.is_key_pressed(KEY_ALT):
+			speed = 0.001
+			rotation_sped = 0.1
+		
+		camera_arm_.position = Vector3.ZERO
+		camera_arm_.rotation.y = 0
+		camera_arm_.rotation.z = 0
+		camera_.position = Vector3.ZERO
+		camera_.rotation = Vector3.ZERO
+		rotate_y(deg_to_rad(-Bus.input_service.relative.x * 8.0 * rotation_sped))
+		camera_arm_.rotate_x(deg_to_rad(-Bus.input_service.relative.y * 8.0 * rotation_sped))
+		camera_arm_.rotation.x = clamp(camera_arm_.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+		camera_arm_.rotation.z = 0
+		
+		var move := Input.get_vector("move_left", "move_right", "move_forward", "move_backward") * 0.1
+		var y = 0
+		if move.y > 0:
+			y = -1.0
+		elif move.y < 0:
+			y = 1.0
+		
+		var direction = (transform.basis * Vector3(move.x, 0, move.y)).normalized()
 
-	if free_walk:
+	
+
+
+		position.y += camera_arm_.rotation.x * y * speed
+		position.x += direction.x * speed
+		position.z += direction.z * speed
+
+		ray_cast_.position = Vector3.ZERO
+		ray_cast_.global_rotation = camera_arm_.global_rotation
+		ray_cast_.target_position = Vector3.FORWARD * 10000
+		#ray_cast_.target_position = cursorPos - camera_arm_.position
+
+		ray_cast_at_()
+		
+		return
+
+	elif free_walk:
 		camera_arm_.position = Vector3.ZERO
 		camera_arm_.rotation.y = 0
 		camera_arm_.rotation.z = 0
@@ -94,10 +145,6 @@ func _physics_process(delta: float) -> void:
 	rotation = Vector3.ZERO
 	position = Vector3.ZERO
 	
-	if not stack_.is_empty():
-		camera_arm_.global_rotation = lerp(camera_arm_.global_rotation, stack_[0][1].global_rotation, delta * 6.0)
-		camera_arm_.global_position = lerp(camera_arm_.global_position, stack_[0][1].global_position, delta * 6.0)
-
 	if not cursor.is_owner(self):
 		return
 	
@@ -161,6 +208,13 @@ func auto_focus(from:Vector3, to:Vector3) -> float:
 
 func get_head_position() -> Vector3:
 	return camera_arm_.global_position
+
+func looky(pos:Vector3, rot:Vector3, length := 0.6) -> void:
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_QUAD)
+	tween.set_parallel()
+	tween.tween_property(camera_arm_, "position", pos, length)
+	tween.tween_property(camera_arm_, "rotation", rot, length)
 
 func look_at_node(node:Node3D) -> void:
 	if not node:

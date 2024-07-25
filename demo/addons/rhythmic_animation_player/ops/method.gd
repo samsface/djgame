@@ -17,6 +17,8 @@ func parse_args_(object:Object, method_name:StringName, args:PackedStringArray) 
 					
 					if method.args[i].type == TYPE_INT:
 						res.push_back(int(args[i+1]))
+					elif method.args[i].type == TYPE_BOOL:
+						res.push_back(bool(int(args[i+1])))
 					elif method.args[i].type == TYPE_FLOAT:
 						res.push_back(float(args[i+1]))
 					else:

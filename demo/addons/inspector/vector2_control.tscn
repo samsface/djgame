@@ -35,8 +35,10 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
-min_value = -15.0
-max_value = 15.0
+min_value = -9.22337e+18
+max_value = 9.22337e+18
+step = 0.0
+prefix = "X"
 
 [node name="Y" type="SpinBox" parent="HBoxContainer4/HBoxContainer"]
 unique_name_in_owner = true
@@ -44,8 +46,10 @@ auto_translate_mode = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
-min_value = -15.0
-max_value = 15.0
+min_value = -9.22337e+18
+max_value = 9.22337e+18
+step = 0.0
+prefix = "Y"
 
 [connection signal="value_changed" from="HBoxContainer4/HBoxContainer/X" to="." method="_value_changed"]
 [connection signal="value_changed" from="HBoxContainer4/HBoxContainer/Y" to="." method="_value_changed"]

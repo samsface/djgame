@@ -104,6 +104,5 @@ func update() -> void:
 
 	# this should go into the input service
 	position2D += Bus.input_service.relative * 1.5
-
-
-	#Input.mouse_mode = Input.MOUSE_MODE_CAPT
+	var view_port_rect := get_viewport().get_visible_rect()
+	position2D = position2D.clamp(Vector2.ZERO, view_port_rect.size)

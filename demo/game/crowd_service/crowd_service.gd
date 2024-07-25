@@ -2,8 +2,14 @@ extends Node3D
 
 var delta_sum_ := 0.0
 
+var characters_ := []
+
 func _ready() -> void:
 	Bus.crowd_service = self
+	for child in get_children():
+		if child is Character:
+			if not child.name == "Mano":
+				characters_.push_back(child)
 
 func clap(value:float) -> void:
 	$Clap.play()
@@ -28,18 +34,26 @@ func look(view_position_idx:int = 0) -> void:
 func get_view_position(from_position := Vector3.ZERO) -> Vector3:
 	return $Marker3D.global_position
 
-func set_attention(value:float) -> void:
-	var tween := create_tween()
-	tween.tween_property($Ch03_nonPBR, "attention", value, 1.0)
-	tween.tween_property($Ch03_nonPBR2, "attention", value, 1.0)
+func set_anger(value:float) -> void:
+	for character in characters_:
+		var tween := create_tween()
+		tween.tween_property(character, "anger", value, 1.0)
 
+func set_visibles(value:bool) -> void:
+	for character in characters_:
+		character.visible = value
+
+func set_attention(value:float) -> void:
+	for character in characters_:
+		var tween := create_tween()
+		tween.tween_property(character, "attention", value, 1.0)
 
 func set_cheer(value:float) -> void:
-	var tween := create_tween()
-	tween.tween_property($Ch03_nonPBR, "cheer", value, 0.4)
-	tween.tween_property($Ch03_nonPBR2, "cheer", value, 0.4)
+	for character in characters_:
+		var tween := create_tween()
+		tween.tween_property(character, "cheer", value, 1.0)
 
 func set_tired(value:float) -> void:
-	var tween := create_tween()
-	tween.tween_property($Ch03_nonPBR, "tired", value, 0.4)
-	tween.tween_property($Ch03_nonPBR2, "tired", value, 0.4)
+	for character in characters_:
+		var tween := create_tween()
+		tween.tween_property(character, "tired", value, 1.0)

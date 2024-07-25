@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://djjl5a5eu5k20"]
+
+[ext_resource type="FontFile" uid="uid://ca4jgypv8bjcn" path="res://ui/fonts/RetroGaming.ttf" id="1_2kuxw"]
+[ext_resource type="Material" uid="uid://dq63e5mx8jbve" path="res://models/shared/outline.tres" id="2_hopw2"]
+[ext_resource type="Script" path="res://game/world_label.gd" id="3_i6qih"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3umm"]
+next_pass = ExtResource("2_hopw2")
+albedo_color = Color(1, 0.312015, 0.698716, 1)
+metallic = 0.74
+metallic_specular = 1.0
+emission_enabled = true
+emission = Color(0.925046, 0.135418, 0.483426, 1)
+emission_energy_multiplier = 7.57
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_p4jnx"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_r3umm")
+text = "1 Year Ago"
+font = ExtResource("1_2kuxw")
+font_size = 4
+curve_step = 10.0
+depth = 0.001
+
+[node name="Mesh" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 0.997445, 0.0714452, 0, -0.0714452, 0.997445, 0.0151705, 0.0258199, -0.502304)
+mesh = SubResource("TextMesh_p4jnx")
+script = ExtResource("3_i6qih")

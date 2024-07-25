@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://c8c0isilrphjb"]
+[gd_scene load_steps=57 format=3 uid="uid://c8c0isilrphjb"]
 
 [ext_resource type="PackedScene" uid="uid://dgg103ssmbg32" path="res://game/settings/settings.tscn" id="1_rpjq6"]
 [ext_resource type="Script" path="res://game/animation.gd" id="2_phct8"]
@@ -30,12 +30,15 @@
 [ext_resource type="Script" path="res://game/crowd_service/crowd_service.gd" id="31_3j3sa"]
 [ext_resource type="AudioStream" uid="uid://cox0cypa0r0wf" path="res://game/crowd_service/Bar Ambience Sound Effect- No Copyright.mp3" id="32_rvjo4"]
 [ext_resource type="Script" path="res://game/audio_stream_player.gd" id="33_0b843"]
-[ext_resource type="PackedScene" uid="uid://bj2wjnpnv2ntw" path="res://models/characters/mano/mano.tscn" id="34_cx8of"]
+[ext_resource type="PackedScene" uid="uid://b5uu6kqhiaiy6" path="res://models/characters/mano/mano.tscn" id="34_cx8of"]
 [ext_resource type="AudioStream" uid="uid://b3hkravd23cph" path="res://game/crowd_service/400587__misjoc__medium-crowd-cheering-01(1).wav" id="34_qie8a"]
 [ext_resource type="AudioStream" uid="uid://b0sodcqt4qvjc" path="res://game/crowd_service/clap.wav" id="35_d1q2r"]
 [ext_resource type="PackedScene" uid="uid://bqej7kilkwxxl" path="res://models/characters/dancer_0/dancer_0.tscn" id="36_cuhf5"]
+[ext_resource type="FontFile" uid="uid://ca4jgypv8bjcn" path="res://ui/fonts/RetroGaming.ttf" id="37_0waph"]
 [ext_resource type="PackedScene" uid="uid://cdnp2ssrh2k6l" path="res://game/livestream_service/live_stream_service.tscn" id="37_8dclm"]
+[ext_resource type="PackedScene" uid="uid://djjl5a5eu5k20" path="res://game/world_label.tscn" id="37_awei0"]
 [ext_resource type="AudioStream" uid="uid://kkoen3nj0q5h" path="res://junk/funk_guitar.wav" id="38_c3iha"]
+[ext_resource type="Material" uid="uid://dq63e5mx8jbve" path="res://models/shared/outline.tres" id="38_sfpsl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ij4h"]
 albedo_color = Color(0.235294, 0.235294, 0.235294, 1)
@@ -85,6 +88,98 @@ point_count = 2
 margin = 0.0
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_hg8pg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3umm"]
+next_pass = ExtResource("38_sfpsl")
+albedo_color = Color(1, 0.312015, 0.698716, 1)
+metallic = 0.74
+metallic_specular = 1.0
+emission_enabled = true
+emission = Color(0.925046, 0.135418, 0.483426, 1)
+emission_energy_multiplier = 7.57
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_1wa32"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_r3umm")
+text = "1 Year Ago"
+font = ExtResource("37_0waph")
+font_size = 4
+curve_step = 10.0
+depth = 0.001
+
+[sub_resource type="TextMesh" id="TextMesh_sjc2w"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_r3umm")
+text = "Daft House Night"
+font = ExtResource("37_0waph")
+font_size = 4
+curve_step = 10.0
+depth = 0.001
+
+[sub_resource type="TextMesh" id="TextMesh_p277i"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_r3umm")
+text = "At the Unicorn"
+font = ExtResource("37_0waph")
+font_size = 4
+curve_step = 10.0
+depth = 0.001
+
+[sub_resource type="TextMesh" id="TextMesh_hlvgl"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_r3umm")
+text = "When you played..."
+font = ExtResource("37_0waph")
+font_size = 4
+curve_step = 10.0
+depth = 0.001
+
+[sub_resource type="TextMesh" id="TextMesh_nelm5"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_r3umm")
+text = "Mano"
+font = ExtResource("37_0waph")
+font_size = 4
+curve_step = 10.0
+depth = 0.001
+
+[sub_resource type="TextMesh" id="TextMesh_047jk"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_r3umm")
+text = "BEST FRIEND"
+font = ExtResource("37_0waph")
+font_size = 4
+curve_step = 10.0
+depth = 0.001
+
+[sub_resource type="TextMesh" id="TextMesh_8l1qm"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_r3umm")
+text = "31 YEARS OLD"
+font = ExtResource("37_0waph")
+font_size = 4
+curve_step = 10.0
+depth = 0.001
+
+[sub_resource type="TextMesh" id="TextMesh_4ysxk"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_r3umm")
+text = "Kick n Snare 300"
+font = ExtResource("37_0waph")
+font_size = 4
+curve_step = 10.0
+depth = 0.001
+
+[sub_resource type="TextMesh" id="TextMesh_fwk45"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_r3umm")
+text = "featuring..."
+font = ExtResource("37_0waph")
+font_size = 4
+curve_step = 10.0
+depth = 0.001
 
 [node name="MarginContainer" type="MarginContainer"]
 anchors_preset = 15
@@ -303,6 +398,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.941458, -1.09446, -15.6042)
 [node name="GardenPretty" type="Node3D" parent="WorldViewport/SubViewport/Game"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0039897, 2.38419e-07, -0.957186)
 
+[node name="Mano" parent="WorldViewport/SubViewport/Game/GardenPretty" instance=ExtResource("34_cx8of")]
+unique_name_in_owner = true
+transform = Transform3D(0.907426, 0, -0.420212, 0, 1, 0, 0.420212, 0, 0.907426, 0.863592, -1.07169, -1.87142)
+speed_scale = 0.0
+
+[node name="LiveStreamCamera" type="Camera3D" parent="WorldViewport/SubViewport/Game/GardenPretty/Mano"]
+transform = Transform3D(-0.995504, -0.0614074, -0.0721139, -0.0624297, 0.997977, 0.0120065, 0.0712307, 0.0164545, -0.997324, 0.169408, 1.36354, 0.453393)
+attributes = SubResource("CameraAttributesPractical_hg8pg")
+
 [node name="PinkPaintDecal3" type="Decal" parent="WorldViewport/SubViewport/Game/GardenPretty"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 6.88694, 4.13738, -1.98569)
 size = Vector3(3.5, 0.1, 2)
@@ -427,12 +531,6 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0039897, -2.38419e-07, 0.957186)
 script = ExtResource("31_3j3sa")
 
-[node name="Marker3D" type="Marker3D" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0404572, 0.211978, 0.332187)
-
-[node name="Marker3D2" type="Marker3D" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.9854e-05, 0.442598, -0.773063)
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService"]
 stream = ExtResource("32_rvjo4")
 script = ExtResource("33_0b843")
@@ -446,31 +544,84 @@ stream = ExtResource("35_d1q2r")
 volume_db = 5.0
 
 [node name="Ch03_nonPBR" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("36_cuhf5")]
-transform = Transform3D(0.0552119, 0, 0.998474, 0, 1, 0, -0.998474, 0, 0.0552119, -1.24834, -1.19139, -2.9996)
+transform = Transform3D(0.903118, 0, 0.429392, 0, 1, 0, -0.429392, 0, 0.903118, 0.572667, -1.19139, -9.99388)
 
 [node name="Ch03_nonPBR2" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("36_cuhf5")]
-transform = Transform3D(0.146532, 0, -0.989206, 0, 1, 0, 0.989206, 0, 0.146532, -0.561583, -1.18293, -3.08201)
+transform = Transform3D(0.264092, 0, -0.964498, 0, 1, 0, 0.964498, 0, 0.264092, -0.253354, -1.18293, -9.11872)
+
+[node name="Ch03_nonPBR5" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("36_cuhf5")]
+transform = Transform3D(0.983514, 0, 0.180828, 0, 1, 0, -0.180828, 0, 0.983514, 2.15739, -1.19139, -8.99478)
+
+[node name="Ch03_nonPBR9" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("36_cuhf5")]
+transform = Transform3D(0.0470719, 0, 0.998891, 0, 1, 0, -0.998891, 0, 0.0470719, -1.7811, -1.19139, -9.35382)
+
+[node name="Ch03_nonPBR6" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("36_cuhf5")]
+transform = Transform3D(-0.999398, 0, -0.0346905, 0, 1, 0, 0.0346905, 0, -0.999398, 2.2745, -1.18293, -8.3893)
+
+[node name="Ch03_nonPBR7" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("36_cuhf5")]
+transform = Transform3D(-0.9881, 0, -0.153814, 0, 1, 0, 0.153814, 0, -0.9881, 0.70638, -1.18293, -9.45483)
 
 [node name="Ch03_nonPBR3" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("36_cuhf5")]
-transform = Transform3D(0.89913, 0, -0.437681, 0, 1, 0, 0.437681, 0, 0.89913, 0.0380758, -1.16179, -7.8824)
+transform = Transform3D(0.839581, 0, -0.543233, 0, 1, 0, 0.543233, 0, 0.839581, 1.87162, -1.16179, -11.7775)
 
 [node name="Ch03_nonPBR4" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("36_cuhf5")]
-transform = Transform3D(-0.991947, 0, 0.126649, 0, 1, 0, -0.126649, 0, -0.991947, -0.13517, -1.16179, -6.64521)
-
-[node name="Mano" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("34_cx8of")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.881379, -1.13239, -2.64367)
-attention = 1.0
+transform = Transform3D(-0.969342, 0, 0.245713, 0, 1, 0, -0.245713, 0, -0.969342, 1.54999, -1.16179, -10.5704)
 
 [node name="LiveStreamService" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_8dclm")]
 size = Vector2i(128, 128)
 
-[node name="LiveStreamCamera" type="Camera3D" parent="WorldViewport/SubViewport/Game/LiveStreamService"]
-transform = Transform3D(-0.992595, 0.0840634, -0.0876868, 0.0756981, 0.992622, 0.0947195, 0.0950022, 0.0873804, -0.991635, -0.107997, 0.324207, -2.62704)
-attributes = SubResource("CameraAttributesPractical_hg8pg")
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="WorldViewport/SubViewport/Game"]
 stream = ExtResource("38_c3iha")
 pitch_scale = 1.2
+
+[node name="2YearsAgoLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
+transform = Transform3D(0.9, 0, 0, 0, 0.8977, 0.0643006, 0, -0.0643006, 0.8977, 0.0151705, 0.0451181, -0.472114)
+mesh = SubResource("TextMesh_1wa32")
+text = "1 Year Ago"
+
+[node name="DaftHouseNightLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
+transform = Transform3D(-0.171965, 0.00890998, 0.57476, -0.0100421, 0.59979, -0.0123025, -0.574741, -0.0131457, -0.171756, -0.1767, 0.0123155, -0.388648)
+mesh = SubResource("TextMesh_sjc2w")
+text = "Daft House Night"
+
+[node name="AtTheUnicornLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
+transform = Transform3D(-0.415577, 0.022275, -1.44111, 0.0377514, 1.49947, 0.0122906, 1.44079, -0.0328642, -0.415992, 0.364956, 0.0316188, -0.298805)
+mesh = SubResource("TextMesh_p277i")
+text = "At the Unicorn"
+
+[node name="NowPlayingLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
+transform = Transform3D(-0.388985, -0.0932223, -4.07488e-09, 0, -1.74846e-08, 0.4, -0.0932223, 0.388985, 1.70031e-08, 0.0312412, 0.00165822, -0.45301)
+mesh = SubResource("TextMesh_hlvgl")
+text = "When you played..."
+
+[node name="ManoLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
+transform = Transform3D(11.7698, 0, -2.33903, 0, 12, 0, 2.33903, 0, 11.7698, -0.26749, 0.53281, -2.32386)
+mesh = SubResource("TextMesh_nelm5")
+text = "Mano"
+
+[node name="ManoLabel2" parent="WorldViewport/SubViewport/Game/ManoLabel" instance=ExtResource("37_awei0")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0155727, -0.0224966, 3.88578e-16)
+mesh = SubResource("TextMesh_047jk")
+skeleton = NodePath("../..")
+text = "BEST FRIEND"
+
+[node name="ManoLabel3" parent="WorldViewport/SubViewport/Game/ManoLabel" instance=ExtResource("37_awei0")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0142888, -0.0319709, 1.39699e-10)
+mesh = SubResource("TextMesh_8l1qm")
+skeleton = NodePath("../..")
+text = "31 YEARS OLD"
+
+[node name="KickNSnareLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
+transform = Transform3D(0.289325, 0.0753695, -0.0247032, 0.00257069, 0.0844774, 0.287849, 0.0792729, -0.277818, 0.0808257, 0.023156, 0.0334834, -0.433071)
+visible = false
+mesh = SubResource("TextMesh_4ysxk")
+text = "Kick n Snare 300"
+
+[node name="FeaturingLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
+transform = Transform3D(0.578651, 0.00437072, -0.15857, 0.00514139, 0.59894, 0.0352708, 0.158546, -0.0353746, 0.577592, 0.0354938, 0.0442698, -0.467715)
+visible = false
+mesh = SubResource("TextMesh_fwk45")
+text = "featuring..."
 
 [connection signal="play" from="Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost" to="WorldViewport/SubViewport/Game" method="_play"]
 [connection signal="stop" from="Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost" to="WorldViewport/SubViewport/Game" method="_stop"]

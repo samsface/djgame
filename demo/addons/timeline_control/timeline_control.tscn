@@ -12,6 +12,7 @@
 [node name="PianoRoll" type="HSplitContainer"]
 offset_right = 1022.0
 offset_bottom = 503.0
+size_flags_vertical = 3
 split_offset = 200
 script = ExtResource("2_ugbsv")
 
@@ -23,11 +24,21 @@ theme_override_constants/separation = 0
 custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
 
-[node name="RowHeaders" type="VBoxContainer" parent="VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="MarginContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RowHeaders" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="Button" type="Button" parent="VBoxContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 text = "Add Track"
 
@@ -37,7 +48,9 @@ mouse_filter = 2
 
 [node name="HSplitContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 8
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
 
 [node name="HeaderScrollContainer" type="Control" parent="MarginContainer/HSplitContainer"]
 unique_name_in_owner = true
@@ -92,6 +105,7 @@ unique_name_in_owner = true
 auto_translate_mode = 1
 clip_contents = true
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("3_jy03w")
 
@@ -108,9 +122,10 @@ script = ExtResource("3_anpkx")
 [node name="Rows" type="VBoxContainer" parent="MarginContainer/HSplitContainer/BodyScrollContainer/MarginContainer"]
 unique_name_in_owner = true
 auto_translate_mode = 1
-layout_mode = 2
-offset_right = 1041.0
-offset_bottom = 650.0
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
 mouse_filter = 2
 theme = ExtResource("4_0aakd")
 theme_override_constants/separation = 0
@@ -126,9 +141,12 @@ color = Color(1, 0, 1, 1)
 [node name="Overlay" type="MarginContainer" parent="MarginContainer/HSplitContainer/BodyScrollContainer/MarginContainer"]
 unique_name_in_owner = true
 auto_translate_mode = 1
-layout_mode = 2
-offset_right = 1041.0
-offset_bottom = 650.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("6_tnfgb")
 
@@ -154,6 +172,8 @@ popup/item_5/id = 4
 
 [connection signal="zoom_changed" from="." to="MarginContainer/HSplitContainer/HeaderScrollContainer/MarginContainer" method="_zoom_changed"]
 [connection signal="zoom_changed" from="." to="MarginContainer/HSplitContainer/BodyScrollContainer/MarginContainer" method="_zoom_changed"]
-[connection signal="pressed" from="VBoxContainer/Button" to="." method="_add_row_pressed"]
+[connection signal="scroll_ended" from="VBoxContainer/ScrollContainer" to="." method="_row_headers_scroll_ended"]
+[connection signal="scroll_started" from="VBoxContainer/ScrollContainer" to="." method="_row_headers_scroll_started"]
+[connection signal="pressed" from="VBoxContainer/ScrollContainer/MarginContainer/Button" to="." method="_add_row_pressed"]
 [connection signal="gui_input" from="MarginContainer/HSplitContainer/BodyScrollContainer" to="." method="_scroll_container_gui_input"]
 [connection signal="item_selected" from="MarginContainer/OptionButton" to="." method="_snap_selected"]

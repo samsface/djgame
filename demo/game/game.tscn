@@ -97,7 +97,7 @@ script = ExtResource("4_oqmxi")
 [node name="SubViewport" type="SubViewport" parent="WorldViewport"]
 handle_input_locally = false
 gui_snap_controls_to_pixels = false
-size = Vector2i(2, 2)
+size = Vector2i(1680, 1050)
 render_target_update_mode = 4
 
 [node name="Game" type="Node3D" parent="WorldViewport/SubViewport"]

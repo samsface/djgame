@@ -187,6 +187,9 @@ func _physics_process(delta:float) -> void:
 			header_scroll_container_.scroll_horizontal = scroll_container_.scroll_horizontal
 			_input(InputEventMouseMotion.new())
 	
+
+	%BodyScrollContainer.scroll_vertical = -$VBoxContainer/ScrollContainer.scroll_vertical 
+
 func _input(event):
 	if not is_visible_in_tree():
 		return
@@ -511,7 +514,7 @@ func move_row_down(row_idx:int) -> void:
 
 	row.get_parent().move_child(row, row.get_index() + 1)
 
-func _scroll_container_gui_input(event: InputEvent) -> void:
+func _scroll_container_gui_input(event: InputEvent) -> void:	
 	if selection_box_ and event is InputEventMouseMotion:
 		selection_box_.size = %Overlay.get_local_mouse_position() - selection_box_.position
 		#selection_box_ = selection_box_.abs()
@@ -595,3 +598,9 @@ func _snap_selected(index: int) -> void:
 			quantinize_snap = 8
 		5:
 			quantinize_snap = 16
+
+func _row_headers_scroll_started() -> void:
+	pass # Replace with function body.
+
+func _row_headers_scroll_ended() -> void:
+	pass # Replace with function body.
