@@ -14,3 +14,4 @@ var livestream_service
 func _ready() -> void:
 	input_service = InputService.new()
 	add_child(input_service)
+

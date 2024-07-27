@@ -1,16 +1,16 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://addons/dialog_graph/dialog_graph.gd" id="1_c1m7p"]
-[ext_resource type="PackedScene" path="res://addons/dialog_graph/ops/dialog_graph_start_op.tscn" id="2_lh40j"]
-[ext_resource type="PackedScene" path="res://addons/dialog_graph/ops/dialog_graph_text_op.tscn" id="3_f0qru"]
-[ext_resource type="PackedScene" path="res://addons/dialog_graph/ops/dialog_graph_snippet_op.tscn" id="4_ehldm"]
+[ext_resource type="Script" path="res://addons/dialog_graph/dialog_graph.gd" id="1_fj0nn"]
+[ext_resource type="PackedScene" path="res://addons/dialog_graph/ops/dialog_graph_start_op.tscn" id="2_veam1"]
+[ext_resource type="PackedScene" path="res://addons/dialog_graph/ops/dialog_graph_text_op.tscn" id="3_g1w5y"]
+[ext_resource type="PackedScene" path="res://addons/dialog_graph/ops/dialog_graph_snippet_op.tscn" id="4_khn5o"]
 
 [node name="DialogGraph" type="GraphEdit"]
 layout_mode = 2
 right_disconnects = true
-script = ExtResource("1_c1m7p")
+script = ExtResource("1_fj0nn")
 connections = Array[Dictionary]([])
-ops = Array[PackedScene]([ExtResource("2_lh40j"), ExtResource("3_f0qru"), ExtResource("4_ehldm")])
+ops = Array[PackedScene]([ExtResource("2_veam1"), ExtResource("3_g1w5y"), ExtResource("4_khn5o")])
 root_node = NodePath("../../../../WorldViewport/SubViewport/Game/Table/Phone")
 
 [connection signal="connection_request" from="." to="." method="_connection_request"]

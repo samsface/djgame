@@ -4,10 +4,11 @@ class_name Character
 
 var r := randf()
 
-@export_range(0.0, 1.0) var speed_scale:float :
+@export_range(0.0, 1.0) var speed_scale:float  = 1.0 :
 	set(v):
-		filming = v
+		speed_scale = v
 		$AnimationTree.set("parameters/Speed/scale", v)
+	
 
 @export_range(0.0, 1.0) var filming:float :
 	set(v):

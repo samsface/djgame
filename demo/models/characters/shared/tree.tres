@@ -104,7 +104,6 @@ transitions = ["Start", "waving_middle", SubResource("AnimationNodeStateMachineT
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_0dplg"]
 
 [resource]
-graph_offset = Vector2(4428.72, -1558.21)
 nodes/Anger/node = SubResource("AnimationNodeBlend2_utg0v")
 nodes/Anger/position = Vector2(2520, -580)
 nodes/AngerAnimation/node = SubResource("AnimationNodeAnimation_vrpi2")

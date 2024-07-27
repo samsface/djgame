@@ -148,7 +148,7 @@ depth = 0.001
 [sub_resource type="TextMesh" id="TextMesh_047jk"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_r3umm")
-text = "BEST FRIEND"
+text = "Man of the  people"
 font = ExtResource("37_0waph")
 font_size = 4
 curve_step = 10.0
@@ -166,7 +166,7 @@ depth = 0.001
 [sub_resource type="TextMesh" id="TextMesh_4ysxk"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_r3umm")
-text = "Kick n Snare 300"
+text = "Kick n Snare"
 font = ExtResource("37_0waph")
 font_size = 4
 curve_step = 10.0
@@ -346,7 +346,6 @@ omni_shadow_mode = 0
 [node name="Poly" parent="WorldViewport/SubViewport/Game/Table" instance=ExtResource("19_wp3jn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500806, -0.363653)
 snap = 1e-06
-polygon = PackedVector2Array(0.0038, 0, 0.00268701, 0.00268701, 2.32683e-19, 0.0038, -0.00268701, 0.00268701, -0.0038, 4.65366e-19, -0.00268701, -0.00268701, -6.98049e-19, -0.0038, 0.00268701, -0.00268701)
 path_node = NodePath("Path3D2")
 path_local = true
 path_continuous_u = false
@@ -401,7 +400,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0039897, 2.38419e-07, -0.9
 [node name="Mano" parent="WorldViewport/SubViewport/Game/GardenPretty" instance=ExtResource("34_cx8of")]
 unique_name_in_owner = true
 transform = Transform3D(0.907426, 0, -0.420212, 0, 1, 0, 0.420212, 0, 0.907426, 0.863592, -1.07169, -1.87142)
-speed_scale = 0.0
 
 [node name="LiveStreamCamera" type="Camera3D" parent="WorldViewport/SubViewport/Game/GardenPretty/Mano"]
 transform = Transform3D(-0.995504, -0.0614074, -0.0721139, -0.0624297, 0.997977, 0.0120065, 0.0712307, 0.0164545, -0.997324, 0.169408, 1.36354, 0.453393)
@@ -603,7 +601,7 @@ text = "Mano"
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0155727, -0.0224966, 3.88578e-16)
 mesh = SubResource("TextMesh_047jk")
 skeleton = NodePath("../..")
-text = "BEST FRIEND"
+text = "Man of the  people"
 
 [node name="ManoLabel3" parent="WorldViewport/SubViewport/Game/ManoLabel" instance=ExtResource("37_awei0")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0142888, -0.0319709, 1.39699e-10)
@@ -612,10 +610,10 @@ skeleton = NodePath("../..")
 text = "31 YEARS OLD"
 
 [node name="KickNSnareLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
-transform = Transform3D(0.289325, 0.0753695, -0.0247032, 0.00257069, 0.0844774, 0.287849, 0.0792729, -0.277818, 0.0808257, 0.023156, 0.0334834, -0.433071)
+transform = Transform3D(0.289325, 0.0753695, -0.0247032, 0.00257069, 0.0844774, 0.287849, 0.0792729, -0.277818, 0.0808257, 0.0146838, 0.0334081, -0.435392)
 visible = false
 mesh = SubResource("TextMesh_4ysxk")
-text = "Kick n Snare 300"
+text = "Kick n Snare"
 
 [node name="FeaturingLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
 transform = Transform3D(0.578651, 0.00437072, -0.15857, 0.00514139, 0.59894, 0.0352708, 0.158546, -0.0353746, 0.577592, 0.0354938, 0.0442698, -0.467715)

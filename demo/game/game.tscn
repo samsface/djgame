@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bfo1bxbj7knm0"]
+[gd_scene load_steps=19 format=3 uid="uid://bfo1bxbj7knm0"]
 
 [ext_resource type="PackedScene" uid="uid://lprkgl2wh3cd" path="res://game/camera/camera.tscn" id="2_1yirq"]
 [ext_resource type="Script" path="res://game/canvas_layer_2.gd" id="4_7p2wi"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dgg103ssmbg32" path="res://game/settings/settings.tscn" id="14_anos2"]
 [ext_resource type="Script" path="res://game/GuidesService.gd" id="14_y06of"]
 [ext_resource type="CameraAttributesPractical" uid="uid://ev1eo0cru0we" path="res://game/cameraatr.tres" id="16_2sje1"]
+[ext_resource type="PackedScene" uid="uid://b364jh5p6mp8e" path="res://models/characters/mano/manotest.glb" id="16_j8q3n"]
 [ext_resource type="Script" path="res://game/world_environment.gd" id="18_sypot"]
 [ext_resource type="Script" path="res://game/plane.gd" id="22_gkvti"]
 [ext_resource type="PackedScene" uid="uid://da81hs1u0ymhf" path="res://models/poster/poster.tscn" id="23_picdr"]
@@ -105,6 +106,9 @@ metadata/_edit_lock_ = true
 
 [node name="PointsService" parent="WorldViewport/SubViewport/Game" instance=ExtResource("6_2emse")]
 
+[node name="manotest2" parent="WorldViewport/SubViewport/Game" instance=ExtResource("16_j8q3n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.10425, -9.66953)
+
 [node name="Guides" type="Node3D" parent="WorldViewport/SubViewport/Game"]
 script = ExtResource("14_y06of")
 
@@ -143,6 +147,9 @@ script = ExtResource("22_gkvti")
 
 [node name="DaftHousePoster" parent="WorldViewport/SubViewport/Game/GardenOverGrown" instance=ExtResource("23_picdr")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.81537, 1.39943, -0.412132)
+
+[node name="manotest" parent="WorldViewport/SubViewport/Game" instance=ExtResource("16_j8q3n")]
+transform = Transform3D(0.0469147, 0, -0.0246579, 0, 0.053, 0, 0.0246579, 0, 0.0469147, 2.41682, -0.783549, -7.33828)
 
 [connection signal="play" from="Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost" to="WorldViewport/SubViewport/Game" method="_play"]
 [connection signal="stop" from="Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost" to="WorldViewport/SubViewport/Game" method="_stop"]
