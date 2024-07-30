@@ -1,10 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://lprkgl2wh3cd"]
+[gd_scene load_steps=9 format=3 uid="uid://lprkgl2wh3cd"]
 
 [ext_resource type="Script" path="res://game/camera/camera.gd" id="1_o37hp"]
 [ext_resource type="Script" path="res://game/camera/cursor.gd" id="2_rcdnn"]
 [ext_resource type="Script" path="res://game/hud_canvas_layer.gd" id="3_5v3r4"]
 [ext_resource type="Texture2D" uid="uid://cwhxcbe4nkdvd" path="res://game/camera/cursor.png" id="3_6dawb"]
 [ext_resource type="CameraAttributesPractical" uid="uid://ev1eo0cru0we" path="res://game/cameraatr.tres" id="5_am7l2"]
+[ext_resource type="Script" path="res://game/camera/camera_3d.gd" id="6_4d0xl"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_p5ieg"]
+frequency = 0.0119
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pejev"]
+seamless = true
+noise = SubResource("FastNoiseLite_p5ieg")
 
 [node name="Camera" type="Node3D"]
 script = ExtResource("1_o37hp")
@@ -30,6 +38,9 @@ attributes = ExtResource("5_am7l2")
 current = true
 fov = 55.0
 near = 0.01
+far = 100.0
+script = ExtResource("6_4d0xl")
+noise = SubResource("NoiseTexture2D_pejev")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, 0)

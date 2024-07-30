@@ -4,12 +4,12 @@ class_name Character
 
 var r := randf()
 
-@export_range(0.0, 1.0) var speed_scale:float  = 1.0 :
+@export_range(0.0, 10.0) var speed_scale:float  = 1.0 :
 	set(v):
 		speed_scale = v
-		$AnimationTree.set("parameters/Speed/scale", v)
+		if is_node_ready():
+			$AnimationTree.set("parameters/Speed/scale", v)
 	
-
 @export_range(0.0, 1.0) var filming:float :
 	set(v):
 		filming = v
@@ -17,7 +17,6 @@ var r := randf()
 
 @export_range(0.0, 1.0) var anger:float :
 	set(v):
-		AnimationNodeTimeSeek
 		if anger == 0 and v != 0:
 			$AnimationTree.set("parameters/AngerTimeSeek/seek_request", randf() * 19.0)
 		anger = v
@@ -44,6 +43,9 @@ var r := randf()
 		invalidate_attention_()
 
 func invalidate_attention_() -> void:
+	if not is_node_ready():
+		return
+
 	var a := []
 	var n := 3
 	for i in 3:
@@ -52,14 +54,22 @@ func invalidate_attention_() -> void:
 	$AnimationTree.set("parameters/AttentionA/blend_amount", a[0])
 	$AnimationTree.set("parameters/AttentionB/blend_amount", a[1])
 	$AnimationTree.set("parameters/AttentionC/blend_amount", a[2])
-	$AnimationTree.set("parameters/TimeScale/scale", 1.0 + attention + r * 0.2)
 	
 	$AnimationTree.set("parameters/Cheer/blend_amount", cheer)
 	$AnimationTree.set("parameters/Clap/blend_amount", clap)
 	$AnimationTree.set("parameters/Tired/blend_amount", tired)
 	$AnimationTree.set("parameters/Anger/blend_amount", anger)
 
+var delta_sum_ := 0.0
+
 func _physics_process(delta: float) -> void:
-	var cr = transform.basis.get_rotation_quaternion()
-	if has_node("Armature"):
-		$Armature.position = $AnimationTree.get_root_motion_position_accumulator()
+	delta_sum_ += delta
+	
+	##if sin(delta_sum_ * 40.0) > 0.9:
+	#	speed_scale = 2.0
+	#else:
+	#	speed_scale = 0.0
+
+	if not Engine.is_editor_hint():
+		if has_node("Armature"):
+			$Armature.position = $AnimationTree.get_root_motion_position_accumulator()

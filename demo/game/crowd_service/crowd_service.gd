@@ -15,11 +15,6 @@ func clap(value:float) -> void:
 	$Clap.play()
 	var tween := create_tween()
 	tween.set_parallel()
-	tween.tween_property($Ch03_nonPBR, "clap", value, 1.0)
-	tween.tween_property($Ch03_nonPBR2, "clap", value, 1.0)
-	
-	tween.tween_property($Ch03_nonPBR, "clap", 0.0, 1.0).set_delay(1.0)
-	tween.tween_property($Ch03_nonPBR2, "clap", 0.0, 1.0).set_delay(1.0)
 
 func scream() -> void:
 	$Scream.play()

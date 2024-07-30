@@ -1,17 +1,18 @@
-[gd_scene load_steps=19 format=3 uid="uid://bfo1bxbj7knm0"]
+[gd_scene load_steps=20 format=3 uid="uid://bfo1bxbj7knm0"]
 
 [ext_resource type="PackedScene" uid="uid://lprkgl2wh3cd" path="res://game/camera/camera.tscn" id="2_1yirq"]
 [ext_resource type="Script" path="res://game/canvas_layer_2.gd" id="4_7p2wi"]
 [ext_resource type="Script" path="res://game/world_viewport.gd" id="4_oqmxi"]
 [ext_resource type="PackedScene" uid="uid://ij1ky0f8flgr" path="res://addons/dialog_graph/dialog_graph.tscn" id="5_7vruj"]
 [ext_resource type="PackedScene" uid="uid://df031doltiks0" path="res://game/points_service/points_service.tscn" id="6_2emse"]
+[ext_resource type="PackedScene" uid="uid://cs13wbytj7dmb" path="res://models/characters/mano/mano.tscn" id="8_wfst1"]
 [ext_resource type="Script" path="res://game/animation.gd" id="9_ds76j"]
 [ext_resource type="PackedScene" uid="uid://lb3oq22iphka" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_host_control.tscn" id="10_cc86w"]
-[ext_resource type="Environment" uid="uid://b8uhvyo3rc3m8" path="res://game/settings/environment_potato.tres" id="12_jtkg2"]
+[ext_resource type="Environment" uid="uid://chtmgmwa87swx" path="res://game/settings/environment_high.tres" id="11_xnd0y"]
 [ext_resource type="PackedScene" uid="uid://dgg103ssmbg32" path="res://game/settings/settings.tscn" id="14_anos2"]
 [ext_resource type="Script" path="res://game/GuidesService.gd" id="14_y06of"]
 [ext_resource type="CameraAttributesPractical" uid="uid://ev1eo0cru0we" path="res://game/cameraatr.tres" id="16_2sje1"]
-[ext_resource type="PackedScene" uid="uid://b364jh5p6mp8e" path="res://models/characters/mano/manotest.glb" id="16_j8q3n"]
+[ext_resource type="PackedScene" uid="uid://b364jh5p6mp8e" path="res://models/characters/mano/mano.glb" id="16_j8q3n"]
 [ext_resource type="Script" path="res://game/world_environment.gd" id="18_sypot"]
 [ext_resource type="Script" path="res://game/plane.gd" id="22_gkvti"]
 [ext_resource type="PackedScene" uid="uid://da81hs1u0ymhf" path="res://models/poster/poster.tscn" id="23_picdr"]
@@ -104,10 +105,11 @@ render_target_update_mode = 4
 [node name="Game" type="Node3D" parent="WorldViewport/SubViewport"]
 metadata/_edit_lock_ = true
 
-[node name="PointsService" parent="WorldViewport/SubViewport/Game" instance=ExtResource("6_2emse")]
+[node name="manotest2" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_wfst1")]
+transform = Transform3D(-0.969663, 0, -0.244445, 0, 1, 0, 0.244445, 0, -0.969663, 0.0470468, -1.13502, -9.30227)
+speed_scale = 2.0
 
-[node name="manotest2" parent="WorldViewport/SubViewport/Game" instance=ExtResource("16_j8q3n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.10425, -9.66953)
+[node name="PointsService" parent="WorldViewport/SubViewport/Game" instance=ExtResource("6_2emse")]
 
 [node name="Guides" type="Node3D" parent="WorldViewport/SubViewport/Game"]
 script = ExtResource("14_y06of")
@@ -117,7 +119,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.67509)
 free_walk = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="WorldViewport/SubViewport/Game"]
-environment = ExtResource("12_jtkg2")
+environment = ExtResource("11_xnd0y")
 camera_attributes = ExtResource("16_2sje1")
 script = ExtResource("18_sypot")
 

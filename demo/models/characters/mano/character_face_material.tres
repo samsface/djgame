@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://ba0julu0cys8c"]
+
+[ext_resource type="Texture2D" uid="uid://c3uq0si0io6mp" path="res://models/characters/shared/faces/face.png" id="1_hfq6t"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.0
+alpha_antialiasing_mode = 2
+alpha_antialiasing_edge = 0.3
+albedo_texture = ExtResource("1_hfq6t")

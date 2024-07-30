@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://c8c0isilrphjb"]
+[gd_scene load_steps=54 format=3 uid="uid://c8c0isilrphjb"]
 
 [ext_resource type="PackedScene" uid="uid://dgg103ssmbg32" path="res://game/settings/settings.tscn" id="1_rpjq6"]
 [ext_resource type="Script" path="res://game/animation.gd" id="2_phct8"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://df031doltiks0" path="res://game/points_service/points_service.tscn" id="9_56eb3"]
 [ext_resource type="Script" path="res://game/GuidesService.gd" id="10_bl7c8"]
 [ext_resource type="PackedScene" uid="uid://lprkgl2wh3cd" path="res://game/camera/camera.tscn" id="11_chjkg"]
-[ext_resource type="Environment" uid="uid://b8uhvyo3rc3m8" path="res://game/settings/environment_potato.tres" id="12_t8aui"]
+[ext_resource type="Environment" uid="uid://chtmgmwa87swx" path="res://game/settings/environment_high.tres" id="12_41qun"]
 [ext_resource type="CameraAttributesPractical" uid="uid://ev1eo0cru0we" path="res://game/cameraatr.tres" id="13_wi7ad"]
 [ext_resource type="Script" path="res://game/world_environment.gd" id="14_vsfug"]
 [ext_resource type="Texture2D" uid="uid://48p1jkwhm4wh" path="res://models/club/samm0363_texture_of_a_bar_table_with_stains_and_wear_tile_5a36bd34-3c9c-4c2b-a62c-8adabec8fccf.png" id="15_ip5l0"]
@@ -30,15 +30,13 @@
 [ext_resource type="Script" path="res://game/crowd_service/crowd_service.gd" id="31_3j3sa"]
 [ext_resource type="AudioStream" uid="uid://cox0cypa0r0wf" path="res://game/crowd_service/Bar Ambience Sound Effect- No Copyright.mp3" id="32_rvjo4"]
 [ext_resource type="Script" path="res://game/audio_stream_player.gd" id="33_0b843"]
-[ext_resource type="PackedScene" uid="uid://b5uu6kqhiaiy6" path="res://models/characters/mano/mano.tscn" id="34_cx8of"]
+[ext_resource type="PackedScene" uid="uid://cs13wbytj7dmb" path="res://models/characters/mano/mano.tscn" id="34_cx8of"]
 [ext_resource type="AudioStream" uid="uid://b3hkravd23cph" path="res://game/crowd_service/400587__misjoc__medium-crowd-cheering-01(1).wav" id="34_qie8a"]
 [ext_resource type="AudioStream" uid="uid://b0sodcqt4qvjc" path="res://game/crowd_service/clap.wav" id="35_d1q2r"]
-[ext_resource type="PackedScene" uid="uid://bqej7kilkwxxl" path="res://models/characters/dancer_0/dancer_0.tscn" id="36_cuhf5"]
 [ext_resource type="FontFile" uid="uid://ca4jgypv8bjcn" path="res://ui/fonts/RetroGaming.ttf" id="37_0waph"]
 [ext_resource type="PackedScene" uid="uid://cdnp2ssrh2k6l" path="res://game/livestream_service/live_stream_service.tscn" id="37_8dclm"]
 [ext_resource type="PackedScene" uid="uid://djjl5a5eu5k20" path="res://game/world_label.tscn" id="37_awei0"]
 [ext_resource type="AudioStream" uid="uid://kkoen3nj0q5h" path="res://junk/funk_guitar.wav" id="38_c3iha"]
-[ext_resource type="Material" uid="uid://dq63e5mx8jbve" path="res://models/shared/outline.tres" id="38_sfpsl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ij4h"]
 albedo_color = Color(0.235294, 0.235294, 0.235294, 1)
@@ -90,14 +88,12 @@ margin = 0.0
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_hg8pg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3umm"]
-next_pass = ExtResource("38_sfpsl")
-albedo_color = Color(1, 0.312015, 0.698716, 1)
+albedo_color = Color(1, 0, 0.698039, 1)
 metallic = 0.74
 metallic_specular = 1.0
 emission_enabled = true
 emission = Color(0.925046, 0.135418, 0.483426, 1)
 emission_energy_multiplier = 7.57
-backlight_enabled = true
 backlight = Color(1, 1, 1, 1)
 
 [sub_resource type="TextMesh" id="TextMesh_1wa32"]
@@ -145,28 +141,19 @@ font_size = 4
 curve_step = 10.0
 depth = 0.001
 
-[sub_resource type="TextMesh" id="TextMesh_047jk"]
-resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_r3umm")
-text = "Man of the  people"
-font = ExtResource("37_0waph")
-font_size = 4
-curve_step = 10.0
-depth = 0.001
-
-[sub_resource type="TextMesh" id="TextMesh_8l1qm"]
-resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_r3umm")
-text = "31 YEARS OLD"
-font = ExtResource("37_0waph")
-font_size = 4
-curve_step = 10.0
-depth = 0.001
-
 [sub_resource type="TextMesh" id="TextMesh_4ysxk"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_r3umm")
-text = "Kick n Snare"
+text = "Kick"
+font = ExtResource("37_0waph")
+font_size = 4
+curve_step = 10.0
+depth = 0.001
+
+[sub_resource type="TextMesh" id="TextMesh_kw0sd"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_r3umm")
+text = "n'Snare"
 font = ExtResource("37_0waph")
 font_size = 4
 curve_step = 10.0
@@ -269,22 +256,25 @@ script = ExtResource("10_bl7c8")
 
 [node name="Camera" parent="WorldViewport/SubViewport/Game" instance=ExtResource("11_chjkg")]
 
+[node name="Mano" parent="WorldViewport/SubViewport/Game" instance=ExtResource("34_cx8of")]
+unique_name_in_owner = true
+transform = Transform3D(0.810199, 0, -0.744026, 0, 1.1, 0, 0.744026, 0, 0.810199, 1.18576, -1.10025, -1.83706)
+attention = 0.6
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="WorldViewport/SubViewport/Game"]
-environment = ExtResource("12_t8aui")
+environment = ExtResource("12_41qun")
 camera_attributes = ExtResource("13_wi7ad")
 script = ExtResource("14_vsfug")
 
 [node name="Sun" type="DirectionalLight3D" parent="WorldViewport/SubViewport/Game/WorldEnvironment"]
-transform = Transform3D(0.578922, 0.127831, -0.8053, 0.791957, -0.323192, 0.518027, -0.194046, -0.93766, -0.288339, 5.72989, 5.18985, -9.19963)
+transform = Transform3D(-0.337095, 0.487707, -0.8053, 0, 0.855364, 0.518027, 0.941471, 0.174624, -0.288339, 5.72989, 5.18985, -9.19963)
 shadow_enabled = true
 shadow_reverse_cull_face = true
+shadow_blur = 0.267
 directional_shadow_mode = 0
-directional_shadow_split_1 = 0.0
-directional_shadow_split_2 = 0.117
-directional_shadow_split_3 = 1.0
-directional_shadow_blend_splits = true
-directional_shadow_max_distance = 25.0
-directional_shadow_pancake_size = 0.2
+directional_shadow_split_2 = 0.021
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 30.0
 
 [node name="Table" type="StaticBody3D" parent="WorldViewport/SubViewport/Game"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.501, 0)
@@ -346,6 +336,7 @@ omni_shadow_mode = 0
 [node name="Poly" parent="WorldViewport/SubViewport/Game/Table" instance=ExtResource("19_wp3jn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500806, -0.363653)
 snap = 1e-06
+polygon = PackedVector2Array(0.0038, 0, 0.00268701, 0.00268701, 2.32683e-19, 0.0038, -0.00268701, 0.00268701, -0.0038, 4.65366e-19, -0.00268701, -0.00268701, -6.98049e-19, -0.0038, 0.00268701, -0.00268701)
 path_node = NodePath("Path3D2")
 path_local = true
 path_continuous_u = false
@@ -397,12 +388,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.941458, -1.09446, -15.6042)
 [node name="GardenPretty" type="Node3D" parent="WorldViewport/SubViewport/Game"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0039897, 2.38419e-07, -0.957186)
 
-[node name="Mano" parent="WorldViewport/SubViewport/Game/GardenPretty" instance=ExtResource("34_cx8of")]
-unique_name_in_owner = true
-transform = Transform3D(0.907426, 0, -0.420212, 0, 1, 0, 0.420212, 0, 0.907426, 0.863592, -1.07169, -1.87142)
-
-[node name="LiveStreamCamera" type="Camera3D" parent="WorldViewport/SubViewport/Game/GardenPretty/Mano"]
-transform = Transform3D(-0.995504, -0.0614074, -0.0721139, -0.0624297, 0.997977, 0.0120065, 0.0712307, 0.0164545, -0.997324, 0.169408, 1.36354, 0.453393)
+[node name="LiveStreamCamera" type="Camera3D" parent="WorldViewport/SubViewport/Game/GardenPretty"]
+transform = Transform3D(-0.933278, -0.0626371, 0.35365, -0.0624297, 0.997977, 0.0120064, -0.353686, -0.0108729, -0.935301, 0.826796, 0.29185, -1.38881)
 attributes = SubResource("CameraAttributesPractical_hg8pg")
 
 [node name="PinkPaintDecal3" type="Decal" parent="WorldViewport/SubViewport/Game/GardenPretty"]
@@ -531,6 +518,8 @@ script = ExtResource("31_3j3sa")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService"]
 stream = ExtResource("32_rvjo4")
+volume_db = -6.0
+bus = &"New Bus"
 script = ExtResource("33_0b843")
 
 [node name="Scream" type="AudioStreamPlayer" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService"]
@@ -540,30 +529,6 @@ volume_db = 5.0
 [node name="Clap" type="AudioStreamPlayer" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService"]
 stream = ExtResource("35_d1q2r")
 volume_db = 5.0
-
-[node name="Ch03_nonPBR" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("36_cuhf5")]
-transform = Transform3D(0.903118, 0, 0.429392, 0, 1, 0, -0.429392, 0, 0.903118, 0.572667, -1.19139, -9.99388)
-
-[node name="Ch03_nonPBR2" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("36_cuhf5")]
-transform = Transform3D(0.264092, 0, -0.964498, 0, 1, 0, 0.964498, 0, 0.264092, -0.253354, -1.18293, -9.11872)
-
-[node name="Ch03_nonPBR5" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("36_cuhf5")]
-transform = Transform3D(0.983514, 0, 0.180828, 0, 1, 0, -0.180828, 0, 0.983514, 2.15739, -1.19139, -8.99478)
-
-[node name="Ch03_nonPBR9" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("36_cuhf5")]
-transform = Transform3D(0.0470719, 0, 0.998891, 0, 1, 0, -0.998891, 0, 0.0470719, -1.7811, -1.19139, -9.35382)
-
-[node name="Ch03_nonPBR6" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("36_cuhf5")]
-transform = Transform3D(-0.999398, 0, -0.0346905, 0, 1, 0, 0.0346905, 0, -0.999398, 2.2745, -1.18293, -8.3893)
-
-[node name="Ch03_nonPBR7" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("36_cuhf5")]
-transform = Transform3D(-0.9881, 0, -0.153814, 0, 1, 0, 0.153814, 0, -0.9881, 0.70638, -1.18293, -9.45483)
-
-[node name="Ch03_nonPBR3" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("36_cuhf5")]
-transform = Transform3D(0.839581, 0, -0.543233, 0, 1, 0, 0.543233, 0, 0.839581, 1.87162, -1.16179, -11.7775)
-
-[node name="Ch03_nonPBR4" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("36_cuhf5")]
-transform = Transform3D(-0.969342, 0, 0.245713, 0, 1, 0, -0.245713, 0, -0.969342, 1.54999, -1.16179, -10.5704)
 
 [node name="LiveStreamService" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_8dclm")]
 size = Vector2i(128, 128)
@@ -593,27 +558,23 @@ mesh = SubResource("TextMesh_hlvgl")
 text = "When you played..."
 
 [node name="ManoLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
-transform = Transform3D(11.7698, 0, -2.33903, 0, 12, 0, 2.33903, 0, 11.7698, -0.26749, 0.53281, -2.32386)
+transform = Transform3D(15.6931, 0, -3.11871, 0, 16, 0, 3.11871, 0, 15.6931, -0.114262, 0.53281, -2.11912)
 mesh = SubResource("TextMesh_nelm5")
 text = "Mano"
 
-[node name="ManoLabel2" parent="WorldViewport/SubViewport/Game/ManoLabel" instance=ExtResource("37_awei0")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0155727, -0.0224966, 3.88578e-16)
-mesh = SubResource("TextMesh_047jk")
-skeleton = NodePath("../..")
-text = "Man of the  people"
-
-[node name="ManoLabel3" parent="WorldViewport/SubViewport/Game/ManoLabel" instance=ExtResource("37_awei0")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0142888, -0.0319709, 1.39699e-10)
-mesh = SubResource("TextMesh_8l1qm")
-skeleton = NodePath("../..")
-text = "31 YEARS OLD"
-
-[node name="KickNSnareLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
-transform = Transform3D(0.289325, 0.0753695, -0.0247032, 0.00257069, 0.0844774, 0.287849, 0.0792729, -0.277818, 0.0808257, 0.0146838, 0.0334081, -0.435392)
+[node name="KickLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
+unique_name_in_owner = true
+transform = Transform3D(0.289325, 0.0753695, -0.0247032, 0.00257069, 0.0844774, 0.287849, 0.0792729, -0.277818, 0.0808257, -0.00711677, 0.0332144, -0.441365)
 visible = false
 mesh = SubResource("TextMesh_4ysxk")
-text = "Kick n Snare"
+text = "Kick"
+
+[node name="NSnareLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
+unique_name_in_owner = true
+transform = Transform3D(0.289325, 0.0753695, -0.0247032, 0.00257069, 0.0844774, 0.287849, 0.0792729, -0.277818, 0.0808257, 0.026906, 0.0335167, -0.432043)
+visible = false
+mesh = SubResource("TextMesh_kw0sd")
+text = "n'Snare"
 
 [node name="FeaturingLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
 transform = Transform3D(0.578651, 0.00437072, -0.15857, 0.00514139, 0.59894, 0.0352708, 0.158546, -0.0353746, 0.577592, 0.0354938, 0.0442698, -0.467715)

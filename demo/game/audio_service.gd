@@ -13,9 +13,9 @@ func _ready() -> void:
 	regex_.compile("^[+-]?\\d+(\\.\\d+)?$")
 	
 	Bus.audio_service = self
-	
-	
+
 	audio_stream_ = PureDataAudioStreamPlayer.new()
+	audio_stream_.bus = "Music"
 	audio_stream_.stream = AudioStreamGenerator.new()
 	audio_stream_.stream.buffer_length = 0.024
 	add_child(audio_stream_)

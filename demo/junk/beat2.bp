@@ -3503,7 +3503,7 @@
 "reply_a": "",
 "reply_b": "",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/dialog.tscn",
-"time": 128,
+"time": 192,
 "value": "Looks class man",
 "who": "Mano"
 }, {
@@ -4077,19 +4077,7 @@
 "property": "attention",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/tween.tscn",
 "time": 0,
-"to_value": 0.660156
-}, {
-"length": 16,
-"property": "filming",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/tween.tscn",
-"time": 16,
-"to_value": 0.990234
-}, {
-"length": 16,
-"property": "speed_scale",
-"scene_file_path": "res://addons/rhythmic_animation_player/ops/tween.tscn",
-"time": 32,
-"to_value": 0.701172
+"to_value": 1.0
 }, {
 "length": 192,
 "property": "attention",
@@ -4102,6 +4090,18 @@
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/tween.tscn",
 "time": 800,
 "to_value": 1.0
+}, {
+"length": 1,
+"property": "speed_scale",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/tween.tscn",
+"time": 112,
+"to_value": 0.0507812
+}, {
+"length": 1,
+"property": "speed_scale",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/tween.tscn",
+"time": 128,
+"to_value": 1.0
 }],
 "node_path": NodePath("%Mano"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
@@ -4113,17 +4113,17 @@
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
 "time": 0
 }, {
-"length": 12,
+"length": 5,
 "method": &"set_visible 1",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 52
+"time": 65
 }, {
 "length": 4,
 "method": &"set_visible 0",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 73
+"time": 80
 }],
-"node_path": NodePath("KickNSnareLabel"),
+"node_path": NodePath("KickLabel"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }, {
 "condition_ex": "",
@@ -4131,14 +4131,29 @@
 "length": 7,
 "method": &"set_visible 1",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 81
+"time": 84
 }, {
 "length": 7,
 "method": &"set_visible 0",
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
-"time": 93
+"time": 96
 }],
 "node_path": NodePath("FeaturingLabel"),
+"scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
+}, {
+"condition_ex": "",
+"frames": [{
+"length": 4,
+"method": &"set_visible 1",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
+"time": 69
+}, {
+"length": 4,
+"method": &"set_visible 0",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/method.tscn",
+"time": 80
+}],
+"node_path": NodePath("NSnareLabel"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn"
 }]
 }, {

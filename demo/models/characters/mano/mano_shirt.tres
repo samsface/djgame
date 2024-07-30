@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://cy7mo6f10wt4"]
+
+[ext_resource type="Shader" path="res://models/characters/mano/cell_shader.gdshader" id="1_xkvq0"]
+
+[sub_resource type="Gradient" id="Gradient_ymx0l"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.585916)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_edixr"]
+gradient = SubResource("Gradient_ymx0l")
+
+[sub_resource type="Gradient" id="Gradient_lt03x"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.769014)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sedqr"]
+gradient = SubResource("Gradient_lt03x")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_xkvq0")
+shader_parameter/color_gradient = SubResource("GradientTexture1D_edixr")
+shader_parameter/fresnel_gradient = SubResource("GradientTexture1D_sedqr")

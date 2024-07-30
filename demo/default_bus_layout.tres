@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://vns8yf4lufeq"]
+[gd_resource type="AudioBusLayout" load_steps=6 format=3 uid="uid://vns8yf4lufeq"]
 
 [sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_gby66"]
 resource_name = "Amplify"
@@ -16,21 +16,36 @@ resource_name = "Chorus"
 
 [sub_resource type="AudioEffectLimiter" id="AudioEffectLimiter_lfwnm"]
 resource_name = "Limiter"
-ceiling_db = -6.6
+ceiling_db = -3.0
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_wxj2p"]
+resource_name = "Compressor"
+threshold = -13.0
+ratio = 28.2
+gain = -6.0
+attack_us = 355.0
+sidechain = &"Music"
 
 [resource]
-bus/0/volume_db = -0.330477
-bus/0/effect/0/effect = SubResource("AudioEffectAmplify_gby66")
-bus/0/effect/0/enabled = true
-bus/0/effect/1/effect = SubResource("AudioEffectReverb_oif8r")
-bus/0/effect/1/enabled = true
-bus/0/effect/2/effect = SubResource("AudioEffectChorus_r80rm")
-bus/0/effect/2/enabled = true
-bus/0/effect/3/effect = SubResource("AudioEffectLimiter_lfwnm")
-bus/0/effect/3/enabled = true
-bus/1/name = &"KeyPresses"
+bus/1/name = &"Music"
 bus/1/solo = false
 bus/1/mute = false
 bus/1/bypass_fx = false
-bus/1/volume_db = -7.63485
+bus/1/volume_db = 0.0
 bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectAmplify_gby66")
+bus/1/effect/0/enabled = true
+bus/1/effect/1/effect = SubResource("AudioEffectReverb_oif8r")
+bus/1/effect/1/enabled = true
+bus/1/effect/2/effect = SubResource("AudioEffectChorus_r80rm")
+bus/1/effect/2/enabled = true
+bus/1/effect/3/effect = SubResource("AudioEffectLimiter_lfwnm")
+bus/1/effect/3/enabled = true
+bus/2/name = &"New Bus"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 0.0
+bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectCompressor_wxj2p")
+bus/2/effect/0/enabled = true

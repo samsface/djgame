@@ -30,6 +30,8 @@ func begin() -> void:
 	flash()
 	
 	var node = get_target_node()
+	if not node:
+		return
 
 	var method_args_generic = method.split(" ")
 	var method_name = method_args_generic[0]

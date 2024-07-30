@@ -1,0 +1,45 @@
+[gd_resource type="ShaderMaterial" load_steps=10 format=3 uid="uid://lxww3gisksau"]
+
+[ext_resource type="Shader" path="res://models/characters/mano/cell_shader.gdshader" id="1_8mdu7"]
+[ext_resource type="Shader" path="res://models/characters/mano/outline.gdshader" id="1_accnn"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_g70ps"]
+noise_type = 4
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cc0wv"]
+in_3d_space = true
+seamless = true
+as_normal_map = true
+noise = SubResource("FastNoiseLite_g70ps")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_56dwf"]
+render_priority = 0
+shader = ExtResource("1_accnn")
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
+shader_parameter/shadow_thickness = 2.0
+shader_parameter/scale = 2.0
+shader_parameter/noise_scale = 1.0
+shader_parameter/disable = true
+shader_parameter/crayon_offset_texture = SubResource("NoiseTexture2D_cc0wv")
+
+[sub_resource type="Gradient" id="Gradient_ymx0l"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.585916)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_edixr"]
+gradient = SubResource("Gradient_ymx0l")
+
+[sub_resource type="Gradient" id="Gradient_lt03x"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.769014)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sedqr"]
+gradient = SubResource("Gradient_lt03x")
+
+[resource]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_56dwf")
+shader = ExtResource("1_8mdu7")
+shader_parameter/color_gradient = SubResource("GradientTexture1D_edixr")
+shader_parameter/fresnel_gradient = SubResource("GradientTexture1D_sedqr")

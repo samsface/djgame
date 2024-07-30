@@ -1,10 +1,7 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cd7t4yroltx6u"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cd7t4yroltx6u"]
 
 [ext_resource type="Shader" path="res://game/guide/shared/arrow/arrow.gdshader" id="1_n0e2a"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_df2n6"]
-
 [resource]
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_df2n6")
 shader = ExtResource("1_n0e2a")

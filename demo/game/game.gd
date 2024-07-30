@@ -2,6 +2,7 @@ extends Node3D
 class_name Level
 
 @export var patch:String
+@export var autoplay := false
 
 @onready var guides_ := $Guides
 @onready var audio_ := AudioService
@@ -26,7 +27,8 @@ func _ready() -> void:
 
 	audio_.set_metro(130)
 	
-	_play()
+	if autoplay:
+		_play()
 	$Camera.looky(Vector3(-0.0147195002064109, 0.1273230016231537, -0.327578991651535), Vector3(-0.9006010293960571, -0.2513279914855957, 0), 0.1)
 
 func _rumble() -> void:
