@@ -20,7 +20,7 @@ shader_parameter/shadow_color = Color(0, 0, 0, 1)
 shader_parameter/shadow_thickness = 2.0
 shader_parameter/scale = 2.0
 shader_parameter/noise_scale = 1.0
-shader_parameter/disable = true
+shader_parameter/disable = false
 shader_parameter/crayon_offset_texture = SubResource("NoiseTexture2D_cc0wv")
 
 [sub_resource type="Gradient" id="Gradient_ymx0l"]

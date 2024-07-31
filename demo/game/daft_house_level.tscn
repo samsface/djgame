@@ -258,8 +258,7 @@ script = ExtResource("10_bl7c8")
 
 [node name="Mano" parent="WorldViewport/SubViewport/Game" instance=ExtResource("34_cx8of")]
 unique_name_in_owner = true
-transform = Transform3D(0.810199, 0, -0.744026, 0, 1.1, 0, 0.744026, 0, 0.810199, 1.18576, -1.10025, -1.83706)
-attention = 0.6
+transform = Transform3D(0.810199, 0, -0.744026, 0, 1.1, 0, 0.744026, 0, 0.810199, 1.04487, -1.10025, -1.69781)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="WorldViewport/SubViewport/Game"]
 environment = ExtResource("12_41qun")

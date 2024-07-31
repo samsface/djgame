@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://dsc6o0lawmtkx"]
+
+[ext_resource type="Shader" path="res://models/characters/mano/mano.gdshader" id="1_v1qcr"]
+[ext_resource type="Texture2D" uid="uid://c3uq0si0io6mp" path="res://models/characters/shared/faces/face.png" id="2_b2gqe"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_g70ps"]
+noise_type = 4
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gqkpd"]
+in_3d_space = true
+seamless = true
+as_normal_map = true
+noise = SubResource("FastNoiseLite_g70ps")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_v1qcr")
+shader_parameter/scale = 3.0
+shader_parameter/noise_scale = 1.0
+shader_parameter/fps = 24.0
+shader_parameter/crayon_offset_texture = SubResource("NoiseTexture2D_gqkpd")
+shader_parameter/texture_face = ExtResource("2_b2gqe")
