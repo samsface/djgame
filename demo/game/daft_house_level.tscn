@@ -252,42 +252,42 @@ metadata/_edit_lock_ = true
 
 [node name="Rando" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(0.608747, 0, 0.793364, 0, 1, 0, -0.793364, 0, 0.608747, -0.267153, -1.05207, -10.82)
-talking = 0.957631
+talking = 0.18502
 jump = 0.387241
 cheer_left = 0.562042
 cheer_right = 0.00393959
 
 [node name="Rando2" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(-0.998878, 0, 0.0473678, 0, 1, 0, -0.0473678, 0, -0.998878, 0.609856, -1.05207, -9.60122)
-talking = 0.387875
+talking = 0.579575
 jump = 0.715247
 cheer_left = 0.585481
 cheer_right = 0.695664
 
 [node name="Rando3" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(-0.14199, 0, -0.989868, 0, 1, 0, 0.989868, 0, -0.14199, 1.16999, -1.05207, -10.3411)
-talking = 0.265886
+talking = 0.163783
 jump = 0.197193
 cheer_left = 0.499483
 cheer_right = 0.82792
 
 [node name="Rando4" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(0.988909, 0, 0.148517, 0, 1, 0, -0.148517, 0, 0.988909, 0.514756, -1.05207, -11.1875)
-talking = 0.91536
+talking = 0.692683
 jump = 0.619637
 cheer_left = 0.716641
 cheer_right = 0.812103
 
 [node name="Rando5" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(-0.436126, 0, 0.899885, 0, 1, 0, -0.899885, 0, -0.436126, -2.91186, -1.05207, -7.22742)
-talking = 0.542826
+talking = 0.384067
 jump = 0.962876
 cheer_left = 0.650209
 cheer_right = 0.251673
 
 [node name="Rando6" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(0.536165, 0, -0.844113, 0, 1, 0, 0.844113, 0, 0.536165, -1.66524, -1.05207, -7.86204)
-talking = 0.661738
+talking = 0.204887
 jump = 0.575413
 cheer_left = 0.392628
 cheer_right = 0.456179

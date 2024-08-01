@@ -11,6 +11,7 @@ extends Control
 signal seeked
 signal begin
 signal end
+signal seek_time_change_reqest
 
 var queue_on_ := []
 var queue_off_ := []
@@ -25,6 +26,11 @@ var offset := 0
 func _ready() -> void:
 	timeline_control = $TimelineControl
 	$TimelineControl.undo = undo_
+	$TimelineControl.seek_time_changed.connect(_seek_time_changed)
+	
+func _seek_time_changed() -> void:
+	Bus.audio_service.emit_float("CLOCK", $TimelineControl.seek_time)
+	#seek_time_change_reqest.emit($TimelineControl.seek_time)
 
 func seek(time:float) -> void:
 	var t := int(time + offset)
@@ -37,9 +43,7 @@ func seek(time:float) -> void:
 	if t >= $TimelineControl.time_range.y:
 		t = $TimelineControl.time_range.x + int(t % l)
 
-	
-	
-	$TimelineControl.caret = t
+	$TimelineControl.seek_time = t
 
 	for i in queue_off_.size():
 		var item = queue_off_[i].get(t)

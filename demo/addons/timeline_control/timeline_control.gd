@@ -7,6 +7,7 @@ signal changed
 signal add_row_pressed
 signal row_header_pressed
 signal zoom_changed(float)
+signal seek_time_changed
 
 @export var scroll_horizontal:float :
 	set(v):
@@ -26,9 +27,11 @@ signal zoom_changed(float)
 		split_offset = 0 if collapsed else 200
 		dragger_visibility = DRAGGER_HIDDEN_COLLAPSED if disable_row_headers else DRAGGER_VISIBLE
 
-@export var caret:int :
+@export var seek_time:int :
 	set(v):
-		%Caret.position.x = to_local(v)
+		%Cursor.time = v
+	get:
+		return %Cursor.time
 
 enum Tool {
 	none,
@@ -85,6 +88,7 @@ func to_local(v):
 	return v * zoom
 
 func _ready() -> void:
+	connect_row_item_(%Cursor)
 	connect_row_item_(%TimeRange)
 	header_scroll_container_.gui_input.connect(_headings_gui_input)
 
@@ -147,13 +151,12 @@ func _table_item_button_down(item):
 
 	#if w.x == 0:
 		#move_begin_()
-	if w.x > 0:
+	if w.x > 0 and not item.disable_resize:
 		resize_east_begin_()
-	elif w.x < 0:
+	elif w.x < 0 and not item.disable_resize:
 		resize_west_begin_()
 		
 	time_ = item.position.x / zoom
-	#cursor.position.x = item.position.x
 		
 	last_item_down_ = item
 
@@ -212,13 +215,13 @@ func _input(event):
 		move_process_()
 	elif tool_ == Tool.resize_east:
 		for item in selection_:
-			item.length = to_world(quantinize((row_position + quantinize_snap) * zoom, quantinize_snap) - item.position.x)
+			item.length = round(to_world(quantinize((row_position + quantinize_snap) * zoom, quantinize_snap) - item.position.x))
 		%Overlay.queue_redraw()
 	elif tool_ == Tool.resize_west:
 		for item in selection_:
 			var c = item.position.x
-			item.time = to_world(quantinize(row_position * zoom, quantinize_snap))
-			item.length += to_world(c - item.position.x)
+			item.time = round(to_world(quantinize(row_position * zoom, quantinize_snap)))
+			item.length += round(to_world(c - item.position.x))
 		%Overlay.queue_redraw()
 	elif tool_ == Tool.zooming:
 		var new_zoom = zoom_grab_position_.y - header_scroll_container_.get_local_mouse_position().y
@@ -311,13 +314,15 @@ func translation_begin_() -> void:
 	for item in selection_:
 		undo.add_undo_method(item.reparent.bind(item.get_parent()))
 		undo.add_undo_property(item, "time", item.time)
-		undo.add_undo_property(item, "length", item.length)
+		if not item.disable_resize:
+			undo.add_undo_property(item, "length", item.length)
 
 func translation_end_() -> void:
 	for item in selection_:
 		undo.add_do_method(item.reparent.bind(item.get_parent()))
 		undo.add_do_property(item, "time", item.time)
-		undo.add_do_property(item, "length", item.length)
+		if not item.disable_resize:
+			undo.add_do_property(item, "length", item.length)
 	
 	commit_action_()
 
@@ -345,21 +350,20 @@ func move_process_() -> void:
 	handle_item_position.x = quantinize(handle_item_position.x, quantinize_snap)
 
 	var move = handle_item_position - handle_item.position
-	move = move.round()
-	
-	if move != Vector2.ZERO:
-		print(move)
 
 	for item in selection_:
-		item.time += to_world(move.x)
+		item.time += round(to_world(move.x))
 
 	if selection_.size() == 1:
-		if handle_item != %TimeRange:
+		if handle_item != %TimeRange and handle_item != %Cursor:
 			if handle_item.get_parent().get_index() != track_index:
 				handle_item.get_parent().remove_child(handle_item)
 				%Rows.get_child(track_index).add_child(handle_item)
 
 	%Overlay.queue_redraw()
+
+	if selection_[0] == %Cursor:
+		seek_time_changed.emit()
 
 func resize_east_begin_() -> void:
 	tool_ = Tool.resize_east
@@ -432,7 +436,7 @@ func remove_item(node:Control) -> void:
 func invalidate_grid_size_() -> void:
 	#grid_.grid_size = zoom
 
-	for row in %Rows.get_children() + [%TimeRange.get_parent()]:
+	for row in %Rows.get_children() + [%Cursor.get_parent(), %TimeRange.get_parent()]:
 		for item in row.get_children():
 			item.time = item.time
 			
@@ -603,4 +607,8 @@ func _row_headers_scroll_started() -> void:
 	pass # Replace with function body.
 
 func _row_headers_scroll_ended() -> void:
+	pass # Replace with function body.
+
+
+func _cursor_changed():
 	pass # Replace with function body.

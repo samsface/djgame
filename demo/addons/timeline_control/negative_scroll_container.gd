@@ -15,7 +15,6 @@ class_name NegativeScrollContainer
 		if get_child_count() > 0:
 			get_child(0).position.x = scroll_horizontal
 			get_child(0).position.y = scroll_vertical
-			prints(scroll_vertical, get_child(0).position.y)
 
 func auto_scroll(delta) -> bool:
 	var mpx = get_local_mouse_position().x

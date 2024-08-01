@@ -55,17 +55,16 @@ theme_override_constants/separation = 0
 [node name="HeaderScrollContainer" type="Control" parent="MarginContainer/HSplitContainer"]
 unique_name_in_owner = true
 clip_contents = true
-custom_minimum_size = Vector2(0, 64)
+custom_minimum_size = Vector2(0, 96)
 layout_mode = 2
 script = ExtResource("3_jy03w")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HSplitContainer/HeaderScrollContainer"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_bottom = 96.0
 grow_horizontal = 2
-grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("3_anpkx")
 numbers = true
@@ -85,13 +84,32 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
+[node name="Cursor" type="Control" parent="MarginContainer/HSplitContainer/HeaderScrollContainer/MarginContainer/Rows"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Cursor" type="Button" parent="MarginContainer/HSplitContainer/HeaderScrollContainer/MarginContainer/Rows/Cursor" node_paths=PackedStringArray("piano_roll_")]
+unique_name_in_owner = true
+modulate = Color(1, 0.317647, 1, 1)
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+script = ExtResource("5_q1ywe")
+piano_roll_ = NodePath("../../../../../../..")
+disable_resize = true
+length = 1
+
 [node name="TimeRangeRow" type="Control" parent="MarginContainer/HSplitContainer/HeaderScrollContainer/MarginContainer/Rows"]
+auto_translate_mode = 1
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 mouse_filter = 2
 
 [node name="TimeRange" type="Button" parent="MarginContainer/HSplitContainer/HeaderScrollContainer/MarginContainer/Rows/TimeRangeRow" node_paths=PackedStringArray("piano_roll_")]
 unique_name_in_owner = true
+auto_translate_mode = 1
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 0
 offset_right = 32.0
@@ -130,14 +148,6 @@ mouse_filter = 2
 theme = ExtResource("4_0aakd")
 theme_override_constants/separation = 0
 
-[node name="Caret" type="ColorRect" parent="MarginContainer/HSplitContainer/BodyScrollContainer/MarginContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-offset_right = 1.0
-offset_bottom = 650.0
-mouse_filter = 2
-color = Color(1, 0, 1, 1)
-
 [node name="Overlay" type="MarginContainer" parent="MarginContainer/HSplitContainer/BodyScrollContainer/MarginContainer"]
 unique_name_in_owner = true
 auto_translate_mode = 1
@@ -149,6 +159,14 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("6_tnfgb")
+
+[node name="Caret" type="ColorRect" parent="MarginContainer"]
+unique_name_in_owner = true
+top_level = true
+custom_minimum_size = Vector2(1, 128)
+layout_mode = 2
+mouse_filter = 2
+color = Color(1, 0, 1, 1)
 
 [node name="OptionButton" type="OptionButton" parent="MarginContainer"]
 layout_mode = 2

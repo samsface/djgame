@@ -26,6 +26,7 @@ attack_us = 355.0
 sidechain = &"Music"
 
 [resource]
+bus/0/volume_db = -80.0
 bus/1/name = &"Music"
 bus/1/solo = false
 bus/1/mute = false
