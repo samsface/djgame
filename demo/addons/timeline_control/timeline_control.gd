@@ -9,6 +9,8 @@ signal row_header_pressed
 signal zoom_changed(float)
 signal seek_time_changed
 
+@export var root_node:Node
+
 @export var scroll_horizontal:float :
 	set(v):
 		if scroll_container_:
@@ -32,6 +34,8 @@ signal seek_time_changed
 		%Cursor.time = v
 	get:
 		return %Cursor.time
+
+@export var ops:Array[PackedScene]
 
 enum Tool {
 	none,
@@ -88,9 +92,15 @@ func to_local(v):
 	return v * zoom
 
 func _ready() -> void:
+	%AddTrackButton.get_popup().id_pressed.connect(_add_track_button_id_pressed)
+	
 	connect_row_item_(%Cursor)
 	connect_row_item_(%TimeRange)
 	header_scroll_container_.gui_input.connect(_headings_gui_input)
+	
+
+	for op in ops:
+		%AddTrackButton.get_popup().add_item(op.resource_path.get_file().replace(".tscn", "").capitalize())
 
 func _headings_gui_input(event:InputEvent) -> void:
 	if event.is_action_pressed("click"):
@@ -530,8 +540,19 @@ func _scroll_container_gui_input(event: InputEvent) -> void:
 		if event.pressed:
 			if event.button_index == MOUSE_BUTTON_RIGHT:
 				if %Rows.get_child_count() > 0:
-					var table_idx := get_local_mouse_table_position_row()
-					row_pressed.emit(get_local_mouse_table_position_row(), get_local_mouse_table_position())
+					var row = %Rows.get_child(get_local_mouse_table_position_row())
+					
+					var header = get_row_header(get_local_mouse_table_position_row())
+					if not header:
+						return
+					
+					var item := ops[header.type].instantiate()
+					
+					item.time = floor(get_local_mouse_table_position() / quantinize_snap) * quantinize_snap
+					item.length = quantinize_snap
+					
+					add_item(item, get_local_mouse_table_position_row())
+
 			else:
 				tool_ = Tool.selecting
 				selection_box_ = Rect2(%Overlay.get_local_mouse_position(), Vector2.ZERO)
@@ -564,8 +585,11 @@ func fit() -> void:
 	zoom = 4 * r
 	scroll_horizontal = 0
 
-func _add_row_pressed() -> void:
-	add_row_pressed.emit()
+func _add_track_button_id_pressed(id) -> void:
+	var row_header = preload("res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn").instantiate()
+	row_header.type = id
+	row_header.root_node = root_node
+	add_row(row_header)
 
 func get_row_header(row_idx:int) -> Control:
 	if row_idx >= %RowHeaders.get_child_count():
@@ -602,6 +626,8 @@ func _snap_selected(index: int) -> void:
 			quantinize_snap = 8
 		5:
 			quantinize_snap = 16
+			
+	sort_rows_()
 
 func _row_headers_scroll_started() -> void:
 	pass # Replace with function body.
@@ -612,3 +638,17 @@ func _row_headers_scroll_ended() -> void:
 
 func _cursor_changed():
 	pass # Replace with function body.
+	
+func sort_rows_() -> void:
+	var headers := []
+	for i in get_row_count():
+		headers.push_back([get_row_header(i).node_path, %RowHeaders.get_child(i), %Rows.get_child(i)])
+
+	headers.sort_custom(func(a, b):
+		return str(a[0]) < str(b[0]))
+
+	for i in headers.size():
+		print(headers[i])
+		%RowHeaders.move_child(headers[i][1], i)
+		%Rows.move_child(headers[i][2], i)
+	

@@ -28,6 +28,8 @@ func _ready() -> void:
 	$TimelineControl.undo = undo_
 	$TimelineControl.seek_time_changed.connect(_seek_time_changed)
 	
+	$TimelineControl.root_node = root_node
+	
 func _seek_time_changed() -> void:
 	Bus.audio_service.emit_float("CLOCK", $TimelineControl.seek_time)
 	#seek_time_change_reqest.emit($TimelineControl.seek_time)
@@ -73,9 +75,10 @@ func invalidate_queue_() -> void:
 			var begin = item.time - item.get_lookahead()
 			var end = item.time + item.length
 
-			if item.time < $TimelineControl.time_range.x or item.time > $TimelineControl.time_range.y:
-				continue
+			#if item.time < $TimelineControl.time_range.x or item.time > $TimelineControl.time_range.y:
+			#	continue
 	
+			# think this is for looping, forget
 			if begin < $TimelineControl.time_range.x:
 				dict_on[$TimelineControl.time_range.y + begin] = item
 				#dict_off[time_range.x] = item
@@ -91,14 +94,6 @@ func invalidate_queue_() -> void:
 		
 		queue_on_.push_back(dict_on)
 		queue_off_.push_back(dict_off)
-
-func _row_right_clicked(row_idx:int, time:int) -> void:
-	if painting_item:
-		var item := painting_item.instantiate()
-		item.time = floor(time / $TimelineControl.quantinize_snap) *  $TimelineControl.quantinize_snap
-		item.length = $TimelineControl.quantinize_snap
-		
-		$TimelineControl.add_item(item, row_idx)
 
 func _selection_changed(selection) -> void:
 	if not inspector:
@@ -181,20 +176,3 @@ func _input(event: InputEvent) -> void:
 func _visibility_changed() -> void:
 	if visible:
 		inspector.undo = undo_
-
-func _paint_item_selected(index: int) -> void:
-	match index:
-		0:
-			painting_item = preload("res://addons/rhythmic_animation_player/ops/bang.tscn")
-		1:
-			painting_item = preload("res://addons/rhythmic_animation_player/ops/slide.tscn")
-		2:
-			painting_item = preload("res://addons/rhythmic_animation_player/ops/method.tscn")
-		3:
-			painting_item = preload("res://addons/rhythmic_animation_player/ops/dialog.tscn")
-		4:
-			painting_item = preload("res://addons/rhythmic_animation_player/ops/tween.tscn")
-		5:
-			painting_item = preload("res://addons/rhythmic_animation_player/ops/jump.tscn")
-		6:
-			painting_item = preload("res://addons/rhythmic_animation_player/ops/camera.tscn")

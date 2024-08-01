@@ -1,9 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwilpnax30ixm"]
+[gd_scene load_steps=11 format=3 uid="uid://cwilpnax30ixm"]
 
+[ext_resource type="PackedScene" uid="uid://74pwn2qyav8l" path="res://addons/rhythmic_animation_player/ops/bang.tscn" id="2_spgtn"]
 [ext_resource type="Script" path="res://addons/timeline_control/timeline_control.gd" id="2_ugbsv"]
+[ext_resource type="PackedScene" uid="uid://bcyryirofl6ti" path="res://addons/rhythmic_animation_player/ops/slide.tscn" id="3_0cqlh"]
 [ext_resource type="Script" path="res://addons/timeline_control/grid.gd" id="3_anpkx"]
 [ext_resource type="Script" path="res://addons/timeline_control/negative_scroll_container.gd" id="3_jy03w"]
 [ext_resource type="Theme" uid="uid://c5jrgxmplyccb" path="res://ui/beat_player2.tres" id="4_0aakd"]
+[ext_resource type="PackedScene" uid="uid://ogx3qotg0a0o" path="res://addons/rhythmic_animation_player/ops/tween.tscn" id="4_ki4e2"]
 [ext_resource type="Script" path="res://addons/timeline_control/timeline_control_item.gd" id="5_q1ywe"]
 [ext_resource type="Script" path="res://addons/timeline_control/overlay.gd" id="6_tnfgb"]
 
@@ -15,14 +18,20 @@ offset_bottom = 503.0
 size_flags_vertical = 3
 split_offset = 200
 script = ExtResource("2_ugbsv")
+ops = Array[PackedScene]([ExtResource("2_spgtn"), ExtResource("3_0cqlh"), ExtResource("4_ki4e2")])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 72)
+custom_minimum_size = Vector2(0, 66)
 layout_mode = 2
+
+[node name="AddTrackButton" type="MenuButton" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Add Track +"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -30,17 +39,11 @@ size_flags_vertical = 3
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
-[node name="MarginContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="RowHeaders" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer"]
+[node name="RowHeaders" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-
-[node name="Button" type="Button" parent="VBoxContainer/ScrollContainer/MarginContainer"]
-layout_mode = 2
-text = "Add Track"
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -192,6 +195,5 @@ popup/item_5/id = 4
 [connection signal="zoom_changed" from="." to="MarginContainer/HSplitContainer/BodyScrollContainer/MarginContainer" method="_zoom_changed"]
 [connection signal="scroll_ended" from="VBoxContainer/ScrollContainer" to="." method="_row_headers_scroll_ended"]
 [connection signal="scroll_started" from="VBoxContainer/ScrollContainer" to="." method="_row_headers_scroll_started"]
-[connection signal="pressed" from="VBoxContainer/ScrollContainer/MarginContainer/Button" to="." method="_add_row_pressed"]
 [connection signal="gui_input" from="MarginContainer/HSplitContainer/BodyScrollContainer" to="." method="_scroll_container_gui_input"]
 [connection signal="item_selected" from="MarginContainer/OptionButton" to="." method="_snap_selected"]

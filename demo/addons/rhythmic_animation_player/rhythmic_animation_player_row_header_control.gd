@@ -2,6 +2,10 @@ extends HBoxContainer
 
 var root_node:Node
 
+@export var type:int : 
+	set(v):
+		type = v
+
 @export var node_path:NodePath : 
 	set(v):
 		node_path = v
@@ -23,14 +27,29 @@ func pretty_name(np:NodePath):
 	
 	return str(str)
 	
+func get_target_node_property_path() -> NodePath:
+	var str := str(node_path)
+	var search := str.find(":")
+	if search != -1:
+		return NodePath(str.substr(search))
+	else:
+		return NodePath()
 
 func invalidate_() -> void:
 	$Value.text = pretty_name(node_path)
 	
-	if try_get_node() == null:
+	var node = try_get_node()
+	if node == null:
 		modulate = Color.RED
 	else:
-		modulate = Color.WHITE
+		var property_path := get_target_node_property_path()
+		if property_path:
+			if node.get_indexed(property_path) == null:
+				modulate = Color.RED
+			else:
+				modulate = Color.WHITE
+		else:
+			modulate = Color.WHITE
 	
 	if condition_ex.is_empty():
 		$Condition.visible = false

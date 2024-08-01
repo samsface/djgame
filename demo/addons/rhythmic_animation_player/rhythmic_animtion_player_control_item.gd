@@ -19,6 +19,13 @@ func get_target_node():
 	
 	return row_header.try_get_node()
 		
+func get_target_property_path() -> NodePath:
+	var row_header = get_row_header()
+	if not row_header:
+		return NodePath()
+		
+	return row_header.get_target_node_property_path()
+
 func begin() -> void:
 	pass
 

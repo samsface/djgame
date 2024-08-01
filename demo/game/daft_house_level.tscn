@@ -97,10 +97,10 @@ emission = Color(0.925046, 0.135418, 0.483426, 1)
 emission_energy_multiplier = 7.57
 backlight = Color(1, 1, 1, 1)
 
-[sub_resource type="TextMesh" id="TextMesh_1wa32"]
+[sub_resource type="TextMesh" id="TextMesh_kw0sd"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_r3umm")
-text = "1 Year Ago"
+text = "n'Snare"
 font = ExtResource("37_0waph")
 font_size = 4
 curve_step = 10.0
@@ -110,6 +110,33 @@ depth = 0.001
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_r3umm")
 text = "Daft House Night"
+font = ExtResource("37_0waph")
+font_size = 4
+curve_step = 10.0
+depth = 0.001
+
+[sub_resource type="TextMesh" id="TextMesh_nelm5"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_r3umm")
+text = "Mano"
+font = ExtResource("37_0waph")
+font_size = 4
+curve_step = 10.0
+depth = 0.001
+
+[sub_resource type="TextMesh" id="TextMesh_fwk45"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_r3umm")
+text = "featuring..."
+font = ExtResource("37_0waph")
+font_size = 4
+curve_step = 10.0
+depth = 0.001
+
+[sub_resource type="TextMesh" id="TextMesh_4ysxk"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_r3umm")
+text = "Kick"
 font = ExtResource("37_0waph")
 font_size = 4
 curve_step = 10.0
@@ -133,37 +160,10 @@ font_size = 4
 curve_step = 10.0
 depth = 0.001
 
-[sub_resource type="TextMesh" id="TextMesh_nelm5"]
+[sub_resource type="TextMesh" id="TextMesh_1wa32"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_r3umm")
-text = "Mano"
-font = ExtResource("37_0waph")
-font_size = 4
-curve_step = 10.0
-depth = 0.001
-
-[sub_resource type="TextMesh" id="TextMesh_4ysxk"]
-resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_r3umm")
-text = "Kick"
-font = ExtResource("37_0waph")
-font_size = 4
-curve_step = 10.0
-depth = 0.001
-
-[sub_resource type="TextMesh" id="TextMesh_kw0sd"]
-resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_r3umm")
-text = "n'Snare"
-font = ExtResource("37_0waph")
-font_size = 4
-curve_step = 10.0
-depth = 0.001
-
-[sub_resource type="TextMesh" id="TextMesh_fwk45"]
-resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_r3umm")
-text = "featuring..."
+text = "1 Year Ago"
 font = ExtResource("37_0waph")
 font_size = 4
 curve_step = 10.0
@@ -252,42 +252,42 @@ metadata/_edit_lock_ = true
 
 [node name="Rando" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(0.608747, 0, 0.793364, 0, 1, 0, -0.793364, 0, 0.608747, -0.267153, -1.05207, -10.82)
-talking = 0.18502
+talking = 0.118804
 jump = 0.387241
 cheer_left = 0.562042
 cheer_right = 0.00393959
 
 [node name="Rando2" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(-0.998878, 0, 0.0473678, 0, 1, 0, -0.0473678, 0, -0.998878, 0.609856, -1.05207, -9.60122)
-talking = 0.579575
+talking = 0.378921
 jump = 0.715247
 cheer_left = 0.585481
 cheer_right = 0.695664
 
 [node name="Rando3" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(-0.14199, 0, -0.989868, 0, 1, 0, 0.989868, 0, -0.14199, 1.16999, -1.05207, -10.3411)
-talking = 0.163783
+talking = 0.671663
 jump = 0.197193
 cheer_left = 0.499483
 cheer_right = 0.82792
 
 [node name="Rando4" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(0.988909, 0, 0.148517, 0, 1, 0, -0.148517, 0, 0.988909, 0.514756, -1.05207, -11.1875)
-talking = 0.692683
+talking = 0.355274
 jump = 0.619637
 cheer_left = 0.716641
 cheer_right = 0.812103
 
 [node name="Rando5" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(-0.436126, 0, 0.899885, 0, 1, 0, -0.899885, 0, -0.436126, -2.91186, -1.05207, -7.22742)
-talking = 0.384067
+talking = 0.97308
 jump = 0.962876
 cheer_left = 0.650209
 cheer_right = 0.251673
 
 [node name="Rando6" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(0.536165, 0, -0.844113, 0, 1, 0, 0.844113, 0, 0.536165, -1.66524, -1.05207, -7.86204)
-talking = 0.204887
+talking = 0.790078
 jump = 0.575413
 cheer_left = 0.392628
 cheer_right = 0.456179
@@ -583,51 +583,66 @@ size = Vector2i(128, 128)
 stream = ExtResource("38_c3iha")
 pitch_scale = 1.2
 
-[node name="2YearsAgoLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
-transform = Transform3D(0.9, 0, 0, 0, 0.8977, 0.0643006, 0, -0.0643006, 0.8977, 0.0151705, 0.0451181, -0.472114)
-mesh = SubResource("TextMesh_1wa32")
-text = "1 Year Ago"
-
-[node name="DaftHouseNightLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
-transform = Transform3D(-0.171965, 0.00890998, 0.57476, -0.0100421, 0.59979, -0.0123025, -0.574741, -0.0131457, -0.171756, -0.1767, 0.0123155, -0.388648)
-mesh = SubResource("TextMesh_sjc2w")
-text = "Daft House Night"
-
-[node name="AtTheUnicornLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
-transform = Transform3D(-0.415577, 0.022275, -1.44111, 0.0377514, 1.49947, 0.0122906, 1.44079, -0.0328642, -0.415992, 0.364956, 0.0316188, -0.298805)
-mesh = SubResource("TextMesh_p277i")
-text = "At the Unicorn"
-
-[node name="NowPlayingLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
+[node name="Text" type="Node3D" parent="WorldViewport/SubViewport/Game"]
 transform = Transform3D(-0.388985, -0.0932223, -4.07488e-09, 0, -1.74846e-08, 0.4, -0.0932223, 0.388985, 1.70031e-08, 0.0312412, 0.00165822, -0.45301)
-mesh = SubResource("TextMesh_hlvgl")
-text = "When you played..."
 
-[node name="ManoLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
-transform = Transform3D(15.6931, 0, -3.11871, 0, 16, 0, 3.11871, 0, 15.6931, -0.114262, 0.53281, -2.11912)
-visible = false
-mesh = SubResource("TextMesh_nelm5")
-text = "Mano"
-
-[node name="KickLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
+[node name="NSnare" parent="WorldViewport/SubViewport/Game/Text" instance=ExtResource("37_awei0")]
 unique_name_in_owner = true
-transform = Transform3D(0.289325, 0.0753695, -0.0247032, 0.00257069, 0.0844774, 0.287849, 0.0792729, -0.277818, 0.0808257, -0.00711677, 0.0332144, -0.441365)
-visible = false
-mesh = SubResource("TextMesh_4ysxk")
-text = "Kick"
-
-[node name="NSnareLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
-unique_name_in_owner = true
-transform = Transform3D(0.289325, 0.0753695, -0.0247032, 0.00257069, 0.0844774, 0.287849, 0.0792729, -0.277818, 0.0808257, 0.026906, 0.0335167, -0.432043)
+transform = Transform3D(-0.749583, -0.0213674, 0.0129651, 0.0241527, -0.719333, 0.210893, 0.00642673, 0.211193, 0.719623, -0.00167666, 0.0535001, 0.0796462)
 visible = false
 mesh = SubResource("TextMesh_kw0sd")
+skeleton = NodePath("../..")
 text = "n'Snare"
 
-[node name="FeaturingLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
-transform = Transform3D(0.578651, 0.00437072, -0.15857, 0.00514139, 0.59894, 0.0352708, 0.158546, -0.0353746, 0.577592, 0.0354938, 0.0442698, -0.467715)
+[node name="DaftHouseNight" parent="WorldViewport/SubViewport/Game/Text" instance=ExtResource("37_awei0")]
+transform = Transform3D(0.752942, -0.0140024, -1.29726, -1.29709, -0.0371507, -0.752445, -0.0251053, 1.49948, -0.0307563, 0.468038, 0.277629, 0.0266432)
+visible = false
+mesh = SubResource("TextMesh_sjc2w")
+skeleton = NodePath("../..")
+text = "Daft House Night"
+
+[node name="Mano" parent="WorldViewport/SubViewport/Game/Text" instance=ExtResource("37_awei0")]
+transform = Transform3D(-39.9695, 1.94289e-13, -1.56135, -1.56135, -1.74846e-06, 39.9695, -6.82489e-08, 40, 1.74713e-06, 1.32448, -3.9658, 1.32788)
+visible = false
+mesh = SubResource("TextMesh_nelm5")
+skeleton = NodePath("../..")
+text = "Mano"
+
+[node name="Featuring" parent="WorldViewport/SubViewport/Game/Text" instance=ExtResource("37_awei0")]
+transform = Transform3D(-1.49917, 0.00998475, 0.0489807, 0.0483053, -0.0885479, 1.49661, 0.0128535, 1.49735, 0.0881771, -0.00177102, -0.0382279, 0.106529)
 visible = false
 mesh = SubResource("TextMesh_fwk45")
+skeleton = NodePath("../..")
 text = "featuring..."
+
+[node name="Kick" parent="WorldViewport/SubViewport/Game/Text" instance=ExtResource("37_awei0")]
+unique_name_in_owner = true
+transform = Transform3D(-0.749583, -0.0213674, 0.0129651, 0.0241527, -0.719333, 0.210893, 0.00642673, 0.211193, 0.719622, 0.0864695, 0.0506597, 0.0788905)
+visible = false
+mesh = SubResource("TextMesh_4ysxk")
+skeleton = NodePath("../..")
+text = "Kick"
+
+[node name="AtTheUnicorn" parent="WorldViewport/SubViewport/Game/Text" instance=ExtResource("37_awei0")]
+transform = Transform3D(0.170872, -0.0350061, 3.74594, 3.74492, -0.0928766, -0.171694, 0.0943787, 3.74867, 0.0307265, -0.90116, 0.180461, 0.0749015)
+visible = false
+mesh = SubResource("TextMesh_p277i")
+skeleton = NodePath("../..")
+text = "At the Unicorn"
+
+[node name="WhenYouPlayed" parent="WorldViewport/SubViewport/Game/Text" instance=ExtResource("37_awei0")]
+transform = Transform3D(1, 1.49012e-08, 0, -1.49012e-08, 1, 0, 0, -3.55271e-15, 1, 0, 0, 0)
+visible = false
+mesh = SubResource("TextMesh_hlvgl")
+skeleton = NodePath("../..")
+text = "When you played..."
+
+[node name="2YearsAgo" parent="WorldViewport/SubViewport/Game/Text" instance=ExtResource("37_awei0")]
+transform = Transform3D(-2.18804, 0.0374641, -0.523036, -0.524376, -0.156325, 2.18245, -2.29213e-08, 2.24425, 0.160752, 0.0587124, -0.0725958, 0.10865)
+visible = false
+mesh = SubResource("TextMesh_1wa32")
+skeleton = NodePath("../..")
+text = "1 Year Ago"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="WorldViewport/SubViewport/Game"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.140762, 0.292133, -0.827488)
