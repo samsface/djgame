@@ -2,6 +2,8 @@
 
 [resource]
 auto_exposure_enabled = true
+dof_blur_far_enabled = true
+dof_blur_far_distance = 3.0
 dof_blur_far_transition = -1.0
 dof_blur_near_enabled = true
 dof_blur_near_distance = 0.13

@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode unshaded, depth_draw_opaque, depth_prepass_alpha;
+render_mode unshaded;
 
 // Inspired by https://godotshaders.com/shader/3d-pixel-art-outline-highlight-post-processing-shader/
 

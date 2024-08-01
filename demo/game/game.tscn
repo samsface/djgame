@@ -97,6 +97,7 @@ script = ExtResource("4_oqmxi")
 
 [node name="SubViewport" type="SubViewport" parent="WorldViewport"]
 handle_input_locally = false
+scaling_3d_scale = 0.5
 gui_snap_controls_to_pixels = false
 size = Vector2i(1680, 1050)
 render_target_update_mode = 4
@@ -106,8 +107,9 @@ metadata/_edit_lock_ = true
 
 [node name="Mano" parent="WorldViewport/SubViewport/Game" instance=ExtResource("7_dfhen")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.02848, -8.94283)
-attention = 0.0
-cheer_left = 0.009
+jump = 1.0
+cheer_left = 0.207
+cheer_right = 0.176
 
 [node name="PointsService" parent="WorldViewport/SubViewport/Game" instance=ExtResource("6_2emse")]
 

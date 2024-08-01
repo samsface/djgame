@@ -2,21 +2,20 @@
 
 [sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_gby66"]
 resource_name = "Amplify"
-volume_db = -13.0
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_oif8r"]
 resource_name = "Reverb"
-room_size = 0.14
-damping = 0.78
-spread = 0.13
-wet = 0.16
+hipass = 0.22
+dry = 0.9
+wet = 0.1
 
 [sub_resource type="AudioEffectChorus" id="AudioEffectChorus_r80rm"]
 resource_name = "Chorus"
+dry = 0.5
+wet = 0.4
 
 [sub_resource type="AudioEffectLimiter" id="AudioEffectLimiter_lfwnm"]
 resource_name = "Limiter"
-ceiling_db = -3.0
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_wxj2p"]
 resource_name = "Compressor"
@@ -40,7 +39,7 @@ bus/1/effect/1/enabled = true
 bus/1/effect/2/effect = SubResource("AudioEffectChorus_r80rm")
 bus/1/effect/2/enabled = true
 bus/1/effect/3/effect = SubResource("AudioEffectLimiter_lfwnm")
-bus/1/effect/3/enabled = true
+bus/1/effect/3/enabled = false
 bus/2/name = &"New Bus"
 bus/2/solo = false
 bus/2/mute = false

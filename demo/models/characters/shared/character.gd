@@ -10,10 +10,11 @@ var r := randf()
 		if is_node_ready():
 			$AnimationTree.set("parameters/TimeScale/scale", v)
 	
-@export_range(0.0, 1.0) var filming:float :
+@export_range(0.0, 1.0) var talking:float :
 	set(v):
-		filming = v
-		$AnimationTree.set("parameters/Filming/blend_amount", v)
+		talking = v
+		if is_node_ready():
+			$AnimationTree.set("parameters/Talking/blend_position", v)
 
 @export_range(0.0, 1.0) var anger:float :
 	set(v):
@@ -22,11 +23,11 @@ var r := randf()
 		anger = v
 
 
-@export_range(0.0, 1.0) var attention:float :
+@export_range(0.0, 1.0) var jump:float :
 	set(v):
-		attention = v
+		jump = v
 		if is_node_ready():
-			$AnimationTree.set("parameters/Jump/blend_position", attention)
+			$AnimationTree.set("parameters/Jump/blend_position", jump)
 
 @export_range(0.0, 1.0) var cheer_left:float :
 	set(v):
@@ -49,20 +50,6 @@ var r := randf()
 	set(v):
 		tired = v
 
-
-
-var delta_sum_ := 0.0
-
 func _physics_process(delta: float) -> void:
-	
-	AnimationNodeBlendTree
-	delta_sum_ += delta
-	
-	##if sin(delta_sum_ * 40.0) > 0.9:
-	#	speed_scale = 2.0
-	#else:
-	#	speed_scale = 0.0
-
-	if not Engine.is_editor_hint() or true:
-		if has_node("Armature"):
-			$Armature.position = $AnimationTree.get_root_motion_position_accumulator()
+	if has_node("Armature"):
+		$Armature.position = $AnimationTree.get_root_motion_position_accumulator()

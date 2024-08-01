@@ -1,0 +1,91 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=17 format=3 uid="uid://6xhbptqpvu8h"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_apw4l"]
+animation = &"character_animations/Cheering"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i2u6n"]
+animation = &"character_animations/Cheering"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_yby88"]
+filter_enabled = true
+filters = ["Armature/Skeleton3D:Arm_L", "Armature/Skeleton3D:ForeArm_L", "Armature/Skeleton3D:HandIndex1_L", "Armature/Skeleton3D:HandIndex2_L", "Armature/Skeleton3D:HandIndex3_L", "Armature/Skeleton3D:HandMiddle1_L", "Armature/Skeleton3D:HandMiddle2_L", "Armature/Skeleton3D:HandMiddle3_L", "Armature/Skeleton3D:HandRing1_L", "Armature/Skeleton3D:HandRing2_L", "Armature/Skeleton3D:HandRing3_L", "Armature/Skeleton3D:HandThumb1_L", "Armature/Skeleton3D:HandThumb2_L", "Armature/Skeleton3D:HandThumb3_L", "Armature/Skeleton3D:Hand_L", "Armature/Skeleton3D:Head", "Armature/Skeleton3D:Neck", "Armature/Skeleton3D:Shoulder_L", "Armature/Skeleton3D:Spine1", "Armature/Skeleton3D:Spine2"]
+sync = true
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_sdyvk"]
+filter_enabled = true
+filters = ["Armature/Skeleton3D:Arm_R", "Armature/Skeleton3D:ForeArm_R", "Armature/Skeleton3D:HandIndex1_R", "Armature/Skeleton3D:HandIndex2_R", "Armature/Skeleton3D:HandIndex3_R", "Armature/Skeleton3D:HandMiddle1_R", "Armature/Skeleton3D:HandMiddle2_R", "Armature/Skeleton3D:HandMiddle3_R", "Armature/Skeleton3D:HandRing1_R", "Armature/Skeleton3D:HandRing2_R", "Armature/Skeleton3D:HandRing3_R", "Armature/Skeleton3D:HandThumb1_R", "Armature/Skeleton3D:HandThumb2_R", "Armature/Skeleton3D:HandThumb3_R", "Armature/Skeleton3D:Hand_R", "Armature/Skeleton3D:Head", "Armature/Skeleton3D:Neck", "Armature/Skeleton3D:Shoulder_R", "Armature/Skeleton3D:Spine1", "Armature/Skeleton3D:Spine2"]
+sync = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5jmun"]
+animation = &"character_animations/Jumping Rope"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jbp5e"]
+animation = &"character_animations/Cross Jumps"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bfwvl"]
+animation = &"character_animations/Cross Jumps Rotation"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_42h4w"]
+animation = &"character_animations/Excited"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gn03o"]
+animation = &"character_animations/Breakdance Ready"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_8xree"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_5jmun")
+blend_point_0/pos = 0.5
+blend_point_1/node = SubResource("AnimationNodeAnimation_jbp5e")
+blend_point_1/pos = 0.75
+blend_point_2/node = SubResource("AnimationNodeAnimation_bfwvl")
+blend_point_2/pos = 1.0
+blend_point_3/node = SubResource("AnimationNodeAnimation_42h4w")
+blend_point_3/pos = 0.25
+blend_point_4/node = SubResource("AnimationNodeAnimation_gn03o")
+blend_point_4/pos = 0.0
+min_space = 0.0
+snap = 0.05
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xqxew"]
+animation = &"character_animations/Yelling"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xqvro"]
+animation = &"character_animations/Talking Alt"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m5xay"]
+animation = &"character_animations/Talking"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jftnv"]
+animation = &"character_animations/Standing Arguing"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_wx7kn"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_xqxew")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_xqvro")
+blend_point_1/pos = 0.33
+blend_point_2/node = SubResource("AnimationNodeAnimation_m5xay")
+blend_point_2/pos = 0.66
+blend_point_3/node = SubResource("AnimationNodeAnimation_jftnv")
+blend_point_3/pos = 1.0
+min_space = 0.0
+snap = 0.33
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ynrd8"]
+
+[resource]
+graph_offset = Vector2(-572.718, -439.96)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_i2u6n")
+nodes/Animation/position = Vector2(-1100, -80)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_apw4l")
+"nodes/Animation 2/position" = Vector2(-1100, 80)
+nodes/CheerLeft/node = SubResource("AnimationNodeBlend2_yby88")
+nodes/CheerLeft/position = Vector2(-540, -220)
+nodes/CheerRight/node = SubResource("AnimationNodeBlend2_sdyvk")
+nodes/CheerRight/position = Vector2(-260, -20)
+nodes/Jump/node = SubResource("AnimationNodeBlendSpace1D_8xree")
+nodes/Jump/position = Vector2(-1100, -260)
+nodes/Talking/node = SubResource("AnimationNodeBlendSpace1D_wx7kn")
+nodes/Talking/position = Vector2(280, -140)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_ynrd8")
+nodes/TimeScale/position = Vector2(520, -160)
+nodes/output/position = Vector2(740, -140)
+node_connections = [&"CheerLeft", 0, &"Jump", &"CheerLeft", 1, &"Animation", &"CheerRight", 0, &"CheerLeft", &"CheerRight", 1, &"Animation 2", &"TimeScale", 0, &"Talking", &"output", 0, &"TimeScale"]

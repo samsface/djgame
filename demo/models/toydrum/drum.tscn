@@ -182,7 +182,6 @@ label = "rec"
 
 [node name="Sound" type="AudioStreamPlayer3D" parent="NorthFace/Record"]
 stream = SubResource("AudioStreamRandomizer_2uwsy")
-bus = &"KeyPresses"
 
 [node name="Base" parent="NorthFace/Record" instance=ExtResource("12_bc3uq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.02836e-05, 0)
@@ -234,7 +233,6 @@ size = Vector3(0.02, 0.0025, 0.02)
 
 [node name="Sound" type="AudioStreamPlayer3D" parent="NorthFace/seq-1"]
 stream = SubResource("AudioStreamRandomizer_qnwah")
-bus = &"KeyPresses"
 
 [node name="Path" type="Path3D" parent="NorthFace/seq-1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0116102, 0)
@@ -281,7 +279,6 @@ size = Vector3(0.02, 0.0025, 0.02)
 
 [node name="Sound" type="AudioStreamPlayer3D" parent="NorthFace/seq-2"]
 stream = SubResource("AudioStreamRandomizer_qnwah")
-bus = &"KeyPresses"
 
 [node name="Path" type="Path3D" parent="NorthFace/seq-2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0116102, 0)
@@ -328,7 +325,6 @@ size = Vector3(0.02, 0.0025, 0.02)
 
 [node name="Sound" type="AudioStreamPlayer3D" parent="NorthFace/seq-3"]
 stream = SubResource("AudioStreamRandomizer_qnwah")
-bus = &"KeyPresses"
 
 [node name="Path" type="Path3D" parent="NorthFace/seq-3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0116102, 0)
@@ -375,7 +371,6 @@ size = Vector3(0.02, 0.0025, 0.02)
 
 [node name="Sound" type="AudioStreamPlayer3D" parent="NorthFace/seq-4"]
 stream = SubResource("AudioStreamRandomizer_qnwah")
-bus = &"KeyPresses"
 
 [node name="Path" type="Path3D" parent="NorthFace/seq-4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0116102, 0)
@@ -422,7 +417,6 @@ size = Vector3(0.02, 0.0025, 0.02)
 
 [node name="Sound" type="AudioStreamPlayer3D" parent="NorthFace/seq-5"]
 stream = SubResource("AudioStreamRandomizer_qnwah")
-bus = &"KeyPresses"
 
 [node name="Path" type="Path3D" parent="NorthFace/seq-5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0116102, 0)
@@ -469,7 +463,6 @@ size = Vector3(0.02, 0.0025, 0.02)
 
 [node name="Sound" type="AudioStreamPlayer3D" parent="NorthFace/seq-6"]
 stream = SubResource("AudioStreamRandomizer_qnwah")
-bus = &"KeyPresses"
 
 [node name="Path" type="Path3D" parent="NorthFace/seq-6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0116102, 0)
@@ -516,7 +509,6 @@ size = Vector3(0.02, 0.0025, 0.02)
 
 [node name="Sound" type="AudioStreamPlayer3D" parent="NorthFace/seq-7"]
 stream = SubResource("AudioStreamRandomizer_qnwah")
-bus = &"KeyPresses"
 
 [node name="Path" type="Path3D" parent="NorthFace/seq-7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0116102, 0)
@@ -563,7 +555,6 @@ size = Vector3(0.02, 0.0025, 0.02)
 
 [node name="Sound" type="AudioStreamPlayer3D" parent="NorthFace/seq-8"]
 stream = SubResource("AudioStreamRandomizer_qnwah")
-bus = &"KeyPresses"
 
 [node name="Path" type="Path3D" parent="NorthFace/seq-8"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0116102, 0)

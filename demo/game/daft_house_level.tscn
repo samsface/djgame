@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://c8c0isilrphjb"]
+[gd_scene load_steps=55 format=3 uid="uid://c8c0isilrphjb"]
 
 [ext_resource type="PackedScene" uid="uid://dgg103ssmbg32" path="res://game/settings/settings.tscn" id="1_rpjq6"]
 [ext_resource type="Script" path="res://game/animation.gd" id="2_phct8"]
@@ -7,10 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://ij1ky0f8flgr" path="res://addons/dialog_graph/dialog_graph.tscn" id="5_vn3bw"]
 [ext_resource type="Script" path="res://game/world_viewport.gd" id="6_nn5dd"]
 [ext_resource type="Script" path="res://game/game.gd" id="7_qq0t8"]
+[ext_resource type="PackedScene" uid="uid://cc1hg7tc2evsm" path="res://models/characters/mano/rando.tscn" id="8_3lxhf"]
 [ext_resource type="PackedScene" uid="uid://df031doltiks0" path="res://game/points_service/points_service.tscn" id="9_56eb3"]
 [ext_resource type="Script" path="res://game/GuidesService.gd" id="10_bl7c8"]
 [ext_resource type="PackedScene" uid="uid://lprkgl2wh3cd" path="res://game/camera/camera.tscn" id="11_chjkg"]
-[ext_resource type="Environment" uid="uid://chtmgmwa87swx" path="res://game/settings/environment_high.tres" id="12_41qun"]
+[ext_resource type="Environment" uid="uid://b8uhvyo3rc3m8" path="res://game/settings/environment_potato.tres" id="13_kaxbq"]
 [ext_resource type="CameraAttributesPractical" uid="uid://ev1eo0cru0we" path="res://game/cameraatr.tres" id="13_wi7ad"]
 [ext_resource type="Script" path="res://game/world_environment.gd" id="14_vsfug"]
 [ext_resource type="Texture2D" uid="uid://48p1jkwhm4wh" path="res://models/club/samm0363_texture_of_a_bar_table_with_stains_and_wear_tile_5a36bd34-3c9c-4c2b-a62c-8adabec8fccf.png" id="15_ip5l0"]
@@ -27,8 +28,8 @@
 [ext_resource type="Script" path="res://game/spot_light_3D2.gd" id="28_bbbjr"]
 [ext_resource type="Script" path="res://game/spot_light_3d_2.gd" id="29_6bji4"]
 [ext_resource type="PackedScene" uid="uid://dubsbp7lv8nrh" path="res://models/club/stool_spin.tscn" id="30_3qmxi"]
+[ext_resource type="AudioStream" uid="uid://dd21pqbi2oj6p" path="res://game/crowd_service/Heavy_Pedestrian_Crowd_with_Active_Voices_Movement_and_Background_Traffic-(youconvert.net).mp3" id="30_b2rk4"]
 [ext_resource type="Script" path="res://game/crowd_service/crowd_service.gd" id="31_3j3sa"]
-[ext_resource type="AudioStream" uid="uid://cox0cypa0r0wf" path="res://game/crowd_service/Bar Ambience Sound Effect- No Copyright.mp3" id="32_rvjo4"]
 [ext_resource type="Script" path="res://game/audio_stream_player.gd" id="33_0b843"]
 [ext_resource type="PackedScene" uid="uid://cs13wbytj7dmb" path="res://models/characters/mano/mano.tscn" id="34_cx8of"]
 [ext_resource type="AudioStream" uid="uid://b3hkravd23cph" path="res://game/crowd_service/400587__misjoc__medium-crowd-cheering-01(1).wav" id="34_qie8a"]
@@ -249,6 +250,48 @@ render_target_update_mode = 4
 script = ExtResource("7_qq0t8")
 metadata/_edit_lock_ = true
 
+[node name="Rando" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
+transform = Transform3D(0.608747, 0, 0.793364, 0, 1, 0, -0.793364, 0, 0.608747, -0.267153, -1.05207, -10.82)
+talking = 0.957631
+jump = 0.387241
+cheer_left = 0.562042
+cheer_right = 0.00393959
+
+[node name="Rando2" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
+transform = Transform3D(-0.998878, 0, 0.0473678, 0, 1, 0, -0.0473678, 0, -0.998878, 0.609856, -1.05207, -9.60122)
+talking = 0.387875
+jump = 0.715247
+cheer_left = 0.585481
+cheer_right = 0.695664
+
+[node name="Rando3" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
+transform = Transform3D(-0.14199, 0, -0.989868, 0, 1, 0, 0.989868, 0, -0.14199, 1.16999, -1.05207, -10.3411)
+talking = 0.265886
+jump = 0.197193
+cheer_left = 0.499483
+cheer_right = 0.82792
+
+[node name="Rando4" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
+transform = Transform3D(0.988909, 0, 0.148517, 0, 1, 0, -0.148517, 0, 0.988909, 0.514756, -1.05207, -11.1875)
+talking = 0.91536
+jump = 0.619637
+cheer_left = 0.716641
+cheer_right = 0.812103
+
+[node name="Rando5" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
+transform = Transform3D(-0.436126, 0, 0.899885, 0, 1, 0, -0.899885, 0, -0.436126, -2.91186, -1.05207, -7.22742)
+talking = 0.542826
+jump = 0.962876
+cheer_left = 0.650209
+cheer_right = 0.251673
+
+[node name="Rando6" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
+transform = Transform3D(0.536165, 0, -0.844113, 0, 1, 0, 0.844113, 0, 0.536165, -1.66524, -1.05207, -7.86204)
+talking = 0.661738
+jump = 0.575413
+cheer_left = 0.392628
+cheer_right = 0.456179
+
 [node name="PointsService" parent="WorldViewport/SubViewport/Game" instance=ExtResource("9_56eb3")]
 
 [node name="Guides" type="Node3D" parent="WorldViewport/SubViewport/Game"]
@@ -258,10 +301,14 @@ script = ExtResource("10_bl7c8")
 
 [node name="Mano" parent="WorldViewport/SubViewport/Game" instance=ExtResource("34_cx8of")]
 unique_name_in_owner = true
-transform = Transform3D(0.810199, 0, -0.744026, 0, 1.1, 0, 0.744026, 0, 0.810199, 1.04487, -1.10025, -1.69781)
+transform = Transform3D(0.810199, 0, -0.744026, 0, 1.1, 0, 0.744026, 0, 0.810199, 1.04487, -1.09137, -1.69781)
+time_scale = 0.0
+jump = 0.0
+cheer_left = 1.0
+cheer_right = 1.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="WorldViewport/SubViewport/Game"]
-environment = ExtResource("12_41qun")
+environment = ExtResource("13_kaxbq")
 camera_attributes = ExtResource("13_wi7ad")
 script = ExtResource("14_vsfug")
 
@@ -429,10 +476,10 @@ texture_albedo = ExtResource("27_2m61l")
 transform = Transform3D(0.664813, 0, -0.74701, 0, 1, 0, 0.74701, 0, 0.664813, -1.03997, -1.13426, -4.18184)
 
 [node name="oil_drum_table2" parent="WorldViewport/SubViewport/Game/GardenPretty" instance=ExtResource("26_1upn2")]
-transform = Transform3D(0.723835, 0, 0.689973, 0, 1, 0, -0.689973, 0, 0.723835, -0.13218, -1.12196, -7.38365)
+transform = Transform3D(0.723791, 0.0110128, 0.689931, -0.00797145, 0.999939, -0.00759854, -0.689973, 0, 0.723835, 0.482037, -1.12196, -9.40325)
 
 [node name="oil_drum_table3" parent="WorldViewport/SubViewport/Game/GardenPretty" instance=ExtResource("26_1upn2")]
-transform = Transform3D(0.565917, 0, 0.824462, 0, 1, 0, -0.824462, 0, 0.565917, -2.71831, -1.13426, -7.63526)
+transform = Transform3D(0.565917, 0, 0.824462, 0, 1, 0, -0.824462, 0, 0.565917, -2.44568, -1.13426, -6.82582)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="WorldViewport/SubViewport/Game/GardenPretty"]
 transform = Transform3D(0.96555, 0, -0.260218, 0, 1, 0, 0.260218, 0, 0.96555, -0.240418, 0.617192, 1.6745)
@@ -516,7 +563,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0039897, -2.38419e-07, 0.95
 script = ExtResource("31_3j3sa")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService"]
-stream = ExtResource("32_rvjo4")
+stream = ExtResource("30_b2rk4")
 volume_db = -6.0
 bus = &"New Bus"
 script = ExtResource("33_0b843")
@@ -558,6 +605,7 @@ text = "When you played..."
 
 [node name="ManoLabel" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_awei0")]
 transform = Transform3D(15.6931, 0, -3.11871, 0, 16, 0, 3.11871, 0, 15.6931, -0.114262, 0.53281, -2.11912)
+visible = false
 mesh = SubResource("TextMesh_nelm5")
 text = "Mano"
 
@@ -580,6 +628,11 @@ transform = Transform3D(0.578651, 0.00437072, -0.15857, 0.00514139, 0.59894, 0.0
 visible = false
 mesh = SubResource("TextMesh_fwk45")
 text = "featuring..."
+
+[node name="OmniLight3D" type="OmniLight3D" parent="WorldViewport/SubViewport/Game"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.140762, 0.292133, -0.827488)
+light_color = Color(1, 0.191708, 0.28876, 1)
+shadow_enabled = true
 
 [connection signal="play" from="Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost" to="WorldViewport/SubViewport/Game" method="_play"]
 [connection signal="stop" from="Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost" to="WorldViewport/SubViewport/Game" method="_stop"]
