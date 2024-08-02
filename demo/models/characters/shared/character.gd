@@ -49,6 +49,14 @@ var r := randf()
 @export_range(0.0, 1.0) var tired:float :
 	set(v):
 		tired = v
+		
+@export var emotion:CharacterFace.Emotion :
+	set(v):
+		emotion = v
+		%Face.emotion = v
+
+func _ready():
+	$Armature/Skeleton3D/Face.get_surface_override_material(0).set_shader_parameter("texture_face", $SubViewport.get_texture())
 
 func _physics_process(delta: float) -> void:
 	if has_node("Armature"):

@@ -107,9 +107,10 @@ metadata/_edit_lock_ = true
 
 [node name="Mano" parent="WorldViewport/SubViewport/Game" instance=ExtResource("7_dfhen")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.02848, -8.94283)
-jump = 1.0
-cheer_left = 0.207
-cheer_right = 0.176
+time_scale = 0.867
+cheer_left = 0.0
+cheer_right = 0.0
+emotion = 5
 
 [node name="PointsService" parent="WorldViewport/SubViewport/Game" instance=ExtResource("6_2emse")]
 
