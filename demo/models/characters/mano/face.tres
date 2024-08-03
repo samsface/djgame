@@ -12,7 +12,7 @@ seamless = true
 as_normal_map = true
 noise = SubResource("FastNoiseLite_g70ps")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ixhlk"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_7iybk"]
 viewport_path = NodePath("SubViewport")
 
 [resource]
@@ -23,4 +23,4 @@ shader_parameter/scale = 3.0
 shader_parameter/noise_scale = 1.0
 shader_parameter/fps = 24.0
 shader_parameter/crayon_offset_texture = SubResource("NoiseTexture2D_gqkpd")
-shader_parameter/texture_face = SubResource("ViewportTexture_ixhlk")
+shader_parameter/texture_face = SubResource("ViewportTexture_7iybk")

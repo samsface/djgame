@@ -52,6 +52,11 @@ const eye_motions_values_:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 		var idx:int = eye_motions_values_[v]
 		$Mouth.texture.region.position.x = ((idx % 8)) * 128
 		$Mouth.texture.region.position.y = floor(idx / 8) * 128
+		
+		var tween = create_tween()
+
+		tween.tween_property(self, "scale:y", 0.1, 0.05)
+		tween.tween_property(self, "scale:y", 1.0, 0.1)
 	
 var left_eye_emotion:Emotion :
 	set(v):
