@@ -1,5 +1,5 @@
 - car radio level should use that wipeout grass level
-- introduction to garden should start with camera pointed up looking at planes and player has to look down
+- introduction to garden should start with camera pointed up looking at planes and player has to look down. Also but some blur on the camera and focus from blur circle thing to sharp plane.daf. Or maybe use this as the way to transition from oen place to next.d
 - frist level starts up really close on the drum kit to zoom out and reveal nobody gives a shit 
 - https://www.youtube.com/watch?v=ERLy4Dam1pU 1:19 could easy make in pure data 
 - make the crowd just outline when things really get going

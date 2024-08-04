@@ -208,12 +208,18 @@ func auto_focus(from:Vector3, to:Vector3) -> float:
 func get_head_position() -> Vector3:
 	return camera_arm_.global_position
 
+@export var dolly:Transform3D :
+	set(v):
+		dolly = v
+		camera_arm_.global_transform = dolly
+
 func looky(pos:Vector3, rot:Vector3, length := 0.6) -> void:
 	var tween := create_tween()
 	tween.set_trans(Tween.TRANS_QUAD)
 	tween.set_parallel()
 	tween.tween_property(camera_arm_, "position", pos, length)
 	tween.tween_property(camera_arm_, "rotation", rot, length)
+
 
 func look_at_node(node:Node3D) -> void:
 	if not node:

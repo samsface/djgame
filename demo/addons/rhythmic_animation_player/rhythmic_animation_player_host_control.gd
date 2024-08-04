@@ -73,10 +73,13 @@ func _debug_pressed():
 	play.emit()
 
 func _new_pressed():
-	var bp := preload("res://addons/rhythmic_animation_player/rhythmic_animation_player_control.tscn").instantiate()
+	var bp := preload("res://addons/timeline_control/timeline_control.tscn").instantiate()
 	bp.name = "scene"
 	bp.inspector = %Inspector
 	bp.root_node = get_node(root_node)
+	bp.selection_changed.connect(func(selection): %Inspector.selection = selection)
+	bp.visibility_changed.connect(func(): if bp.visible: %Inspector.undo = bp.undo)
+	bp.row_header_pressed.connect(func(header):  %Inspector.selection = header)
 	%Tabs.add_child(bp)
 	%Tabs.current_tab = %Tabs.get_child_count() - 1
 

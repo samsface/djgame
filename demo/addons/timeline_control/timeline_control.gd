@@ -97,7 +97,6 @@ func _ready() -> void:
 	connect_row_item_(%Cursor)
 	connect_row_item_(%TimeRange)
 	header_scroll_container_.gui_input.connect(_headings_gui_input)
-	
 
 	for op in ops:
 		%AddTrackButton.get_popup().add_item(op.resource_path.get_file().replace(".tscn", "").capitalize())
@@ -171,6 +170,10 @@ func _table_item_button_down(item):
 	last_item_down_ = item
 
 	selection_changed.emit(selection_)
+	
+	if Input.is_action_pressed("ctrl"):
+		if item is RythmicAnimationPlayerControlItem:
+			item.begin()
 
 	print("new selection", selection_)
 
@@ -209,9 +212,12 @@ func _input(event):
 
 	var row_position = get_local_mouse_table_position()
 
-	if event.is_action_pressed("duplicate"):
+	if event.is_action_pressed("ui_redo"):
+		undo.redo()
+	elif event.is_action_pressed("ui_undo"):
+		undo.undo()
+	elif event.is_action_pressed("duplicate"):
 		duplicate_(selection_)
-	
 	elif event.is_action_pressed("ui_text_delete"):
 		erase_(selection_)
 
@@ -373,7 +379,7 @@ func move_process_() -> void:
 	%Overlay.queue_redraw()
 
 	if selection_[0] == %Cursor:
-		seek_time_changed.emit()
+		_seek_time_dragged()
 
 func resize_east_begin_() -> void:
 	tool_ = Tool.resize_east
@@ -482,10 +488,14 @@ func add_row(control:Control = null) -> void:
 	var row_header := preload("res://addons/timeline_control/timeline_control_row_header.tscn").instantiate()
 	if control:
 		row_header.get_node("%Body").add_child(control)
+		control.node_path_changed.connect(sort_rows_)
 		row_header.pressed.connect(func(): row_header_pressed.emit(control))
 
 	undo.add_do_method(%RowHeaders.add_child.bind(row_header))
 	undo.add_undo_method(%RowHeaders.remove_child.bind(row_header))
+	
+	undo.add_do_method(sort_rows_)
+	undo.add_undo_method(sort_rows_)
 	
 	commit_action_()
 
@@ -626,8 +636,6 @@ func _snap_selected(index: int) -> void:
 			quantinize_snap = 8
 		5:
 			quantinize_snap = 16
-			
-	sort_rows_()
 
 func _row_headers_scroll_started() -> void:
 	pass # Replace with function body.
@@ -651,4 +659,165 @@ func sort_rows_() -> void:
 		print(headers[i])
 		%RowHeaders.move_child(headers[i][1], i)
 		%Rows.move_child(headers[i][2], i)
+
+@export var inspector:Node
+@export var painting_item:PackedScene
+@export var id:String :
+	set(v):
+		id = v
+		name = id
+
+signal seeked
+signal begin
+signal end
+
+var queue_on_ := []
+var queue_on_2_ := []
+var queue_off_ := []
+var look_ahead_ := 0
+
+var timeline_control
+var offset := 0
+
+func _seek_time_dragged() -> void:
+	Bus.audio_service.emit_float("CLOCK", seek_time)
+	seek2(seek_time)
+
+func seek2(seek_time):
+	var array:Array
+	for track in queue_on_2_:
+		for i in track.size():
+			if track[i].time > seek_time and i > 0:
+				if track[i-1].has_method("interprolate"):
+					if i - 2 < 0:
+						track[i-1].interprolate(null, seek_time)
+					else:
+						track[i-1].interprolate(track[i-2].value_, seek_time)
+						
+				break
+
+func seek(time:float) -> void:
+	var t := int(time + offset)
 	
+	var l = (time_range.y - time_range.x) 
+	
+	t += time_range.x
+	
+	if t >= time_range.y:
+		t = time_range.x + int(t % l)
+
+	seek_time = t
+
+	for i in queue_off_.size():
+		var item = queue_off_[i].get(t)
+		if item:
+			item.end()
+
+	for i in queue_on_.size():
+		var item = queue_on_[i].get(t)
+		if item:
+			item.begin()
+
+	seeked.emit(t)
+
+func get_look_ahead() -> int:
+	return abs(look_ahead_)
+
+func invalidate_queue_() -> void:
+
+	queue_on_.clear()
+	queue_off_.clear()
+
+	look_ahead_= 0
+	
+
+	for row in get_node("%Rows").get_children():
+		var dict_on := {}
+		var dict_off := {}
+		for item in row.get_children():
+			var begin = item.time - item.get_lookahead()
+			var end = item.time + item.length
+
+			#if item.time < $TimelineControl.time_range.x or item.time > $TimelineControl.time_range.y:
+			#	continue
+	
+			# think this is for looping, forget
+			if begin < time_range.x:
+				dict_on[time_range.y + begin] = item
+				#dict_off[time_range.x] = item
+
+			if item.fill():
+				for i in range(begin, end - 1):
+					dict_on[i] = item
+			
+			dict_on[begin] = item
+			dict_off[end] = item
+			
+			look_ahead_ = min(look_ahead_, time_range.x + begin)
+		
+		queue_on_.push_back(dict_on)
+		queue_off_.push_back(dict_off)
+		
+	queue_on_2_.clear()
+	for track in queue_on_:
+		var sorted := []
+		
+		for key_frame in track.values():
+			sorted.push_back(key_frame) 
+		
+		sorted.sort_custom(func(a, b): return a.time < b.time)
+		
+		queue_on_2_.push_back(sorted)
+		
+
+func to_dict() -> Dictionary:
+	if not inspector:
+		return {}
+
+	var res := {
+		"name" = name,
+		time_range = time_range,
+		tracks = []
+	}
+	
+	var rows := get_node("%Rows")
+	var row_headers := get_node("%RowHeaders")
+	
+	for i in rows.get_child_count():
+		res.tracks.push_back({ frames = [] })
+		res.tracks.back().merge(inspector.scene_to_dict(row_headers.get_child(i).get_node("%Body").get_child(0)))
+		
+		for item in rows.get_child(i).get_children():
+			res.tracks.back().frames.push_back(inspector.scene_to_dict(item))
+	
+	return res
+
+func from_dict(dict) -> void:
+	if not inspector:
+		return
+
+	if dict.has("name"):
+		name = dict.name
+	
+	if dict.has("time_range"):
+		time_range = dict.time_range
+	
+	for track in dict.get("tracks", []):
+		var track_node = _add_row_pressed()
+		for property in track:
+			track_node.set(property, track[property])
+
+		for frame in track.frames:
+			var frame_node = inspector.scene_from_dict(frame)
+			add_item(frame_node, get_row_count() - 1)
+
+	undo.clear_history()
+	
+func _add_row_pressed() -> Control:
+	var row_header = preload("res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn").instantiate()
+	row_header.root_node = root_node
+	add_row(row_header)
+	return row_header
+
+func _changed() -> void:
+	invalidate_queue_()

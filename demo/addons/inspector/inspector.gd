@@ -25,6 +25,7 @@ var selection :
 
 var properties_to_poll_ := {}
 var textures_:Array[Texture]
+var property_updated_outside_of_inspector_:StringName
 
 func invalidate_() -> void:
 	for control in %Controls.get_children():
@@ -76,6 +77,8 @@ func invalidate_() -> void:
 					control = add_vector2_control_(property)
 				TYPE_VECTOR3:
 					control = add_vector3_control_(property)
+				TYPE_TRANSFORM3D:
+					control = add_transform_3d_control_(property)
 				TYPE_STRING:
 					if property.hint & PROPERTY_HINT_MULTILINE_TEXT:
 						control = add_multiline_string_control_(property)
@@ -143,6 +146,11 @@ func add_vector3_control_(property:Dictionary) -> Control:
 	var control = preload("vector3_control.tscn").instantiate()
 	return control
 
+func add_transform_3d_control_(property:Dictionary) -> Control:
+	var control = preload("transform_3d.tscn").instantiate()
+	return control
+
+
 func add_multiline_string_control_(property:Dictionary) -> Control:
 	var control = preload("multiline_string_control.tscn").instantiate()
 	return control
@@ -161,12 +169,16 @@ class Box:
 func _control_value_changed(new_value, property_name:String) -> void:
 	if not selection:
 		return
+	
+	if property_name == property_updated_outside_of_inspector_:
+		return
 
 	if properties_to_poll_[property_name][0] is NodePath:
 		new_value = NodePath(new_value)
 
-	if properties_to_poll_[property_name][0] == new_value:
-		return
+	if typeof(properties_to_poll_[property_name][0]) == typeof(new_value):
+		if properties_to_poll_[property_name][0] == new_value:
+			return
 
 	undo.create_action("update " + property_name)
 
@@ -182,7 +194,9 @@ func _control_value_changed(new_value, property_name:String) -> void:
 func set_poll_value(property_name, new_value) -> void:
 	properties_to_poll_[property_name][0] = new_value
 
-func set_node_value_(object:InspectorMultiSelection, property_name:String, value, set_poll = null) -> void:
+# if you add type hints to the signature, the undo commit randomly won't call it
+func set_node_value_(object, property_name, value, set_poll = null) -> void:
+	print("SET_NODE_VALUE")
 	var is_active_object = object == selection_
 	
 	if is_active_object and set_poll and set_poll.x > 0:
@@ -212,10 +226,12 @@ func poll_node_properties_() -> void:
 	
 	for property_name in properties_to_poll_:
 		var node_value = get_node_value_(property_name)
-		
-		if node_value != properties_to_poll_[property_name][0]:
+	
+		if (typeof(node_value) != typeof(properties_to_poll_[property_name][0])) or (node_value != properties_to_poll_[property_name][0]):
 			properties_to_poll_[property_name][0] = node_value
+			property_updated_outside_of_inspector_ = property_name
 			properties_to_poll_[property_name][1].set_value(node_value)
+			property_updated_outside_of_inspector_ = StringName()
 
 func copy_all_possible_property_values(from:Node, to:Node) -> void:
 	for property in to.get_property_list():
@@ -237,7 +253,7 @@ func scene_to_dict(node:Node):
 
 		if property.usage & PROPERTY_USAGE_SCRIPT_VARIABLE == 0:
 			continue
-		
+
 		res[property.name] = node.get(property.name)
 
 	res["scene_file_path"] = node.scene_file_path

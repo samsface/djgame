@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://addons/rhythmic_animation_player/ops/tween.gd" id="2_smc25"]
 
 [node name="Bang" type="Button"]
+self_modulate = Color(0.184314, 0.309804, 0.309804, 1)
 clip_children = 2
 clip_contents = true
 offset_right = 32.0
@@ -24,5 +25,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "BANG"
 vertical_alignment = 1

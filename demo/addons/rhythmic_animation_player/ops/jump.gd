@@ -13,7 +13,7 @@ func _ready():
 
 func invalidate_target_beat_player_() -> void:
 	if target_beat_player_:
-		target_beat_player_.timeline_control.changed.disconnect(redraw_)
+		target_beat_player_.changed.disconnect(redraw_)
 	
 	target_beat_player_ = get_target_beat_player_()
 	if not target_beat_player_:
@@ -22,7 +22,7 @@ func invalidate_target_beat_player_() -> void:
 		target_beat_player_ = get_target_beat_player_()
 	
 	if target_beat_player_:
-		target_beat_player_.timeline_control.changed.connect(redraw_)
+		target_beat_player_.changed.connect(redraw_)
 	
 	redraw_()
 

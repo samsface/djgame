@@ -1,5 +1,7 @@
 extends HBoxContainer
 
+signal node_path_changed
+
 var root_node:Node
 
 @export var type:int : 
@@ -10,6 +12,7 @@ var root_node:Node
 	set(v):
 		node_path = v
 		invalidate_()
+		node_path_changed.emit()
 
 @export_multiline var condition_ex:String : 
 	set(v):
