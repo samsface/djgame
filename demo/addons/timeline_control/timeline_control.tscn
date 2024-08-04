@@ -139,6 +139,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("3_anpkx")
+color = true
 
 [node name="Rows" type="VBoxContainer" parent="MarginContainer/HSplitContainer/BodyScrollContainer/MarginContainer"]
 unique_name_in_owner = true

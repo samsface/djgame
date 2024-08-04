@@ -50,14 +50,31 @@ func invalidate_() -> void:
 			if node.get_indexed(property_path) == null:
 				modulate = Color.RED
 			else:
-				modulate = Color.WHITE
+				modulate =  hash_path_as_color_(node_path)
 		else:
-			modulate = Color.WHITE
+			modulate =  hash_path_as_color_(node_path)
 	
 	if condition_ex.is_empty():
 		$Condition.visible = false
 	else:
 		$Condition.visible = true
+
+# Function to get a random color based on a string
+func get_color_from_string(s: String) -> Color:
+	var rng = RandomNumberGenerator.new()
+	rng.seed = hash(s)
+
+	var r = rng.randf_range(0.0, 1.0)
+	var g = rng.randf_range(0.0, 1.0)
+	var b = rng.randf_range(0.0, 1.0)
+
+	return Color(r, g, b)
+	
+func hash_path_as_color_(path:NodePath) -> Color:
+	if path.is_empty():
+		return Color.RED
+
+	return get_color_from_string(path.get_name(0))
 
 func try_get_node() -> Node:
 	if not root_node:

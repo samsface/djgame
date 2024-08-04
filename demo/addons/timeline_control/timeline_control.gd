@@ -202,6 +202,7 @@ func _physics_process(delta:float) -> void:
 		if scroll_container_.auto_scroll(delta):
 			header_scroll_container_.scroll_horizontal = scroll_container_.scroll_horizontal
 			_input(InputEventMouseMotion.new())
+			commit_action_()
 	
 
 	%BodyScrollContainer.scroll_vertical = -$VBoxContainer/ScrollContainer.scroll_vertical 
@@ -328,14 +329,16 @@ func erase_(items:Array[Control]) -> void:
 
 func translation_begin_() -> void:
 	for item in selection_:
-		undo.add_undo_method(item.reparent.bind(item.get_parent()))
+		var p = item.get_parent()
+		undo.add_undo_method(func(): item.reparent(p); item.position.y = 0)
 		undo.add_undo_property(item, "time", item.time)
 		if not item.disable_resize:
 			undo.add_undo_property(item, "length", item.length)
 
 func translation_end_() -> void:
 	for item in selection_:
-		undo.add_do_method(item.reparent.bind(item.get_parent()))
+		var p = item.get_parent()
+		undo.add_do_method(func(): item.reparent(p); item.position.y = 0)
 		undo.add_do_property(item, "time", item.time)
 		if not item.disable_resize:
 			undo.add_do_property(item, "length", item.length)
@@ -450,6 +453,7 @@ func remove_item(node:Control) -> void:
 	commit_action_()
 
 func invalidate_grid_size_() -> void:
+
 	#grid_.grid_size = zoom
 
 	for row in %Rows.get_children() + [%Cursor.get_parent(), %TimeRange.get_parent()]:
@@ -479,6 +483,7 @@ func add_row(control:Control = null) -> void:
 	var row := PianoRollRow.new()
 	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	row.custom_minimum_size.y = 36
+
 	connect_row_(row)
 	undo.add_do_method(%Rows.add_child.bind(row))
 	undo.add_do_property(row, "owner", %Rows)
@@ -656,7 +661,6 @@ func sort_rows_() -> void:
 		return str(a[0]) < str(b[0]))
 
 	for i in headers.size():
-		print(headers[i])
 		%RowHeaders.move_child(headers[i][1], i)
 		%Rows.move_child(headers[i][2], i)
 
@@ -686,12 +690,19 @@ func _seek_time_dragged() -> void:
 func seek2(seek_time):
 	var array:Array
 	for track in queue_on_2_:
-		for i in track.size():
-			if track[i].time > seek_time and i > 0:
-				if track[i-1].has_method("interprolate"):
-					if i - 2 < 0:
+		if track.size() == 1:
+			if track[0].has_method("interprolate"):
+				track[0].interprolate(null, seek_time)
+			
+		for i in range(1, track.size()):
+
+			if ((track[i].time > seek_time)):
+
+				if i - 2 < 0:
+					if track[i-1].has_method("interprolate"):
 						track[i-1].interprolate(null, seek_time)
-					else:
+				else:
+					if track[i-1].has_method("interprolate"):
 						track[i-1].interprolate(track[i-2].value_, seek_time)
 						
 				break
@@ -764,11 +775,13 @@ func invalidate_queue_() -> void:
 		
 		for key_frame in track.values():
 			sorted.push_back(key_frame) 
+			
+			if key_frame.get_target_node().name.contains("2Years"):
+				pass
 		
 		sorted.sort_custom(func(a, b): return a.time < b.time)
 		
 		queue_on_2_.push_back(sorted)
-		
 
 func to_dict() -> Dictionary:
 	if not inspector:

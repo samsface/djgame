@@ -23,7 +23,7 @@ var tween_:Tween
 
 func _ready():
 	invalidate_value_()
-	item_rect_changed.connect(invalidate_value_)
+	#item_rect_changed.connect(invalidate_value_)
 
 func get_lookahead() -> int:
 	return 10

@@ -148,25 +148,27 @@ func interprolate(from, t):
 			TYPE_BOOL:
 				from = false
 
-
-
 	var target_node = get_target_node()
 	if target_node:
 		var property_path := get_target_property_path()
 		if not property_path.is_empty():
-			if tween_type == TransitionType.TOGGLE:
-				target_node.set_indexed(property_path, value_)
-			else:
-				var elapsed_time = ((t - time) / float(length))
-	
 
-				if elapsed_time >= 1.0:
-					target_node.set_indexed(property_path, value_)
-				elif elapsed_time <= 0.0:
-					target_node.set_indexed(property_path, from_)
+			var elapsed_time = ((t - time) / float(length))
+			if target_node.name.contains("Camera"):
+				pass
+
+			if elapsed_time >= 1.0:
+				target_node.set_indexed(property_path, value_)
+			elif elapsed_time <= 0.0:
+				target_node.set_indexed(property_path, from)
+			else:
+				if tween_type == TransitionType.TOGGLE:
+					if enable_from:
+						target_node.set_indexed(property_path, from_)
+					else:
+						target_node.set_indexed(property_path, value_)
 				else:
 					var new_value = tween_.interpolate_value(from, subtract_variant(value_, from), elapsed_time, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN)
-					prints(target_node, elapsed_time)
 					target_node.set_indexed(property_path, new_value)
 
 func begin():

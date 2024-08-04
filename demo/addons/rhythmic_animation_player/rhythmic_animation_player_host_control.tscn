@@ -84,9 +84,7 @@ theme_override_constants/margin_bottom = 8
 [node name="Inspector" parent="V/HSplitContainer/MarginContainer" instance=ExtResource("3_em7m1")]
 unique_name_in_owner = true
 layout_mode = 2
-visible_properties = Array[StringName]([&"value", &"auto", &"scene", &"method", &"silent", &"title", &"type", &"to_value", &"property", &"condition_ex", &"length", &"time", &"node_path", &"from", &"who", &"reply_a", &"reply_b", &"id", &"camera_position", &"camera_rotation", &"match_viewport_camera_transform", &"tween_ease", &"tween_type", &"is_toggle", &"test", &"enable_from"])
-
-[node name="Node3D" type="Node3D" parent="."]
+visible_properties = Array[StringName]([&"value", &"auto", &"scene", &"method", &"silent", &"title", &"type", &"to_value", &"property", &"condition_ex", &"length", &"time", &"node_path", &"from", &"who", &"reply_a", &"reply_b", &"id", &"camera_position", &"camera_rotation", &"match_viewport_camera_transform", &"tween_ease", &"tween_type", &"is_toggle", &"test", &"enable_from", &"from_value", &"to_value"])
 
 [connection signal="pressed" from="V/Menu/Save" to="." method="_save_pressed"]
 [connection signal="pressed" from="V/Menu/Play" to="." method="_play_pressed"]

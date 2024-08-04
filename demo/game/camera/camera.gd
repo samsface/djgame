@@ -210,6 +210,7 @@ func get_head_position() -> Vector3:
 
 @export var dolly:Transform3D :
 	set(v):
+		print(v)
 		dolly = v
 		camera_arm_.global_transform = dolly
 
