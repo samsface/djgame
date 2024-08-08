@@ -36,6 +36,12 @@ func flash() -> void:
 	if tween:
 		tween.kill()
 	
+	pivot_offset = size * 0.5
+	
 	tween = create_tween()
-	tween.tween_property(self, "modulate", Color.GREEN, 0.1)
-	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
+	tween.tween_property(self, "z_index", 1, 0)
+	tween.tween_property(self, "scale", Vector2.ONE * 1.5, 0.1)
+	tween.tween_property(self, "scale", Vector2.ONE, 0.1)
+	tween.tween_property(self, "z_index", 0, 0)
+	#tween.tween_property(self, "modulate", Color.GREEN, 0.1)
+	#tween.tween_property(self, "modulate", Color.WHITE, 0.1)

@@ -18,13 +18,13 @@ func _ready() -> void:
 
 
 	audio_.connect_to_bang("rumble", _rumble)
-	audio_.connect_to_float("clock", _clock)
+	
 
 	for child in get_children():
 		if child is Device:
 			child.value_changed.connect(_device_nob_value_changed)
 
-
+	#130
 	audio_.set_metro(130)
 	
 	if autoplay:
@@ -32,12 +32,9 @@ func _ready() -> void:
 	$Camera.looky(Vector3(-0.0147195002064109, 0.1273230016231537, -0.327578991651535), Vector3(-0.9006010293960571, -0.2513279914855957, 0), 0.1)
 
 func _rumble() -> void:
+	print("rumble")
 	Bus.camera_service.shake(0.7, 0.001 * rumble)
 	Bus.camera_service.rumble.emit()
-
-func _clock(value:float) -> void:
-	audio_.clock = value
-	beat_player_.call_deferred("seek", value)
 
 func _device_nob_value_changed(nob:Nob, new_value:float, old_value:float) -> void:
 	#print(nob.get_path())
@@ -63,7 +60,7 @@ func play() -> void:
 func _play():
 	%Phone.free_click = false
 	$PointsService.play()
-	Bus.camera_service.cursor.disabled = false
+	#Bus.camera_service.cursor.disabled = false
 	audio_.play()
 
 func _died() -> void:
@@ -71,8 +68,7 @@ func _died() -> void:
 
 func stop() -> void:
 	%Phone.free_click = true
-	audio_.stop()
-	
+
 	%Phone.look("Top")
 	var stream := preload("res://models/phone/stream/live_stream_app.tscn").instantiate()
 	%Phone.get_phone_gui().start_app(stream)

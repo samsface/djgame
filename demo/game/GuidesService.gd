@@ -41,7 +41,7 @@ func bang(nob:Node3D, time, time_in_seconds:float, value:float, auto:bool, dilem
 		d.active = true
 
 	d.done.connect(func():
-		assert(bangs_[nob].front() == d)
+		#assert(bangs_[nob].front() == d)
 		bangs_[nob].pop_front()
 		if not bangs_[nob].is_empty():
 			bangs_[nob].front().set_deferred("active", true)

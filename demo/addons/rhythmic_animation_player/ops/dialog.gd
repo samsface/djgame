@@ -22,8 +22,9 @@ func _ready():
 func invalidate_value_() -> void:
 	text = value.replace("\n", " ")
 	tooltip_text = text
-
+	
 func begin() -> void:
 	var target_node = get_target_node()
 	if target_node:
-		target_node.dialog(db, length, who, value, db_name, reply_a, reply_b)
+		if target_node.has_method("dialog"):
+			target_node.dialog(db, length, who, value, db_name, reply_a, reply_b)

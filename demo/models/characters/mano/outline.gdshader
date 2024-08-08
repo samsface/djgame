@@ -26,10 +26,31 @@ vec2 getDepth(vec2 screen_uv, sampler2D depth_texture, mat4 inv_projection_matri
 }
 
 const float fps = 24.0;
+varying mat4 CAMERA;
+
+void vertex() {
+  CAMERA = INV_VIEW_MATRIX;
+}
+
 
 void fragment() {
 	if(!disable)
 	{
+		{
+		float depth = texture(DEPTH_TEXTURE, SCREEN_UV).x;
+ 		vec3 ndc = vec3(SCREEN_UV * 2.0 - 1.0, depth);
+
+		 vec4 world = CAMERA * INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
+ 		 vec3 world_position = world.xyz / world.w;
+
+		if(distance(world_position, NODE_POSITION_WORLD) > 1.8)
+		{
+			discard;
+		}
+		}
+
+
+
 		vec2 screen_uv = SCREEN_UV;
 
 		float time_round = round(TIME * fps) / fps;
@@ -101,6 +122,7 @@ void fragment() {
 		float alpha_mask = depth_diff;
 		DEPTH = min_depth_data.y*alpha_mask + depth_data.y*(1.0-alpha_mask);
 		ALPHA = clamp((alpha_mask) * 5., 0., 1.);
+
 	}
 	else
 	{

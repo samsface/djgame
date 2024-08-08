@@ -17,8 +17,8 @@ class_name PianoRollItemSlide
 		invalidate_value_()
 
 func _ready():
-	self_modulate = Color.DARK_SLATE_GRAY
-	$Polygon2D.self_modulate = Color.LIGHT_GREEN
+	self_modulate = Color.DARK_GREEN
+	$Polygon2D.self_modulate = Color.GREEN
 	invalidate_value_()
 	item_rect_changed.connect(invalidate_value_)
 

@@ -10,4 +10,4 @@ func _draw() -> void:
 		draw_rect(p.selection_box_, Color.AZURE, false, 1.0)
 
 func _process(delta: float) -> void:
-	RenderingServer.canvas_item_set_custom_rect(get_canvas_item(), true, Rect2(get_parent().position.x * -1, 0, 64, 64))
+	RenderingServer.canvas_item_set_custom_rect(get_canvas_item(), true, Rect2(get_parent().position.x * -1, get_parent().position.y * -1, 64, 64))

@@ -52,7 +52,7 @@ func _draw():
 			draw_line(Vector2(x * grid_size, y_offset), Vector2(x * grid_size, %Rows.size.y), color, 2.0)
 
 func _process(delta: float) -> void:
-	RenderingServer.canvas_item_set_custom_rect(get_canvas_item(), true, Rect2(position.x * -1, 0, 64, 64))
+	RenderingServer.canvas_item_set_custom_rect(get_canvas_item(), true, Rect2(position.x * -1, position.y * -1, 64, 64))
 
 func _zoom_changed(zoom:float) -> void:
 	grid_size = zoom

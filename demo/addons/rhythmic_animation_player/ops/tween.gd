@@ -2,12 +2,25 @@ extends RythmicAnimationPlayerControlItem
 
 enum TransitionType {
 	TOGGLE,
-	LINEAR
+	LINEAR,
+	SINE,
+	QUINT,
+	QUART,
+	QUAD,
+	EXPO,
+	ELASTIC,
+	CUBIC,
+	CIRC,
+	BOUNCE,
+	BACK,
+	SPRING
 }
 
 enum EaseType {
 	EASE_IN,
-	EASE_OUT
+	EASE_OUT,
+	EASE_IN_OUT,
+	EASTE_OUT_IN,
 }
 
 @export var property:String : 
@@ -35,10 +48,10 @@ enum EaseType {
 		enable_from = v
 		invalidate_value_()
 
+
+var tween_:Tween
 var value_
 var from_
-
-var value_before_begin_
 
 func _ready():
 	invalidate_value_()
@@ -66,41 +79,31 @@ func _get(property:StringName):
 		var x = get_target_node_property_value_()
 		if typeof(from_) == typeof(x):
 			return from_
+			Tween.TRANS_BACK
 		else:
 			return 0 
 
 func _get_property_list():
-	var value_type = deduce_type_()
-	if value_type == TYPE_NIL:
+	var property = get_property_or_null_()
+	if property == null:
 		return []
 
 	var properties := []
 	
-	if enable_from:
-		properties.append({
-			"name": "from",
-			"type": value_type,
-			"usage": 4102
-		})
+	property.usage |= PROPERTY_USAGE_SCRIPT_VARIABLE
 	
-		
-	properties.append({
-		"name": "value",
-		"type": value_type,
-		"usage": 4102
-	})
+	if enable_from:
+		var from = property.duplicate()
+		from.name = "from"
+		properties.push_back(from)
+	
+	property.name = "value"
+	properties.push_back(property)
 
 	return properties
 
 func invalidate_value_() -> void:
 	self_modulate = Color.DARK_SLATE_GRAY
-	
-
-func infer_type(value):
-	if typeof(value_before_begin_) == TYPE_BOOL:
-		return bool(value)
-	else:
-		return value
 
 func get_target_node_property_value_():
 	var target_node = get_target_node()
@@ -111,18 +114,20 @@ func get_target_node_property_value_():
 
 	return null
 
-func deduce_type_():
+func get_property_or_null_():
 	var target_node = get_target_node()
-	if target_node:
-		var property_path := get_target_property_path()
-		if not property_path.is_empty():
-			var value = target_node.get_indexed(property_path)
-			return typeof(value)
-	
-	return TYPE_NIL
-	$Label.text = "%s" % [to_value]
+	if not target_node:
+		return
+		
+	var property_path := get_target_property_path()
+	if property_path.is_empty():
+		return
 
-var tween_:Tween
+	for property in target_node.get_property_list():
+		if property.name == property_path.get_subname(0):
+			return property
+	
+	return null
 
 func subtract_variant(a, b):
 	match typeof(value_):
@@ -154,10 +159,8 @@ func interprolate(from, t):
 		if not property_path.is_empty():
 
 			var elapsed_time = ((t - time) / float(length))
-			if target_node.name.contains("Camera"):
-				pass
 
-			if elapsed_time >= 1.0:
+			if elapsed_time >= 1.0:	
 				target_node.set_indexed(property_path, value_)
 			elif elapsed_time <= 0.0:
 				target_node.set_indexed(property_path, from)
@@ -168,7 +171,7 @@ func interprolate(from, t):
 					else:
 						target_node.set_indexed(property_path, value_)
 				else:
-					var new_value = tween_.interpolate_value(from, subtract_variant(value_, from), elapsed_time, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN)
+					var new_value = tween_.interpolate_value(from, subtract_variant(value_, from), elapsed_time, 1.0, tween_type - 1, tween_ease)
 					target_node.set_indexed(property_path, new_value)
 
 func begin():
@@ -178,12 +181,18 @@ func begin():
 	if target_node:
 		var property_path := get_target_property_path()
 		if not property_path.is_empty():
-			value_before_begin_ = target_node.get_indexed(property_path)
 			if tween_type == TransitionType.TOGGLE:
-				target_node.set_indexed(property_path, value_)
+				if enable_from:
+					target_node.set_indexed(property_path, from_)
+				else:
+					target_node.set_indexed(property_path, value_)
 			else:
 				var tween = target_node.create_tween()
-				tween.tween_property(target_node, property_path, value_, length * (Bus.audio_service.metro) * 0.001)#.from(from_value)
+				tween.set_trans(tween_type - 1)
+				tween.set_ease(tween_ease)
+				var t = tween.tween_property(target_node, property_path, value_, length * (Bus.audio_service.metro) * 0.001)
+				if enable_from:
+					t.from(from_)
 
 func end():
 	if tween_type == TransitionType.TOGGLE:

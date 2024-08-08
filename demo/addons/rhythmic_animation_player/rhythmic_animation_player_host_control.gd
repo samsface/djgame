@@ -31,8 +31,11 @@ func show_scene(scene) -> void:
 func get_save_file_path_() -> String:
 	return save_path
 
+
 func _ready():
 	Bus.beat_service = self
+	# CONNECT_DEFERRED as libpd hangs when sending messages in a callback
+	Bus.audio_service.clock_changed.connect(seek, CONNECT_DEFERRED)
 
 	%Inspector.custom_rules.push_back(func(property:Dictionary):
 		if property.type == TYPE_STRING and property.name.ends_with("_ex"):
@@ -66,11 +69,23 @@ func _ready():
 		child._changed()
 
 func _play_pressed() -> void:
-	visible = false
-	play.emit()
+	_debug_pressed()
 
 func _debug_pressed():
 	play.emit()
+	Bus.audio_service.play()
+	playing = true
+
+func _pause_pressed() -> void:
+	stop.emit()
+	playing = false
+	Bus.audio_service.pause()
+
+func _stop_pressed() -> void:
+	stop.emit()
+	playing = false
+	Bus.audio_service.stop()
+	%Tabs.get_current_tab_control().reset()
 
 func _new_pressed():
 	var bp := preload("res://addons/timeline_control/timeline_control.tscn").instantiate()
@@ -108,5 +123,15 @@ func _duplicate_pressed() -> void:
 	_new_pressed()
 	%Tabs.get_child(%Tabs.current_tab).from_dict(clip)
 
-func _stop_pressed() -> void:
-	stop.emit()
+
+
+func _unhandled_key_input(event):
+	if event is InputEventKey:
+		if event.pressed:
+			if event.keycode == KEY_SPACE:
+				if playing:
+					_pause_pressed()
+					get_viewport().set_input_as_handled()
+				else:
+					_debug_pressed()
+					get_viewport().set_input_as_handled()

@@ -7,7 +7,6 @@ var hover_scale := 1.1
 var rumble_scale := 1.5
 
 func hover_begin() -> void:
-	print(get_path())
 	if hover_tween_:
 		hover_tween_.kill()
 

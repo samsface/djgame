@@ -20,13 +20,12 @@ resource_name = "Limiter"
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_wxj2p"]
 resource_name = "Compressor"
 threshold = -13.0
-ratio = 28.2
+ratio = 30.0
 gain = -6.0
 attack_us = 355.0
 sidechain = &"Music"
 
 [resource]
-bus/0/volume_db = -80.0
 bus/1/name = &"Music"
 bus/1/solo = false
 bus/1/mute = false

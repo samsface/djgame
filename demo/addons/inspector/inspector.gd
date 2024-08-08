@@ -196,7 +196,6 @@ func set_poll_value(property_name, new_value) -> void:
 
 # if you add type hints to the signature, the undo commit randomly won't call it
 func set_node_value_(object, property_name, value, set_poll = null) -> void:
-	print("SET_NODE_VALUE")
 	var is_active_object = object == selection_
 	
 	if is_active_object and set_poll and set_poll.x > 0:

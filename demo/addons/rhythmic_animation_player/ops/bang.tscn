@@ -1,7 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://74pwn2qyav8l"]
+[gd_scene load_steps=5 format=3 uid="uid://74pwn2qyav8l"]
 
 [ext_resource type="Theme" uid="uid://dbvpa0vlu34gu" path="res://ui/beat_player.tres" id="1_641as"]
 [ext_resource type="Script" path="res://addons/rhythmic_animation_player/ops/bang.gd" id="2_rihem"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xsewa"]
+bg_color = Color(0.544975, 0.544974, 0.544974, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xcchi"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+anti_aliasing = false
 
 [node name="Bang" type="Button"]
 clip_children = 2
@@ -11,12 +29,8 @@ offset_bottom = 32.0
 theme = ExtResource("1_641as")
 script = ExtResource("2_rihem")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(0.556863, 0.823529, 0.490196, 1)
-antialiased = true
-polygon = PackedVector2Array(1, 1, 31, 1, 31, 31, 1, 31)
-
 [node name="Label" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,3 +41,18 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "BANG"
 vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_xsewa")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xcchi")
+max_value = 1.0
+step = 0.0
+fill_mode = 3
+show_percentage = false

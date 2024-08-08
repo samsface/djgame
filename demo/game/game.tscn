@@ -1,13 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://bfo1bxbj7knm0"]
+[gd_scene load_steps=15 format=3 uid="uid://bfo1bxbj7knm0"]
 
 [ext_resource type="PackedScene" uid="uid://lprkgl2wh3cd" path="res://game/camera/camera.tscn" id="2_1yirq"]
-[ext_resource type="Script" path="res://game/canvas_layer_2.gd" id="4_7p2wi"]
 [ext_resource type="Script" path="res://game/world_viewport.gd" id="4_oqmxi"]
-[ext_resource type="PackedScene" uid="uid://ij1ky0f8flgr" path="res://addons/dialog_graph/dialog_graph.tscn" id="5_7vruj"]
 [ext_resource type="PackedScene" uid="uid://df031doltiks0" path="res://game/points_service/points_service.tscn" id="6_2emse"]
 [ext_resource type="PackedScene" uid="uid://cs13wbytj7dmb" path="res://models/characters/mano/mano.tscn" id="7_dfhen"]
-[ext_resource type="Script" path="res://game/animation.gd" id="9_ds76j"]
-[ext_resource type="PackedScene" uid="uid://lb3oq22iphka" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_host_control.tscn" id="10_cc86w"]
 [ext_resource type="Environment" uid="uid://chtmgmwa87swx" path="res://game/settings/environment_high.tres" id="11_xnd0y"]
 [ext_resource type="PackedScene" uid="uid://dgg103ssmbg32" path="res://game/settings/settings.tscn" id="14_anos2"]
 [ext_resource type="Script" path="res://game/GuidesService.gd" id="14_y06of"]
@@ -35,60 +31,6 @@ mouse_filter = 2
 
 [node name="ConfigService" parent="." instance=ExtResource("14_anos2")]
 
-[node name="Recorder" type="Node" parent="."]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Recorder"]
-layer = 3
-visible = false
-script = ExtResource("9_ds76j")
-
-[node name="VSplitContainer" type="VSplitContainer" parent="Recorder/CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/autohide = 0
-
-[node name="ColorRect" type="ColorRect" parent="Recorder/CanvasLayer/VSplitContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-color = Color(1, 1, 1, 0)
-
-[node name="BeatPlayerHost" parent="Recorder/CanvasLayer/VSplitContainer" instance=ExtResource("10_cc86w")]
-unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0.882353)
-layout_mode = 2
-save_path = "res://junk/beat2.bp"
-root_node = NodePath("../../../../WorldViewport/SubViewport/Game")
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="Recorder"]
-layer = 3
-visible = false
-script = ExtResource("4_7p2wi")
-
-[node name="VSplitContainer" type="VSplitContainer" parent="Recorder/CanvasLayer2"]
-auto_translate_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/autohide = 0
-
-[node name="ColorRect" type="ColorRect" parent="Recorder/CanvasLayer2/VSplitContainer"]
-auto_translate_mode = 1
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-color = Color(1, 1, 1, 0)
-
-[node name="DialogGraph" parent="Recorder/CanvasLayer2/VSplitContainer" instance=ExtResource("5_7vruj")]
-layout_mode = 2
-
 [node name="WorldViewport" type="SubViewportContainer" parent="."]
 layout_mode = 2
 mouse_filter = 2
@@ -106,7 +48,7 @@ render_target_update_mode = 4
 metadata/_edit_lock_ = true
 
 [node name="Mano" parent="WorldViewport/SubViewport/Game" instance=ExtResource("7_dfhen")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.02848, -8.94283)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18937, -1.02848, -8.94283)
 time_scale = 0.867
 emotion = 5
 
@@ -150,6 +92,3 @@ script = ExtResource("22_gkvti")
 
 [node name="DaftHousePoster" parent="WorldViewport/SubViewport/Game/GardenOverGrown" instance=ExtResource("23_picdr")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.81537, 1.39943, -0.412132)
-
-[connection signal="play" from="Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost" to="WorldViewport/SubViewport/Game" method="_play"]
-[connection signal="stop" from="Recorder/CanvasLayer/VSplitContainer/BeatPlayerHost" to="WorldViewport/SubViewport/Game" method="_stop"]

@@ -1,5 +1,7 @@
 extends Node
 
+signal clock_changed
+
 var patch_file_handle_ := PureDataPatch.new()
 var audio_stream_:PureDataAudioStreamPlayer
 
@@ -8,6 +10,14 @@ var float_signals_ := {}
 var metro := 130
 var latency := 0.2
 var regex_ = RegEx.new()
+
+var clock_ := 0
+var clock:int :
+	set(v):
+		clock_ = v
+		emit_float("CLOCK", clock_)
+	get:
+		return clock_
 
 func _ready() -> void:
 	regex_.compile("^[+-]?\\d+(\\.\\d+)?$")
@@ -31,6 +41,8 @@ func _ready() -> void:
 	audio_stream_.bang.connect(_bang)
 	audio_stream_.float.connect(_float)
 	
+	Bus.audio_service.connect_to_float("clock", _clock)
+	
 	#audio_stream_.stop()
 	
 func _bang(signal_name:String) -> void:
@@ -49,13 +61,14 @@ func set_metro(value:float) -> void:
 
 func play() -> void:
 	emit_float("WIPE-BUFFER", 1)
-	emit_float("CLOCK", -16)
 	emit_bang("PLAY")
+
+func pause() -> void:
+	audio_stream_.send_bang("r-STOP")
 	
 func stop() -> void:
 	audio_stream_.send_bang("r-STOP")
 	audio_stream_.send_bang("r-RESET")
-	emit_float("CLOCK", -16)
 
 func connect_to_bang(signal_name:StringName, callable:Callable) -> void:
 	audio_stream_.bind("s-" + signal_name)
@@ -88,4 +101,6 @@ func _exit_tree() -> void:
 func write_at_array_index(array:String, index:int, value:float) -> void:
 	audio_stream_.write_array(array, index, PackedFloat32Array([value]), 1)
 
-var clock := 0
+func _clock(value) -> void:
+	clock_ = value
+	clock_changed.emit(clock_)

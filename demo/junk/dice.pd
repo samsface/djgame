@@ -1,0 +1,12 @@
+#N canvas 185 219 1553 1012 12;
+#X obj 985 573 random 2;
+#X obj 992 673 moses 1;
+#X obj 985 498 inlet;
+#X obj 37 37 ot;
+#X obj 949 747 outlet;
+#X obj 1067 742 outlet;
+#X connect 0 0 1 0;
+#X connect 1 0 4 0;
+#X connect 1 1 5 0;
+#X connect 2 0 0 0;
+#X coords 0 -1 1 1 64 64 1 100 100;

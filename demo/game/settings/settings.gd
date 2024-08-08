@@ -39,8 +39,8 @@ func save_() -> void:
 
 	var file := ConfigFile.new()
 	file.set_value("graphics", "graphics_quality", graphics_quality)
-	file.save("user://config.ini")
 
+	file.save("user://config.ini")
 func load_() -> void:
 	is_loading_ = true
 	var file := ConfigFile.new()

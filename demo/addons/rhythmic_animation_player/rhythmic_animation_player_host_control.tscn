@@ -58,7 +58,7 @@ text = "Duplicate"
 [node name="HSplitContainer" type="HSplitContainer" parent="V"]
 layout_mode = 2
 size_flags_vertical = 3
-split_offset = 1300
+split_offset = 2200
 
 [node name="MarginContainer2" type="MarginContainer" parent="V/HSplitContainer"]
 layout_mode = 2

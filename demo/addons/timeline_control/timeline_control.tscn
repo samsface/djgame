@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cwilpnax30ixm"]
+[gd_scene load_steps=12 format=3 uid="uid://cwilpnax30ixm"]
 
 [ext_resource type="PackedScene" uid="uid://74pwn2qyav8l" path="res://addons/rhythmic_animation_player/ops/bang.tscn" id="2_spgtn"]
 [ext_resource type="Script" path="res://addons/timeline_control/timeline_control.gd" id="2_ugbsv"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://addons/timeline_control/negative_scroll_container.gd" id="3_jy03w"]
 [ext_resource type="Theme" uid="uid://c5jrgxmplyccb" path="res://ui/beat_player2.tres" id="4_0aakd"]
 [ext_resource type="PackedScene" uid="uid://ogx3qotg0a0o" path="res://addons/rhythmic_animation_player/ops/tween.tscn" id="4_ki4e2"]
+[ext_resource type="PackedScene" uid="uid://cacwbd3e771k4" path="res://addons/rhythmic_animation_player/ops/method.tscn" id="5_08m63"]
 [ext_resource type="Script" path="res://addons/timeline_control/timeline_control_item.gd" id="5_q1ywe"]
 [ext_resource type="Script" path="res://addons/timeline_control/overlay.gd" id="6_tnfgb"]
 
@@ -18,7 +19,7 @@ offset_bottom = 503.0
 size_flags_vertical = 3
 split_offset = 200
 script = ExtResource("2_ugbsv")
-ops = Array[PackedScene]([ExtResource("2_spgtn"), ExtResource("3_0cqlh"), ExtResource("4_ki4e2")])
+ops = Array[PackedScene]([ExtResource("2_spgtn"), ExtResource("3_0cqlh"), ExtResource("4_ki4e2"), ExtResource("5_08m63")])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2

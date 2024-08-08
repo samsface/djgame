@@ -1,0 +1,11 @@
+#N canvas -257 412 1920 1105 12;
+#X obj 691 410 delay 800;
+#X obj 744 341 nbx 5 17 -1e+37 1e+37 0 0 empty TEMPO empty 0 -10 0 12 #fcfcfc #000000 #000000 0 256;
+#X obj 679 272 inlet;
+#X obj 693 495 outlet;
+#X obj 691 457 bng 19 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
+#X connect 0 0 4 0;
+#X connect 1 0 0 1;
+#X connect 2 0 0 0;
+#X connect 4 0 3 0;
+#X coords 0 -1 1 1 64 64 1 100 100;

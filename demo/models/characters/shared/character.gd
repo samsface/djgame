@@ -22,7 +22,6 @@ var r := randf()
 			$AnimationTree.set("parameters/AngerTimeSeek/seek_request", randf() * 19.0)
 		anger = v
 
-
 @export_range(0.0, 1.0) var jump:float :
 	set(v):
 		jump = v
@@ -52,8 +51,9 @@ var r := randf()
 		
 @export var emotion:CharacterFace.Emotion :
 	set(v):
-		emotion = v
-		%Face.emotion = v
+		if emotion != v:
+			emotion = v
+			%Face.emotion = v
 
 func _ready():
 	$Armature/Skeleton3D/Face.get_surface_override_material(0).set_shader_parameter("texture_face", $SubViewport.get_texture())

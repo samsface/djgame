@@ -1,8 +1,11 @@
-[gd_resource type="Resource" script_class="DeviceData" load_steps=9 format=3 uid="uid://d2v2vxmias8e0"]
+[gd_resource type="Resource" script_class="DeviceData" load_steps=12 format=3 uid="uid://d2v2vxmias8e0"]
 
 [ext_resource type="Script" path="res://models/shared/NobMappingArray.gd" id="1_7af2q"]
 [ext_resource type="Script" path="res://models/shared/nob_mapping_hradio.gd" id="1_d6288"]
+[ext_resource type="Script" path="res://models/shared/nob_mapping_array.gd" id="1_yxa5o"]
 [ext_resource type="Script" path="res://models/shared/nob_mapping_slider.gd" id="2_07fgk"]
+[ext_resource type="Script" path="res://models/shared/nob_mapping_bang.gd" id="2_omtyk"]
+[ext_resource type="Script" path="res://models/shared/nob_mapping_expr.gd" id="3_owsay"]
 
 [sub_resource type="Resource" id="Resource_uf07f"]
 script = ExtResource("1_d6288")
@@ -43,8 +46,8 @@ logarithmic = false
 
 [resource]
 script = ExtResource("1_7af2q")
-arrays = Array[Resource("res://models/shared/nob_mapping_array.gd")]([])
+arrays = Array[ExtResource("1_yxa5o")]([])
 radios = Array[ExtResource("1_d6288")]([SubResource("Resource_uf07f")])
-exprs = Array[Resource("res://models/shared/nob_mapping_expr.gd")]([])
+exprs = Array[ExtResource("3_owsay")]([])
 sliders = Array[ExtResource("2_07fgk")]([SubResource("Resource_rkmgh"), SubResource("Resource_f6ar4"), SubResource("Resource_kxsjv"), SubResource("Resource_c5auu")])
-bangs = Array[Resource("res://models/shared/nob_mapping_bang.gd")]([])
+bangs = Array[ExtResource("2_omtyk")]([])

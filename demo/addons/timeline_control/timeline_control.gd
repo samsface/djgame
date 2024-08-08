@@ -684,7 +684,12 @@ var timeline_control
 var offset := 0
 
 func _seek_time_dragged() -> void:
-	Bus.audio_service.emit_float("CLOCK", seek_time)
+	Bus.audio_service.clock = seek_time
+	seek2(seek_time)
+
+func reset() -> void:
+	seek_time = look_ahead_
+	Bus.audio_service.clock = look_ahead_
 	seek2(seek_time)
 
 func seek2(seek_time):
@@ -694,16 +699,20 @@ func seek2(seek_time):
 			if track[0].has_method("interprolate"):
 				track[0].interprolate(null, seek_time)
 			
-		for i in range(1, track.size()):
+		for i in range(track.size() -1, -1, -1):
 
-			if ((track[i].time > seek_time)):
+			if str(track[i].get_target_property_path()).contains("emotion"):
+				print(i)
 
-				if i - 2 < 0:
-					if track[i-1].has_method("interprolate"):
-						track[i-1].interprolate(null, seek_time)
+
+			if ((track[i].time <= seek_time)):
+				
+				if i - 1 < 0:
+					if track[i].has_method("interprolate"):
+						track[i].interprolate(null, seek_time)
 				else:
-					if track[i-1].has_method("interprolate"):
-						track[i-1].interprolate(track[i-2].value_, seek_time)
+					if track[i].has_method("interprolate"):
+						track[i].interprolate(track[i-1].value_, seek_time)
 						
 				break
 
