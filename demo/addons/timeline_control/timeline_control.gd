@@ -244,7 +244,7 @@ func _input(event):
 		var new_zoom = zoom_grab_position_.y - header_scroll_container_.get_local_mouse_position().y
 		new_zoom *= 0.1
 		
-		zoom = clamp(zoom_previous_ - new_zoom, 2, 64)
+		zoom = clamp(zoom_previous_ - new_zoom, 1, 64)
 		%Overlay.queue_redraw()
 
 	elif tool_ == Tool.move_row:

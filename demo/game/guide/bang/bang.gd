@@ -215,4 +215,3 @@ func get_off_() -> float:
 
 func get_off_time_() -> float:
 	return fall_time_ - fall_tween_.get_total_elapsed_time()
-

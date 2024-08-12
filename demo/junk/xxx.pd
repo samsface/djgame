@@ -24,7 +24,7 @@
 #X obj 1091 670 % 4;
 #X obj 1043 1232;
 #X obj 500 913 osc~;
-#X obj 523 981 adsr \$1;
+#X obj 523 980 adsr \$1;
 #X obj 496 1141 *~;
 #X obj 523 516 midibash;
 #X obj 820 515 midibash;
@@ -39,14 +39,14 @@
 #X obj 848 1067 redux;
 #X obj 1123 937 hsl 128 15 32 4 0 0 s-acid-redux r-acid-redux empty -2 -8 0 10 #fcfcfc #000000 #000000 0 1;
 #X obj 950 74 s r-RESET;
-#X floatatom 848 105 5 0 0 0 - r-metro - 0;
+#X floatatom 839 137 5 0 0 0 - r-metro - 0;
 #X obj 1513 449 bng 19 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
 #X obj 1573 449 bng 19 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
 #X obj 1625 449 bng 19 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
 #X obj 1125 253 nbx 5 17 -1e+37 1e+37 0 0 s-clock empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 256;
 #X obj 1070 204 i++;
 #X msg 1010 400 1, f 5;
-#X obj 1084 1017 nbx 5 17 0 0.9 0 0 empty r-acid-gain empty 0 -10 0 12 #fcfcfc #000000 #000000 0 256;
+#X obj 1083 1018 nbx 5 17 0 2 0 0 empty r-acid-gain empty 0 -10 0 12 #fcfcfc #000000 #000000 0 256;
 #X msg 1785 248 kick.wav;
 #X obj 1785 301 send toykit-set-sample-0;
 #X obj 1988 305 send toykit-set-sample-1;
@@ -65,6 +65,9 @@
 #X obj 183 586 s r-CLOCK;
 #X msg 192 534 -16;
 #X obj 577 1179 *~ 0.7;
+#X obj 144 777 autowah;
+#X obj 116 1253 compressor;
+#X floatatom 264 75 5 0 0 0 - - r-metro 0;
 #X connect 1 0 6 0;
 #X connect 1 0 28 0;
 #X connect 1 0 27 0;
@@ -110,7 +113,7 @@
 #X connect 30 0 27 1;
 #X connect 31 0 28 1;
 #X connect 32 0 27 2;
-#X connect 33 0 55 0;
+#X connect 33 0 63 0;
 #X connect 34 0 33 1;
 #X connect 36 0 3 1;
 #X connect 41 0 40 0;
@@ -132,3 +135,4 @@
 #X connect 60 0 59 0;
 #X connect 61 0 0 0;
 #X connect 61 0 0 1;
+#X connect 63 0 55 0;
