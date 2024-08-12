@@ -165,6 +165,7 @@ label = "LE DAFT BOX 94"
 
 [node name="Gain" parent="Model/NorthFace" instance=ExtResource("2_4wliu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.036, 0, 0.00294859)
+slidey = true
 
 [node name="LinesAndDirt" type="Node3D" parent="Model/NorthFace/Gain"]
 
@@ -192,6 +193,7 @@ label = "Gain"
 
 [node name="Res" parent="Model/NorthFace" instance=ExtResource("2_4wliu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013, 0, 0.00294859)
+slidey = true
 
 [node name="LinesAndDirt" type="Node3D" parent="Model/NorthFace/Res"]
 
@@ -219,6 +221,7 @@ label = "Res"
 
 [node name="Cutoff" parent="Model/NorthFace" instance=ExtResource("2_4wliu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.012, 0, 0.00294859)
+slidey = true
 
 [node name="LinesAndDirt" type="Node3D" parent="Model/NorthFace/Cutoff"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8573e-05, 0)
@@ -247,6 +250,7 @@ label = "Cutoff"
 
 [node name="Decay" parent="Model/NorthFace" instance=ExtResource("2_4wliu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0356056, -7.36844e-05, 0.00307322)
+slidey = true
 
 [node name="LinesAndDirt" type="Node3D" parent="Model/NorthFace/Decay"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.38195e-05, 0)

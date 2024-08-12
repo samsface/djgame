@@ -30,8 +30,8 @@ var dragging_ := false
 var dragging_start_ := Vector2.ZERO
 var mouse_over_ := false
 
-@onready var path_follow_ = $Path3D/PathFollow3D
-@onready var shadow_path_follow_ = $Path3D/PathFollow3D2
+@onready var path_follow_ = $PathForKnob/PathFollowForKnob
+@onready var path_follow_for_knob_ = $PathForKnob/PathFollowForKnob
 
 func _ready() -> void:
 	path_follow = $Path/PathFollow
@@ -39,7 +39,8 @@ func _ready() -> void:
 	value = randf()
 	
 func buffer_change(time, v):
-	value = v
+	pass
+	#value = v
 
 func _physics_process(delta: float) -> void:
 	if dragging_:
@@ -91,21 +92,28 @@ func get_path_follow() -> PathFollow3D:
 	return $Path3D/PathFollow3D2
 
 func invalidate_() -> void:
-	if not path_follow_:
+	if not path_follow_for_knob_:
 		return
 
-	path_follow_.progress_ratio = value
+	path_follow_for_knob_.progress_ratio = value
 
 	Bus.camera_service.cursor.try_set_position(self, $Nob.global_position)
 
 	#Bus.camera_service.look_at_node(self.get_parent())
 
 func get_guide_position_for_value(value:float) -> Vector3:
-	var a = $Path3D.curve.get_baked_length()
-	return $Path3D.to_global($Path3D.curve.sample_baked(value * a))
+	var a = $PathForKnob.curve.get_baked_length()
+	return $PathForKnob.to_global($PathForKnob.curve.sample_baked(value * a))
 
 func update_path_follow_position_for_value(for_value:float) -> void:
 	$Path.global_position = get_guide_position_for_value(for_value)
 
 func get_nob_position() -> Vector3:
 	return $Nob.global_position
+
+func get_new_path_follow_and_remote_transform(for_value:float) -> PathFollow3D:
+	var dup = $PathForGuide/PathFollow.duplicate()
+	$PathForGuide.add_child(dup)
+	dup.h_offset = (for_value - 0.5	) * -$PathForKnob.curve.get_baked_length()
+
+	return dup

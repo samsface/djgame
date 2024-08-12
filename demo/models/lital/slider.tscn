@@ -108,27 +108,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00784409, 0)
 size = Vector3(0.01, 0.01, 0.05)
 material = SubResource("StandardMaterial3D_3v7bt")
 
-[node name="Path3D" type="Path3D" parent="."]
+[node name="PathForKnob" type="Path3D" parent="."]
 curve = SubResource("Curve3D_pxbqc")
 
-[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+[node name="PathFollowForKnob" type="PathFollow3D" parent="PathForKnob"]
 transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0.02)
 rotation_mode = 0
 cubic_interp = false
 loop = false
 tilt_enabled = false
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
+[node name="RemoteTransformForKnob" type="RemoteTransform3D" parent="PathForKnob/PathFollowForKnob"]
 remote_path = NodePath("../../../Nob")
 update_rotation = false
 update_scale = false
 
-[node name="Path" type="Path3D" parent="."]
+[node name="PathForGuide" type="Path3D" parent="."]
+transform = Transform3D(1, 0, -2.13163e-14, 0, 1, 0, 2.13163e-14, 0, 1, 0, 0, 0)
 curve = SubResource("Curve3D_y63d2")
 
-[node name="PathFollow" type="PathFollow3D" parent="Path"]
+[node name="PathFollow" type="PathFollow3D" parent="PathForGuide"]
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0, 0.1, 0)
 loop = false
 
-[node name="RemoteTransform" type="RemoteTransform3D" parent="Path/PathFollow"]
+[node name="RemoteTransform" type="RemoteTransform3D" parent="PathForGuide/PathFollow"]
 update_scale = false

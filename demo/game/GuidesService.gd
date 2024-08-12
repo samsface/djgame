@@ -24,7 +24,7 @@ func bang(nob:Node3D, time, time_in_seconds:float, value:float, auto:bool, dilem
 	d.position = pos
 	d.time = time
 	d.length = time_in_seconds
-	d.visible = not silent
+	d.silent = silent
 	d.dilema_group = dilema_group
 	d.watch(nob, value)
 	nob.intended_value = value

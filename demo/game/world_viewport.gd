@@ -10,12 +10,14 @@ func _ready() -> void:
 	subviewport_.get_window().focus_entered.connect(func():
 		print_debug("focus entered main window")
 		Bus.camera_service.cursor.disabled = false
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED)
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		)
 
 	subviewport_.get_window().focus_exited.connect(func():
 		print_debug("focus exited main window")
 		Bus.camera_service.cursor.disabled = true
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE)
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		)
 
 func _invalidate_graphics_quality() -> void:
 	match Bus.config_service.graphics_quality:

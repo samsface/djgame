@@ -2,6 +2,7 @@ extends Node3D
 class_name Nob
 
 @export var scale_guide := 1.0
+@export var slidey:bool
 
 var intended_value := 0.0
 var reset_to_intended_value_tween_:Tween
