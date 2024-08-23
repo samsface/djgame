@@ -176,4 +176,3 @@ func search_found(result:String, user_data:Object, search_control:Control) -> vo
 	var new_op = user_data.instantiate()
 	new_op.position_offset = to_local(search_control.position)
 	add_child(new_op)
-

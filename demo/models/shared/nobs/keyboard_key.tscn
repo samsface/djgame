@@ -6,9 +6,12 @@
 
 [node name="keyboard_key" instance=ExtResource("1_addu6")]
 script = ExtResource("2_bpvfb")
-electric = Color(0, 1, 0, 0)
+albedo = Color(0.54099, 0.54099, 0.54099, 1)
+wear = 0.296
+wear_albedo = Color(0.964742, 0.964742, 0.964742, 1)
 
 [node name="KeybardButton" parent="." index="0"]
-instance_shader_parameters/electric_albedo = Color(0, 1, 0, 0)
-instance_shader_parameters/rand = 0.914807
+instance_shader_parameters/albedo = null
+instance_shader_parameters/wear = null
+instance_shader_parameters/wear_albedo = null
 surface_material_override/0 = ExtResource("3_qgc1y")

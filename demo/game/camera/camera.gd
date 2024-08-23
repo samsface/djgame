@@ -27,6 +27,9 @@ var head_pos_:Vector3
 @export var noclip:bool :
 	set(v):
 		noclip = v
+		if not noclip:
+			rotation = Vector3.ZERO
+			position = Vector3.ZERO
 	
 func logi(str:String) -> void:
 	pass
@@ -98,9 +101,6 @@ func _physics_process(delta: float) -> void:
 		
 		var direction = (transform.basis * Vector3(move.x, 0, move.y)).normalized()
 
-	
-
-
 		position.y += camera_arm_.rotation.x * y * speed
 		position.x += direction.x * speed
 		position.z += direction.z * speed
@@ -141,8 +141,8 @@ func _physics_process(delta: float) -> void:
 		
 		return
 
-	rotation = Vector3.ZERO
-	position = Vector3.ZERO
+	#rotation = Vector3.ZERO
+	#position = Vector3.ZERO
 	
 	if not cursor.is_owner(self):
 		return
@@ -211,7 +211,9 @@ func get_head_position() -> Vector3:
 @export var dolly:Transform3D :
 	set(v):
 		dolly = v
-		camera_arm_.global_transform = dolly
+		camera_arm_.transform = Transform3D()
+		camera_.transform = Transform3D()
+		transform = dolly
 
 func looky(pos:Vector3, rot:Vector3, length := 0.6) -> void:
 	var tween := create_tween()
@@ -219,7 +221,6 @@ func looky(pos:Vector3, rot:Vector3, length := 0.6) -> void:
 	tween.set_parallel()
 	tween.tween_property(camera_arm_, "position", pos, length)
 	tween.tween_property(camera_arm_, "rotation", rot, length)
-
 
 func look_at_node(node:Node3D) -> void:
 	if not node:

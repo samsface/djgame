@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="DeviceData" load_steps=15 format=3 uid="uid://cqmulviu26gd3"]
+[gd_resource type="Resource" script_class="DeviceData" load_steps=17 format=3 uid="uid://cqmulviu26gd3"]
 
+[ext_resource type="Script" path="res://models/shared/nob_mapping_array.gd" id="1_2xilh"]
 [ext_resource type="Script" path="res://models/shared/nob_mapping_hradio.gd" id="1_7kknr"]
 [ext_resource type="Script" path="res://models/shared/nob_mapping_bang.gd" id="2_5ypay"]
 [ext_resource type="Script" path="res://models/shared/nob_mapping_expr.gd" id="2_gmc4h"]
 [ext_resource type="Script" path="res://models/shared/NobMappingArray.gd" id="2_ymg7s"]
+[ext_resource type="Script" path="res://models/shared/nob_mapping_slider.gd" id="6_5ulk4"]
 
 [sub_resource type="Resource" id="Resource_0c266"]
 script = ExtResource("2_5ypay")
@@ -57,8 +59,8 @@ symbol = ""
 
 [resource]
 script = ExtResource("2_ymg7s")
-arrays = Array[Resource("res://models/shared/nob_mapping_array.gd")]([])
+arrays = Array[ExtResource("1_2xilh")]([])
 radios = Array[ExtResource("1_7kknr")]([SubResource("Resource_scfs4")])
 exprs = Array[ExtResource("2_gmc4h")]([SubResource("Resource_4l3wh"), SubResource("Resource_8bj34"), SubResource("Resource_av6lp")])
-sliders = Array[Resource("res://models/shared/nob_mapping_slider.gd")]([])
+sliders = Array[ExtResource("6_5ulk4")]([])
 bangs = Array[ExtResource("2_5ypay")]([SubResource("Resource_0c266"), SubResource("Resource_iwce1"), SubResource("Resource_io3e3"), SubResource("Resource_ywh5s"), SubResource("Resource_6e5on"), SubResource("Resource_jsy5u")])

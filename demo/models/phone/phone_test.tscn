@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://4s0i5u4b6lfr"]
+[gd_scene load_steps=6 format=3 uid="uid://4s0i5u4b6lfr"]
 
 [ext_resource type="Script" path="res://models/phone/phone_test2.gd" id="1_l1ku3"]
 [ext_resource type="PackedScene" uid="uid://bl7d8jwotcuws" path="res://models/phone/phone.tscn" id="2_37awu"]
 [ext_resource type="PackedScene" uid="uid://lprkgl2wh3cd" path="res://game/camera/camera.tscn" id="3_066ar"]
 [ext_resource type="PackedScene" uid="uid://cdnp2ssrh2k6l" path="res://game/livestream_service/live_stream_service.tscn" id="3_pgupw"]
+
+[sub_resource type="Curve3D" id="Curve3D_dseli"]
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_l1ku3")
@@ -34,3 +36,6 @@ light_energy = 2.685
 light_indirect_energy = 1.13
 omni_range = 0.56
 omni_attenuation = 0.784584
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_dseli")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bi76febq42c75"]
+[gd_scene load_steps=7 format=4 uid="uid://bi76febq42c75"]
 
 [ext_resource type="PackedScene" uid="uid://cywkpyvenrldh" path="res://models/shared/nobs/keyboard_key_long_and_short.glb" id="1_2el4n"]
 [ext_resource type="Script" path="res://models/toydrum/buttonm.gd" id="2_xtqe5"]
@@ -13,13 +13,13 @@ _surfaces = [{
 "aabb": AABB(-0.00974981, 0, -0.0201743, 0.0194996, 0.0098688, 0.0403485),
 "format": 34896613377,
 "index_count": 84,
-"index_data": PackedByteArray(9, 0, 3, 0, 10, 0, 9, 0, 0, 0, 3, 0, 13, 0, 11, 0, 14, 0, 13, 0, 8, 0, 11, 0, 11, 0, 15, 0, 14, 0, 15, 0, 7, 0, 6, 0, 7, 0, 3, 0, 2, 0, 3, 0, 11, 0, 10, 0, 11, 0, 7, 0, 15, 0, 7, 0, 11, 0, 3, 0, 1, 0, 7, 0, 2, 0, 1, 0, 4, 0, 7, 0, 5, 0, 15, 0, 6, 0, 5, 0, 12, 0, 15, 0, 0, 0, 2, 0, 3, 0, 0, 0, 1, 0, 2, 0, 6, 0, 4, 0, 5, 0, 6, 0, 7, 0, 4, 0, 14, 0, 12, 0, 13, 0, 14, 0, 15, 0, 12, 0, 10, 0, 8, 0, 9, 0, 10, 0, 11, 0, 8, 0, 1, 0, 5, 0, 4, 0, 5, 0, 13, 0, 12, 0, 13, 0, 9, 0, 8, 0, 9, 0, 1, 0, 0, 0, 1, 0, 13, 0, 5, 0, 13, 0, 1, 0, 9, 0),
-"lods": [0.00574839, PackedByteArray(13, 0, 11, 0, 15, 0, 13, 0, 8, 0, 11, 0, 8, 0, 2, 0, 11, 0, 8, 0, 1, 0, 2, 0, 4, 0, 13, 0, 15, 0, 4, 0, 15, 0, 7, 0, 1, 0, 4, 0, 7, 0, 1, 0, 7, 0, 2, 0, 7, 0, 11, 0, 2, 0, 11, 0, 7, 0, 15, 0, 1, 0, 13, 0, 4, 0, 13, 0, 1, 0, 8, 0), 0.0200434, PackedByteArray(1, 0, 7, 0, 2, 0, 1, 0, 4, 0, 7, 0, 4, 0, 8, 0, 7, 0, 8, 0, 2, 0, 7, 0, 8, 0, 1, 0, 2, 0, 1, 0, 8, 0, 4, 0)],
+"index_data": PackedByteArray("CQADAAoACQAAAAMADQALAA4ADQAIAAsACwAPAA4ADwAHAAYABwADAAIAAwALAAoACwAHAA8ABwALAAMAAQAHAAIAAQAEAAcABQAPAAYABQAMAA8AAAACAAMAAAABAAIABgAEAAUABgAHAAQADgAMAA0ADgAPAAwACgAIAAkACgALAAgAAQAFAAQABQANAAwADQAJAAgACQABAAAAAQANAAUADQABAAkA"),
+"lods": [0.00574839, PackedByteArray("DQALAA8ADQAIAAsACAACAAsACAABAAIABAANAA8ABAAPAAcAAQAEAAcAAQAHAAIABwALAAIACwAHAA8AAQANAAQADQABAAgA"), 0.0200434, PackedByteArray("AQAHAAIAAQAEAAcABAAIAAcACAACAAcACAABAAIAAQAIAAQA")],
 "name": "KeyboardButton",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 16,
-"vertex_data": PackedByteArray(143, 244, 0, 0, 0, 0, 0, 0, 254, 255, 0, 0, 135, 5, 0, 0, 165, 216, 255, 255, 199, 22, 0, 0, 169, 205, 255, 255, 64, 17, 0, 0, 255, 255, 0, 0, 119, 250, 0, 0, 143, 244, 0, 0, 255, 255, 0, 0, 169, 205, 255, 255, 190, 238, 0, 0, 165, 216, 255, 255, 55, 233, 0, 0, 0, 0, 0, 0, 135, 5, 0, 0, 111, 11, 0, 0, 0, 0, 0, 0, 85, 50, 255, 255, 64, 17, 0, 0, 89, 39, 255, 255, 199, 22, 0, 0, 111, 11, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 119, 250, 0, 0, 89, 39, 255, 255, 55, 233, 0, 0, 85, 50, 255, 255, 190, 238, 0, 0)
+"vertex_data": PackedByteArray("j/QAAAAAAAD+/wAAhwUAAKXY///HFgAAqc3//0ARAAD//wAAd/oAAI/0AAD//wAAqc3//77uAACl2P//N+kAAAAAAACHBQAAbwsAAAAAAABVMv//QBEAAFkn///HFgAAbwsAAP//AAAAAAAAd/oAAFkn//836QAAVTL//77uAAA=")
 }]
 blend_shape_mode = 0
 
@@ -27,24 +27,33 @@ blend_shape_mode = 0
 resource_name = "keyboard_key_long_and_short_Cube_027"
 _surfaces = [{
 "aabb": AABB(-0.00974981, 0, -0.0201743, 0.0194996, 0.0098688, 0.0403485),
-"attribute_data": PackedByteArray(2, 45, 255, 251, 243, 183, 250, 193, 2, 45, 255, 251, 253, 186, 241, 190, 2, 45, 255, 255, 2, 45, 0, 0, 143, 48, 152, 189, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 251, 148, 52, 200, 193, 0, 0, 255, 251, 253, 186, 13, 129, 2, 45, 255, 61, 2, 45, 255, 61, 2, 45, 255, 65, 243, 183, 4, 126, 2, 45, 255, 65, 0, 0, 255, 65, 148, 52, 54, 126, 0, 0, 255, 65, 143, 48, 102, 130, 0, 0, 255, 61, 0, 0, 255, 61, 6, 119, 241, 190, 2, 45, 255, 189, 2, 45, 255, 189, 2, 45, 255, 193, 15, 122, 250, 193, 2, 45, 255, 193, 0, 0, 255, 193, 111, 109, 200, 193, 0, 0, 255, 193, 116, 113, 152, 189, 0, 0, 255, 189, 0, 0, 255, 189, 2, 45, 255, 125, 15, 122, 4, 126, 2, 45, 255, 125, 6, 119, 13, 129, 2, 45, 255, 129, 2, 45, 255, 129, 116, 113, 102, 130, 0, 0, 255, 129, 0, 0, 255, 129, 0, 0, 255, 125, 111, 109, 54, 126, 0, 0, 255, 125),
+"attribute_data": PackedByteArray("Ai3/+/O3+sECLf/7/brxvgIt//8CLQAAjzCYvQAA//8AAAAAAAD/+5Q0yMEAAP/7/boNgQIt/z0CLf89Ai3/QfO3BH4CLf9BAAD/QZQ0Nn4AAP9BjzBmggAA/z0AAP89BnfxvgIt/70CLf+9Ai3/wQ96+sECLf/BAAD/wW9tyMEAAP/BdHGYvQAA/70AAP+9Ai3/fQ96BH4CLf99BncNgQIt/4ECLf+BdHFmggAA/4EAAP+BAAD/fW9tNn4AAP99"),
 "format": 34896613399,
 "index_count": 84,
-"index_data": PackedByteArray(27, 0, 9, 0, 30, 0, 27, 0, 0, 0, 9, 0, 41, 0, 35, 0, 44, 0, 41, 0, 26, 0, 35, 0, 33, 0, 46, 0, 42, 0, 46, 0, 21, 0, 19, 0, 21, 0, 10, 0, 6, 0, 10, 0, 33, 0, 31, 0, 33, 0, 21, 0, 46, 0, 21, 0, 33, 0, 10, 0, 5, 0, 23, 0, 8, 0, 5, 0, 14, 0, 23, 0, 15, 0, 45, 0, 18, 0, 15, 0, 36, 0, 45, 0, 2, 0, 7, 0, 11, 0, 2, 0, 4, 0, 7, 0, 20, 0, 13, 0, 17, 0, 20, 0, 22, 0, 13, 0, 43, 0, 38, 0, 40, 0, 43, 0, 47, 0, 38, 0, 32, 0, 25, 0, 29, 0, 32, 0, 34, 0, 25, 0, 3, 0, 16, 0, 12, 0, 16, 0, 39, 0, 37, 0, 39, 0, 28, 0, 24, 0, 28, 0, 3, 0, 1, 0, 3, 0, 39, 0, 16, 0, 39, 0, 3, 0, 28, 0),
-"lods": [0.00574839, PackedByteArray(40, 0, 34, 0, 45, 0, 40, 0, 25, 0, 34, 0, 25, 0, 7, 0, 34, 0, 25, 0, 4, 0, 7, 0, 13, 0, 40, 0, 45, 0, 13, 0, 45, 0, 22, 0, 5, 0, 13, 0, 22, 0, 5, 0, 22, 0, 8, 0, 21, 0, 33, 0, 6, 0, 33, 0, 21, 0, 46, 0, 3, 0, 39, 0, 12, 0, 39, 0, 3, 0, 24, 0), 0.0200434, PackedByteArray(5, 0, 22, 0, 8, 0, 5, 0, 13, 0, 22, 0, 13, 0, 25, 0, 22, 0, 25, 0, 7, 0, 22, 0, 25, 0, 4, 0, 7, 0, 3, 0, 24, 0, 12, 0)],
+"index_data": PackedByteArray("GwAJAB4AGwAAAAkAKQAjACwAKQAaACMAIQAuACoALgAVABMAFQAKAAYACgAhAB8AIQAVAC4AFQAhAAoABQAXAAgABQAOABcADwAtABIADwAkAC0AAgAHAAsAAgAEAAcAFAANABEAFAAWAA0AKwAmACgAKwAvACYAIAAZAB0AIAAiABkAAwAQAAwAEAAnACUAJwAcABgAHAADAAEAAwAnABAAJwADABwA"),
+"lods": [0.00574839, PackedByteArray("KAAiAC0AKAAZACIAGQAHACIAGQAEAAcADQAoAC0ADQAtABYABQANABYABQAWAAgAFQAhAAYAIQAVAC4AAwAnAAwAJwADABgA"), 0.0200434, PackedByteArray("BQAWAAgABQANABYADQAZABYAGQAHABYAGQAEAAcAAwAYAAwA")],
 "material": SubResource("StandardMaterial3D_e2us2"),
 "name": "KeyboardButton",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 48,
-"vertex_data": PackedByteArray(143, 244, 0, 0, 0, 0, 64, 247, 143, 244, 0, 0, 0, 0, 255, 191, 143, 244, 0, 0, 0, 0, 14, 223, 254, 255, 0, 0, 135, 5, 1, 192, 254, 255, 0, 0, 135, 5, 14, 223, 254, 255, 0, 0, 135, 5, 195, 203, 165, 216, 255, 255, 199, 22, 90, 226, 165, 216, 255, 255, 199, 22, 11, 223, 165, 216, 255, 255, 199, 22, 196, 201, 169, 205, 255, 255, 64, 17, 226, 247, 169, 205, 255, 255, 64, 17, 15, 249, 169, 205, 255, 255, 64, 17, 11, 223, 255, 255, 0, 0, 119, 250, 50, 199, 255, 255, 0, 0, 119, 250, 64, 193, 255, 255, 0, 0, 119, 250, 118, 212, 143, 244, 0, 0, 255, 255, 6, 192, 143, 244, 0, 0, 255, 255, 143, 192, 143, 244, 0, 0, 255, 255, 65, 193, 169, 205, 255, 255, 190, 238, 124, 181, 169, 205, 255, 255, 190, 238, 255, 255, 169, 205, 255, 255, 190, 238, 47, 193, 165, 216, 255, 255, 55, 233, 34, 254, 165, 216, 255, 255, 55, 233, 46, 193, 165, 216, 255, 255, 55, 233, 179, 210, 0, 0, 0, 0, 135, 5, 50, 199, 0, 0, 0, 0, 135, 5, 23, 244, 0, 0, 0, 0, 135, 5, 83, 227, 111, 11, 0, 0, 0, 0, 84, 248, 111, 11, 0, 0, 0, 0, 143, 192, 111, 11, 0, 0, 0, 0, 24, 244, 85, 50, 255, 255, 64, 17, 109, 249, 85, 50, 255, 255, 64, 17, 255, 255, 85, 50, 255, 255, 64, 17, 15, 244, 89, 39, 255, 255, 199, 22, 34, 254, 89, 39, 255, 255, 199, 22, 14, 244, 89, 39, 255, 255, 199, 22, 71, 225, 111, 11, 0, 0, 255, 255, 6, 204, 111, 11, 0, 0, 255, 255, 255, 191, 111, 11, 0, 0, 255, 255, 99, 205, 0, 0, 0, 0, 119, 250, 1, 192, 0, 0, 0, 0, 119, 250, 101, 205, 0, 0, 0, 0, 119, 250, 208, 216, 89, 39, 255, 255, 55, 233, 90, 226, 89, 39, 255, 255, 55, 233, 82, 205, 89, 39, 255, 255, 55, 233, 53, 214, 85, 50, 255, 255, 190, 238, 187, 196, 85, 50, 255, 255, 190, 238, 15, 249, 85, 50, 255, 255, 190, 238, 80, 205, 21, 204, 17, 69, 0, 0, 255, 127, 153, 190, 182, 75, 133, 3, 60, 126, 154, 190, 184, 75, 203, 177, 238, 84, 220, 156, 144, 177, 143, 190, 164, 75, 121, 176, 73, 81, 222, 198, 37, 63, 78, 135, 87, 188, 142, 190, 163, 75, 186, 30, 117, 189, 230, 172, 98, 111, 102, 182, 162, 97, 214, 141, 152, 141, 62, 12, 124, 152, 230, 172, 99, 111, 130, 145, 40, 141, 255, 127, 255, 191, 230, 172, 85, 111, 3, 193, 9, 2, 230, 172, 84, 111, 145, 181, 86, 95, 186, 30, 117, 189, 103, 83, 73, 181, 42, 89, 76, 168, 142, 195, 98, 59, 62, 12, 124, 152, 102, 83, 72, 181, 40, 188, 252, 50, 255, 127, 255, 191, 115, 83, 86, 181, 3, 193, 9, 2, 116, 83, 87, 181, 100, 90, 39, 170, 132, 138, 253, 141, 0, 0, 255, 127, 226, 112, 186, 168, 133, 3, 60, 126, 225, 112, 186, 168, 4, 96, 174, 178, 220, 156, 144, 177, 233, 112, 197, 168, 4, 98, 183, 181, 115, 140, 194, 141, 78, 135, 87, 188, 234, 112, 198, 168)
+"vertex_data": PackedByteArray("j/QAAAAAQPeP9AAAAAD/v4/0AAAAAA7f/v8AAIcFAcD+/wAAhwUO3/7/AACHBcPLpdj//8cWWuKl2P//xxYL36XY///HFsTJqc3//0AR4vepzf//QBEP+anN//9AEQvf//8AAHf6Msf//wAAd/pAwf//AAB3+nbUj/QAAP//BsCP9AAA//+PwI/0AAD//0HBqc3//77ufLWpzf//vu7//6nN//++7i/Bpdj//zfpIv6l2P//N+kuwaXY//836bPSAAAAAIcFMscAAAAAhwUX9AAAAACHBVPjbwsAAAAAVPhvCwAAAACPwG8LAAAAABj0VTL//0ARbflVMv//QBH//1Uy//9AEQ/0WSf//8cWIv5ZJ///xxYO9Fkn///HFkfhbwsAAP//BsxvCwAA////v28LAAD//2PNAAAAAHf6AcAAAAAAd/plzQAAAAB3+tDYWSf//zfpWuJZJ///N+lSzVkn//836TXWVTL//77uu8RVMv//vu4P+VUy//++7lDNFcwRRQAA/3+ZvrZLhQM8fpq+uEvLse5U3JyQsY++pEt5sElR3sYlP06HV7yOvqNLuh51veasYm9mtqJh1o2YjT4MfJjmrGNvgpEojf9//7/mrFVvA8EJAuasVG+RtVZfuh51vWdTSbUqWUyojsNiOz4MfJhmU0i1KLz8Mv9//79zU1a1A8EJAnRTV7VkWieqhIr9jQAA/3/icLqohQM8fuFwuqgEYK6y3JyQselwxagEYre1c4zCjU6HV7zqcMao")
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_1tagj")
 
 [node name="keyboard_key_long_and_short" instance=ExtResource("1_2el4n")]
 script = ExtResource("2_xtqe5")
+electric = Color(1, 1, 0, 0)
+albedo = Color(0.819967, 0.949126, 0.718885, 1)
+wear = 0.345
+wear_albedo = Color(1, 0.85604, 0.433151, 1)
 
 [node name="KeyBoardButtonLongAndShort" parent="." index="0"]
+instance_shader_parameters/albedo = Color(0.819967, 0.949126, 0.718885, 1)
+instance_shader_parameters/electric_albedo = Color(1, 1, 0, 0)
+instance_shader_parameters/rand = 0.00261027
+instance_shader_parameters/wear = 0.345
+instance_shader_parameters/wear_albedo = Color(1, 0.85604, 0.433151, 1)
 mesh = SubResource("ArrayMesh_2tf8p")
 surface_material_override/0 = ExtResource("3_mmruu")

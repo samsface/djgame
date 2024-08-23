@@ -1,0 +1,116 @@
+[gd_scene load_steps=16 format=3 uid="uid://bt2kjmrxbmg5j"]
+
+[ext_resource type="Script" path="res://models/radio/radio.gd" id="1_vbk18"]
+[ext_resource type="PackedScene" uid="uid://bpruc7wwiwser" path="res://models/shared/nobs/square_button_knob.tscn" id="1_yy0kp"]
+[ext_resource type="PackedScene" uid="uid://trtvbgsxissg" path="res://models/shared/screw_head_with_washer.glb" id="2_p3t8m"]
+[ext_resource type="FontFile" uid="uid://ca4jgypv8bjcn" path="res://ui/fonts/RetroGaming.ttf" id="3_ih5nf"]
+[ext_resource type="Script" path="res://models/shared/nobs/label_style.gd" id="4_8uism"]
+[ext_resource type="PackedScene" uid="uid://c3dsqomoer3fb" path="res://models/radio/led_display.tscn" id="4_w7ww0"]
+[ext_resource type="ArrayMesh" uid="uid://brypuwdn6olmf" path="res://models/radio/radio_mesh.res" id="7_kl12e"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_ah3jg"]
+action = &"1"
+
+[sub_resource type="Resource" id="Resource_k8w7w"]
+script = ExtResource("4_8uism")
+size = 34
+font = ExtResource("3_ih5nf")
+curve = 0.0
+color = Color(0.837591, 0.677191, 1, 1)
+
+[sub_resource type="InputEventAction" id="InputEventAction_c3cbs"]
+action = &"2"
+
+[sub_resource type="InputEventAction" id="InputEventAction_sje8r"]
+action = &"3"
+
+[sub_resource type="InputEventAction" id="InputEventAction_fsxtt"]
+action = &"4"
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xmdxm"]
+viewport_path = NodePath("NorthFace/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ecn8p"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_xmdxm")
+
+[sub_resource type="QuadMesh" id="QuadMesh_kyf4b"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ecn8p")
+size = Vector2(0.05, 0.02)
+orientation = 1
+
+[node name="Radio" type="Node3D"]
+script = ExtResource("1_vbk18")
+
+[node name="NorthFace" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0168218, 0.0239055, 0)
+
+[node name="screw_head_with_washer" parent="NorthFace" instance=ExtResource("2_p3t8m")]
+transform = Transform3D(0.93764, 0, -0.347607, 0, 1, 0, 0.347607, 0, 0.93764, -0.0374479, 0, 0.0549632)
+
+[node name="screw_head_with_washer3" parent="NorthFace" instance=ExtResource("2_p3t8m")]
+transform = Transform3D(0.841718, 0, 0.539917, 0, 1, 0, -0.539917, 0, 0.841718, 0.00261139, 0, 0.0549632)
+
+[node name="screw_head_with_washer4" parent="NorthFace" instance=ExtResource("2_p3t8m")]
+transform = Transform3D(0.951272, 0, -0.308353, 0, 1, 0, 0.308353, 0, 0.951272, 0.00261139, 0, -0.0551162)
+
+[node name="screw_head_with_washer2" parent="NorthFace" instance=ExtResource("2_p3t8m")]
+transform = Transform3D(0.883234, 0, 0.468932, 0, 1, 0, -0.468932, 0, 0.883234, -0.0374479, 0, -0.0541962)
+
+[node name="SubViewport" type="SubViewport" parent="NorthFace"]
+own_world_3d = true
+size = Vector2i(213, 64)
+render_target_update_mode = 4
+
+[node name="LedDisplay" parent="NorthFace/SubViewport" instance=ExtResource("4_w7ww0")]
+unique_name_in_owner = true
+
+[node name="Channel1" parent="NorthFace" instance=ExtResource("1_yy0kp")]
+unique_name_in_owner = true
+transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.00481866, 8.61278e-05, 0.0339286)
+action = SubResource("InputEventAction_ah3jg")
+label = "1"
+label_style = SubResource("Resource_k8w7w")
+albedo = Color(0, 0, 0, 1)
+wear = 1.0
+
+[node name="Channel2" parent="NorthFace" instance=ExtResource("1_yy0kp")]
+unique_name_in_owner = true
+transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.00481866, 8.61278e-05, 0.0113095)
+action = SubResource("InputEventAction_c3cbs")
+label = "2"
+label_style = SubResource("Resource_k8w7w")
+albedo = Color(0, 0, 0, 1)
+wear = 1.0
+
+[node name="Channel3" parent="NorthFace" instance=ExtResource("1_yy0kp")]
+unique_name_in_owner = true
+transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.00481866, 8.61278e-05, -0.0113095)
+action = SubResource("InputEventAction_sje8r")
+label = "3"
+label_style = SubResource("Resource_k8w7w")
+albedo = Color(0, 0, 0, 1)
+wear = 1.0
+
+[node name="Channel4" parent="NorthFace" instance=ExtResource("1_yy0kp")]
+unique_name_in_owner = true
+transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.00481866, 8.61278e-05, -0.0339286)
+action = SubResource("InputEventAction_fsxtt")
+label = "4"
+label_style = SubResource("Resource_k8w7w")
+albedo = Color(0, 0, 0, 1)
+wear = 1.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NorthFace"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0293782, 0, 0)
+mesh = SubResource("QuadMesh_kyf4b")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+mesh = ExtResource("7_kl12e")
+
+[connection signal="value_changed" from="NorthFace/Channel1" to="." method="_channel_1_button_pressed"]
+[connection signal="value_changed" from="NorthFace/Channel2" to="." method="_channel_2_button_pressed"]
+[connection signal="value_changed" from="NorthFace/Channel3" to="." method="_channel_3_button_pressed"]
+[connection signal="value_changed" from="NorthFace/Channel4" to="." method="_channel_4_button_pressed"]

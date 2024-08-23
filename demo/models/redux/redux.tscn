@@ -19,34 +19,34 @@ script = ExtResource("13_d54gs")
 size = 4
 font = ExtResource("3_tt5or")
 curve = 0.0
-color = null
+color = Color(0, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_ucqdy"]
 script = ExtResource("13_d54gs")
 size = 7
 font = ExtResource("3_tt5or")
 curve = 0.4616
-color = null
+color = Color(0, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_n3mww"]
 script = ExtResource("13_d54gs")
 size = 10
 font = ExtResource("5_yoli3")
 curve = 0.0
-color = null
+color = Color(0, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_pqj4l"]
 script = ExtResource("13_d54gs")
 size = 4
 curve = 0.0
-color = null
+color = Color(0, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_vi17s"]
 script = ExtResource("13_d54gs")
 size = 7
 font = ExtResource("3_tt5or")
 curve = 0.0
-color = null
+color = Color(0, 0, 0, 1)
 
 [node name="Redux" type="Node3D"]
 script = ExtResource("1_gcvpy")

@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3dsqomoer3fb"]
+
+[ext_resource type="FontFile" uid="uid://gtvv3ev1i08b" path="res://models/radio/TEXASLED.TTF" id="1_8ty3b"]
+[ext_resource type="Script" path="res://models/radio/radio_led_display.gd" id="1_xnjdx"]
+
+[sub_resource type="Theme" id="Theme_4hxrj"]
+default_font = ExtResource("1_8ty3b")
+default_font_size = 44
+
+[node name="Control" type="Control"]
+custom_minimum_size = Vector2(512, 64)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 400.0
+offset_bottom = 37.0
+script = ExtResource("1_xnjdx")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.128904, 0.208539, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 511.0
+offset_bottom = 58.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ChannelNameLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+theme = SubResource("Theme_4hxrj")
+bbcode_enabled = true
+text = "[font_size=32][/font_size]"
+fit_content = true
+scroll_active = false
+
+[node name="VBoxContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+
+[node name="FrequencyLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme = SubResource("Theme_4hxrj")
+bbcode_enabled = true
+text = "[font_size=24]0.0FM[/font_size]"
+fit_content = true
+scroll_active = false

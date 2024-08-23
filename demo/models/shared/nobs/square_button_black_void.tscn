@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcvyc6blialbk"]
+
+[ext_resource type="PackedScene" uid="uid://b615mg447o104" path="res://models/shared/nobs/square_button.glb" id="1_rpxm2"]
+[ext_resource type="Material" uid="uid://dtnc8e2uktfb5" path="res://models/redux/black_void_material.tres" id="2_7nifu"]
+
+[node name="square_button" instance=ExtResource("1_rpxm2")]
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_7nifu")

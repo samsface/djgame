@@ -4,6 +4,14 @@ extends RythmicAnimationPlayerControlItem
 	set(v):
 		method = v
 		$Label.text = method
+		
+@export var lookahead:int
+
+@export var pass_time_and_length:bool
+
+@export var fire_in_debug := false
+
+var value_
 
 func parse_args_(object:Object, method_name:StringName, args:PackedStringArray) -> Array:
 	var res := []
@@ -26,6 +34,15 @@ func parse_args_(object:Object, method_name:StringName, args:PackedStringArray) 
 
 	return res
 
+func get_lookahead() -> int:
+	return lookahead
+
+func interprolate(from, t):
+	if not fire_in_debug:
+		return
+
+	begin()
+
 func begin() -> void:
 	flash()
 	
@@ -37,4 +54,9 @@ func begin() -> void:
 	var method_name = method_args_generic[0]
 
 	var args = parse_args_(node, method_name, method_args_generic)
+	
+	if pass_time_and_length:
+		args.push_front(length)
+		args.push_front(time)
+
 	node.callv(method_name, args)

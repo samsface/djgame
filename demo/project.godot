@@ -25,7 +25,9 @@ AudioService="*res://game/audio_service.gd"
 
 window/size/viewport_width=1680
 window/size/viewport_height=1050
+window/size/mode=2
 window/subwindows/embed_subwindows=false
+window/vsync/vsync_mode=0
 
 [editor]
 

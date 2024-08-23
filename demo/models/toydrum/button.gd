@@ -1,3 +1,4 @@
+@tool
 extends Nob
 class_name NobButton
 
@@ -6,6 +7,35 @@ signal value_will_change
 signal impulse(Vector3, float)
 
 @export var action:InputEventAction
+
+@export var label:String : 
+	set(v):
+		label = v
+		%Label.label = label
+		
+@export var label_style:LabelStyle :
+	set(v):
+		label_style = v
+		%Label.label_style = label_style
+		
+@export var albedo:Color :
+	set(v):
+		albedo = v
+		if not is_node_ready():
+			await ready
+		%Button.albedo = albedo
+
+@export_range(0.0, 1.0) var wear:float :
+	set(v):
+		wear = v
+		%Button.wear = wear
+		
+@export var wear_albedo:Color :
+	set(v):
+		wear_albedo = v
+		%Button.wear_albedo = wear_albedo
+
+@export var press_distance:float
 
 var value : 
 	set(v):
@@ -61,7 +91,7 @@ func pressed() -> void:
 
 	down_ = true
 	var tween = create_tween()
-	tween.tween_property($Nob, "position:y", -0.006, 0.01)
+	tween.tween_property($Nob, "position:y", -press_distance, 0.01)
 
 	if lock:
 		return

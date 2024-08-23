@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvkavulcjdtlq"]
+
+[ext_resource type="PackedScene" uid="uid://b615mg447o104" path="res://models/shared/nobs/square_button.glb" id="1_0kaxi"]
+[ext_resource type="Script" path="res://models/toydrum/buttonm.gd" id="2_imc1t"]
+
+[node name="square_button" instance=ExtResource("1_0kaxi")]
+script = ExtResource("2_imc1t")
+albedo = Color(0.987348, 0.517688, 0.641765, 1)
+
+[node name="Cube" parent="." index="0"]
+instance_shader_parameters/albedo = Color(0.987348, 0.517688, 0.641765, 1)

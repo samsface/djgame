@@ -1,0 +1,39 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://d1itv83qjgtk4"]
+
+[ext_resource type="Shader" path="res://models/shared/nobs/knob_shader.gdshader" id="1_f65e0"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="3_loq7m"]
+
+[sub_resource type="Gradient" id="Gradient_5huey"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_basrq"]
+gradient = SubResource("Gradient_5huey")
+
+[sub_resource type="Gradient" id="Gradient_15cmb"]
+colors = PackedColorArray(0, 0, 0, 1, 0.974971, 0.974971, 0.974971, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lstbf"]
+frequency = 0.0526
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_p8a7r"]
+width = 256
+height = 256
+in_3d_space = true
+seamless = true
+seamless_blend_skirt = 0.0
+color_ramp = SubResource("Gradient_15cmb")
+noise = SubResource("FastNoiseLite_lstbf")
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_f65e0")
+shader_parameter/roughness = 0.213
+shader_parameter/specular = 1.0
+shader_parameter/metallic = 0.03
+shader_parameter/ao_light_affect = 1.0
+shader_parameter/detail_scale = Vector2(0.1, 0.1)
+shader_parameter/aoe_texture = SubResource("GradientTexture1D_basrq")
+shader_parameter/texture_detail = ExtResource("3_loq7m")
+shader_parameter/electric_noise = SubResource("NoiseTexture2D_p8a7r")

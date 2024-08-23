@@ -26,6 +26,7 @@ attack_us = 355.0
 sidechain = &"Music"
 
 [resource]
+bus/0/volume_db = -80.0
 bus/1/name = &"Music"
 bus/1/solo = false
 bus/1/mute = false
@@ -33,11 +34,11 @@ bus/1/bypass_fx = false
 bus/1/volume_db = 0.0
 bus/1/send = &"Master"
 bus/1/effect/0/effect = SubResource("AudioEffectAmplify_gby66")
-bus/1/effect/0/enabled = true
+bus/1/effect/0/enabled = false
 bus/1/effect/1/effect = SubResource("AudioEffectReverb_oif8r")
-bus/1/effect/1/enabled = true
+bus/1/effect/1/enabled = false
 bus/1/effect/2/effect = SubResource("AudioEffectChorus_r80rm")
-bus/1/effect/2/enabled = true
+bus/1/effect/2/enabled = false
 bus/1/effect/3/effect = SubResource("AudioEffectLimiter_lfwnm")
 bus/1/effect/3/enabled = false
 bus/2/name = &"New Bus"

@@ -1,0 +1,443 @@
+[gd_scene load_steps=52 format=3 uid="uid://r4jyall8jbku"]
+
+[ext_resource type="PackedScene" uid="uid://dgg103ssmbg32" path="res://game/settings/settings.tscn" id="1_wu5a7"]
+[ext_resource type="Script" path="res://game/levels/car/v_split_container.gd" id="1_yqwvr"]
+[ext_resource type="Script" path="res://game/world_viewport.gd" id="2_ok5au"]
+[ext_resource type="PackedScene" uid="uid://bt2kjmrxbmg5j" path="res://models/radio/radio.tscn" id="3_idgv0"]
+[ext_resource type="PackedScene" uid="uid://df031doltiks0" path="res://game/points_service/points_service.tscn" id="4_x4ayx"]
+[ext_resource type="Script" path="res://game/GuidesService.gd" id="5_5vd1q"]
+[ext_resource type="Script" path="res://game/levels/car/game.gd" id="5_7141o"]
+[ext_resource type="PackedScene" uid="uid://lprkgl2wh3cd" path="res://game/camera/camera.tscn" id="6_6v0ic"]
+[ext_resource type="PackedScene" uid="uid://xvp0yshx0tqi" path="res://models/road/scene.gltf" id="6_exuct"]
+[ext_resource type="CameraAttributesPractical" uid="uid://ev1eo0cru0we" path="res://game/cameraatr.tres" id="8_bi2xc"]
+[ext_resource type="Script" path="res://game/world_environment.gd" id="9_rayxg"]
+[ext_resource type="PackedScene" uid="uid://lb3oq22iphka" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_host_control.tscn" id="11_qp32j"]
+[ext_resource type="Environment" uid="uid://b8uhvyo3rc3m8" path="res://game/settings/environment_potato.tres" id="12_x8urt"]
+[ext_resource type="Script" path="res://game/levels/car/electric_tower_spawner.gd" id="15_qvxmr"]
+[ext_resource type="Shader" path="res://models/road/road.gdshader" id="16_5n2ku"]
+[ext_resource type="Shader" path="res://game/levels/car/ground.gdshader" id="17_10afu"]
+[ext_resource type="Script" path="res://game/levels/car/road.gd" id="17_nt62j"]
+[ext_resource type="Script" path="res://game/levels/car/rail.gd" id="18_7sjib"]
+[ext_resource type="Shader" path="res://game/levels/car/grass_shader.gdshader" id="19_nloml"]
+[ext_resource type="ArrayMesh" uid="uid://dlquyweaxp2fy" path="res://game/levels/car/geograss.res" id="20_4nxai"]
+[ext_resource type="Script" path="res://game/levels/car/gpu_particles_3d.gd" id="20_38jbp"]
+[ext_resource type="Script" path="res://game/levels/car/camera_3d.gd" id="21_m7k38"]
+[ext_resource type="Shader" path="res://game/levels/car/car.gdshader" id="22_2yv1j"]
+
+[sub_resource type="Curve3D" id="Curve3D_fyb2l"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3000, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Environment" id="Environment_4bk1n"]
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
+
+[sub_resource type="World3D" id="World3D_2ivdu"]
+environment = SubResource("Environment_4bk1n")
+
+[sub_resource type="Gradient" id="Gradient_gc171"]
+offsets = PackedFloat32Array(0.3)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vjknk"]
+gradient = SubResource("Gradient_gc171")
+width = 401
+height = 1024
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v46bc"]
+render_priority = 0
+shader = ExtResource("22_2yv1j")
+shader_parameter/texture_gradient = SubResource("GradientTexture2D_vjknk")
+
+[sub_resource type="Gradient" id="Gradient_r1xlb"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8fuln"]
+gradient = SubResource("Gradient_r1xlb")
+width = 401
+height = 1024
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aqgls"]
+render_priority = 0
+shader = ExtResource("22_2yv1j")
+shader_parameter/texture_gradient = SubResource("GradientTexture2D_8fuln")
+
+[sub_resource type="Gradient" id="Gradient_25lpi"]
+offsets = PackedFloat32Array(0.40942, 0.492754)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_duyl7"]
+gradient = SubResource("Gradient_25lpi")
+
+[sub_resource type="Gradient" id="Gradient_ndhqf"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.417085, 0.477387, 0.532663, 0.879397, 0.909548)
+colors = PackedColorArray(0.572988, 0.572988, 0.572988, 1, 0.980961, 0.812057, 0, 1, 0.537011, 0.537011, 0.537011, 1, 1, 1, 1, 1, 0.537255, 0.537255, 0.537255, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lwafe"]
+gradient = SubResource("Gradient_ndhqf")
+width = 1024
+height = 1024
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2s7wj"]
+frequency = 0.0009
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e34cy"]
+noise = SubResource("FastNoiseLite_2s7wj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4nw4a"]
+render_priority = 0
+shader = ExtResource("16_5n2ku")
+shader_parameter/color_a = Color(0.699653, 0.699653, 0.699653, 1)
+shader_parameter/color_b = Color(0.536717, 0.948375, 1.54018e-06, 1)
+shader_parameter/middle_line_color = Color(0.773786, 0.822865, 0, 1)
+shader_parameter/side_line_color = Color(0.920995, 0.920995, 0.920995, 1)
+shader_parameter/color_ramp = SubResource("GradientTexture1D_duyl7")
+shader_parameter/texture_t = SubResource("NoiseTexture2D_e34cy")
+shader_parameter/texture_road = SubResource("GradientTexture2D_lwafe")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ewrg5"]
+frequency = 0.0025
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rn1n6"]
+width = 1024
+height = 1024
+seamless = true
+noise = SubResource("FastNoiseLite_ewrg5")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5vm0q"]
+viewport_path = NodePath("WorldViewport/SubViewport/Game/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6nqgk"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("17_10afu")
+shader_parameter/texture_height_amplitude = 5.0
+shader_parameter/albedo = Color(0, 0.6, 0, 1)
+shader_parameter/texture_height = SubResource("NoiseTexture2D_rn1n6")
+shader_parameter/texture_road_distance = SubResource("ViewportTexture_5vm0q")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1bqrc"]
+material = SubResource("ShaderMaterial_6nqgk")
+size = Vector2(1024, 1024)
+subdivide_width = 256
+subdivide_depth = 256
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_th14h"]
+viewport_path = NodePath("WorldViewport/SubViewport/Game/SubViewport")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0xaxj"]
+seed = 3
+frequency = 0.0664
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tm0k2"]
+width = 1024
+height = 1024
+seamless = true
+as_normal_map = true
+noise = SubResource("FastNoiseLite_0xaxj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bo1rf"]
+resource_local_to_scene = true
+shader = ExtResource("19_nloml")
+shader_parameter/rows = 4.0
+shader_parameter/spacing = 0.25
+shader_parameter/height_map_amplitude = 1.0
+shader_parameter/height_map_size = Vector2(1024, 1024)
+shader_parameter/texture_height_size = Vector2(1024, 1024)
+shader_parameter/texture_height_amplitude = 5.0
+shader_parameter/height_map = SubResource("ViewportTexture_th14h")
+shader_parameter/texture_noise = SubResource("NoiseTexture2D_tm0k2")
+shader_parameter/texture_height = SubResource("NoiseTexture2D_rn1n6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vistu"]
+resource_local_to_scene = true
+shader = ExtResource("19_nloml")
+shader_parameter/rows = 4.0
+shader_parameter/spacing = 0.6
+shader_parameter/height_map_amplitude = 1.0
+shader_parameter/height_map_size = Vector2(1024, 1024)
+shader_parameter/texture_height_size = Vector2(1024, 1024)
+shader_parameter/texture_height_amplitude = 5.0
+shader_parameter/height_map = SubResource("ViewportTexture_th14h")
+shader_parameter/texture_noise = SubResource("NoiseTexture2D_tm0k2")
+shader_parameter/texture_height = SubResource("NoiseTexture2D_rn1n6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hki15"]
+resource_local_to_scene = true
+shader = ExtResource("19_nloml")
+shader_parameter/rows = 4.0
+shader_parameter/spacing = 1.9
+shader_parameter/height_map_amplitude = 1.0
+shader_parameter/height_map_size = Vector2(1024, 1024)
+shader_parameter/texture_height_size = Vector2(1024, 1024)
+shader_parameter/texture_height_amplitude = 5.0
+shader_parameter/height_map = SubResource("ViewportTexture_th14h")
+shader_parameter/texture_noise = SubResource("NoiseTexture2D_tm0k2")
+shader_parameter/texture_height = SubResource("NoiseTexture2D_rn1n6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pmakn"]
+albedo_color = Color(0.89059, 0.89059, 0.89059, 1)
+metallic = 0.73
+roughness = 0.41
+
+[node name="MarginContainer" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Recorder" type="Node" parent="."]
+
+[node name="VSplitContainer" type="VSplitContainer" parent="Recorder"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 900
+script = ExtResource("1_yqwvr")
+
+[node name="MarginContainer" type="MarginContainer" parent="Recorder/VSplitContainer"]
+layout_mode = 2
+
+[node name="BeatPlayerHost" parent="Recorder/VSplitContainer" instance=ExtResource("11_qp32j")]
+unique_name_in_owner = true
+layout_mode = 2
+save_path = "res://junk/car.bp"
+root_node = NodePath("../../../WorldViewport/SubViewport/Game")
+
+[node name="ConfigService" parent="." instance=ExtResource("1_wu5a7")]
+
+[node name="WorldViewport" type="SubViewportContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+stretch = true
+script = ExtResource("2_ok5au")
+
+[node name="SubViewport" type="SubViewport" parent="WorldViewport"]
+handle_input_locally = false
+scaling_3d_scale = 0.5
+gui_snap_controls_to_pixels = false
+size = Vector2i(2, 2)
+render_target_update_mode = 4
+
+[node name="Game" type="Node3D" parent="WorldViewport/SubViewport"]
+script = ExtResource("5_7141o")
+
+[node name="Path3D" type="Path3D" parent="WorldViewport/SubViewport/Game"]
+curve = SubResource("Curve3D_fyb2l")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="WorldViewport/SubViewport/Game/Path3D"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37108e-08, 0, -0.999985, 0, 0.999917, 0, 0.999986, 0, -4.37107e-08, 32.9984, 0, 1.87)
+progress = 33.0
+h_offset = 1.87
+loop = false
+
+[node name="Car" type="Node3D" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0.411333, 1.26341)
+
+[node name="Sketchfab_Scene" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car" instance=ExtResource("6_exuct")]
+transform = Transform3D(-0.3, 8.23704e-25, 6.19083e-08, 4.51189e-24, 0.3, 3.33819e-17, -4.52987e-08, 2.44258e-17, -0.41, -0.347, -0.405, 0.185)
+
+[node name="Radio" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car" instance=ExtResource("3_idgv0")]
+unique_name_in_owner = true
+transform = Transform3D(-2.38935e-07, 1.9081e-08, -1, -0.74375, 0.668516, 1.08997e-08, 0.668548, 0.743715, 5.59319e-08, -0.339012, 0.542629, -0.574386)
+
+[node name="Camera" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car" instance=ExtResource("6_6v0ic")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.334046, 0.262877, 1.36224e-08)
+
+[node name="PointsService" parent="WorldViewport/SubViewport/Game" instance=ExtResource("4_x4ayx")]
+
+[node name="SubViewport" type="SubViewport" parent="WorldViewport/SubViewport/Game"]
+own_world_3d = true
+world_3d = SubResource("World3D_2ivdu")
+size = Vector2i(1024, 1024)
+render_target_update_mode = 4
+
+[node name="CSGMesh3D7" type="CSGPolygon3D" parent="WorldViewport/SubViewport/Game/SubViewport"]
+operation = 2
+polygon = PackedVector2Array(-5, 0, -5, 1, 5, 1, 5, 0)
+mode = 2
+path_node = NodePath("../../Path3D")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = false
+path_u_distance = 0.0
+path_joined = false
+material = SubResource("ShaderMaterial_v46bc")
+script = ExtResource("17_nt62j")
+width = 5.0
+
+[node name="CSGMesh3D8" type="CSGPolygon3D" parent="WorldViewport/SubViewport/Game/SubViewport"]
+operation = 2
+polygon = PackedVector2Array(-50, 0, -50, 1, 50, 1, 50, 0)
+mode = 2
+path_node = NodePath("../../Path3D")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = false
+path_u_distance = 0.0
+path_joined = false
+material = SubResource("ShaderMaterial_aqgls")
+script = ExtResource("17_nt62j")
+width = 50.0
+
+[node name="Camera3D" type="Camera3D" parent="WorldViewport/SubViewport/Game/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 100, 0)
+projection = 1
+current = true
+size = 1024.0
+script = ExtResource("21_m7k38")
+
+[node name="Guides" type="Node3D" parent="WorldViewport/SubViewport/Game"]
+script = ExtResource("5_5vd1q")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="WorldViewport/SubViewport/Game"]
+environment = ExtResource("12_x8urt")
+camera_attributes = ExtResource("8_bi2xc")
+script = ExtResource("9_rayxg")
+
+[node name="Sun" type="DirectionalLight3D" parent="WorldViewport/SubViewport/Game/WorldEnvironment"]
+transform = Transform3D(-0.229171, 0.778863, 0.583826, 0.810338, -0.179648, 0.557745, 0.53929, 0.600915, -0.589972, 5.72989, 5.18985, -9.19963)
+shadow_enabled = true
+shadow_reverse_cull_face = true
+directional_shadow_mode = 0
+directional_shadow_split_1 = 0.0
+directional_shadow_split_2 = 0.117
+directional_shadow_split_3 = 1.0
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 8192.0
+directional_shadow_pancake_size = 0.2
+
+[node name="Spawner" type="Node3D" parent="WorldViewport/SubViewport/Game"]
+
+[node name="ElectricTower" type="Node3D" parent="WorldViewport/SubViewport/Game/Spawner" node_paths=PackedStringArray("path")]
+script = ExtResource("15_qvxmr")
+path = NodePath("../../Path3D")
+delay = 3
+
+[node name="CSGMesh3D5" type="CSGPolygon3D" parent="WorldViewport/SubViewport/Game"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.99, 0)
+operation = 2
+polygon = PackedVector2Array(-5, 0, -5, 1, 5, 1, 5, 0)
+mode = 2
+path_node = NodePath("../Path3D")
+path_interval_type = 1
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = false
+path_u_distance = 0.07
+path_joined = false
+material = SubResource("ShaderMaterial_4nw4a")
+script = ExtResource("17_nt62j")
+width = 5.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldViewport/SubViewport/Game"]
+transform = Transform3D(0.999994, 3.72554e-09, 8.52651e-14, 3.72503e-09, 0.999997, 1.62826e-16, -1.63425e-13, 1.86278e-09, 0.999996, 0, 0, 0)
+mesh = SubResource("PlaneMesh_1bqrc")
+
+[node name="Grass" type="GPUParticles3D" parent="WorldViewport/SubViewport/Game"]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 30.6062, 0, 3.55743)
+cast_shadow = 0
+amount = 10000
+lifetime = 0.01
+explosiveness = 1.0
+visibility_aabb = AABB(-12.5, 0, -12.5, 25, 20, 25)
+process_material = SubResource("ShaderMaterial_bo1rf")
+draw_pass_1 = ExtResource("20_4nxai")
+script = ExtResource("20_38jbp")
+rows = 100
+spacing = 0.25
+
+[node name="Grass2" type="GPUParticles3D" parent="WorldViewport/SubViewport/Game"]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 30.6062, 0, 3.55743)
+cast_shadow = 0
+amount = 10000
+lifetime = 0.01
+explosiveness = 1.0
+visibility_aabb = AABB(-30, 0, -30, 60, 20, 60)
+process_material = SubResource("ShaderMaterial_vistu")
+draw_pass_1 = ExtResource("20_4nxai")
+script = ExtResource("20_38jbp")
+rows = 100
+spacing = 0.6
+
+[node name="Grass3" type="GPUParticles3D" parent="WorldViewport/SubViewport/Game"]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 30.6062, 0, 3.55743)
+cast_shadow = 0
+amount = 10000
+lifetime = 0.01
+explosiveness = 1.0
+visibility_aabb = AABB(-95, 0, -95, 190, 20, 190)
+process_material = SubResource("ShaderMaterial_hki15")
+draw_pass_1 = ExtResource("20_4nxai")
+script = ExtResource("20_38jbp")
+rows = 100
+spacing = 1.9
+
+[node name="CSGMesh3D2" type="CSGPolygon3D" parent="WorldViewport/SubViewport/Game"]
+polygon = PackedVector2Array(-5, 0.165, -4.91, 0.234, -4.91, 0.252, -4.985, 0.291, -4.985, 0.339, -4.916, 0.375, -4.916, 0.393, -5, 0.474, -5, 0.456, -4.934, 0.39, -4.934, 0.381, -5, 0.351, -5, 0.279, -4.928, 0.249, -4.928, 0.234, -5, 0.183, -5, 0.165)
+mode = 2
+path_node = NodePath("../Path3D")
+path_interval_type = 1
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = false
+path_u_distance = 0.0
+path_joined = false
+smooth_faces = true
+material = SubResource("StandardMaterial3D_pmakn")
+script = ExtResource("18_7sjib")
+polygon_scale = Vector2(0.003, 0.003)
+polygon_offset = Vector2(-5, 0.165)
+
+[node name="Polygon2D" type="Polygon2D" parent="WorldViewport/SubViewport/Game/CSGMesh3D2"]
+polygon = PackedVector2Array(0, 0, 30, 23, 30, 29, 5, 42, 5, 58, 28, 70, 28, 76, 0, 103, 0, 97, 22, 75, 22, 72, 0, 62, 0, 38, 24, 28, 24, 23, 0, 6, 0, 0)
+
+[node name="CSGMesh3D3" type="CSGPolygon3D" parent="WorldViewport/SubViewport/Game"]
+polygon = PackedVector2Array(5, 0.165, 4.94, 0.234, 4.94, 0.252, 4.99, 0.291, 4.99, 0.339, 4.944, 0.375, 4.944, 0.393, 5, 0.474, 5, 0.456, 4.956, 0.39, 4.956, 0.381, 5, 0.351, 5, 0.279, 4.952, 0.249, 4.952, 0.234, 5, 0.183, 5, 0.165)
+mode = 2
+path_node = NodePath("../Path3D")
+path_interval_type = 1
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = false
+path_u_distance = 0.0
+path_joined = false
+smooth_faces = true
+material = SubResource("StandardMaterial3D_pmakn")
+script = ExtResource("18_7sjib")
+polygon_scale = Vector2(-0.002, 0.003)
+polygon_offset = Vector2(5, 0.165)
+
+[node name="Polygon2D" type="Polygon2D" parent="WorldViewport/SubViewport/Game/CSGMesh3D3"]
+visible = false
+position = Vector2(-40, 8)
+polygon = PackedVector2Array(0, 0, 30, 23, 30, 29, 5, 42, 5, 58, 28, 70, 28, 76, 0, 103, 0, 97, 22, 75, 22, 72, 0, 62, 0, 38, 24, 28, 24, 23, 0, 6, 0, 0)

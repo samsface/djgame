@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bxts7kh2ufsws"]
 
-[ext_resource type="Script" path="res://addons/inspector/vector3_control.gd" id="1_f6ti4"]
+[ext_resource type="Script" path="res://addons/inspector/vector_3_control.gd" id="1_b0b4x"]
 
 [node name="Panel" type="Button"]
 custom_minimum_size = Vector2(200, 96)
@@ -8,7 +8,7 @@ offset_left = 21.0
 offset_right = 377.0
 offset_bottom = 102.0
 text_overrun_behavior = 3
-script = ExtResource("1_f6ti4")
+script = ExtResource("1_b0b4x")
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="."]
 layout_mode = 1

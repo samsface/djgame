@@ -1,41 +1,8 @@
-[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://c3pp76cx8xann"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c3pp76cx8xann"]
 
 [ext_resource type="Shader" path="res://models/toydrum/electric.gdshader" id="1_8mr3k"]
-
-[sub_resource type="Gradient" id="Gradient_15cmb"]
-colors = PackedColorArray(0, 0, 0, 1, 0.974971, 0.974971, 0.974971, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ikov4"]
-noise_type = 2
-frequency = 0.1298
-fractal_type = 3
-fractal_octaves = 4
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1blc5"]
-width = 256
-height = 256
-in_3d_space = true
-seamless = true
-seamless_blend_skirt = 0.0
-color_ramp = SubResource("Gradient_15cmb")
-noise = SubResource("FastNoiseLite_ikov4")
-
-[sub_resource type="Gradient" id="Gradient_x1cn8"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_vgjy8"]
-frequency = 0.025
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w7i7d"]
-width = 256
-height = 256
-in_3d_space = true
-seamless = true
-color_ramp = SubResource("Gradient_x1cn8")
-noise = SubResource("FastNoiseLite_vgjy8")
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_8mr3k")
 shader_parameter/outline_width = 1.0
-shader_parameter/noise = SubResource("NoiseTexture2D_1blc5")
-shader_parameter/noise2 = SubResource("NoiseTexture2D_w7i7d")

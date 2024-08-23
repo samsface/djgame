@@ -33,7 +33,7 @@ func _ready() -> void:
 
 	print_debug("libpd init was ", audio_stream_.is_initialized())
 
-	var p = ProjectSettings.globalize_path("res://junk/xxx.pd")
+	var p = ProjectSettings.globalize_path("res://junk/radio.pd")
 
 	if not patch_file_handle_.open(p):
 		push_error("couldn't open patch")

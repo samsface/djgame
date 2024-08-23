@@ -6620,13 +6620,27 @@
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/bang.tscn",
 "silent": false,
 "time": 1408,
-"value": 0.5
+"value": 0.300781
 }, {
 "from_value": 0.0,
 "length": 34,
 "scene_file_path": "res://addons/rhythmic_animation_player/ops/slide.tscn",
 "time": 1358,
 "value": 1.0
+}, {
+"auto": false,
+"length": 16,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/bang.tscn",
+"silent": false,
+"time": 1440,
+"value": 1.0
+}, {
+"auto": false,
+"length": 16,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/bang.tscn",
+"silent": false,
+"time": 1424,
+"value": 0.599609
 }],
 "node_path": NodePath("%acid/Model/NorthFace/Res"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn",
@@ -9729,6 +9743,13 @@
 "silent": false,
 "time": 1388,
 "value": 1.0
+}, {
+"auto": true,
+"length": 4,
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/bang.tscn",
+"silent": true,
+"time": 208,
+"value": 1.0
 }],
 "node_path": NodePath("%toykit/NorthFace/seq-2"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn",
@@ -11909,7 +11930,7 @@
 "to_value": 0.0,
 "tween_ease": 2,
 "tween_type": 8,
-"value": Transform3D(0.998441, 0.00350573, -0.0557113, 0, 0.998026, 0.0628025, 0.0558215, -0.0627046, 0.99647, 0.0128235, 0.0637052, -0.226531)
+"value": Transform3D(0.99961, 0.00599619, -0.0272701, 0, 0.976669, 0.214751, 0.0279216, -0.214667, 0.976288, 0.0141633, 0.0967681, -0.192214)
 }, {
 "enable_from": false,
 "length": 16,
@@ -12020,6 +12041,26 @@
 "tween_ease": 2,
 "tween_type": 8,
 "value": Transform3D(0.980955, 0.082704, -0.175747, 0, 0.90482, 0.425794, 0.194235, -0.417685, 0.887588, -0.00106002, 0.130549, -0.165628)
+}, {
+"enable_from": false,
+"length": 48,
+"property": "",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/tween.tscn",
+"time": 752,
+"to_value": 0.0,
+"tween_ease": 1,
+"tween_type": 8,
+"value": Transform3D(0.975149, 0.0077343, -0.221413, 0, 0.99939, 0.0349102, 0.221548, -0.0340427, 0.974555, -0.00733667, 0.0541759, -0.2075)
+}, {
+"enable_from": false,
+"length": 6,
+"property": "",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/tween.tscn",
+"time": 78,
+"to_value": 0.0,
+"tween_ease": 2,
+"tween_type": 8,
+"value": Transform3D(0.975149, -0.0262286, -0.21999, 0, 0.992967, -0.118388, 0.221549, 0.115446, 0.968292, -0.0208141, 0.0505401, -0.255311)
 }],
 "node_path": NodePath("Camera:dolly"),
 "scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn",

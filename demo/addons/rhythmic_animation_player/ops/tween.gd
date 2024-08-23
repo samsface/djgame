@@ -152,6 +152,8 @@ func interprolate(from, t):
 				from = 0.0
 			TYPE_BOOL:
 				from = false
+			TYPE_VECTOR3:
+				from = Vector3.ZERO
 
 	var target_node = get_target_node()
 	if target_node:

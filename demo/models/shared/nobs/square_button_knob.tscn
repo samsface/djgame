@@ -1,0 +1,97 @@
+[gd_scene load_steps=18 format=3 uid="uid://bpruc7wwiwser"]
+
+[ext_resource type="Script" path="res://models/toydrum/button.gd" id="1_46e6y"]
+[ext_resource type="Script" path="res://models/shared/nob_model.gd" id="2_sjuuk"]
+[ext_resource type="PackedScene" uid="uid://bvkavulcjdtlq" path="res://models/shared/nobs/square_button.tscn" id="3_massl"]
+[ext_resource type="PackedScene" uid="uid://b77oywlnttw32" path="res://models/shared/label.tscn" id="4_modnf"]
+[ext_resource type="FontFile" uid="uid://ca4jgypv8bjcn" path="res://ui/fonts/RetroGaming.ttf" id="5_5fnco"]
+[ext_resource type="Script" path="res://models/shared/nobs/label_style.gd" id="6_kecne"]
+[ext_resource type="PackedScene" uid="uid://dcvyc6blialbk" path="res://models/shared/nobs/square_button_black_void.tscn" id="7_j4hon"]
+[ext_resource type="AudioStream" uid="uid://bmkr5qf551e58" path="res://models/shared/sounds/key_press_0.wav" id="8_m5lp2"]
+[ext_resource type="AudioStream" uid="uid://bgxedw1j0conq" path="res://models/shared/sounds/key_press_1.wav" id="9_7escm"]
+[ext_resource type="AudioStream" uid="uid://bxoki7ft7c3na" path="res://models/shared/sounds/key_press_loud_1.wav" id="10_83o6u"]
+[ext_resource type="AudioStream" uid="uid://c3p1l42revws3" path="res://models/shared/sounds/key_press_loud_0.wav" id="11_xu3nc"]
+[ext_resource type="AudioStream" uid="uid://dh5tiwpnwbg3a" path="res://models/shared/sounds/key_press_loud_2.wav" id="12_jgin4"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_s7mvf"]
+action = &"7"
+
+[sub_resource type="Resource" id="Resource_3ypb2"]
+script = ExtResource("6_kecne")
+size = 24
+font = ExtResource("5_5fnco")
+curve = 0.0
+color = Color(0.702608, 0.638796, 0.45503, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vcpyw"]
+size = Vector3(0.02, 0.02, 0.02)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ksjj7"]
+streams_count = 5
+stream_0/stream = ExtResource("8_m5lp2")
+stream_1/stream = ExtResource("9_7escm")
+stream_2/stream = ExtResource("10_83o6u")
+stream_3/stream = ExtResource("11_xu3nc")
+stream_4/stream = ExtResource("12_jgin4")
+
+[sub_resource type="Curve3D" id="Curve3D_plp3i"]
+bake_interval = 0.01
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 1.86265e-09, 0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[node name="seq-7" type="Node3D"]
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 1
+transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_46e6y")
+action = SubResource("InputEventAction_s7mvf")
+albedo = Color(1, 0.490665, 0.672305, 1)
+press_distance = 0.003
+
+[node name="Nob" type="Area3D" parent="."]
+collision_layer = 9
+
+[node name="Model" type="Node3D" parent="Nob"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("2_sjuuk")
+
+[node name="Button" parent="Nob/Model" instance=ExtResource("3_massl")]
+unique_name_in_owner = true
+transform = Transform3D(1, 2.68221e-07, 0, -2.68221e-07, 1, 0, 0, 0, 1, 0, 0, 0)
+albedo = Color(1, 0.490665, 0.672305, 1)
+
+[node name="Label" parent="Nob/Model/Button" instance=ExtResource("4_modnf")]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, -2.08616e-07, 0.999999, -1.79416e-14, 0.999999, 2.08616e-07, -1, -9.4731e-16, -4.37114e-08, -1.53946e-15, 0.00458351, 0)
+label_style = SubResource("Resource_3ypb2")
+label = "7"
+
+[node name="BlackVoid" parent="Nob" instance=ExtResource("7_j4hon")]
+transform = Transform3D(1.1, 9.61651e-08, -9.61651e-08, 9.61651e-08, -1.1, 0, -9.61651e-08, -8.40702e-15, -1.1, 0, 0, 0)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Nob"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.44329e-09, -0.00538096, 0)
+shape = SubResource("BoxShape3D_vcpyw")
+
+[node name="Sound" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_ksjj7")
+
+[node name="Path" type="Path3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0098543, 0.00948174, 0)
+curve = SubResource("Curve3D_plp3i")
+
+[node name="PathFollow" type="PathFollow3D" parent="Path"]
+transform = Transform3D(-4.37113e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0.999999, 4.37114e-08, 1.91069e-15, 6.93889e-18, 0, 0)
+progress = 0.1
+loop = false
+
+[node name="RemoteTransform" type="RemoteTransform3D" parent="Path/PathFollow"]
+transform = Transform3D(1, 0, 2.11758e-22, 0, 1, 8.35187e-23, -2.11758e-22, -8.35187e-23, 1, 0, 0, 0)
+update_scale = false
+
+[connection signal="mouse_entered" from="Nob" to="." method="_mouse_entered"]
+[connection signal="mouse_exited" from="Nob" to="." method="_mouse_exited"]
