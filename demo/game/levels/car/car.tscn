@@ -1,18 +1,21 @@
-[gd_scene load_steps=52 format=3 uid="uid://r4jyall8jbku"]
+[gd_scene load_steps=70 format=3 uid="uid://r4jyall8jbku"]
 
 [ext_resource type="PackedScene" uid="uid://dgg103ssmbg32" path="res://game/settings/settings.tscn" id="1_wu5a7"]
 [ext_resource type="Script" path="res://game/levels/car/v_split_container.gd" id="1_yqwvr"]
 [ext_resource type="Script" path="res://game/world_viewport.gd" id="2_ok5au"]
 [ext_resource type="PackedScene" uid="uid://bt2kjmrxbmg5j" path="res://models/radio/radio.tscn" id="3_idgv0"]
+[ext_resource type="Shader" path="res://game/levels/car/hipster_shader.gdshader" id="4_5tg5o"]
 [ext_resource type="PackedScene" uid="uid://df031doltiks0" path="res://game/points_service/points_service.tscn" id="4_x4ayx"]
 [ext_resource type="Script" path="res://game/GuidesService.gd" id="5_5vd1q"]
 [ext_resource type="Script" path="res://game/levels/car/game.gd" id="5_7141o"]
 [ext_resource type="PackedScene" uid="uid://lprkgl2wh3cd" path="res://game/camera/camera.tscn" id="6_6v0ic"]
-[ext_resource type="PackedScene" uid="uid://xvp0yshx0tqi" path="res://models/road/scene.gltf" id="6_exuct"]
+[ext_resource type="PackedScene" uid="uid://bvb3valnbby5w" path="res://models/road/sketchfab_scene.tscn" id="6_nitcn"]
 [ext_resource type="CameraAttributesPractical" uid="uid://ev1eo0cru0we" path="res://game/cameraatr.tres" id="8_bi2xc"]
+[ext_resource type="Texture2D" uid="uid://dqjwmshavotv6" path="res://hills.png" id="9_ca5fy"]
 [ext_resource type="Script" path="res://game/world_environment.gd" id="9_rayxg"]
+[ext_resource type="PackedScene" uid="uid://bvyqie2mkgeun" path="res://models/road/car.tscn" id="10_q0pex"]
 [ext_resource type="PackedScene" uid="uid://lb3oq22iphka" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_host_control.tscn" id="11_qp32j"]
-[ext_resource type="Environment" uid="uid://b8uhvyo3rc3m8" path="res://game/settings/environment_potato.tres" id="12_x8urt"]
+[ext_resource type="Environment" uid="uid://chtmgmwa87swx" path="res://game/settings/environment_high.tres" id="14_c3uhd"]
 [ext_resource type="Script" path="res://game/levels/car/electric_tower_spawner.gd" id="15_qvxmr"]
 [ext_resource type="Shader" path="res://models/road/road.gdshader" id="16_5n2ku"]
 [ext_resource type="Shader" path="res://game/levels/car/ground.gdshader" id="17_10afu"]
@@ -23,6 +26,64 @@
 [ext_resource type="Script" path="res://game/levels/car/gpu_particles_3d.gd" id="20_38jbp"]
 [ext_resource type="Script" path="res://game/levels/car/camera_3d.gd" id="21_m7k38"]
 [ext_resource type="Shader" path="res://game/levels/car/car.gdshader" id="22_2yv1j"]
+[ext_resource type="PackedScene" uid="uid://cgr8ulc8ui22f" path="res://models/road/electric_tower.tscn" id="24_0jyxe"]
+[ext_resource type="PackedScene" uid="uid://ybwbv2t5uouc" path="res://models/road/road_side_black_and_white_pole.tscn" id="24_ak04v"]
+[ext_resource type="Shader" path="res://game/levels/car/clip_map.gdshader" id="24_t0eh2"]
+[ext_resource type="ArrayMesh" uid="uid://dir4sgf14psex" path="res://models/road/clip_map.res" id="24_ukkxs"]
+[ext_resource type="PackedScene" uid="uid://dlfm846b7ydgm" path="res://models/road/road_sign.tscn" id="25_huxv7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yqnny"]
+shader = ExtResource("4_5tg5o")
+
+[sub_resource type="Gradient" id="Gradient_7664g"]
+offsets = PackedFloat32Array(0.314433, 0.60567)
+colors = PackedColorArray(0.0194087, 0.553954, 0, 1, 0.177384, 0.978875, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wd3li"]
+gradient = SubResource("Gradient_7664g")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ewrg5"]
+frequency = 0.0025
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rn1n6"]
+width = 1024
+height = 1024
+seamless = true
+noise = SubResource("FastNoiseLite_ewrg5")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7sdd3"]
+viewport_path = NodePath("WorldViewport/SubViewport/Game/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bqaap"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("24_t0eh2")
+shader_parameter/texture_height_amplitude = 5.0
+shader_parameter/x = 21.695
+shader_parameter/texture_height = SubResource("NoiseTexture2D_rn1n6")
+shader_parameter/texture_road_distance = SubResource("ViewportTexture_7sdd3")
+shader_parameter/test = SubResource("GradientTexture2D_wd3li")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5vm0q"]
+viewport_path = NodePath("WorldViewport/SubViewport/Game/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6nqgk"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("17_10afu")
+shader_parameter/texture_height_amplitude = 50.0
+shader_parameter/albedo = Color(0, 0.739715, 0, 1)
+shader_parameter/texture_height = SubResource("NoiseTexture2D_rn1n6")
+shader_parameter/texture_road_distance = SubResource("ViewportTexture_5vm0q")
+shader_parameter/test = SubResource("GradientTexture2D_wd3li")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1bqrc"]
+material = SubResource("ShaderMaterial_6nqgk")
+size = Vector2(1024, 1024)
+subdivide_width = 256
+subdivide_depth = 256
 
 [sub_resource type="Curve3D" id="Curve3D_fyb2l"]
 _data = {
@@ -30,6 +91,20 @@ _data = {
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_skxyr"]
+size = Vector2(1000, 100)
+orientation = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mr8hj"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.376471)
+albedo_texture = ExtResource("9_ca5fy")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5tlot"]
+flip_faces = true
+size = Vector2(1000, 100)
+orientation = 0
 
 [sub_resource type="Environment" id="Environment_4bk1n"]
 background_mode = 1
@@ -76,15 +151,37 @@ offsets = PackedFloat32Array(0.40942, 0.492754)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_duyl7"]
 gradient = SubResource("Gradient_25lpi")
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_b8bk8"]
+noise_type = 2
+frequency = 0.0038
+fractal_type = 3
+cellular_distance_function = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2e4ed"]
+width = 1024
+height = 1024
+seamless = true
+as_normal_map = true
+noise = SubResource("FastNoiseLite_b8bk8")
+
 [sub_resource type="Gradient" id="Gradient_ndhqf"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0.417085, 0.477387, 0.532663, 0.879397, 0.909548)
-colors = PackedColorArray(0.572988, 0.572988, 0.572988, 1, 0.980961, 0.812057, 0, 1, 0.537011, 0.537011, 0.537011, 1, 1, 1, 1, 1, 0.537255, 0.537255, 0.537255, 1)
+offsets = PackedFloat32Array(0.0525, 0.0775, 0.1, 0.505, 0.515, 0.9025, 0.9275)
+colors = PackedColorArray(0.572549, 0.572549, 0.572549, 1, 1, 1, 1, 1, 0.572988, 0.572988, 0.572988, 1, 0.980961, 0.812057, 0, 1, 0.537011, 0.537011, 0.537011, 1, 1, 1, 1, 1, 0.537255, 0.537255, 0.537255, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_lwafe"]
 gradient = SubResource("Gradient_ndhqf")
 width = 1024
 height = 1024
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Gradient" id="Gradient_y7b1y"]
+offsets = PackedFloat32Array(0, 0.0625, 0.9325, 1)
+colors = PackedColorArray(0, 0.6, 0, 1, 1, 1, 1, 0, 0.745098, 0.952941, 0.501961, 0, 0, 0.6, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5m254"]
+gradient = SubResource("Gradient_y7b1y")
 fill_from = Vector2(0.5, 1)
 fill_to = Vector2(0.5, 0)
 
@@ -104,33 +201,8 @@ shader_parameter/side_line_color = Color(0.920995, 0.920995, 0.920995, 1)
 shader_parameter/color_ramp = SubResource("GradientTexture1D_duyl7")
 shader_parameter/texture_t = SubResource("NoiseTexture2D_e34cy")
 shader_parameter/texture_road = SubResource("GradientTexture2D_lwafe")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ewrg5"]
-frequency = 0.0025
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rn1n6"]
-width = 1024
-height = 1024
-seamless = true
-noise = SubResource("FastNoiseLite_ewrg5")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_5vm0q"]
-viewport_path = NodePath("WorldViewport/SubViewport/Game/SubViewport")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6nqgk"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("17_10afu")
-shader_parameter/texture_height_amplitude = 5.0
-shader_parameter/albedo = Color(0, 0.6, 0, 1)
-shader_parameter/texture_height = SubResource("NoiseTexture2D_rn1n6")
-shader_parameter/texture_road_distance = SubResource("ViewportTexture_5vm0q")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_1bqrc"]
-material = SubResource("ShaderMaterial_6nqgk")
-size = Vector2(1024, 1024)
-subdivide_width = 256
-subdivide_depth = 256
+shader_parameter/texture_road_edge = SubResource("GradientTexture2D_5m254")
+shader_parameter/texture_detail = SubResource("NoiseTexture2D_2e4ed")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_th14h"]
 viewport_path = NodePath("WorldViewport/SubViewport/Game/SubViewport")
@@ -146,37 +218,11 @@ seamless = true
 as_normal_map = true
 noise = SubResource("FastNoiseLite_0xaxj")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bo1rf"]
-resource_local_to_scene = true
-shader = ExtResource("19_nloml")
-shader_parameter/rows = 4.0
-shader_parameter/spacing = 0.25
-shader_parameter/height_map_amplitude = 1.0
-shader_parameter/height_map_size = Vector2(1024, 1024)
-shader_parameter/texture_height_size = Vector2(1024, 1024)
-shader_parameter/texture_height_amplitude = 5.0
-shader_parameter/height_map = SubResource("ViewportTexture_th14h")
-shader_parameter/texture_noise = SubResource("NoiseTexture2D_tm0k2")
-shader_parameter/texture_height = SubResource("NoiseTexture2D_rn1n6")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vistu"]
-resource_local_to_scene = true
-shader = ExtResource("19_nloml")
-shader_parameter/rows = 4.0
-shader_parameter/spacing = 0.6
-shader_parameter/height_map_amplitude = 1.0
-shader_parameter/height_map_size = Vector2(1024, 1024)
-shader_parameter/texture_height_size = Vector2(1024, 1024)
-shader_parameter/texture_height_amplitude = 5.0
-shader_parameter/height_map = SubResource("ViewportTexture_th14h")
-shader_parameter/texture_noise = SubResource("NoiseTexture2D_tm0k2")
-shader_parameter/texture_height = SubResource("NoiseTexture2D_rn1n6")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hki15"]
 resource_local_to_scene = true
 shader = ExtResource("19_nloml")
 shader_parameter/rows = 4.0
-shader_parameter/spacing = 1.9
+shader_parameter/spacing = 0.5
 shader_parameter/height_map_amplitude = 1.0
 shader_parameter/height_map_size = Vector2(1024, 1024)
 shader_parameter/texture_height_size = Vector2(1024, 1024)
@@ -186,9 +232,9 @@ shader_parameter/texture_noise = SubResource("NoiseTexture2D_tm0k2")
 shader_parameter/texture_height = SubResource("NoiseTexture2D_rn1n6")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pmakn"]
-albedo_color = Color(0.89059, 0.89059, 0.89059, 1)
-metallic = 0.73
-roughness = 0.41
+metallic = 0.42
+metallic_specular = 1.0
+roughness = 0.07
 
 [node name="MarginContainer" type="MarginContainer"]
 anchors_preset = 15
@@ -230,11 +276,34 @@ script = ExtResource("2_ok5au")
 handle_input_locally = false
 scaling_3d_scale = 0.5
 gui_snap_controls_to_pixels = false
-size = Vector2i(2, 2)
+size = Vector2i(1680, 1050)
 render_target_update_mode = 4
+
+[node name="MarginContainer" type="ColorRect" parent="WorldViewport/SubViewport"]
+visible = false
+material = SubResource("ShaderMaterial_yqnny")
+use_parent_material = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Game" type="Node3D" parent="WorldViewport/SubViewport"]
 script = ExtResource("5_7141o")
+
+[node name="ClipMap" type="MeshInstance3D" parent="WorldViewport/SubViewport/Game"]
+unique_name_in_owner = true
+transform = Transform3D(0.999996, 0, 0, 0, 0.999997, 0, 0, 0, 0.999994, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_bqaap")
+mesh = ExtResource("24_ukkxs")
+skeleton = NodePath("../MeshInstance3D3")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="WorldViewport/SubViewport/Game"]
+transform = Transform3D(0.999996, 0, 0, 0, 0.999997, 0, 0, 0, 0.999994, 0, 0, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_1bqrc")
 
 [node name="Path3D" type="Path3D" parent="WorldViewport/SubViewport/Game"]
 curve = SubResource("Curve3D_fyb2l")
@@ -250,16 +319,33 @@ loop = false
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0.411333, 1.26341)
 
-[node name="Sketchfab_Scene" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car" instance=ExtResource("6_exuct")]
-transform = Transform3D(-0.3, 8.23704e-25, 6.19083e-08, 4.51189e-24, 0.3, 3.33819e-17, -4.52987e-08, 2.44258e-17, -0.41, -0.347, -0.405, 0.185)
+[node name="car" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car" instance=ExtResource("10_q0pex")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.342, -0.675, 0.189)
+
+[node name="Sketchfab_Scene2" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car" instance=ExtResource("6_nitcn")]
+transform = Transform3D(-0.3, 8.23704e-25, 6.19083e-08, 4.51189e-24, 0.3, 3.33819e-17, -4.52987e-08, 2.44258e-17, -0.41, -0.347, -0.405, 0.185001)
+visible = false
 
 [node name="Radio" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car" instance=ExtResource("3_idgv0")]
 unique_name_in_owner = true
 transform = Transform3D(-2.38935e-07, 1.9081e-08, -1, -0.74375, 0.668516, 1.08997e-08, 0.668548, 0.743715, 5.59319e-08, -0.339012, 0.542629, -0.574386)
 
+[node name="OmniLight3D" type="OmniLight3D" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car/Radio"]
+transform = Transform3D(-1.3022e-07, -0.743722, -0.668478, -1.6118e-07, 0.668555, -0.743708, 1.00001, 1.90458e-07, -5.46544e-09, 0.35569, 0.543575, -0.0355127)
+
 [node name="Camera" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car" instance=ExtResource("6_6v0ic")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.334046, 0.262877, 1.36224e-08)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car"]
+transform = Transform3D(-1, 0, -1.39086e-08, 0, 1, 0, -1.05303e-07, 0, -1, 357.64, 15.6758, -393.847)
+mesh = SubResource("PlaneMesh_skxyr")
+surface_material_override/0 = SubResource("StandardMaterial3D_mr8hj")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car"]
+transform = Transform3D(-0.780998, 0, 0.624534, 0, 1, 0, -0.624535, 0, -0.780998, -403.707, 15.6758, -393.847)
+mesh = SubResource("PlaneMesh_5tlot")
+surface_material_override/0 = SubResource("StandardMaterial3D_mr8hj")
 
 [node name="PointsService" parent="WorldViewport/SubViewport/Game" instance=ExtResource("4_x4ayx")]
 
@@ -268,6 +354,13 @@ own_world_3d = true
 world_3d = SubResource("World3D_2ivdu")
 size = Vector2i(1024, 1024)
 render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="WorldViewport/SubViewport/Game/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 100, 0)
+projection = 1
+current = true
+size = 1024.0
+script = ExtResource("21_m7k38")
 
 [node name="CSGMesh3D7" type="CSGPolygon3D" parent="WorldViewport/SubViewport/Game/SubViewport"]
 operation = 2
@@ -303,23 +396,16 @@ material = SubResource("ShaderMaterial_aqgls")
 script = ExtResource("17_nt62j")
 width = 50.0
 
-[node name="Camera3D" type="Camera3D" parent="WorldViewport/SubViewport/Game/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 100, 0)
-projection = 1
-current = true
-size = 1024.0
-script = ExtResource("21_m7k38")
-
 [node name="Guides" type="Node3D" parent="WorldViewport/SubViewport/Game"]
 script = ExtResource("5_5vd1q")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="WorldViewport/SubViewport/Game"]
-environment = ExtResource("12_x8urt")
+environment = ExtResource("14_c3uhd")
 camera_attributes = ExtResource("8_bi2xc")
 script = ExtResource("9_rayxg")
 
 [node name="Sun" type="DirectionalLight3D" parent="WorldViewport/SubViewport/Game/WorldEnvironment"]
-transform = Transform3D(-0.229171, 0.778863, 0.583826, 0.810338, -0.179648, 0.557745, 0.53929, 0.600915, -0.589972, 5.72989, 5.18985, -9.19963)
+transform = Transform3D(-0.258819, -0.620885, -0.739942, -6.69698e-08, -0.766045, 0.642787, -0.965927, 0.166366, 0.198267, 0, 0, 0)
 shadow_enabled = true
 shadow_reverse_cull_face = true
 directional_shadow_mode = 0
@@ -327,8 +413,6 @@ directional_shadow_split_1 = 0.0
 directional_shadow_split_2 = 0.117
 directional_shadow_split_3 = 1.0
 directional_shadow_blend_splits = true
-directional_shadow_max_distance = 8192.0
-directional_shadow_pancake_size = 0.2
 
 [node name="Spawner" type="Node3D" parent="WorldViewport/SubViewport/Game"]
 
@@ -336,6 +420,21 @@ directional_shadow_pancake_size = 0.2
 script = ExtResource("15_qvxmr")
 path = NodePath("../../Path3D")
 delay = 3
+prop = ExtResource("24_0jyxe")
+h_offset = 10.0
+
+[node name="RoadSign" type="Node3D" parent="WorldViewport/SubViewport/Game/Spawner" node_paths=PackedStringArray("path")]
+script = ExtResource("15_qvxmr")
+path = NodePath("../../Path3D")
+delay = 4
+prop = ExtResource("25_huxv7")
+h_offset = 6.0
+
+[node name="RoadSideBlackAndWhitePole" type="Node3D" parent="WorldViewport/SubViewport/Game/Spawner" node_paths=PackedStringArray("path")]
+script = ExtResource("15_qvxmr")
+path = NodePath("../../Path3D")
+prop = ExtResource("24_ak04v")
+h_offset = 5.5
 
 [node name="CSGMesh3D5" type="CSGPolygon3D" parent="WorldViewport/SubViewport/Game"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.99, 0)
@@ -348,55 +447,25 @@ path_interval = 1.0
 path_simplify_angle = 0.0
 path_rotation = 2
 path_local = false
-path_continuous_u = false
-path_u_distance = 0.07
+path_continuous_u = true
+path_u_distance = 10.0
 path_joined = false
 material = SubResource("ShaderMaterial_4nw4a")
 script = ExtResource("17_nt62j")
 width = 5.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldViewport/SubViewport/Game"]
-transform = Transform3D(0.999994, 3.72554e-09, 8.52651e-14, 3.72503e-09, 0.999997, 1.62826e-16, -1.63425e-13, 1.86278e-09, 0.999996, 0, 0, 0)
-mesh = SubResource("PlaneMesh_1bqrc")
-
-[node name="Grass" type="GPUParticles3D" parent="WorldViewport/SubViewport/Game"]
-transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 30.6062, 0, 3.55743)
-cast_shadow = 0
-amount = 10000
-lifetime = 0.01
-explosiveness = 1.0
-visibility_aabb = AABB(-12.5, 0, -12.5, 25, 20, 25)
-process_material = SubResource("ShaderMaterial_bo1rf")
-draw_pass_1 = ExtResource("20_4nxai")
-script = ExtResource("20_38jbp")
-rows = 100
-spacing = 0.25
-
-[node name="Grass2" type="GPUParticles3D" parent="WorldViewport/SubViewport/Game"]
-transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 30.6062, 0, 3.55743)
-cast_shadow = 0
-amount = 10000
-lifetime = 0.01
-explosiveness = 1.0
-visibility_aabb = AABB(-30, 0, -30, 60, 20, 60)
-process_material = SubResource("ShaderMaterial_vistu")
-draw_pass_1 = ExtResource("20_4nxai")
-script = ExtResource("20_38jbp")
-rows = 100
-spacing = 0.6
-
 [node name="Grass3" type="GPUParticles3D" parent="WorldViewport/SubViewport/Game"]
-transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 30.6062, 0, 3.55743)
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 31.7009, 0, 1.46205)
 cast_shadow = 0
-amount = 10000
+amount = 40000
 lifetime = 0.01
 explosiveness = 1.0
-visibility_aabb = AABB(-95, 0, -95, 190, 20, 190)
+visibility_aabb = AABB(-50, 0, -50, 100, 20, 100)
 process_material = SubResource("ShaderMaterial_hki15")
 draw_pass_1 = ExtResource("20_4nxai")
 script = ExtResource("20_38jbp")
-rows = 100
-spacing = 1.9
+rows = 200
+spacing = 0.5
 
 [node name="CSGMesh3D2" type="CSGPolygon3D" parent="WorldViewport/SubViewport/Game"]
 polygon = PackedVector2Array(-5, 0.165, -4.91, 0.234, -4.91, 0.252, -4.985, 0.291, -4.985, 0.339, -4.916, 0.375, -4.916, 0.393, -5, 0.474, -5, 0.456, -4.934, 0.39, -4.934, 0.381, -5, 0.351, -5, 0.279, -4.928, 0.249, -4.928, 0.234, -5, 0.183, -5, 0.165)

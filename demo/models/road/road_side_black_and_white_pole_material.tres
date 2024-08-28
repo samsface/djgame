@@ -1,0 +1,22 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://dl0ogc4j54dsx"]
+
+[ext_resource type="Shader" path="res://models/road/car.gdshader" id="1_x1p1c"]
+[ext_resource type="Texture2D" uid="uid://cinpqgt55ea43" path="res://models/road/road_side_black_and_white_pole_map.png" id="2_05s6h"]
+[ext_resource type="Texture2D" uid="uid://5ho8kwru2mf" path="res://models/road/road_side_black_and_white_pole_albedo.png" id="3_a1jy4"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="3_oqpqk"]
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_x1p1c")
+shader_parameter/albedo = Color(1, 0.881596, 0.866841, 1)
+shader_parameter/wear_albedo = Color(0.784696, 0.67743, 0.691753, 1)
+shader_parameter/roughness = 0.933
+shader_parameter/specular = 0.189
+shader_parameter/metallic = 0.03
+shader_parameter/ao_light_affect = 1.0
+shader_parameter/detail_scale = Vector2(1, 1)
+shader_parameter/wear = 0.0
+shader_parameter/texture_albedo = ExtResource("3_a1jy4")
+shader_parameter/aoe_texture = ExtResource("2_05s6h")
+shader_parameter/texture_detail = ExtResource("3_oqpqk")

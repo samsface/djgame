@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://ccy7w6xdgt3dx"]
+
+[ext_resource type="Shader" path="res://models/road/car.gdshader" id="1_jyye6"]
+[ext_resource type="Texture2D" uid="uid://bv6p3rxdwmhs5" path="res://models/road/car_chasis_material.png" id="2_ev3wb"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="3_o0q20"]
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_jyye6")
+shader_parameter/albedo = Color(1, 0.186187, 0.206265, 1)
+shader_parameter/wear_albedo = Color(0.322319, 0.237218, 0.249805, 1)
+shader_parameter/roughness = 0.546
+shader_parameter/specular = 0.703
+shader_parameter/metallic = 0.03
+shader_parameter/ao_light_affect = 1.0
+shader_parameter/detail_scale = Vector2(5, 5)
+shader_parameter/wear = 0.063
+shader_parameter/aoe_texture = ExtResource("2_ev3wb")
+shader_parameter/texture_detail = ExtResource("3_o0q20")

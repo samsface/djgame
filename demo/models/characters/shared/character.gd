@@ -14,6 +14,7 @@ var r := randf()
 	set(v):
 		talking = v
 		if is_node_ready():
+			$AnimationTree.set("parameters/TalkingGate/blend_amount", ceil(talking))
 			$AnimationTree.set("parameters/Talking/blend_position", v)
 
 @export_range(0.0, 1.0) var anger:float :

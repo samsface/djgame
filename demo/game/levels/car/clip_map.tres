@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://brbowvuhrxpga"]
+
+[ext_resource type="Shader" path="res://game/levels/car/clip_map.gdshader" id="1_vg8mo"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ewrg5"]
+frequency = 0.0025
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rn1n6"]
+width = 1024
+height = 1024
+seamless = true
+noise = SubResource("FastNoiseLite_ewrg5")
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_vg8mo")
+shader_parameter/texture_height_amplitude = null
+shader_parameter/texture_height = SubResource("NoiseTexture2D_rn1n6")

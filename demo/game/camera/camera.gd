@@ -20,10 +20,17 @@ var stack_ := []
 var head_pos_:Vector3
 @export var free_walk:bool :
 	set(v):
-		await ready
+		if not is_node_ready():
+			await ready
 		set_free_walk_(v)
 		free_walk = v
-		
+
+@export var walk_height:float = 0.28
+@export var no_walk:bool
+
+@export var look_x_range := Vector2(-90, 90)
+@export var look_y_range := Vector2(-360, 360)
+	
 @export var noclip:bool :
 	set(v):
 		noclip = v
@@ -121,14 +128,19 @@ func _physics_process(delta: float) -> void:
 		camera_.position = Vector3.ZERO
 		camera_.rotation = Vector3.ZERO
 		rotate_y(deg_to_rad(-Bus.input_service.relative.x * 0.8))
+		rotation.y = clamp(rotation.y, deg_to_rad(look_y_range.x), deg_to_rad(look_y_range.y))
+		
 		camera_arm_.rotate_x(deg_to_rad(-Bus.input_service.relative.y * 0.8))
-		camera_arm_.rotation.x = clamp(camera_arm_.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+		camera_arm_.rotation.x = clamp(camera_arm_.rotation.x, deg_to_rad(look_x_range.x), deg_to_rad(look_x_range.y))
 		camera_arm_.rotation.z = 0
 		
 		var move := Input.get_vector("move_left", "move_right", "move_forward", "move_backward") * 0.1
+		if no_walk:
+			move *= 0.0
+		
 		var direction = (transform.basis * Vector3(move.x, 0, move.y)).normalized()
 
-		position.y = 0.28
+		position.y = walk_height
 		position.x += direction.x * 0.05
 		position.z += direction.z * 0.05
 
@@ -138,10 +150,10 @@ func _physics_process(delta: float) -> void:
 		#ray_cast_.target_position = cursorPos - camera_arm_.position
 
 		ray_cast_at_()
-		
+
 		return
 
-	#rotation = Vector3.ZERO
+	#rotation = Vector3.ZEROradio
 	#position = Vector3.ZERO
 	
 	if not cursor.is_owner(self):
@@ -152,8 +164,8 @@ func _physics_process(delta: float) -> void:
 	var pos = cursor.position2D
 	
 	var from = camera_.project_ray_origin(pos)
-	var to = from + camera_.project_ray_normal(pos) * 100
-
+	var to = from + camera_.project_local_ray_normal(pos) * 100.0
+	ray_cast_.rotation = Vector3.ZERO
 	ray_cast_.position = camera_arm_.position
 	ray_cast_.target_position = to 
 	
@@ -172,7 +184,7 @@ func ray_cast_at_() -> void:
 				hovering_._mouse_exited()
 
 		var point = ray_cast_.get_collision_point()
-		cursor.try_set_position(self, point)
+		#cursor.try_set_position(self, point)
 		
 		#print(next_hovering)
 		

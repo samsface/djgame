@@ -8,7 +8,6 @@
 random_pitch = 1.23
 streams_count = 1
 stream_0/stream = ExtResource("2_2e17c")
-stream_0/weight = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hy0nu"]
 bg_color = Color(0, 0, 0, 0.313726)
@@ -49,6 +48,7 @@ theme_override_constants/separation = 24
 
 [node name="HP" type="ProgressBar" parent="CanvasLayer/MarginContainer2/VBoxContainer"]
 auto_translate_mode = 1
+visible = false
 show_behind_parent = true
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
@@ -63,7 +63,7 @@ script = ExtResource("4_byvq0")
 color = Color(0, 1, 0, 1)
 unit = "hp"
 
-[node name="Love" type="ProgressBar" parent="CanvasLayer/MarginContainer2/VBoxContainer"]
+[node name="Goodboy" type="ProgressBar" parent="CanvasLayer/MarginContainer2/VBoxContainer"]
 auto_translate_mode = 1
 visible = false
 show_behind_parent = true
@@ -77,5 +77,5 @@ step = 0.0
 value = 0.5
 show_percentage = false
 script = ExtResource("4_byvq0")
-color = Color(1, 0.345098, 0.729412, 1)
+color = Color(6.73831e-06, 0.683894, 0.927268, 1)
 unit = "xxx"

@@ -1,0 +1,33 @@
+[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://chdnjkemtyvhr"]
+
+[ext_resource type="Shader" path="res://models/shared/nobs/knob_shader.gdshader" id="1_wp6j2"]
+[ext_resource type="Texture2D" uid="uid://d4dcnkc0gf147" path="res://models/radio/base_car_radio_map.png" id="2_jbd4g"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="3_s78mr"]
+
+[sub_resource type="Gradient" id="Gradient_15cmb"]
+colors = PackedColorArray(0, 0, 0, 1, 0.974971, 0.974971, 0.974971, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lstbf"]
+frequency = 0.0526
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_p8a7r"]
+width = 256
+height = 256
+in_3d_space = true
+seamless = true
+seamless_blend_skirt = 0.0
+color_ramp = SubResource("Gradient_15cmb")
+noise = SubResource("FastNoiseLite_lstbf")
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_wp6j2")
+shader_parameter/roughness = 0.177
+shader_parameter/specular = 1.0
+shader_parameter/metallic = 0.03
+shader_parameter/ao_light_affect = 1.0
+shader_parameter/detail_scale = Vector2(1, 1)
+shader_parameter/aoe_texture = ExtResource("2_jbd4g")
+shader_parameter/texture_detail = ExtResource("3_s78mr")
+shader_parameter/electric_noise = SubResource("NoiseTexture2D_p8a7r")

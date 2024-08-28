@@ -31,7 +31,86 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={}
+_subresources={
+"materials": {
+"RoadSideBlackAndWhitePoleMaterial": {
+"use_external/enabled": true,
+"use_external/path": "res://models/road/road_side_black_and_white_pole_material.tres"
+},
+"RoadSideBlackAndWhitePoleReflectorMaterial": {
+"use_external/enabled": true,
+"use_external/path": "res://models/road/road_side_black_and_white_pole_reflector_material.tres"
+},
+"RoadSignConnectorMaterial": {
+"use_external/enabled": true,
+"use_external/path": "res://models/road/road_sign_connector_material.tres"
+},
+"RoadSignPoleShortMaterial": {
+"use_external/enabled": true,
+"use_external/path": "res://models/road/road_sign_pole_short_material.tres"
+},
+"RoadSignSmallMaterial": {
+"use_external/enabled": true,
+"use_external/path": "res://models/road/road_sign_small_material.tres"
+}
+},
+"meshes": {
+"road_ClipMap": {
+"generate/lightmap_uv": 0,
+"generate/lods": 2,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://models/road/clip_map.res"
+},
+"road_ElectricTower": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://models/road/electric_tower.res"
+},
+"road_RoadSideBlackAndWhitePole": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://models/road/road_side_black_and_white_pole_mesh.res"
+},
+"road_RoadSignConnector": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://models/road/road_sign_connector_mesh.res"
+},
+"road_RoadSignPoleShort": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://models/road/road_sign_pole_short_mesh.res"
+},
+"road_RoadSignSmall": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://models/road/road_sign_small_mesh.res"
+}
+}
+}
 blender/nodes/visible=0
 blender/nodes/active_collection_only=false
 blender/nodes/punctual_lights=true

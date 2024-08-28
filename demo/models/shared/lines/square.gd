@@ -19,3 +19,4 @@ func invalidate_labels_() -> void:
 	$Node3D.set_instance_shader_parameter("fill_line_width", line_style.fill_line_width)
 	$Node3D.set_instance_shader_parameter("fill_line_accent", line_style.fill_line_accent)
 	$Node3D.set_instance_shader_parameter("fill_line_accent_width", line_style.fill_line_accent_width)
+	$Node3D.set_instance_shader_parameter("color", line_style.line_color)

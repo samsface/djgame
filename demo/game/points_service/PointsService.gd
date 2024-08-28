@@ -6,7 +6,7 @@ var stats_ := {}
 func _ready() -> void:
 	Bus.points_service = self
 	stats_["hp"]= $CanvasLayer/MarginContainer2/VBoxContainer/HP
-	stats_["love"]= $CanvasLayer/MarginContainer2/VBoxContainer/Love
+	stats_["good_boy"] = $CanvasLayer/MarginContainer2/VBoxContainer/Goodboy
 
 func play() -> void:
 	stats_.hp.decay_rate = 0.01
@@ -29,3 +29,12 @@ func build_points(stat:String, value:int, pos:Vector3, delay:float) -> void:
 
 func show_bar(stat:String, value:bool) -> void:
 	stats_[stat].visible = value
+
+func set_points(stat:String, points:float) -> void:
+	stats_[stat].points = points
+
+func get_points(stat:String):
+	return stats_[stat].points
+
+func add_points(stat:String, points:float) -> void:
+	stats_[stat].add_points(points)

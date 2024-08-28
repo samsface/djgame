@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgr8ulc8ui22f"]
+
+[ext_resource type="ArrayMesh" uid="uid://bvu4a2vjtembh" path="res://models/road/electric_tower.res" id="1_n22iw"]
+[ext_resource type="Script" path="res://models/road/electric_tower.gd" id="2_8o7bi"]
+
+[node name="ElectricTower" type="MeshInstance3D" node_paths=PackedStringArray("cables_in", "cables_out")]
+mesh = ExtResource("1_n22iw")
+script = ExtResource("2_8o7bi")
+cables_in = [NodePath("Node3D/In"), NodePath("Node3D/In2"), NodePath("Node3D2/In"), NodePath("Node3D2/In2"), NodePath("Node3D3/In"), NodePath("Node3D3/In2")]
+cables_out = [NodePath("Node3D/In3"), NodePath("Node3D/In4"), NodePath("Node3D2/In3"), NodePath("Node3D3/In3"), NodePath("Node3D3/In4")]
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="In" type="Marker3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0.329)
+
+[node name="In2" type="Marker3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0.329)
+
+[node name="In3" type="Marker3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -0.622393)
+
+[node name="In4" type="Marker3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -0.622393)
+
+[node name="Node3D2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.3074, 0)
+
+[node name="In" type="Marker3D" parent="Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0.329)
+
+[node name="In2" type="Marker3D" parent="Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0.329)
+
+[node name="In3" type="Marker3D" parent="Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -0.622393)
+
+[node name="In4" type="Marker3D" parent="Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -0.622393)
+
+[node name="Node3D3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.5229, 0)
+
+[node name="In" type="Marker3D" parent="Node3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0.329)
+
+[node name="In2" type="Marker3D" parent="Node3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0.329)
+
+[node name="In3" type="Marker3D" parent="Node3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -0.622393)
+
+[node name="In4" type="Marker3D" parent="Node3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -0.622393)

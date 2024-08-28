@@ -22,3 +22,7 @@ class_name LineStyle
 	set(v):
 		fill_line_accent_width = v
 		emit_changed()
+@export var line_color:Color :
+	set(v):
+		line_color = v
+		emit_changed()

@@ -83,7 +83,7 @@ var time_ := 0.0
 @onready var cursor := %Cursor
 @onready var scroll_container_ := %BodyScrollContainer
 @onready var header_scroll_container_ := %HeaderScrollContainer
-@onready var grid_ := %Grid
+
 
 func to_world(v) -> float:
 	return v / zoom
@@ -435,7 +435,7 @@ func add_item(node:Button, row_idx:int) -> void:
 
 	undo.create_action("add")
 	undo.add_do_method(row.add_child.bind(node))
-	undo.add_do_property(node, "owner", row)
+	undo.add_do_property(node, "owner", self)
 	undo.add_do_reference(node)
 	undo.add_undo_method(row.remove_child.bind(node))
 
@@ -486,7 +486,7 @@ func add_row(control:Control = null) -> void:
 
 	connect_row_(row)
 	undo.add_do_method(%Rows.add_child.bind(row))
-	undo.add_do_property(row, "owner", %Rows)
+	undo.add_do_property(row, "owner", self)
 	undo.add_do_reference(row)
 	undo.add_undo_method(%Rows.remove_child.bind(row))
 	
@@ -784,10 +784,7 @@ func invalidate_queue_() -> void:
 		
 		for key_frame in track.values():
 			sorted.push_back(key_frame) 
-			
-			if key_frame.get_target_node().name.contains("2Years"):
-				pass
-		
+
 		sorted.sort_custom(func(a, b): return a.time < b.time)
 		
 		queue_on_2_.push_back(sorted)

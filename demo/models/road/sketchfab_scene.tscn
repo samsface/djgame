@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvb3valnbby5w"]
+
+[ext_resource type="PackedScene" uid="uid://xvp0yshx0tqi" path="res://models/road/scene.gltf" id="1_u8b1n"]
+
+[node name="Sketchfab_Scene" instance=ExtResource("1_u8b1n")]
+
+[node name="FL_Door_Windows_0" parent="Sketchfab_model/Car_SmallCar_FBX/RootNode/FL_Door/Object_42" index="5"]
+visible = false
+
+[node name="FR_Door_Windows_0" parent="Sketchfab_model/Car_SmallCar_FBX/RootNode/FR_Door/Object_64" index="5"]
+visible = false
+
+[node name="Windows_Windows_0" parent="Sketchfab_model/Car_SmallCar_FBX/RootNode/Windows/Object_72" index="0"]
+visible = false

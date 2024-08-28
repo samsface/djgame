@@ -27,7 +27,6 @@ window/size/viewport_width=1680
 window/size/viewport_height=1050
 window/size/mode=2
 window/subwindows/embed_subwindows=false
-window/vsync/vsync_mode=0
 
 [editor]
 
@@ -36,10 +35,6 @@ movie_writer/movie_file="/home/sam/work/djgame/demo/test.avi"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/spread/plugin.cfg", "res://addons/verlet_physics/plugin.cfg")
-
-[filesystem]
-
-import/blender/enabled=false
 
 [global_group]
 

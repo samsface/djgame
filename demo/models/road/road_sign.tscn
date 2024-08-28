@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlfm846b7ydgm"]
+
+[ext_resource type="ArrayMesh" uid="uid://dq4dh2khxxirq" path="res://models/road/road_sign_pole_short_mesh.res" id="1_54dlw"]
+[ext_resource type="ArrayMesh" uid="uid://1us86vxpbcf1" path="res://models/road/road_sign_connector_mesh.res" id="2_8y24e"]
+[ext_resource type="ArrayMesh" uid="uid://bykc8rddo3flh" path="res://models/road/road_sign_small_mesh.res" id="3_3242f"]
+
+[node name="RoadSign" type="Node3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_54dlw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_8y24e")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0875002, 1.55518, 0)
+mesh = ExtResource("3_3242f")

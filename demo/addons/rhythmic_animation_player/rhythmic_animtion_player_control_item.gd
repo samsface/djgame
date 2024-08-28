@@ -2,6 +2,15 @@
 extends TimelineControlItem
 class_name RythmicAnimationPlayerControlItem
 
+@export var unique_name:String : 
+	set(v):
+		unique_name = v
+
+		if not unique_name.is_empty():
+			name = v
+			unique_name_in_owner = true
+		else:
+			unique_name_in_owner = false
 var active := false
 var db = Object.new()
 var tween:Tween

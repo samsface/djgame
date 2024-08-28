@@ -2,13 +2,12 @@
 extends Camera3D
 
 func _physics_process(delta: float) -> void:
-	var camera:Camera3D
+	var clip_map_size := 1024.0
+	var clip_map_position_normalized:Vector3 = %ClipMap.global_position / clip_map_size
+	clip_map_position_normalized += Vector3(-0.5, 0.0, -0.5)
 	
-	if Engine.is_editor_hint():
-		camera = EditorInterface.get_editor_viewport_3d(0 ).get_camera_3d()
-	else:
-		var viewport = get_viewport()
-		camera = viewport.get_camera_3d()
+	clip_map_position_normalized = clip_map_position_normalized.floor()
+	clip_map_position_normalized += Vector3(1.0, 0.0, 1.0)
 	
-	#global_position = -camera.global_position
+	global_position = clip_map_position_normalized * clip_map_size
 	global_position.y = 100

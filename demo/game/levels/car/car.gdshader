@@ -10,4 +10,3 @@ void fragment() {
 
 	ALBEDO = texture(texture_gradient, uv).rgb;
 }
-

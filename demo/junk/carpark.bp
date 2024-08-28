@@ -1,0 +1,50 @@
+[{
+"name": &"scene",
+"time_range": Vector2i(0, 8),
+"tracks": [{
+"condition_ex": "",
+"frames": [],
+"node_path": NodePath("%Camera"),
+"scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn",
+"type": 3
+}, {
+"condition_ex": "",
+"frames": [{
+"enable_from": false,
+"length": 16,
+"property": "",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/tween.tscn",
+"time": 32,
+"to_value": 0.0,
+"tween_ease": 0,
+"tween_type": 8,
+"unique_name": "RadioCameraAngle",
+"value": Transform3D(0.999903, 0.00567926, 0.0127549, 0, 0.913534, -0.406762, -0.0139621, 0.406722, 0.913445, -0.348146, 0.133337, -0.22014)
+}, {
+"enable_from": false,
+"length": 16,
+"property": "",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/tween.tscn",
+"time": 0,
+"to_value": 0.0,
+"tween_ease": 0,
+"tween_type": 0,
+"unique_name": "FirstCameraAngle",
+"value": Transform3D(0.0209426, -0.582025, -0.812901, 0, 0.813079, -0.582153, 0.999781, 0.0121918, 0.017028, -0.133207, 0.0892275, -0.0452003)
+}, {
+"enable_from": false,
+"length": 16,
+"property": "",
+"scene_file_path": "res://addons/rhythmic_animation_player/ops/tween.tscn",
+"time": 64,
+"to_value": 0.0,
+"tween_ease": 0,
+"tween_type": 8,
+"unique_name": "RadioCameraAngle2",
+"value": Transform3D(0.999903, 0.00232827, -0.0137668, 0, 0.985998, 0.166754, 0.0139623, -0.166738, 0.985902, -0.352696, 0.243305, -0.224971)
+}],
+"node_path": NodePath("%Camera:dolly"),
+"scene_file_path": "res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.tscn",
+"type": 2
+}]
+}]

@@ -7,7 +7,7 @@ uniform sampler2D height_map : repeat_disable;
 uniform float height_map_amplitude = 1.0;
 uniform vec2 height_map_size = vec2(1024, 1024);
 uniform sampler2D texture_noise;
-uniform sampler2D texture_height;
+uniform sampler2D texture_height : repeat_enable;
 uniform vec2 texture_height_size = vec2(1024, 1024);
 uniform float texture_height_amplitude = 1.0;
 

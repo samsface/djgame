@@ -253,7 +253,7 @@ func scene_to_dict(node:Node):
 		if property.usage & PROPERTY_USAGE_SCRIPT_VARIABLE == 0:
 			continue
 
-		res[property.name] = node.get(property.name)
+		res[property.name] = node.get(property.name) 
 
 	res["scene_file_path"] = node.scene_file_path
 

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ybwbv2t5uouc"]
+
+[ext_resource type="ArrayMesh" uid="uid://dde175ficecrk" path="res://models/road/road_side_black_and_white_pole_mesh.res" id="1_s3hfl"]
+
+[node name="RoadSideBlackAndWhitePole" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1.5, 0, 0, 0, 0.965, 0, 0, 0)
+mesh = ExtResource("1_s3hfl")

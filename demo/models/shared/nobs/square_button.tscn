@@ -6,6 +6,3 @@
 [node name="square_button" instance=ExtResource("1_0kaxi")]
 script = ExtResource("2_imc1t")
 albedo = Color(0.987348, 0.517688, 0.641765, 1)
-
-[node name="Cube" parent="." index="0"]
-instance_shader_parameters/albedo = Color(0.987348, 0.517688, 0.641765, 1)

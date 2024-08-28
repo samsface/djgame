@@ -73,13 +73,13 @@ func _physics_process(delta: float) -> void:
 		cursor_.scale = Vector2.ONE
 	else:
 		position = next_position_
-		cursor_.position = camera_.unproject_position(position) 
+		cursor_.position = position2D#camera_.unproject_position(position) 
 		#position2D = cursor_.position
-		cursor_.scale = distance_to_camera_(global_position.distance_to(camera_.global_position))
+		cursor_.scale = Vector2(0.5, 0.5)
 	
 func invalidate_disabled_() -> void:
 	if not disabled:
-		reset()
+		reset()#a#a
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
@@ -88,10 +88,12 @@ func reset() -> void:
 	position2D = get_viewport().size * 0.5
 
 func update() -> void:
+
 	if disabled:
 		return
 
 	# this should go into the input service
 	position2D += Bus.input_service.relative * 1.5
-	var view_port_rect := get_viewport().get_visible_rect()
-	position2D = position2D.clamp(Vector2.ZERO, view_port_rect.size)
+
+	#var view_port_rect := get_viewport().get_visible_rect()
+	#position2D = position2D.clamp(Vector2.ZERO, view_port_rect.size)

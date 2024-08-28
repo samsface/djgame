@@ -95,7 +95,10 @@ func _new_pressed():
 	bp.selection_changed.connect(func(selection): %Inspector.selection = selection)
 	bp.visibility_changed.connect(func(): if bp.visible: %Inspector.undo = bp.undo)
 	bp.row_header_pressed.connect(func(header):  %Inspector.selection = header)
+	bp.unique_name_in_owner = true
 	%Tabs.add_child(bp)
+	bp.owner = self
+
 	%Tabs.current_tab = %Tabs.get_child_count() - 1
 
 func _save_pressed():
@@ -123,9 +126,10 @@ func _duplicate_pressed() -> void:
 	_new_pressed()
 	%Tabs.get_child(%Tabs.current_tab).from_dict(clip)
 
-
-
 func _unhandled_key_input(event):
+	if not is_visible_in_tree():
+		return
+
 	if event is InputEventKey:
 		if event.pressed:
 			if event.keycode == KEY_SPACE:

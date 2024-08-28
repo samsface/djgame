@@ -1,15 +1,17 @@
-[gd_scene load_steps=18 format=3 uid="uid://bpruc7wwiwser"]
+[gd_scene load_steps=20 format=3 uid="uid://bpruc7wwiwser"]
 
 [ext_resource type="Script" path="res://models/toydrum/button.gd" id="1_46e6y"]
 [ext_resource type="Script" path="res://models/shared/nob_model.gd" id="2_sjuuk"]
-[ext_resource type="PackedScene" uid="uid://bvkavulcjdtlq" path="res://models/shared/nobs/square_button.tscn" id="3_massl"]
+[ext_resource type="Script" path="res://models/toydrum/buttonm.gd" id="3_hf51l"]
+[ext_resource type="ArrayMesh" uid="uid://8s3b4udyc0o8" path="res://models/shared/button_flat_square_mesh.res" id="3_jn2sf"]
+[ext_resource type="Material" uid="uid://d1itv83qjgtk4" path="res://models/shared/nobs/square_key_material.tres" id="4_kh3rb"]
 [ext_resource type="PackedScene" uid="uid://b77oywlnttw32" path="res://models/shared/label.tscn" id="4_modnf"]
 [ext_resource type="FontFile" uid="uid://ca4jgypv8bjcn" path="res://ui/fonts/RetroGaming.ttf" id="5_5fnco"]
 [ext_resource type="Script" path="res://models/shared/nobs/label_style.gd" id="6_kecne"]
-[ext_resource type="PackedScene" uid="uid://dcvyc6blialbk" path="res://models/shared/nobs/square_button_black_void.tscn" id="7_j4hon"]
 [ext_resource type="AudioStream" uid="uid://bmkr5qf551e58" path="res://models/shared/sounds/key_press_0.wav" id="8_m5lp2"]
 [ext_resource type="AudioStream" uid="uid://bgxedw1j0conq" path="res://models/shared/sounds/key_press_1.wav" id="9_7escm"]
 [ext_resource type="AudioStream" uid="uid://bxoki7ft7c3na" path="res://models/shared/sounds/key_press_loud_1.wav" id="10_83o6u"]
+[ext_resource type="Material" uid="uid://dtnc8e2uktfb5" path="res://models/redux/black_void_material.tres" id="10_xq6b6"]
 [ext_resource type="AudioStream" uid="uid://c3p1l42revws3" path="res://models/shared/sounds/key_press_loud_0.wav" id="11_xu3nc"]
 [ext_resource type="AudioStream" uid="uid://dh5tiwpnwbg3a" path="res://models/shared/sounds/key_press_loud_2.wav" id="12_jgin4"]
 
@@ -21,7 +23,7 @@ script = ExtResource("6_kecne")
 size = 24
 font = ExtResource("5_5fnco")
 curve = 0.0
-color = Color(0.702608, 0.638796, 0.45503, 1)
+color = Color(0.701961, 0.639216, 0.454902, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vcpyw"]
 size = Vector3(0.02, 0.02, 0.02)
@@ -49,29 +51,38 @@ process_thread_messages = 1
 transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_46e6y")
 action = SubResource("InputEventAction_s7mvf")
-albedo = Color(1, 0.490665, 0.672305, 1)
 press_distance = 0.003
 
 [node name="Nob" type="Area3D" parent="."]
 collision_layer = 9
 
 [node name="Model" type="Node3D" parent="Nob"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("2_sjuuk")
 
-[node name="Button" parent="Nob/Model" instance=ExtResource("3_massl")]
+[node name="Button" type="MeshInstance3D" parent="Nob/Model"]
 unique_name_in_owner = true
-transform = Transform3D(1, 2.68221e-07, 0, -2.68221e-07, 1, 0, 0, 0, 1, 0, 0, 0)
-albedo = Color(1, 0.490665, 0.672305, 1)
+material_override = ExtResource("4_kh3rb")
+instance_shader_parameters/albedo = Color(0, 0, 0, 1)
+instance_shader_parameters/wear = 0.0
+instance_shader_parameters/wear_albedo = Color(0, 0, 0, 1)
+mesh = ExtResource("3_jn2sf")
+script = ExtResource("3_hf51l")
 
 [node name="Label" parent="Nob/Model/Button" instance=ExtResource("4_modnf")]
 unique_name_in_owner = true
-transform = Transform3D(-4.37114e-08, -2.08616e-07, 0.999999, -1.79416e-14, 0.999999, 2.08616e-07, -1, -9.4731e-16, -4.37114e-08, -1.53946e-15, 0.00458351, 0)
+transform = Transform3D(-4.37114e-08, 5.96047e-08, 0.999999, -6.21728e-15, 0.999999, -5.96047e-08, -1, -9.4731e-16, -4.37114e-08, 1.22939e-09, 0.00458351, 0)
 label_style = SubResource("Resource_3ypb2")
 label = "7"
 
-[node name="BlackVoid" parent="Nob" instance=ExtResource("7_j4hon")]
-transform = Transform3D(1.1, 9.61651e-08, -9.61651e-08, 9.61651e-08, -1.1, 0, -9.61651e-08, -8.40702e-15, -1.1, 0, 0, 0)
+[node name="BlackVoid" type="MeshInstance3D" parent="Nob"]
+transform = Transform3D(1.03, 0, 0, 0, -1.03, -9.00455e-08, 0, 9.00455e-08, -1.03, 0, 0, 0)
+material_override = ExtResource("10_xq6b6")
+mesh = ExtResource("3_jn2sf")
+skeleton = NodePath("../Model")
+script = ExtResource("3_hf51l")
+albedo = Color(0.982844, 0.492028, 0.69594, 1)
+wear = 1.0
+wear_albedo = Color(1, 1, 1, 1)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Nob"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.44329e-09, -0.00538096, 0)

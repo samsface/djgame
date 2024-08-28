@@ -48,19 +48,12 @@ enum EaseType {
 		enable_from = v
 		invalidate_value_()
 
-
 var tween_:Tween
 var value_
 var from_
 
 func _ready():
 	invalidate_value_()
-	
-	var dict := {}
-	dict[5] = 5
-	dict[15] = 15
-	dict[1] = 1
-	dict[2] = 2
 
 func _set(property:StringName, value):
 	if property == "test" or property == "value":

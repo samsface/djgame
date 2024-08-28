@@ -72,7 +72,7 @@ snap = 0.33
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ynrd8"]
 
 [resource]
-graph_offset = Vector2(-572.718, -439.96)
+graph_offset = Vector2(65.1352, -441.627)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_i2u6n")
 nodes/Animation/position = Vector2(-1100, -80)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_apw4l")
@@ -87,5 +87,5 @@ nodes/Talking/node = SubResource("AnimationNodeBlendSpace1D_wx7kn")
 nodes/Talking/position = Vector2(280, -140)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_ynrd8")
 nodes/TimeScale/position = Vector2(520, -160)
-nodes/output/position = Vector2(740, -140)
+nodes/output/position = Vector2(780, -160)
 node_connections = [&"CheerLeft", 0, &"Jump", &"CheerLeft", 1, &"Animation", &"CheerRight", 0, &"CheerLeft", &"CheerRight", 1, &"Animation 2", &"TimeScale", 0, &"Talking", &"output", 0, &"TimeScale"]

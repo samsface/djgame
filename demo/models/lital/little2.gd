@@ -2,11 +2,15 @@ extends Node3D
 class_name Device
 
 signal value_changed
+signal clicked
+
 
 @export var map:DeviceData
 
 var tween_:Tween
 var select := "1"
+
+var mouse_over := false
 
 func _ready() -> void:
 	await get_tree().process_frame
@@ -26,3 +30,16 @@ func set_preset(value:float):
 
 func set_sample(idx:int, sample_path:String) -> void:
 	Bus.audio_service.emit_message("toykit-set-sample-" + str(idx), [sample_path])
+
+func _mouse_entered() -> void:
+	set_physics_process(true)
+	mouse_over = true
+
+func _mouse_exited() -> void:
+	set_physics_process(false)
+	mouse_over = false
+
+func _physics_process(delta: float) -> void:
+	if not Engine.is_editor_hint():
+		if Input.is_action_just_pressed("click"):
+			clicked.emit()

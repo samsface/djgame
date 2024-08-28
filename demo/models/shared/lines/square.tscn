@@ -6,7 +6,6 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4r5q8"]
 render_priority = 0
 shader = ExtResource("1_jrk5i")
-shader_parameter/outline_color = null
 
 [sub_resource type="QuadMesh" id="QuadMesh_lwjfe"]
 size = Vector2(0.5, 0.5)
@@ -19,8 +18,5 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 material_override = SubResource("ShaderMaterial_4r5q8")
 cast_shadow = 0
 lod_bias = 0.001
-instance_shader_parameters/fill_line_accent = 16
-instance_shader_parameters/fill_line_accent_width = 0.075
-instance_shader_parameters/fill_line_width = 0.01
 instance_shader_parameters/size = Vector2(0.1, 0.1)
 mesh = SubResource("QuadMesh_lwjfe")

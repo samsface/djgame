@@ -11,11 +11,15 @@ signal impulse(Vector3, float)
 @export var label:String : 
 	set(v):
 		label = v
+		if not is_node_ready():
+			await ready
 		%Label.label = label
-		
+
 @export var label_style:LabelStyle :
 	set(v):
 		label_style = v
+		if not is_node_ready():
+			await ready
 		%Label.label_style = label_style
 		
 @export var albedo:Color :
@@ -28,11 +32,15 @@ signal impulse(Vector3, float)
 @export_range(0.0, 1.0) var wear:float :
 	set(v):
 		wear = v
+		if not is_node_ready():
+			await ready
 		%Button.wear = wear
 		
 @export var wear_albedo:Color :
 	set(v):
 		wear_albedo = v
+		if not is_node_ready():
+			await ready
 		%Button.wear_albedo = wear_albedo
 
 @export var press_distance:float
@@ -130,14 +138,14 @@ func released() -> void:
 
 func _mouse_entered() -> void:
 	mouse_over_ = true
-	#set_process_input(true)
+	set_process(true)
 	
 	$Nob/Model.hover_begin()
 	
 func _mouse_exited() -> void:
 	mouse_over_ = false
 	if not down_:
-		#set_process_input(false)
+		set_process(false)
 		$Nob/Model.hover_end()
 
 func light_color_() -> float:
@@ -151,3 +159,9 @@ func radio():
 	if value > 0.0:
 		tween.tween_property(self, "scale", Vector3.ONE * 1.2, 0.0)
 		tween.tween_property(self, "scale", Vector3.ONE, 0.1).set_delay(0.1)
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("click"):
+		call_deferred("pressed")
+	elif Input.is_action_just_released("click"):
+		call_deferred("released")

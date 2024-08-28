@@ -1,0 +1,287 @@
+[gd_scene load_steps=38 format=3 uid="uid://ck0ejsnc1wpy0"]
+
+[ext_resource type="Script" path="res://game/levels/car/v_split_container.gd" id="1_1rm14"]
+[ext_resource type="PackedScene" uid="uid://lb3oq22iphka" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_host_control.tscn" id="2_cfg5t"]
+[ext_resource type="PackedScene" uid="uid://dgg103ssmbg32" path="res://game/settings/settings.tscn" id="3_dqocj"]
+[ext_resource type="Script" path="res://game/world_viewport.gd" id="4_6fsl8"]
+[ext_resource type="Shader" path="res://game/levels/car/hipster_shader.gdshader" id="5_lr7ur"]
+[ext_resource type="Script" path="res://game/levels/car/carkpark.gd" id="6_lwmb2"]
+[ext_resource type="Shader" path="res://game/levels/car/ground.gdshader" id="9_x1x6b"]
+[ext_resource type="PackedScene" uid="uid://bvyqie2mkgeun" path="res://models/road/car.tscn" id="10_lkipa"]
+[ext_resource type="PackedScene" uid="uid://bvb3valnbby5w" path="res://models/road/sketchfab_scene.tscn" id="11_1ljdb"]
+[ext_resource type="PackedScene" uid="uid://cs13wbytj7dmb" path="res://models/characters/mano/mano.tscn" id="11_yy6kh"]
+[ext_resource type="PackedScene" uid="uid://bt2kjmrxbmg5j" path="res://models/radio/radio.tscn" id="12_38nwr"]
+[ext_resource type="PackedScene" uid="uid://lprkgl2wh3cd" path="res://game/camera/camera.tscn" id="13_pqd28"]
+[ext_resource type="Texture2D" uid="uid://dqjwmshavotv6" path="res://hills.png" id="14_au1fb"]
+[ext_resource type="Environment" uid="uid://b8uhvyo3rc3m8" path="res://game/settings/environment_potato.tres" id="14_t0q0r"]
+[ext_resource type="PackedScene" uid="uid://df031doltiks0" path="res://game/points_service/points_service.tscn" id="15_mw666"]
+[ext_resource type="Script" path="res://game/GuidesService.gd" id="19_c0206"]
+[ext_resource type="CameraAttributesPractical" uid="uid://ev1eo0cru0we" path="res://game/cameraatr.tres" id="21_bdydh"]
+[ext_resource type="Script" path="res://game/world_environment.gd" id="22_54vpq"]
+[ext_resource type="Script" path="res://game/levels/car/electric_tower_spawner.gd" id="23_ebt2x"]
+[ext_resource type="PackedScene" uid="uid://cgr8ulc8ui22f" path="res://models/road/electric_tower.tscn" id="24_0buyn"]
+[ext_resource type="PackedScene" uid="uid://dlfm846b7ydgm" path="res://models/road/road_sign.tscn" id="25_qkonj"]
+[ext_resource type="PackedScene" uid="uid://ybwbv2t5uouc" path="res://models/road/road_side_black_and_white_pole.tscn" id="26_unuc5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yqnny"]
+shader = ExtResource("5_lr7ur")
+
+[sub_resource type="Gradient" id="Gradient_7664g"]
+offsets = PackedFloat32Array(0.314433, 0.60567)
+colors = PackedColorArray(0.0194087, 0.553954, 0, 1, 0.177384, 0.978875, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wd3li"]
+gradient = SubResource("Gradient_7664g")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ewrg5"]
+frequency = 0.0025
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rn1n6"]
+width = 1024
+height = 1024
+seamless = true
+noise = SubResource("FastNoiseLite_ewrg5")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5vm0q"]
+viewport_path = NodePath("WorldViewport/SubViewport/Game/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6nqgk"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("9_x1x6b")
+shader_parameter/texture_height_amplitude = 50.0
+shader_parameter/albedo = Color(0, 0.739715, 0, 1)
+shader_parameter/texture_height = SubResource("NoiseTexture2D_rn1n6")
+shader_parameter/texture_road_distance = SubResource("ViewportTexture_5vm0q")
+shader_parameter/test = SubResource("GradientTexture2D_wd3li")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1bqrc"]
+material = SubResource("ShaderMaterial_6nqgk")
+size = Vector2(1024, 1024)
+subdivide_width = 256
+subdivide_depth = 256
+
+[sub_resource type="Curve3D" id="Curve3D_fyb2l"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3000, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_skxyr"]
+size = Vector2(1000, 100)
+orientation = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mr8hj"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.376471)
+albedo_texture = ExtResource("14_au1fb")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5tlot"]
+flip_faces = true
+size = Vector2(1000, 100)
+orientation = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hq1pu"]
+size = Vector2(0.25, 0.1)
+orientation = 2
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_avlx6"]
+viewport_path = NodePath("WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car/MeshInstance3D3/SubViewport2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w537e"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_avlx6")
+
+[node name="MarginContainer" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Recorder" type="Node" parent="."]
+
+[node name="VSplitContainer" type="VSplitContainer" parent="Recorder"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 900
+script = ExtResource("1_1rm14")
+
+[node name="MarginContainer" type="MarginContainer" parent="Recorder/VSplitContainer"]
+layout_mode = 2
+
+[node name="BeatPlayerHost" parent="Recorder/VSplitContainer" instance=ExtResource("2_cfg5t")]
+unique_name_in_owner = true
+layout_mode = 2
+save_path = "res://junk/carpark.bp"
+root_node = NodePath("../../../WorldViewport/SubViewport/Game")
+
+[node name="ConfigService" parent="." instance=ExtResource("3_dqocj")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer2"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+
+[node name="Subtitle" type="RichTextLabel" parent="CanvasLayer/MarginContainer2/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center][font_size=64]Son... I'm going to go pay my taxes.[/font_size][/center]"
+
+[node name="WorldViewport" type="SubViewportContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+stretch = true
+script = ExtResource("4_6fsl8")
+
+[node name="SubViewport" type="SubViewport" parent="WorldViewport"]
+handle_input_locally = false
+scaling_3d_scale = 0.5
+gui_snap_controls_to_pixels = false
+size = Vector2i(1680, 1050)
+render_target_update_mode = 4
+
+[node name="MarginContainer" type="ColorRect" parent="WorldViewport/SubViewport"]
+visible = false
+material = SubResource("ShaderMaterial_yqnny")
+use_parent_material = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Game" type="Node3D" parent="WorldViewport/SubViewport"]
+script = ExtResource("6_lwmb2")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="WorldViewport/SubViewport/Game"]
+transform = Transform3D(0.999996, 0, 0, 0, 0.999997, 0, 0, 0, 0.999994, 0, 0, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_1bqrc")
+
+[node name="Path3D" type="Path3D" parent="WorldViewport/SubViewport/Game"]
+curve = SubResource("Curve3D_fyb2l")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="WorldViewport/SubViewport/Game/Path3D"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37108e-08, 0, -0.999985, 0, 0.999917, 0, 0.999986, 0, -4.37107e-08, -8.17403e-08, 0, 1.87)
+h_offset = 1.87
+loop = false
+
+[node name="Car" type="Node3D" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0.411333, 1.26341)
+
+[node name="car" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car" instance=ExtResource("10_lkipa")]
+transform = Transform3D(-0.7, 0, -1.05697e-07, 0, 0.7, 0, 1.05697e-07, 0, -0.7, -0.342, -0.675, 0.189)
+
+[node name="Sketchfab_Scene2" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car" instance=ExtResource("11_1ljdb")]
+transform = Transform3D(-0.3, 8.23704e-25, 6.19083e-08, 4.51189e-24, 0.3, 3.33819e-17, -4.52987e-08, 2.44258e-17, -0.41, -0.347, -0.405, 0.185001)
+visible = false
+
+[node name="Radio" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car" instance=ExtResource("12_38nwr")]
+unique_name_in_owner = true
+transform = Transform3D(-2.58554e-07, 2.92159e-08, -1, -0.975622, 0.21973, 3.53618e-09, 0.21974, 0.975575, 5.97001e-08, -0.345595, 0.192544, -0.36133)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car/Radio"]
+transform = Transform3D(-1.3022e-07, -0.743722, -0.668478, -1.6118e-07, 0.668555, -0.743708, 1.00001, 1.90458e-07, -5.46544e-09, 0.35569, 0.543575, -0.0355127)
+
+[node name="Camera" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car" instance=ExtResource("13_pqd28")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.334046, 0.262877, 1.36224e-08)
+
+[node name="Mano" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car" instance=ExtResource("11_yy6kh")]
+unique_name_in_owner = true
+transform = Transform3D(-0.117083, 0, -0.537394, 0, 0.550003, 0, 0.537395, 0, -0.117083, 0.298995, -0.556775, 0.0625302)
+
+[node name="Dad" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car" instance=ExtResource("11_yy6kh")]
+unique_name_in_owner = true
+transform = Transform3D(0.127158, -0.609656, -0.710757, -0.0577687, 0.710806, -0.620034, 0.934623, 0.12688, 0.0583759, 1.20373, -0.378, -0.146)
+talking = 0.328
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car"]
+transform = Transform3D(-1, 0, -1.39086e-08, 0, 1, 0, -1.05303e-07, 0, -1, 357.64, 15.6758, -393.847)
+mesh = SubResource("PlaneMesh_skxyr")
+surface_material_override/0 = SubResource("StandardMaterial3D_mr8hj")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car"]
+transform = Transform3D(-0.780998, 0, 0.624534, 0, 1, 0, -0.624535, 0, -0.780998, -403.707, 15.6758, -393.847)
+mesh = SubResource("PlaneMesh_5tlot")
+surface_material_override/0 = SubResource("StandardMaterial3D_mr8hj")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car"]
+transform = Transform3D(0.999037, -0.0241193, -0.0366611, 0.0241356, 0.999709, -1.055e-09, 0.0366505, -0.000884836, 0.999328, -0.355108, 0.61872, -0.605433)
+visible = false
+mesh = SubResource("PlaneMesh_hq1pu")
+surface_material_override/0 = SubResource("StandardMaterial3D_w537e")
+
+[node name="SubViewport2" type="SubViewport" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car/MeshInstance3D3"]
+size = Vector2i(1680, 1050)
+
+[node name="Camera3D" type="Camera3D" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car/MeshInstance3D3/SubViewport2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 31.8301, 1.07686, 1.50732)
+fov = 96.4
+far = 10.0
+
+[node name="PointsService" parent="WorldViewport/SubViewport/Game" instance=ExtResource("15_mw666")]
+
+[node name="Guides" type="Node3D" parent="WorldViewport/SubViewport/Game"]
+script = ExtResource("19_c0206")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="WorldViewport/SubViewport/Game"]
+environment = ExtResource("14_t0q0r")
+camera_attributes = ExtResource("21_bdydh")
+script = ExtResource("22_54vpq")
+
+[node name="Sun" type="DirectionalLight3D" parent="WorldViewport/SubViewport/Game/WorldEnvironment"]
+transform = Transform3D(-0.258819, -0.620885, -0.739942, -6.69698e-08, -0.766045, 0.642787, -0.965927, 0.166366, 0.198267, 0, 0, 0)
+shadow_enabled = true
+shadow_reverse_cull_face = true
+directional_shadow_mode = 0
+directional_shadow_split_1 = 0.0
+directional_shadow_split_2 = 0.117
+directional_shadow_split_3 = 1.0
+directional_shadow_blend_splits = true
+
+[node name="Spawner" type="Node3D" parent="WorldViewport/SubViewport/Game"]
+
+[node name="ElectricTower" type="Node3D" parent="WorldViewport/SubViewport/Game/Spawner" node_paths=PackedStringArray("path")]
+script = ExtResource("23_ebt2x")
+path = NodePath("../../Path3D")
+delay = 3
+prop = ExtResource("24_0buyn")
+h_offset = 10.0
+
+[node name="RoadSign" type="Node3D" parent="WorldViewport/SubViewport/Game/Spawner" node_paths=PackedStringArray("path")]
+script = ExtResource("23_ebt2x")
+path = NodePath("../../Path3D")
+delay = 4
+prop = ExtResource("25_qkonj")
+h_offset = 6.0
+
+[node name="RoadSideBlackAndWhitePole" type="Node3D" parent="WorldViewport/SubViewport/Game/Spawner" node_paths=PackedStringArray("path")]
+script = ExtResource("23_ebt2x")
+path = NodePath("../../Path3D")
+prop = ExtResource("26_unuc5")
+h_offset = 5.5

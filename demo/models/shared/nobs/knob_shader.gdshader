@@ -3,11 +3,11 @@
 shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
 
-instance uniform vec3 albedo : source_color;
-instance uniform vec3 wear_albedo : source_color;
+instance uniform vec3 albedo : source_color = vec3(0.0);
+instance uniform vec3 wear_albedo : source_color = vec3(0.0);
 uniform sampler2D aoe_texture : filter_linear_mipmap, repeat_enable;
 
-uniform float roughness : hint_range(0.0, 1.0);
+uniform float roughness : hint_range(0.0, 1.0) = 0.0;
 uniform float specular : hint_range(0.0, 1.0);
 uniform float metallic : hint_range(0.0, 1.0);
 uniform float ao_light_affect : hint_range(0.0, 1.0, 0.01);
@@ -54,10 +54,13 @@ void fragment()
 	float b = texture(electric_noise, SCREEN_UV + vec2(TIME, 0) * 0.3).r;
 	b *= 0.005;
 
-	if((y + b) < electric_albedo.a * 0.01)
+	if(electric_albedo.a > 0.0)
 	{
-		ALBEDO = electric_albedo.rgb;
-		EMISSION = electric_albedo.rgb;
+		if((y + b) < electric_albedo.a * 0.01)
+		{
+			ALBEDO = electric_albedo.rgb;
+			EMISSION = electric_albedo.rgb;
+		}
 	}
 
 }

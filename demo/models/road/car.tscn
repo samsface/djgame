@@ -1,0 +1,92 @@
+[gd_scene load_steps=8 format=3 uid="uid://bvyqie2mkgeun"]
+
+[ext_resource type="PackedScene" uid="uid://cvyf5o4k3n4m6" path="res://models/road/car.glb" id="1_1xcem"]
+[ext_resource type="Material" uid="uid://ccy7w6xdgt3dx" path="res://models/road/car_chasis_material.tres" id="2_gd0jt"]
+[ext_resource type="Material" uid="uid://ckwd34awfxrr6" path="res://models/road/car_interior_material.tres" id="3_yk0wf"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="4_pw7ha"]
+[ext_resource type="Texture2D" uid="uid://cw60s0n8bbnis" path="res://models/road/car_windows_map.png" id="6_c5mwa"]
+
+[sub_resource type="Shader" id="Shader_h2nem"]
+code = "shader_type spatial;
+render_mode unshaded;
+
+uniform vec3 albedo : source_color = vec3(0.0);
+uniform vec3 wear_albedo : source_color = vec3(0.0);
+uniform sampler2D aoe_texture : filter_linear_mipmap, repeat_enable;
+
+uniform float roughness : hint_range(0.0, 1.0) = 0.0;
+uniform float specular : hint_range(0.0, 1.0);
+uniform float metallic : hint_range(0.0, 1.0);
+uniform float ao_light_affect : hint_range(0.0, 1.0, 0.01);
+
+uniform vec2 detail_scale = vec2(1.0);
+uniform sampler2D texture_detail : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform float wear : hint_range(0.0, 1.0);
+
+uniform float alpha : hint_range(0.0, 1.0) = 0.2;
+
+varying float y;
+
+void vertex()
+{
+	y = VERTEX.y;
+}
+
+void fragment()
+{
+	vec2 base_uv = UV;
+
+	vec4 aoe_tex = texture(aoe_texture, base_uv);
+	vec4 detail_tex = texture(texture_detail, base_uv * detail_scale);
+
+	ALBEDO = albedo;
+
+	float e = aoe_tex.g;
+	e = round(e - wear * 0.5);
+
+	ALBEDO = mix(ALBEDO, wear_albedo.rgb, e);
+
+	ALBEDO = mix(ALBEDO, wear_albedo.rgb, round(detail_tex.r - 0.04));
+
+	METALLIC = metallic;
+	SPECULAR = specular;
+	ROUGHNESS = roughness;
+
+	AO = pow(aoe_tex.r, 1.0);
+	AO_LIGHT_AFFECT = ao_light_affect;
+
+	ALBEDO = vec3(1.0);
+	ALPHA = round(aoe_tex.g + 0.1) * 0.1;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_88nb8"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_h2nem")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/wear_albedo = Color(1, 1, 1, 1)
+shader_parameter/roughness = 1.0
+shader_parameter/specular = 1.0
+shader_parameter/metallic = 1.0
+shader_parameter/ao_light_affect = 1.0
+shader_parameter/detail_scale = Vector2(1, 1)
+shader_parameter/wear = 1.0
+shader_parameter/alpha = 1.0
+shader_parameter/aoe_texture = ExtResource("6_c5mwa")
+shader_parameter/texture_detail = ExtResource("4_pw7ha")
+
+[node name="car" instance=ExtResource("1_1xcem")]
+
+[node name="CarChasis" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_gd0jt")
+
+[node name="CarWheels" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.507804, 0.245584)
+
+[node name="CarInterior" parent="." index="3"]
+surface_material_override/0 = ExtResource("3_yk0wf")
+
+[node name="CarWindows" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42925, -0.0415604)
+surface_material_override/0 = SubResource("ShaderMaterial_88nb8")

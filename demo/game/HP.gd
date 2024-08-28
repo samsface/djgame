@@ -9,6 +9,11 @@ var value_ := 0.0
 var combo := 0
 var decay_rate := 0.0
 
+@export var points:float :
+	set(v):
+		set_points(v)
+	get:
+		return value_
 @export var color:Color
 @export var unit:String
 
@@ -29,6 +34,14 @@ func add_points(v:float) -> void:
 		inc_(v)
 		
 	if value_ == 0.0:
+		zero.emit()
+		
+func set_points(v:float) -> void:
+	if v > value_:
+		inc_(v - value_)
+	elif v < value_:
+		dec_(v - value_)
+	else:
 		zero.emit()
 
 func decay(v:float) -> void:
@@ -59,8 +72,8 @@ func dec_(v):
 	dec_tween_ = create_tween()
 	dec_tween_.set_parallel()
 	dec_tween_.tween_property(self, "value", value_, 0.1)
-	dec_tween_.tween_property(self, "modulate", Color.RED, 0.1)
-	dec_tween_.tween_property(self, "modulate", color, 0.1).set_delay(0.1)
+	#dec_tween_.tween_property(self, "modulate", Color.RED, 0.1)
+	#dec_tween_.tween_property(self, "modulate", color, 0.1).set_delay(0.1)
 
 func inc_(v):
 	value_ = clampf(value_ + v, 0.0, 1.0)
@@ -74,5 +87,5 @@ func inc_(v):
 	inc_tween_ = create_tween()
 	inc_tween_.set_parallel()
 	inc_tween_.tween_property(self, "value", value_, 0.1)
-	inc_tween_.tween_property(self, "modulate", Color.WHITE, 0.1)
-	inc_tween_.tween_property(self, "modulate", color, 0.1).set_delay(0.1)
+	#inc_tween_.tween_property(self, "modulate", Color.WHITE, 0.1)
+	#inc_tween_.tween_property(self, "modulate", color, 0.1).set_delay(0.1)

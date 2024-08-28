@@ -1,14 +1,24 @@
-[gd_resource type="Environment" load_steps=3 format=3 uid="uid://chtmgmwa87swx"]
+[gd_resource type="Environment" load_steps=5 format=3 uid="uid://chtmgmwa87swx"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_b2yfj"]
-sky_top_color = Color(0.0975379, 0.491815, 0.626645, 1)
+[sub_resource type="Gradient" id="Gradient_1ifne"]
+offsets = PackedFloat32Array(0, 0.71)
+colors = PackedColorArray(0, 0, 0, 1, 1.2514e-06, 0.659731, 0.666705, 1)
 
-[sub_resource type="Sky" id="Sky_s34c4"]
-sky_material = SubResource("ProceduralSkyMaterial_b2yfj")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3yx4b"]
+gradient = SubResource("Gradient_1ifne")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e3dpt"]
+sky_top_color = Color(0.156337, 0.452313, 0.771319, 1)
+sky_horizon_color = Color(0.405925, 0.705984, 0.78765, 1)
+
+[sub_resource type="Sky" id="Sky_1isd6"]
+sky_material = SubResource("ProceduralSkyMaterial_e3dpt")
 
 [resource]
 background_mode = 2
-sky = SubResource("Sky_s34c4")
+background_color = Color(1.15514e-05, 0.976014, 0.756093, 1)
+background_energy_multiplier = 3.0
+sky = SubResource("Sky_1isd6")
 ssr_enabled = true
 ssr_fade_in = 0.579562
 ssr_fade_out = 10.1965
@@ -22,9 +32,14 @@ ssil_radius = 0.3
 ssil_intensity = 5.0
 ssil_sharpness = 0.97
 ssil_normal_rejection = 0.55
-sdfgi_enabled = true
 sdfgi_use_occlusion = true
-sdfgi_bounce_feedback = 1.0
+sdfgi_bounce_feedback = 0.96
+sdfgi_y_scale = 2
 glow_enabled = true
+glow_hdr_threshold = 0.0
+fog_light_color = Color(0.501431, 0.819116, 1, 1)
+fog_sun_scatter = 1.0
+fog_density = 0.2422
+fog_sky_affect = 0.0
 volumetric_fog_density = 0.0845
-adjustment_enabled = true
+adjustment_color_correction = SubResource("GradientTexture1D_3yx4b")
