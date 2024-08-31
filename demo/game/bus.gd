@@ -10,6 +10,9 @@ var input_service:InputService
 var config_service:ConfigService
 var beat_service
 var livestream_service
+var bars
+var env
+
 
 func _ready() -> void:
 	input_service = InputService.new()

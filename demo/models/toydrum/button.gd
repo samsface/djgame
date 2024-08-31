@@ -78,6 +78,9 @@ func buffer_change(time, value):
 	value_will_change.emit(time, value)
 
 func _unhandled_input(event: InputEvent) -> void:
+	if Engine.is_editor_hint():
+		return
+	
 	if down_:
 		if event.is_action_released("click"):
 			released()
@@ -161,6 +164,10 @@ func radio():
 		tween.tween_property(self, "scale", Vector3.ONE, 0.1).set_delay(0.1)
 
 func _process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+	
+	
 	if Input.is_action_just_pressed("click"):
 		call_deferred("pressed")
 	elif Input.is_action_just_released("click"):

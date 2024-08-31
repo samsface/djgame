@@ -1,0 +1,58 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://brohnvqwn4ila"]
+
+[sub_resource type="Shader" id="Shader_72x1j"]
+code = "shader_type spatial;
+
+uniform vec4 albedo : source_color;
+uniform vec4 emission : source_color;
+uniform float emission_energy : hint_range(0.0, 100.0, 0.01);
+uniform sampler2D curve_alpha;
+
+uniform sampler2D depth_texture :  hint_depth_texture, repeat_disable, filter_nearest;
+uniform sampler2D normal_roughness_texture : hint_normal_roughness_texture, repeat_disable, filter_nearest;
+
+uniform float a;
+
+
+void fragment() {
+	vec2 base_uv = UV;
+
+	ALBEDO = albedo.rgb;
+
+	
+	float d = distance(base_uv, vec2(0.5, 0.5)) / sqrt(2.0);
+	
+	float drop_off = clamp(texture(curve_alpha, vec2(d, 0.0)).r * a, 0.0, 1.0);
+
+	ALPHA *= drop_off;
+	
+	EMISSION = emission.rgb * emission_energy;
+
+
+    float depth = textureLod(depth_texture, SCREEN_UV, 0.0).r;
+    vec4 upos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV * 2.0 - 1.0, depth, 1.0);
+    vec3 pixel_position = upos.xyz / upos.w;
+
+	float dd = distance(pixel_position, VERTEX);
+	if(dd < 0.5) {
+		ALPHA = 0.0;
+	}
+
+}
+"
+
+[sub_resource type="Curve" id="Curve_hevq8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.0594595, 1), 0.0, 0.0, 0, 0, Vector2(0.340541, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_o6bi2"]
+curve = SubResource("Curve_hevq8")
+
+[resource]
+render_priority = 0
+shader = SubResource("Shader_72x1j")
+shader_parameter/albedo = Color(0.95, 0.791667, 0, 1)
+shader_parameter/emission = Color(0.9665, 0.716228, 0, 1)
+shader_parameter/emission_energy = 6.51
+shader_parameter/a = 1.0
+shader_parameter/curve_alpha = SubResource("CurveTexture_o6bi2")

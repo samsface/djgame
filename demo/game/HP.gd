@@ -22,7 +22,7 @@ func _ready() -> void:
 	pivot_offset = size * 0.5
 	get_parent().pivot_offset = get_parent().size * 0.5
 	
-	modulate = color
+	self_modulate = color
 
 func _physics_process(delta:float) -> void:
 	decay(decay_rate * delta)

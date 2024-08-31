@@ -1,0 +1,24 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://bkobhd1jcn5ew"]
+
+[ext_resource type="Shader" path="res://game/points_service/points_service.gdshader" id="1_0f275"]
+
+[sub_resource type="Gradient" id="Gradient_ymx0l"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.585916)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_l8ilj"]
+gradient = SubResource("Gradient_ymx0l")
+
+[sub_resource type="Gradient" id="Gradient_lt03x"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.769014)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8wk7p"]
+gradient = SubResource("Gradient_lt03x")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_0f275")
+shader_parameter/albedo = Color(0.549435, 0.845281, 0.849126, 1)
+shader_parameter/fresnel_gradient = SubResource("GradientTexture1D_8wk7p")
+shader_parameter/color_gradient = SubResource("GradientTexture1D_l8ilj")

@@ -9,6 +9,7 @@ class_name WorldEnviromentService
 		return environment.sky.sky_material
 
 func _ready() -> void:
+	Bus.env = self
 	Bus.config_service.graphics_quality_changed.connect(_invalidate_graphics_quality)
 	_invalidate_graphics_quality()
 

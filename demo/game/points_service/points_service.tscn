@@ -1,8 +1,68 @@
-[gd_scene load_steps=7 format=3 uid="uid://df031doltiks0"]
+[gd_scene load_steps=14 format=3 uid="uid://df031doltiks0"]
 
 [ext_resource type="Script" path="res://game/points_service/PointsService.gd" id="1_iqlpb"]
 [ext_resource type="AudioStream" uid="uid://dkqau0j3qyfq1" path="res://game/points_service/369673__filmsndfx__record-scratches.wav" id="2_2e17c"]
+[ext_resource type="Material" uid="uid://bkobhd1jcn5ew" path="res://game/points_service/liquid_shader.tres" id="2_84mr4"]
 [ext_resource type="Script" path="res://game/HP.gd" id="4_byvq0"]
+[ext_resource type="ArrayMesh" uid="uid://mlikgthegtlb" path="res://models/road/doctor_icon_mesh.res" id="4_o74t1"]
+[ext_resource type="Texture2D" uid="uid://buuymvhjr1165" path="res://models/road/doctor_icon_albedo.png" id="5_84yv7"]
+
+[sub_resource type="Shader" id="Shader_p17er"]
+code = "shader_type spatial;
+render_mode cull_disabled;
+
+uniform float AlphaAmount: hint_range(0.0, 1.0, 0.001) = 0.5;
+uniform float Metallic: hint_range(0.0, 1.0, 0.001) = 0.5;
+uniform float Roughness: hint_range(0.0, 1.0, 0.001) = 0.5;
+uniform float Rim: hint_range(0.0, 1.0, 0.001) = 0.5;
+uniform float RimTint: hint_range(0.0, 1.0, 0.001) = 0.5;
+uniform float Specular: hint_range(0.0, 1.0, 0.001) = 0.5;
+
+
+varying vec3 v;
+
+void vertex() {
+	v = VERTEX;
+}
+
+void fragment() {
+	ALBEDO = vec3(0.0);
+	ALPHA     = AlphaAmount;
+	METALLIC  = Metallic;
+	ROUGHNESS = Roughness;
+	SPECULAR  = Specular;
+	RIM       = Rim;
+	RIM_TINT  = RimTint;
+
+	if(v.x < 0.1) {
+	if(mod(v.y, 0.2) < 0.02) {
+		//ALBEDO = vec3(1.0, 0.0, 0.0);
+		//ALPHA = 1.0;
+	}
+	}
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6gdlw"]
+render_priority = 0
+next_pass = ExtResource("2_84mr4")
+shader = SubResource("Shader_p17er")
+shader_parameter/AlphaAmount = 0.068
+shader_parameter/Metallic = 0.047
+shader_parameter/Roughness = 0.0
+shader_parameter/Rim = 0.519
+shader_parameter/RimTint = 0.793
+shader_parameter/Specular = 1.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1xsq4"]
+material = SubResource("ShaderMaterial_6gdlw")
+height = 5.0
+radial_segments = 12
+rings = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yu0p1"]
+albedo_texture = ExtResource("5_84yv7")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ty5xm"]
 random_pitch = 1.23
@@ -11,19 +71,77 @@ stream_0/stream = ExtResource("2_2e17c")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hy0nu"]
 bg_color = Color(0, 0, 0, 0.313726)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jd5w2"]
 bg_color = Color(1, 1, 1, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
-shadow_color = Color(1, 1, 1, 0.333333)
-shadow_size = 10
-anti_aliasing = false
 
 [node name="PointsService" type="Node3D"]
 script = ExtResource("1_iqlpb")
+
+[node name="CSGBox3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-8.74228e-09, -0.2, 0, 0.2, -8.74228e-09, 0, 0, 0, 0.2, 0, 0.198842, -1.02237)
+layers = 2
+mesh = SubResource("CapsuleMesh_1xsq4")
+skeleton = NodePath("../SubViewportContainer/SubViewport")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+texture_filter = 4
+use_parent_material = true
+custom_minimum_size = Vector2(512, 512)
+offset_right = 256.0
+offset_bottom = 256.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="CSGBox3D2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
+transform = Transform3D(-8.74228e-09, -0.2, 0, 0.2, -8.74228e-09, 0, 0, 0, 0.2, 0, 0.198842, -1.02237)
+layers = 2
+mesh = SubResource("CapsuleMesh_1xsq4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.587785, 0.809017, 0, -0.809017, 0.587785, 0, 0.947075, 1.44371)
+layers = 2
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
+cull_mask = 2
+current = true
+
+[node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, -1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D"]
+transform = Transform3D(0.436802, 0, -0.899558, 0, 1, 0, 0.899558, 0, 0.436802, 0, 0, 0)
+layers = 2
+gi_mode = 2
+mesh = ExtResource("4_o74t1")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_yu0p1")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.365909, 0.777114, 0.312853)
+layers = 2
 
 [node name="RecordScratch" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_ty5xm")
@@ -33,25 +151,34 @@ layer = 0
 
 [node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer"]
 auto_translate_mode = 1
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 128
+theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 128
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer2"]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme_override_constants/separation = 24
 
-[node name="HP" type="ProgressBar" parent="CanvasLayer/MarginContainer2/VBoxContainer"]
-auto_translate_mode = 1
+[node name="HPSlot" type="Control" parent="CanvasLayer/MarginContainer2/VBoxContainer"]
 visible = false
-show_behind_parent = true
-custom_minimum_size = Vector2(0, 16)
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
+
+[node name="HP" type="ProgressBar" parent="CanvasLayer/MarginContainer2/VBoxContainer/HPSlot"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+offset_right = 471.0
+offset_bottom = 64.0
 mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_hy0nu")
 theme_override_styles/fill = SubResource("StyleBoxFlat_jd5w2")
@@ -63,12 +190,19 @@ script = ExtResource("4_byvq0")
 color = Color(0, 1, 0, 1)
 unit = "hp"
 
-[node name="Goodboy" type="ProgressBar" parent="CanvasLayer/MarginContainer2/VBoxContainer"]
-auto_translate_mode = 1
+[node name="GoodBoySlot" type="Control" parent="CanvasLayer/MarginContainer2/VBoxContainer"]
 visible = false
-show_behind_parent = true
-custom_minimum_size = Vector2(0, 16)
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
+
+[node name="Goodboy" type="ProgressBar" parent="CanvasLayer/MarginContainer2/VBoxContainer/GoodBoySlot"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+offset_right = 476.0
+offset_bottom = 64.0
 mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_hy0nu")
 theme_override_styles/fill = SubResource("StyleBoxFlat_jd5w2")
@@ -79,3 +213,22 @@ show_percentage = false
 script = ExtResource("4_byvq0")
 color = Color(6.73831e-06, 0.683894, 0.927268, 1)
 unit = "xxx"
+
+[node name="ss" type="Label" parent="CanvasLayer/MarginContainer2/VBoxContainer/GoodBoySlot/Goodboy"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.5
+offset_top = -11.5
+offset_right = 62.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 36
+text = "Good Boy Meter"

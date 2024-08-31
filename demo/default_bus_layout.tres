@@ -26,6 +26,7 @@ attack_us = 355.0
 sidechain = &"Music"
 
 [resource]
+bus/0/volume_db = -0.328256
 bus/1/name = &"Music"
 bus/1/solo = false
 bus/1/mute = false
@@ -39,7 +40,7 @@ bus/1/effect/1/enabled = false
 bus/1/effect/2/effect = SubResource("AudioEffectChorus_r80rm")
 bus/1/effect/2/enabled = false
 bus/1/effect/3/effect = SubResource("AudioEffectLimiter_lfwnm")
-bus/1/effect/3/enabled = false
+bus/1/effect/3/enabled = true
 bus/2/name = &"New Bus"
 bus/2/solo = false
 bus/2/mute = false

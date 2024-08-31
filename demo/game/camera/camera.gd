@@ -30,6 +30,7 @@ var head_pos_:Vector3
 
 @export var look_x_range := Vector2(-90, 90)
 @export var look_y_range := Vector2(-360, 360)
+@export var look_speed := 0.8
 	
 @export var noclip:bool :
 	set(v):
@@ -127,10 +128,10 @@ func _physics_process(delta: float) -> void:
 		camera_arm_.rotation.z = 0
 		camera_.position = Vector3.ZERO
 		camera_.rotation = Vector3.ZERO
-		rotate_y(deg_to_rad(-Bus.input_service.relative.x * 0.8))
+		rotate_y(deg_to_rad(-Bus.input_service.relative.x * look_speed))
 		rotation.y = clamp(rotation.y, deg_to_rad(look_y_range.x), deg_to_rad(look_y_range.y))
 		
-		camera_arm_.rotate_x(deg_to_rad(-Bus.input_service.relative.y * 0.8))
+		camera_arm_.rotate_x(deg_to_rad(-Bus.input_service.relative.y * look_speed))
 		camera_arm_.rotation.x = clamp(camera_arm_.rotation.x, deg_to_rad(look_x_range.x), deg_to_rad(look_x_range.y))
 		camera_arm_.rotation.z = 0
 		

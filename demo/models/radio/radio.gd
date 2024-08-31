@@ -18,21 +18,35 @@ signal on_pressed
 		channel_name = v
 		%ChannelNameLabel.text = "[font_size=32]%s[/font_size]" %channel_name
 
+@export var tune_duration := 0.5
+
 func _channel_1_button_pressed(value) -> void:
+	if not on:
+		return
+
 	if value:
-		tween_to_channel(98.1, "POP HEADS", 0.5)
+		tween_to_channel(98.1, "JUST DANCE")
 
 func _channel_2_button_pressed(value) -> void:
+	if not on:
+		return
+
 	if value:
-		tween_to_channel(98.5, "WEAHTER", 0.5)
+		tween_to_channel(98.5, "ROCK EDS")
 
 func _channel_3_button_pressed(value) -> void:
+	if not on:
+		return
+
 	if value:
-		tween_to_channel(102.8, "D HIP HOP", 0.5)
+		tween_to_channel(102.8, "FOLKS")
 
 func _channel_4_button_pressed(value) -> void:
+	if not on:
+		return
+
 	if value:
-		tween_to_channel(112.0, "CLASSIC FM", 0.5)
+		tween_to_channel(112.0, "AFROMEN")
 
 func _power_button_pressed(value:float) -> void:
 	on = not on
@@ -47,7 +61,7 @@ func on_() -> void:
 		var c = channel_name
 		frequency = 0
 		channel_name = "XXXXXXX"
-		tween_to_channel(f, c, 1.0)
+		tween_to_channel(f, c)
 		$NorthFace/LedDisplayMesh.mesh.material.emission_energy_multiplier = 16.0
 		
 	else:
@@ -57,10 +71,10 @@ func on_() -> void:
 		
 	on_pressed.emit()
 
-func tween_to_channel(frequency:float, channel_name:String, duration:float) -> void:
+func tween_to_channel(frequency:float, channel_name:String, duration:float = tune_duration) -> void:
 	if tween_:
 		tween_.kill()
-		
+	
 	tween_ = create_tween()
 	tween_.set_ease(Tween.EASE_OUT)
 	tween_.set_trans(Tween.TRANS_CUBIC)

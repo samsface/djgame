@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bt2kjmrxbmg5j"]
+[gd_scene load_steps=31 format=3 uid="uid://bt2kjmrxbmg5j"]
 
 [ext_resource type="Script" path="res://models/radio/radio.gd" id="1_vbk18"]
 [ext_resource type="PackedScene" uid="uid://bpruc7wwiwser" path="res://models/shared/nobs/square_button_knob.tscn" id="1_yy0kp"]
@@ -12,9 +12,12 @@
 [ext_resource type="Material" uid="uid://chdnjkemtyvhr" path="res://models/radio/base_radio_material.tres" id="7_dcup8"]
 [ext_resource type="ArrayMesh" uid="uid://brypuwdn6olmf" path="res://models/radio/radio_mesh.res" id="7_kl12e"]
 [ext_resource type="FontFile" uid="uid://gtvv3ev1i08b" path="res://models/radio/TEXASLED.TTF" id="10_d1hr1"]
+[ext_resource type="ArrayMesh" uid="uid://bmb6n54vwo8xk" path="res://models/radio/god_ray.res" id="13_7ia4i"]
+[ext_resource type="Material" uid="uid://brohnvqwn4ila" path="res://models/radio/god_ray_material.tres" id="14_4g5ur"]
+[ext_resource type="Script" path="res://models/radio/god_ray.gd" id="14_kbrhw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rhdo8"]
-size = Vector3(0.072, 0.045, 0.14)
+size = Vector3(0.072, 0.08, 0.14)
 
 [sub_resource type="Resource" id="Resource_olksy"]
 script = ExtResource("3_323hb")
@@ -95,21 +98,27 @@ orientation = 1
 
 [node name="Radio" type="Node3D"]
 script = ExtResource("1_vbk18")
+tune_duration = null
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00119211, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00467154, 0)
 shape = SubResource("BoxShape3D_rhdo8")
 
 [node name="NorthFace" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0168218, 0.0239055, 0)
 
 [node name="Node3D10" parent="NorthFace" instance=ExtResource("2_5nwwq")]
-transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.00509727, 0.000236794, 0.000409916)
+transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.00509727, 0.000236794, 0.0120033)
 line_style = SubResource("Resource_olksy")
-size = Vector2(0.045, 0.185)
+size = Vector2(0.045, 0.19)
+
+[node name="Node3D16" parent="NorthFace" instance=ExtResource("2_5nwwq")]
+transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.00509727, 0.000236794, -0.0475622)
+line_style = SubResource("Resource_olksy")
+size = Vector2(0.045, 0.045)
 
 [node name="Node3D12" parent="NorthFace" instance=ExtResource("2_5nwwq")]
 transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.0188941, 0.000236794, 0.0391538)
@@ -118,6 +127,11 @@ size = Vector2(0.008, 0.03)
 
 [node name="Node3D13" parent="NorthFace" instance=ExtResource("2_5nwwq")]
 transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.0347922, 0.000236794, 0.0343187)
+line_style = SubResource("Resource_olksy")
+size = Vector2(0.008, 0.03)
+
+[node name="Node3D17" parent="NorthFace" instance=ExtResource("2_5nwwq")]
+transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.0189017, 0.000236794, -0.0475963)
 line_style = SubResource("Resource_olksy")
 size = Vector2(0.008, 0.03)
 
@@ -135,6 +149,11 @@ label = "Tune"
 transform = Transform3D(-4.37113e-08, -2.68221e-07, 0.999999, -1.17243e-14, 0.999999, 2.68221e-07, -1, 0, -4.37114e-08, -0.0300222, 0.00033424, 0.0374622)
 label_style = SubResource("Resource_nmfvy")
 label = "Freq"
+
+[node name="Label5" parent="NorthFace" instance=ExtResource("4_bby18")]
+transform = Transform3D(-4.37113e-08, -2.68221e-07, 0.999999, -1.17243e-14, 0.999999, 2.68221e-07, -1, 0, -4.37114e-08, -0.0189593, 0.00033424, -0.0475467)
+label_style = SubResource("Resource_nmfvy")
+label = "Power"
 
 [node name="Label4" parent="NorthFace" instance=ExtResource("4_bby18")]
 transform = Transform3D(-4.37113e-08, -2.68221e-07, 0.999999, -1.17243e-14, 0.999999, 2.68221e-07, -1, 0, -4.37114e-08, 0.00868428, 0.00033424, 0.000408147)
@@ -239,7 +258,7 @@ scroll_active = false
 
 [node name="Channel1" parent="NorthFace" instance=ExtResource("1_yy0kp")]
 unique_name_in_owner = true
-transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.00481866, 8.61287e-05, 0.0339286)
+transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.00481866, 8.61287e-05, 0.047619)
 action = SubResource("InputEventAction_ah3jg")
 label = "1"
 label_style = SubResource("Resource_k8w7w")
@@ -248,7 +267,7 @@ wear_albedo = Color(0.309804, 0.309804, 0.309804, 1)
 
 [node name="Channel2" parent="NorthFace" instance=ExtResource("1_yy0kp")]
 unique_name_in_owner = true
-transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.00481866, 8.61278e-05, 0.0113095)
+transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.00481866, 8.61278e-05, 0.0238095)
 action = SubResource("InputEventAction_c3cbs")
 label = "2"
 label_style = SubResource("Resource_k8w7w")
@@ -257,7 +276,7 @@ wear_albedo = Color(0.309804, 0.309804, 0.309804, 1)
 
 [node name="Channel3" parent="NorthFace" instance=ExtResource("1_yy0kp")]
 unique_name_in_owner = true
-transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.00481866, 8.61278e-05, -0.0113095)
+transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.00481866, 8.61278e-05, 0)
 action = SubResource("InputEventAction_sje8r")
 label = "3"
 label_style = SubResource("Resource_k8w7w")
@@ -266,7 +285,7 @@ wear_albedo = Color(0.309804, 0.309804, 0.309804, 1)
 
 [node name="Channel4" parent="NorthFace" instance=ExtResource("1_yy0kp")]
 unique_name_in_owner = true
-transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.00481866, 8.61278e-05, -0.0339286)
+transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, -0.00481866, 8.61278e-05, -0.0238095)
 action = SubResource("InputEventAction_fsxtt")
 label = "4"
 label_style = SubResource("Resource_k8w7w")
@@ -275,7 +294,7 @@ wear_albedo = Color(0.309804, 0.309804, 0.309804, 1)
 
 [node name="Channel5" parent="NorthFace" instance=ExtResource("1_yy0kp")]
 unique_name_in_owner = true
-transform = Transform3D(0.5, -1.34111e-07, 0, 1.34111e-07, 0.5, 0, 0, 0, 0.5, -0.030743, 8.61287e-05, -0.0402936)
+transform = Transform3D(1, -2.68222e-07, 0, 2.68222e-07, 1, 0, 0, 0, 1, -0.0045516, 8.61287e-05, -0.047619)
 action = SubResource("InputEventAction_xl3n2")
 label = "0"
 label_style = SubResource("Resource_cr524")
@@ -294,6 +313,14 @@ instance_shader_parameters/electric_albedo = Color(0, 0, 0, 0)
 instance_shader_parameters/wear = 0.155
 instance_shader_parameters/wear_albedo = Color(0.310617, 0.310617, 0.310617, 1)
 mesh = ExtResource("7_kl12e")
+
+[node name="GodRay" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-0.293674, 0, -0.0623295, 0, 0.3, 0, 0.0623295, 0, -0.293674, -0.00278698, -0.00113001, 0)
+material_override = ExtResource("14_4g5ur")
+cast_shadow = 0
+mesh = ExtResource("13_7ia4i")
+script = ExtResource("14_kbrhw")
 
 [connection signal="value_changed" from="NorthFace/Channel1" to="." method="_channel_1_button_pressed"]
 [connection signal="value_changed" from="NorthFace/Channel2" to="." method="_channel_2_button_pressed"]

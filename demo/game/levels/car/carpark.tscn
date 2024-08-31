@@ -1,16 +1,19 @@
-[gd_scene load_steps=38 format=3 uid="uid://ck0ejsnc1wpy0"]
+[gd_scene load_steps=41 format=3 uid="uid://ck0ejsnc1wpy0"]
 
 [ext_resource type="Script" path="res://game/levels/car/v_split_container.gd" id="1_1rm14"]
 [ext_resource type="PackedScene" uid="uid://lb3oq22iphka" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_host_control.tscn" id="2_cfg5t"]
 [ext_resource type="PackedScene" uid="uid://dgg103ssmbg32" path="res://game/settings/settings.tscn" id="3_dqocj"]
 [ext_resource type="Script" path="res://game/world_viewport.gd" id="4_6fsl8"]
+[ext_resource type="Script" path="res://game/levels/car/margin_container.gd" id="4_nnb5p"]
 [ext_resource type="Shader" path="res://game/levels/car/hipster_shader.gdshader" id="5_lr7ur"]
+[ext_resource type="Script" path="res://game/levels/car/bars.gd" id="5_mo0ji"]
 [ext_resource type="Script" path="res://game/levels/car/carkpark.gd" id="6_lwmb2"]
 [ext_resource type="Shader" path="res://game/levels/car/ground.gdshader" id="9_x1x6b"]
 [ext_resource type="PackedScene" uid="uid://bvyqie2mkgeun" path="res://models/road/car.tscn" id="10_lkipa"]
 [ext_resource type="PackedScene" uid="uid://bvb3valnbby5w" path="res://models/road/sketchfab_scene.tscn" id="11_1ljdb"]
 [ext_resource type="PackedScene" uid="uid://cs13wbytj7dmb" path="res://models/characters/mano/mano.tscn" id="11_yy6kh"]
 [ext_resource type="PackedScene" uid="uid://bt2kjmrxbmg5j" path="res://models/radio/radio.tscn" id="12_38nwr"]
+[ext_resource type="PackedScene" uid="uid://ckktfxfqs2xvc" path="res://models/characters/mano/papa.tscn" id="13_oku8k"]
 [ext_resource type="PackedScene" uid="uid://lprkgl2wh3cd" path="res://game/camera/camera.tscn" id="13_pqd28"]
 [ext_resource type="Texture2D" uid="uid://dqjwmshavotv6" path="res://hills.png" id="14_au1fb"]
 [ext_resource type="Environment" uid="uid://b8uhvyo3rc3m8" path="res://game/settings/environment_potato.tres" id="14_t0q0r"]
@@ -125,7 +128,39 @@ root_node = NodePath("../../../WorldViewport/SubViewport/Game")
 
 [node name="ConfigService" parent="." instance=ExtResource("3_dqocj")]
 
+[node name="HipsterShader" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="ColorRect" parent="HipsterShader"]
+material = SubResource("ShaderMaterial_yqnny")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+script = ExtResource("5_mo0ji")
+bars = 0.181
+
+[node name="TopBar" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 84.165
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="BottomBar" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -204.165
+offset_bottom = -120.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
 
 [node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 15
@@ -135,18 +170,21 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer2"]
-custom_minimum_size = Vector2(0, 128)
+[node name="Subtitle" type="MarginContainer" parent="CanvasLayer/MarginContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 161.12)
 layout_mode = 2
 size_flags_vertical = 8
 mouse_filter = 2
+script = ExtResource("4_nnb5p")
+prefix = "[font_size=64][outline_size=32][center]"
 
-[node name="Subtitle" type="RichTextLabel" parent="CanvasLayer/MarginContainer2/MarginContainer"]
-unique_name_in_owner = true
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/MarginContainer2/Subtitle"]
 layout_mode = 2
 mouse_filter = 2
 bbcode_enabled = true
-text = "[center][font_size=64]Son... I'm going to go pay my taxes.[/font_size][/center]"
+text = "[outline_color=black][outline_size=32][center][font_size=64]Son... I'm going to go pay my taxes.[/font_size][/center][/outline_size][/outline_color]"
+visible_characters_behavior = 1
 
 [node name="WorldViewport" type="SubViewportContainer" parent="."]
 layout_mode = 2
@@ -160,16 +198,6 @@ scaling_3d_scale = 0.5
 gui_snap_controls_to_pixels = false
 size = Vector2i(1680, 1050)
 render_target_update_mode = 4
-
-[node name="MarginContainer" type="ColorRect" parent="WorldViewport/SubViewport"]
-visible = false
-material = SubResource("ShaderMaterial_yqnny")
-use_parent_material = true
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Game" type="Node3D" parent="WorldViewport/SubViewport"]
 script = ExtResource("6_lwmb2")
@@ -200,9 +228,16 @@ transform = Transform3D(-0.7, 0, -1.05697e-07, 0, 0.7, 0, 1.05697e-07, 0, -0.7, 
 transform = Transform3D(-0.3, 8.23704e-25, 6.19083e-08, 4.51189e-24, 0.3, 3.33819e-17, -4.52987e-08, 2.44258e-17, -0.41, -0.347, -0.405, 0.185001)
 visible = false
 
+[node name="HolyCarRadioAngle" type="Marker3D" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car"]
+unique_name_in_owner = true
+transform = Transform3D(-2.58554e-07, 2.92159e-08, -1, -0.975622, 0.21973, 3.53618e-09, 0.21974, 0.975575, 5.97001e-08, -0.345595, -0.000377536, -0.221965)
+
 [node name="Radio" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car" instance=ExtResource("12_38nwr")]
 unique_name_in_owner = true
 transform = Transform3D(-2.58554e-07, 2.92159e-08, -1, -0.975622, 0.21973, 3.53618e-09, 0.21974, 0.975575, 5.97001e-08, -0.345595, 0.192544, -0.36133)
+frequency = 98.1
+channel_name = "JUST DANCE"
+tune_duration = 0.5
 
 [node name="OmniLight3D" type="OmniLight3D" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car/Radio"]
 transform = Transform3D(-1.3022e-07, -0.743722, -0.668478, -1.6118e-07, 0.668555, -0.743708, 1.00001, 1.90458e-07, -5.46544e-09, 0.35569, 0.543575, -0.0355127)
@@ -215,10 +250,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.334046, 0.262877, 1.36224e
 unique_name_in_owner = true
 transform = Transform3D(-0.117083, 0, -0.537394, 0, 0.550003, 0, 0.537395, 0, -0.117083, 0.298995, -0.556775, 0.0625302)
 
-[node name="Dad" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car" instance=ExtResource("11_yy6kh")]
+[node name="Dad" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car" instance=ExtResource("13_oku8k")]
 unique_name_in_owner = true
 transform = Transform3D(0.127158, -0.609656, -0.710757, -0.0577687, 0.710806, -0.620034, 0.934623, 0.12688, 0.0583759, 1.20373, -0.378, -0.146)
-talking = 0.328
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car"]
 transform = Transform3D(-1, 0, -1.39086e-08, 0, 1, 0, -1.05303e-07, 0, -1, 357.64, 15.6758, -393.847)
@@ -255,7 +289,8 @@ camera_attributes = ExtResource("21_bdydh")
 script = ExtResource("22_54vpq")
 
 [node name="Sun" type="DirectionalLight3D" parent="WorldViewport/SubViewport/Game/WorldEnvironment"]
-transform = Transform3D(-0.258819, -0.620885, -0.739942, -6.69698e-08, -0.766045, 0.642787, -0.965927, 0.166366, 0.198267, 0, 0, 0)
+transform = Transform3D(-0.258819, -0.620885, -0.739942, -1.1567e-07, -0.766045, 0.642787, -0.965927, 0.166366, 0.198267, 0, 0, 0)
+layers = 3
 shadow_enabled = true
 shadow_reverse_cull_face = true
 directional_shadow_mode = 0

@@ -40,6 +40,4 @@ func _mouse_exited() -> void:
 	mouse_over = false
 
 func _physics_process(delta: float) -> void:
-	if not Engine.is_editor_hint():
-		if Input.is_action_just_pressed("click"):
-			clicked.emit()
+	pass
