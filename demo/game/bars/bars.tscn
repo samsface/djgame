@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://bukqxrnktt1xj"]
+
+[ext_resource type="Script" path="res://game/levels/car/bars.gd" id="1_g5ksj"]
+[ext_resource type="Script" path="res://game/levels/car/margin_container.gd" id="2_37wre"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 0
+script = ExtResource("1_g5ksj")
+
+[node name="TopBar" type="ColorRect" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="BottomBar" type="ColorRect" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 102.0
+offset_bottom = 102.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Subtitle" type="MarginContainer" parent="MarginContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 161.12)
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+script = ExtResource("2_37wre")
+prefix = "[font_size=64][outline_size=32][center]"
+
+[node name="Text" type="RichTextLabel" parent="MarginContainer2/Subtitle"]
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+visible_characters_behavior = 1

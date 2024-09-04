@@ -1,0 +1,116 @@
+[gd_scene load_steps=12 format=3 uid="uid://cdeek4iytr3n3"]
+
+[ext_resource type="Script" path="res://game/levels/car/football/mini_game_football.gd" id="1_n23bq"]
+[ext_resource type="PackedScene" uid="uid://cjoipn5rkqdbg" path="res://game/levels/car/football/mini_game_football_player_character.tscn" id="1_teco8"]
+[ext_resource type="PackedScene" uid="uid://bs1yaqw55301l" path="res://models/houses/car_sedan.gltf" id="3_mp1xc"]
+[ext_resource type="PackedScene" uid="uid://cmujxfsicgkuq" path="res://models/houses/car_hatchback.gltf" id="4_vp8na"]
+[ext_resource type="PackedScene" uid="uid://1uql26ncvxlw" path="res://models/houses/car_stationwagon.gltf" id="5_boq47"]
+[ext_resource type="PackedScene" uid="uid://c3p7kumnlisvx" path="res://game/levels/car/football/mini_game_football_character.tscn" id="6_vyopc"]
+[ext_resource type="PackedScene" uid="uid://bukqxrnktt1xj" path="res://game/bars/bars.tscn" id="7_a1dlw"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_8jdih"]
+radius = 1.0
+height = 2.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2ipjy"]
+radius = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_cwlsc"]
+size = Vector3(1, 22.155, 42.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jf0vv"]
+size = Vector3(1, 24.515, 43.59)
+
+[node name="MiniGameFootBall" type="Node3D"]
+script = ExtResource("1_n23bq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.90735e-06, 0)
+
+[node name="CameraBase" type="Marker3D" parent="."]
+
+[node name="CameraArm" type="Marker3D" parent="CameraBase"]
+transform = Transform3D(1, 0, 0, 0, 0.903118, 0.429392, 0, -0.429392, 0.903118, 0, 35.8775, 55.4586)
+
+[node name="Camera3D" type="Camera3D" parent="CameraBase/CameraArm"]
+unique_name_in_owner = true
+
+[node name="Character" parent="." instance=ExtResource("1_teco8")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33906, 0, 6.22782)
+player = true
+move_speed = 50.0
+
+[node name="Ball" type="Area3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.514, 0.864836, -23.7583)
+
+[node name="Ball" type="MeshInstance3D" parent="Ball"]
+mesh = SubResource("SphereMesh_8jdih")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball"]
+shape = SubResource("SphereShape3D_2ipjy")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, 28.8027, 11.0277, -43.1146)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+mesh = SubResource("BoxMesh_cwlsc")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_jf0vv")
+
+[node name="car_sedan2" parent="." instance=ExtResource("3_mp1xc")]
+transform = Transform3D(-15, 0, 2.26494e-06, 0, 15, 0, -2.26494e-06, 0, -15, -28.4786, 0, 0.449235)
+
+[node name="car_hatchback2" parent="." instance=ExtResource("4_vp8na")]
+unique_name_in_owner = true
+transform = Transform3D(-15, 0, 1.31134e-06, 0, 15, 0, -1.31134e-06, 0, -15, -7.05061, 0, 7.70529)
+
+[node name="car_stationwagon2" parent="." instance=ExtResource("5_boq47")]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -11.9279, 0, -23.9374)
+
+[node name="Node" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.74505, 0, 5.7625)
+
+[node name="ManoCamera" type="Marker3D" parent="Node"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.94721, 0.320613, 0, -0.320613, 0.94721, 0, 7.941, 11.674)
+
+[node name="Mano" parent="." instance=ExtResource("6_vyopc")]
+unique_name_in_owner = true
+transform = Transform3D(-0.993822, 0, -0.110983, 0, 1, 0, 0.110983, 0, -0.993822, 3.74505, 0, 5.7625)
+move_speed = 50.0
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Mano"]
+remote_path = NodePath("../../Node")
+update_rotation = false
+update_scale = false
+
+[node name="Papa" parent="." instance=ExtResource("6_vyopc")]
+unique_name_in_owner = true
+transform = Transform3D(1.46299, 0, -1.36369, 0, 2, 0, 1.36369, 0, 1.46299, -9.40451, 0, -0.126616)
+move_speed = 40.0
+
+[node name="ChaseWayPoints" type="Marker3D" parent="."]
+
+[node name="0" type="Marker3D" parent="ChaseWayPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.7774, 0, 0)
+
+[node name="1" type="Marker3D" parent="ChaseWayPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 95.7568, 0, -30.8182)
+
+[node name="2" type="Marker3D" parent="ChaseWayPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.8689, 0, 0)
+
+[node name="3" type="Marker3D" parent="ChaseWayPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.218121, 0, 0)
+
+[node name="Subtitle" parent="." instance=ExtResource("7_a1dlw")]
+unique_name_in_owner = true
+
+[node name="StartCameraMarker" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.47512, 3.18242, 7.09758)

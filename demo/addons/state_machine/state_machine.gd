@@ -4,7 +4,10 @@ class_name State
 signal ui_accept
 
 func _enter_tree() -> void:
-	owner = get_parent().owner
+	if get_parent().owner:
+		owner = get_parent().owner
+	else:
+		owner = get_parent()
 
 func move_to(game_state:State) -> void:
 	queue_free()

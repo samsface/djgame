@@ -1,7 +1,10 @@
 @tool
 extends CanvasLayer
 
+const dialog_bar_length := 0.16
+
 signal bars_changed
+signal finished
 
 @onready var top_bar_ = $TopBar
 @onready var bottom_bar_ = $BottomBar
@@ -13,8 +16,14 @@ signal bars_changed
 			await ready
 		invalidate_()
 
+@export var text:String :
+	set(v):
+		text = v
+		%Subtitle.text = text
+
 func _ready() -> void:
-	Bus.bars = self
+	if not Bus.bars:
+		Bus.bars = self
 
 func get_rect() -> Rect2:
 	return Rect2(0, top_bar_.size.y, top_bar_.size.x, bottom_bar_.position.y)

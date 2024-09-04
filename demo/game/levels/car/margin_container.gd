@@ -20,7 +20,7 @@ var tween_:Tween
 		
 		var duration = $Text.get_total_character_count() * 0.025
 		tween_.tween_property($Text, "visible_ratio", 1.0, duration)
-		tween_.finished.connect(func(): finished.emit())
+		tween_.finished.connect(func(): get_parent().get_parent().finished.emit())
 
 @export var prefix:String :
 	set(v):

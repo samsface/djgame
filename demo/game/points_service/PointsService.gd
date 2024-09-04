@@ -4,6 +4,16 @@ class_name PointsService
 var stats_ := {}
 var l := Vector3.ZERO
 var energy := 0.0
+var depth := 6.0
+
+@onready var good_boy = %GoodBoy
+@onready var label = %Label3D
+
+func center(meter, offset:Vector2 = Vector2.ZERO):
+	meter.position = %Camera3D.project_position(Bus.bars.get_rect().get_center() + offset, depth)
+
+func get_center(offset:Vector2 = Vector2.ZERO) -> Vector3:
+	return %Camera3D.project_position(Bus.bars.get_rect().get_center() + offset, depth)
 
 func _ready() -> void:
 	Bus.points_service = self
@@ -17,16 +27,14 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	#$CanvasLayer/MarginContainer2.position = Bus.bars.get_rect().position
 	#$CanvasLayer/MarginContainer2.size = Bus.bars.get_rect().size
-	
 
-	%Node3D.get_child(0).rotate_y(delta)
+	%DoctorIcon.get_child(0).rotate_y(delta)
 	
 	var new_l = Bus.camera_service.camera_.global_rotation
 	var d = new_l.distance_to(l) * 10.0
 	energy = lerp(energy, energy + d, delta)
 
-	
-	%CSGBox3D2.mesh.material.next_pass.set_shader_parameter("energy", energy)
+	%GoodBoy/Mesh.mesh.material.next_pass.set_shader_parameter("energy", energy)
 	
 	l = new_l
 	
@@ -34,11 +42,23 @@ func _physics_process(delta: float) -> void:
 	
 	# it doesn't look good to match the env light exactly, player just needs to feel a little interaction
 	# while keeping the liquid wavey line clear
-	$SubViewportContainer/SubViewport/DirectionalLight3D.rotation.x = deg_to_rad(-54) - Bus.camera_service.camera_.global_rotation.x * 0.5
+	$CanvasLayer2/SubViewportContainer/SubViewport/DirectionalLight3D.rotation.x = deg_to_rad(-54) - Bus.camera_service.camera_.global_rotation.x * 0.5
 	#$SubViewportContainer/SubViewport/DirectionalLight3D.global_rotation.y = 0# Bus.camera_service.camera_.global_rotation.y * 0.5
 	
+	sort_meters_(delta)
+	
 
+func sort_meters_(delta:float) -> void:
+	var top_left = %Camera3D.project_position(Bus.bars.get_rect().position, 0.5)
+	
+	for meter in %Meters.get_children():
+		if meter.sort:
+			var position2 = %Camera3D.unproject_position(meter.get_node("Pivot").global_position)
+			var position3 = Bus.bars.get_rect().position + Vector2(32, 16)
+			var l = lerp(position2, position3, delta * 5.0)
+			var k = %Camera3D.project_position(l, depth)
 
+			meter.position = k - meter.get_node("Pivot").position
 
 func play() -> void:
 	stats_.hp.decay_rate = 0.01

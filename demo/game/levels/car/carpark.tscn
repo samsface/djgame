@@ -1,12 +1,11 @@
-[gd_scene load_steps=41 format=3 uid="uid://ck0ejsnc1wpy0"]
+[gd_scene load_steps=40 format=3 uid="uid://ck0ejsnc1wpy0"]
 
 [ext_resource type="Script" path="res://game/levels/car/v_split_container.gd" id="1_1rm14"]
 [ext_resource type="PackedScene" uid="uid://lb3oq22iphka" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_host_control.tscn" id="2_cfg5t"]
 [ext_resource type="PackedScene" uid="uid://dgg103ssmbg32" path="res://game/settings/settings.tscn" id="3_dqocj"]
 [ext_resource type="Script" path="res://game/world_viewport.gd" id="4_6fsl8"]
-[ext_resource type="Script" path="res://game/levels/car/margin_container.gd" id="4_nnb5p"]
+[ext_resource type="PackedScene" uid="uid://bukqxrnktt1xj" path="res://game/bars/bars.tscn" id="5_gyndu"]
 [ext_resource type="Shader" path="res://game/levels/car/hipster_shader.gdshader" id="5_lr7ur"]
-[ext_resource type="Script" path="res://game/levels/car/bars.gd" id="5_mo0ji"]
 [ext_resource type="Script" path="res://game/levels/car/carkpark.gd" id="6_lwmb2"]
 [ext_resource type="Shader" path="res://game/levels/car/ground.gdshader" id="9_x1x6b"]
 [ext_resource type="PackedScene" uid="uid://bvyqie2mkgeun" path="res://models/road/car.tscn" id="10_lkipa"]
@@ -139,52 +138,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 0
-script = ExtResource("5_mo0ji")
-bars = 0.181
-
-[node name="TopBar" type="ColorRect" parent="CanvasLayer"]
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 84.165
-grow_horizontal = 2
-color = Color(0, 0, 0, 1)
-
-[node name="BottomBar" type="ColorRect" parent="CanvasLayer"]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -204.165
-offset_bottom = -120.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0, 0, 0, 1)
-
-[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Subtitle" type="MarginContainer" parent="CanvasLayer/MarginContainer2"]
+[node name="Subtitle" parent="." instance=ExtResource("5_gyndu")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 161.12)
-layout_mode = 2
-size_flags_vertical = 8
-mouse_filter = 2
-script = ExtResource("4_nnb5p")
-prefix = "[font_size=64][outline_size=32][center]"
-
-[node name="Text" type="RichTextLabel" parent="CanvasLayer/MarginContainer2/Subtitle"]
-layout_mode = 2
-mouse_filter = 2
-bbcode_enabled = true
-text = "[outline_color=black][outline_size=32][center][font_size=64]Son... I'm going to go pay my taxes.[/font_size][/center][/outline_size][/outline_color]"
-visible_characters_behavior = 1
 
 [node name="WorldViewport" type="SubViewportContainer" parent="."]
 layout_mode = 2
@@ -250,7 +205,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.334046, 0.262877, 1.36224e
 unique_name_in_owner = true
 transform = Transform3D(-0.117083, 0, -0.537394, 0, 0.550003, 0, 0.537395, 0, -0.117083, 0.298995, -0.556775, 0.0625302)
 
+[node name="PapaMarkerWhenCaught" type="Marker3D" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car"]
+unique_name_in_owner = true
+transform = Transform3D(0.897838, 0, 0.294812, 0, 0.945, 0, -0.294812, 0, 0.897837, -0.705651, -0.703501, -1.52162)
+
 [node name="Dad" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car" instance=ExtResource("13_oku8k")]
+unique_name_in_owner = true
+transform = Transform3D(0.897838, 0, 0.294812, 0, 0.945, 0, -0.294812, 0, 0.897837, -0.705651, -0.703501, -1.52162)
+
+[node name="PapaMarkerForIntro" type="Marker3D" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car"]
 unique_name_in_owner = true
 transform = Transform3D(0.127158, -0.609656, -0.710757, -0.0577687, 0.710806, -0.620034, 0.934623, 0.12688, 0.0583759, 1.20373, -0.378, -0.146)
 

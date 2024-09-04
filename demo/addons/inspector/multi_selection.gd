@@ -24,7 +24,7 @@ func intersection_(dict_a:Dictionary, dict_b:Dictionary) -> Dictionary:
 	for key in dict_a:
 		if key in dict_b:
 			res[key] = dict_a[key]
-			
+			Geometry2D
 	return res
 
 func invalidate_property_list_() -> void:

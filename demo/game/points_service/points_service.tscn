@@ -1,11 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://df031doltiks0"]
+[gd_scene load_steps=16 format=3 uid="uid://df031doltiks0"]
 
 [ext_resource type="Script" path="res://game/points_service/PointsService.gd" id="1_iqlpb"]
 [ext_resource type="AudioStream" uid="uid://dkqau0j3qyfq1" path="res://game/points_service/369673__filmsndfx__record-scratches.wav" id="2_2e17c"]
 [ext_resource type="Material" uid="uid://bkobhd1jcn5ew" path="res://game/points_service/liquid_shader.tres" id="2_84mr4"]
+[ext_resource type="Script" path="res://game/points_service/meter.gd" id="3_cfuxn"]
 [ext_resource type="Script" path="res://game/HP.gd" id="4_byvq0"]
 [ext_resource type="ArrayMesh" uid="uid://mlikgthegtlb" path="res://models/road/doctor_icon_mesh.res" id="4_o74t1"]
 [ext_resource type="Texture2D" uid="uid://buuymvhjr1165" path="res://models/road/doctor_icon_albedo.png" id="5_84yv7"]
+[ext_resource type="FontFile" uid="uid://ca4jgypv8bjcn" path="res://ui/fonts/RetroGaming.ttf" id="6_kejsj"]
 
 [sub_resource type="Shader" id="Shader_p17er"]
 code = "shader_type spatial;
@@ -92,54 +94,78 @@ corner_radius_bottom_left = 8
 [node name="PointsService" type="Node3D"]
 script = ExtResource("1_iqlpb")
 
-[node name="CSGBox3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(-8.74228e-09, -0.2, 0, 0.2, -8.74228e-09, 0, 0, 0, 0.2, 0, 0.198842, -1.02237)
-layers = 2
-mesh = SubResource("CapsuleMesh_1xsq4")
-skeleton = NodePath("../SubViewportContainer/SubViewport")
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 3
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer2"]
 texture_filter = 4
 use_parent_material = true
-custom_minimum_size = Vector2(512, 512)
-offset_right = 256.0
-offset_bottom = 256.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer2/SubViewportContainer"]
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
+size = Vector2i(1680, 1050)
 render_target_update_mode = 4
 
-[node name="CSGBox3D2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
-unique_name_in_owner = true
-transform = Transform3D(-8.74228e-09, -0.2, 0, 0.2, -8.74228e-09, 0, 0, 0, 0.2, 0, 0.198842, -1.02237)
-layers = 2
-mesh = SubResource("CapsuleMesh_1xsq4")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CanvasLayer2/SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 0.587785, 0.809017, 0, -0.809017, 0.587785, 0, 0.947075, 1.44371)
 layers = 2
 
-[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+[node name="Label3D" type="Label3D" parent="CanvasLayer2/SubViewportContainer/SubViewport"]
 unique_name_in_owner = true
-cull_mask = 2
-current = true
+transform = Transform3D(0.07, 8.88178e-16, 0, -8.88178e-16, 0.07, 0, 0, 0, 0.07, -3.25562e-09, 0.07448, 0)
+layers = 2
+pixel_size = 0.015
+modulate = Color(1, 0.305101, 0.641312, 1)
+text = "GuD BoY Meter Unlocked"
+font = ExtResource("6_kejsj")
 
-[node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport"]
+[node name="Meters" type="Node3D" parent="CanvasLayer2/SubViewportContainer/SubViewport"]
 unique_name_in_owner = true
-transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, -1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D"]
+[node name="GoodBoy" type="Node3D" parent="CanvasLayer2/SubViewportContainer/SubViewport/Meters"]
+unique_name_in_owner = true
+visible = false
+script = ExtResource("3_cfuxn")
+color = Color(0, 0.729486, 0.729485, 1)
+color_danger = Color(1, 0, 0.0166664, 1)
+
+[node name="Mesh" type="MeshInstance3D" parent="CanvasLayer2/SubViewportContainer/SubViewport/Meters/GoodBoy"]
+transform = Transform3D(-3.0598e-09, -0.07, 0, 0.07, -3.0598e-09, 0, 0, 0, 0.07, 0, 0, 0)
+layers = 2
+mesh = SubResource("CapsuleMesh_1xsq4")
+skeleton = NodePath("../../..")
+
+[node name="Pivot" type="Marker3D" parent="CanvasLayer2/SubViewportContainer/SubViewport/Meters/GoodBoy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.169882, 0.0346867, 0)
+
+[node name="DoctorIcon" type="Node3D" parent="CanvasLayer2/SubViewportContainer/SubViewport/Meters/GoodBoy"]
+unique_name_in_owner = true
+transform = Transform3D(0.0175, -3.9968e-15, -2.08616e-09, 3.9968e-15, 0.0175, -9.11891e-17, 2.08616e-09, 6.91861e-17, 0.0175, 0.139765, 2.27987e-08, 0)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CanvasLayer2/SubViewportContainer/SubViewport/Meters/GoodBoy/DoctorIcon"]
 transform = Transform3D(0.436802, 0, -0.899558, 0, 1, 0, 0.899558, 0, 0.436802, 0, 0, 0)
 layers = 2
 gi_mode = 2
 mesh = ExtResource("4_o74t1")
-skeleton = NodePath("../../../..")
+skeleton = NodePath("../../../../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_yu0p1")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer2/SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
+cull_mask = 2
+current = true
+fov = 10.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="CanvasLayer2/SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.365909, 0.777114, 0.312853)
 layers = 2
 

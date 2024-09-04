@@ -23,7 +23,7 @@ static func random_vector3() -> Vector3:
 	var green = randf() - 0.5
 	var blue = randf() - 0.5
 
-	return Vector3(red, green, blue)
+	return Vector3(red, green, blue) * 2.0
 
 static func random_vector2() -> Vector2:
 	# Generate random values for red, green, and blue components
