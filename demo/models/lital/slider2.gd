@@ -24,7 +24,7 @@ signal impulse(Vector3, float)
 var electric:Color = Color.TRANSPARENT :
 	set(v):
 		electric = v
-		$Nob/Model/fader.electric = v
+		#$Nob/Model/fader.electric = v
 
 var dragging_ := false
 var dragging_start_ := Vector2.ZERO
@@ -59,17 +59,13 @@ func _physics_process(delta: float) -> void:
 	if dragging_:
 		var diff = Bus.input_service.relative.y * 0.002
 		
-		if diff == 0.0:
-			return
-
-		var new_value = value - diff
-
-		value = clamp(new_value, 0.00, 1.0)
+		if diff != 0.0:
+			var new_value = value - diff
+			value = clamp(new_value, 0.00, 1.0)
+			if abs(diff) > 0.1:
+				$Nob/Sparks.spark()
 
 		Bus.camera_service.cursor.try_set_position(self, $Nob.global_position)
-
-		if abs(diff) > 0.1:
-			$Nob/Sparks.spark()
 
 func _mouse_entered() -> void:
 	print_debug(get_path())

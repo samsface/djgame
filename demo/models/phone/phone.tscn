@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bl7d8jwotcuws"]
+[gd_scene load_steps=20 format=3 uid="uid://bl7d8jwotcuws"]
 
 [ext_resource type="PackedScene" uid="uid://v8jvhtuvyeij" path="res://models/phone/phone.glb" id="1_qnpo2"]
 [ext_resource type="Script" path="res://models/phone/phones.gd" id="2_hu3e3"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" path="res://models/phone/phone_test.gd" id="6_vrhos"]
 [ext_resource type="PackedScene" uid="uid://c23pskns2q5d1" path="res://models/phone/nob.tscn" id="10_agbu1"]
 [ext_resource type="Script" path="res://models/toydrum/marker_3d.gd" id="10_fot8k"]
-[ext_resource type="Script" path="res://models/toydrum/buttonm.gd" id="11_3ktek"]
 [ext_resource type="Material" uid="uid://ch00a4q6gt2wa" path="res://models/phone/nob_electric.tres" id="12_n07xt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lea2s"]
@@ -171,7 +170,6 @@ collision_mask = 0
 input_ray_pickable = false
 monitoring = false
 monitorable = false
-script = ExtResource("11_3ktek")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="0/StaticBody3D" index="0"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0.001, 0)
@@ -193,7 +191,6 @@ collision_mask = 0
 input_ray_pickable = false
 monitoring = false
 monitorable = false
-script = ExtResource("11_3ktek")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ReplyA/StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00123587, 0)
@@ -215,7 +212,6 @@ collision_mask = 0
 input_ray_pickable = false
 monitoring = false
 monitorable = false
-script = ExtResource("11_3ktek")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="ReplyB/StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00104139, 0)

@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://lprkgl2wh3cd"]
+[gd_scene load_steps=8 format=3 uid="uid://lprkgl2wh3cd"]
 
 [ext_resource type="Script" path="res://game/camera/camera.gd" id="1_o37hp"]
 [ext_resource type="Script" path="res://game/camera/cursor.gd" id="2_rcdnn"]
-[ext_resource type="Script" path="res://game/hud_canvas_layer.gd" id="3_5v3r4"]
 [ext_resource type="Texture2D" uid="uid://cwhxcbe4nkdvd" path="res://game/camera/cursor.png" id="3_6dawb"]
 [ext_resource type="CameraAttributesPractical" uid="uid://ev1eo0cru0we" path="res://game/cameraatr.tres" id="5_am7l2"]
 [ext_resource type="Script" path="res://game/camera/camera_3d.gd" id="6_4d0xl"]
@@ -17,13 +16,10 @@ noise = SubResource("FastNoiseLite_p5ieg")
 [node name="Camera" type="Node3D"]
 script = ExtResource("1_o37hp")
 
-[node name="Cursor" type="Node3D" parent="."]
+[node name="Cursor" type="CanvasLayer" parent="."]
 script = ExtResource("2_rcdnn")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Cursor"]
-script = ExtResource("3_5v3r4")
-
-[node name="Cursor2D" type="Sprite2D" parent="Cursor/CanvasLayer"]
+[node name="Cursor2D" type="Sprite2D" parent="Cursor"]
 texture = ExtResource("3_6dawb")
 centered = false
 offset = Vector2(-64, -32)

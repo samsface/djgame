@@ -167,6 +167,7 @@ func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 	
+	return
 	
 	if Input.is_action_just_pressed("click"):
 		call_deferred("pressed")

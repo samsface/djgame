@@ -1,11 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwp3tnmuhyvep"]
+[gd_scene load_steps=3 format=3 uid="uid://dwp3tnmuhyvep"]
 
 [ext_resource type="PackedScene" uid="uid://d1j3o2mbfpav3" path="res://models/shared/nobs/fader.glb" id="1_jm8os"]
-[ext_resource type="Script" path="res://models/toydrum/buttonm.gd" id="2_sw36p"]
 [ext_resource type="Material" uid="uid://d0073rw5p3mbj" path="res://models/shared/nobs/fader_material.tres" id="3_hcw2f"]
 
 [node name="fader" instance=ExtResource("1_jm8os")]
-script = ExtResource("2_sw36p")
 
 [node name="Fader_001" parent="." index="0"]
 instance_shader_parameters/rand = 0.63362

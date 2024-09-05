@@ -61,7 +61,7 @@ func shake(duration:float = 0.5, scale:float = 0.001) -> void:
 	shake_tween_.tween_interval(Bus.audio_service.latency * 0.2)
 	
 	for i in int(duration / 0.1):
-		shake_tween_.tween_property(camera_, "position", position + rv(scale / (i+1)), 0.01)
+		shake_tween_.tween_property(camera_, "position", camera_.position + rv(scale / (i+1)), 0.01)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("debug_free_walk"):
@@ -160,9 +160,7 @@ func _physics_process(delta: float) -> void:
 	if not cursor.is_owner(self):
 		return
 	
-	cursor.update()
-
-	var pos = cursor.position2D
+	var pos = cursor.get_position()
 	
 	var from = camera_.project_ray_origin(pos)
 	var to = from + camera_.project_local_ray_normal(pos) * 100.0
@@ -185,9 +183,6 @@ func ray_cast_at_() -> void:
 				hovering_._mouse_exited()
 
 		var point = ray_cast_.get_collision_point()
-		#cursor.try_set_position(self, point)
-		
-		#print(next_hovering)
 		
 		if hovering_ == next_hovering:
 			pass

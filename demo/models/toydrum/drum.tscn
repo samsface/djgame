@@ -28,6 +28,7 @@ fill_line_count = 0
 fill_line_width = 0.0121
 fill_line_accent = 0
 fill_line_accent_width = 0.0
+line_color = Color(0, 0, 0, 1)
 
 [sub_resource type="InputEventAction" id="InputEventAction_dxo2h"]
 action = &"ui_accept"
@@ -86,22 +87,22 @@ size = Vector2(0.112, -0.003)
 metadata/_edit_lock_ = true
 
 [node name="Button9" parent="NorthFace" instance=ExtResource("3_5te0k")]
-transform = Transform3D(1, -2.98023e-08, 0, 1.78814e-07, 0.999998, 0, 0, 0, 0.999998, 0.0178593, 9.31323e-10, 0.0696429)
+transform = Transform3D(1, -2.98023e-08, 0, 2.38419e-07, 0.999998, 0, 0, 0, 0.999998, 0.017811, 0.000138266, 0.0696429)
 albedo = Color(0.776471, 0.756863, 0.607843, 1)
 wear_albedo = Color(0.760784, 0.694118, 0.521569, 1)
 
 [node name="Button10" parent="NorthFace" instance=ExtResource("3_5te0k")]
-transform = Transform3D(1, 0, 0, 8.9407e-08, 0.999998, 2.68221e-07, 2.38228e-21, -2.68221e-07, 0.999998, 0.0178593, 4.65661e-10, 0.0232143)
+transform = Transform3D(1, 0, 0, 1.78814e-07, 0.999998, 2.68221e-07, 2.38228e-21, -2.68221e-07, 0.999998, 0.017811, 0.000138266, 0.0232143)
 albedo = Color(0.776471, 0.756863, 0.607843, 1)
 wear_albedo = Color(0.760784, 0.694118, 0.521569, 1)
 
 [node name="Button11" parent="NorthFace" instance=ExtResource("3_5te0k")]
-transform = Transform3D(1, 0, 0, 5.96046e-08, 0.999998, 2.68221e-07, 2.38228e-21, -2.68221e-07, 0.999998, 0.0178593, 0, -0.0232143)
+transform = Transform3D(1, 0, 0, 1.19209e-07, 0.999998, 2.68221e-07, 2.38228e-21, -2.68221e-07, 0.999998, 0.017811, 0.000138266, -0.0232143)
 albedo = Color(0.776471, 0.756863, 0.607843, 1)
 wear_albedo = Color(0.760784, 0.694118, 0.521569, 1)
 
 [node name="Record" parent="NorthFace" instance=ExtResource("3_5te0k")]
-transform = Transform3D(1, 0, 0, 8.9407e-08, 0.999998, 2.68221e-07, 2.38228e-21, -2.68221e-07, 0.999998, 0.0178593, 4.65661e-10, -0.0672959)
+transform = Transform3D(1, 0, 0, 1.78814e-07, 0.999998, 2.68221e-07, 2.38228e-21, -2.68221e-07, 0.999998, 0.017811, 0.000138266, -0.0672959)
 action = SubResource("InputEventAction_dxo2h")
 albedo = Color(1, 0.131245, 0.225278, 1)
 wear_albedo = Color(0.986994, 0.665201, 0.794134, 1)
