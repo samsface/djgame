@@ -691,6 +691,7 @@ func reset() -> void:
 	seek_time = look_ahead_
 	Bus.audio_service.clock = look_ahead_
 	seek2(seek_time)
+	offset = 0
 
 func seek2(seek_time):
 	var array:Array
@@ -711,7 +712,7 @@ func seek2(seek_time):
 					if track[i].has_method("interprolate"):
 						track[i].interprolate(null, seek_time)
 				else:
-					if track[i].has_method("interprolate"):
+					if track[i].has_method("interprolate") and track[i-1].has_method("interprolate"):
 						track[i].interprolate(track[i-1].value_, seek_time)
 						
 				break

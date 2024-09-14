@@ -29,6 +29,7 @@ var electric:Color = Color.TRANSPARENT :
 var dragging_ := false
 var dragging_start_ := Vector2.ZERO
 var mouse_over_ := false
+var top
 
 @onready var path_follow_ = $PathForKnob/PathFollowForKnob
 @onready var path_follow_for_knob_ = $PathForKnob/PathFollowForKnob

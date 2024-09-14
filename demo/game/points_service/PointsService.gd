@@ -16,6 +16,8 @@ func get_center(offset:Vector2 = Vector2.ZERO) -> Vector3:
 	return %Camera3D.project_position(Bus.bars.get_rect().get_center() + offset, depth)
 
 func _ready() -> void:
+	Bus.audio_service.open_patch("res://junk/radio.pd")
+	
 	Bus.points_service = self
 	stats_["hp"]= %HP
 	stats_["good_boy"] = %Goodboy

@@ -10,6 +10,7 @@ uniform sampler2D aoe_texture : filter_linear_mipmap, repeat_enable;
 uniform float roughness : hint_range(0.0, 1.0) = 0.0;
 uniform float specular : hint_range(0.0, 1.0);
 uniform float metallic : hint_range(0.0, 1.0);
+uniform float max_y;
 uniform float ao_light_affect : hint_range(0.0, 1.0, 0.01);
 
 uniform vec2 detail_scale = vec2(1.0);
@@ -54,13 +55,9 @@ void fragment()
 	float b = texture(electric_noise, SCREEN_UV + vec2(TIME, 0) * 0.3).r;
 	b *= 0.005;
 
-	if(electric_albedo.a > 0.0)
+	if((y + b) < electric_albedo.a * max_y)
 	{
-		if((y + b) < electric_albedo.a * 0.01)
-		{
-			ALBEDO = electric_albedo.rgb;
-			EMISSION = electric_albedo.rgb;
-		}
+		ALBEDO = electric_albedo.rgb;
+		EMISSION = electric_albedo.rgb;
 	}
-
 }

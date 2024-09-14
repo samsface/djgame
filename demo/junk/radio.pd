@@ -65,6 +65,7 @@
 #X obj 1380 663 loadbang;
 #X msg 1380 688 0;
 #X obj 1982 510 loadbang;
+#X msg 2002 783 car_a.wav;
 #X connect 3 0 4 0;
 #X connect 7 0 6 0;
 #X connect 12 0 13 0;

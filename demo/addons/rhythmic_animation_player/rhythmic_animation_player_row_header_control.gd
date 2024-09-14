@@ -13,7 +13,7 @@ var root_node:Node
 		node_path = v
 		invalidate_()
 		node_path_changed.emit()
-
+##
 @export_multiline var condition_ex:String : 
 	set(v):
 		condition_ex = v

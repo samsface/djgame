@@ -8,16 +8,10 @@ var audio_stream_:PureDataAudioStreamPlayer
 var bang_signals_ := {}
 var float_signals_ := {}
 var metro := 130
-var latency := 0.2
+var latency := 0.02
 var regex_ = RegEx.new()
 
-var clock_ := 0
-var clock:int :
-	set(v):
-		clock_ = v
-		emit_float("CLOCK", clock_)
-	get:
-		return clock_
+var clock := 0.0
 
 func _ready() -> void:
 	regex_.compile("^[+-]?\\d+(\\.\\d+)?$")
@@ -27,23 +21,28 @@ func _ready() -> void:
 	audio_stream_ = PureDataAudioStreamPlayer.new()
 	audio_stream_.bus = "Music"
 	audio_stream_.stream = AudioStreamGenerator.new()
-	audio_stream_.stream.buffer_length = 0.024
+	audio_stream_.stream.buffer_length = 0.124
 	add_child(audio_stream_)
 	audio_stream_.play()
 
 	print_debug("libpd init was ", audio_stream_.is_initialized())
 
-	var p = ProjectSettings.globalize_path("res://junk/radio#####.pd")
-
-	if not patch_file_handle_.open(p):
-		push_error("couldn't open patch")
-
 	audio_stream_.bang.connect(_bang)
 	audio_stream_.float.connect(_float)
 	
-	Bus.audio_service.connect_to_float("clock", _clock)
+	set_process(false)
+	
+	#Bus.audio_service.connect_to_float("clock", _clock)
 	
 	#audio_stream_.stop()
+	
+func open_patch(patch_name) -> void:
+	patch_file_handle_.close()
+	
+	var p = ProjectSettings.globalize_path(patch_name)
+
+	if not patch_file_handle_.open(p):
+		push_error("couldn't open patch")
 	
 func _bang(signal_name:String) -> void:
 	var callback = bang_signals_.get(signal_name)
@@ -60,15 +59,14 @@ func set_metro(value:float) -> void:
 	emit_float("metro", value)
 
 func play() -> void:
-	emit_float("WIPE-BUFFER", 1)
-	emit_bang("PLAY")
+	set_process(true)
 
 func pause() -> void:
-	audio_stream_.send_bang("r-STOP")
+	set_process(false)
 	
 func stop() -> void:
-	audio_stream_.send_bang("r-STOP")
-	audio_stream_.send_bang("r-RESET")
+	set_process(false)
+	clock = 0
 
 func connect_to_bang(signal_name:StringName, callable:Callable) -> void:
 	audio_stream_.bind("s-" + signal_name)
@@ -101,6 +99,12 @@ func _exit_tree() -> void:
 func write_at_array_index(array:String, index:int, value:float) -> void:
 	audio_stream_.write_array(array, index, PackedFloat32Array([value]), 1)
 
-func _clock(value) -> void:
-	clock_ = value
-	clock_changed.emit(clock_)
+func _process(delta: float) -> void:
+	var last_clock = floor(clock)
+	
+	var a =  ((60.0 / metro) / 4.0)
+
+	clock += delta / a
+	
+	if floor(clock) != last_clock:
+		clock_changed.emit(floor(clock))

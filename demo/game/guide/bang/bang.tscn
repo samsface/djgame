@@ -1,7 +1,27 @@
-[gd_scene load_steps=8 format=3 uid="uid://b48f1dismuxck"]
+[gd_scene load_steps=14 format=3 uid="uid://b48f1dismuxck"]
 
 [ext_resource type="Script" path="res://game/guide/bang/bang.gd" id="1_o3eak"]
-[ext_resource type="PackedScene" uid="uid://cw6wg4868tix8" path="res://game/guide/shared/arrow/arrow.tscn" id="2_4ukwx"]
+[ext_resource type="ArrayMesh" uid="uid://bprimokiujq8l" path="res://models/shared/arrow.res" id="3_2ulbo"]
+[ext_resource type="Shader" path="res://game/guide/shared/arrow/arrow.gdshader" id="3_jlk12"]
+[ext_resource type="Script" path="res://game/guide/shared/arrow/arrow.gd" id="4_erd4k"]
+[ext_resource type="Shader" path="res://game/guide/bang/bang.gdshader" id="5_y2sl4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3848k"]
+render_priority = 0
+shader = ExtResource("3_jlk12")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_glm75"]
+render_priority = 1
+shader = ExtResource("5_y2sl4")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1lqjy"]
+top_radius = 0.005
+bottom_radius = 0.005
+height = 1.0
+radial_segments = 4
+rings = 512
+cap_top = false
+cap_bottom = false
 
 [sub_resource type="Curve" id="Curve_h621f"]
 _data = [Vector2(0, 0.335671), 0.0, 0.0, 0, 0, Vector2(0.489583, 0), 0.0, 0.0, 0, 0]
@@ -34,6 +54,7 @@ radial_segments = 4
 rings = 1
 
 [node name="Arrow" type="Node3D"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("1_o3eak")
 
 [node name="Timer" type="Timer" parent="."]
@@ -43,11 +64,35 @@ autostart = true
 
 [node name="Arrow___" type="Node3D" parent="."]
 
-[node name="Arrow_" parent="Arrow___" instance=ExtResource("2_4ukwx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.44)
+[node name="Arrow_" type="MeshInstance3D" parent="Arrow___"]
+transform = Transform3D(4.77671e-14, -1.09278e-06, -25, -25, -1.09278e-06, 0, -1.09278e-06, 25, -1.09278e-06, -5.40616e-08, 0, -0.418392)
+material_override = SubResource("ShaderMaterial_3848k")
+transparency = 1.0
+instance_shader_parameters/albedo = Color(0, 0, 0, 1)
+instance_shader_parameters/scale = 0.0
+instance_shader_parameters/tail_length = 0.0
+instance_shader_parameters/ttl = 0.0
+mesh = ExtResource("3_2ulbo")
+skeleton = NodePath("../..")
+script = ExtResource("4_erd4k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arrow___/Arrow_"]
+transform = Transform3D(1, -7.10543e-15, 8.47033e-22, 7.10543e-15, 1, 0, 0, 0, 1, -2.25426e-08, 0.515716, -6.76279e-08)
+material_override = SubResource("ShaderMaterial_glm75")
+instance_shader_parameters/amp = 0.0
+instance_shader_parameters/freq = null
+instance_shader_parameters/tail_length2 = null
+mesh = SubResource("CylinderMesh_1lqjy")
 
 [node name="Particles" type="GPUParticles3D" parent="Arrow___/Arrow_"]
-transform = Transform3D(1, 0, 0, 0, 1, -3.72529e-09, 0, 3.72529e-09, 1, 0, 0, 0)
+transform = Transform3D(-1.74846e-09, -0.04, -1.59944e-09, 0, -1.59944e-09, 0.04, -0.04, 1.74846e-09, 6.99139e-17, -7.6932e-10, 0.0176, 3.36281e-17)
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_fdilt")
 draw_pass_1 = SubResource("SphereMesh_34g5m")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Arrow___/Arrow_"]
+light_color = Color(0, 0.901961, 0.34902, 1)
+omni_range = 0.1
+omni_attenuation = 0.258816
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Arrow___/Arrow_"]

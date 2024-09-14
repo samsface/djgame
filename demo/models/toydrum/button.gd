@@ -35,6 +35,13 @@ signal impulse(Vector3, float)
 		if not is_node_ready():
 			await ready
 		%Button.wear = wear
+
+@export var electric:Color :
+	set(v):
+		electric = v
+		if not is_node_ready():
+			await ready
+		%Button.electric = electric
 		
 @export var wear_albedo:Color :
 	set(v):
@@ -45,6 +52,8 @@ signal impulse(Vector3, float)
 
 @export var press_distance:float
 
+@onready var top = $Top
+
 var value : 
 	set(v):
 		if v == value_:
@@ -52,8 +61,6 @@ var value :
 
 		value_ = clamp(v, 0.0, 1.0)
 		$Nob/Model/Button.light = light_color_()
-		value_changed.emit(value_)
-		value_ = 0
 	get:
 		return value_
 
@@ -65,11 +72,6 @@ var pulse_ := 0.0 :
 	set(v):
 		pulse_ = v
 		$Nob/Model/Button.light = light_color_()
-
-var electric:Color = Color.TRANSPARENT :
-	set(v):
-		electric = v
-		$Nob/Model/Button.electric = v
 
 func _ready() -> void:
 	path_follow = $Path/PathFollow
@@ -122,9 +124,8 @@ func pressed() -> void:
 	#Bus.camera_service.cursor.push(self, Cursor.Action.grab)
 	#Bus.camera_service.cursor.try_set_position(self, global_position)
 	#Bus.camera_service.look_at_node(self.get_parent())
-	
 
-	value_ = 0
+
 
 func released() -> void:
 	if not down_:

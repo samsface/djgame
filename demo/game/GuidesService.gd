@@ -16,17 +16,18 @@ func slide(nob:Node3D, length:float, from_value:float, to_value:float, gluide:fl
 	guide.watch(nob, from_value, to_value, length, gluide, false)
 	slides_[nob] = guide
 
-func bang(nob:Node3D, time, time_in_seconds:float, value:float, auto:bool, dilema_group:int, silent:bool):
+func bang(nob:Node3D, time, time_in_seconds:float, value:float, auto:bool, dilema_group:int, silent:bool, duration_in_seconds:float):
 	var pos = nob.get_guide_position_for_value(value)
 	var d = preload("res://game/guide/bang/bang.tscn").instantiate()
 	d.auto = auto
 	d.points_service = $"../PointsService"
-	d.position = pos
+	#d.position = pos
 	d.time = time
 	d.length = time_in_seconds
+	d.duration = duration_in_seconds
 	d.silent = silent
 	d.dilema_group = dilema_group
-	d.watch(nob, value)
+	d.nob_ = nob
 	nob.intended_value = value
 
 	try_add_to_dilema_group(d, dilema_group)

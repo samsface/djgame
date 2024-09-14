@@ -23,5 +23,4 @@ depth = 0.004
 script = ExtResource("1_jqg8p")
 
 [node name="Text" parent="." instance=ExtResource("2_r5vv7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, 0)
 mesh = SubResource("TextMesh_jyk2s")

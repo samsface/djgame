@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cwilpnax30ixm"]
+[gd_scene load_steps=13 format=3 uid="uid://cwilpnax30ixm"]
 
 [ext_resource type="PackedScene" uid="uid://74pwn2qyav8l" path="res://addons/rhythmic_animation_player/ops/bang.tscn" id="2_spgtn"]
 [ext_resource type="Script" path="res://addons/timeline_control/timeline_control.gd" id="2_ugbsv"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cacwbd3e771k4" path="res://addons/rhythmic_animation_player/ops/method.tscn" id="5_08m63"]
 [ext_resource type="Script" path="res://addons/timeline_control/timeline_control_item.gd" id="5_q1ywe"]
 [ext_resource type="Script" path="res://addons/timeline_control/overlay.gd" id="6_tnfgb"]
+[ext_resource type="PackedScene" uid="uid://c177prs5ceell" path="res://addons/rhythmic_animation_player/ops/audio.tscn" id="6_ysvrx"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hl84n"]
 
@@ -19,7 +20,7 @@ offset_bottom = 503.0
 size_flags_vertical = 3
 split_offset = 200
 script = ExtResource("2_ugbsv")
-ops = Array[PackedScene]([ExtResource("2_spgtn"), ExtResource("3_0cqlh"), ExtResource("4_ki4e2"), ExtResource("5_08m63")])
+ops = Array[PackedScene]([ExtResource("2_spgtn"), ExtResource("3_0cqlh"), ExtResource("4_ki4e2"), ExtResource("5_08m63"), ExtResource("6_ysvrx")])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -182,6 +183,7 @@ item_count = 6
 popup/item_0/text = "auto"
 popup/item_0/id = 5
 popup/item_1/text = "1/16"
+popup/item_1/id = 1
 popup/item_2/text = "1/8"
 popup/item_2/id = 1
 popup/item_3/text = "1/4"

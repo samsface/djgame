@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://c23oo2781ehsy"]
+
+[ext_resource type="Script" path="res://test.gd" id="1_aloga"]
+[ext_resource type="PackedScene" uid="uid://b48f1dismuxck" path="res://game/guide/bang/bang.tscn" id="1_vcb0m"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mcjsu"]
+
+[node name="Test" type="Node3D"]
+script = ExtResource("1_aloga")
+
+[node name="Arrow" parent="." instance=ExtResource("1_vcb0m")]
+transform = Transform3D(0.707101, -0.707112, -3.09088e-08, 0, -4.37114e-08, 1, -0.707112, -0.707101, -3.09084e-08, -0.174492, 3.24016, 0.324566)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.99317, 0.00203619, 0.116653, 0, 0.999847, -0.0174524, -0.116671, 0.0173332, 0.993019, -0.175492, 0.239159, 0.323566)
+mesh = SubResource("BoxMesh_mcjsu")
+
+[node name="Marker3D" type="Marker3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.519496, 0)

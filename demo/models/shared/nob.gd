@@ -31,8 +31,8 @@ func reset_() -> void:
 func slide(length, from_value, to_value, gluide) -> void:
 	Bus.guide_service.slide(self, length, from_value, to_value, gluide)
 	
-func bang(time, length_in_seconds, value, auto, dilema_group, silent) -> void:
-	Bus.guide_service.bang(self, time, length_in_seconds, value, auto, dilema_group, silent)
+func bang(time, length_in_seconds, value, auto, dilema_group, silent, durtation) -> void:
+	Bus.guide_service.bang(self, time, length_in_seconds, value, auto, dilema_group, silent, durtation)
 
 func update_path_follow_position_for_value(for_value:float) -> void:
 	pass

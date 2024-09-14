@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjk82apdpepv"]
+[gd_scene load_steps=4 format=3 uid="uid://bjk82apdpepv"]
 
 [ext_resource type="Script" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_row_header_control.gd" id="1_rqhl2"]
+
+[sub_resource type="Animation" id="Animation_0q20r"]
+resource_name = "new_animation"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ekvji"]
+_data = {
+"new_animation": SubResource("Animation_0q20r")
+}
 
 [node name="MarginContainer" type="HBoxContainer"]
 auto_translate_mode = 1
@@ -21,3 +29,8 @@ auto_translate_mode = 1
 layout_mode = 2
 size_flags_horizontal = 3
 text_overrun_behavior = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ekvji")
+}

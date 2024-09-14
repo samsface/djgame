@@ -31,7 +31,7 @@ fill_line_accent_width = 0.0
 line_color = Color(0, 0, 0, 1)
 
 [sub_resource type="InputEventAction" id="InputEventAction_dxo2h"]
-action = &"ui_accept"
+action = &"R"
 
 [sub_resource type="InputEventAction" id="InputEventAction_8g0eo"]
 action = &"1"
@@ -102,8 +102,10 @@ albedo = Color(0.776471, 0.756863, 0.607843, 1)
 wear_albedo = Color(0.760784, 0.694118, 0.521569, 1)
 
 [node name="Record" parent="NorthFace" instance=ExtResource("3_5te0k")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 1.78814e-07, 0.999998, 2.68221e-07, 2.38228e-21, -2.68221e-07, 0.999998, 0.017811, 0.000138266, -0.0672959)
 action = SubResource("InputEventAction_dxo2h")
+label = "R"
 albedo = Color(1, 0.131245, 0.225278, 1)
 wear_albedo = Color(0.986994, 0.665201, 0.794134, 1)
 

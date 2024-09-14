@@ -12,18 +12,26 @@ var length := 0.0
 var time := 0
 var auto := false
 var silent := false
+var duration := 0.0
+var done_ := false#
+var waiting_for_nob_release_ := false
 
 @onready var timer_ := $Timer
 @onready var arrow__ := $Arrow___/Arrow_
 
 var dilema_group := 0
+var latency_time_ := 0.0
 var fall_time_ := 0.0
+var tail_time_ := 0.0
+var no_tail_time_ = false
+var velocity_ := Vector3.ZERO
+var v_ := 0.0
 
 func color_() -> Color:
 	if auto:
 		return Color.PURPLE
 	else:
-		return Color("#00e659")
+		return Color.GREEN
 
 func emission_color_() -> Color:
 	if auto:
@@ -32,171 +40,109 @@ func emission_color_() -> Color:
 		return Color.GREEN
 
 func _ready() -> void:
-	fall_time_ = length + Bus.audio_service.latency
-	fall_tween_ = create_tween()
-	fall_tween_.set_parallel()
-	
-	if silent:
-		visible = false
-		nob_.buffer_change(time, for_value_)
-		fall_tween_.tween_interval(length)
-		fall_tween_.finished.connect(func(): nob_.value = for_value_; done.emit(); queue_free())
+	if not nob_.top:
+		done.emit()
+		queue_free()
 		return
+		
+	visible = false
+		
+	latency_time_ = Bus.audio_service.latency
+
+	fall_time_ = length
+	
+	#fall_tween_ = create_tween()
+	#fall_tween_.set_parallel()
 
 	scale = Vector3.ONE * nob_.scale_guide * 0.02
+	global_position = nob_.top.global_position + Vector3.UP * 0.1 + Vector3.ONE * 0.0001
+	look_at(nob_.top.global_position)
+	
+	var x = global_position.distance_to(nob_.top.global_position)
+	
+	velocity_ = (global_position.direction_to(nob_.top.global_position) * x) / fall_time_
+	
+	v_ = x / (fall_time_)
+	
 
-	var path_follow = nob_.get_new_path_follow_and_remote_transform(for_value_)
-	tree_exited.connect(path_follow.queue_free)
-		
-	var remote_transform:RemoteTransform3D = path_follow.get_child(0)
-	remote_transform.remote_path = get_path()
-	remote_transform.rotation.z = 0
-	path_follow.progress_ratio = 0.0
+	tail_time_ = duration
+	if tail_time_ == 0.0:
+		no_tail_time_ = true
 
 	arrow__.albedo = color_()
-
-	var g = emission_color_()
-	g.a = 0.8
-	fall_tween_.tween_property(nob_, "electric", g, min(fall_time_, 0.2))
-	fall_tween_.tween_property(remote_transform, "rotation:z", 5, fall_time_)
-	fall_tween_.tween_property(path_follow, "progress_ratio", 1.0, fall_time_)
-	fall_tween_.finished.connect(_miss)
-
+	
 	points_ = points_service.make_points("hp")
 	tree_exited.connect(points_.queue_free)
 	points_.scale = Vector3.ONE * nob_.scale_guide
+	
+	#rotate_object_local(Vector3(0, 0, 1), randf() * PI)
+	
+func set_active() -> void:
+	if nob_.value > 0.0:
+		waiting_for_nob_release_ = true
+		nob_.value_changed.connect(func(value): 
+				waiting_for_nob_release_ = false)
 
-	if nob_.slidey:
-		pass
-	else:
-		nob_.value_changed.connect(_nob_value_changed)
-		nob_.buffer_change(time, for_value_)
-
-func _nob_value_changed(value:float) -> void:
-	if not active:
-		return
-
-	if value != for_value_:
+func _done() -> void:
+	if done_:
 		return
 	
-	# too far away, ignore
-	if ((fall_time_) - fall_tween_.get_total_elapsed_time()) > 0.2:
-		return
+	active = false
+	done_ = true
 
-	_hit()
-
-func _miss() -> void:
-	if nob_.slidey:
-		if abs(nob_.value) < proximity_:
-			_hit()
-		
-	if hit_:
-		return
+	if points_.points <= 0:
+		points_.points = -100
 	
-	visible = false
-	for i in 10:
-		await get_tree().physics_frame
+	points_.commit()
+	done.emit()
+	
+	arrow__.visible = false
+	
+	get_tree().create_timer(0.2).timeout.connect(queue_free)
+	
+	nob_.electric =  Color.TRANSPARENT
 
-	if hit_:
-		return
-
-	if miss_:
+func _physics_process(delta: float) -> void:
+	if latency_time_ > 0.0:
+		latency_time_ -= delta
 		return
 
 	visible = true
-	
+		
+	if active:
+		nob_.electric.r = 0
+		nob_.electric.g = 1
+		nob_.electric.b = 0
+		nob_.electric.a = lerp(nob_.electric.a, 1.0, delta)
 
-	done.emit()
-	
-	miss_ = true
-	
-	if not auto:
-		points_.bar.combo = 0
-	
-	visible = false
+	if active and not waiting_for_nob_release_:
+		if nob_.value > 0.0:
+			if fall_time_ < 0.2:
+				points_.points += 1
+				
+				nob_.electric = Color.GREEN
+				arrow__.freq = 100.0
+				arrow__.amp = lerp(arrow__.amp, 0.02, delta * 30.0)
+				arrow__.transparency = 1.0
 
-	#nob_.value = for_value_
-	
-	#await get_tree().physics_frame
+			else:
+				points_.points -= 1
 
-	judge_accuracy_()
+			points_.global_position = global_position - Vector3.FORWARD * 0.01
 
-func _hit() -> void:
-	if hit_:
-		return
-	
-	if miss_:
-		return
-	
-	done.emit()
-	
-	if not silent:
-		nob_.electric.a = 1.0
-
-	var combo:float = min(points_.bar.combo, 10.0)
-	combo = combo / 10.0
-	
-	arrow__.explode(combo)
-
-	hit_ = true
-	
-	hit.emit()
-
-	judge_accuracy_()
-
-func watch(nob:Nob, for_value:float) -> void:
-	if not nob:
-		return
-
-	for_value_ = for_value
-	nob_ = nob
-
-func score_(off_time) -> int:
-	if off_time <= .1:
-		return 100
-	if off_time <= .2:
-		return 50
-	if off_time <= .3:
-		return 25
+	if no_tail_time_:
+		arrow__.length = 0.01
 	else:
-		return 5
+		arrow__.length = (tail_time_ * v_) * 2.0
 
-func judge_accuracy_() -> void:
-	if not auto:
-		var off := get_off_()
-
-		if abs(off) < proximity_:
-			var off_time := get_off_time_()
-			points_.points = 10#score_(off_time)
-			points_.commit()
-		else:
-			if dilema_group == 0:
-				points_.points = -100
-				points_.commit()
-
-		points_.global_position = global_position
-
-	wait_then_free_()
-
-func wait_then_free_() -> void:
-	var end_tween := create_tween()
-	end_tween.set_parallel()
+	fall_time_ -= delta
 	
-	var ec = emission_color_()
-	var eca = ec
-	eca.a = 0
-	
-	end_tween.tween_property(nob_, "electric", ec, 0.1)
-	end_tween.tween_property(nob_, "electric", eca, 0.1).set_delay(0.1)
+	if fall_time_ <= 0.0:
+#
+		tail_time_ -= delta
 
-	$Arrow___/Arrow_/Particles.emitting = false
-	end_tween.tween_interval(0.8).finished.connect(queue_free)
-
-func get_nob() -> Nob:
-	return nob_
-	
-func get_off_() -> float:
-	return nob_.value - for_value_
-
-func get_off_time_() -> float:
-	return fall_time_ - fall_tween_.get_total_elapsed_time()
+		if tail_time_ <= 0.0:
+			_done()
+	else:
+		global_position += velocity_ * delta
+		#rotate_object_local(Vector3(0, 0, 1), delta * 2.0)

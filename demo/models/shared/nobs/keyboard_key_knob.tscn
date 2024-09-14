@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://mmolo7rstaoq"]
+[gd_scene load_steps=19 format=3 uid="uid://mmolo7rstaoq"]
 
 [ext_resource type="Script" path="res://models/toydrum/button.gd" id="1_qsxmh"]
 [ext_resource type="Script" path="res://models/shared/nob_model.gd" id="2_ytbjw"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://bxoki7ft7c3na" path="res://models/shared/sounds/key_press_loud_1.wav" id="10_pad7j"]
 [ext_resource type="AudioStream" uid="uid://c3p1l42revws3" path="res://models/shared/sounds/key_press_loud_0.wav" id="11_i06qq"]
 [ext_resource type="AudioStream" uid="uid://dh5tiwpnwbg3a" path="res://models/shared/sounds/key_press_loud_2.wav" id="12_syt3a"]
+[ext_resource type="Material" uid="uid://dtnc8e2uktfb5" path="res://models/redux/black_void_material.tres" id="14_wj5us"]
 
 [sub_resource type="Resource" id="Resource_lhxru"]
 script = ExtResource("6_uhe1v")
@@ -35,10 +36,10 @@ stream_4/stream = ExtResource("12_syt3a")
 [sub_resource type="Curve3D" id="Curve3D_haa4w"]
 bake_interval = 0.01
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 1.86265e-09, 0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-"tilts": PackedFloat32Array(0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 1.86265e-09, 0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0)
 }
-point_count = 2
+point_count = 3
 
 [node name="seq-1" type="Node3D"]
 process_thread_group = 2
@@ -46,6 +47,7 @@ process_thread_group_order = 0
 process_thread_messages = 1
 transform = Transform3D(0.999999, -2.68221e-07, 0, 2.68221e-07, 0.999999, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_qsxmh")
+electric = Color(1, 1, 1, 0)
 press_distance = 0.004
 
 [node name="Nob" type="Area3D" parent="."]
@@ -59,6 +61,7 @@ unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 2.84217e-14, -1, 1.69407e-21, 1, 2.84217e-14, 1, 0, -4.37114e-08, 0, 0, 0)
 material_override = ExtResource("3_1awgn")
 instance_shader_parameters/albedo = Color(0, 0, 0, 1)
+instance_shader_parameters/electric_albedo = Color(1, 1, 1, 0)
 mesh = ExtResource("3_od1n0")
 skeleton = NodePath("")
 script = ExtResource("4_t2jyo")
@@ -72,18 +75,14 @@ label = "1"
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Nob"]
 shape = SubResource("BoxShape3D_bqlpe")
 
-[node name="BlackVoid" type="MeshInstance3D" parent="Nob"]
-transform = Transform3D(4.5897e-08, -3.82137e-15, -1.05, -9.17939e-08, -1, 0, -1.05, 8.74228e-08, -4.5897e-08, 0, 0, 0)
-material_override = ExtResource("3_1awgn")
-instance_shader_parameters/albedo = Color(0, 0, 0, 1)
-instance_shader_parameters/electric_albedo = Color(1, 1, 1, 0)
-instance_shader_parameters/wear = 0.0
-instance_shader_parameters/wear_albedo = Color(0, 0, 0, 1)
-mesh = ExtResource("3_od1n0")
-skeleton = NodePath("")
-
 [node name="Sound" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_qnwah")
+
+[node name="BlackVoid" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.5897e-08, 0, -1.05, -9.17939e-08, -1, 2.84217e-14, -1.05, 8.74228e-08, -4.5897e-08, 0, 0, 0)
+material_override = ExtResource("14_wj5us")
+mesh = ExtResource("3_od1n0")
+skeleton = NodePath("")
 
 [node name="Path" type="Path3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0116102, 0)
@@ -96,6 +95,9 @@ loop = false
 [node name="RemoteTransform" type="RemoteTransform3D" parent="Path/PathFollow"]
 transform = Transform3D(1, 0, 2.11758e-22, 0, 1, 8.35187e-23, -2.11758e-22, -8.35187e-23, 1, 0, 0, 0)
 update_scale = false
+
+[node name="Top" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7639e-09, 0.0103046, 0)
 
 [connection signal="mouse_entered" from="Nob" to="." method="_mouse_entered"]
 [connection signal="mouse_exited" from="Nob" to="." method="_mouse_exited"]

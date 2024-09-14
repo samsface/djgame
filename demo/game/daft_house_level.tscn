@@ -1,13 +1,16 @@
-[gd_scene load_steps=54 format=3 uid="uid://c8c0isilrphjb"]
+[gd_scene load_steps=58 format=3 uid="uid://c8c0isilrphjb"]
 
 [ext_resource type="PackedScene" uid="uid://dgg103ssmbg32" path="res://game/settings/settings.tscn" id="1_rpjq6"]
 [ext_resource type="PackedScene" uid="uid://lb3oq22iphka" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_host_control.tscn" id="3_qgyqs"]
 [ext_resource type="Script" path="res://game/canvas_layer_2.gd" id="4_871n5"]
+[ext_resource type="Shader" path="res://game/levels/car/hipster_shader.gdshader" id="5_jk6lh"]
 [ext_resource type="PackedScene" uid="uid://bukqxrnktt1xj" path="res://game/bars/bars.tscn" id="6_3odtk"]
 [ext_resource type="Script" path="res://game/world_viewport.gd" id="6_nn5dd"]
 [ext_resource type="Script" path="res://game/game.gd" id="7_qq0t8"]
 [ext_resource type="PackedScene" uid="uid://cc1hg7tc2evsm" path="res://models/characters/mano/rando.tscn" id="8_3lxhf"]
+[ext_resource type="AudioStream" uid="uid://j3grs5jrmulh" path="res://junk/kickass.ogg" id="8_o8nqk"]
 [ext_resource type="PackedScene" uid="uid://df031doltiks0" path="res://game/points_service/points_service.tscn" id="9_56eb3"]
+[ext_resource type="Script" path="res://game/audio_stream_player_2.gd" id="9_le8sj"]
 [ext_resource type="Script" path="res://game/GuidesService.gd" id="10_bl7c8"]
 [ext_resource type="PackedScene" uid="uid://lprkgl2wh3cd" path="res://game/camera/camera.tscn" id="11_chjkg"]
 [ext_resource type="Environment" uid="uid://b8uhvyo3rc3m8" path="res://game/settings/environment_potato.tres" id="13_kaxbq"]
@@ -37,6 +40,9 @@
 [ext_resource type="PackedScene" uid="uid://cdnp2ssrh2k6l" path="res://game/livestream_service/live_stream_service.tscn" id="37_8dclm"]
 [ext_resource type="PackedScene" uid="uid://djjl5a5eu5k20" path="res://game/world_label.tscn" id="37_awei0"]
 [ext_resource type="AudioStream" uid="uid://kkoen3nj0q5h" path="res://junk/funk_guitar.wav" id="38_c3iha"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_glj08"]
+shader = ExtResource("5_jk6lh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ij4h"]
 albedo_color = Color(0.235294, 0.235294, 0.235294, 1)
@@ -117,7 +123,6 @@ depth = 0.001
 [sub_resource type="TextMesh" id="TextMesh_nelm5"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_r3umm")
-text = "Mano"
 font = ExtResource("37_0waph")
 font_size = 4
 curve_step = 10.0
@@ -210,6 +215,17 @@ root_node = NodePath("../../../../WorldViewport/SubViewport/Game")
 [node name="Subtitle" parent="." instance=ExtResource("6_3odtk")]
 unique_name_in_owner = true
 
+[node name="HipsterShader" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="ColorRect" parent="HipsterShader"]
+material = SubResource("ShaderMaterial_glj08")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="WorldViewport" type="SubViewportContainer" parent="."]
 layout_mode = 2
 mouse_filter = 2
@@ -226,44 +242,48 @@ render_target_update_mode = 4
 script = ExtResource("7_qq0t8")
 metadata/_edit_lock_ = true
 
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="WorldViewport/SubViewport/Game"]
+stream = ExtResource("8_o8nqk")
+script = ExtResource("9_le8sj")
+
 [node name="Rando" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(0.608747, 0, 0.793364, 0, 1, 0, -0.793364, 0, 0.608747, -0.267153, -1.05207, -10.82)
-talking = 0.222792
+talking = 0.407114
 jump = 0.387241
 cheer_left = 0.562042
 cheer_right = 0.00393959
 
 [node name="Rando2" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(-0.998878, 0, 0.0473678, 0, 1, 0, -0.0473678, 0, -0.998878, 0.609856, -1.05207, -9.60122)
-talking = 0.574954
+talking = 0.215197
 jump = 0.715247
 cheer_left = 0.585481
 cheer_right = 0.695664
 
 [node name="Rando3" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(-0.14199, 0, -0.989868, 0, 1, 0, 0.989868, 0, -0.14199, 1.16999, -1.05207, -10.3411)
-talking = 0.325771
+talking = 0.205577
 jump = 0.197193
 cheer_left = 0.499483
 cheer_right = 0.82792
 
 [node name="Rando4" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(0.988909, 0, 0.148517, 0, 1, 0, -0.148517, 0, 0.988909, 0.514756, -1.05207, -11.1875)
-talking = 0.941893
+talking = 0.478594
 jump = 0.619637
 cheer_left = 0.716641
 cheer_right = 0.812103
 
 [node name="Rando5" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(-0.436126, 0, 0.899885, 0, 1, 0, -0.899885, 0, -0.436126, -2.91186, -1.05207, -7.22742)
-talking = 0.167734
+talking = 0.335846
 jump = 0.962876
 cheer_left = 0.650209
 cheer_right = 0.251673
 
 [node name="Rando6" parent="WorldViewport/SubViewport/Game" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(0.536165, 0, -0.844113, 0, 1, 0, 0.844113, 0, 0.536165, -1.66524, -1.05207, -7.86204)
-talking = 0.566184
+talking = 0.582892
 jump = 0.575413
 cheer_left = 0.392628
 cheer_right = 0.456179
@@ -287,6 +307,7 @@ script = ExtResource("14_vsfug")
 
 [node name="Sun" type="DirectionalLight3D" parent="WorldViewport/SubViewport/Game/WorldEnvironment"]
 transform = Transform3D(-0.337095, 0.487707, -0.8053, 0, 0.855364, 0.518027, 0.941471, 0.174624, -0.288339, 5.72989, 5.18985, -9.19963)
+light_energy = 0.238
 shadow_enabled = true
 shadow_reverse_cull_face = true
 shadow_blur = 0.267
@@ -579,7 +600,6 @@ transform = Transform3D(-39.9695, 1.94289e-13, -1.56135, -1.56135, -1.74846e-06,
 visible = false
 mesh = SubResource("TextMesh_nelm5")
 skeleton = NodePath("../..")
-text = "Mano"
 
 [node name="Featuring" parent="WorldViewport/SubViewport/Game/Text" instance=ExtResource("37_awei0")]
 transform = Transform3D(-1.49917, 0.00998475, 0.0489807, 0.0483053, -0.0885479, 1.49661, 0.0128535, 1.49735, 0.0881771, -0.00177102, -0.0382279, 0.106529)

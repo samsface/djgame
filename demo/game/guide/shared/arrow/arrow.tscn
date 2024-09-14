@@ -9,8 +9,6 @@ script = ExtResource("2_g3hcq")
 albedo = Color(0, 0.901961, 0.34902, 1)
 
 [node name="Cube" parent="." index="0"]
-instance_shader_parameters/scale = 0.0
-instance_shader_parameters/ttl = 0.0
 surface_material_override/0 = ExtResource("2_kliq3")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." index="1"]
@@ -20,3 +18,4 @@ omni_range = 0.1
 omni_attenuation = 0.258816
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="2"]
+visible = false

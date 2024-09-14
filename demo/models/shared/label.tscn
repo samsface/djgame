@@ -70,7 +70,6 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 [sub_resource type="TextMesh" id="TextMesh_pbbrj"]
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_ta8ku")
-text = "TRUE BYPASS"
 font_size = 32
 pixel_size = 0.0005
 curve_step = 10.0

@@ -17,7 +17,6 @@ sky_material = SubResource("ProceduralSkyMaterial_e3dpt")
 [resource]
 background_mode = 2
 background_color = Color(1.15514e-05, 0.976014, 0.756093, 1)
-background_energy_multiplier = 3.0
 sky = SubResource("Sky_1isd6")
 ssr_enabled = true
 ssr_fade_in = 0.579562
@@ -37,9 +36,5 @@ sdfgi_bounce_feedback = 0.96
 sdfgi_y_scale = 2
 glow_enabled = true
 glow_hdr_threshold = 0.0
-fog_light_color = Color(0.501431, 0.819116, 1, 1)
-fog_sun_scatter = 1.0
-fog_density = 0.2422
-fog_sky_affect = 0.0
 volumetric_fog_density = 0.0845
 adjustment_color_correction = SubResource("GradientTexture1D_3yx4b")

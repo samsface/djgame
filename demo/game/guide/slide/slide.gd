@@ -14,6 +14,7 @@ var legato := false
 var gluide_ := 0.0
 var ref_count_ := 0
 
+
 @onready var arrow_ = $arrow
 
 func _ready() -> void:

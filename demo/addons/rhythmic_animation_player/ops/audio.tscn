@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://c177prs5ceell"]
+
+[ext_resource type="Theme" uid="uid://dbvpa0vlu34gu" path="res://ui/beat_player.tres" id="1_qduhc"]
+[ext_resource type="Script" path="res://addons/rhythmic_animation_player/ops/audio.gd" id="2_f7ulq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xsewa"]
+bg_color = Color(0.544975, 0.544974, 0.544974, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xcchi"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+anti_aliasing = false
+
+[node name="Bang" type="Button"]
+clip_children = 2
+clip_contents = true
+offset_right = 32.0
+offset_bottom = 32.0
+theme = ExtResource("1_qduhc")
+script = ExtResource("2_f7ulq")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "BANG"
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_xsewa")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xcchi")
+max_value = 1.0
+step = 0.0
+fill_mode = 3
+show_percentage = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

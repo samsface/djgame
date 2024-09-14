@@ -9,30 +9,32 @@ class_name Level
 @onready var beat_player_  := %BeatPlayerHost
 
 var tween_:Tween
-var rumble := 1.0
+var rumble := 0.0 
 
 func _ready() -> void:
 	%toykit.look("ZoomOn1")
 	
-	Bus.level = self
+	#Bus.level = self
 
-
-	audio_.connect_to_bang("rumble", _rumble)
-	
+	Bus.audio_service.open_patch("res://junk/xxx.pd")
 
 	for child in get_children():
 		if child is Device:
 			child.value_changed.connect(_device_nob_value_changed)
 
-	#130
-	audio_.set_metro(130)
+
+	audio_.set_metro(123.0)
 	
 	if autoplay:
 		_play()
 	$Camera.looky(Vector3(-0.0147195002064109, 0.1273230016231537, -0.327578991651535), Vector3(-0.9006010293960571, -0.2513279914855957, 0), 0.1)
 
-func _rumble() -> void:
-	print("rumble")
+func _physics_process(delta: float) -> void:
+	if int(audio_.clock) % 4 == 0:
+		get_tree().create_timer(audio_.latency).timeout.connect(force_rumble)
+
+
+func force_rumble() -> void:
 	Bus.camera_service.shake(0.7, 0.001 * rumble)
 	Bus.camera_service.rumble.emit()
 

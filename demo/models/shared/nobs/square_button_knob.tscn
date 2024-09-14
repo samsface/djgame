@@ -104,5 +104,8 @@ loop = false
 transform = Transform3D(1, 0, 2.11758e-22, 0, 1, 8.35187e-23, -2.11758e-22, -8.35187e-23, 1, 0, 0, 0)
 update_scale = false
 
+[node name="Top" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17571e-09, 0.00438335, 0)
+
 [connection signal="mouse_entered" from="Nob" to="." method="_mouse_entered"]
 [connection signal="mouse_exited" from="Nob" to="." method="_mouse_exited"]

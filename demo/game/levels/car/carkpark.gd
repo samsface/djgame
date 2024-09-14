@@ -3,7 +3,10 @@ extends Node3D
 signal any_input
 
 func _ready() -> void:
+	Bus.audio_service.open_patch("res://junk/radio.pd")
 	Bus.audio_service.set_metro(((60000.0 / 132.0) / 4.0))
+	
+
 	
 	%Radio.on = false
 	
@@ -191,3 +194,7 @@ func move_papa(x) -> void:
 	%Dad.visible = true
 	%Dad.emotion = CharacterFace.Emotion.ANGRY
 	%Dad.talking = 1.0
+
+func _input(e:InputEvent) -> void:
+	if e.is_action_pressed("debug_next_level"):
+		get_tree().change_scene_to_file("res://game/daft_house_level.tscn")

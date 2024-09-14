@@ -11,6 +11,11 @@ class_name PianoRollItemBang
 		auto = v
 		invalidate_value_()
 
+@export var hold:bool : 
+	set(v):
+		hold = v
+		invalidate_value_()
+
 @export var dilema_group:int : 
 	set(v):
 		dilema_group = v
@@ -45,4 +50,7 @@ func begin() -> void:
 	var target_node = get_target_node()
 	if target_node and target_node.has_method("bang"):
 		var length_in_seconds = get_lookahead() * (Bus.audio_service.metro) * 0.001
-		target_node.bang(time, length_in_seconds, value, auto, dilema_group, silent)
+		var duration_in_seconds = length * (Bus.audio_service.metro) * 0.001
+		if not hold:
+			duration_in_seconds = 0.0
+		target_node.bang(time, length_in_seconds, value, auto, dilema_group, silent, duration_in_seconds)

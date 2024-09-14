@@ -60,4 +60,3 @@ void light()
 	DIFFUSE_LIGHT += clamp(shaded.rgb * LIGHT_COLOR, 0.0, 1.0);
 
 }
-

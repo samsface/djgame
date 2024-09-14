@@ -296,18 +296,26 @@ mesh = SubResource("QuadMesh_8nlrd")
 [node name="Preset1" parent="Model/NorthFace" instance=ExtResource("12_gqpmd")]
 transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, -0.0359784, 0, 0.0393107)
 action = SubResource("InputEventAction_dnlut")
+label = "U"
+press_distance = 0.004
 
 [node name="Preset2" parent="Model/NorthFace" instance=ExtResource("12_gqpmd")]
 transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, -0.0123241, 0, 0.0393107)
 action = SubResource("InputEventAction_87mva")
+label = "I"
+press_distance = 0.004
 
 [node name="Preset3" parent="Model/NorthFace" instance=ExtResource("12_gqpmd")]
 transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 0.0139931, 0, 0.0393107)
 action = SubResource("InputEventAction_eqkrx")
+label = "O"
+press_distance = 0.004
 
 [node name="Preset4" parent="Model/NorthFace" instance=ExtResource("12_gqpmd")]
 transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 0.0356559, 0, 0.0393107)
 action = SubResource("InputEventAction_qlhyv")
+label = "P"
+press_distance = 0.004
 
 [node name="WestFace" type="Node3D" parent="Model"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0642776, 0, 0)

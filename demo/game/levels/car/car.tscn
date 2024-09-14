@@ -1,10 +1,11 @@
-[gd_scene load_steps=70 format=3 uid="uid://r4jyall8jbku"]
+[gd_scene load_steps=71 format=3 uid="uid://r4jyall8jbku"]
 
 [ext_resource type="PackedScene" uid="uid://dgg103ssmbg32" path="res://game/settings/settings.tscn" id="1_wu5a7"]
 [ext_resource type="Script" path="res://game/levels/car/v_split_container.gd" id="1_yqwvr"]
 [ext_resource type="Script" path="res://game/world_viewport.gd" id="2_ok5au"]
 [ext_resource type="PackedScene" uid="uid://bt2kjmrxbmg5j" path="res://models/radio/radio.tscn" id="3_idgv0"]
 [ext_resource type="Shader" path="res://game/levels/car/hipster_shader.gdshader" id="4_5tg5o"]
+[ext_resource type="PackedScene" uid="uid://bukqxrnktt1xj" path="res://game/bars/bars.tscn" id="4_nbju2"]
 [ext_resource type="PackedScene" uid="uid://df031doltiks0" path="res://game/points_service/points_service.tscn" id="4_x4ayx"]
 [ext_resource type="Script" path="res://game/GuidesService.gd" id="5_5vd1q"]
 [ext_resource type="Script" path="res://game/levels/car/game.gd" id="5_7141o"]
@@ -266,6 +267,8 @@ root_node = NodePath("../../../WorldViewport/SubViewport/Game")
 
 [node name="ConfigService" parent="." instance=ExtResource("1_wu5a7")]
 
+[node name="CanvasLayer" parent="." instance=ExtResource("4_nbju2")]
+
 [node name="WorldViewport" type="SubViewportContainer" parent="."]
 layout_mode = 2
 mouse_filter = 2
@@ -457,7 +460,7 @@ script = ExtResource("17_nt62j")
 width = 5.0
 
 [node name="Grass3" type="GPUParticles3D" parent="WorldViewport/SubViewport/Game"]
-transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 33.2534, 0, 3.07617)
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 23.6895, 0, 30.942)
 cast_shadow = 0
 amount = 40000
 lifetime = 0.01
