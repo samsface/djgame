@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bmbh8x6xdqdv3" path="res://models/lital/ting.glb" id="1_58qkh"]
 [ext_resource type="Texture2D" uid="uid://b8ruc67rnxkpn" path="res://models/lital/littlemap.png" id="2_lmj52"]
-[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="3_srdh6"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/textures/smudges_basecolor.png" id="3_srdh6"]
 [ext_resource type="Texture2D" uid="uid://cyqijqesyfuqx" path="res://models/lital/ting_drawing.png" id="4_i23tq"]
 
 [sub_resource type="Shader" id="Shader_ysapm"]

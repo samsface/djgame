@@ -7,8 +7,8 @@
 [ext_resource type="Script" path="res://models/shared/nobs/line_style.gd" id="3_323hb"]
 [ext_resource type="FontFile" uid="uid://ca4jgypv8bjcn" path="res://ui/fonts/RetroGaming.ttf" id="3_ih5nf"]
 [ext_resource type="Script" path="res://models/shared/nobs/label_style.gd" id="4_8uism"]
-[ext_resource type="PackedScene" uid="uid://b77oywlnttw32" path="res://models/shared/label.tscn" id="4_bby18"]
-[ext_resource type="Material" uid="uid://d0w4b22no3hse" path="res://models/shared/screw_header_with_washer_material.tres" id="7_a0ofs"]
+[ext_resource type="PackedScene" uid="uid://b77oywlnttw32" path="res://models/shared/label/label.tscn" id="4_bby18"]
+[ext_resource type="Material" uid="uid://d0w4b22no3hse" path="res://models/shared/nobs/screw_header_with_washer_material.tres" id="7_a0ofs"]
 [ext_resource type="Material" uid="uid://chdnjkemtyvhr" path="res://models/radio/base_radio_material.tres" id="7_dcup8"]
 [ext_resource type="ArrayMesh" uid="uid://brypuwdn6olmf" path="res://models/radio/radio_mesh.res" id="7_kl12e"]
 [ext_resource type="FontFile" uid="uid://gtvv3ev1i08b" path="res://models/radio/TEXASLED.TTF" id="10_d1hr1"]
@@ -315,7 +315,7 @@ mesh = ExtResource("7_kl12e")
 
 [node name="GodRay" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.0723132, 0, -0.291379, 0, 0.3, 0, 0.291379, 0, 0.0723132, -0.00278698, -0.00113001, 0)
+transform = Transform3D(0.212592, 0, -0.211982, 0, 0.3, 0, 0.211982, 0, 0.212592, -0.00278698, -0.00113001, 0)
 material_override = ExtResource("14_4g5ur")
 cast_shadow = 0
 mesh = ExtResource("13_7ia4i")

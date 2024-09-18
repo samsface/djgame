@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://cg43cfc5yi0ma" path="res://models/club/metal_shader.tres" id="1_78wtd"]
 [ext_resource type="Texture2D" uid="uid://cfw6aynesse24" path="res://models/club/rain_shelter_big_roof_griders_small.png" id="2_6advp"]
-[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="3_a8clm"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/textures/smudges_basecolor.png" id="3_a8clm"]
 
 [sub_resource type="Gradient" id="Gradient_rscpi"]
 offsets = PackedFloat32Array(0, 0.486146, 0.866499)

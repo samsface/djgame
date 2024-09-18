@@ -1,8 +1,8 @@
 [gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://d1itv83qjgtk4"]
 
 [ext_resource type="Shader" path="res://models/shared/nobs/knob_shader.gdshader" id="1_f65e0"]
-[ext_resource type="Texture2D" uid="uid://dbv01lci812hq" path="res://models/shared/button_flat_square_map.png" id="2_5c4bt"]
-[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="3_loq7m"]
+[ext_resource type="Texture2D" uid="uid://dbv01lci812hq" path="res://models/shared/nobs/button_flat_square_map.png" id="2_5c4bt"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/textures/smudges_basecolor.png" id="3_loq7m"]
 
 [sub_resource type="Gradient" id="Gradient_15cmb"]
 colors = PackedColorArray(0, 0, 0, 1, 0.974971, 0.974971, 0.974971, 1)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dw25wwjo7a1uo"]
 
-[ext_resource type="PackedScene" uid="uid://c6gjynfkm6pvx" path="res://models/shared/plug.glb" id="1_s33k0"]
-[ext_resource type="Material" uid="uid://ht354kco75b0" path="res://models/shared/plug_material.tres" id="2_yto7b"]
+[ext_resource type="PackedScene" uid="uid://c6gjynfkm6pvx" path="res://models/shared/nobs/plug.glb" id="1_s33k0"]
+[ext_resource type="Material" uid="uid://ht354kco75b0" path="res://models/shared/nobs/plug_material.tres" id="2_yto7b"]
 [ext_resource type="Material" uid="uid://dtnc8e2uktfb5" path="res://models/redux/black_void_material.tres" id="3_1tuu5"]
 
 [node name="plug" instance=ExtResource("1_s33k0")]

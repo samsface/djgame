@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://bq8nrvsjwegq0" path="res://models/club/wood_shader.tres" id="1_iltkp"]
 [ext_resource type="Texture2D" uid="uid://cownt4qf7yx37" path="res://models/club/stool_spin_leather.png" id="2_q3kje"]
-[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="3_1u7dy"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/textures/smudges_basecolor.png" id="3_1u7dy"]
 
 [sub_resource type="Gradient" id="Gradient_u4by5"]
 offsets = PackedFloat32Array(0)

@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://lprkgl2wh3cd" path="res://game/camera/camera.tscn" id="6_6v0ic"]
 [ext_resource type="PackedScene" uid="uid://bvb3valnbby5w" path="res://models/road/sketchfab_scene.tscn" id="6_nitcn"]
 [ext_resource type="CameraAttributesPractical" uid="uid://ev1eo0cru0we" path="res://game/cameraatr.tres" id="8_bi2xc"]
-[ext_resource type="Texture2D" uid="uid://dqjwmshavotv6" path="res://hills.png" id="9_ca5fy"]
+[ext_resource type="Texture2D" uid="uid://dqjwmshavotv6" path="res://game/levels/star_guitar/hills.png" id="9_ca5fy"]
 [ext_resource type="Script" path="res://game/world_environment.gd" id="9_rayxg"]
 [ext_resource type="PackedScene" uid="uid://bvyqie2mkgeun" path="res://models/road/car.tscn" id="10_q0pex"]
 [ext_resource type="PackedScene" uid="uid://lb3oq22iphka" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_host_control.tscn" id="11_qp32j"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://v8n5xbvrdio6" path="res://models/redux/redux_base.glb" id="1_ck1ir"]
 [ext_resource type="Material" uid="uid://qitngf1gw2gt" path="res://models/redux/redux_base_material.tres" id="2_m30eu"]
-[ext_resource type="PackedScene" uid="uid://c6gjynfkm6pvx" path="res://models/shared/plug.glb" id="3_ud4it"]
+[ext_resource type="PackedScene" uid="uid://c6gjynfkm6pvx" path="res://models/shared/nobs/plug.glb" id="3_ud4it"]
 
 [node name="redux_base" instance=ExtResource("1_ck1ir")]
 

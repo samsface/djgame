@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" path="res://models/shared/nobs/knob_shader.gdshader" id="1_wp6j2"]
 [ext_resource type="Texture2D" uid="uid://d4dcnkc0gf147" path="res://models/radio/base_car_radio_map.png" id="2_jbd4g"]
-[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="3_s78mr"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/textures/smudges_basecolor.png" id="3_s78mr"]
 
 [sub_resource type="Gradient" id="Gradient_15cmb"]
 colors = PackedColorArray(0, 0, 0, 1, 0.974971, 0.974971, 0.974971, 1)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" path="res://models/shared/nobs/knob_shader.gdshader" id="2_u8axs"]
 [ext_resource type="Texture2D" uid="uid://cpks26ymejva2" path="res://models/shared/nobs/keyboard_button.png" id="2_xfp4x"]
-[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="3_dkrkj"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/textures/smudges_basecolor.png" id="3_dkrkj"]
 
 [sub_resource type="Gradient" id="Gradient_15cmb"]
 colors = PackedColorArray(0, 0, 0, 1, 0.974971, 0.974971, 0.974971, 1)

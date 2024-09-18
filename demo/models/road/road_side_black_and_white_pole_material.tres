@@ -3,7 +3,7 @@
 [ext_resource type="Shader" path="res://models/road/car.gdshader" id="1_x1p1c"]
 [ext_resource type="Texture2D" uid="uid://cinpqgt55ea43" path="res://models/road/road_side_black_and_white_pole_map.png" id="2_05s6h"]
 [ext_resource type="Texture2D" uid="uid://5ho8kwru2mf" path="res://models/road/road_side_black_and_white_pole_albedo.png" id="3_a1jy4"]
-[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="3_oqpqk"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/textures/smudges_basecolor.png" id="3_oqpqk"]
 
 [resource]
 resource_local_to_scene = true

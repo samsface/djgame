@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="DeviceData" load_steps=12 format=3 uid="uid://d2v2vxmias8e0"]
 
-[ext_resource type="Script" path="res://models/shared/NobMappingArray.gd" id="1_7af2q"]
-[ext_resource type="Script" path="res://models/shared/nob_mapping_hradio.gd" id="1_d6288"]
-[ext_resource type="Script" path="res://models/shared/nob_mapping_array.gd" id="1_yxa5o"]
-[ext_resource type="Script" path="res://models/shared/nob_mapping_slider.gd" id="2_07fgk"]
-[ext_resource type="Script" path="res://models/shared/nob_mapping_bang.gd" id="2_omtyk"]
-[ext_resource type="Script" path="res://models/shared/nob_mapping_expr.gd" id="3_owsay"]
+[ext_resource type="Script" path="res://models/shared/nobs/NobMappingArray.gd" id="1_7af2q"]
+[ext_resource type="Script" path="res://models/shared/nobs/nob_mapping_hradio.gd" id="1_d6288"]
+[ext_resource type="Script" path="res://models/shared/nobs/nob_mapping_array.gd" id="1_yxa5o"]
+[ext_resource type="Script" path="res://models/shared/nobs/nob_mapping_slider.gd" id="2_07fgk"]
+[ext_resource type="Script" path="res://models/shared/nobs/nob_mapping_bang.gd" id="2_omtyk"]
+[ext_resource type="Script" path="res://models/shared/nobs/nob_mapping_expr.gd" id="3_owsay"]
 
 [sub_resource type="Resource" id="Resource_uf07f"]
 script = ExtResource("1_d6288")

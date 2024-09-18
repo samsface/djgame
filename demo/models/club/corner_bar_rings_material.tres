@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://cg43cfc5yi0ma" path="res://models/club/metal_shader.tres" id="1_7q7ua"]
 [ext_resource type="Texture2D" uid="uid://b5o5rkhcrassq" path="res://models/club/corner_bar_rings_maps.png" id="2_af6gm"]
-[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="3_bb6cr"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/textures/smudges_basecolor.png" id="3_bb6cr"]
 
 [sub_resource type="Gradient" id="Gradient_4vn8e"]
 offsets = PackedFloat32Array(0.0124224, 0.754658, 1)

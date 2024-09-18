@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bpx0380hsh5kf"]
 
-[ext_resource type="PackedScene" uid="uid://b7yfm6vkgt0f8" path="res://models/shared/knob_slits.glb" id="1_x067x"]
+[ext_resource type="PackedScene" uid="uid://b7yfm6vkgt0f8" path="res://models/shared/nobs/knob_slits.glb" id="1_x067x"]
 [ext_resource type="Script" path="res://models/shared/nobs/knob_slits.gd" id="2_xim8f"]
-[ext_resource type="Texture2D" uid="uid://nmmckq1qygfk" path="res://models/shared/smudges_basecolor (copy).png" id="3_hv7cg"]
+[ext_resource type="Texture2D" uid="uid://nmmckq1qygfk" path="res://models/shared/nobs/smudges_basecolor (copy).png" id="3_hv7cg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e0iqp"]
 albedo_color = Color(0, 0, 0, 1)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://s46n8ptm6mji" path="res://models/club/glass_shader.tres" id="1_yc1s3"]
 [ext_resource type="Texture2D" uid="uid://dy7gbt8nf7qlq" path="res://models/club/georgian_window_glass.png" id="2_73whk"]
-[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="3_x7trv"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/textures/smudges_basecolor.png" id="3_x7trv"]
 
 [sub_resource type="Gradient" id="Gradient_2dxpj"]
 offsets = PackedFloat32Array(0)

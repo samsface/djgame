@@ -1,21 +1,3 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://d0073rw5p3mbj"]
-
-[ext_resource type="Material" uid="uid://c3pp76cx8xann" path="res://models/shared/electric.tres" id="1_g40p2"]
-[ext_resource type="Shader" path="res://models/shared/basic.gdshader" id="2_lnv87"]
-[ext_resource type="Texture2D" uid="uid://30joc7s5lht6" path="res://models/shared/nobs/ao_map.png" id="3_rpip3"]
-[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="5_xjxn5"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://d0073rw5p3mbj"]
 
 [resource]
-render_priority = 0
-next_pass = ExtResource("1_g40p2")
-shader = ExtResource("2_lnv87")
-shader_parameter/smudge_scale = 0.366
-shader_parameter/color = Color(0.65098, 0.65098, 0.65098, 1)
-shader_parameter/color2 = Color(1, 0, 0, 1)
-shader_parameter/debug_uv1 = false
-shader_parameter/debug_uv2 = false
-shader_parameter/ambient_occlusion = 4.84211
-shader_parameter/metalic = 0.631579
-shader_parameter/edge_color = Color(1, 1, 1, 0.745098)
-shader_parameter/map = ExtResource("3_rpip3")
-shader_parameter/smudges = ExtResource("5_xjxn5")

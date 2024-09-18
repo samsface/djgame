@@ -5,7 +5,7 @@
 [ext_resource type="Shader" path="res://models/phone/phone.gdshader" id="4_ejdu2"]
 [ext_resource type="Texture2D" uid="uid://vd5jphf13nun" path="res://models/phone/map.png" id="4_mdlhq"]
 [ext_resource type="PackedScene" uid="uid://bnvodaqvhpkdb" path="res://models/phone/phone_gui.tscn" id="4_v6eo8"]
-[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="4_v74j0"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/textures/smudges_basecolor.png" id="4_v74j0"]
 [ext_resource type="Script" path="res://models/phone/notifications.gd" id="5_pqb1u"]
 [ext_resource type="Texture2D" uid="uid://m76np0thy42y" path="res://models/phone/marc.png" id="5_s4yx2"]
 [ext_resource type="Script" path="res://models/phone/phone_test.gd" id="6_vrhos"]

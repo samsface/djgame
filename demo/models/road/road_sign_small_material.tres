@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" path="res://models/road/car.gdshader" id="1_gsse1"]
 [ext_resource type="Texture2D" uid="uid://dce1wfhvq513x" path="res://models/road/road_sign_small_map.png" id="2_jftyy"]
-[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="3_quv3e"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/textures/smudges_basecolor.png" id="3_quv3e"]
 
 [resource]
 resource_local_to_scene = true

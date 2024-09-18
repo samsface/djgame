@@ -1,0 +1,89 @@
+[gd_scene load_steps=5 format=3 uid="uid://b77oywlnttw32"]
+
+[ext_resource type="Script" path="res://models/redux/Label.gd" id="1_jnaqk"]
+
+[sub_resource type="Shader" id="Shader_k20kr"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.2.1.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
+
+uniform sampler2D texture_albedo : source_color,filter_linear_mipmap,repeat_enable;
+uniform float point_size : hint_range(0,128);
+uniform float roughness : hint_range(0,1);
+uniform sampler2D texture_metallic : hint_default_white,filter_linear_mipmap,repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r,filter_linear_mipmap,repeat_enable;
+uniform float specular;
+uniform float metallic;
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+instance uniform float curve : hint_range(-1.0, 1.0) = 0.0;
+instance uniform vec4 albedo : source_color;
+
+void vertex() {
+	UV=UV*uv1_scale.xy+uv1_offset.xy;
+
+	float side = UV.x > 0.5 ? 1.0 : -1.0;
+
+	float cc = curve;
+	float a = cc * abs(0.5 - UV.x) * side * 1.0;
+
+    float s = sin(a);
+    float c = cos(a);
+
+    // Rotation matrix
+    mat2 rotation = mat2(vec2(c, -s), vec2(s, c));
+
+	VERTEX.xy *= rotation;
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+	vec4 albedo_tex = texture(texture_albedo,base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	float metallic_tex = dot(texture(texture_metallic,base_uv),metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	vec4 roughness_texture_channel = vec4(1.0,0.0,0.0,0.0);
+	float roughness_tex = dot(texture(texture_roughness,base_uv),roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+	SPECULAR = specular;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ta8ku"]
+render_priority = 0
+shader = SubResource("Shader_k20kr")
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.15
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.48
+shader_parameter/metallic = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="TextMesh" id="TextMesh_pbbrj"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_ta8ku")
+font_size = 32
+pixel_size = 0.0005
+curve_step = 10.0
+depth = 0.0
+width = 1.0
+
+[node name="Label" type="Node3D"]
+script = ExtResource("1_jnaqk")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+cast_shadow = 0
+instance_shader_parameters/albedo = Color(0, 0, 0, 1)
+instance_shader_parameters/curve = 0.0
+mesh = SubResource("TextMesh_pbbrj")
+skeleton = NodePath("")
+script = ExtResource("1_jnaqk")

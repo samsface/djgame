@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bt2kjmrxbmg5j" path="res://models/radio/radio.tscn" id="12_38nwr"]
 [ext_resource type="PackedScene" uid="uid://ckktfxfqs2xvc" path="res://models/characters/mano/papa.tscn" id="13_oku8k"]
 [ext_resource type="PackedScene" uid="uid://lprkgl2wh3cd" path="res://game/camera/camera.tscn" id="13_pqd28"]
-[ext_resource type="Texture2D" uid="uid://dqjwmshavotv6" path="res://hills.png" id="14_au1fb"]
+[ext_resource type="Texture2D" uid="uid://dqjwmshavotv6" path="res://game/levels/star_guitar/hills.png" id="14_au1fb"]
 [ext_resource type="Environment" uid="uid://b8uhvyo3rc3m8" path="res://game/settings/environment_potato.tres" id="14_t0q0r"]
 [ext_resource type="PackedScene" uid="uid://df031doltiks0" path="res://game/points_service/points_service.tscn" id="15_mw666"]
 [ext_resource type="Script" path="res://game/GuidesService.gd" id="19_c0206"]

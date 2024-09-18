@@ -1,8 +1,0 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c3pp76cx8xann"]
-
-[ext_resource type="Shader" path="res://models/shared/nobs/electric.gdshader" id="1_8mr3k"]
-
-[resource]
-render_priority = 0
-shader = ExtResource("1_8mr3k")
-shader_parameter/outline_width = 1.0

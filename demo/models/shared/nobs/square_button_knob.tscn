@@ -1,11 +1,11 @@
 [gd_scene load_steps=20 format=3 uid="uid://bpruc7wwiwser"]
 
 [ext_resource type="Script" path="res://models/shared/nobs/button.gd" id="1_46e6y"]
-[ext_resource type="Script" path="res://models/shared/nob_model.gd" id="2_sjuuk"]
+[ext_resource type="Script" path="res://models/shared/nobs/nob_model.gd" id="2_sjuuk"]
 [ext_resource type="Script" path="res://models/shared/nobs/buttonm.gd" id="3_hf51l"]
 [ext_resource type="ArrayMesh" uid="uid://8s3b4udyc0o8" path="res://models/shared/button_flat_square_mesh.res" id="3_jn2sf"]
 [ext_resource type="Material" uid="uid://d1itv83qjgtk4" path="res://models/shared/nobs/square_key_material.tres" id="4_kh3rb"]
-[ext_resource type="PackedScene" uid="uid://b77oywlnttw32" path="res://models/shared/label.tscn" id="4_modnf"]
+[ext_resource type="PackedScene" uid="uid://b77oywlnttw32" path="res://models/shared/label/label.tscn" id="4_modnf"]
 [ext_resource type="FontFile" uid="uid://ca4jgypv8bjcn" path="res://ui/fonts/RetroGaming.ttf" id="5_5fnco"]
 [ext_resource type="Script" path="res://models/shared/nobs/label_style.gd" id="6_kecne"]
 [ext_resource type="AudioStream" uid="uid://bmkr5qf551e58" path="res://models/shared/sounds/key_press_0.wav" id="8_m5lp2"]

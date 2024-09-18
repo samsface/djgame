@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cvyf5o4k3n4m6" path="res://models/road/car.glb" id="1_1xcem"]
 [ext_resource type="Material" uid="uid://ccy7w6xdgt3dx" path="res://models/road/car_chasis_material.tres" id="2_gd0jt"]
 [ext_resource type="Material" uid="uid://ckwd34awfxrr6" path="res://models/road/car_interior_material.tres" id="3_yk0wf"]
-[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/smudges_basecolor.png" id="4_pw7ha"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/textures/smudges_basecolor.png" id="4_pw7ha"]
 [ext_resource type="Texture2D" uid="uid://cw60s0n8bbnis" path="res://models/road/car_windows_map.png" id="6_c5mwa"]
 
 [sub_resource type="Shader" id="Shader_h2nem"]

@@ -5,11 +5,11 @@
 [ext_resource type="Resource" uid="uid://cqmulviu26gd3" path="res://models/toydrum/mappings.tres" id="2_6gioe"]
 [ext_resource type="Script" path="res://models/shared/nobs/line_style.gd" id="2_cak2j"]
 [ext_resource type="PackedScene" uid="uid://bjfihtm5t424l" path="res://models/shared/nobs/button2.tscn" id="3_5te0k"]
-[ext_resource type="PackedScene" uid="uid://b77oywlnttw32" path="res://models/shared/label.tscn" id="4_48ppo"]
+[ext_resource type="PackedScene" uid="uid://b77oywlnttw32" path="res://models/shared/label/label.tscn" id="4_48ppo"]
 [ext_resource type="Script" path="res://models/shared/nobs/label_style.gd" id="5_2kcmv"]
 [ext_resource type="FontFile" uid="uid://ca4jgypv8bjcn" path="res://ui/fonts/RetroGaming.ttf" id="8_nib8j"]
 [ext_resource type="ArrayMesh" uid="uid://ddv7b246ohcvy" path="res://models/lital/long_slanted.obj" id="9_u0gxs"]
-[ext_resource type="PackedScene" uid="uid://c1midsktuy41j" path="res://models/shared/plug_no_screw.glb" id="18_ek7yc"]
+[ext_resource type="PackedScene" uid="uid://c1midsktuy41j" path="res://models/shared/nobs/plug_no_screw.glb" id="18_ek7yc"]
 [ext_resource type="PackedScene" uid="uid://mmolo7rstaoq" path="res://models/shared/nobs/keyboard_key_knob.tscn" id="18_lui31"]
 [ext_resource type="Material" uid="uid://cvedaj7ghb1bw" path="res://models/lital/long_slanted_material.tres" id="21_uvrst"]
 
