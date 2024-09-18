@@ -45,7 +45,7 @@ script = ExtResource("4_oqmxi")
 handle_input_locally = false
 scaling_3d_scale = 0.5
 gui_snap_controls_to_pixels = false
-size = Vector2i(1680, 1050)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="Game" type="Node3D" parent="WorldViewport/SubViewport"]

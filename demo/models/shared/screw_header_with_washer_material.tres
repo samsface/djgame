@@ -26,6 +26,7 @@ shader = ExtResource("1_ct0xf")
 shader_parameter/roughness = 0.213
 shader_parameter/specular = 0.698
 shader_parameter/metallic = 0.03
+shader_parameter/max_y = null
 shader_parameter/ao_light_affect = 1.0
 shader_parameter/detail_scale = Vector2(0.1, 0.1)
 shader_parameter/aoe_texture = ExtResource("2_p6tmb")

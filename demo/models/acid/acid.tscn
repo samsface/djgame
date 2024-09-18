@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://rbuf4nqmcmjx"]
+[gd_scene load_steps=30 format=3 uid="uid://rbuf4nqmcmjx"]
 
 [ext_resource type="Script" path="res://models/redux/device.gd" id="1_636gy"]
 [ext_resource type="Script" path="res://models/lital/little2.gd" id="1_u4dod"]
@@ -15,9 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://du6gatur0vum5" path="res://models/shared/power_plug.tscn" id="9_d6sye"]
 [ext_resource type="Texture2D" uid="uid://bcvmpvpwk1nvp" path="res://models/shared/stickers/smiley.png" id="9_xy7ad"]
 [ext_resource type="ArrayMesh" uid="uid://bihsv7t48c5h3" path="res://models/lital/wide.obj" id="11_6h82h"]
-[ext_resource type="PackedScene" uid="uid://bjfihtm5t424l" path="res://models/toydrum/button2.tscn" id="12_gqpmd"]
+[ext_resource type="PackedScene" uid="uid://bjfihtm5t424l" path="res://models/shared/nobs/button2.tscn" id="12_gqpmd"]
 [ext_resource type="Texture2D" uid="uid://pl7gf7bptldf" path="res://models/acid/albedo.png" id="12_u5yes"]
-[ext_resource type="Script" path="res://models/toydrum/marker_3d.gd" id="18_4buks"]
 
 [sub_resource type="Resource" id="Resource_arge0"]
 script = ExtResource("7_dom38")
@@ -341,17 +340,3 @@ calculate_tangents = false
 [node name="CSGMesh3D" type="CSGMesh3D" parent="Model/CSGCombiner3D"]
 snap = 1e-06
 mesh = ExtResource("11_6h82h")
-
-[node name="Views" type="Node3D" parent="."]
-
-[node name="Top" type="Marker3D" parent="Views"]
-transform = Transform3D(0.810531, 0.467478, -0.352851, 0, 0.602448, 0.798158, 0.585696, -0.646932, 0.488303, -0.0564172, 0.120051, 0.0609291)
-script = ExtResource("18_4buks")
-
-[node name="View2" type="Marker3D" parent="Views"]
-transform = Transform3D(0.781496, 0.294875, -0.549829, 0, 0.881264, 0.472625, 0.62391, -0.369354, 0.688704, -0.0912988, 0.0926991, 0.075563)
-script = ExtResource("18_4buks")
-
-[node name="Low" type="Marker3D" parent="Views"]
-transform = Transform3D(0.999945, 0.00613323, -0.00853381, 0, 0.812036, 0.583608, 0.0105092, -0.583576, 0.811991, -0.00423019, 0.0542445, 0.0919209)
-script = ExtResource("18_4buks")

@@ -1,10 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://dfkhn8atn11hq"]
+[gd_scene load_steps=24 format=3 uid="uid://dfkhn8atn11hq"]
 
 [ext_resource type="Script" path="res://models/lital/little2.gd" id="1_i84dm"]
 [ext_resource type="PackedScene" uid="uid://cyqgaxwtbp2kl" path="res://models/shared/lines/square.tscn" id="1_kqc44"]
 [ext_resource type="Resource" uid="uid://cqmulviu26gd3" path="res://models/toydrum/mappings.tres" id="2_6gioe"]
 [ext_resource type="Script" path="res://models/shared/nobs/line_style.gd" id="2_cak2j"]
-[ext_resource type="PackedScene" uid="uid://bjfihtm5t424l" path="res://models/toydrum/button2.tscn" id="3_5te0k"]
+[ext_resource type="PackedScene" uid="uid://bjfihtm5t424l" path="res://models/shared/nobs/button2.tscn" id="3_5te0k"]
 [ext_resource type="PackedScene" uid="uid://b77oywlnttw32" path="res://models/shared/label.tscn" id="4_48ppo"]
 [ext_resource type="Script" path="res://models/shared/nobs/label_style.gd" id="5_2kcmv"]
 [ext_resource type="FontFile" uid="uid://ca4jgypv8bjcn" path="res://ui/fonts/RetroGaming.ttf" id="8_nib8j"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://c1midsktuy41j" path="res://models/shared/plug_no_screw.glb" id="18_ek7yc"]
 [ext_resource type="PackedScene" uid="uid://mmolo7rstaoq" path="res://models/shared/nobs/keyboard_key_knob.tscn" id="18_lui31"]
 [ext_resource type="Material" uid="uid://cvedaj7ghb1bw" path="res://models/lital/long_slanted_material.tres" id="21_uvrst"]
-[ext_resource type="Script" path="res://models/toydrum/marker_3d.gd" id="23_jxgk4"]
 
 [sub_resource type="Resource" id="Resource_7wmo2"]
 script = ExtResource("5_2kcmv")
@@ -189,37 +188,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.9115, 0, 0, 0)
 gi_mode = 2
 snap = 1e-06
 mesh = ExtResource("9_u0gxs")
-
-[node name="Views" type="Node3D" parent="."]
-
-[node name="Front" type="Marker3D" parent="Views"]
-transform = Transform3D(0.0191991, -0.0515333, 0.998485, 0, 0.998671, 0.0515427, -0.999815, -0.000989575, 0.0191735, 0.2, 0.03, 0.006)
-script = ExtResource("23_jxgk4")
-
-[node name="FrontAlt" type="Marker3D" parent="Views"]
-transform = Transform3D(0.00610343, -0.0907071, 0.995857, 0, 0.995878, 0.0907086, -0.999981, -0.000553635, 0.00607826, 0.148972, 0.0418706, 0.0137224)
-script = ExtResource("23_jxgk4")
-
-[node name="Front2" type="Marker3D" parent="Views"]
-transform = Transform3D(-0.0157054, -0.369775, 0.928987, 0, 0.929103, 0.36982, -0.999876, 0.0058082, -0.014592, 0.157991, 0.0658584, 0.00442371)
-script = ExtResource("23_jxgk4")
-
-[node name="Marker3D3" type="Marker3D" parent="Views"]
-transform = Transform3D(-0.693396, -0.530863, 0.487221, 0, 0.676175, 0.73674, -0.720555, 0.510854, -0.468857, 0.0915213, 0.103574, -0.0830994)
-script = ExtResource("23_jxgk4")
-
-[node name="ZoomOn1" type="Marker3D" parent="Views"]
-transform = Transform3D(0.00609675, -0.790188, 0.612833, 0, 0.612845, 0.790201, -0.999981, -0.00481768, 0.00373636, 0.0578976, 0.0765133, 0.0848299)
-script = ExtResource("23_jxgk4")
-
-[node name="ZoomOn2" type="Marker3D" parent="Views"]
-transform = Transform3D(0.0279132, -0.805659, 0.59172, 0, 0.591952, 0.805972, -0.99961, -0.0224973, 0.0165233, 0.0579367, 0.0767288, 0.0629224)
-script = ExtResource("23_jxgk4")
-
-[node name="ZoomOn1FromRight" type="Marker3D" parent="Views"]
-transform = Transform3D(-0.969875, -0.197586, 0.14248, 0, 0.584896, 0.811107, -0.2436, 0.786675, -0.567275, 0.0319998, 0.0856247, 0.00238991)
-script = ExtResource("23_jxgk4")
-
-[node name="ZoomOn1FromLeft" type="Marker3D" parent="Views"]
-transform = Transform3D(0.998718, -0.0341589, 0.0373374, 0, 0.737815, 0.675002, -0.0506054, -0.674138, 0.736868, -0.00171971, 0.0549936, 0.138037)
-script = ExtResource("23_jxgk4")

@@ -8,12 +8,13 @@ var audio_stream_:PureDataAudioStreamPlayer
 var bang_signals_ := {}
 var float_signals_ := {}
 var metro := 130
-var latency := 0.02
+var latency := 0.00
 var regex_ = RegEx.new()
 
 var clock := 0.0
 
 func _ready() -> void:
+
 	regex_.compile("^[+-]?\\d+(\\.\\d+)?$")
 	
 	Bus.audio_service = self
@@ -35,7 +36,7 @@ func _ready() -> void:
 	#Bus.audio_service.connect_to_float("clock", _clock)
 	
 	#audio_stream_.stop()
-	
+
 func open_patch(patch_name) -> void:
 	patch_file_handle_.close()
 	
@@ -59,6 +60,7 @@ func set_metro(value:float) -> void:
 	emit_float("metro", value)
 
 func play() -> void:
+	latency = AudioServer.get_output_latency() + AudioServer.get_time_to_next_mix()
 	set_process(true)
 
 func pause() -> void:
@@ -108,3 +110,6 @@ func _process(delta: float) -> void:
 	
 	if floor(clock) != last_clock:
 		clock_changed.emit(floor(clock))
+
+func call_with_latency(callable:Callable) -> void:
+	get_tree().create_timer(latency).timeout.connect(callable)

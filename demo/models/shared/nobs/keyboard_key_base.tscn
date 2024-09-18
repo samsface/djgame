@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://bfkdsompjx7fu"]
-
-[ext_resource type="PackedScene" uid="uid://dc3vppk01vhed" path="res://models/shared/nobs/keyboard_key.tscn" id="1_1e3ya"]
-[ext_resource type="Material" uid="uid://dtnc8e2uktfb5" path="res://models/redux/black_void_material.tres" id="2_40rya"]
-
-[node name="keyboard_key2" instance=ExtResource("1_1e3ya")]
-
-[node name="KeybardButton" parent="." index="0"]
-surface_material_override/0 = ExtResource("2_40rya")

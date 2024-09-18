@@ -18,7 +18,6 @@ sky_material = SubResource("ProceduralSkyMaterial_e3dpt")
 background_mode = 2
 background_color = Color(1.15514e-05, 0.976014, 0.756093, 1)
 sky = SubResource("Sky_1isd6")
-ssr_enabled = true
 ssr_fade_in = 0.579562
 ssr_fade_out = 10.1965
 ssao_enabled = true

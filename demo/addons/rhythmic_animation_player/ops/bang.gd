@@ -1,6 +1,11 @@
 extends RythmicAnimationPlayerControlItem
 class_name PianoRollItemBang
 
+enum BangShape {
+	ARROW,
+	SQUARE_WAVE
+}
+
 @export var value:float = 1.0 : 
 	set(v):
 		value = v
@@ -24,6 +29,8 @@ class_name PianoRollItemBang
 	set(v):
 		silent = v
 		invalidate_value_()
+		
+@export var bang_shape:BangShape
 
 var tween_:Tween
 
@@ -53,4 +60,4 @@ func begin() -> void:
 		var duration_in_seconds = length * (Bus.audio_service.metro) * 0.001
 		if not hold:
 			duration_in_seconds = 0.0
-		target_node.bang(time, length_in_seconds, value, auto, dilema_group, silent, duration_in_seconds)
+		target_node.bang(time, length_in_seconds, value, auto, dilema_group, silent, duration_in_seconds, bang_shape)

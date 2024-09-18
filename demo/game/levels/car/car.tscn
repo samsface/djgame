@@ -333,7 +333,6 @@ visible = false
 unique_name_in_owner = true
 transform = Transform3D(-2.38935e-07, 1.9081e-08, -1, -0.74375, 0.668516, 1.08997e-08, 0.668548, 0.743715, 5.59319e-08, -0.339012, 0.542629, -0.574386)
 visible = false
-tune_duration = 0.5
 
 [node name="OmniLight3D" type="OmniLight3D" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car/Radio"]
 transform = Transform3D(-1.3022e-07, -0.743722, -0.668478, -1.6118e-07, 0.668555, -0.743708, 1.00001, 1.90458e-07, -5.46544e-09, 0.35569, 0.543575, -0.0355127)

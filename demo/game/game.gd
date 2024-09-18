@@ -12,8 +12,6 @@ var tween_:Tween
 var rumble := 0.0 
 
 func _ready() -> void:
-	%toykit.look("ZoomOn1")
-	
 	#Bus.level = self
 
 	Bus.audio_service.open_patch("res://junk/xxx.pd")
@@ -29,14 +27,21 @@ func _ready() -> void:
 		_play()
 	$Camera.looky(Vector3(-0.0147195002064109, 0.1273230016231537, -0.327578991651535), Vector3(-0.9006010293960571, -0.2513279914855957, 0), 0.1)
 
+	Bus.points_service.good_boy.value = 0.5
+	Bus.points_service.center(Bus.points_service.good_boy)
+
 func _physics_process(delta: float) -> void:
 	if int(audio_.clock) % 4 == 0:
-		get_tree().create_timer(audio_.latency).timeout.connect(force_rumble)
-
+		Bus.audio_service.call_with_latency(force_rumble)
 
 func force_rumble() -> void:
 	Bus.camera_service.shake(0.7, 0.001 * rumble)
 	Bus.camera_service.rumble.emit()
+
+func table_jump() -> void:
+	var t := create_tween()
+	t.tween_property($Table/NorthFace, "position:y", 0.02, 0.05)
+	t.tween_property($Table/NorthFace, "position:y", 0.0, 0.1).set_delay(0.05)
 
 func _device_nob_value_changed(nob:Nob, new_value:float, old_value:float) -> void:
 	#print(nob.get_path())

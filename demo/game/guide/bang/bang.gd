@@ -13,11 +13,9 @@ var time := 0
 var auto := false
 var silent := false
 var duration := 0.0
+var bang_shape:PianoRollItemBang.BangShape
 var done_ := false#
 var waiting_for_nob_release_ := false
-
-@onready var timer_ := $Timer
-@onready var arrow__ := $Arrow___/Arrow_
 
 var dilema_group := 0
 var latency_time_ := 0.0
@@ -26,6 +24,7 @@ var tail_time_ := 0.0
 var no_tail_time_ = false
 var velocity_ := Vector3.ZERO
 var v_ := 0.0
+var arrow_
 
 func color_() -> Color:
 	if auto:
@@ -44,15 +43,19 @@ func _ready() -> void:
 		done.emit()
 		queue_free()
 		return
+
+	if bang_shape == PianoRollItemBang.BangShape.ARROW:
+		arrow_ = preload("res://game/guide/shared/arrow/arrow.tscn").instantiate()
+	else:
+		arrow_ = preload("res://game/guide/shared/arrow/square_wave.tscn").instantiate()
+	
+	$ArrowAnchor.add_child(arrow_)
 		
 	visible = false
 		
 	latency_time_ = Bus.audio_service.latency
 
 	fall_time_ = length
-	
-	#fall_tween_ = create_tween()
-	#fall_tween_.set_parallel()
 
 	scale = Vector3.ONE * nob_.scale_guide * 0.02
 	global_position = nob_.top.global_position + Vector3.UP * 0.1 + Vector3.ONE * 0.0001
@@ -63,20 +66,22 @@ func _ready() -> void:
 	velocity_ = (global_position.direction_to(nob_.top.global_position) * x) / fall_time_
 	
 	v_ = x / (fall_time_)
-	
 
 	tail_time_ = duration
 	if tail_time_ == 0.0:
 		no_tail_time_ = true
 
-	arrow__.albedo = color_()
+	arrow_.albedo = color_()
 	
 	points_ = points_service.make_points("hp")
 	tree_exited.connect(points_.queue_free)
 	points_.scale = Vector3.ONE * nob_.scale_guide
-	
-	#rotate_object_local(Vector3(0, 0, 1), randf() * PI)
-	
+
+func _clock_changed(time:int) -> void:
+	if time % 4 == 0:
+		if nob_.value > 0.0:
+			Bus.audio_service.call_with_latency(nob_.pulse)
+
 func set_active() -> void:
 	if nob_.value > 0.0:
 		waiting_for_nob_release_ = true
@@ -90,13 +95,19 @@ func _done() -> void:
 	active = false
 	done_ = true
 
+	if Bus.audio_service.clock_changed.is_connected(_clock_changed):
+		Bus.audio_service.clock_changed.disconnect(_clock_changed)
+
+
 	if points_.points <= 0:
 		points_.points = -100
+	
+	points_.global_position = global_position - Vector3.FORWARD * 0.02
 	
 	points_.commit()
 	done.emit()
 	
-	arrow__.visible = false
+	arrow_.visible = false
 	
 	get_tree().create_timer(0.2).timeout.connect(queue_free)
 	
@@ -108,7 +119,7 @@ func _physics_process(delta: float) -> void:
 		return
 
 	visible = true
-		
+
 	if active:
 		nob_.electric.r = 0
 		nob_.electric.g = 1
@@ -118,22 +129,25 @@ func _physics_process(delta: float) -> void:
 	if active and not waiting_for_nob_release_:
 		if nob_.value > 0.0:
 			if fall_time_ < 0.2:
+				if duration > 0.3:
+					if not Bus.audio_service.clock_changed.is_connected(_clock_changed):
+						Bus.audio_service.clock_changed.connect(_clock_changed)
+				
 				points_.points += 1
 				
 				nob_.electric = Color.GREEN
-				arrow__.freq = 100.0
-				arrow__.amp = lerp(arrow__.amp, 0.02, delta * 30.0)
-				arrow__.transparency = 1.0
+				arrow_.freq = 100.0
+				arrow_.amp = lerp(arrow_.amp, 0.04, delta * 30.0)
 
 			else:
 				points_.points -= 1
 
-			points_.global_position = global_position - Vector3.FORWARD * 0.01
+			points_.global_position = global_position - Vector3.FORWARD * 0.02
 
 	if no_tail_time_:
-		arrow__.length = 0.01
+		arrow_.length = 0.01
 	else:
-		arrow__.length = (tail_time_ * v_) * 2.0
+		arrow_.length = (tail_time_ * v_) * 2.0
 
 	fall_time_ -= delta
 	
@@ -145,4 +159,3 @@ func _physics_process(delta: float) -> void:
 			_done()
 	else:
 		global_position += velocity_ * delta
-		#rotate_object_local(Vector3(0, 0, 1), delta * 2.0)

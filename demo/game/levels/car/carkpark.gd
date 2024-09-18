@@ -19,7 +19,7 @@ func _ready() -> void:
 	
 	Bus.points_service.good_boy.value = 0.5
 	Bus.points_service.good_boy.visible = false
-	
+
 	%BeatPlayerHost.get_node("%scene/%FirstCameraAngle").begin()
 	
 

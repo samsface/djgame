@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://7chbqpmrrhk7"]
 
 [ext_resource type="PackedScene" uid="uid://c6cj4ylwmj0e8" path="res://models/lital/slider.glb" id="1_lkhmy"]
-[ext_resource type="Shader" path="res://models/toydrum/buttonm.gdshader" id="2_imgo6"]
+[ext_resource type="Shader" path="res://models/shared/nobs/buttonm.gdshader" id="2_imgo6"]
 
 [sub_resource type="Gradient" id="Gradient_hyruf"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)

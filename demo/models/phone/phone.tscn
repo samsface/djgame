@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bl7d8jwotcuws"]
+[gd_scene load_steps=19 format=3 uid="uid://bl7d8jwotcuws"]
 
 [ext_resource type="PackedScene" uid="uid://v8jvhtuvyeij" path="res://models/phone/phone.glb" id="1_qnpo2"]
 [ext_resource type="Script" path="res://models/phone/phones.gd" id="2_hu3e3"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://m76np0thy42y" path="res://models/phone/marc.png" id="5_s4yx2"]
 [ext_resource type="Script" path="res://models/phone/phone_test.gd" id="6_vrhos"]
 [ext_resource type="PackedScene" uid="uid://c23pskns2q5d1" path="res://models/phone/nob.tscn" id="10_agbu1"]
-[ext_resource type="Script" path="res://models/toydrum/marker_3d.gd" id="10_fot8k"]
 [ext_resource type="Material" uid="uid://ch00a4q6gt2wa" path="res://models/phone/nob_electric.tres" id="12_n07xt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lea2s"]
@@ -150,17 +149,7 @@ offset_right = 950.0
 offset_bottom = 679.0
 text = "Rewind"
 
-[node name="Views" type="Node3D" parent="." index="5"]
-
-[node name="Top" type="Marker3D" parent="Views" index="0"]
-transform = Transform3D(0.999945, 0.010479, -0.000787115, 0, 0.0749028, 0.997191, 0.0105085, -0.997136, 0.0748987, -0.00045669, 0.0679921, 0.00982836)
-script = ExtResource("10_fot8k")
-
-[node name="TopZoomed" type="Marker3D" parent="Views" index="1"]
-transform = Transform3D(0.97668, -0.210164, 0.0438887, 0, 0.204421, 0.978883, -0.214698, -0.956056, 0.199654, 0.00738612, 0.0696394, 0.010783)
-script = ExtResource("10_fot8k")
-
-[node name="0" parent="." index="6" instance=ExtResource("10_agbu1")]
+[node name="0" parent="." index="5" instance=ExtResource("10_agbu1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0185696, -9.78545e-05, -0.0262739)
 
 [node name="StaticBody3D" type="Area3D" parent="0" index="1"]
@@ -181,7 +170,7 @@ skeleton = NodePath("../../../ReplyA")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="0/StaticBody3D" index="1"]
 shape = SubResource("BoxShape3D_vffgr")
 
-[node name="ReplyA" parent="." index="7" instance=ExtResource("10_agbu1")]
+[node name="ReplyA" parent="." index="6" instance=ExtResource("10_agbu1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018675, -9.78545e-05, 0.0548497)
 
 [node name="StaticBody3D" type="Area3D" parent="ReplyA" index="1"]
@@ -202,7 +191,7 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ReplyA/StaticBody3D" index="1"]
 shape = SubResource("BoxShape3D_r4ofo")
 
-[node name="ReplyB" parent="." index="8" instance=ExtResource("10_agbu1")]
+[node name="ReplyB" parent="." index="7" instance=ExtResource("10_agbu1")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.0186377, -9.78545e-05, 0.0548497)
 
 [node name="StaticBody3D" type="Area3D" parent="ReplyB" index="1"]

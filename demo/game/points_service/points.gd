@@ -45,4 +45,4 @@ func commit():
 		#get_tree().create_timer(randf_range(0.1, 0.3)).timeout.connect(func(): PureData.pitch_scale = 1.0; Bus.camera_service.camera_.rotation_degrees.z = 0)
 
 	#get_parent().points += points_ * 0.1 #* get_parent().combo
-	bar.add_points(points_ * 0.001)
+	bar.value += points * 0.001

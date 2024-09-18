@@ -19,9 +19,6 @@ func _ready() -> void:
 		for m in map.radios + map.exprs + map.arrays + map.sliders + map.bangs:
 			m.hook(self)
 
-func look(view_position:String) -> void:
-	Bus.camera_service.look_at_node($Views.get_node_or_null(view_position))
-
 func set_swing(value:float):
 	Bus.audio_service.emit_float("toykit-swing", value)
 

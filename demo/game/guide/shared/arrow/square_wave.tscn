@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://iitrmmrj8rr5"]
+
+[ext_resource type="Shader" path="res://game/guide/bang/bang.gdshader" id="1_ixvfr"]
+[ext_resource type="Script" path="res://game/guide/shared/arrow/arrow.gd" id="2_2dlkc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_glm75"]
+render_priority = 1
+shader = ExtResource("1_ixvfr")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1lqjy"]
+top_radius = 0.005
+bottom_radius = 0.005
+height = 1.0
+radial_segments = 4
+rings = 512
+cap_top = false
+cap_bottom = false
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+transform = Transform3D(4.77671e-14, -1.09278e-06, -25, -25, -1.09278e-06, -2.11758e-20, -1.09278e-06, 25, -1.09278e-06, 1.07307e-06, 8.52651e-13, 12.4745)
+material_override = SubResource("ShaderMaterial_glm75")
+instance_shader_parameters/amp = 0.0
+instance_shader_parameters/freq = 0.0
+instance_shader_parameters/tail_length = 0.0
+mesh = SubResource("CylinderMesh_1lqjy")
+skeleton = NodePath("../Arrow_")
+script = ExtResource("2_2dlkc")

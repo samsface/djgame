@@ -192,7 +192,6 @@ unique_name_in_owner = true
 transform = Transform3D(-2.58554e-07, 2.92159e-08, -1, -0.975622, 0.21973, 3.53618e-09, 0.21974, 0.975575, 5.97001e-08, -0.345595, 0.192544, -0.36133)
 frequency = 98.1
 channel_name = "JUST DANCE"
-tune_duration = 0.5
 
 [node name="OmniLight3D" type="OmniLight3D" parent="WorldViewport/SubViewport/Game/Path3D/PathFollow3D/Car/Radio"]
 transform = Transform3D(-1.3022e-07, -0.743722, -0.668478, -1.6118e-07, 0.668555, -0.743708, 1.00001, 1.90458e-07, -5.46544e-09, 0.35569, 0.543575, -0.0355127)

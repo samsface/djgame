@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://d1i36ul15hsb8"]
 
 [ext_resource type="Script" path="res://game/guide/rapid_bang/rapid_bang.gd" id="1_bgscu"]
-[ext_resource type="PackedScene" uid="uid://cw6wg4868tix8" path="res://game/guide/shared/arrow/arrow.tscn" id="2_nq4fq"]
+[ext_resource type="PackedScene" uid="uid://cw6wg4868tix8" path="res://game/guide/shared/arrow/arrow_old.tscn" id="2_nq4fq"]
 
 [sub_resource type="Curve" id="Curve_h621f"]
 _data = [Vector2(0, 0.335671), 0.0, 0.0, 0, 0, Vector2(0.489583, 0), 0.0, 0.0, 0, 0]

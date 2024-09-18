@@ -31,8 +31,8 @@ func reset_() -> void:
 func slide(length, from_value, to_value, gluide) -> void:
 	Bus.guide_service.slide(self, length, from_value, to_value, gluide)
 	
-func bang(time, length_in_seconds, value, auto, dilema_group, silent, durtation) -> void:
-	Bus.guide_service.bang(self, time, length_in_seconds, value, auto, dilema_group, silent, durtation)
+func bang(time, length_in_seconds, value, auto, dilema_group, silent, durtation, bang_shape) -> void:
+	Bus.guide_service.bang(self, time, length_in_seconds, value, auto, dilema_group, silent, durtation, bang_shape)
 
 func update_path_follow_position_for_value(for_value:float) -> void:
 	pass
@@ -41,3 +41,6 @@ func get_new_path_follow_and_remote_transform(for_value:float) -> PathFollow3D:
 	var dup = path_follow.duplicate()
 	path_follow.get_parent().add_child(dup)
 	return dup
+
+func pulse() -> void:
+	pass

@@ -73,6 +73,8 @@ var pulse_ := 0.0 :
 		pulse_ = v
 		$Nob/Model/Button.light = light_color_()
 
+var pulse_tween_:Tween
+
 func _ready() -> void:
 	path_follow = $Path/PathFollow
 
@@ -174,3 +176,11 @@ func _process(delta: float) -> void:
 		call_deferred("pressed")
 	elif Input.is_action_just_released("click"):
 		call_deferred("released")
+
+func pulse() -> void:
+	if pulse_tween_:
+		pulse_tween_.kill()
+
+	pulse_tween_ = create_tween()
+	pulse_tween_.tween_property($Nob/Model, "scale", Vector3.ONE * 1.5, 0.1)
+	pulse_tween_.tween_property($Nob/Model, "scale", Vector3.ONE, 0.2)

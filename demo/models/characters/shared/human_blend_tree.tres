@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeBlendTree" load_steps=18 format=3 uid="uid://6xhbptqpvu8h"]
+[gd_resource type="AnimationNodeBlendTree" load_steps=18 format=3 uid="uid://br7ab0jp37w04"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_apw4l"]
 animation = &"character_animations/Cheering"

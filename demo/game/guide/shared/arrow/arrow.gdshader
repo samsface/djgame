@@ -4,6 +4,7 @@ instance uniform vec3 albedo : source_color;
 instance uniform float ttl : hint_range(0.0, 1.0);
 instance uniform float scale : hint_range(0.0, 1.0);
 instance uniform float tail_length;
+instance uniform float spin;
 
 void vertex()
 {
@@ -12,7 +13,15 @@ void vertex()
 		VERTEX.y += tail_length;
 	}
 
-	VERTEX += pow(ttl, 2.0) * NORMAL * (UV.x + UV.y) * (scale * 3.0 + 0.5);
+	float angle = TIME * spin;
+
+	 mat3 rotation_matrix = mat3(
+       vec3(cos(angle), 0.0, sin(angle)),
+         vec3(0.0, 1.0, 0.0),
+         vec3(-sin(angle), 0.0, cos(angle))
+    );
+
+    VERTEX = rotation_matrix * VERTEX;
 }
 
 void fragment()

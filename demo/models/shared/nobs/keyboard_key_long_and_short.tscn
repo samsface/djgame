@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=4 uid="uid://bi76febq42c75"]
 
 [ext_resource type="PackedScene" uid="uid://cywkpyvenrldh" path="res://models/shared/nobs/keyboard_key_long_and_short.glb" id="1_2el4n"]
-[ext_resource type="Script" path="res://models/toydrum/buttonm.gd" id="2_xtqe5"]
+[ext_resource type="Script" path="res://models/shared/nobs/buttonm.gd" id="2_xtqe5"]
 [ext_resource type="Material" uid="uid://c7ewiicv8488q" path="res://models/shared/nobs/keyboard_key_material_good.tres" id="3_mmruu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2us2"]

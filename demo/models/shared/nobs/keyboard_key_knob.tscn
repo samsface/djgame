@@ -1,11 +1,11 @@
 [gd_scene load_steps=19 format=3 uid="uid://mmolo7rstaoq"]
 
-[ext_resource type="Script" path="res://models/toydrum/button.gd" id="1_qsxmh"]
+[ext_resource type="Script" path="res://models/shared/nobs/button.gd" id="1_qsxmh"]
 [ext_resource type="Script" path="res://models/shared/nob_model.gd" id="2_ytbjw"]
 [ext_resource type="Material" uid="uid://c7ewiicv8488q" path="res://models/shared/nobs/keyboard_key_material_good.tres" id="3_1awgn"]
 [ext_resource type="ArrayMesh" uid="uid://d24o64vpcut8o" path="res://models/shared/button_keyboard.res" id="3_od1n0"]
 [ext_resource type="PackedScene" uid="uid://b77oywlnttw32" path="res://models/shared/label.tscn" id="4_8retr"]
-[ext_resource type="Script" path="res://models/toydrum/buttonm.gd" id="4_t2jyo"]
+[ext_resource type="Script" path="res://models/shared/nobs/buttonm.gd" id="4_t2jyo"]
 [ext_resource type="FontFile" uid="uid://ca4jgypv8bjcn" path="res://ui/fonts/RetroGaming.ttf" id="5_lrlqv"]
 [ext_resource type="Script" path="res://models/shared/nobs/label_style.gd" id="6_uhe1v"]
 [ext_resource type="AudioStream" uid="uid://bmkr5qf551e58" path="res://models/shared/sounds/key_press_0.wav" id="8_5hox4"]

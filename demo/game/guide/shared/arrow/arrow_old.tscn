@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cw6wg4868tix8"]
+
+[ext_resource type="PackedScene" uid="uid://crrrp6vpstmju" path="res://game/guide/shared/arrow/arrow.glb" id="1_sfb4t"]
+[ext_resource type="Script" path="res://game/guide/shared/arrow/arrow.gd" id="2_g3hcq"]
+[ext_resource type="Material" uid="uid://cd7t4yroltx6u" path="res://game/guide/shared/arrow/arrow.tres" id="2_kliq3"]
+
+[node name="arrow" instance=ExtResource("1_sfb4t")]
+script = ExtResource("2_g3hcq")
+albedo = Color(0, 0.901961, 0.34902, 1)
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_kliq3")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.499199, 0)
+light_color = Color(0, 0.901961, 0.34902, 1)
+omni_range = 0.1
+omni_attenuation = 0.258816
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="2"]
+visible = false

@@ -1,8 +1,8 @@
 [gd_scene load_steps=20 format=3 uid="uid://bpruc7wwiwser"]
 
-[ext_resource type="Script" path="res://models/toydrum/button.gd" id="1_46e6y"]
+[ext_resource type="Script" path="res://models/shared/nobs/button.gd" id="1_46e6y"]
 [ext_resource type="Script" path="res://models/shared/nob_model.gd" id="2_sjuuk"]
-[ext_resource type="Script" path="res://models/toydrum/buttonm.gd" id="3_hf51l"]
+[ext_resource type="Script" path="res://models/shared/nobs/buttonm.gd" id="3_hf51l"]
 [ext_resource type="ArrayMesh" uid="uid://8s3b4udyc0o8" path="res://models/shared/button_flat_square_mesh.res" id="3_jn2sf"]
 [ext_resource type="Material" uid="uid://d1itv83qjgtk4" path="res://models/shared/nobs/square_key_material.tres" id="4_kh3rb"]
 [ext_resource type="PackedScene" uid="uid://b77oywlnttw32" path="res://models/shared/label.tscn" id="4_modnf"]

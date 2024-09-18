@@ -16,8 +16,6 @@ func get_center(offset:Vector2 = Vector2.ZERO) -> Vector3:
 	return %Camera3D.project_position(Bus.bars.get_rect().get_center() + offset, depth)
 
 func _ready() -> void:
-	Bus.audio_service.open_patch("res://junk/radio.pd")
-	
 	Bus.points_service = self
 	stats_["hp"]= %HP
 	stats_["good_boy"] = %Goodboy
@@ -33,7 +31,7 @@ func _physics_process(delta: float) -> void:
 	%DoctorIcon.get_child(0).rotate_y(delta)
 	
 	var new_l = Bus.camera_service.camera_.global_rotation
-	var d = new_l.distance_to(l) * 10.0
+	var d = new_l.distance_to(l) * 100.0
 	energy = lerp(energy, energy + d, delta)
 
 	%GoodBoy/Mesh.mesh.material.next_pass.set_shader_parameter("energy", energy)
@@ -51,7 +49,7 @@ func _physics_process(delta: float) -> void:
 	
 
 func sort_meters_(delta:float) -> void:
-	var top_left = %Camera3D.project_position(Bus.bars.get_rect().position, 0.5)
+#	var top_left = %Camera3D.project_position(Bus.bars.get_rect().position, 0.5)
 	
 	for meter in %Meters.get_children():
 		if meter.sort:
@@ -63,7 +61,8 @@ func sort_meters_(delta:float) -> void:
 			meter.position = k - meter.get_node("Pivot").position
 
 func play() -> void:
-	stats_.hp.decay_rate = 0.01
+	return
+	#stats_.hp.decay_rate = 0.01
 
 func make_points(stat:String):
 	var points = preload("res://game/points_service/points.tscn").instantiate()
@@ -74,28 +73,9 @@ func make_points(stat:String):
 func build_points(stat:String, value:int, pos:Vector3, delay:float) -> void:
 	if delay:
 		await get_tree().create_timer(delay).timeout
-
+#
 	var p = make_points(stat)
 	p.position = pos
 	p.points = value
 	p.commit()
 	get_tree().create_timer(0.8).timeout.connect(p.queue_free)
-
-func show_bar(stat:String, value:bool) -> void:
-	stats_[stat].get_parent().visible = value
-
-	if value:
-		var tween := create_tween()
-		tween.set_trans(Tween.TRANS_BOUNCE)
-		tween.set_ease(Tween.EASE_OUT)
-		tween.tween_property(stats_[stat], "global_position:y", stats_[stat].global_position.y, 2.3)
-		stats_[stat].global_position.y = $CanvasLayer/MarginContainer2.global_position.y + $CanvasLayer/MarginContainer2.size.y
-
-func set_points(stat:String, points:float) -> void:
-	stats_[stat].points = points
-
-func get_points(stat:String):
-	return stats_[stat].points
-
-func add_points(stat:String, points:float) -> void:
-	stats_[stat].add_points(points)

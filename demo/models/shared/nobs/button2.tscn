@@ -1,11 +1,11 @@
 [gd_scene load_steps=19 format=3 uid="uid://bjfihtm5t424l"]
 
-[ext_resource type="Script" path="res://models/toydrum/button.gd" id="1_3a06k"]
+[ext_resource type="Script" path="res://models/shared/nobs/button.gd" id="1_3a06k"]
 [ext_resource type="Script" path="res://models/shared/nob_model.gd" id="2_c5q1x"]
 [ext_resource type="ArrayMesh" uid="uid://bbng7t7okc6ad" path="res://models/shared/button_keyboard_long.res" id="3_na7yp"]
 [ext_resource type="Material" uid="uid://c7ewiicv8488q" path="res://models/shared/nobs/keyboard_key_material_good.tres" id="3_v3koy"]
 [ext_resource type="AudioStream" uid="uid://bmkr5qf551e58" path="res://models/shared/sounds/key_press_0.wav" id="4_v73w6"]
-[ext_resource type="Script" path="res://models/toydrum/buttonm.gd" id="5_ianib"]
+[ext_resource type="Script" path="res://models/shared/nobs/buttonm.gd" id="5_ianib"]
 [ext_resource type="AudioStream" uid="uid://bgxedw1j0conq" path="res://models/shared/sounds/key_press_1.wav" id="5_wy74t"]
 [ext_resource type="PackedScene" uid="uid://b77oywlnttw32" path="res://models/shared/label.tscn" id="6_0bu2t"]
 [ext_resource type="AudioStream" uid="uid://bxoki7ft7c3na" path="res://models/shared/sounds/key_press_loud_1.wav" id="6_02xft"]

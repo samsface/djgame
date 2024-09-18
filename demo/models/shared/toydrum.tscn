@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://2xhghfqbt6mu"]
-
-[ext_resource type="PackedScene" uid="uid://cq1tq75l6it7v" path="res://models/toydrum/base.glb" id="1_1q632"]
-
-[node name="Toydrum" type="Node3D"]
-
-[node name="base" parent="." instance=ExtResource("1_1q632")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.90703, 0, -2.44256)
