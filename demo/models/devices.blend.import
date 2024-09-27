@@ -51,6 +51,15 @@ _subresources={
 "save_to_file/enabled": true,
 "save_to_file/path": "res://models/radio/radio_mesh.res"
 },
+"devices_BasePianoTiny": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://models/meshes/base_piano_tiny.res"
+},
 "devices_ButtonFlatSquare": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
@@ -77,6 +86,51 @@ _subresources={
 "lods/normal_split_angle": 25.0,
 "save_to_file/enabled": true,
 "save_to_file/path": "res://models/shared/button_keyboard_long.res"
+},
+"devices_ButtonPianoKey": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://models/meshes/button_piano_key_mesh.res"
+},
+"devices_ButtonPianoKeyC": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://models/meshes/button_piano_key_c_mesh.res"
+},
+"devices_ButtonPianoKeyD": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://models/meshes/button_piano_key_d_mesh.res"
+},
+"devices_ButtonPianoKeyE": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://models/meshes/button_piano_key_e_mesh.res"
+},
+"devices_ButtonPianoKeySharp": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://models/meshes/button_piano_key_sharp_mesh.res"
 },
 "devices_ScrewHeadWithWasher": {
 "generate/lightmap_uv": 0,

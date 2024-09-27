@@ -4,6 +4,7 @@ render_mode cull_disabled;
 instance uniform float freq;
 instance uniform float amp;
 instance uniform float tail_length;
+instance uniform bool square;
 
 varying float yy;
 
@@ -17,7 +18,10 @@ void vertex()
 
 	float form = sin((y + tail_length) * freq);
 	form = form * 0.5 + 0.5;
-	form = round(form);
+	if(square)
+	{
+		form = round(form);
+	}
 	form -= 0.5;
 	
 	float factor = clamp((1.0 - yy) / tail_length, 0.0, 1.0);

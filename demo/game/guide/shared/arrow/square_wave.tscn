@@ -19,9 +19,10 @@ cap_bottom = false
 [node name="MeshInstance3D" type="MeshInstance3D"]
 transform = Transform3D(4.77671e-14, -1.09278e-06, -25, -25, -1.09278e-06, -2.11758e-20, -1.09278e-06, 25, -1.09278e-06, 1.07307e-06, 8.52651e-13, 12.4745)
 material_override = SubResource("ShaderMaterial_glm75")
-instance_shader_parameters/amp = 0.0
-instance_shader_parameters/freq = 0.0
-instance_shader_parameters/tail_length = 0.0
+instance_shader_parameters/amp = 0.2
+instance_shader_parameters/freq = 13.39
+instance_shader_parameters/square = false
+instance_shader_parameters/tail_length = 1.0
 mesh = SubResource("CylinderMesh_1lqjy")
 skeleton = NodePath("../Arrow_")
 script = ExtResource("2_2dlkc")

@@ -25,6 +25,11 @@ class_name Arrow
 	set(v):
 		spin = v
 		set_instance_shader_parameter("spin", spin)
+		
+@export var square : bool :
+	set(v):
+		square = v
+		set_instance_shader_parameter("square", square)
 
 func _ready() -> void:
 	amp = 0

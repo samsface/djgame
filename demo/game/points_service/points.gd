@@ -28,10 +28,9 @@ func miss() -> void:
 	text_.text = "%s%s %s" % ["-" if points < 0 else "+", abs(points_), bar.unit]
 
 func no_touch() -> void:
-	text_.text = "DON'T TOUCH!"
-	bar.miss()
+	text_.text = "NO!"
 
-func commit():
+func commit(free_on_finish := false):
 	var tween := create_tween()
 	tween.set_trans(Tween.TRANS_QUAD)
 	tween.tween_property(self, "scale", scale * 1.5, 0.1)
@@ -46,3 +45,6 @@ func commit():
 
 	#get_parent().points += points_ * 0.1 #* get_parent().combo
 	bar.value += points * 0.001
+	
+	if free_on_finish:
+		tween.finished.connect(queue_free)

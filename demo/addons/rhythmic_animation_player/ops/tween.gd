@@ -115,9 +115,12 @@ func get_property_or_null_():
 	var property_path := get_target_property_path()
 	if property_path.is_empty():
 		return
+		
+	if property_path.get_subname_count() > 1:
+		target_node = target_node.get_indexed(property_path.slice(0, property_path.get_subname_count() - 1))
 
 	for property in target_node.get_property_list():
-		if property.name == property_path.get_subname(0):
+		if property.name == property_path.get_subname(property_path.get_subname_count() - 1):
 			return property
 	
 	return null

@@ -45,7 +45,6 @@ func danger_() -> void:
 		tween.tween_property(self, "position", position + HyperRandom.random_vector3() * 0.01, 0.08)
 
 func _physics_process(delta: float) -> void:
-	value_ = 0.5
 	if value_ > 0.0:
 		value_ += delta * 0.02
 		value_ = clamp(value_, 0, 1)

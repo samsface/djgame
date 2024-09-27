@@ -52,6 +52,8 @@ signal impulse(Vector3, float)
 
 @export var press_distance:float
 
+@export var pump_scale:float = 1.2
+
 @onready var top = $Top
 
 var value : 
@@ -108,6 +110,8 @@ func pressed() -> void:
 	var tween = create_tween()
 	tween.tween_property($Nob, "position:y", -press_distance, 0.01)
 
+	Bus.points_service.control_pressed(self)
+
 	if lock:
 		return
 
@@ -127,8 +131,6 @@ func pressed() -> void:
 	#Bus.camera_service.cursor.try_set_position(self, global_position)
 	#Bus.camera_service.look_at_node(self.get_parent())
 
-
-
 func released() -> void:
 	if not down_:
 		return
@@ -139,7 +141,7 @@ func released() -> void:
 
 	var tween = create_tween()
 	tween.tween_property($Nob, "position:y", 0, 0.05)
-	
+
 	#Bus.camera_service.cursor.pop(self)
 
 func _mouse_entered() -> void:
@@ -182,5 +184,5 @@ func pulse() -> void:
 		pulse_tween_.kill()
 
 	pulse_tween_ = create_tween()
-	pulse_tween_.tween_property($Nob/Model, "scale", Vector3.ONE * 1.5, 0.1)
-	pulse_tween_.tween_property($Nob/Model, "scale", Vector3.ONE, 0.2)
+	pulse_tween_.tween_property($Nob/Model, "scale", Vector3.ONE * pump_scale, 0.05)
+	pulse_tween_.tween_property($Nob/Model, "scale", Vector3.ONE, 0.1)

@@ -1,8 +1,6 @@
 extends Guide
 class_name BangGuide
 
-signal hit
-
 const proximity_ := 0.1
 
 var nob_
@@ -25,6 +23,7 @@ var no_tail_time_ = false
 var velocity_ := Vector3.ZERO
 var v_ := 0.0
 var arrow_
+var hit_emitted_ := false
 
 func color_() -> Color:
 	if auto:
@@ -46,9 +45,12 @@ func _ready() -> void:
 
 	if bang_shape == PianoRollItemBang.BangShape.ARROW:
 		arrow_ = preload("res://game/guide/shared/arrow/arrow.tscn").instantiate()
+	elif bang_shape == PianoRollItemBang.BangShape.SIN_WAVE:
+		arrow_ = preload("res://game/guide/shared/arrow/square_wave.tscn").instantiate()
 	else:
 		arrow_ = preload("res://game/guide/shared/arrow/square_wave.tscn").instantiate()
-	
+		arrow_.square = true
+
 	$ArrowAnchor.add_child(arrow_)
 		
 	visible = false
@@ -138,6 +140,10 @@ func _physics_process(delta: float) -> void:
 				nob_.electric = Color.GREEN
 				arrow_.freq = 100.0
 				arrow_.amp = lerp(arrow_.amp, 0.04, delta * 30.0)
+				
+				if not hit_emitted_:
+					hit_emitted_ = true
+					hit.emit()
 
 			else:
 				points_.points -= 1

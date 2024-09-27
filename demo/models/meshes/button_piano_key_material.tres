@@ -1,0 +1,34 @@
+[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://bla8evb4nais1"]
+
+[ext_resource type="Shader" path="res://models/shared/nobs/knob_shader.gdshader" id="1_5olt2"]
+[ext_resource type="Texture2D" uid="uid://balekiqrivns0" path="res://models/meshes/button_piano_key_map.png" id="2_64iwd"]
+[ext_resource type="Texture2D" uid="uid://bnmpxxnhif7av" path="res://models/shared/textures/smudges_basecolor.png" id="3_t1vpe"]
+
+[sub_resource type="Gradient" id="Gradient_15cmb"]
+colors = PackedColorArray(0, 0, 0, 1, 0.974971, 0.974971, 0.974971, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lstbf"]
+frequency = 0.0526
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_p8a7r"]
+width = 256
+height = 256
+in_3d_space = true
+seamless = true
+seamless_blend_skirt = 0.0
+color_ramp = SubResource("Gradient_15cmb")
+noise = SubResource("FastNoiseLite_lstbf")
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_5olt2")
+shader_parameter/roughness = 0.213
+shader_parameter/specular = 1.0
+shader_parameter/metallic = 0.03
+shader_parameter/max_y = 0.015
+shader_parameter/ao_light_affect = 1.0
+shader_parameter/detail_scale = Vector2(0.1, 0.1)
+shader_parameter/aoe_texture = ExtResource("2_64iwd")
+shader_parameter/texture_detail = ExtResource("3_t1vpe")
+shader_parameter/electric_noise = SubResource("NoiseTexture2D_p8a7r")

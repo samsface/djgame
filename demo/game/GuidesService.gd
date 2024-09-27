@@ -1,6 +1,8 @@
 extends Node3D
 class_name GuideService
 
+signal hit
+
 var active_dilema_groups_ := {}
 var slides_ := {}
 var bangs_ := {}
@@ -30,6 +32,8 @@ func bang(nob:Node3D, time, time_in_seconds:float, value:float, auto:bool, dilem
 	d.dilema_group = dilema_group
 	d.nob_ = nob
 	nob.intended_value = value
+	
+	d.hit.connect(func(): hit.emit())
 
 	try_add_to_dilema_group(d, dilema_group)
 
@@ -70,4 +74,13 @@ func nob_has_guide(nob:Nob) -> bool:
 		if node.get_nob() == nob:
 			return true
 
+	return false
+	
+func control_has_guide(control) -> bool:
+	if bangs_.get(control):
+		return true
+	
+	if slides_.get(control):
+		return true
+	
 	return false

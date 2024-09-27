@@ -44,6 +44,7 @@ draw_pass_1 = SubResource("SphereMesh_34g5m")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1.91068e-15, -4.37112e-08, -1, -1, -4.37112e-08, -1.08251e-20, -4.37112e-08, 1, -4.37112e-08, -5.40616e-08, 0, -0.418392)
+visible = false
 light_color = Color(0, 0.901961, 0.34902, 1)
 omni_range = 0.1
 omni_attenuation = 0.258816

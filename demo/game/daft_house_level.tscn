@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://c8c0isilrphjb"]
+[gd_scene load_steps=56 format=3 uid="uid://c8c0isilrphjb"]
 
 [ext_resource type="PackedScene" uid="uid://dgg103ssmbg32" path="res://game/settings/settings.tscn" id="1_rpjq6"]
 [ext_resource type="PackedScene" uid="uid://lb3oq22iphka" path="res://addons/rhythmic_animation_player/rhythmic_animation_player_host_control.tscn" id="3_qgyqs"]
@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://game/audio_stream_player_2.gd" id="9_le8sj"]
 [ext_resource type="Script" path="res://game/GuidesService.gd" id="10_bl7c8"]
 [ext_resource type="PackedScene" uid="uid://lprkgl2wh3cd" path="res://game/camera/camera.tscn" id="11_chjkg"]
-[ext_resource type="Environment" uid="uid://b8uhvyo3rc3m8" path="res://game/settings/environment_potato.tres" id="13_kaxbq"]
+[ext_resource type="Environment" uid="uid://chtmgmwa87swx" path="res://game/settings/environment_high.tres" id="13_80xpw"]
 [ext_resource type="CameraAttributesPractical" uid="uid://ev1eo0cru0we" path="res://game/cameraatr.tres" id="13_wi7ad"]
 [ext_resource type="Script" path="res://game/world_environment.gd" id="14_vsfug"]
 [ext_resource type="Texture2D" uid="uid://48p1jkwhm4wh" path="res://models/club/samm0363_texture_of_a_bar_table_with_stains_and_wear_tile_5a36bd34-3c9c-4c2b-a62c-8adabec8fccf.png" id="15_ip5l0"]
@@ -27,8 +27,6 @@
 [ext_resource type="PackedScene" uid="uid://dbqtlcaws2qy3" path="res://models/club/exit_sign.tscn" id="25_153ln"]
 [ext_resource type="PackedScene" uid="uid://brd4uell7hfpi" path="res://models/club/oil_drum_table.tscn" id="26_1upn2"]
 [ext_resource type="Texture2D" uid="uid://bcvmpvpwk1nvp" path="res://models/shared/stickers/smiley.png" id="27_2m61l"]
-[ext_resource type="Script" path="res://game/spot_light_3D2.gd" id="28_bbbjr"]
-[ext_resource type="Script" path="res://game/spot_light_3d_2.gd" id="29_6bji4"]
 [ext_resource type="PackedScene" uid="uid://dubsbp7lv8nrh" path="res://models/club/stool_spin.tscn" id="30_3qmxi"]
 [ext_resource type="AudioStream" uid="uid://dd21pqbi2oj6p" path="res://game/crowd_service/Heavy_Pedestrian_Crowd_with_Active_Voices_Movement_and_Background_Traffic-(youconvert.net).mp3" id="30_b2rk4"]
 [ext_resource type="Script" path="res://game/crowd_service/crowd_service.gd" id="31_3j3sa"]
@@ -41,6 +39,7 @@
 [ext_resource type="PackedScene" uid="uid://cdnp2ssrh2k6l" path="res://game/livestream_service/live_stream_service.tscn" id="37_8dclm"]
 [ext_resource type="PackedScene" uid="uid://djjl5a5eu5k20" path="res://game/world_label.tscn" id="37_awei0"]
 [ext_resource type="AudioStream" uid="uid://kkoen3nj0q5h" path="res://junk/funk_guitar.wav" id="38_c3iha"]
+[ext_resource type="PackedScene" uid="uid://bxlav4q1ih7iu" path="res://models/keyboard/keyboard.tscn" id="42_w6rdv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_glj08"]
 shader = ExtResource("5_jk6lh")
@@ -84,6 +83,30 @@ _data = {
 }
 point_count = 4
 
+[sub_resource type="Curve3D" id="Curve3D_yf781"]
+bake_interval = 0.01
+_data = {
+"points": PackedVector3Array(0.0117191, 0.00801365, 0.00215116, -0.0117191, -0.00801365, -0.00215116, -0.0353139, 0.00794181, 0.025816, 0.0325541, -0.000398908, 0.014599, -0.0325541, 0.000398908, -0.014599, -0.0414605, 0.00149842, -0.0217844, 0.00306407, 0.0078714, 0.0117063, -0.00306407, -0.0078714, -0.0117063, -0.0154468, -0.00127875, -0.14183, 0, 0, 0, 0, 0, 0, -0.0253368, -0.064318, -0.139802),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[sub_resource type="Curve3D" id="Curve3D_o84p7"]
+bake_interval = 0.01
+_data = {
+"points": PackedVector3Array(0.0117191, 0.00801365, 0.00215116, -0.0117191, -0.00801365, -0.00215116, -0.0381239, 0.00923418, 0.0189344, 0.0325541, -0.000398908, 0.014599, -0.0325541, 0.000398908, -0.014599, -0.0334757, 0.00149842, -0.0217844, 0.00306407, 0.0078714, 0.0117063, -0.00306407, -0.0078714, -0.0117063, -0.0218296, -0.00127875, -0.14183, 0, 0, 0, 0, 0, 0, -0.0253368, -0.064318, -0.139802),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[sub_resource type="Curve3D" id="Curve3D_q6rao"]
+bake_interval = 0.01
+_data = {
+"points": PackedVector3Array(0.0117191, 0.00801365, 0.00215116, -0.0117191, -0.00801365, -0.00215116, -0.0963072, 0.00776439, 0.070823, 0.0105934, -0.00299479, 0.0422485, -0.0105934, 0.00299479, -0.0422485, -0.0664569, 0.00149842, 0.0626172, 0.00306407, 0.0078714, 0.0117063, -0.00306407, -0.0078714, -0.0117063, -0.0218296, -0.00127875, -0.14183, 0, 0, 0, 0, 0, 0, -0.0253368, -0.064318, -0.139802),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
 [sub_resource type="Curve3D" id="Curve3D_vr3fm"]
 bake_interval = 0.01
 _data = {
@@ -114,6 +137,11 @@ font = ExtResource("37_0waph")
 font_size = 4
 curve_step = 10.0
 depth = 0.001
+
+[sub_resource type="FogMaterial" id="FogMaterial_cxc2q"]
+density = 0.6649
+emission = Color(0.462291, 0.462291, 0.462291, 1)
+height_falloff = 1e-05
 
 [node name="MarginContainer" type="MarginContainer"]
 anchors_preset = 15
@@ -196,7 +224,7 @@ script = ExtResource("10_bl7c8")
 [node name="Camera" parent="WorldViewport/SubViewport/Game" instance=ExtResource("11_chjkg")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="WorldViewport/SubViewport/Game"]
-environment = ExtResource("13_kaxbq")
+environment = ExtResource("13_80xpw")
 camera_attributes = ExtResource("13_wi7ad")
 script = ExtResource("14_vsfug")
 
@@ -238,14 +266,10 @@ material = SubResource("StandardMaterial3D_3ij4h")
 
 [node name="NorthFace" type="Node3D" parent="WorldViewport/SubViewport/Game/Table"]
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="WorldViewport/SubViewport/Game/Table/NorthFace" groups=["light"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0617377, 0.590035, -0.266224)
-light_color = Color(0, 0.662745, 0.635294, 1)
-light_energy = 0.395
-light_size = 0.003
-shadow_bias = 0.03
-shadow_blur = 1.45
-omni_range = 0.188
+[node name="Piano" parent="WorldViewport/SubViewport/Game/Table/NorthFace" instance=ExtResource("42_w6rdv")]
+unique_name_in_owner = true
+transform = Transform3D(0.335131, 0, -0.726421, 0, 0.8, 0, 0.726421, 0, 0.335131, -0.22035, 0.493822, -0.345072)
+skeleton = NodePath("")
 
 [node name="acid" parent="WorldViewport/SubViewport/Game/Table/NorthFace" instance=ExtResource("16_wnopg")]
 unique_name_in_owner = true
@@ -258,31 +282,10 @@ transform = Transform3D(-0.945929, 0, 0.324373, 0, 1, 0, -0.324373, 0, -0.945929
 unique_name_in_owner = true
 transform = Transform3D(0.953275, -0.0599356, -0.296099, -0.0300469, 0.956453, -0.290337, 0.300607, 0.285668, 0.909961, 0.131448, 0.515901, -0.232579)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="WorldViewport/SubViewport/Game/Table/NorthFace" groups=["light"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0340311, 0.646539, -0.466655)
-light_color = Color(0, 0.737255, 0.47451, 1)
-omni_range = 0.188
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="WorldViewport/SubViewport/Game/Table/NorthFace" groups=["light"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.230654, 0.554354, -0.450073)
-light_color = Color(0.988235, 0.662745, 0, 1)
-omni_range = 0.188
-omni_shadow_mode = 0
-
-[node name="OmniLight3D6" type="OmniLight3D" parent="WorldViewport/SubViewport/Game/Table/NorthFace" groups=["light"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20535, 0.552052, -0.24224)
-light_color = Color(0.270588, 0.882353, 0, 1)
-light_energy = 0.28
-light_indirect_energy = 0.0
-shadow_enabled = true
-shadow_bias = 0.0
-shadow_blur = 0.6
-omni_range = 0.188
-omni_shadow_mode = 0
-
 [node name="Poly" parent="WorldViewport/SubViewport/Game/Table/NorthFace" instance=ExtResource("19_wp3jn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500806, -0.363653)
 snap = 1e-06
+polygon = PackedVector2Array(0.0038, 0, 0.00268701, 0.00268701, 2.32683e-19, 0.0038, -0.00268701, 0.00268701, -0.0038, 4.65366e-19, -0.00268701, -0.00268701, -6.98049e-19, -0.0038, 0.00268701, -0.00268701)
 path_node = NodePath("Path3D2")
 path_local = true
 path_continuous_u = false
@@ -300,6 +303,36 @@ diameter = 0.0021
 
 [node name="Path3D2" type="Path3D" parent="WorldViewport/SubViewport/Game/Table/NorthFace/Poly2"]
 curve = SubResource("Curve3D_ygfj3")
+
+[node name="Poly5" parent="WorldViewport/SubViewport/Game/Table/NorthFace" instance=ExtResource("19_wp3jn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, 0.501, -0.365)
+polygon = PackedVector2Array(0.0021, 0, 0.00148492, 0.00148492, 1.28588e-19, 0.0021, -0.00148492, 0.00148492, -0.0021, 2.57176e-19, -0.00148492, -0.00148492, -3.85764e-19, -0.0021, 0.00148492, -0.00148492)
+path_node = NodePath("Path3D2")
+path_local = true
+diameter = 0.0021
+
+[node name="Path3D2" type="Path3D" parent="WorldViewport/SubViewport/Game/Table/NorthFace/Poly5"]
+curve = SubResource("Curve3D_yf781")
+
+[node name="Poly3" parent="WorldViewport/SubViewport/Game/Table/NorthFace" instance=ExtResource("19_wp3jn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08, 0.501, -0.365)
+polygon = PackedVector2Array(0.0021, 0, 0.00148492, 0.00148492, 1.28588e-19, 0.0021, -0.00148492, 0.00148492, -0.0021, 2.57176e-19, -0.00148492, -0.00148492, -3.85764e-19, -0.0021, 0.00148492, -0.00148492)
+path_node = NodePath("Path3D2")
+path_local = true
+diameter = 0.0021
+
+[node name="Path3D2" type="Path3D" parent="WorldViewport/SubViewport/Game/Table/NorthFace/Poly3"]
+curve = SubResource("Curve3D_o84p7")
+
+[node name="Poly6" parent="WorldViewport/SubViewport/Game/Table/NorthFace" instance=ExtResource("19_wp3jn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.285, 0.501, -0.365)
+polygon = PackedVector2Array(0.0021, 0, 0.00148492, 0.00148492, 1.28588e-19, 0.0021, -0.00148492, 0.00148492, -0.0021, 2.57176e-19, -0.00148492, -0.00148492, -3.85764e-19, -0.0021, 0.00148492, -0.00148492)
+path_node = NodePath("Path3D2")
+path_local = true
+diameter = 0.0021
+
+[node name="Path3D2" type="Path3D" parent="WorldViewport/SubViewport/Game/Table/NorthFace/Poly6"]
+curve = SubResource("Curve3D_q6rao")
 
 [node name="Poly4" parent="WorldViewport/SubViewport/Game/Table/NorthFace" instance=ExtResource("19_wp3jn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.493287, -0.365328)
@@ -371,58 +404,6 @@ transform = Transform3D(0.723791, 0.0110128, 0.689931, -0.00797145, 0.999939, -0
 [node name="oil_drum_table3" parent="WorldViewport/SubViewport/Game/GardenPretty" instance=ExtResource("26_1upn2")]
 transform = Transform3D(0.565917, 0, 0.824462, 0, 1, 0, -0.824462, 0, 0.565917, -2.44568, -1.13426, -6.82582)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="WorldViewport/SubViewport/Game/GardenPretty"]
-transform = Transform3D(0.96555, 0, -0.260218, 0, 1, 0, 0.260218, 0, 0.96555, -0.240418, 0.617192, 1.6745)
-visible = false
-light_color = Color(1, 0, 0.0235294, 1)
-light_energy = 1.5
-light_specular = 5.0
-shadow_enabled = true
-spot_range = 20.0
-spot_attenuation = 0.3
-spot_angle = 10.04
-spot_angle_attenuation = 0.594604
-script = ExtResource("28_bbbjr")
-
-[node name="SpotLight3D3" type="SpotLight3D" parent="WorldViewport/SubViewport/Game/GardenPretty"]
-transform = Transform3D(0.999001, -0.0446627, 0.00174228, 0.0385792, 0.881299, 0.470982, -0.0225708, -0.470444, 0.882141, -0.240418, 1.05591, 1.6745)
-visible = false
-light_color = Color(0.819765, 1, 0.702636, 1)
-light_energy = 1.5
-light_specular = 4.537
-shadow_enabled = true
-spot_range = 7.606
-spot_attenuation = 0.55
-spot_angle = 13.02
-spot_angle_attenuation = 0.594604
-script = ExtResource("28_bbbjr")
-
-[node name="SpotLight3D4" type="SpotLight3D" parent="WorldViewport/SubViewport/Game/GardenPretty"]
-transform = Transform3D(0.999001, -0.0446627, 0.00174228, 0.0385792, 0.881299, 0.470982, -0.0225708, -0.470444, 0.882141, 0.497457, 1.05591, 1.6745)
-visible = false
-light_color = Color(0.819765, 1, 0.702636, 1)
-light_energy = 1.5
-light_specular = 4.537
-shadow_enabled = true
-spot_range = 7.606
-spot_attenuation = 0.55
-spot_angle = 13.02
-spot_angle_attenuation = 0.594604
-script = ExtResource("28_bbbjr")
-
-[node name="SpotLight3D2" type="SpotLight3D" parent="WorldViewport/SubViewport/Game/GardenPretty"]
-transform = Transform3D(0.956131, 0, 0.292939, 0, 1, 0, -0.292939, 0, 0.956131, -0.192916, 0.617192, 1.6745)
-visible = false
-light_color = Color(0.286137, 0.4976, 1, 1)
-light_energy = 1.5
-light_specular = 5.0
-shadow_enabled = true
-spot_range = 20.0
-spot_attenuation = 0.3
-spot_angle = 10.04
-spot_angle_attenuation = 0.594604
-script = ExtResource("29_6bji4")
-
 [node name="stool_spin" parent="WorldViewport/SubViewport/Game/GardenPretty" instance=ExtResource("30_3qmxi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.995054, -1.12702, -10.5119)
 
@@ -434,18 +415,6 @@ transform = Transform3D(0.311705, 0, -0.950179, 0, 1, 0, 0.950179, 0, 0.311705, 
 
 [node name="stool_spin4" parent="WorldViewport/SubViewport/Game/GardenPretty" instance=ExtResource("30_3qmxi")]
 transform = Transform3D(-0.00520113, 0, -0.999986, 0, 1, 0, 0.999986, 0, -0.00520113, 5.15391, -1.12702, -8.86127)
-
-[node name="OmniLight3D4" type="OmniLight3D" parent="WorldViewport/SubViewport/Game/GardenPretty" groups=["light"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.265416, 0.341738, -0.103054)
-light_color = Color(1, 0, 1, 1)
-shadow_enabled = true
-omni_range = 1.47
-
-[node name="OmniLight3D5" type="OmniLight3D" parent="WorldViewport/SubViewport/Game/GardenPretty" groups=["light"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17252, 0.768919, -2.72736)
-light_color = Color(0.90044, 0.511822, 1.92523e-07, 1)
-shadow_enabled = true
-omni_range = 1.47
 
 [node name="CrowdService" type="Node3D" parent="WorldViewport/SubViewport/Game/GardenPretty"]
 unique_name_in_owner = true
@@ -459,35 +428,35 @@ time_scale = 3.0
 
 [node name="Rando5" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(0.997024, 0, -0.0770849, 0, 1, 0, 0.0770849, 0, 0.997024, -0.344679, -1.05207, -2.3104)
-talking = 0.710188
+talking = 0.645366
 jump = 0.778
 cheer_left = 1.0
 cheer_right = 1.0
 
 [node name="Rando6" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(0.997024, 0, -0.0770849, 0, 1, 0, 0.0770849, 0, 0.997024, 0.464414, -1.05207, -2.93955)
-talking = 0.574692
+talking = 0.302193
 jump = 0.778
 cheer_left = 1.0
 cheer_right = 1.0
 
 [node name="Rando7" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(0.997024, 0, -0.0770849, 0, 1, 0, 0.0770849, 0, 0.997024, -0.843388, -1.05207, -2.93955)
-talking = 0.654074
+talking = 0.799506
 jump = 0.778
 cheer_left = 1.0
 cheer_right = 1.0
 
 [node name="Rando8" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(0.997024, 0, -0.0770849, 0, 1, 0, 0.0770849, 0, 0.997024, 1.50339, -1.05207, -2.93955)
-talking = 0.496857
+talking = 0.480351
 jump = 0.778
 cheer_left = 1.0
 cheer_right = 1.0
 
 [node name="Rando9" parent="WorldViewport/SubViewport/Game/GardenPretty/CrowdService" instance=ExtResource("8_3lxhf")]
 transform = Transform3D(0.996824, 0, 0.0796243, 0, 1, 0, -0.0796243, 0, 0.996824, -0.21063, -1.05207, -3.56613)
-talking = 0.996207
+talking = 0.122769
 jump = 0.778
 cheer_left = 1.0
 cheer_right = 1.0
@@ -509,6 +478,7 @@ volume_db = 5.0
 [node name="BlackVoidCurtain" type="MeshInstance3D" parent="WorldViewport/SubViewport/Game/GardenPretty"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.059291, 0.429559)
+visible = false
 material_override = ExtResource("36_wyakm")
 mesh = SubResource("QuadMesh_1cw70")
 
@@ -518,17 +488,23 @@ mesh = SubResource("TextMesh_nelm5")
 skeleton = NodePath("../../..")
 text = "LEVEL UNO"
 
+[node name="SpotLight3D6" type="SpotLight3D" parent="WorldViewport/SubViewport/Game/GardenPretty"]
+transform = Transform3D(0.988702, 0, -0.149898, 0, 1, 0, 0.149898, 0, 0.988702, -0.055, -0.25, 1.172)
+light_color = Color(0.302699, 0.614834, 0, 1)
+light_volumetric_fog_energy = 16.0
+spot_range = 47.433
+spot_angle = 62.7
+
+[node name="FogVolume" type="FogVolume" parent="WorldViewport/SubViewport/Game/GardenPretty"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.152282, 0.200603, -0.322209)
+material = SubResource("FogMaterial_cxc2q")
+
 [node name="LiveStreamService" parent="WorldViewport/SubViewport/Game" instance=ExtResource("37_8dclm")]
 size = Vector2i(128, 128)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="WorldViewport/SubViewport/Game"]
 stream = ExtResource("38_c3iha")
 pitch_scale = 1.2
-
-[node name="OmniLight3D" type="OmniLight3D" parent="WorldViewport/SubViewport/Game"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.140762, 0.292133, -0.827488)
-light_color = Color(1, 0.191708, 0.28876, 1)
-shadow_enabled = true
 
 [connection signal="play" from="Recorder/CanvasLayer2/VSplitContainer/BeatPlayerHost" to="WorldViewport/SubViewport/Game" method="_play"]
 [connection signal="stop" from="Recorder/CanvasLayer2/VSplitContainer/BeatPlayerHost" to="WorldViewport/SubViewport/Game" method="_stop"]

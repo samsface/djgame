@@ -2,6 +2,7 @@ extends Node3D
 class_name Guide
 
 signal done
+signal hit
 
 var points_:Points
 var hit_ := false

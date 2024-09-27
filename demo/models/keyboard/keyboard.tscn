@@ -1,0 +1,133 @@
+[gd_scene load_steps=19 format=3 uid="uid://bxlav4q1ih7iu"]
+
+[ext_resource type="ArrayMesh" uid="uid://bnto4oj3aeavo" path="res://models/meshes/base_piano_tiny.res" id="1_8nuhg"]
+[ext_resource type="Material" uid="uid://bcln26qdibucq" path="res://models/meshes/base_piano_tiny.tres" id="1_s4pxp"]
+[ext_resource type="PackedScene" uid="uid://b0o2wi7cws5g" path="res://models/shared/nobs/button_piano_key_c.tscn" id="2_pu66q"]
+[ext_resource type="PackedScene" uid="uid://bighi0y88f58l" path="res://models/shared/nobs/button_piano_key_e.tscn" id="3_5au0f"]
+[ext_resource type="PackedScene" uid="uid://db5i0hd68vn6h" path="res://models/shared/nobs/button_piano_key_sharp.tscn" id="3_qkpwp"]
+[ext_resource type="PackedScene" uid="uid://pni4mdatpydk" path="res://models/shared/nobs/button_piano_key_d.tscn" id="4_lsu13"]
+[ext_resource type="FontFile" uid="uid://ca4jgypv8bjcn" path="res://ui/fonts/RetroGaming.ttf" id="4_nexgs"]
+[ext_resource type="PackedScene" uid="uid://fd35yk5smfht" path="res://models/shared/nobs/button_piano_key.tscn" id="5_0qmsy"]
+[ext_resource type="PackedScene" uid="uid://b77oywlnttw32" path="res://models/shared/label/label.tscn" id="8_lx03v"]
+[ext_resource type="FontFile" uid="uid://budhm0vd6f5km" path="res://ui/fonts/Bigdex.ttf" id="9_olk6h"]
+[ext_resource type="Script" path="res://models/shared/nobs/label_style.gd" id="10_11xpb"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_kww6l"]
+action = &"a"
+
+[sub_resource type="Resource" id="Resource_u60j2"]
+script = ExtResource("10_11xpb")
+size = 48
+font = ExtResource("4_nexgs")
+curve = 0.0
+color = Color(0, 0, 0, 1)
+
+[sub_resource type="InputEventAction" id="InputEventAction_y5unh"]
+action = &"s"
+
+[sub_resource type="InputEventAction" id="InputEventAction_qkams"]
+action = &"d"
+
+[sub_resource type="InputEventAction" id="InputEventAction_jh8ih"]
+action = &"f"
+
+[sub_resource type="InputEventAction" id="InputEventAction_ms0a3"]
+action = &"g"
+
+[sub_resource type="Resource" id="Resource_s8y7y"]
+script = ExtResource("10_11xpb")
+size = 25
+font = ExtResource("9_olk6h")
+curve = 0.0
+color = Color(0, 0, 0, 1)
+
+[node name="Keyboard" type="MeshInstance3D"]
+material_override = ExtResource("1_s4pxp")
+mesh = ExtResource("1_8nuhg")
+
+[node name="Keys" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0234538, 0.0220927, 0.0341926)
+
+[node name="C" parent="Keys" instance=ExtResource("2_pu66q")]
+unique_name_in_owner = true
+transform = Transform3D(-4.37113e-08, 0, 1, 0, 0.999999, 0, -0.999999, 0, -4.37114e-08, 0, 0, 0.0339286)
+action = SubResource("InputEventAction_kww6l")
+label = "A"
+label_style = SubResource("Resource_u60j2")
+albedo = Color(1, 1, 1, 1)
+wear_albedo = Color(0.886262, 0.886261, 0.886262, 1)
+pump_scale = 1.05
+
+[node name="CSharp" parent="Keys" instance=ExtResource("3_qkpwp")]
+transform = Transform3D(-4.37113e-08, 0, 1, 0, 0.999999, 0, -0.999999, 0, -4.37114e-08, -0.025629, 0, 0.024072)
+pump_scale = 1.05
+
+[node name="D" parent="Keys" instance=ExtResource("4_lsu13")]
+unique_name_in_owner = true
+transform = Transform3D(-4.37113e-08, 1.17243e-14, 1, 2.68221e-07, 0.999998, 0, -0.999998, 2.68221e-07, -4.37114e-08, 0, 0, 0.0113095)
+action = SubResource("InputEventAction_y5unh")
+label = "S"
+label_style = SubResource("Resource_u60j2")
+albedo = Color(1, 1, 1, 1)
+wear_albedo = Color(0.91664, 0.91664, 0.91664, 1)
+pump_scale = 1.05
+
+[node name="DSharp" parent="Keys" instance=ExtResource("3_qkpwp")]
+transform = Transform3D(-4.37113e-08, 0, 1, 0, 0.999999, 0, -0.999999, 0, -4.37114e-08, -0.025629, 0, -0.000998694)
+pump_scale = 1.05
+
+[node name="E" parent="Keys" instance=ExtResource("3_5au0f")]
+unique_name_in_owner = true
+transform = Transform3D(-4.37113e-08, 0, 1, 0, 0.999999, 0, -0.999999, 0, -4.37114e-08, 0, 0, -0.0113095)
+action = SubResource("InputEventAction_qkams")
+label = "D"
+label_style = SubResource("Resource_u60j2")
+albedo = Color(1, 1, 1, 1)
+wear_albedo = Color(0.758192, 0.758192, 0.758192, 1)
+pump_scale = 1.05
+
+[node name="F" parent="Keys" instance=ExtResource("2_pu66q")]
+unique_name_in_owner = true
+transform = Transform3D(-4.37113e-08, 0, 1, 0, 0.999999, 0, -0.999999, 0, -4.37114e-08, 0, 0, -0.0337559)
+action = SubResource("InputEventAction_jh8ih")
+label = "E"
+label_style = SubResource("Resource_u60j2")
+albedo = Color(1, 1, 1, 1)
+wear_albedo = Color(0.886262, 0.886261, 0.886262, 1)
+pump_scale = 1.05
+
+[node name="FSharp" parent="Keys" instance=ExtResource("3_qkpwp")]
+transform = Transform3D(-4.37113e-08, 0, 1, 0, 0.999999, 0, -0.999999, 0, -4.37114e-08, -0.025629, 0, -0.0436125)
+pump_scale = 1.05
+
+[node name="G" parent="Keys" instance=ExtResource("4_lsu13")]
+unique_name_in_owner = true
+transform = Transform3D(-4.37113e-08, 1.17243e-14, 1, 2.68221e-07, 0.999998, 0, -0.999998, 2.68221e-07, -4.37114e-08, 0, 0, -0.056375)
+action = SubResource("InputEventAction_ms0a3")
+label = "F"
+label_style = SubResource("Resource_u60j2")
+albedo = Color(1, 1, 1, 1)
+wear_albedo = Color(0.91664, 0.91664, 0.91664, 1)
+pump_scale = 1.05
+
+[node name="GSharp" parent="Keys" instance=ExtResource("3_qkpwp")]
+transform = Transform3D(-4.37113e-08, 0, 1, 0, 0.999999, 0, -0.999999, 0, -4.37114e-08, -0.025629, 0, -0.0686832)
+pump_scale = 1.05
+
+[node name="B" parent="Keys" instance=ExtResource("3_5au0f")]
+unique_name_in_owner = true
+transform = Transform3D(-4.37113e-08, 0, 1, 0, 0.999999, 0, -0.999999, 0, -4.37114e-08, 0, -0.000134178, -0.078994)
+label = "G"
+label_style = SubResource("Resource_u60j2")
+albedo = Color(1, 1, 1, 1)
+wear_albedo = Color(0.758192, 0.758192, 0.758192, 1)
+pump_scale = 1.05
+
+[node name="C2" parent="Keys" instance=ExtResource("5_0qmsy")]
+transform = Transform3D(-4.37113e-08, 0, 1, 0, 0.999999, 0, -0.999999, 0, -4.37114e-08, 0, 0, -0.101348)
+pump_scale = 1.05
+
+[node name="InLabel3" parent="." instance=ExtResource("8_lx03v")]
+transform = Transform3D(-4.3072e-08, 0.170416, 0.985372, 7.44911e-09, 0.985372, -0.170416, -1, 0, -4.37114e-08, -0.0368742, 0.0379912, 0.0553054)
+label_style = SubResource("Resource_s8y7y")
+label = "GOMAHA  MINI"

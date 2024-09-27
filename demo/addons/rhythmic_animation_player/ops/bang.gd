@@ -3,7 +3,8 @@ class_name PianoRollItemBang
 
 enum BangShape {
 	ARROW,
-	SQUARE_WAVE
+	SQUARE_WAVE,
+	SIN_WAVE
 }
 
 @export var value:float = 1.0 : 

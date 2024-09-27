@@ -29,14 +29,26 @@ func _ready() -> void:
 
 	Bus.points_service.good_boy.value = 0.5
 	Bus.points_service.center(Bus.points_service.good_boy)
+	
+	Bus.guide_service.hit.connect(_guide_hit)
+
+func _guide_hit() -> void:
+	var tween := create_tween()
+	tween.parallel()
+	tween.tween_property($GardenPretty/SpotLight3D5, "light_energy", 1.0, 0.1)
+	tween.tween_property($GardenPretty/SpotLight3D6, "light_energy", 1.0, 0.1)
+	var chain := tween.chain()
+	chain.tween_property($GardenPretty/SpotLight3D5, "light_energy", 0.0, 0.1)
+	chain.tween_property($GardenPretty/SpotLight3D6, "light_energy", 0.0, 0.1)
 
 func _physics_process(delta: float) -> void:
-	if int(audio_.clock) % 4 == 0:
+	if int(floor(audio_.clock)) % 4 == 0:
 		Bus.audio_service.call_with_latency(force_rumble)
 
 func force_rumble() -> void:
 	Bus.camera_service.shake(0.7, 0.001 * rumble)
 	Bus.camera_service.rumble.emit()
+
 
 func table_jump() -> void:
 	var t := create_tween()
